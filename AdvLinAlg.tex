@@ -1,0 +1,1174 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Advanced Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Dummitt and Foote}
+\newcommand{\DUEDATE}{June 21, 2023}
+\newcommand{\SEMESTER}{Summer 2023}
+\newcommand{\SCHEDULE}{T/Th 2:00 -- 3:20}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\F}{\textbf{F}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Vector Spaces}
+\section{Exercises}
+
+\begin{enumerate}
+
+\item Suppose $a$ and $b$ are real numebers, not both 0.  Find real numbers $c$ and $d$ such that
+\begin{align*}
+	1/(a+bi)=c+di.
+\end{align*}
+
+\BLUE{\begin{align*}
+	\LET a+bi&=re^{i\theta} = r(cos \theta + i\sin \theta) \AND c+di=se^{i\phi} = s(\cos \phi + i \sin \phi)\\
+	1 &= (a+bi)(c+di) = (r(cos \theta + i\sin \theta))(s(\cos \phi + i \sin \phi))\\
+	&= rs(\cos\theta\cos\phi-\sin\theta\sin\phi)+i(\cos\theta\sin\phi+\sin\theta\cos\phi)) \\
+	&= re^{i\theta}se^{i\phi} = rse^{i(\theta+\phi)} \implies \theta+\phi = 0 \AND rs = 1\\
+	\frac{d}{c^2+d^2} &= \frac{-b}{a^2+b^2} \AND (a^2+b^2)(c^2+d^2) = 1 \implies c^2+d^2= 1/(a^2+b^2)\\
+	d(a^2+b^2) &= \frac{b}{a^2+b^2} \\
+	d &= \frac{-b}{(a^2+b^2)^2} \AND c = \frac{a}{(a^2+b^2)^2}
+\end{align*}
+}
+
+\item Show that 
+\begin{align*}
+\frac{-1+1\sqrt{3}i}{2}
+\end{align*}is a cube root of 1 (meaning that its cube equals 1).
+\begin{align*}
+	\LET \omega &= r(\cos \theta + i\sin\theta) = \frac{-1+1\sqrt{3}i}{2}\\
+	\theta &= \frac{2\pi}{3} \AND r=1 \\
+	\omega^3 = (e^{\frac{2\pi}{3}i})^3 = e^{2\pi i} = 1
+\end{align*}
+
+\item Find two distinct square roots of $i$.
+
+\BLUE{\begin{align*}
+	\LET \omega &= a + bi \AND \omega^2 = i\\
+	(a+bi)^2 &= i \implies (a^2-b^2)+2abi = i \\
+	a^2 &= b^2 \implies a = \pm b \AND 2ab = 1 \implies a = \pm \sqrt{2}/2 \\
+	\therefore \omega &= \frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2} \OR \omega = -\frac{\sqrt{2}}{2}-i\frac{\sqrt{2}}{2}
+\end{align*}
+}
+
+\item Show that $\alpha + \beta=\beta+\alpha$ for all $\alpha, \beta, \in \C$.
+
+\BLUE{Let $\alpha = a+bi, \beta = c+di$ for some $a,b,c,d \in \R$.  Then,
+	\begin{align*}
+		\alpha + \beta &= (a+bi)+(c+di) \\
+		&= a+c+ib+id = (c+di)+(a+bi)\\
+		&= \beta+\alpha
+	\end{align*}
+}
+
+\item Show that $(\alpha+\beta)+\gamma=\alpha+(\beta+\gamma)$ for all $\alpha, \beta, \gamma \in\C$.
+
+\item Show that $(\alpha\beta)\gamma =  \alpha(\beta\gamma)$ for all $\alpha, \beta, \gamma \in \C$.
+
+\item Show that for every $\alpha \in \C$, there exists a unique $\beta \in \C$ sucht aht $\alpha +\beta = 0$.
+
+\item Show that for every $\alpha \in \C$ with $\alpha \ne 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
+
+\item Show that $\gamma(\alpha+\beta)=\gamma\alpha+\gamma\beta$ for all $\gamma,\alpha,\beta \in \C$.
+
+\item Find $x \in \R^4$ such that 
+\begin{align*}
+	(4,-3,1,7)+2x=(5,9,-6,8)
+\end{align*}
+
+\BLUE{Let $x=(a,b,c,d)$ then
+\begin{align*}
+	(4,-3,1,7)+2(a,b,c,d)&=(5,9,-6,8) \\
+	(4+2a,-3+2b, 1+2c, 7+2d) &= (5,9,-6,8) \\
+	4+2a = 5 &\implies a = 1/2 \\
+	-3+2b = 9 &\implies b = 6 \\
+	1+2c = -6 &\implies c = -7/2 \\
+	7+2d = 8 &\implies d = 1/2
+\end{align*}
+}
+
+\item Explain why there does not exist $\gamma \in \C$ such that
+\begin{align*}
+	\gamma(2-3i,5+4i,-6+7i)=(12-5i, 7+22i,-32-9i).
+\end{align*}
+
+\BLUE{these two points are linearly independent (i.e., a line going through one and the origin will not go through the other).}
+
+\item Show that $(x+y)+z=x+(y+z)$ for all $x,y,z \in \F^n$.
+
+\item Show that $(ab)x=a(bx)$ for all $x \in \F^n$ and all $a,b,\in \F^n$.
+
+\item Show that $1x =x$ for all $x \in \F^n$
+
+\item Show that $\gamma(x+y)=\gamma x+\gamma y$ for all $\gamma \in \F$ and all $x,y \in \F^n$
+
+\item Show that $(a+b)x=ax+bx$ for all $a,b, \in \F$ and all $x \in \F^n$.
+
+
+\end{enumerate}
+
+\section{Exercises B}
+
+\begin{definition} A \DEFINE{Vector Space} is commutative, associative, has an identity, has an additive inverse for each element, supports scalar multiplication (with a multiplicative identity), supports the distributive property.
+\end{definition}
+
+\begin{remark}Notation:  $\F^S \equiv \{f: S \to \F\}$. \textit{this is crappy notation for a textbook.} This implies that $\R^n \equiv \{ \{1,\dots,n\} \to \R\}$.  This is counter intuitive when $\R^n$ is usually defined as an $n$-tuple.  That is, $\R^n=\{(x_1,\dots, x_n)\}$.  I have ot ask, who let him publish a book with an obviously confusing notation?  Perhaps, I'll see some wisdom in this notation as we continue. \\
+\\
+Be that as it may, since every $f \in \F^S$ generate values in $F$ it is easy to see that $F^S$ is a vector space.  Thus, our intuitive notion of it representing an $n$-tuple is now expanded to a more abstract understanding.
+\end{remark}
+
+\begin{enumerate}
+
+\item Prove that $-(-v)=v$ for every $v \in V$.
+
+\BLUE{ Additive Inverse Exists.  Thus there exists $w \to v+w=0$.  Since it is closed under addition we may add the addtive inverse of $w$, $-w$ to both sides.  This gives us $(v+w)-w=-2$.  Since it is associative we can say $v+(w-w)= -w$ and $v=-w=-(-v)$ as $-v$ is another way of writing additive inverse of $v$.
+}
+
+\item Suppose $a \in \F, v\in V$, and $av=0$.  Prove that $a=0$ or $v=0$.
+
+\BLUE{if $a=0$ we are done.  if $a \ne 0$, let's assume that $v \ne 0$.  then for any $w \in V$ we have $av+aw=aw$ or $v+w=w$ or $v=0$.
+}
+
+\item Suppose $v,w \in V$.  Explain why there exists a unique $x \in V$ such that $v+3x=w$.
+
+\BLUE{let $x, x'$ be distinct solutions $v+3x=v+3x' \to 3x=3x' \to x=x'$
+}
+
+\item The empty set is not a vector space. The empty set fails to satisfy only one of the requirements lisetd in 1.19.  Which one?
+
+\BLUE{A vector space MUST have an additive identity, namely 0, which means that it cannot be empty.
+}
+
+\item Show that in the definition of a vector space (1.19), the additive inverse condition can be replace with the condition that
+\begin{align*}
+	0v=0 \FORALL v \in V
+\end{align*}
+Here the 0 on the left side is the number 0, and the 0 on the right side is the additive identity of $V$.  (The phrase "a condition can be replaced" in a definition meas that the collection of objcets satisfying the definiton is unchanged if the original condition is replace with the new condition.)
+
+\BLUE{This is equivalent to saying that the additive inverse is actually $-1$ times the element rather than notationally assigned $-v$.
+}
+
+\item Let $\infty$ and $-\infty$ denote two distinct objects, neither of which is in $\R$.  Define an addition and scalar multipication on $\R \cup \{\infty\}\cup\{-\infty\}$ as you could guess from the notation.  Specfically, the sum and product of two real numbers is as usual, and for $t \in \R$ define
+\begin{align*}
+	t\infty &= \LBRACKET{\begin{array}{ll}
+		\infty & \text{if } t > 0,\\
+		0 & \text{if } t=0 \\
+		-\infty & \text{if } t <0	
+	\end{array} }  	
+	t(-\infty) = \LBRACKET{\begin{array}{ll}
+		-\infty & \text{if } t > 0,\\
+		0 & \text{if } t=0 \\
+		\infty & \text{if } t <0	
+	\end{array} }  \\	
+	t+\infty &= \infty+t=\infty, t+(-\infty)=(-\infty)+t=-\infty \\
+	\infty+\infty&=\infty, (-\infty)+(\infty)= -\infty, \infty+(-\infty) = 0
+\end{align*}  
+Is $\R\cup\{\infty\}\cup\{-\infty\}$ a vector space over $\R$?  Explain.
+
+\BLUE{Yes.  It passes all rules and it even has an additive inverse for $\infty$.
+}
+
+\end{enumerate}
+
+\section{Subspaces}
+
+\begin{enumerate}
+
+\item For each of the following subsets of $\F^3$, determine whether it is a subspace of $\F^3$.
+\begin{enumerate}
+	\item $\Xi=\{(x_1,x_2,x_3)\in\F^3\,:\, x_1+2x_2+3x_3=0\}$;
+	
+	\BLUE{\begin{itemize}
+		\item Zero Must Exist:  $(0,0,0) \to 0+2(0)+3(0)=0+0+0=0$.  Yes.
+		\item Closed under Addition: Let $\alpha=(a,b,c), \beta=(d,e,f) \in \Xi$. then $\alpha+\beta = (a+d,b+e, c+f)$ and $(a+d)+2(b+e)+3(c+f) = a+d+2b+2e+3c+3f$ since this is also associative we have $(a+2b+3c)+(d+2d+3f)=0+0=0$.  Yes.
+		\item Closed under Scalar Multiplication: Let $\alpha=(a,b,c) \in \Xi$.  then let $x\in \F$ be a scalar then $x(a+2b+3c) = x(0) = 0$.  Yes.
+	\end{itemize}
+	}	
+	
+	\item $\{(x_1,x_2,x_3)\in\F^3\,:\,x_1+2x_2+3x_3=4\}$;
+	
+	\BLUE{No.  Not closed under addition.}
+	
+	\item $\{(x_1,x_2,x_3)\in\F^3\,:\,x_1x_2x_3=0\}$;
+	
+	\BLUE{ Not closed under addition.}
+	
+	\item $\{(x_1,x_2,x_3)\in\F^3\,:\, x_1=5x_3\}$
+	
+	\BLUE{Yes}
+	
+\end{enumerate}
+
+\item Verify all the assertionsi n Example 1.35.
+
+\begin{itemize}
+	\item  if $b\in\F$, then 
+	\begin{align*}
+		\{(x_1,x_2,x_3,x_4)\in\F^4\,:\, x_3=5x_4+b\}
+	\end{align*}is a subspace of $\F^4$ if and only if $b=0$.
+	
+	\item The set of continuous real-valued function on the interval $[0.1]$ is a subspace of $\R^{[0,1]}$.
+	
+	\BLUE{Let $f,g$ be continuous real-valued functions on $[0,1]$.  So is $f+g$ and $xf$ for any $x\in \R$.
+	}
+	
+	\item The set of differentiable real-valued functions on $\R$ is a subspace of $\R^\R$.
+	
+	\BLUE{Let $f,g$ be differentialbe real-valued functions on $\R$ then so is $f+g$ and $xf$ for all $x\in \R$.
+	}
+	
+	\item The set of differentiable real-valued functions $f$ on the interval $(0,3)$ such that $f'(2)=b$ is a subspace of $\R^{(0,3)}$ if and only if $b=0$.
+	
+	\BLUE{let $f,g$ be members of the set.  then $(f+g)'(x) = f'(x)+g'(x)$ and in order for $f+g$ to be a member of the set then $f'(2)+g'(2) = 2b = b$ which is only true when $b=0$.
+	}
+	
+	\item The set of all sequences of complex numbers with limit 0 is a subspace of $\C^\infty$
+	
+	\BLUE{Let $\{x_i\}, \{y_i\}$ be sequences that converge to zero.  That is $\lim_{i\to \infty} x_i = \lim_{i\to\infty} y_i = 0$  then $\lim_{i\to\infty}(x_i+y_i) = \lim_{i\to \infty} x_i + \lim_{i\to\infty} y_i = 0$,  Similarly for scalar multiplication.
+	}
+\end{itemize}
+
+\item Show that the set of differentiable real-valued functions $f$ on the interval $(-4,4)$ such that $f'(-1)=3f(2)$ is a subspace of $\R^{(-4,4)}$.
+
+\BLUE{Let check addition: $3(f+g)(2) = 3f(2)+3g(2)=f'(-1)+g'(-1)=(f+g)'(-1)$  yes. \\Let's check scalar mulitplication $x3f(2) = xf'(-1)$, yes.
+}
+
+\item Suppose $b\in\R$.  Show that the set of continuous real-valued functions $f$ on the interval $[0,1]$ such that $\int_0^1 f=b$ is a subpace of $\R^{[0,1]}$ if and only if $b=0$.
+
+\item if $\R^2$ is subspace of the complex vector space $\C^2$.
+
+\item \begin{enumerate}
+	\item Is $\{(a,b,c)\in\R^3\,:\, a^3=b^3\}$ a subspace of $\R^3$?
+	
+	\BLUE{No.  Let $\alpha = (a,b,c), \beta=(d,e,f)$ be members of the set.  Then, $\alpha+\beta=(a+d,b+e,c+f)$ which is not in the set because
+	\begin{align*}
+		0 &= (a+d)^3 - (b+e)^3 \\
+		&= a^3+a^2d+3ad^2+d^3-(b^3+3b^2e+3be^2+e^3) \\
+		&= 3a^2d+3ad^2-3b^2e-3be^2 \\
+		&= a^2d+ad^2-b^2e-be^2 \\
+		&= ad(a+D)-be(b+e)
+	\end{align*}which must be true for all of $\R^3$ which it is not.
+	}
+	
+	\item Is $\{(a,b,c)\in\C^3\,:\, a^3=b^3\}$ a subspace of $\R^3$?
+\end{enumerate}
+
+\item Give an example of a nonempty subset $U$ of $\R^2$ such that $U$ is closed under addition and under taking additive inverses (meanint $-u \in U$ whenever $u\in U$), but $U$ is not a subspace of $\R^2$.
+
+\BLUE{Let $U=\{(x,y)\in \R^2\,:\, x^2+y^2=1\}$ this does not contain zero.
+}
+
+\item Give an example of a nonempty subset of $U$ of $\R^2$ such that $U$ is closed under scalar multiplication, but $U$ is not a subspace fo $\R^2$.
+
+\BLUE{Let $U=\{(x,y)\in \R^2\,:\, x^2=y^2\}$ not closed under addition $(1,1), (-2,2) \in U$ but $(1-2, 1+2)=(-1,3)$ and $(-1)^2 \ne 3^2$.
+}
+
+\item A function $f\,:\,\R\to\R$ is \DEFINE{periodic} if there exists a positive number $p$ such that $f(x)=f(x+p)$ for all $ x\in \R$.  Is the set of periodic functiosn from $\R$ to $\R$ a subspace of $\R^\R$? Explain.
+
+Let $U$ be the set of periodic functions.  Answer three questions:
+\begin{description}
+	\item Does the set contain the additive identity?
+	
+		Let $f(x) \equiv 0$ for all $x \in \R$ then for any $p\in \R, f(x+p)=0$.  Yes.
+		
+	\item Is the set closed under addition?
+	
+		Let $f,g \in U$.  Then, $f(x+p)=f(x), g(x+p)=x$ for all $x \in \R$.  So, $(f+g)(x+p)=f(x+p)+g(x+p)=f(x)+g(x)=(f+g)(x)$.  Yes.
+		
+	\item Is the set closed under scalar multiplication? Yes
+\end{description}
+
+
+\item Suppose $U_1$ and $U_2$ are subspaces of $V$.  Prove that the intersection $U_1\cap U_2$ is a subspace of $V$.
+
+\BLUE{Let $x,y \in U_1\cap U_2$.  then $x+y \in U_1$ and $x+y \in U_2$ therefore $x+y \in U_1\cap U_2$.  Also, $ax \in U_1 \cap U_2$ for all $a\in \R$ for the same reason.  
+}
+
+\item Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
+
+\BLUE{Let $\{U_i\}$ be a collection of subspaces of a vector space $V$.  Let $x,y \in \cap U_i$.  $0 \in \cap U_i$, $x+y \in U_i$ for all $i \to x+y \in \cap U_i$ and $ax \in \cap U_i$.
+}
+
+\item Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+
+\BLUE{Given $A,B$ are subspaces of $V$. Choose $x,y \in A \cup B$ and assume that $x+y \in A \cup B$.  This means that $x+y \in A$ or $x+y \in B$ or $x+y \in A\cap B$. The last case is handled in a different exercise.  The first case implies that both $x, y \in A$ as $A$ is a subspace under $V$ and closed under addition.  Since, $x,y \in A\cup B$, it must be the case that $x,y \in B$, hence $A \subset B$.  
+}
+
+\item Prove that the union of three suspaces of $V$ is a subspace of $V$ if and only if one of the subpsaces contains the other two.  \textit{[This exercise is surprisingly harder than the previous exercsie, possibly because this exercise i not true if we replace $\F$ with a field containing only two elements.]}
+
+\BLUE{Given $A,B,C$ subspaces of $V$. We know from previous exercises that if $A \cup B$ is a subspace the one contained in the other.  So, let's assume that this is not the case.  Then $A\cup B = \{0\}$ the additive identity and $A \cup B$ does NOT make a subspace.  Assuming that $A\cup B \cup C$ is a subspace of $V$ and letting $x,y \in A\cup B \cup C$ and neither $x$ nor $y$ is zero.  if $x,y \not \in A$ then $x+y \not \in A$ and $x+y \in B \cup C$.  Therefore $B\subset C$ or $C \subset B$.  A similar argument can be made when $x,y, \not \in B$ concluding that $A \subset C$ or $C \subset A$.  Either $C = \{0\}$ so that it can be contained by both or $C$ contains both subspaces.
+}
+
+\item Verify the assertion in Example 1.38.
+
+\BLUE{1.38 Suppose that $U =\{(x,x,y,y) \in \F^4 : x,y \in \F\}$ and $W=\{(x,x,x,y) \in \F^4\,:\, x,y \in \F\}$ then
+\begin{align*}
+	U+W = \{(x,x,y,z) \in \F^4\,:\, x,y,z \in \F\}
+\end{align*}the question really is the range of each coordinate.  the range of the first two coordinate in each subspace are the same and can be assigned the variable $x$.  The range of the third coordinate is $x+y$ which is independent of $x$ but has the same range and thus can be designated $y$.  The range of the fourth coordiante is independent also thus cannot be the same as the other two and must be designated $z$.
+}
+
+\item Suppose $U$ is a subspace of $V$.  What is $U+U$?
+
+\BLUE{Any element of $U+U$ is made up of elements $x,y \in U$ having the form $x+y$.  But, $x+y \in U$ therefore $U+U=U$.
+}
+
+\item Is the operation of addition on the subspaces of $V$ commutative?  In other words, if $U$ and $W$ are subspaces of $V$, is $U+W=W+U$?
+
+\BLUE{Yes
+}
+
+\item Is the operation of addition on the subspaces of $V$ associative?  In other words, in $U_1,U_2, U_3$ are subspaces of $V$, is 
+\begin{align*}
+	(U_1+U_2)+U_3=U_1+(U_2+U_3)?
+\end{align*}
+
+\BLUE{Yes}
+
+\item Does the operation of addition on the subspaces of $V$ have an additive identity?  Which subspaces have the additive inverses?
+
+\BLUE{0 is a member of all subspaces and $0+0$ is a member of all added subspaces.\\
+Let $U,V$ be subspaces of $W$. $U+V=0$ can only happen when all of $V$ cancels out all of $U$ in all possible combinations.  That is for every $u \in U$ every $v \in V$ but be $u+v=0$.  We know that there is a unique additive inverse for each element of a subspace.  Therefore, 0 is the only subspace with and additive inverse.
+}
+
+\item Prove or give a counterexample:  if $U_1,U_2, W$ are subspaces of $V$ such that 
+\begin{align*}
+	U_1+W=U_2+W,
+\end{align*}then $U_1=U_2$.
+
+\BLUE{Let $x \in U_1 + W$ and $x= u_1+w$ for some $u_1 \in U_1$ and $w_1 \in W$.  then $u_1 + w_1 \in U_2 + W$.  Therefore, there exists $u_2 \in U_2$ and $w_2 \in W$ such that $u_2+w_2 = u_1+w_1$. \\
+Counter example: $W = \{(x,0)\}, U_1 = \{(x,x)\}, U_2 = \{(0,y)\}$
+}
+
+\item Suppose 
+\begin{align*}
+	U=\{(x,x,y,y)\in \F^4\,:\, x,y \in \F\},
+\end{align*}Find a subspace $W$ of $\F^4$ such that $\F^4= U \oplus W$.
+
+\BLUE{Let $w=(a,b,c,d) \in U \oplus W$ and $w \not \in U$.  Then, $a \ne b$ and/or $c \ne d$. A simple representation is $W =\{(0,b,0,d)\,:\, c,d \in \F \}$
+}
+
+\item Suppose 
+\begin{align*}
+	U=\{(x,y,x+y,x-y,2x) \in \F^5\,:\, x,y\in\F\}
+\end{align*}Find a subspace $W$ of $\F^5= U\oplus W$.
+
+\item Suppose
+\begin{align*}
+	U=\{(x,y,x+y,x-y,2x) \in \F^5\,:\, x,y\in\F\}
+\end{align*}  Find three subspaces $W_1, W_2, W_3$ of $\F^5$ none of which equals $\{0\}$, such that $\F^5 = U\oplus W_1\oplus W_2\oplus W_3$.
+
+\BLUE{Let $x = (a,b,c,d,e) \in \F^5$ and $x \not \in U$, that is $c \ne a+b, d \ne x-y, e \ne 2x$.  simply let $W_1=\{(0,0,c,0,0)\}, W_2 = \{(0,0,0,d,0)\}$ and $W_3 = \{(0,0,0,0,e)\}$.
+}
+
+\item Prove or give a counterexample: if $U_1,U_2,W$ are subspaces of $V$ such that 
+\begin{align*}
+	V=U_1\oplus W \AND V=U_2\oplus W.
+\end{align*}then $U_1=U_2$.
+
+\BLUE{Let $x = V$ then $x = u_1+w_1$ and $x = u_2+w_2$ where $w \in W, u_1 \in U_1$ and $u_2 \in U_2$.  Since, these are direct sums, there exists only one way for $x$ to be determined in both cases, thus $w_1 = w_2$.  Therefore, $u_1+w_1=u_2+w_2$ implies that $u_1 = u_2$. 
+}
+
+\item A function $f: \R \to \R$ is called \DEFINE{even} if 
+\begin{align*}
+	f(-x)=f(x)
+\end{align*}for all $x \in \R$.  a function $f\,:\, \R\to\R$ is called \DEFINE{odd} if 
+\begin{align*}
+	f(-x)=-f(x)
+\end{align*}for all $x \in \R$.  Let $U_e$ denote the set of real-valued even fucntions on $\R$ and $U_o$ denote the set of real-valued odd fucntions on $\R$.  Show that $\R^\R=U_e\oplus U_o$.
+
+\BLUE{Given a $F \in \R^\R$.  Then define $f,g\in \R^\R$ as
+\begin{align*}
+	f(x) &=\BINDEF{F(x) & \text{if } F(x)=F(-x)}{0& \text{otherwise}}\\
+	g(x) &= \BINDEF{F(x) & \text{if } F(-x)=-F(x)}{0& \text{otherwise}}
+\end{align*}clearly $f$ is even and $g$ is odd and $F=f+g$.
+}
+
+\end{enumerate}
+
+\chapter{Finite Dimensional Vector Spaces}
+
+\section{Span and Linear Independence Exercises}
+
+\begin{enumerate}
+
+\item Suppose $v_1,v_2,v_3,v_4$ spans $V$.  Prove that the list 
+\begin{align*}
+	v_1-v_2,v_2-v_3,v_3-v_4,v_4
+\end{align*}also spans $V$.
+
+\BLUE{Let $u_1=v_1-v_2,u_2=v_2-v_3,u_3=v_3-v_4,u_4=v_4$.  \\
+Which can also be written as $v_1=u_1+u_2+u_3+u_4,v_2=u_2+u_3+u_4,v_3=u_3+u_4,v_4 = u_4$.  \\
+let $x \in V$ then $x = av_1+bv_2+cv_3+dv_4$\\
+Given any $x \in V$ we have 
+\begin{align*}
+	x&=a_1v_1+a_2v_2+a_3v_3+a_4v_4 \\
+	&= a_1(u_1+u_2+u_3+u_4)+a_2(u_2+u_3+u_4)+a_3(u_3+u_4)+a_4(u_4) \\
+	&= (a_1)u_1+(a_1+a_2)u_2+(a_1+a_2+a_3)u_3+(a_1+a_2+a_3+a_4)u_4
+\end{align*}which is a linear combination of our list of vectors and is true for all $x \in V$. All of these equations are reversible indicating that the $\SPAN(u_1, u_2, u_3, u_4) \subseteq V$ hence it is equal.
+}
+
+\item Verify the assertions in Example 2.18.
+
+\begin{itemize}
+	\item a list $v$ of one vector $v \in V$ is linearly independent if and only if $v \ne 0$.
+	
+	\BLUE{For $v$ to be linearly independent $av=0$ if and only if $a=0$. if $v=0$ then $a$ can be anything.
+	}
+	
+	\item A list of two vectors in $V$ is linearly independent if and only if neither vector is a scalar multiple of the other.
+	
+	\BLUE{Vectors $u,v$ are linearly independent implies that $au+bv=0$ is only true when $a = b = 0$.  Let $a, b \ne 0$ then $au=-bv$ or $u=\frac{-b}{a}v$ which means that they are scalar multiples of each other.
+	}
+	
+	\item $(1,0,0,0),(0,1,0,0),(0,0,1,0)$ is linearly independent in $\F^4$.
+	
+	\BLUE{$a(1,0,0,0)+b(0,1,0,0)+c(0,0,1,0)=(a,b,c,0)$  this can only be (0,0,0,0) when $a=b=c=0$.  Hence, linearly independent.
+	}
+	
+	\item The list $1,z,\dots,z^m$ is linearly independent in $\mathcal{P}(\F)$ for each nonegative integer $m$.
+	
+	\BLUE{Given any two integers $i,j$ there is no scalar $a$ such that $z^i=az^j$.  Thus, any linear combination of $1,z,\dots,z^m$, i.e., polynomial, will equal zero only when all of the coefficients are zero.
+	}
+\end{itemize}
+
+\item Find a number $t$ such that 
+\begin{align*}
+	(3,1,4), (2.-3,5), (5,9,t)
+\end{align*}is not linearly independent $\R^3$.
+
+	\BLUE{$=4a+5b+t=0$ and $a-3b+9=0$ or $t=-4a-5b$ and $a=3b-9$ $t=-4(3b-9)-5b=-17b+36$.  When $t = \frac{-36}{17}b$.
+	}
+
+\item Verify the assertion in the second bullet point in Example 2.20.
+\begin{itemize}
+	
+	\item The list $(2,3,1),(1,-1,2)(7,3,c)$ is linearly dependent in $\F^3$ if and only if $c=8$.
+	
+\end{itemize}
+
+\item \begin{enumerate}
+	\item Show that if we think of $\C$ as a vector space over $\R$, then the list $(1+i, 1-i)$ is linearly independent.
+	
+	\RED{$a(1+i)+b(1-i)=a+ai+b-bi$  This will equal zero when $a=-b$ is zero in $\R$ ignoring the complex case.
+	}	
+	
+	\item Show that if we think of $\C $ as a vector space over $\C$, then the list $(1+i, 1-i)$ is lineraly dependent.
+	
+	\RED{similarly from above, but $a=b=0$ is the only solution}
+\end{enumerate}
+
+\item Suppose $v_1,v_2, v_3,v_4$ is linearly independent in $V$. Prove that the list
+\begin{align*}
+	v_1-v_2, v_2, v_3, v_3 -v_4, v_4
+\end{align*}is also linearly independent.
+
+\item Prove or give a conterexample: If $v_1,v_2, \dots,v_m$ is a linearly independent list of vectors in $V$, then 
+\begin{align*}
+	5v_1-4v_2, v_2,v_3, \dots, v_m
+\end{align*}is linearly independent.
+
+\item Prove or give a counterexample: If $v_1,v_2,\dots,v_m$ is a linearly independent list of vectors in $V$ and $\lambda \in \F$ with $\lambda \ne 0$, then $\lambda v_1, \lambda v_2, \dots, \lambda m$ is linearly independent.
+
+	\BLUE{$\lambda v_1+\lambda v_2+\cdots+\lambda v_m=\lambda(v_1+v_2+\cdots v_m)=0$}
+
+\item Prove or give a counterexample: If $v_1, \dots, v_m$ and $w_1, \dots, w_m$ are linearly independent lists of vectors in $V$ , then $v_1+w_1, \dots, v_m+w_m$ is linearly independent.
+
+	\BLUE{$v_1+w_1+v_2+w_2+\cdots v_m+w_m= (v_1+v_2+\cdots v_m+w_1+w_2+\cdots+w_m = 0+0$}
+
+\item Suppose $v_1, \dots, v_m$ is linearly independent in $V$ and $w \in V$.  Prove that if $v_1+w, \dots, v_m+w_m$ is linearly independent, then $w \in \SPAN(v_1, \dots, v_m)$.
+
+	\BLUE{$0=v_1+w+v_2+w+\cdots +v_m+w = mw+v_1+v_2+\cdots +v_m$ which means that $w$ is a linear combination of $v_1,v_2, \dots, v_m$ and hence $w \in \SPAN(v_1,v_2,\dots, v_m)$.
+	}
+
+\item Suppose $v_1, \dots, v_m$ is linearly independent in $V$ and $w \in V$.  Show that $v_1, \dots, v_m, w$ is linearly independent if and only if 
+\begin{align*}
+	w \not \in \SPAN(v_1, \dots, v_m).
+\end{align*}
+
+\item Explain why there does not exist a list of six polynomials that is linearly independent in $\mathcal{P}_4(\F)$.
+
+\BLUE{the degree of $\mathcal{P}_4(\F)$ is 5.  It needs 5 linearly independent vectors to span it.}
+
+\item Explay why no list of four polynomials spans $\mathcal{P}_4(\F)$.
+
+\BLUE{the degree of $\mathcal{P}_4(\F)$ is 5.  It needs 5 linearly independent vectors to span it.}
+
+\item Prove that $V$ is infinite-dimensional if and only if there is a sequence $v_1,v_2, \dots$ of vectors in $V$ such that $v_1, \dots, v_m$ is linearly independent for every positive integer $m$.
+
+\BLUE{\IF Let there be the infinite list of linearly independent vectors $v1,v2,\dots$ all in the vector space $V$.  Given any $m \in \Z^+$ it is clear that $v_1,v_2,\dots,v_m$ are linearly independent.
+\\ 
+\ONLYIF Assume that given any $m \in \Z^+$ there is a sequence of linearly independent vectors $U_m=(v_1,v_2,\dots, v_m)$ in the finitely dimensional vector space $V$ and $\SPAN(v_1,v_2,\dots,v_m)=V$. Let $n>m$.  Then, there exists $U_n=(u_1,u_2,\dots, u_n)$ linearly independent vectors such that $\SPAN(U_n)=V$.  Thus, $\SPAN(U_n)=\SPAN(U_m)$. Remove the $m$ vectors from $U_n$ that span $U_m$.  Let $w$ be one of the remaining vectors.  $w$ is linearly independent of all $U_m$ and the removed vectors.  Thus $w \not\in \SPAN(U_m)$ which is a contradiction.  therefore $V$ is infinitely dimensional.
+}
+
+\item Prove the $\F^\infty$ is infinte-dimensional.
+
+\BLUE{Proof by contradiction.  IF it were finitely dimensional, then we would have finite number of linearly independet vectors taht span the entire set.  That isn't the case.
+}
+
+\item Prove that the real vector space of all continuous real-valued functions on the interval $[0,1]$ is infinite-dimensional.
+
+\BLUE{Suppose this is true.  Then there exists a finite set of functions $f_1, \dots, f_n$ such that $\SPAN(f_1, \dots,f_n) = \R^\{[0,1]]$.  Then, given any $u \in [0,1]$ there are $n$ different values in the set $X= \{f_1(u), \dots, f_n(u)\}$.  Let $y$ be such that $y \not \in X$ and $y \in [0,1]$.  Define $g \in \R^{[0,1]}$ as $g(x)=y$.  Clearly, $g(u)=y$ and $g \not \in \SPAN(f_1,\dots, f_n)$.  A contradiction.
+}
+
+\item Suppose $p_0, p_1, \dots, p_m$ are polynomials in $\mathcal{P}(\F)$ such that $p_j(2)=0$ for each $j$.  Prove that $p_0, p_1, \dots, p_m$ is not linearly independent in $\mathcal{P}_m(\F)$.
+
+\BLUE{There cannot be a linear equation which passes through the point (2,0) and be basis vector.  All basis vectors have the property $p(0)=0$.
+}
+
+\end{enumerate}
+
+\section{Bases -- Exercise}
+
+\begin{enumerate}
+	\item Find all vector spaces that have exactly one basis.
+	
+	\BLUE{Let $x$ be a basis for $U$.  Then $ax \in U$ for all $a \in \F$.  This is true when $x=0$ and $U=\{0\}$.  This is also true when $\F = \R$ and $x=1$ (Or any other member of $\R$).  This is also true when $\F = \C$ and $x=i$ (or any complex constant) and we allow scalars to be members of $\C$.
+	}
+	
+	\item \begin{enumerate}
+		\item Let $U$ be the subspace of $\R^5$ defined by
+		\begin{align*}
+			U=\{(x_1,x_2,x_3,x_4,x_5)\in \R^5\,:\,x_1=3x_2\AND x_3=7x_4\}.
+		\end{align*}Find a basis of $U$.
+		
+		\BLUE{Every $u=(x_1,x_2,x_3,x_4,x_5) \in U$ then we know that $u=(3x_2,x_2,7x_4,x_4,x_5)=(3,1,0,0,0)x_2+(0,0,7,1,0)x_4+(0,0,0,0,1)x_5$ therefore  $(2,1,0,0,0), (0,0,7,1,0), (0,0,0,0,1)$ forms a basis for $U$
+		}
+		
+		\item Extend the basis in part (a) to a basis of $\R^5$
+		
+		\BLUE{Given $u \in \R^5$ and $u \not \in U$ then $x_1 \ne 3x_2$ or $x_3 \ne 7x_4$.  Thus, $u=a(2,1,0,0)+b(0,0,7,1,0+c(0,0,0,0,1)+d(1,0,0,0,0)+e(0,0,1,0,0)$ where $d$ and $e$ are scalars of any value. 
+		}
+		
+		\item Find a subspace $W$ of $\R^5$ such that $\R^5=U\oplus W$.
+		
+		\BLUE{$W = \{(x_1,x_2,x_3,x_4,0)\in \R^5\,:\,x_1\ne3x_2\AND x_3\ne7x_4\}\cup\{0\}$}
+	\end{enumerate}
+	
+	\item \begin{enumerate}
+		\item Let $U$ be a subspace of $\C^5$ defined by 
+		\begin{align*}
+			U=\{(z_1,z_2,z_3,z_4,z_5)\in\C^5\,:\, 6z_1=z_2\AND z_3+2z_4+3z_5=0\}.
+		\end{align*}Find a basis for $U$.
+		\item Extend the basis in part (a) to a basis of $\C^5$.
+		\item Find a subspace $W$ of $\C^5$ such that $\C^5=U\oplus W$.
+	\end{enumerate}
+	
+	\item Prove or disprove: there exists a bassis $p_0, p_1,p_2,p_3$ of $\mathcal{P}_3(\F)$ such that none of the polynomials $p_0,p_1,p_2,p_3$ has degree 2.
+
+	\BLUE{Any basis for $\mathcal{P}_3(\F)$ must have at least four vectors.  However, each vector with an element for $x^2$ must also have a non-zero element for $x^3$.  That is $(0,0,1,b)$ where $b \ne 0$.  Thus, this set is equal to $\SPAN(\{(1,0,0,0)(0,1,0,0),(0,0,1,1)\}$ which only has three elements.  Disproven.
+	}
+	
+	\item Suppose $v_1,v_2,v_3,v_4$ is a basis of $V$.  Prove that 
+	\begin{align*}
+		v_1+v_2,v_2+v_3,v_3+v_4, v_4
+	\end{align*}is also a basis of $V$.
+	
+	\BLUE{Four linearly independent vectors forms a basis for $V$.
+	\begin{align*}
+		a(v_1+v_2)+c(v_2+v_3)+d(v_3+v_4)+ ev_4 &= av_1+av_2+c(v_2+cv_3)+dv_3+dv_4+ev_4 \\
+		&= av_1+(a+c)v_2+(c+d)v_3+(d+e)v_4 \\
+	\end{align*} $v_1,v_2,v_3,v_4$ are linearly independent.  Ths sum can only equal zero when $a=0$ which implies that $c=0$ and $d=0$ and $e=0$. Which means that the vectors are linearly independent.
+	}
+	
+	\item Prove or give a counterexample:  If $v_1,v_2,v_3,v_4$ is a basis of $V$ and $U$ is a subspace of $V$ such that $v_1,v_2 \in U$ and $v_3\not\in U$ and $v_4 \not\in U$, then $v_1,v_2$ is a basis of $U$.
+	
+	\item Suppose $U$ and $W$ are subspacs of $V$ such that $V=U \oplus W$.  Suppose also that $u_1,\dots,u_m$ is a basis of $U$ and $w_1,\dots,w_n$ is a basis of $W$. Prove that 
+	\begin{align*}
+		u_1,\dots,u_m,w_a,\dots,w_n
+	\end{align*}is a basis of $V$.
+\end{enumerate}
+
+
+\section{Dimension -- Exercises}
+\newcommand{\PP}[1]{\mathcal{P}_#1(\F)}
+\newcommand{\PPP}{\mathcal{P}}
+
+\begin{enumerate}
+
+\item Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$ such that $\dim U=\dim V$.  Prove that $U=V$.
+
+\BLUE{Let $n=\dim U$.  Then a basis for $U$ will have $n$ linearly independent vectors.  $U$ is a subspace of $V$ hence the basis vectors are part of $V$.  Since, $\dim V=n$ then any $n$ linearly independent vectors will forma  basis for $V$.  Hence, the $\SPAN$(n-vectors)$=U=V$.
+}
+
+\item Show that the subspacs of $\R^2$ are precisely $\{0\}, \R^2$, and all lines in $\R^2$ through the origin.
+
+\BLUE{The subspaces of $\R^2$ must have dimension of 0, 1, or 2.  $\dim \{0\} =0, \dim \R^2=2$.  Each line can written in the form $y=mx+b$ which is one-dimensional and is a vector space if and only if $b=0$.
+}
+
+\item Show that the subspaces in $\R^3$ are precisely $\{0\}, \R^3$, and all lines in $\R^3$ through the origin, and all planes in $\R^3$ through the origin.
+
+\item \begin{enumerate}
+	\item Let $U=\{p \in \PP{4}\,:\, p(6)=0\}$.  Find a basis for $U$.
+	
+	\BLUE{Notice that if $p \in U$ then $p$ has the form $p(x)=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4$ and $p(6)=0$ implies that $0 = a_0+a_16+a_26^2+a_36^3+a_46^4$.  If we look at polynomials of each degree we see that \\
+	degree 0 implies $a_0 =0$ or (0,0,0,0,0)\\
+	degree 1 implies $0=a_0 + 6a_1$ or (-6,1,0,0,0)\\
+	degree 2 implies $0=a_0+6a_1+36a_2$ or (-6,-5,1,0,0) \\
+	degree 3 implies $0=a_0+6a_1+36a_2+216a_3$ or (-36, -6, -4, 1, 0)\\
+	degree 4 implies $(1,6,6^2,6^3,6^4)$ \\
+	We can find a vector that describes the degree 4 polynomials.  This means that we have 4 vectors in a vector space of dimension 5.
+	}
+	
+	\item Extend the basis in part (a) to a basis of $\mathcal{P}_4(\F)$
+	
+	\BLUE{
+		Add the vector (1,0,0,0,0) to the basis.	
+	}
+	
+	\item Find a subspace $W$ of $\PP{4}(\F)$.
+	
+	\BLUE{$W$ is the set of constant polynomials.
+	}
+	
+	\item Find a subspace $W$ of $\PP{4}(\F)$ such that $\PP{4}(\F)=U\oplus W$
+\end{enumerate}
+
+\item \begin{enumerate}
+	\item Let $U=\{p\in\PP{4}\,:\,p''(6)=0$.  Find a basis of $U$.
+	
+	\BLUE{Clearly, polynomials of degree 0 and 1 are members in $U$ which give sus (1,0,0,0,0) and (0,1,0,0,0).  That leaves \\
+	degree 2 implies $0=a_2$ which means that (0,0,0,0,0) \\
+	degree 3 implies $0=a_2+a_3x$ or (0,0,-6, 1,0)
+	degree 4 implies $0=a_2+a_3x+a_4x^2$ or (0,0,-6,-5,1).
+	}
+	
+	\item Extend the basis in (a) to a basis of $\PP{4}$.
+	
+	\BLUE{add the vector (0,0,1,0,0)}
+
+	\item Find a subspace $W$ of $\PP{4}$ such that $\PP{4}=U\oplus W$.
+\end{enumerate}
+
+\item \begin{enumerate}
+	\item Let $U=\{p\in \PP{4}\,:\,p(2)=p(5)\}$.  Find a basis of $U$.
+	\item Extend the basis in part (a) to a basis of $\PP{4}$.
+	\item Find a subspace $W$ of $\PP{4}$ such that $\PP{4}=U\oplus W$.
+\end{enumerate}
+
+\item \begin{enumerate}
+	\item Let $U=\{p\in \PP{4}\,:\,p(2)=p(5)=p(6)\}$.  Find a basis of $U$.
+	\item Extend the basis in part (a) to a basis of $\PP{4}$.
+	\item Find a subspace $W$ of $\PP{4}$ such that $\PP{4}=U\oplus W$.
+\end{enumerate}
+\item \begin{enumerate}
+	\item Let $U=\{p\in \PP{4}\,:\,\int_{-1}^1 p=0\}$.  Find a basis of $U$.
+	\item Extend the basis in part (a) to a basis of $\PP{4}$.
+	\item Find a subspace $W$ of $\PP{4}$ such that $\PP{4}=U\oplus W$.
+\end{enumerate}
+
+\item Suppose $v_1,\dots,v_m$ is linearly independent in $V$ and $w \in V$.  Prove that 
+\begin{align*}
+	\dim \SPAN(v_1+w,\dots,v_m+w)\ge m-1
+\end{align*}
+
+\BLUE{if $w \not \in \SPAN(v_1,\dots,v_m)$ then $	\dim \SPAN(v_1+w,\dots,v_m+w) \ge m$ and if $-w \in \{v_1,\dots,v_m\}$ then $	\dim \SPAN(v_1+w,\dots,v_m+w) = m-1$
+}
+
+\item Suppose $p_0,p_1,\dots,p_m\in \mathcal{P}(\F)$ are such that each $p_j$ has  degree $j$.  Prove that $p_0,p_1,\dots,p_m$ is a basis for $\PP{m}$.
+
+\item Suppose that $U$ and $W$ are subspaces of $\R^8$ such that $\dim U=3, \dim W=5$, and $U+W = \R^8$.  Prove that $\R^8=U\oplus W$.
+
+\item Supoose $U$ and $W$ are both five-dimensional subspaces of $\R^9$.  Prove that $U\cap W \ne \{0\}$.
+
+\item Suppose $U$ and $W$ are both 4-dimensional subspaces of $\C^6$.  Prove that there exists two vectors in $U\cap W$ wuch that neither of these vectors is a scalar multiple of the other.
+
+\item Supose $U_1,\dots, U_m$ are finite-dimensional subspaces of $V$.  Prove that $U_1+\cdots+U_m$ is finite-dimensional and 
+\begin{align*}
+	\dim(U_1+\cdots+U_m) \le \dim U_1+\cdots+\dim U_m
+\end{align*}
+
+\item Suppose $V$ is finite-dimensiona, with $\dim V = n \ge 1$.  Prove that there exists 1-dimensional subspaces $U_1,\dots, U_n$ of $V$ such that 
+	\begin{align*}
+		V = U_1\oplus\cdots\oplus U_n
+0	\end{align*}
+	
+\item Supoose $U_1,\dots,U_m$ are finite-dimensional subspaces of $V$ such that $U_1+\cdots+U_m$ is a direct sum.  Prove that $U_1\oplus\cdots\oplus U_m$ is finite-dimensional and 
+\begin{align*}
+	\dim U_1\oplus \cdots \oplus U_m = \dim U_1 + \cdots + \dim U_m.
+\end{align*}
+
+\item You might guess, by analogy with the formula for the number of elements in the union of three subsets of a finite set, that if $U_1, U_2, U_3$ are subspaces of a finte-dimensional vector space, then 
+\begin{align*}
+	\dim(U_1+U_2+U_3) =& \dim U_1+\dim U_2+\dim U_3 \\
+	&-\dim(U_1\cap U_2)-\dim(U_1\cap U_3)-\dim(U_2\cap U_3) \\
+	&+\dim(U_1\cap U_2 \cap U_3)
+\end{align*}  Prove this or give acounter example.
+
+\end{enumerate}
+
+\chapter{Linear Maps}
+
+\section{The Vector Space of Linear Maps -- Exercises}
+\newcommand{\LL}{\mathcal{L}}
+
+\begin{enumerate}
+\item Suppose $b,c \in \R$. Define $T:\R^3\to\R^2$ by 
+\begin{align*}
+	T(x,y,z)=(2x-4y+3z+b, 6x+cxyz).
+\end{align*}Show that $T$ is linear if and only if $b=c=0$.
+
+\BLUE{\begin{align*}
+	\LET T(x,y,z)&=(2x-4y+3z+b, 6x+cxyz) \\
+		T(u,v,w)&=(2u-4v+3w+b, 6u+cuvw)\\
+		T((x,y,z)+(u,v,w))&=T((x+u,y+v,z+w))\\
+		&=(2(x+u)-4(y+v)+3(z+w)+b, 6(x+u)+c(x+u)(y+v)(z+w)) \\
+		&=(2x-4y-3z+b, 6x+c(xyz))+(2u-4v+3w, 6u+cuvw)+(0, c(\dots)) \\
+		&= T(x,y,z)+T(u,v,w) \iff b=0 \AND c=0
+\end{align*}
+}
+
+\item Suppose $b,c \in \R$.  Define $T:\mathcal{P}(\R)\to\R^2$ by 
+\begin{align*}
+	Tp=(3p(4)+5p'(6)+bp(1)p(2), \int_{-1}^2 x^3p(x)dx+c\sin p(0)).
+\end{align*}Show that $T$ is linear if and only if $b=c=0$.
+
+\BLUE{$b$ depends on the term $bp(1)p(2)$ which becomes $b(p+q)(1)(p+q)(2) = b(p(1)+q(1))(p(2)+q(2))$ which is not linear unless $b=0$ and cancels it out.\\
+$c$ depends on the term $c\sin(p(0))$ which becomes $c\sin((p+q)(0))=c\sin((p(0)+q(0))$ which is not lineary unless $c = 0-$ and cancels it out.
+}
+
+\item Suppose $T \in \LL(\F^n,\F^m)$.  Show that there exist scalars $A_{ij} \in \F$ for $j=1,\dots,m$ and $k=1,\dots,n$ such that 
+\begin{align*}
+	T(x_1,\dots,x_n)=(A_{1,1}x_1+\cdots+A_{1,n}x_n,\dots,A_{m,1}x_1+\cdots+A_{m,n}x_n)
+\end{align*}for every $(x_1,\dots,x_n) \in \F^n$.\\
+\textit{[The exercise above shows that T has the form promised in the last item of Example 3.4.]}
+
+\BLUE{Given $T \in \LL(\F^n,\F^m)$ and any vectors $u=(u_1,\dots, u_n),v=(v_1,\dots,v_n) \in \F^n$.  Let $n=1$ then $T(u)=(f_1(u_1), \dots, f_m(u_1))$ for some $m$ functions $f_i: \R \to \R$. Each of these is of the form $f_i(x)= A_ix$. $T(u+v)=(\dots,f_i(u_i+v_i),\dots)=(\dots,f_i(u_i),\dots)+(\dots,f_i(v_i),\dots) = Tu+Tv$.  Now assume that this is true for $n$ (the $A_i$ now translate to $A_{ij}$) it is easy to show that it is true for $n+1$.  Hence an inductive proof.
+}
+
+\item Suppose $T \in \LL(V,W)$ and $v_1,\dots,v_,$ is a list of vectors in $V$ such that $Tv_1,\dots,Tv_m$ is a linearly independent list in $W$.  Prove that $v_1, \dots, v_m$ is linearly independent.
+
+\BLUE{$T$ is a linear map and $Tv_i$ are linearly independent.  Then $aTv_1+bTv_2=0$ implies $a=b=0$ thus, $T(av_1+bv_2)=0$ implies $T(0)=0$ or that $av_1+bv_2=0$ only if $a=b=0$.
+}
+
+\item Prove the assertion in 3.7.  $\LL(V,W)$ is a vector space.
+
+\BLUE{Let $S,T \in \LL(V,W)$ and $v \in V$ and $w \in W$.  Then $(T+S)(v) = T(v)+S(v)\in W$ therefore $T+S \in \LL(V,W)$.  And $aT(v) \in W$ when $a \in \F$ hence $aT \in \LL(V,W)$.  therefore, $\LL(V,W)$ is a vector space.
+}
+
+\item Prove the assertions in 3.9.
+
+\BLUE{Let $T_1\in \LL(V,U), T_2 \in \LL(W,V), T_3 \in \LL(X,W)$.\\
+Associative: Show that $(T_1T_2)T_3 = T_1(T_2T_3)$\\
+\\
+$(T_1T_2)T_3(x)=(T_1(T_2))T_3(x)=T_1(T_2(T_3(x))) = T_1(T_2T_3(x))= T_1(T_2T_3)(x)$\\
+\\
+Identity: $IT=TI=T$, where $I(v)=v$\\
+\\
+$I(T(v))=T(v)$ and $T(I(v))=T(v)$\\
+\\
+Distributive\\
+}
+
+\item Show that every linear map from a 1-dimensional vector space to itself is multiplication by some scalar.  More Precisely, prove that if $\dim V =1$ and T$\in \LL(V,V)$, then there exists $\lambda \in \F$ such that $Tv=\lambda v$ for all $v  \in V$.
+
+\BLUE{Let $T(0) = b$ for some value $b \in \F$.  then $T(v-v)= T(v)-T(v)=0$ therefore $T$ must be a single term of the form $T(v)=\alpha v$ for some $\alpha \in \F$.
+}
+
+\item Give an example of a function $\varphi : \R^2\to\R$ such that
+\begin{align*}
+	\varphi(av)=a\varphi(v)
+\end{align*} for all $a \in \R$ and all $v \in \R^2$ but $\varphi$ is not linear.
+
+\BLUE{$\varphi(x,y)=\sqrt[3]{x^3+y^3}$}
+
+\item Given an example of a funtion $\varphi:\C \to \C$ such that
+\begin{align*}
+	\varphi(w+z)=\varphi(w)+\varphi(z)
+\end{align*}for all $w,z\in\C$ but $\varphi$ is not linear.
+
+\item Suppose $U$ is a subspace of $V$ with $U\ne V$.  Suppose $S \in \LL(U,W)$ and $S \ne 0$ (which means that $Su \ne 0$ for some $u\in U$).  Define $T: V \to W$ by
+\begin{align*}
+	Tv=\BINDEF{Sv & \text{if } v \in U}{0 & \text{if }v \in V\AND v \not \in U}
+\end{align*}Prove that $T$ is not a linear map of $V$.
+
+\BLUE{Choose $v,w \in V$ such that $v,w \not \in U$ and $v+w=u \in U$. then $T(v+w)=T(v)+T(w)=0$ but $T(u)=Su$ a contradiction.
+}
+
+\item Suppose $V$ is finite-dimensional.  Prove that every linear map on a subspace of $V$ can be extended to a linear map on $V$.  In other words, show that $U$ is a subspace of $V$ and $S \in \LL(U,W)$, then there exists $T\in \LL(V,W)$ such that $Tu=Su$ for all $u\in U$.
+
+\BLUE{Let $X$ be a subspace of $V$ such that $X \oplus U=V$.  Let $R\in \LL(X,W)$ and 
+\begin{align*}
+	Tv = \BINDEF{Sv & \text{if } v \in U}{Rv & \text{if } v \in X}
+\end{align*}
+}
+
+\item Suppose $V$ is finite-dimensional with $\dim V > 0$, and suppose $W$ is infinite-dimensional.  Prove that $\LL(V,W)$ is infinite-dimensional.
+
+\BLUE{Let $m=\dim \LL(V,W)$.  There, there exists a basis of linear maps $T_1, \dots, T_m$ such that $\SPAN(T_1,\dots, T_m) = \LL(V,W)$.  Thus, $\dim T_1(v)+\cdots+\dim T_m(v) \le m$.  Thus, given any $w \in W$ $w$ can be written with a finite sum of linearly independent vectors from $T_i$.  But $\dim W = \infty$  a contradiction.
+}
+
+\item Suppose $v_1, \dots,v_m$ is linearly dependent list of vectors in $V$.  Suppose also that $W \ne \{0\}$.  Prove that there exist $w_1,\dots,w_m \in W$ such that no $T \in \LL(V,W)$ satisfies $Tv_k=w_k$ for each $k=1,\dots,m$.
+
+\item Suppose $V$ is finite-dimensional with $\dim V \ge 2$.  Prove that there exist $S,T \in\LL(V,V)$ such that $ST \ne TS$.
+
+\BLUE{Let $S=(y,x)$ and $T=(x,-y)$  then $S(T(x,y)) = (-y,x)$ and $T(S(x,y))= (y,-x)$.}
+
+\end{enumerate}
+
+\section{Null Space -- Exercises}
+
+\begin{enumerate}
+
+\item Give an example of a linear map $T$ such that $\dim\NULL T = 3$ and $\dim \RANGE T=2$;
+
+\BLUE{$T \in \LL(\R^2,\mathcal{P}_4(\F))$ and $T(a,b)=ax^3+bx^4$
+}
+
+\item Suppose $V$ is a vector space and $S,T \in \LL(V,V)$ are such that 
+\begin{align*}
+	\RANGE S \subset \NULL T
+\end{align*}Prove that $(ST)^2=0$
+
+\BLUE{Show that $STST=0$.  Basically, no matter what happens $T(S(v))=0$ so $S(\underline{T(S(}T(v)\textbf{))})$ which will give us zero.
+}
+
+\item Suppose $v_1, \dots, v_m$ is a list of vectors in $V$.  Define $T \in \LL(\F^m,V)$ by 
+\begin{align*}
+	T(z_1,\dots,z_m)=z_1v_1+\cdots+z_mv_m.
+\end{align*}\begin{enumerate}
+\item What property of $T$ corresponds to $v_1,\dots,v_m$ spanning $V$?
+\item What property of $T$ corresponds to $v_1,\dots,v_m$ being linearly independent?
+\end{enumerate}
+
+\item Show that 
+\begin{align*}
+	U=\{T \in\LL(\R^5,\R^4)\,:\,\dim\NULL T > 2\}
+\end{align*}is not a subspace of $\LL(\R^5,\R^4)$
+
+\BLUE{$\dim \NULL T$ can take on the values 3, 4 an 5.  which means that the $\dim \RANGE T$ takes on the values 2, 1, and 0, respectively.  For $\dim \NULL T =3 $ we could have two entirely disjoint linear maps, e.g., $S(a,b,c,d,e) = (a,b, 0,0)$ and $T(a,b,c,d,e)=(0,0,c,d)$ These are both in $U$ but added $S+T \not \in U$. hence not a subspace of $\LL(\R^5,\R^4)$.  Similarly, for $\dim \NULL T = 4 \AND 5$
+}
+
+\item Give an example of linear map $T\,:\,\R^4\to\R^4$ such that 
+\begin{align*}
+	\RANGE T = \NULL T
+\end{align*}
+
+\BLUE{$T(a,b,c,d)=T(a,0,c,0)$}
+
+\item Prove that there does not exist a linear map $T\,:\,\R^5\to\R^5$ such that 
+\begin{align*}
+	\RANGE T = \NULL T
+\end{align*}
+
+\BLUE{$1\le \dim \RANGE T\le 5$ and $1\le \dim \NULL T\le 4$ and $\dim \RANGE T + \dim\NULL T = 4$  thus if $\dim \RANGE T = \dim\NULL T = 2.5$ which isn't possible.
+}
+
+\item Suppose $V$ and $W$ are finite-dimensional with $2 \le \dim V \le \dim W$.  Show that $\{T\in \LL(V,W):T$ is not injective$\}$ is not a suspace of $\LL(V,W)$
+
+\BLUE{Counter example, pick two linear maps from the set, one that cancels out the other when you add them leaving behind an injective linear map. Hence, not a subspace.\\
+\\
+$V, W = \R^2, T(x,y)=(x \mod 4, y), S(x,y)=(-x\mod 4, y)$ then $(T+S)(x,y)=(0, 2y) \not \in \LL(V,W)$
+}
+
+\item Suppose $V$ and $W$ are finite-dimensional with $\dim V \ge\dim W\ge 2$.  Show that $\{T\in \LL(V,W):T$ is not surjective$\}$ is not a subspace of $\LL(V,W)$.
+
+\BLUE{$T(x,y)=(x,0), S(x,y)=(0,y), (S+T)(x,y)=(x,y)$
+}
+
+\item Suppose $T \in\LL(V,W)$ is injective and $v_1,\dots,v_n$ is linearly independent in $V$.  Prove that $Tv_1,\dots,Tv_n$ is linearly independent in $W$.
+
+\BLUE{Given any $u \in \SPAN{v_1, \dots, v_n}$ we have constants $c_1,\dots,c_n$ such that $u=c_1v_1+\cdots+c_nv_n$.  Then, $T(u)=T(c_1v_1+\cdots+c_nv_n)$
+}
+
+\item Suppose $v_1,\dots,v_n$ spans $V$ and $T \in \LL(V,W)$.  Prove that the list $Tv_1,\dots,T_n$ spans range $T$.
+
+\BLUE{Let $w \in \RANGE(T)$.  Then, there exists an $x \in V$ such that $Tx=w$.  Since $\SPAN(v_1, \dots, v_n) = V$ then $x \in \SPAN(v_1, \dots, v_n)$.  Hence, $w \in \SPAN(Tv_1, \dots, Tv_n)$.
+}
+
+\item Suppose $S_1,\dots,S_n$ are injective linear maps such that $S_1S_2\cdots  S_n$ makes sense.  Prove that $S_1S_2\cdots S_{n-1}$ is injective.
+
+\item Suppose that $V$ is finite-dimensional and that $T \in \LL(V,W)$.  Prove that there exist a subspace $U$ of $V$ such that $U \cap \NULL T = \{0\}$ and $\RANGE T=\{Tu\,:\,u\in U\}$.
+
+\BLUE{Let $u,v \in \RANGE T$.  Then there must be $x,y \in U$ such that $Tx=u, Ty=v$.  We know that $\RANGE T$ is a subspace, therefore $u+v \in \RANGE T$.  Thus $Tx+Ty \in \RANGE T$ and $Tx+Ty=T(x+y)$.  Hence, $x+y \in U$.  A similar argument holds for scalar multpilcation.
+}
+
+\item Suppose $T$ is a linear map from $\F^4$ to $\F^2$ such that 
+\begin{align*}
+	\NULL T = \{(x_1,x_2,x_3,x_4)\in \F^4\,:\, x_1=5x_2\AND x_3=7x_4\}.
+\end{align*}Prove that $T$ is surjective.
+
+\BLUE{Give any $(x,y)\in \F^2$ we can clearly find at least one point (actually a whole set of points) $(a,b,c,d) \in \R^4$ such that $(x,y)=(a-5b,c-7d)$.  Setting $b=d=0$ we can see that $(x,y)=(a,d)$ thus spanning $\F^2$
+}
+
+\item Suppose $U$ is a 3-dimensional subspace of $\R^8$ and that $T$ is a linear map from $\R^8$ to $\R^5$ such that $\NULL T= U$.  Prove that $T$ is surjective.
+
+\BLUE{Since $\dim V = \dim \NULL T + \dim \RANGE T$ and $\dim \NULL T = \dim U = 3$ then $8-3=5=\dim \RANGE T$.  Since, the $\dim W = \dim \R^5 = 5$ then $T$ must be surjective.
+}
+
+\item Prove that there does not exist a linear map from $\F^5$ to $\F^2$ whose null space equals
+\begin{align*}
+\{(x_1,x_2,x_3,x_4,x_5)\in \F^5\,:\,x_1=x_2\AND x_3=x_4=x_5\}.
+\end{align*}
+
+\BLUE{the $\NULL T = \{(a,a,b,b,b)\,:\,$ for some $a,b\}$.  Hence $\dim\NULL T = 2$.  Since $\dim V = 5$ then the $\dim \RANGE T$ would have to be 3 but $\dim W = 2$ hence no such $T$ exists.
+}
+
+\item Suppose there exists a linear map on $V$ whose null space and range are both finite-dimensional.  Prove that $V$ is finite-dimensional.
+
+\BLUE{Let $T=\LL(V,W)$ for some vector space $W$ not necessarily finite.  Since $\dim V = \dim \RANGE T + \dim \NULL T$ then $\dim V$ must have some finite value hence be finite dimensional.
+}
+
+\item Suppose $V$ and $W$ are both finite-dimensional.  Prove that there exists an injective linear map from $V$ to $W$ if and only if $\dim V \le \dim W$.
+
+\item Suppose $V$ and $W$ are both finite-dimensional.  Prove that there exists a surjective linear map from $V$ onto $W$ if and only if $\dim V \ge \dim W$.
+
+\item Suppose $V$ and $W$ are finite-dimensional and that $U$ is a subspace of $V$.  Prove that there exists $T \in \LL(V,W)$ such that $\NULL T = U$ if and only if $\dim U \ge \dim V - \dim W$.
+
+\item Suppose $W$ is finite-dimensional and $T \in \LL(V,W)$.  Prove  that $T$ is injective if and only if there exists $S\in \LL(W,V)$ such that $ST$ is the identity map on $V$.
+
+\BLUE{$T$ injective implies that for every $w \in \RANGE T$ there exists one and only one $v \in V$ such that $Tv=w$.  So, let $S \in \LL(W,V)$ defined as
+\begin{align*}
+	S(w) = \BINDEF{v & \text{if } w \in \RANGE T \AND Tv=w}{0 & \text{otherwise}}
+\end{align*}
+}
+
+\item Suppose $V$ is finite-dimensional and $G\in \LL(V,W)$.  Prove that $T$ is surjective if and only if there exists $S \in \LL(W,V)$ such that $TS$ is the identity map on $W$.
+
+\BLUE{$T$ surjective on $W$ means that for every $w \in W$ there exists at least one $v \in V$ such that $Tv=w$.  Define $S \in \LL(W,V)$ such that $Sw = v$ where $Tv=w$.
+}
+
+\item Suppose $U$ and $V$ are finite-dimensional vector spaces and $S\in\LL(V,W)$ and $T\in\LL(U,V)$.  Prove that 
+\begin{align*}
+	\dim\NULL ST \le \dim \NULL S + \dim \NULL T.
+\end{align*}
+
+\item Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \LL(V,W)$ and $T \in \LL(U,V)$.  Prove that
+\begin{align*}
+	\dim \RANGE ST \le \min\{\dim\RANGE S, \dim \RANGE T\}.
+\end{align*}
+
+\item Suppose $W$ is finite-dimensional and $T_1,T_2 \in \LL(V,W)$.  Prove that $\NULL T_1\subset \NULL T_2$ if and only if there exists $S \in \LL(W,W)$ such that $T_2 = ST_1$.
+
+\item Suppose $V$ is finite-dimsnsional and $T_1,T_@ \in \LL(V,W)$.  Prove that $\RANGE T_1\subset \RANGE T_2$ if and only if there exists $S \in \LL(V,V)$ such that $T_1=T_2S$.
+
+\item Suppose $D \in \LL(\mathcal{P}(\R), \mathcal{P}(R))$ is such that $\deg Dp=(\deg p) -1$ for every nonconstant polynomial $ p \in \mathcal{P}(R)$.  Prove that $D$ is surjective.
+
+\item Suppose $ p \in \mathcal{P}(\R)$.  Prove that there exists a polynomial $q \in \mathcal{P}(\R)$ such that $5q''+3q'=p$.
+
+\item Suppose $T \in\LL(V,W)$, and $w_1,\dots,w_m$ is a basis of $\RANGE T$.  Prove that there exists $\varphi_1,\dots,\varphi_m \in \LL(V, \F)$ such that 
+\begin{align*}
+	Tv=\varphi_1(v)w_1+\cdots+\varphi_m(v)w_m
+\end{align*}for every $v \in V$.
+
+\item Suppose $\varphi\in\LL(V,\F)$.  Suppose $u \in V$ is not in $\NULL \varphi$.  Prove that 
+\begin{align*}
+	V = \NULL \varphi \oplus \{au \,:\,a \in \F\}.
+\end{align*}
+
+\item Suppose $\varphi_1$ and $\varphi_2$ are linear maps from $V$ to $\F$ that have the same $\NULL$ space.  Show that there exists a constant $c \in \F$ such that $\varphi_1=c \varphi_2$.
+
+\item Give an example of two linear maps $T_1$ and $T_2$ from $\R^5$ to $\R^2$ that have the same null space but are such that $T_1$ is not a scalar multiple of $T_2$.
+
+\end{enumerate}
+
+\section{Matrices -- Exercises}
+
+\newcommand{\MM}{\mathcal{M}}
+\begin{enumerate}
+
+\item Suppose $V$ and $W$ are finite-dimensional and $T \in \LL(V,W)$.  Show that with respect to each choice of bases of $V$ and $W$, the matrix of $T$ has at least $\dim \RANGE T$ nonzero entries.
+
+\BLUE{Since $Tv_k= A_{1,k}w_1+\cdots+A_{m,k}w_m$ for each $k=1,\dots,n$ If any row, $j$, is filled with zeros then $Tv_j = 0$ and not in the $\RANGE T$.
+}
+
+\item Suppose $D \in \LL(\PPP_3(\R),\PPP_2(\R))$ is the differentiation map defined by  $Dp=p'$.  Find a basis of $\PPP_3(\R)$ and a basis of $\PPP_2(\R)$ such that the matrix of $D$ with respet to these bases is 
+\begin{align*}
+	\left ( \begin{array}{cccc}
+		1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 \\
+		0 & 0 & 1 & 0
+		\end{array}	 \right )
+\end{align*} \\
+$[$\textit{Compare the exercise above to Example 3.34.  The next exerecise generalizes the exercise above.}
+
+\BLUE{\begin{align*}
+	Tv_k &= \sum_{j=1}^m A_{k,j}w_j\\
+	Tv_1 &= A_{1,1}w_1 + A_{1,2}w_2 + A_{1,3}w_3 = w_1 \\
+	Tv_2 &= w_2 \\
+	Tv_3 &= w_3 
+\end{align*}Thus, $T$ is the identity mapping any basis to itself (except for $w_4$).
+}
+
+\item Suppose $V$ and $W$ are finite-dimensional and $T \in \LL(V,W)$.  Prove that there exists a basis of $V$ and a basis of $W$ such that with respect to these bases, all entries of $\MM(T)$ are 0 except that the entries in row $j$, column $j$, equal 1 for $1 \le j \le \dim \RANGE T.$
+
+\BLUE{Since, 
+\begin{align*}
+	Tv_k&= \sum_{j=1}^mA_{k,j}w_k
+\end{align*}there can be only $\dim \RANGE T$ linearly indepdent vectors to make up the basis of $\RANGE T$.
+}
+
+\item Suppose $v_1, \dots, v_m$ is a basis of $V$ and $W$ is finite-dimensional.  Suppse $T\in \LL(V,W)$, Prove that there exists a basis $w_1,\dots, w_n$ of $W$ such that all the entries in the first column of $\MM(T)$ (with respect to the basis $v_1,\dots,v_m$ and $w_1,\dots,w_m$) are 0 except or possibly a 1 in the first row, first colum. $[$ In this exercise, unlike Exercise 3, you are given the basis of $V$ instead of being able to choose a basis of $V.]$
+
+\RED{Note that $Tv_1=w_1\MM(T)$ for some $w_1 \in W$. Let $\dim W=2$. Since
+\begin{align*}
+	Tv_1 = \sum_{j=1}^m A_{1,j}w_j
+\end{align*}We can pick $w_1$ such that $w_1=Tv_1$ which is precisely the first column with a 1 followed by zeros.  Now produce $w_2$ from $Tv_2$ and verify that this forms a basis for $W$.  Now proceed with an inductive proof to show that is true for all dimensions of $W$.
+}
+
+\item Suppose $w_1, \dots, w_n$ is a basis of $W$ and $V$ is finite-dimensional.  Suppose $T \in \LL(V,W)$.  Prove that there exists a basis $v_1, \dots, v_m$ of $V$ such that all the entries in the first row of $\MM(T)$ (with respect to the bases $v_1,\dots,v_m$ and $w_1, \dots, w_n$) are 0 esxcept for possible a 1 in the first row, first column. $[$In this exercise, unlike Exercise 3, you are given the basis for $W$ instead of being able to choose a basis of $W.]$
+
+\item Suppose $V$ and $W$ are finite-dimensional and $T \in \LL(V,W)$.  Prove that $\dim \RANGE T =  1$ if and only if there exists a basis of $V$ and a basis of $W$ such that with respect to these bases, all entries of $\MM(T)$ equal 1.
+
+\item Verify 3.36.  "Suppose $S,T\in \LL(V,W)$, Then $\MM(S+T)=\MM(S)+\MM(T)$."
+
+\BLUE{From 3.7 $\LL(V,W)$ is a vector space.  Therefore, given any $x \in V$ \begin{align*}
+	(T+S)(x) &= T(x)+S(x) \\
+	\MM(T+S)(x) &= \MM(T)x+\MM(S)x \\
+	&= (\MM(T)+\MM(S))x \\
+	\MM(T+S) &= \MM(T) + \MM(S)
+\end{align*}
+}
+
+\item Verity 3.38. "Suppose $\lambda \in \F$ and $T \in \LL(V,W)$.  Then $\MM(\lambda T) = \lambda\MM(T)$.
+
+\item Prove 3.52.
+
+\item Suppose $A$ is a $m$-by-$n$ matrix and $C$ is an $n$-by-$p$ matrix.  Prove that 
+\begin{align*}
+	(AC)_{j,.} = A_{j,.}C
+\end{align*}for $1 \le j\le m$.  In other words, show that row $j$ of $AC$ equals (row $j$ of $A$) times $C$.
+
+\item Suppose $a = \CYCLE{a_1 & \cdots&a_n}$ is a 1-by-$n$ matrix and $C$ is a $n$-by$p$ matrix.  Prove that 
+\begin{align*}
+	aC=a_1C_1+\cdots+a_nC_n.
+\end{align*}In other words, show that $aC$ is a linaear combination of rows of $C$, with the scalars that multiply the rows coming from $a$.
+
+\item Give an example with 2-by-2 matrices to show that matrix multiplication is not commutative.  In other words, find 2-by-2 matrices $A$ adn $C$ such that $AC \ne CA$.
+
+\item Prove that the distributive property holds for matrix addition and matrix multiplication.  In other words, suppose $A,B,C,D,E$ and $F$ are matrices whose sizes are such that $A(B+C)$ and $(D+E)F$ make sense.  Prove that $AB+AC$ and $DF+EF$ both make sense and that $A(B+C)=AB+AC$ and $(D+E)F=DF+EF$.
+
+\item Prove that matrix multiplication is asociative.  IN other words, suppose $A,B$, And $C$ are matriecs whose Sizes are such that $(AB)C$ makes sense.  Prove that $A(BC)$ makes sense and that $(AB)C=A(BC)$.
+
+\item Suppose $A$ is an $n$-by-$n$ matrix and $a \le j, k\le n$.  Show that the entries in row $j$, column $k$, of $A^3$ (which is defiend by $AAA$) is 
+\begin{align*}
+	\sum_{p=1}^n \sum_{r=1}^n A_{j,p}A_{p,r}A_{r,k}.
+\end{align*}
+
+\end{enumerate}
+
+\section{Invertibility and Isomorphic Vector Spaces -- Exercises}
+
+\begin{enumerate}
+
+\item Suppose $T \in \LL(U,V)$ and $S\in (V,W)$ are both invertible linear maps.Prove taht $ST \in \LL(U,W)$ is invertible and that $(ST)^{-1}=t*{-1}S*{-1}$.
+
+\item Suppose $V$ is finite-dimensional dn $\dim V > 1$.  Prove that the set of noninvertible operators on $V$ is not a subspace of $\LL(V)$.
+
+\item Suppose $V$ is finite-dimensional, $U$ is asubspace of $V$, and $S \in \LL(U,V)$.  Prove there exists an invertible operator $T \in \LL(V)$ such that $TGu=Su$ for eveyr $u \in U$ if and only if $S$ is injective.
+
+\item Suppose $W$ is finite-dimensional and $T_1,T_2 \in \LL(V,W)$.  Prove that $\NULL T_1 = \NULL T_2$ if and only if there exists an invertible operator $S \in \L(w)$ such tha t$T_1=ST_2$.
+
+\item Suppose $V$ is finite-dimensional and $T_1,T_2 \in \LL(V,W)$ prove that $\RANGE T_1 = \RANGE T_2$ if and only if there exists an invertible operator $S \in \L(V)$ such that $T_1 = T_2S$.
+
+\item Suppose $V$ and $W$ are finite-dimensional dn $T_1,T_2 \in \L(V,W)$.  Prove that there exist invertible operators $F \in \L(V)$ and $S \in \L(W)$ such that $T_1=sT_2R$ if and only if $\dim \NULL T_1 = \dim \NULL T_2$.
+
+\item Suppose $v$ and $W$ are finite-dimensiona.  Let $v \in V$.  Let
+\begin{align*}
+	E = \{PT\in \L(V,w)\,:\, Tv=0\}.
+\end{align*}\begin{enumerate}
+	\item Show that $E$ is a subspace of $\LL(V,W)$.
+	\item Suppose $v \ne 0$.  What is $\dim E$.
+\end{enumerate}
+
+\item Suppose $V$ is finite-dimensional and $T\,:\,V \to W$ is a surjecitve linear map of $V$ onto $W$.  Porve that there is a subspace $U$ of $V$ such that $T|_U$ is an isomoprnhism of $U$ onto $W$.  (Here $T|_U$ means the function $T$ restricted to $U$.  in orehte rwords, $T|U$ is the function whos domain is $U$, with $T|_U$ defined by $T|_U(u)=Tu$ fo reveyr  $u \in U$.)
+
+\item Suppose $V$ is finite0dimensional and $S,T \in \L(V)$.  Prove that $ST$ is invertible if and only if both $S$ and $T$ are invertible.
+
+\item Suppose $V$ is finite-dimensional and $S,T \in \LL(V)$.  Prove that $ST=I$ if and only if $TS=I$.
+
+\item Suppose $V$ is finite-dimesnional and $S,T,U\in \LL(V)$ and STU=I$.  Show that $T is invertible and that $T_{-1} = US$.
+
+\item Show that the resutl in the previous exercis cna fail without the hyothesis that $V$ is finite-dimensional.
+
+\item Suppose $V$ is a finite-dimensional vector space and $R,S,T \in \LL(V)$ are such that $TST$ is surjective.  Prove that $S$ is injective.
+
+\item Suppose $v_1,\dots,v_n$ is abasis of $V$.  Prove that the map $T\,:\,V \to \F^{n,1}$ define dby 
+\begin{align*}
+	Tv=\MM(v)
+\end{align*}is an isomorphsim of $V$ onto $\F^{n,1}$; here $\MM(V)$ is the matrix of $v \in V$ with respect to the basis $v_a, \dots, v_n$.
+
+\item Prove tha tevery linear map from $\F^{n,1}$ to $\F^{m,1}$ is given by a matrix multiplication.  IN other words, prove ath $T \in \LL(\F^{n,1},\F{m,1}$, then there exists an $m$-by-$n$ matrix $A$ such that $Tx=Ax$ for every $x \in \F^{n,1}$.
+
+\item Supoose $V$ is finite-dimensional and $T \in \LL(V)$.  Prove that $T$ is a sdcalar mutiple of th eidentity if and only if $ST=TS$ for eveyr $S \in \LL(V)$.
+
+\item Suppose $V$ is finite dimensional dn $\mathcal{E}$ is a subspace of $\LL(V)$ such that $ST \in \mathcal{E}$ and $TS \in \mathcal{E}$ for all $s \in \LL(V)$ and all $T \in ]mathcal{E}$.  Prove that $\mathcal{E} = \{0\}$ or $\mathcal{E}=\L(V)$.
+
+\item Show that $V$ and $\LL(\F,V)$ are isomorphic vector spaces.
+
+\item Suppose $T \in \L(\PPP(R))$ is such that $T$ is injective and $\deg Tp\le \deg p$  for eveyr nonzero polynomial $p \in \PPP(\R)$.
+
+\begin{enumerate}
+	\item Profve that $T$ is surjective.
+	\item Proe that $\deg Tp = \deg p$ for every nonzero $p \in \PPP(\R)$.
+\end{enumerate}
+
+\item Suppose $n$ is a positive integer and $A_{a,j} \in \F$ for $i,j = 1,\dots,n$.  Prove that the following are equivalent (note that in both pars belo2w, the number of equations equals the number of variables):
+
+\begin{enumerate}
+\item The trivial soluion $x_1=\cdots=x_n=0$ is the only solution to the homogeneous system of equations
+\begin{align*}
+	\sum_{k=1}^n A_{1,k} x_k &= 0\\
+	&\vdots \\
+	\sum_{k=1}^n A_n,k x_k &= 0
+\end{align*}
+
+\item For every $c_1,\dots,c_n \in \F$, there exists a solution to th esystem of equations 
+\begin{align*}
+	\sum_{k=1}^n A_{a,k} x_k = c_1 \\
+	&\vdots \\
+	\sum_{k=1}^n A_{n,k} x_k = c_k.
+\end{align*}
+\end{enumerate}
+
+\end{enumerate}
+
+
+\end{document}
