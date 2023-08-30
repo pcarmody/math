@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.20)  15 AUG 2023 20:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.20)  21 AUG 2023 16:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -957,7 +957,7 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share
 ve/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on AdvLinAlg.pdf (20 pages, 289490 bytes).
+Output written on AdvLinAlg.pdf (20 pages, 289225 bytes).
 PDF statistics:
  518 PDF objects out of 1000 (max. 8388607)
  454 compressed objects within 5 object streams
