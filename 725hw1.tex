@@ -32,9 +32,13 @@
 \begin{document}
 
 %\homework{}{Homework I}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#1 -- Due 8/30/23
+\end{center}
 
-
-\vskip 0.1cm
+\vskip 0.25cm
 \noindent
 {\bf 1.} 
 Show that the {\it positive} quadrant 
@@ -53,7 +57,7 @@ Is it closed under scalar multiplication?  Given any $(x,y) \in Q$ and $c \in \R
 is a field on its own right where the addition and multiplication operations of $F$ are inherited from those of $E$). 
 Explain the following: $E$ is a vector space over $F$. Also, give an example with concrete fields $E$ and $F$.\\ 
 \\
-Looking closely at the Definition 1.19 on page 12 of the text, please note that the field $F$ only applies to the scalars in scalar multiplciation.  Thus, when we say "a set $V$ is vector space over a field $W$", the scalars come from $W$.  Thus, "$E$ is a vector space over $F$" means to use any elements of $E$ as vectors and limit the scalar values to $F$.\\
+Looking closely at the Definition 1.19 on page 12 of the text, please note that the field $F$ only applies to the scalars in scalar multiplciation.  Thus, when we say "a set $V$ is vector space over a field $W$", the scalars come from $W$.  Thus, "$E$ is a vector space over $F$" means to use any elements of $E$ as vectors and limit the scalar values to elements of $F$.\\
 \\
 An example is $\Q \subset \R$.  That is, the set of real numbers is a subspace over the set of rational numbers.  Given any $x,y \in \R$ and $q,r \in \Q$ we know that $qx+ry \in \R$.\\
 \\
@@ -98,7 +102,7 @@ However, as an $\R$-subspace we can see that complex conjugation is closed under
 	&= (a+c)-i(b+d) \\
 	&= (a-ib)+(c-id) \\
 	&= \overline{a+ib}+\overline{c+id}
-\end{align*} hence closed under addition for complex conjugation.  Therefore, given any $A,B \in \mathbb{H}^n(\C)$ then $\overline{(A+B)_{ij}}= \overline{A_{ij}+B_{ij}} = \overline{A_{ij}}+\overline{B_{ij}} = A_{ji}+B_{ji} = (A+B)_{ji}$ hence $A+B \in \mathbb{H}^n(\C)$
+\end{align*}.  Therefore, given any $A,B \in \mathbb{H}^n(\C)$ then $\overline{(A+B)_{ij}}= \overline{A_{ij}+B_{ij}} = \overline{A_{ij}}+\overline{B_{ij}} = A_{ji}+B_{ji} = (A+B)_{ji}$ hence $A+B \in \mathbb{H}^n(\C)$
 \\ \\
 When we limit $c \in \R$, we can see that complex conjugation is closed under scalar multiplication by real values.  That is $\overline{c(a+ib)} = \overline{ca+icb} = ca-icb = c\overline{(a-ib)}$.  Consequently, given any $A \in \mathbb{H}^n(\C), \overline{cA_{ij}}= c\overline{A_{ij}}=cA_{ji}$ hence $cA \in \mathbb{H}^n(\C)$ and therefore closed.\\
 \\
@@ -137,12 +141,6 @@ If $a \in u+W$ then there exists $x\in W$ such that $a=u+x$. Similarly, if $a \i
 the coefficients of the linear combination add up to $1$: $c_1 v_1 + \ldots + c_m v_m$ where $c_1 + \ldots + c_m =1$. Let 
 $\mathrm{affine}\{v_1, \ldots, v_m\}$ be the set of all affine linear combinations of $v_1, \ldots, v_m$. 
 Show that $\mathrm{affine}\{v_1, \ldots, v_m\}$ is an affine subspace of $V$.  \\
-\\
-Contains the Zero Vector: trivial.\\
-\\
-Scalar Multiplication: 1Let $c_1, \dots, c_m$ be scalars such that the vector $u=c_1v_1+\cdots +c_mv_m \in \mathrm{affine}\{v_1,\dots, v_m\}$.  Let $x$ be a scalar. Then $y=xu=xc_1v_1+\cdots +xc_mv_m$ and notice that $xc_1+\cdots+xc_m=x$\\
-\\
-Addition: Let $c_1, \dots, c_m$ and $d_1, \dots, d_m$ be scalars such that the vectors $u=c_1v_1+\cdots +c_mv_m$ and $v=d_1v_1+\cdots+d_mv_m \in \mathrm{affine}\{v_1,\dots, v_m\}$.  Then $z=u+v=(c_1v_1+\cdots +c_mv_m)+(d_1v_1+\cdots+d_mv_m) = (c_1+d_1)v_1+\cdots+(c_m+d_m)v_m$.  Notice that, $(c_1+d_1)+\cdots+(c_m+d_m) = 2$.  So, let $e_i=\frac{c_i+d_i}{2}$, then we can see that $z=2e_1v_1+\cdots+2e_mv_m=2(e_1v_1+\cdots+e_mv_m)$ and $e_1v_1+\cdots+e_mv_m \in \mathrm{affine}\{v_1,\dots,v_m\}$.  Since we have already shown that it is closed under scalar multiplication this shows that it is also closed under addition.\\
 \\
 Let $n$ be the highest number of linearly dependent vectors from $\{v_1, \dots, v_m\}$ and reorder this list so that these vectors are listed first.  We know that $c_1+\cdots+c_m=1$.  We can make a new list $d_1,\dots,d_{m-1}$ with one less element such that $d_i=c_i+\frac{c_m}{m-1}$ whose sum is still 1.  Now we have a linear combination of $m-1$ elements.  We repeat this process, generating a new set of elements with each iteration with one less element until we have $n$ elements. Let's call these elements $e_1,\dots,e_n$.  Let $W=\mathrm{span}\{v_{n+1}, \dots, v_m\}$ which we know is a vector space as they are linearly independent.  Let $u=e_1v_1+\cdots+e_nv_n$, thus $\mathrm{affine}\{v_1,\dots,v_m\} = u+W$.
 

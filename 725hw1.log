@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.20)  30 AUG 2023 13:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.20)  30 AUG 2023 18:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -193,183 +193,157 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Underfull \hbox (badness 10000) in paragraph at lines 41--49
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--49
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--49
+Underfull \hbox (badness 10000) in paragraph at lines 45--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--61
+Underfull \hbox (badness 10000) in paragraph at lines 55--65
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--61
+Underfull \hbox (badness 10000) in paragraph at lines 55--65
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--61
+Underfull \hbox (badness 10000) in paragraph at lines 55--65
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--73
+Underfull \hbox (badness 10000) in paragraph at lines 66--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--73
+Underfull \hbox (badness 10000) in paragraph at lines 66--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--73
+Underfull \hbox (badness 10000) in paragraph at lines 66--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--73
+Underfull \hbox (badness 10000) in paragraph at lines 66--77
 
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 75--81
+Underfull \hbox (badness 10000) in paragraph at lines 79--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--106
+Underfull \hbox (badness 10000) in paragraph at lines 105--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--106
+Underfull \hbox (badness 10000) in paragraph at lines 105--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--113
+Underfull \hbox (badness 10000) in paragraph at lines 111--117
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--113
+Underfull \hbox (badness 10000) in paragraph at lines 111--117
 
  []
 
 [2]
-<../../Downloads/desmos-graph.png, id=19, 803.0pt x 803.0pt>
+<../../Downloads/desmos-graph.png, id=20, 803.0pt x 803.0pt>
 File: ../../Downloads/desmos-graph.png Graphic file (type png)
 <use ../../Downloads/desmos-graph.png>
 Package pdftex.def Info: ../../Downloads/desmos-graph.png  used on input line 1
-26.
+30.
 (pdftex.def)             Requested size: 80.3047pt x 80.3047pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--146
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
-
- []
-
-
-Overfull \hbox (13.94366pt too wide) in paragraph at lines 115--148
-\OT1/cmr/m/n/10.95 Scalar Mul-ti-pli-ca-tion: 1Let $\OML/cmm/m/it/10.95 c[]; []
- ; c[]$ \OT1/cmr/m/n/10.95 be scalars such that the vec-tor $\OML/cmm/m/it/10.9
-5 u \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 c[]v[] \OT1/cmr/m/n/10.95 + [] + \
-OML/cmm/m/it/10.95 c[]v[] \OMS/cmsy/m/n/10.95 2 []f\OML/cmm/m/it/10.95 v[]; [] 
-; v[]\OMS/cmsy/m/n/10.95 g$\OT1/cmr/m/n/10.95 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 115--148
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3 <../../Downloads/desmos-graph.png>] [4] (./725hw1.aux) ) 
+[3 <../../Downloads/desmos-graph.png>] (./725hw1.aux) ) 
 Here is how much of TeX's memory you used:
- 2990 strings out of 480204
- 41572 string characters out of 5895010
- 339751 words of memory out of 5000000
- 20777 multiletter control sequences out of 15000+600000
- 476751 words of font info for 57 fonts, out of 8000000 for 9000
+ 2993 strings out of 480204
+ 41607 string characters out of 5895010
+ 335751 words of memory out of 5000000
+ 20779 multiletter control sequences out of 15000+600000
+ 477347 words of font info for 59 fonts, out of 8000000 for 9000
  197 hyphenation exceptions out of 8191
  69i,14n,76p,739b,181s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on 725hw1.pdf (4 pages, 148109 bytes).
+</usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on 725hw1.pdf (3 pages, 159337 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
