@@ -1,0 +1,367 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+
+\begin{document}
+
+%\homework{}{Homework II}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#2 -- Due 9/6/23
+\end{center}
+
+
+\vskip 0.25cm
+\noindent
+{\bf 1.} Let $V$ and $W$ be two vector spaces over the field $F$. In the previous homework you showed  that $V \times W$ is also 
+a vector space. 
+Now suppose $V = V_1 \oplus V_2$ and $W = W_1 \oplus W_2$. Show that $V \times W = V_1 \times W_1 \oplus V_2 \times W_2$. \\
+\\
+$V = V_1 \oplus V_2$ means that for every $x\in V$ there exists $v_1 \in V_1$ and $v_2 \in V_2$ such that $x=v_1+v_2$.  Similarly, $W= W_1 \oplus W_2$ means that for every $y\in W$ there exists $w_1 \in W_1$ and $w_2 \in W_2$ such that $y=w_1+w_2$.  Given any $z \in V \times W$ we can see that $z = (x,y)=(v_1+v_2,w_1+w_2)=(v_1,w_1)+(v_2,w_2)$.  Clearly, $(v_1,w_1) \in V_1 \times W_1$ and $(v_2,w_2) \in V_2 \times W_2$.  It is also clear that this is the only way to represent $z$ thus $V \times W = V_1 \times W_1 \oplus V_2 \times W_2$.
+\\
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.} Let $u, v, w$ be three vectors in a vector space $V$ which are linearly independent. Show that $u, u+v, u+v+w$ are also 
+linearly independent. \\
+\\
+$u,v,w$ are linearly independent means that $au+bv+cw=0$ implies that $a=b=c=0$.  Thus, 
+\begin{align*}
+	au+b(u+v)+c(u+v+w) &= au+bu+bv+cu+cv+cw \\
+	&= (a+b+c)u+(b+c)v + cw \\
+	\text{when } (a+b+c)u+(b+c)v + cw &= 0 \\
+	\text{then } a+b+c=b+c=c&=0 \\
+	\therefore a=b=c=0
+\end{align*}hence they are linearly independent.\\
+
+\vskip 0.1cm
+\noindent
+{\bf 3.} An $n \times n$ matrix $P$ is called a {\it permutation} matrix if $P$ is obtained from the identity matrix $I_n$ by a sequence 
+of row swaps. Are the six $3 \times 3$ permutation matrices linearly independent over $\R$ ? Justify your answer. \\
+\\
+Let's take a linear combination of all of them
+\begin{align*}
+	a&\left ( \begin{array}{ccc}
+		0 & 1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 1 
+	\end{array}	 \right ) + 
+	b\left ( \begin{array}{ccc}
+		1 & 0 & 0 \\
+		0 & 0 & 1 \\
+		0 & 1 & 0 
+	\end{array}	 \right )+ 
+	c\left ( \begin{array}{ccc}
+		0 & 0 & 1 \\
+		0 & 1 & 0 \\
+		1 & 0 & 0 
+	\end{array}	 \right )+ 
+	d\left ( \begin{array}{ccc}
+		0 & 1 & 0 \\
+		0 & 0 & 1 \\
+		1 & 0 & 0 
+	\end{array}	 \right )+ 
+	e\left ( \begin{array}{ccc}
+		0 & 0 & 1 \\
+		1 & 0 & 0 \\
+		0 & 1 & 0 
+	\end{array}	 \right )+ 
+	f\left ( \begin{array}{ccc}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1 
+	\end{array}	 \right ) = \\
+	&\left ( \begin{array}{ccc}
+		b+f & a+d & c+e \\
+		a+e & c+f & b+d \\
+		c+d & b+e & a+f 
+	\end{array}	 \right ) = 0
+\end{align*}we have nine equations in 6 unknown variables.  These can be separated into three lists.
+\begin{align*}
+	\begin{array}{ccc}
+		a+d = b+d = c+d = 0 & \implies & a = b = c = -d \\
+		a+e = b+e = c+e = 0 & \implies & a = b = c = -e\\
+		a+f = b+f = c+f = 0 & \implies & a = b = c = -f
+	\end{array}
+\end{align*} which is true when $a=b=c=1$ and $d=e=f=-1$ therefore they are not linearly independent over $\R$.
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 4.} Prove that $\mathcal{F}(\R, \R)$ is infinite dimensional. \\
+\\
+Let $\mathcal{P}^{(n)}(\R)$ be the set of polynomial functions with degree less than or equal to $n$.  Clearly, $\mathcal{P}^{(n)}(\R) \subseteq \mathcal{F}(\R, \R)$ for all $n \in \Z^+$ and is a subspace.  The dimension of $\mathcal{P}^{(n)}(\R)$ is $n$ and the range of $n$ is infinite.  Thus $\mathcal{F}(\R,\R)$ is infinitely dimensional.
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 5.} Compute the dimensions of the vector spaces of $n \times n$ symmetric matrices and $n \times n$ skew-symmetric matrices
+by exhibiting simple bases. \\
+\\
+Let $A$ be a symmetric matrix.  Then.
+\begin{align*}
+	A =	\left ( \begin{array}{ccccc}
+		A_{1,1} & A_{1,2} & A_{1,3} & \cdots & A_{1,n}\\
+		A_{1,2} & A_{2,2} & A_{2,3} & \cdots & A_{2,n}\\
+		A_{1,3} & A_{2,3} & A_{3,3} & \cdots & A_{3,n}\\ 
+		\vdots  & \vdots  & \vdots  &        & \vdots \\
+		A_{1,n} & A_{2,n} & A_{3,n} & \cdots & A_{n,n}\\		
+	\end{array} \right ) \implies \left ( \begin{array}{c}
+		n \text{ elements} \\
+		n-1 \text{ elements} \\
+		n-2 \text{ elements} \\
+		\vdots \\
+		1 \text{ elements} 
+	\end{array}\right )
+\end{align*}the number $N$ of independent elements is 
+\begin{align*}
+	N = \sum_{i=1}^n i = (n+1)n/2
+\end{align*}Thus, the number of linearly independent vectors to form a basis would have to be $(n+1)n/2$ which is the dimension. A basis would have the form 
+\begin{align*}
+	&\left ( \begin{array}{ccccc}
+		1 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right )
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 1 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right )	
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 1 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right )\cdots
+	\left ( \begin{array}{ccccc}
+		1 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 1
+	\end{array} \right )\\
+	&\left ( \begin{array}{ccccc}
+		0 & 1 & 0 & \cdots & 0\\
+		1 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right )
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 1 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		1 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right ) \cdots
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 1\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		1 & 0 & 0 & \cdots & 0
+	\end{array} \right )
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 1\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 1 & 0 & \cdots & 0
+	\end{array} \right )
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 1\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 1 & \cdots & 0
+	\end{array} \right ) \\
+	&\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 1 & \cdots & 0\\
+		0 & 1 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right ) \cdots
+\end{align*} and so on.\\
+\\Similarly, Let $B$ be a skew-symmetric matrix.  Then.
+\begin{align*}
+	B =	\left ( \begin{array}{ccccc}
+		0       & B_{1,2} & B_{1,3} & \cdots & B_{1,n}\\
+		-B_{1,2} & 0       & B_{2,3} & \cdots & B_{2,n}\\
+		-B_{1,3} & -B_{2,3} & 0      & \cdots & B_{3,n}\\ 
+		\vdots  & \vdots  & \vdots  &        & \vdots \\
+		-B_{1,n} & -B_{2,n} & -B_{3,n} & \cdots & 0\\		
+	\end{array} \right ) \implies \left ( \begin{array}{c}
+		n-1 \text{ elements} \\
+		n-2 \text{ elements} \\
+		n-3 \text{ elements} \\
+		\vdots \\
+		0 \text{ elements} 
+	\end{array}\right )
+\end{align*}the number $M$ of independent elements is 
+\begin{align*}
+	M = \sum_{i=0}^{n-1} i = n(n-1)/2
+\end{align*}Thus, the number of linearly independent vectors to form a basis would have to be $n(n-1)/2$ which is the dimension.  A basis would have the form 
+\begin{align*}
+	&\left ( \begin{array}{ccccc}
+		0 & 1 & 0 & \cdots & 0\\
+		-1 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right )
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 1 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		-1 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right ) \cdots
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 1\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		-1 & 0 & 0 & \cdots & 0
+	\end{array} \right )
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 1\\
+		0 & 0 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & -1 & 0 & \cdots & 0
+	\end{array} \right ) \\
+	&\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 0 & \cdots & 1\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & -1 & \cdots & 0
+	\end{array} \right ) 
+	\left ( \begin{array}{ccccc}
+		0 & 0 & 0 & \cdots & 0\\
+		0 & 0 & 1 & \cdots & 0\\
+		0 & -1 & 0 & \cdots & 0\\
+		\vdots & \vdots & \vdots && \vdots \\
+		0 & 0 & 0 & \cdots & 0
+	\end{array} \right ) \cdots
+\end{align*} and so on.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 6.}  Let $\mathcal{P}^{(2)}(F)$ be the $F$-vector space of polynomials of degree at most $2$, and let $\lambda \in F$ be fixed. Define
+$$ g_1(x) = 1,  \,\, g_2(x) = x + \lambda,  \,\, g_3(x) = (x+\lambda)^2.$$
+Prove that $\mathcal{B} = (g_1, g_2, g_3)$ is a basis for $\mathcal{P}^{(2)}(F)$. If $f(x) = c_0 + c_1x + c_2x^2$ what are the coordinates of $f$
+in the basis $\mathcal{B}$?  \\
+\\
+Let $a+bx+cx^2 \in \mathcal{P}^{(2)}(F)$ where $a,b,c \in F$.  Each term constitutes another polynomial that is a member of $\mathcal{P}^{(2)}(F)$.  that is $a \in \mathcal{P}^{(2)}(F)$, $bx \in \mathcal{P}^{(2)}(F)$ and $cx^2 \in \mathcal{P}^{(2)}(F)$.  If $\mathcal{B}$ is a basis then we should be able to find $u,v,w \in F$ each in terms of $a,b,c$ such that 
+\begin{align*}
+	a+bx+cx^2 &= ug_1(x)+vg_2(x)+wg_3(x) \\
+	&= u+v(x+\lambda)+w(x+\lambda)^2 \\
+	&= u+vx+v\lambda+wx^2+2wx\lambda+w\lambda^2 \\
+	&= (u+v\lambda+w\lambda^2)+(v+2w\lambda) x +wx^2 \\
+	\begin{array}{ccc}
+		w=c & b=v+2w\lambda & a = u+v\lambda+w\lambda^2 \\
+		    & b=v+2c\lambda & a = u+v\lambda+c\lambda^2 \\
+		    & v = b-2\lambda c \\
+		    &               & a = u+(b-2\lambda)\lambda + c\lambda^2 		    \\
+		    && u = a-b\lambda+(2-c)\lambda^2
+	\end{array}
+\end{align*}Hence, any vector in $\mathcal{P}^{(2)}(F)$ can be written as a linear combination of elements in $\mathcal{B}$. Further
+\begin{align*}
+	ag_1(x)+bg_2(x)+cg_3(x) &= a+b\lambda + b x + cx^2+2c\lambda x + c\lambda^2 \\
+	&= a+b\lambda+c\lambda^2 + (b+2c\lambda)x+c\lambda x^2\\
+	&= 0 \text{ when} \\
+	&\begin{array}{ccc}
+		c=0 & b+2c\lambda=0 & a+b\lambda +c\lambda^2 = 0\\
+		    & b=0 & a +b\lambda = 0\\
+		    &     & a = 0
+	\end{array}
+\end{align*}hence $\mathcal{B}$ is linearly independent thus forms a basis.
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+{\bf 1.} Let $F$ be a finite field of size $|F| = q$, and let $V$ be an $F$-vector space of dimension $n$. In this exercise you will prove
+that the number of subspaces of $V$ of dimension $k$ is 
+$$ {n \choose k}_q \, = \, \frac{(q^n-1) \cdots (q-1)}{(q^k -1) \cdots (q-1)(q^{n-k} -1) \cdots (q-1)}.$$
+The expressions ${n \choose k}_q$ are called $q$-binomial coefficients or Gaussian coefficients, and they have properties similar to those
+of binomial coefficients. Now let $s(n,k)$ be the number of $k$-dimensional subspaces of $V$.\\
+{\bf a)} Let $m(n,k)$ be the number of $k$-tuples of linearly independent vectors $(v_1, v_2, \ldots, v_k)$ in $V$.  Show that
+$$ m(n,k) = (q^n-1)(q^n -q) \cdots (q^n - q^{k-1}).$$\\
+The first vector $v_1$ may be drawn from $q^n$ possible elements minus the zero vector, hence $q^n-1$.  In order for $v_2$ to be linearly independent from $v_1$ thus it can be any vector except those that are multiples of $v_1$ (i.e., any $xv_1$ where$x \in q$) that is $q^n-q$.  $v_3$ must be linearly independent of both $v_1$ and $v_2$ (i.e., $y((xv_1) + v_2)$ where $x,y \in q$) so $v_3$ must be chosen from $q^n-q^2$ and so on, until we get to the $k$th element which is drawn from $q^n-q^{k-1}$.\\
+\\
+{\bf b)} Each of the $k$-tuples in {\bf a)} can be obtained by first selecting a subspace of dimension $k$ and then choosing $k$ linearly independent vectors from that subspace. Show that for any $k$-dimensional subspace, the number of $k$-tuples 
+of linearly independent vectors from that subspace is 
+$$(q^k-1)(q^k -q) \cdots (q^k - q^{k-1}).$$\\
+\\
+Similarly, any basis will be made up of $k$-tuples of vectors.  The first vector may be chozen from $q^k$ possibilities, minus the zero vector.  The second vector in the basis must be linearly independent from the first so it may be chosen from $q^k-q$ remaining vectors and so on.  Until the last vector which is chosen from $q^k-q^{k-1}$ possibilities\\
+\\
+{\bf c)} Show that $m(n,k) = s(n,k) (q^k-1)(q^k -q) \cdots (q^k - q^{k-1})$ and finish the proof. \\
+\\
+$s(n,k)$ is the number of subspaces with dimension $k$ where $m(n,k)$ represents the number of linearly independe sets of size $k$.  We can calculate $m(n,k)$ from $s(n,k)$ by multiplying it my the number of potential first elements $q^n-1$ then by the number of potential second elements $q^n-q$ and so on.\\
+\\
+
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.} Let $V$ be a vector space and $\mathcal{B} = \{ v_i \, : \, i
+\in I \}$ be a basis of $V$. Let $\{ B_1, \ldots, B_k\}$ be a 
+partition of $\mathcal{B}$.
+If $W$ is a subspace of $V$, is it true that
+$$ W \, = \, \bigoplus_{i=1}^k ( W \cap \mathrm{span}(B_i)) \, ? $$\\
+\\
+Given any $w \in W$ there exist $c_j$ such that $w = \sum_{j \in I} c_jv_j$.  And each $B_i$ contains a disjoint subset of these $v_j$.  Let $\beta_i$ be the set of indices of the vectors which represent the basis vectors for $B_i$, i.e., $\beta_i$ is a basis for $B_i$ and $\{ v_{\beta_j}\}$ forms a basis of $B_i$.  Hence $w=\sum_{i=0}^k \sum_{j \in \beta_i} c_jv_j$ where each sum $\sum_{j \in \beta_i} c_jv_j \in B_i$.  Indeed, each of these sums are precisely $\sum_{j \in \beta_i} c_jv_j \in W\cap \mathrm{span}(B_i)$.  These are clearly independent of each other thus $w$ will be the direct sum of each as each $B_i$ are disjoint from each other by deinition of a partition, thus $W \, = \, \bigoplus_{i=1}^k ( W \cap \mathrm{span}(B_i))$.
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 3.} Let $V$ be finite dimensional vector space over an infinite
+field $F$. Prove that if $W_1, \ldots, W_k$ are subspaces of $V$ 
+of equal dimension, then there is a subspace $U$ of $V$ such that $V = W_i \oplus U$ for $i=1,\ldots, k$. \\
+
+\vskip 0.1cm
+\noindent
+{\bf 4.} Let $E$ be a field and  $F$ be a subfield of $E$. The dimension of $E$ as a vector space over $F$ is denoted by $[E \, : \, F]$. \\
+{\bf a)} Let $F \subset K \subset E$ be three fields where $[K \, : \, F]$ and $[E \, : \, K]$ are finite. Show that $[E \, : \, F] = [E \, : \, K] [K \, : \, F]$. \\ 
+{\bf b)} Show that $\R$ is an infinite dimensional vector space over $\Q$. [Hint: $\R$ is uncountable where $\Q$ is countable]. \\
+
+
+\end{document}

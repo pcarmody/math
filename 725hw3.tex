@@ -1,0 +1,129 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+
+\begin{document}
+
+%\homework{}{Homework III}
+
+\noindent
+{\bf 1.} Suppose that $V$ is a finite dimensional vector space. Show that any linear transformation on a subspace of $V$ can be extended to a 
+linear transformation on $V$. In other words, show that if $U$ is a subspace of $V$ and $S \in \mathcal{L}(U,W)$, then there is 
+$T \in \mathcal{L}(V,W)$ such that $Tu = Su$ for all $u \in U$. \\
+\\
+Define $T\in \mathcal{L}(V,W)$ as 
+\begin{align*}
+	T(v) &= \left \{ \begin{array}{ll}
+		S(v) & \text{if } v \in U\\
+		v & \text{otherwise }	
+	\end{array} \right .\\
+	&\text{thus}\\
+	&\begin{array}{c|c|c}
+		u,v \in U & u \in U, v \in V\backslash U& u,v \in V \backslash U \\\hline
+		T(u+v)=S(u+v) &T(u+v)=S(u)+T(v) &T(u+v)=T(u)+T(v)\\
+		=S(u)+S(V) \in U & = S(u)+v \in V &=u+v \in V 
+	\end{array}
+\end{align*}  
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 2.} Let $V = \mathcal{M}_{n \times n}(F)$, and let $B$ be fixed matrix in $V$. Show that $T \, : \, V \mapsto V$ defined by
+$T(A) = AB-BA$ is a linear transformation. \\
+\\
+What happens in $T$ when you add $C$ and $D$?\
+\begin{align*}
+	T(C+D) &= (C+D)B-B(C+D) \\
+	&= CB+DB -BC-BD & \text{distributive law of matrix multiplication}\\
+	&= CB-BC+DB-BD \\
+	&= T(C)+ T(D)
+\end{align*}and scalar multiplication?
+\begin{align*}
+	T(cA) &= (cA)B-B(cA) \\
+	&= c(AB)-c(BA) \\
+	&= c(AB-BA) \\
+	&= cT(A)
+\end{align*}
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 3.a)} Recall that $\C$ is a real vector space. Find $T \, : \, \C \mapsto \C$ which is a $\R$-linear transformation which is not a 
+$\C$-linear transformation. \\
+{\bf b)} Find a linear transformation $T \, : \, V \mapsto V$ where the range and nullspace of $T$ are identical. \\
+{\bf c)} Find $T$ and $U$ on $\R^2$ such that $TU = 0$ but $UT \neq 0$. \\
+
+\vskip 0.1cm
+\noindent
+{\bf 4.} Let $T$ and $U$ be two linear operators on $\R^2$ defined by $T(x_1, x_2) = (x_2,x_1)$ and $U(x_1,x_2) = (x_1,0)$. \\
+{\bf a)} Give a geometric interpretation for $T$ and $U$. \\
+{\bf b)} Give rules for $U+T$, $UT$, $TU$, $T^2$, and $U^2$. \\
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+{\bf 1.} Let $A$ be an $m \times n$ matrix over $F$ of rank $k$. Show that there exist a $m \times k$ matrix $B$ and a
+$k \times n$ matrix $C$, both with rank $k$, where $A = BC$. Conclude that $A$ has rank $1$ if and only if $A = xy^t$ where
+$x \in F^m$ and $y \in F^n$. \\
+
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.} Let $W$ be the vector space of $2 \times 2$ complex Hermitian matrices. Note that $W$ is a vector space over $\R$ but not
+over $\C$. Let $T \, : \, \R^4 \mapsto W$ be the map defined by 
+$$ (x,y,z,t) \mapsto \left( \begin{array}{cc} t +x & y + iz \\ y - iz & t -x \end{array} \right).$$
+Show that $T$ is an isomorphism. \\
+
+
+
+\vskip 0.1cm
+\noindent
+{\bf 3.} We will consider the vector space $ V = \mathcal{P}^{(n)}(\R)$ of polynomials at most degree $n$. Let 
+$$[x]_k := x(x-1)(x-2) \cdots (x-k+1)$$
+for $k \geq 1$ and $[x]_0 = 1$. \\
+{\bf a)} Show that $([x]_0, [x]_1, [x]_2, \ldots, [x]_n)$ is a basis of $V$. [Hint: argue that   
+$[x]_k = x^k + a(k,k-1) x^{k-1} + \cdots + a(k,1) x + a(k,0)$ where $a(k,j)$ are integers. Construct the $(n+1) \times (n+1)$ matrix
+which expresses each $[x]_k$ in the basis $(1,x,x^2, \ldots, x^n)$. Show that this matrix is invertible].\\
+{\bf b)} Now prove that $x^k = \sum_{j=0}^k S(k,j) [x]_j$ where $S(k,j)$ are integers. \\
+{\bf c)} Show that $S(k,0) = 0 $ for $k \geq 1$. Also show that $S(k,k) = 1$ for $k\geq 0 $. \\
+{\bf d)} Prove that if $ 1 \leq j \leq k-1$ then
+$$ S(k,j) = j S(k-1, j) + S(k-1, j-1).$$ 
+
+\vskip 0.1cm
+\noindent
+The above exercise shows that $S(k,j)$ are nonnegative integers. They are called {\it Stirling numbers of the second kind}. 
+\end{document}
