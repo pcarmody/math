@@ -1,0 +1,231 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+
+\begin{document}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\LL}{\mathcal{L}}
+
+%\homework{}{Homework V}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#5 -- Due 9/27/23
+\end{center}
+
+\vskip 1.0cm
+\noindent
+{\bf 1.} Let $\mathcal{B} = \{v_1, v_2, v_3\}$ be a basis of $\C^3$ where $v_1 = (1,0,-1)$, $v_2 = (1,1,1)$, and $v_3 = (2,2,0)$. Find the dual
+basis. \\
+\begin{align*}
+	\varphi_1(x,y,z) &= ax+by+cz \\
+	\varphi_1(1,0,-1) &= a-c = 1 \\
+	\varphi_1(1,1,1) &= a+b+c = 0\\
+	\varphi_1(2,2,0) &= 2a+2b=0\\
+	a&=-b \\
+	a&= 1, b=-1, c=0\\
+	\varphi_1(x,y,z) &= x-y\\
+\end{align*}
+\begin{align*}
+	\varphi_2(x,y,z) &= ax+by+cz \\
+	\varphi_2(1,0,-1) &= a-c = 0 \\
+	\varphi_2(1,1,1) &= a+b+c = 1\\
+	\varphi_2(2,2,0) &= 2a+2b=0 \\
+	a&=1, b=-1, c=1 \\
+	\varphi_2(x,y,z) &= x-y+x \\
+\end{align*}
+\begin{align*}
+	\varphi_3(x,y,z) &= ax+by+cz \\
+	\varphi_3(1,0,-1) &= a-c = 0 \\
+	\varphi_3(1,1,1) &= a+b+c = 0\\
+	\varphi_3(2,2,0) &= 2a+2b=1\\
+	a &= -2b \implies b=\frac{1}{2} \\
+	a &= -1, c = -1 \\
+	\varphi_3(x,y,z) &= -x+\frac{1}{2}y-z
+\end{align*}
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 2.} Let $f_1, \ldots, f_m$ be linear functionals on $F^n$. For any $v \in F^n$  define $Tv = (f_1(v), \ldots, f_m(v))$. Show
+that $T$ is a linear transformation from $F^n$ to $F^m$. Prove also that every linear transformation from $F^n$ to $F^m$ is 
+of this form, for some $f_1, \ldots, f_m$. \\
+\begin{align*}
+	T(cx+y) &= (f_1(cx+y),\dots, f_m(cx+y)) \\
+	&= (cf_1(x)+f_1(y),\dots, cf_m(x)+f_m(y)) \\
+	&= c(f_1(x),\dots,f_m(x))+ (f_1(y),\dots, f_m(y)) \\
+	&= cT(x)+T(y)
+\end{align*}therefore $T$ is a linear transformation.\\
+\\
+Given a basis $B$ on $F^n$ and $F^m$ every transformation $T\in \LL(F^n, F^m)$ has a matrix $[T]_B = A = [a_{i,j}]$.  Given any $v=(x_1,\dots,x_n)$ we know that each element $T_j(x) = \sum_{i=1}^n a_{i,j}v_j \in F$ for $j=1,\dots,m$.  These are clearly linear functionals, $T_j \in \LL(F^n, F)$ and applies to all transformations in $\LL(F^n,F^m)$.
+\\
+
+\newpage
+\vskip 0.1cm
+\newcommand{\trace}{\mathrm{tr}}
+\noindent
+{\bf 3.}  Recall that the trace function is a linear functional on the vector space $\mathcal{M}_{n \times n}(F)$. Now prove that $\mathrm{tr}(AB) = \mathrm{tr}(BA)$ 
+for any $n \times n$ matrices $A$ and $B$. Conclude that similar matrices have the same trace, and  hence the trace of {\it any} linear operator $T \, : \, V \mapsto V$ on
+a finite dimensional vector space $V$ is well-defined.  Conclude further that if $F = \C$ then it is 
+not possible $AB - BA = I$. Why is this not true over an arbitrary field? \\
+\begin{align*}
+	(AB)_{i,j} &= \sum_{k=1}^n A_{i,k}B_{k,j} \\
+	\trace(AB) &= \sum_{l=1}^n (AB)_{l,l} \\
+	&= \sum_{l=1}^n \sum_{k=1}^n A_{l,k}B_{k,l} \\
+	&= \sum_{k=1}^n \sum_{l=1}^n B_{k,l}A_{l,k} \\
+	&= \sum_{k=1} (BA)_{k,k}\\
+	&= \trace(BA)
+\end{align*}If $A,B$ are similar, then there exists and invertible matrix $P$ such that $A=PBP^{-1}$
+\begin{align*}
+	A&=PBP^{-1}\\
+	\trace(A) &= \trace(PBP^{-1})\\
+	&= \trace(P)\trace(B)\trace(P^{-1}) \\
+	&= \trace(P)\trace(P^{-1})\trace(B) \\
+	&= \trace(PP^{-1})\trace(B) \\
+	&= \trace(I)\trace(B)\\
+	&= \trace(B)
+\end{align*}If $F=\C$ then $\trace(A)=u+iv$ and $\trace(b)=x+iy$ then
+\begin{align*}
+	AB-BA &= I\\
+	\trace(AB-BA) &= 1 \\
+	\trace(A)\trace(B)-\trace(B)\trace(A) &= 1 
+\end{align*}which cannot possibly be true as the left side of this equation is zero.  Over an arbitrary field, the commutativity of both multiplication causes every $xy-yx=0$.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 4.} Let $V$ be a vector space and $S$ any subset of $V$. The {\it annihilator} of $S$, denoted by $S^\circ$ is the 
+set of all linear functionals $f \in V^*$ with $f(v) = 0 $ for all $v \in S$. Show that $S^\circ$ is a subspace of $V^*$. \\ 
+\\
+Let $f,g \in S^\circ$ then for every $v \in S, (cf+g)(v) = cf(v)+g(v)=c\cdot 0+0=0$ therefore $S^\circ$ is a subspace of $V^*$.\\
+\\
+{\bf a)} Now suppose $V$ is finite dimensional. Show that $\dim W + \dim W^\circ = \dim V$. \\
+\\
+Let $k=\dim(W)$ and $B=\{v_1,\dots,v_k\}$ be a basis for $W$.  Then, expand $B$ to fit a basis on $V$, namely $\{v_1,\dots,v_k,v_{k+1},\dots,v_n\}$.  And let $\{f_1, \dots, f_n\}$ be a dual basis, hence a basis for $V^*$.  Notice that for all $f_i, i=k+1,\dots,n$ we have $f_i(v_j)=0$ because $i>k$, thus given any $w\in W$ any linear combination of these functionals will be zero, hence $f_i\in W^\circ$ for all $i=k+1,\dots,n$.  These are also linearly independent as they are taken from a basis.  Hence, $\dim(W^\circ) = n-k$ or $\dim W+\dim W^\circ=\dim V$\\
+\\
+{\bf b)} In an $n$-dimensional vector space, a subspace of dimension $n-1$ is called a hyperplane. Show that any hyperplane
+is the nullspace of a nonzero functional. \\
+\\
+Given any $v \in V$ and given a functional $f:\LL(V,F)$ that is not the zero function.  Then, given a set of basis functionals, $f_1,\dots,f_n$ we have $f(v)=a_1f_1(v)+\cdots+a_nf_n(v)$.  When $f(v)=0$ then we have $a_1f_1(v)+\cdots+a_nf_n(v)=0$ or $a_1f_1(v)+\cdots+a_{n-1}f_{n-1}(v)=-a_nf_n(v)$.  Let's define new functionals, $g_i=\frac{f_i}{f_n}$.  Then, $g_1(v)+\cdots+g_{n-1}(v)=-a_n$.  $\dim\mathrm{span}\{g_1,\dots,g_{n-1}\} = n-1$ which is a hyper-plan on $V^*$.
+\\
+
+{\bf c)} Let $W$ be a $k$-dimensional subspace of the $n$-dimensional vector space $V$. Prove that $W$ is the 
+intersection of $n-k$ hyperplanes. \\
+\\
+When $k=n-1$ we know from 4c) that there is $n-(n-1)=1$ hyperplane, and designate it $h_{n-1}$ and $W=h_{n-1}$.  \\
+When $k=n-2$ we know that there is one hyperplane in $h_{n-1}$, designated $h_{n-2}$ which intersects with thus $W=h_{n-1}\cap h_{n-2}$.\\
+And again at $n-3$ we have a hyperplane $h_{n-3}$ within $h_{n-2}$ and $W=h_{n-3}\cap h_{n-2}\cap h_{n-1}$.\\  Thus, when we have $k$ dimensions we'll have $W= h_k\cap\cdots h_{n-1} $ or $n-k$ intersections. \\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 5.} Let $V =\mathcal{P}(\R)$. Let $a$ and $b$ be fixed real numbers and let $f$ be the linear functional on $V$ defined by
+$$ f(p) \, = \, \int_a^b \, p(x) \, dx.$$
+If $D$ is the differentiation operator on $V$, what is $D^t f$ ? \\
+\\
+$D \in \LL(V,V)$ is the differential operator then, given the standard basis $B$ on $\mathcal{P}(\R)$
+\begin{align*}
+	[D]_B &= \left( \begin{array}{ccccc}
+		0 & 1 & 0 & \cdots & 0 \\
+		0 & 0 & 2 & \cdots & 0 \\
+		0 & 0 & 0 & \cdots & 0 \\
+		\vdots \\
+		0 & 0 & 0 & \cdots & n \\
+		0 & 0 & 0 & \cdots & 0 
+	\end{array}
+	\right)
+\end{align*}Thus, the matrix of $D$ transpose is
+\begin{align*}
+	[D^t]_B &= \left( \begin{array}{cccccc}
+		0 & 0 & 0 & \cdots & 0 &0 \\
+		1 & 0 & 0 & \cdots & 0 &0 \\
+		0 & 2 & 0 & \cdots & 0 &0 \\
+		\vdots \\
+		0 & 0 & 0 & \cdots & 0&0 \\
+		0 & 0 & 0 & \cdots & n &0 
+	\end{array}
+	\right)
+\end{align*}$f \in \LL(\mathrm{P}(\R),\R)$ and given any $p\in \mathrm{P}(\R)$ let $p(x) = a_0+a_1x+a_2x^2+\cdots+a_nx^n$ then for some constant $c$
+\begin{align*}
+	\int p(x) dx &= c+a_0x+\frac{1}{2}a_1x^2+\frac{1}{3}a_2x^3+\cdots+\frac{1}{n+1}a_nx^{n+1} \\
+	\int_a^b p(x) dx &= a_0(b-a)+\frac{1}{2}a_1(b^2-a^2)+\frac{1}{3}a_2(b^3-a^3)+\cdots+\frac{1}{n+1}a_n(b^{n+1}-a^{n+1}) \\
+	D^t f &= f \circ D \\
+	(D^t f)(p) &=  f(Dp) \\
+	&= f(D(a_0+a_1x+a_2x^2+\cdots+a_nx^n)) \\
+	&= f(a_1+2a_2x+3a_3x^2\cdots+na_nx^{n-1}) \\
+	&= a_1(b-a)+a_2(b^2-a^2) + \cdots + a_n(b^n-a^n) \\
+	&= p(b)-p(a)
+\end{align*}
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 6.} Let $V = \mathcal{M}_{n\times n}(F)$ and let $B \in V$ be a fixed matrix. Let $T \, : \, V \mapsto V$ be the linear transformation defined by $T(A) = AB - BA$. 
+What is then $T^t(\mathrm{tr})$ ?  \\
+\\
+\begin{align*}
+	T^t(\trace)(A) &= \trace \circ T(A) \\
+		&= \trace(T(A)) \\
+		&= \trace(AB-BA) = \trace(AB)-\trace(BA)=\trace(A)\trace(B)-\trace(B)\trace(A)\\
+		&= 0
+\end{align*}
+
+
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+{\bf 1.} Let $V$ be a vector space over the field $F$, and let $v \in V$ be a fixed vector. We define the map $L_v \, : \, V^* \mapsto F$ where
+$L_v(f) = f(v)$. Show that $L_v$ is a linear functional on $V^*$, i.e., $L_v \in V^{**}$, the double dual of $V$. \\
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.} Now let $V$ be a finite dimensional vector space and  consider the map $v \mapsto L_v$ which is a map from $V$ to $V^{**}$. Show that this map is a linear isomorphism of $V$ onto $V^{**}$.
+Conclude that if $V$ is a finite dimensional vector space then for every linear functional $L$ on $V^{*}$ there is a unique $v \in V$ such that $L(f) = f(v)$ for every $f \in V^{*}$. [This is really 
+a restatement of the isomorphism you have proved]\\
+
+\vskip 0.1cm
+\noindent 
+{\bf 3.}  Using the above result prove that if $V$ is a finite dimensional vector space then every basis of $V^{*}$ is the dual basis to some basis of $V$. \\
+
+
+
+\end{document}

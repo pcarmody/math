@@ -1,0 +1,251 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+
+\begin{document}
+\newcommand{\ts}{\textsuperscript}
+
+%\homework{}{Homework VI}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#6 -- Due 10/06/23
+\end{center}
+
+\vskip 1.0cm
+
+\noindent
+{\bf 1.} Let $A$ be an $n \times n$ matrix with entries from a field $F$ (actually, from any commutative ring $R$). Let 
+$$ D(A)  \, = \, A_{i_1, j_1} A_{i_2, j_2} \cdots A_{i_n, j_n}.$$
+Prove that $D(A)$ is an $n$-linear function if and only if $i_1, i_2, \ldots, i_n$ are distinct. \\
+\\
+Let there be two indices $s, t$ such that $i_s=i_t$.  Then, attempting to verify that $D(A)$ is $n$-linear on the $i_s\ts{th}$ column, i.e., multpling the $i_s\ts{th}$ column by a scalar $c$ will be equivalent to $cD(A)$.  That is (WTLOG we can assume that $s<t$)
+\begin{align*}
+	D(cA) &= A_{i_1, j_1} \cdots cA_{i_s,j_s}\cdots A_{i_t,j_t} \cdots A_{i_n, j_n} \\
+	&= A_{i_1, j_1} \cdots cA_{i_s,j_s}\cdots cA_{i_s,j_s} \cdots A_{i_n, j_n}\\
+	&= c^2D(A) \text{ which indicates that it is not $n$-linear}
+\end{align*}Further, there must be $n$ elements and there cannot be any duplicates so essentially the set of indices $i_k$ is permutation on the numbers $1,\dots,n$.
+\\
+\vskip 0.1cm
+\noindent
+{\bf 2.}  Consider a Vandermonde matrix
+$$\left( \begin{array}{ccccc} 1 & t_1 & t_1^2 & \cdots & t_1^{n-1} \\
+1 & t_2 & t_2^2 & \cdots & t_2^{n-1} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & t_n & t_n^2 & \cdots & t_n^{n-1} 
+\end{array} \right).$$
+Show that the determinant of this matrix is equal to $\prod_{1 \leq i < j \leq n} (t_j - t_i)$. Conclude that a Vandermonde matrix is invertible if and only if $t_1, \ldots, t_n$ are
+distinct. [Hint: induction on $n$]\\
+\\
+For $n=2$  Let $A_2=\begin{pmatrix}
+ 1 & t_1 \\
+ 1 & t_2
+\end{pmatrix}$ and $\det A_2 = t_2-t_1$.  Now, assuming that it is true for $n$ we want to show that it is also true for $n+1$.  Let $A$ be an $(n+1)\times(n+1)$ Vandermonde Matrix and use the right most column, $A_{n+1}$ to evaluate determinant.  Each of the reduced $n\times n$ matrices, $A(i|n)$, will have the form
+\begin{align*}
+	A(k|n) &= \begin{pmatrix}
+		1 & t_1 & t_1^2 & \cdots & t_1^{n-1}\\
+		1 & t_2 & t_2^2 & \cdots & t_2^{n-1}\\
+		\vdots & \vdots & \vdots &\ddots & \vdots \\
+		1 & t_{k-1} & t_{k-1}^2 & \cdots & t_{k-1}^{n-1}\\
+		1 & t_{k+1} & t_{k+1}^2 & \cdots & t_{k+1}^{n-1}\\
+		\vdots & \vdots & \vdots &\ddots & \vdots \\
+		1 & t_{n+1} & t_{n+1}^2 & \cdots & t_{n+1}^{n-1}
+	\end{pmatrix} 
+\end{align*}thus giving the determinant as 
+\begin{align*}
+	\det(A) &= \sum_{k=1}^{n+1} (-1)^{i+n}t_k^n \det(A(k|n)) \\
+	&= \sum_{k=1}^{n+1} (-1)^{i+n}t_k^n \prod_{1 \leq i < j \leq n+1, i,j \ne k} (t_j - t_i) \\
+	\text{WTS } &= \prod_{1\le i<j \le n+1}(t_j-t_i)
+\end{align*}
+\\
+\vskip 0.1cm
+\noindent
+{\bf 3.a)}  A matrix $A \in \mathcal{M}_{n \times n}(F)$ is called
+skew-symmetric if $A^t = -A$. If $F = \C$ and $n$ is odd, show that
+$\det(A) = 0$ if $A$ is skew-symmetric. \\
+\\
+Remember that the $\det(A(i|j)) = \det(A(j|i))$.  Let $E_j$ be the determinant based on rows and $E_j'$ be the determinant based on columns then
+\begin{align*}
+	E_j(A) &= \sum_{i=1}^n (-1)^{i+j}A_{ij} D(A(i|j))\\
+	E_j'(A) &= \sum_{i=1}^n (-1)^{i+j}A_{ji} D(A(j|i))
+\end{align*}then for every pair $i,j$ there are two terms  $A_{ij}D(A(i|j))= -A_{ji}D(A(j|i))$ each being the negative of the other and canceling each other out, that is, unless $n$ is odd where there will be an additional outstanding term that is not canceled out.  \\
+\\
+{\bf b)}  A matrix $A \in \mathcal{M}_{n \times n}(F)$ is called orthogonal if $A^tA = I$. Show that $\det(A) = \pm 1$ if $A$ is orthogonal. \\
+\\
+\begin{align*}
+	A^tA &= I \\
+	\det(A^tA) &= \det(I)\\
+	\det(A^t)\det(A) &= 1 \\
+	\det(A) &= \det(A^t)^{-1} \\
+	&= \det(A)^{-1} \\
+	&= \pm 1
+\end{align*}
+\\
+{\bf c)}  A matrix $A \in \mathcal{M}_{n \times n}(\C)$ is called unitary if $A^*A = I$. Here $A^*$ is the conjugate transpose of $A$ defined as $A_{ij}^* = \bar{A}_{ji}$ where 
+$\bar{z}$ is the conjugate of a complex number $z$.  Show that $|\det(A)| = 1$ if $A$ is unitary. \\
+\\
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 4.} Let $A$ be an $m \times n$ matrix with entries from a field $F$. For simplicity, we assume $m \leq n$. Now for any $k \leq m$ let $I = \{i_1, i_2, \ldots, i_k\}$ where $
+1 \leq i_1 < i_2 < \cdots < i_k \leq m$ and $J = \{j_1, j_2, \ldots, j_k\}$ where $1 \leq j_1 < j_2 < \cdots < j_k \leq n$. We define $A(I,J)$ as the $k \times k$ matrix obtained from 
+$A$ by using the rows of $A$ indexed by $I$ and the columns of $A$ indexed by $J$. The determinant of $A(I,J)$ is called a $k$-minor of $A$. Show that $\rank(A)  = k$ 
+if and only if there exists a nonzero $k$-minor of $A$ and all $k+1$-minors of $A$ are zero. 
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 5.a)} Let $A \in \mathcal{M}_{n \times n}(F)$. Show that there are at most $n$ scalars $c \in F$ such that $\det(cI - A) = 0$. \\
+\\
+Let $B = \det(cI-A)$ then 
+\begin{align*}
+	B &= \begin{pmatrix}
+		c-A_{11} & -A_{12} & \cdots & -A_{1n}\\
+		-A_{21} & c-A_{22} & \cdots & -A_{2n}\\
+		\vdots & \vdots & \ddots & \vdots \\
+		-A_{n1} & -A_{n2} & \cdots & c-A_{nn}\\
+	\end{pmatrix}
+\end{align*}all $A_{ij}$ are constants.  Thus the only terms with variables in them will be along the diagonal.  Essentially the trace of $B$ will determine the potential values for $c$. And,
+\begin{align*}
+	\mathrm{tr}(B) &= (c-A_{11})(c-A_{22})\cdots(c-A_{nn})
+\end{align*}which will be a polynomial in $c$ of degree $n$.  The zeros of this polynomial will determine values of $c$ that bring the determinant to zero.  Hence there are at most $n$ values of $c$ where $\det(cI-A)=0$.\\
+\\
+{\bf b)} Let $A, B\in \mathcal{M}_{n \times n}(F)$ where $A$ is invertible. Show that there are at most $n$ scalars $c \in F$ such that $cA - B$ is not invertible. \\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 6.} Let $A \in \mathcal{M}_{n \times n}(F)$ where $A$ is in block-diagonal form:
+$\left( \begin{array}{cccc} A_1 & 0 & \cdots & 0 \\
+0 & A_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & A_k 
+\end{array} \right),$
+where $A_j$ is a $r_j \times r_j$ matrix. Show that $\det(A) = \det(A_1) \det(A_2) \cdots \det(A_k)$. \\
+\\
+Step 1: We know that 
+\begin{align*}
+	E_j(A) &= \sum_{i=1}^n (-1)^{i+j}A_{ij}D_{ij}(A)
+\end{align*}and that this is the same for all $j$.  Since $A_1$ is a $1\times 1$ matrix we can see that 
+\begin{align*}
+	E_1(A) &= A_1D_{11}(A) 
+\end{align*}Step 2: removing the first row and first column and designating $D_{11}(A) = A_1'$ and replacing $A_2$ with a matrix
+\begin{align*}
+	A_2 &= \begin{pmatrix}
+		a_{11} & a_{12}\\
+		a_{21} & a_{22}
+	\end{pmatrix} \\
+	A_1' &= \begin{pmatrix}
+		a_{11} & a_{12} & 0 & \cdots & 0\\
+		a_{21} & a_{22} & 0 & \cdots & 0\\
+		\textbf{0} & \textbf{0} & A_3 & \cdots & 0 \\
+		\vdots \\
+		\textbf{0} & \textbf{0} & \textbf{0} & \cdots & A_n \\
+	\end{pmatrix} \\
+	E_1(A_1') &= a_{11}D_{11}(A_1')-a_{12}D_{12}(A_1')
+\end{align*}this gives us two matrices
+\begin{align*}
+	D_{11}(A_1') &= \begin{pmatrix}
+		 a_{22} & 0 & \cdots & 0\\
+		 \textbf{0} & A_3 & \cdots & 0 \\
+		\vdots \\
+		 \textbf{0} & \textbf{0} & \cdots & A_n \\	
+\end{pmatrix}	 \\
+	D_{12}(A_1') &= \begin{pmatrix}
+		 a_{21} & 0 & \cdots & 0\\
+		 \textbf{0} & A_3 & \cdots & 0 \\
+		\vdots \\
+		 \textbf{0} & \textbf{0} & \cdots & A_n \\	
+\end{pmatrix}	 \\
+\end{align*}remove the first two rows and first two columns of $A_1'$ and designate it $A_2'$ and from Step 1 we know that
+\begin{align*}
+	D_{11}(A_1') &= a_{22}D_{11}(A_2') \\
+	D_{12}(A_1') &= a_{21}D_{11}(A_2') \\
+	E_1(A_1') &= (a_{11}a_{22} - a_{12}a_{21})D_{11}(A_2')	\\
+	&= D(A_2)D_{11}(A_2') \\
+	\text{and } E_1(A) &= D(A_1)D(A_2)D_{11}(A_2')
+\end{align*}Step 3: Each of the three terms in $E_1(A_2')$ will generate a matrix with the same form as $A_1'$.  That is, each will have a $2\times 2$ matrix in the first rows and first columns followed by zeros and a matrix $A_3'$ containing the remainder of $A$.  Just as in Step 2 each of these will generate a term of the form $D_{ij}(A_2')D_{11}(A_3')$  That is, 
+\begin{align*}
+	E_1(A_2') &= D(A_3)D_{11}(A_3') \\
+	\text{and } E_1(A) &= D(A_1)D(A_2)D(A_3)D_{11}(A_3')
+\end{align*}Next Step: it should be clear now that the $4\times 4$ matrix will generate four $3 \times 3$ matrices which we apply Step 3 to each and will sum to be a determinant for $A_4$ multiplied by the determinant of the remaining matrix.  Extrapolating to $n$ we get $D_{11}(A_n) = D(A_n)$
+\begin{align*}
+	E_1(A) &= D(A_1)D(A_2)\cdots D(A_n)
+\end{align*}
+
+
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+{\bf 1.} In this exercise you will prove the famous Cramer's rule. For this let $Ax = b$ be a system of equations where $A \in \mathcal{M}_{n \times n}(F)$ and $b \in F^n$.  Using the observation 
+that $( \mathrm{adj} A) A = \det(A) I$ show that $ \det (A) x_i = \sum_{j = 1}^n   (-1)^{i+j} \det ( A(j|i)) b_j$ where $A(j|i)$ is obtained by deleting the $j$th row and $i$th column of $A$.
+Prove that the right-hand side of this expression is equal to $\det(B_i)$ where $B_i$ is obtained from $A$ by replacing the $i$th column of $A$ with the vector $b$. 
+Conclude that if $\det(A) \neq 0$ the unique solution to $Ax = b$ is obtained by $x_i = \frac{\det (B_i)}{\det(A)}$.\\
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.} Let $A$ be an $n \times (n+1)$ matrix of rank $n$. The rank nullity theorem tells us that $\mathrm{null}(A)$ is generated by a single nonzero vector. Show that 
+this nonzero vector can be taken to be 
+$$(+ \det(A^{(1)}) , - \det(A^{(2)}), + \det (A^{(3)}), \ldots, (-1)^{n+1} \det (A^{(n+1)}))$$
+ where $A^{(j)}$ is the $n \times n$ matrix obtained 
+from $A$ by deleting its $j$th column. [Hint: without loss of generality we can assume that a generating vector's last coordinate is equal to $1$. Now use Cramer's rule.]\\
+
+\vskip 0.1cm
+\noindent 
+{\bf 3.}  We have an efficient algorithm for solving the linear equation $Ax = b$. For simplicity let's assume that $A$ is an $n \times n$ invertible matrix.
+However, there is one more thing one needs to worry about in computer science. What if the {\it size} of the solution is so big, that even if we have
+an efficient algorithm to produce the solution, it will consume all of the memory? Algorithms are considered to be good if they are efficient
+and the output they are expected to deliver is a polynomial function (instead of, say, an exponential function) in the input size of the problem. Here is how we define
+the input size of the linear system $Ax = b$. Note that, ultimately, a computer computes with rational numbers that are close approximations to real numbers. 
+So if $p/q$ is a rational number expressed in lowest terms the size of $p/q$ is defined to be (roughly) $\log p + \log q$. This is approximately
+the number of bits needed to be used to represent $p/q$ inside the computer. The size $D$ of the input $Ax = b$ is the sum of sizes of all input 
+numbers in the matrix $A$ and $b$. Now using Cramer's rule and properties of determinants prove that the size of the unique solution 
+to $Ax = b$ is at most a polynomial function in $D$. \\
+
+\vskip 0.1cm
+\noindent
+{\bf 4.} For $m \leq n$ let $A$ be an $m \times n$ matrix and $B$ is an $n \times m$ matrix. For $I \subset \{1,2, \ldots , n\}$ of cardinality $m$, we let $A_I$ be the 
+$m \times m$ submatrix of $A$ whose columns are those of $A$ indexed by $I$, and we let $B_I$ be the $m \times m$ submatrix of $B$ whose rows are those of $B$ indexed by $I$.
+Prove that 
+$$ \det(AB) \, = \, \sum_{|I| = m} \det(A_I)\det(B_I).$$
+Note that when $m=n$ this proves the product formula for determinants.
+
+
+
+\end{document}

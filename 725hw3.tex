@@ -76,19 +76,124 @@ What happens in $T$ when you add $C$ and $D$?\
 \end{align*}
 \\
 
+\pagebreak
 \vskip 0.1cm
 \noindent
 {\bf 3.a)} Recall that $\C$ is a real vector space. Find $T \, : \, \C \mapsto \C$ which is a $\R$-linear transformation which is not a 
 $\C$-linear transformation. \\
+\\
+\\
 {\bf b)} Find a linear transformation $T \, : \, V \mapsto V$ where the range and nullspace of $T$ are identical. \\
+\\
+When $\mathrm{null} (T) = \mathrm{range } (T)$ we have $\{v \in V\,:\, T(v)=0 \} = \{ T(v) \,:\, v \in V \}$.  That is, given any $v \in V, T(v) = 0$.  $T$ is by definition the zero transformation.\\
+\\
 {\bf c)} Find $T$ and $U$ on $\R^2$ such that $TU = 0$ but $UT \neq 0$. \\
+\\
+Let $M$ be the matrix associated with $T$, that is, $Tx = Mx$ and $N$ be the matrix assoicated with $U$, that is, $Ux=Nx$.  Then, $TU = MN$.  Now let 
+\begin{align*}
+	M &= \left ( \begin{array}{cc}
+		a & b\\
+		c & d
+\end{array}	 \right ) \\
+	N &= \left ( \begin{array}{cc}
+		w & x\\
+		y & z
+\end{array}	 \right ) \\
+	MN &= \left ( \begin{array}{cc}
+		a & b\\
+		c & d
+\end{array}	 \right )\left ( \begin{array}{cc}
+		w & x\\
+		y & z
+\end{array}	 \right ) \\
+	&= \left ( \begin{array}{cc}
+		aw+by & ax+bz \\
+		cw+dy & cx+dz
+\end{array}	 \right ) =0 \\
+	\text{thus } &\begin{array}{c|c}
+		aw= -by & ax=-bz \\
+		cw= -dy & cx = -dz
+	\end{array}  \\
+	\text{but } NM &= \left ( \begin{array}{cc}
+		w & x\\
+		y & z
+\end{array}	 \right )\left ( \begin{array}{cc}
+		a & b\\
+		c & d
+\end{array}	 \right ) \\
+	&= \left (\begin{array}{cc}
+		wa+xc & wb+xd \\
+		ya+zc & yb+zd
+\end{array}	 \right ) \ne 0\\
+	\text{thus } &\begin{array}{c|c}
+		aw \ne -cx & bw \ne -dx \\
+		ay \ne -cz  & bd \ne -dz
+	\end{array}  \\
+	\text{Let } 	M &= \left ( \begin{array}{cc}
+		1 & 1\\
+		1 & 1
+\end{array}	 \right ) 
+	\text{ and } 	N = \left ( \begin{array}{cc}
+		1 & 1\\
+		-1 & -1
+\end{array}	 \right ) \\
+	MN &= \left ( \begin{array}{cc}
+		1 & 1\\
+		1 & 1
+\end{array}	 \right ) 
+ \left ( \begin{array}{cc}
+		1 & 1\\
+		-1 & -1
+\end{array}	 \right ) =
+\left ( \begin{array}{cc}
+	1-1 & 1-1 \\
+	1-1 & 1-1
+\end{array} \right ) =
+\left ( \begin{array}{cc}
+	0 & 0 \\
+	0 & 0
+\end{array} \right ) \\
+	NM &=  \left ( \begin{array}{cc}
+		1 & 1\\
+		-1 & -1
+\end{array}	 \right )\left ( \begin{array}{cc}
+		1 & 1\\
+		1 & 1
+\end{array}	 \right )  =
+\left ( \begin{array}{cc}
+	1+1 & 1+1 \\
+	-1+(-1) & -1+(-1) 
+\end{array}\right ) =
+\left ( \begin{array}{cc}
+	2 & 2 \\
+	-2 & -2 
+\end{array} \right )
+\end{align*}.
+\\
 
+\pagebreak
 \vskip 0.1cm
 \noindent
-{\bf 4.} Let $T$ and $U$ be two linear operators on $\R^2$ defined by $T(x_1, x_2) = (x_2,x_1)$ and $U(x_1,x_2) = (x_1,0)$. \\
+{\bf 4.} Let $T$ and $U$ be two linear operators on $\R	^2$ defined by $T(x_1, x_2) = (x_2,x_1)$ and $U(x_1,x_2) = (x_1,0)$. \\ \\
 {\bf a)} Give a geometric interpretation for $T$ and $U$. \\
+\\
+$T$ transposes the right and left values which essentially maps every point across the line $x_2=x_1$ distance from that line.  That is, if a point $P$ has a perpendicular distance $m$ to the line $x_1=x_2$ then $T(P)$ will be the same distance away on the other side of that line.\\
+\includegraphics[scale=0.1]{../../Downloads/desmos-graph(1).png} 
+\\
+$U$ provides the projection onto the $x_1$ axis which is either directly above or below the point.\\
+\\
 {\bf b)} Give rules for $U+T$, $UT$, $TU$, $T^2$, and $U^2$. \\
-
+\\
+$U+T$, $(U+T)(x_1,x_2) = U(x_1,x_2)+T(x_1,x_2)=(x_1,0)+(x_2,x_1) = (x_1+x_2, x_1)$ \\
+\\
+$UT$, $UT(x_1,x_2) = U(T(x_1,x_2))= U(x_2, x_1)=(x_2,0)$\\
+\\
+$TU$, $TU(x_1,x_2) = T(U(x_1,x_2))= T(x_1,0)=(0, x_1)$\\
+ \\
+$T^2$, $T^2(x_1,x_2)= T(T(x_1,X_2)) = T(x_2,x_1)=(x_1,x_2)$ the identity map.\\
+  \\
+$U^2$, $U^2(x_1,x_2)= U(U(x_1,X_2)) = U(x_1,0)=(x_1,0)$ $U^2=U$ and is not the identity map.
+\\
 
 
 
@@ -99,7 +204,9 @@ $\C$-linear transformation. \\
 {\bf 1.} Let $A$ be an $m \times n$ matrix over $F$ of rank $k$. Show that there exist a $m \times k$ matrix $B$ and a
 $k \times n$ matrix $C$, both with rank $k$, where $A = BC$. Conclude that $A$ has rank $1$ if and only if $A = xy^t$ where
 $x \in F^m$ and $y \in F^n$. \\
-
+\\
+\newcommand{\RANGE}{\mathrm{range}}
+\newcommand{\NULL}{\mathrm{null}}
 
 \vskip 0.1cm
 \noindent 
@@ -107,6 +214,34 @@ $x \in F^m$ and $y \in F^n$. \\
 over $\C$. Let $T \, : \, \R^4 \mapsto W$ be the map defined by 
 $$ (x,y,z,t) \mapsto \left( \begin{array}{cc} t +x & y + iz \\ y - iz & t -x \end{array} \right).$$
 Show that $T$ is an isomorphism. \\
+\\
+\begin{align*}
+	\mathrm{null}(T) &= \left \{ (x,y,z,t) \mapsto \left ( \begin{array}{cc}
+		t+x& y+iz \\
+		y-iz & t-x
+	\end{array}\right ) = \left (\begin{array}{cc}
+		0 & 0 \\
+		0 & 0
+	\end{array}\right ) \right \} \\
+		t+x &= 0, t=-x \text{ and } t-x=0, t=x \implies t=x=0 \\
+		y-iz &= 0, y=iz \text{ and } y+iz=0, y=-iz \implies y=z=0 \\
+		\mathrm{null}(T) &= \{(0,0,0,0)\}
+\end{align*} which means that $T$ is injective.\\
+\\
+Let $w$ be any element in $w \in W$ and for $a,b,c,d \in \R$
+\begin{align*}
+	w &= \left ( \begin{array}{cc}
+		a & b+ic\\
+		b-ic & d
+	\end{array}\right )
+\end{align*}Find $t,x$ such that $t+x=a$ and $t-x = c$  or $2t = a+c$ or $t=\frac{a+c}{2}$ and $2x=a-c$ or $x=\frac{a-c}{2}$.  \\
+Similarly, find $y,z$ such that $y-iz=b-ic$ and $y+iz= b+ic$ or $y=b, z=c$.  Thus,
+\begin{align*}
+	T\left (\frac{a-c}{2}, b,c, \frac{a+c}{2}\right ) &= w
+\end{align*}which is true for all $w \in W$ which means that $\mathrm{range}(T) = W$ and is surjective.\\
+\\
+A transformation that is both injective and surjective is an isomorphism.
+\\
 
 
 

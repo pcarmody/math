@@ -1,0 +1,306 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+\begin{document}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\LL}{\mathcal{L}}
+
+%\homework{}{Homework IV}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#4 -- Due 9/20/23
+\end{center}
+
+
+\vskip 1.1cm
+\noindent
+{\bf 1.} Let $T$ be a linear transformation from $\R^3$ to $\R^2$ defined by $T(x_1,x_2,x_3) =(x_1+x_2, 2x_3-x_1)$. \\ \\
+{\bf a)} If $\mathcal{B}$ is the standard ordered basis of $\R^3$ and $\mathcal{B}'$ is the standard ordered basis of $\R^2$, what is 
+$[T]_{\mathcal{B}'}^{\mathcal{B}}$?\\
+\begin{align*}
+	\mathcal{M}(T) &= [T]_{\mathcal{B}'}^\mathcal{B}=\left ( \begin{array}{ccc}
+		1 & 1 & 0 \\
+		-1 & 0 & 2
+	\end{array}\right )
+\end{align*}
+\\
+{\bf b)} If $\mathcal{B} = (v_1, v_2, v_3)$ and $\mathcal{B}' = (w_1, w_2)$ where
+$$ v_1 = (1,0,-1), \, v_2 = ( 1,1,1), \, v_3 = (1,0,0), \,\,\,\, w_1 = (0,1), \, w_2 = (1,0)$$
+what is $[T]_{\mathcal{B}'}^{\mathcal{B}}$ ?\\
+\\
+Let $S$ be the transformation from the standard basis to $\BB$ and $S'$ be the transformation from the standard basis to $\BB'$.  The transformation $T_{\BB'}^\BB$ these bases is $T_{\BB'}^\BB = S'\circ T \circ S$.
+\begin{align*}
+	\MM(S') &= \left( \begin{array}{cc}
+		0 & 1\\
+		1 & 0
+	\end{array} \right)\\
+	\MM(S) &= \left( \begin{array}{ccc}
+		1 & 1 & 1\\
+		0 & 1 & 0 \\
+		-1 & 1 & 0
+	\end{array}\right) \\
+	[T]_{\BB'}^\BB &= \MM(S')\MM(T)\MM(S) \\
+	&= \left( \begin{array}{cc}
+		0 & 1\\
+		1 & 0
+	\end{array} \right)
+	\left ( \begin{array}{ccc}
+		1 & 1 & 0 \\
+		-1 & 0 & 2
+	\end{array}\right )
+	\left( \begin{array}{ccc}
+		1 & 1 & 1\\
+		0 & 1 & 0 \\
+		-1 & 1 & 0
+	\end{array}\right)\\
+	&=\left ( \begin{array}{ccc}
+		-1 & 0 & 2 \\
+		1 & 1 & 0
+	\end{array}\right )
+	\left( \begin{array}{ccc}
+		1 & 1 & 1\\
+		0 & 1 & 0 \\
+		-1 & 1 & 0
+	\end{array}\right)\\
+	&=\left( \begin{array}{ccc}
+		-3 & 1 & -1\\
+		1 & 2 & 2 
+	\end{array}\right)
+\end{align*}
+\\
+
+\pagebreak
+\vskip 0.1cm
+\noindent
+{\bf 2.}  Let $V$ be a $n$-dimensional vector space over $F$ and let $\mathcal{B} = (v_1, \ldots, v_n)$ be a basis of $V$. \\ \\
+{\bf a)} We have learned that there is a unique operator $T$ on $V$ such that $Tv_j = v_{j+1}$ for $j=1, \ldots, n-1$, and $Tv_n = 0$. 
+What is the matrix $A$ of $T$ in the basis $\mathcal{B}$ ? \\
+\\
+\begin{align*}
+	A=\left( \begin{array}{ccccc}
+		0&0&0&\dots&0 \\
+		1&0&0&\dots& 0 \\
+		0&1&0&\dots&0\\
+		\vdots \\
+		0&0&0&\dots& 0
+	\end{array} \right)
+\end{align*}
+\\
+{\bf b)} Prove that $T^n = 0$ but $T^{n-1} \neq 0$. \\
+\\
+$T(1,0,\dots,0) = (0,1,\dots,0)$  thus $v_1 \mapsto v_2$.  Intuitively speaking, each composition of $T$ onto itself will map $v_1$ to the next basis vector.  But we know that $T(v_n) = 0$, thus, the $n-1$th iteration, i.e., $A^{n-1}$ will map $v_1 \to v_{n} \ne 0$ and then the $n$th composition, i.e., $A^n$, will map everything to zero.
+\begin{align*}
+	A &= \left( \begin{array}{ccccc}
+		0&0&0&\dots&0 \\
+		1&0&0&\dots& 0 \\
+		0&1&0&\dots&0\\
+		\vdots \\
+		0&0&0&\dots& 0
+	\end{array} \right)\\
+	A^2&=\left( \begin{array}{ccccc}
+		0&0&0&\dots&0 \\
+		1&0&0&\dots& 0 \\
+		0&1&0&\dots&0\\
+		\vdots \\
+		0&0&0&\dots& 0
+	\end{array} \right)\left( \begin{array}{ccccc}
+		0&0&0&\dots&0 \\
+		1&0&0&\dots& 0 \\
+		0&1&0&\dots&0\\
+		\vdots \\
+		0&0&0&\dots& 0
+	\end{array} \right) = \left( \begin{array}{ccccc}
+		0&0&0&\dots&0 \\
+		0&0&0&\dots& 0 \\
+		1&0&0&\dots&0\\
+		\vdots \\
+		0&0&0&\dots& 0
+	\end{array} \right)\\
+	&\vdots \\
+	A^{n-1}&= \left( \begin{array}{ccccc}
+		0&0&0&\dots&0 \\
+		0&0&0&\dots& 0 \\
+		0&0&0&\dots&0\\
+		\vdots \\
+		1&0&0&\dots& 0
+	\end{array} \right)\\
+	A^n &= \left( \begin{array}{c}
+	0
+\end{array}	 \right)
+\end{align*}
+\\
+{\bf c)} Let $S$ be an operator on $V$ such that $S^n = 0$ but $S^{n-1} \neq 0$. Prove that there is a basis $\mathcal{B}'$ such that
+$[S]_{\mathcal{B}'}$ is  $A$ of part {\bf a)}. \\
+\\
+Let $x=(1,0,\dots,0) \in V$ and let $v_{n-1} = S^{n-1}(x)$, then let $v_{n-2}=S^{n-2}(x)$ and in general $v_i = S^{i}(x)$ with $v_n=x$.  Notice $v_i \ne0$ for all $i=1,\dots,n$ because $S(v_i)=S(0) \implies S(v_{i+1})=0$ indicating that all $v_j=0$ for all $j>i$ and we know that $v_{n-1}=S^{n-1}(x) \ne 0$.  \\
+\textbf{Claim: } This set $\{v_1, \dots, v_n\}$ forms a basis on $V$.  \\
+1) Linear Independence.  Given any two elements $v_i, v_j$ where $j>i$ we can see that if there exists non-zero elements $a,b$ then $av_1+bv_j \ne 0$ implies $v_i = dv_j$ for some $d$ and thus $v_i^2=d^2v_j^2$ and $v_i^{n-j}=d^{n-j}v_j^{n-j}=0$, which can't be true.  Thus, any $a_1v_1+\cdots+a_nv_n=0$ implies that $a_1,\dots,a_n=0$ and hence linearly independent. \\
+2) $\mathrm{span}\{v_1, \dots, v_n\}=V$.  There are $n$ linearly independent vectors in a vector space of degree $n$.  Hence, they span $V$.\\
+\\
+{\bf d)} Prove that if $M$ and $N$ are $n \times n$ matrices over $F$ with $M^n = N^n = 0$ but $M^{n-1} \neq 0 \neq  N^{n-1}$, then
+$M$ and $N$ are similar. \\
+\\
+Let $T, S \in \LL(V,V)$ such that $T(v)=Mv$ and $S(v)=Nv$.  By 2c) there exists a basis $\BB$ such that $[S]_\BB = A$ and a basis $\BB'$ such that $[T]_{\BB'} = A$.  Assuming that these basis are different from the standard bases, then let $P$ be the change of basis matrix for $\BB$ and $P'$ be the change of basis from the standard to $\BB'$.  Thus, 
+\begin{align*}
+	[S]_\BB &= PMP^{-1} \text{ and } [T]_{\BB'}= P'NP'^{-1}\\
+	[S]_\BB &= [T]_{\BB'}\\
+	PMP^{-1} &= P'NP'^{-1} \\
+	M &= P^{-1}P'NP'^{-1}P
+\end{align*}$P,P'$ are both invertible thus $P^{-1}P'$ and $P'^{-1}P$ are invertible.  Hence, forming a change in basis matrix.  $M$ and $N$ are similar.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 3.}  Let $U$ and $V$ finite dimensional vector space and let $S \in \mathcal{L}(V,W)$ and $T \in \mathcal{L}(U,V)$. \\
+\\
+{\bf a)} Prove that $\dim \nullspace(ST) \leq \dim \nullspace(S) + \dim \nullspace(T)$. \\
+\\
+By definition, the range of the $\nullspace(T) = 0$ and we know that $S(0)=0$ for all transformations $S$ hence $0 \in \nullspace(S)$.  Hence $\nullspace(T) \subseteq \nullspace(S)$.  $\nullspace(ST)$ will include the members of $\nullspace(T)$ and those elements of $U$ that map to the $\nullspace(S)$.  Let $X=\{u\in U-\nullspace(T): T(u) \in \nullspace(S)\}$ then , i.e., $\nullspace(ST)=\nullspace(T)\cap X$. $\dim X \le \dim\nullspace(S)$.  Hence, $\dim \nullspace(ST) \leq \dim \nullspace(S) + \dim \nullspace(T)$.\\
+\\
+{\bf b)} Now also assume that $W$ is finite dimensional. Show that $\rank(ST) \leq \min \{\rank(S), \rank(T)\}$. \\
+\begin{align*} 
+	\dim(V) &= \dim \nullspace(S) + \rank(S) \implies \dim \nullspace(S) = V-\rank(S)\\
+	\dim(U) &= \dim\nullspace(T) + \rank( T) = \dim\null(ST) + \rank(ST) \\
+	\rank(ST) &= \dim \nullspace(T) + \rank(T)-\dim\nullspace(ST) \\
+	&\le \dim\nullspace(T)+\rank(T)-\dim\null(S)-\dim\nullspace(T)\\
+	&\le \rank(T)-\dim\nullspace(S)\\
+	&\le \rank(T)-(\dim(V)-\rank(S))\\
+	&\le \rank(T)+\rank(S)-\dim(V) \\
+	\text{Clearly, } \rank(T) &\le \dim(V) \text{ and } \rank(S) \le \dim(V) 
+\end{align*}Thus, if $\rank(T) = \dim(V)$ then $\rank(T) > \rank(S)$ and $\rank(ST) = \rank(S)$ and similarly, if $\rank(S) = \dim(V)$ then $\rank(S) > \rank(T)$ and $\rank(ST) = \rank(T)$.  Thus, $\rank(ST) \le \min\{\rank(S), \rank(T)\}$\\
+\\
+{\bf c)} If $R \in \mathcal{L}(U,V)$, then show that $\rank(T+R) \leq \rank(T) + \rank(R)$.\\
+\\
+\newcommand{\range}{\mathrm{range}}
+We know that if $U,V$ are subspaces of $W$ then $\dim(U+V) = \dim(U) + \dim(V) - \dim(U\cap V)$.  We also know that $\range(T), \range(R)$ are subspaces under $V$ thus $\dim \range(T+R) = \dim\range(T) + \dim\range(R) - \dim\range(T) \cap \range(R)$.  Hence, $\rank(T+R) \le \rank(T)+\rank(R)$ indeed they are equal when $\range(T) \cap \range(R) = 0$ vector.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent 
+{\bf 4.} Let $T$ be a linear operator on a finite dimensional vector space $V$. Show that if  there is an operator $U$ with $TU = I$ then 
+$T$ is invertible and $T^{-1} = U$. Show that this statement may not be true for infinite dimensional vector spaces. [Hint: differentiation] \\ 
+\\
+Let $V$ be a finite-dimensional vector space, $T \in \LL(V,V)$ and let $U \in \LL(V,V)$ such that $TU=I$.  Then given a basis $\BB$ we have $T(v)=[T]_\BB v$ and $U(V)=[U]_\BB v$.  Thus,
+\begin{align*}
+	(TU)(v)=[T]_\BB [U]_\BB v &= [I]_\BB v\\
+	[T]_\BB [U]_\BB &= [I]_\BB \\
+	[T]_\BB^{-1}[T]_\BB [U]_\BB &= [T]_\BB^{-1}[I]_\BB\\
+	[U]_\BB &= [T]_\BB^{-1}
+\end{align*}since $\BB$ is arbitrary, this is true with all possible bases, hence $U= T^{-1}$.\\
+\\
+If $V$ is infinite then $U$ must be surjective and injective.  Let $V = \mathcal{P}(F)$ for some field $F$, and $T=D$ the differentiation transformation, that is $T(f)=f'$.  Let $U$ be the antiderivative.  Clearly, $UT=I$ except that $U(0) \ne \{0\}$ and, hence, not injective.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 5.} Prove that for any real $\theta$ the matrix $\left( \begin{array}{cr} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{array} \right)$
+is similar to $\left( \begin{array}{cc} e^{i\theta}  & 0 \\ 0 & e^{-i\theta} \end{array} \right)$ over the complex numbers. [Hint: Let $T$ be the linear
+operator on $\C^2$ represented in the standard ordered basis $\mathcal{B}$. Then find vectors $v_1$ and $v_2$ such that
+$Tv_1 = e^{i\theta} v_1$ and $Tv_2 = e^{-i\theta} v_2$, and $(v_1, v_2)$ a basis.]\\
+\\
+Let's find an invertible matrix $P$ that will be our change of basis matrix.
+\begin{align*}
+	\text{Let } P &= \left(\begin{array}{cr}
+		a & b\\
+		c & d
+	\end{array}\right), P^{-1}=\left(\begin{array}{cr}
+		a &	-c \\
+		-b & d
+	\end{array}\right)\\
+	\left(\begin{array}{cr}
+		e^{i\theta} & 0\\
+		0 & e^{-i\theta} 
+	\end{array}\right) &=
+	\left(\begin{array}{cr}
+		a & b\\
+		c & d
+	\end{array}\right)
+	\left( \begin{array}{cr} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{array} \right)
+	\left(\begin{array}{cr}
+		a &	-c \\
+		-b & d
+	\end{array}\right)
+\end{align*}Since we are looking at a change of basis matrix let's take a guess and make $a=d=1$ Then,
+\begin{align*}
+	\left(\begin{array}{cr}
+		e^{i\theta} & 0\\
+		0 & e^{-i\theta} 
+	\end{array}\right) &=
+	\left(\begin{array}{cr}
+		1 & b\\
+		c & 1
+	\end{array}\right)
+	\left( \begin{array}{cr} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{array} \right)
+	\left(\begin{array}{cr}
+		1 &	-c \\
+		-b & 1
+	\end{array}\right)\\
+	&=\left( \begin{array}{cr} \cos \theta+c\sin\theta & -\sin\theta+b\cos\theta  \\ c\cos\theta+\sin\theta & -b\sin\theta+\cos \theta \end{array} \right)
+	\left(\begin{array}{cr}
+		1 &	-c \\
+		-b & 1
+	\end{array}\right)\\
+	&= \left(\begin{array}{cr}
+		(\cos\theta+c\sin\theta)-c(\sin\theta+b\cos\theta) & -(\cos\theta+c\sin\theta)-(\sin\theta+b\cos\theta) \\
+		(c\cos\theta+\sin\theta) -b(-b\sin\theta+\cos \theta)&-c(c\cos\theta+c\sin\theta)-(b\sin\theta+\cos\theta)
+	\end{array}\right) \\
+	&= \left(\begin{array}{cr}
+		\cos\theta+c\sin\theta & -(\cos\theta+c\sin\theta)-(\sin\theta+b\cos\theta) \\
+		(c\cos\theta+\sin\theta) -b(-b\sin\theta+\cos \theta)&-c^2\cos\theta+c^2\sin\theta-bc\sin\theta+c\cos\theta
+	\end{array}\right)
+\end{align*}From the first row and first column it seems pretty clear that $c=-i$.  At a guess, $b=-i$ and we get
+\begin{align*}
+\left(\begin{array}{cc}
+		e^{i\theta} & 0\\
+		0 & e^{-i\theta} 
+	\end{array}\right) &=\left(\begin{array}{cc}
+		\cos\theta-i\sin\theta & 0 \\
+		0 & \cos\theta+i\sin\theta
+	\end{array}\right)
+\end{align*}which we know to be true.  Therefore
+\begin{align*}
+	P &= \left(\begin{array}{cc}
+		1 & -i\\
+		-i & 1
+	\end{array}\right)
+\end{align*}
+
+
+
+
+\end{document}
