@@ -1,0 +1,132 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+
+\begin{document}
+
+%\homework{}{Homework VII}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#7 -- Due 10/25/23
+\end{center}
+
+\vskip 1.0 cm
+
+\noindent
+{\bf 1.} Let $V$ be an $n$-dimensional vector space over the field $F$. What is the characteristic and minimal polynomials of the zero operator on $V$ ?
+What is the characteristic and minimal polynomials of the identity operator on $V$? \\
+\begin{align*}
+	\text{Let } T &\equiv 0  \\
+	\det(xI-T) &= \det(xI) = x^n = 0
+\end{align*}0 is the only eigenvalue.  The characteristic polynomial is $x^n$ and the minimum polynomial is $x$.
+\begin{align*}
+	\text{Let } T(v) &= v, \text{ for all } v \in V \\
+	[T]_B^B &= I, \text{ for any basis }B\\
+	\det(xI-T) &= \det(xI-I) = (x-1)^n \\
+	\text{Notice } p(x) &= x-1 \implies p(T) = T-I \equiv 0
+\end{align*}1 is the only eigenvalue.  The characteristic polynomial is $(x-1)^n$ and the minimum polynomial is $x-1$.\\
+
+\vskip 0.1cm
+\noindent
+{\bf 2.}  Let $A, B \in \mathcal{M}_{n \times n}(F)$.  Prove that $AB$ and $BA$ have the same eigenvalues.\\
+\\
+If $A,B$ are both diagonalizable then let $A', B'$ be the 'diagonalized' versions of $A,B$, respectively.  Then $AB = A'B' = B'A' = BA$, hence, commutative.  Thus $\det(xI-AB) = \det(xI-BA)$.
+\begin{align*}
+	AB_{ij} &= \sum_{k=1}^n a_{kj}b_{jk}
+\end{align*}
+
+\vskip 0.1cm
+\noindent
+{\bf 3.a)}  Let $N \in \mathcal{M}_{2 \times 2}(F)$ such that $N^2 = 0$. Show that either $N = 0$ or it is similar to $\left( \begin{array}{cc} 0 & 0 \\ 1 & 0 \end{array} \right)$.\\
+{\bf b)}  Suppose $A$ is a $ 2 \times 2$ matrix with complex entries. Prove that $A$ is similar to either $\left( \begin{array}{cc} a & 0 \\ 0  & b \end{array} \right)$ or
+$\left( \begin{array}{cc} a & 0 \\ 1 & a \end{array} \right)$.\\
+
+\vskip 0.1cm
+\noindent
+{\bf 4.a)} Let $A \, = \, \left( \begin{array}{ccccr} 0 & 0 & 0 & \cdots & -a_0 \\ 1 & 0 & 0 & \cdots & -a_1 \\ 0 & 1 & 0 & \cdots & -a_2 \\ 
+\vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 1 & -a_{n-1} \end{array} \right)$. What is the characteristic polynomial of $A$? [Hint: use induction].
+Conclude that any monic polynomial is the characteristic polynomial of some matrix. \\
+{\bf b)} Show that the minimal polynomial and the characteristic polynomial of $\left( \begin{array}{ccr} 0 & 0 & -c \\ 1 & 0 & -b \\ 0 & 1 & -a \end{array} \right)$ are equal.\\
+
+
+\vskip 0.1cm
+\noindent
+{\bf 5.} Prove that any square matrix $A$ where $A^2 = A$ is diagonalizable. \\
+
+\vskip 0.1cm
+\noindent
+{\bf 6.} Let $T$ be a linear operator an a finite dimensional vector space $V$. Show that if  every subspace of $V$ is $T$-invariant, then $T$ is a scalar multiple
+ of the identity operator.\\
+
+
+\vskip 0.1cm
+\noindent
+{\bf 7.}  True or false?: if a triangular matrix is similar to a diagonal matrix then it is already a diagonal matrix.
+
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+{\bf 1.} Let $V$ be the vector space of all real valued continuous functions on the real line. Let $T$ be the operator defined by $(Tf)(x) \, = \, \int_0^x \, f(t) \, dt$. Prove 
+that $T$ does not have an eigenvalue. \\
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.} Let $D$ be the differentiation operator on $\mathcal{P}^{(n)}$. Compute the characteristic and minimal polynomials of $D$. \\
+
+\vskip 0.1cm
+\noindent 
+{\bf 3.}  Prove that a square matrix $A$ and its transpose $A^t$ have the same eigenvalues. \\
+
+\vskip 0.1cm
+\noindent
+{\bf 4. } Let $A$ be an $n\times n$ matrix with complex entries. Suppose $\lambda$ is an eigenvalue of $A$ and $v = (v_1, \ldots, v_n)$ an eigenvector of $A$. Let $k$ be an index
+where $|v_k| \geq |v_i|$ for all $i=1, \ldots, n$.  Prove that $|\lambda - a_{kk}| \leq \sum_{j \neq k} |a_{kj}|$. In other words, the eigenvalue $\lambda$ lies in a disk in the complex plane with 
+center at $a_{kk}$ and radius $\sum_{j \neq k} |a_{jk}|$. Of course, most of the time we know neither the eigenvalues nor the associated eigenvectors. Therefore, we consider the
+region $R(A)$ in the complex plane that is the union of these disks for each row $k=1, \ldots, n$. Moreover, since $A$ and $A^t$ have the same eigenvalues (see the previous exercise),
+we have $n$ disks obtained from the columns of $A$. So also consider the region $C(A)$ in the complex plane that is the union of the disks obtained from each column. The region
+$G(A) = R(A) \cap C(A)$ is known as the Gersgorin region of $A$ and contains all the eigenvalues of $A$. \\
+
+
+\vskip 0.1cm
+\noindent
+{\bf 5.} We call a matrix $A \in \mathcal{M}_{n \times n}(\C)$ {\it strictly row dominant} if $|a_{kk}| > \sum_{j \neq k} |a_{kj}|$ for every $k =1, \ldots, n$. Show that a strictly
+row dominant matrix is invertible. [Hint: do the above exercise first]. \\ 
+
+
+\end{document}

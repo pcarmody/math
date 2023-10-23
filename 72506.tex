@@ -49,13 +49,14 @@ Assignment \#6 -- Due 10/06/23
 $$ D(A)  \, = \, A_{i_1, j_1} A_{i_2, j_2} \cdots A_{i_n, j_n}.$$
 Prove that $D(A)$ is an $n$-linear function if and only if $i_1, i_2, \ldots, i_n$ are distinct. \\
 \\
-Let there be two indices $s, t$ such that $i_s=i_t$.  Then, attempting to verify that $D(A)$ is $n$-linear on the $i_s\ts{th}$ column, i.e., multpling the $i_s\ts{th}$ column by a scalar $c$ will be equivalent to $cD(A)$.  That is (WTLOG we can assume that $s<t$)
+Let there be two indices $s, t$ such that $i_s=i_t$.  Then, attempting to verify that $D(A)$ is $n$-linear on the $i_s\ts{th}$ column, i.e., multpling the $i_s\ts{th}$ column by a scalar $c$ will be equivalent to $cD(A)$.  That is (W1LOG we can assume that $s<t$)
 \begin{align*}
 	D(cA) &= A_{i_1, j_1} \cdots cA_{i_s,j_s}\cdots A_{i_t,j_t} \cdots A_{i_n, j_n} \\
 	&= A_{i_1, j_1} \cdots cA_{i_s,j_s}\cdots cA_{i_s,j_s} \cdots A_{i_n, j_n}\\
 	&= c^2D(A) \text{ which indicates that it is not $n$-linear}
 \end{align*}Further, there must be $n$ elements and there cannot be any duplicates so essentially the set of indices $i_k$ is permutation on the numbers $1,\dots,n$.
 \\
+\newpage
 \vskip 0.1cm
 \noindent
 {\bf 2.}  Consider a Vandermonde matrix
@@ -70,35 +71,51 @@ distinct. [Hint: induction on $n$]\\
 For $n=2$  Let $A_2=\begin{pmatrix}
  1 & t_1 \\
  1 & t_2
-\end{pmatrix}$ and $\det A_2 = t_2-t_1$.  Now, assuming that it is true for $n$ we want to show that it is also true for $n+1$.  Let $A$ be an $(n+1)\times(n+1)$ Vandermonde Matrix and use the right most column, $A_{n+1}$ to evaluate determinant.  Each of the reduced $n\times n$ matrices, $A(i|n)$, will have the form
+\end{pmatrix}$ and $\det A_2 = t_2-t_1$.  Now, assuming that it is true for $n$ we want to show that it is also true for $n+1$.  Let's start by taking our $(n+1)\times (n+1)$ Vandermonde matrix and using column reduction reduce all but the first column to 0.
 \begin{align*}
-	A(k|n) &= \begin{pmatrix}
-		1 & t_1 & t_1^2 & \cdots & t_1^{n-1}\\
-		1 & t_2 & t_2^2 & \cdots & t_2^{n-1}\\
-		\vdots & \vdots & \vdots &\ddots & \vdots \\
-		1 & t_{k-1} & t_{k-1}^2 & \cdots & t_{k-1}^{n-1}\\
-		1 & t_{k+1} & t_{k+1}^2 & \cdots & t_{k+1}^{n-1}\\
-		\vdots & \vdots & \vdots &\ddots & \vdots \\
-		1 & t_{n+1} & t_{n+1}^2 & \cdots & t_{n+1}^{n-1}
-	\end{pmatrix} 
-\end{align*}thus giving the determinant as 
+	A = \begin{pmatrix}
+		1 & t_1 & t_1^2 & \cdots & t_1^n\\
+		1 & t_2 & t_2^2 & \cdots & t_2^n\\
+		\vdots & \vdots & \ddots & \vdots \\
+		1 & t_{n+1} & t_{n+1}^2 & \cdots & t_{n+1}^n\\
+	\end{pmatrix} \implies
+	\begin{pmatrix}
+		1 & 0 & 0 & \cdots & 0\\
+		1 & t_2-t_1 & t_2^2-t_1^2 & \cdots & t_2^n-t_1^nt_2^{n-1}\\
+		\vdots & \vdots & \ddots & \vdots \\
+		1 & t_{n+1}-t_1 & t_{n+1}^2-t_1^2t_{n+1}^2 & \cdots & t_{n+1}^n-t_1^n t_{n+1}^{n-1}\\
+	\end{pmatrix}
+\end{align*}Expanding by the first row and factoring $t_i-t_1$ from the $i\ts{th}$ row for $i=2,\dots,n+1$ we find that
 \begin{align*}
-	\det(A) &= \sum_{k=1}^{n+1} (-1)^{i+n}t_k^n \det(A(k|n)) \\
-	&= \sum_{k=1}^{n+1} (-1)^{i+n}t_k^n \prod_{1 \leq i < j \leq n+1, i,j \ne k} (t_j - t_i) \\
-	\text{WTS } &= \prod_{1\le i<j \le n+1}(t_j-t_i)
-\end{align*}
+	\det(A) = \prod_{i=2}^{n+1}(t_i-t_1)\det\begin{pmatrix}
+	1 & t_2 & \cdots & t_2^{n-1} \\
+	1 & t_3 & \cdots & t_3^{n-1} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	1 & t_{n+1} & \cdots & t_{n+1}^{n-1}
+	\end{pmatrix}
+\end{align*}because we assume that it works for $n$ we can say that
+\begin{align*}
+	\prod_{i=2}^{n+1}(t_i-t_1)\prod_{2\le i<j\le n+1} (t_j-t_i) = \prod_{1\le i<j\le n+1}(t_j-t_i)
+\end{align*}\\
+And, if any two elements $t_i=t_j$ then $t_j-t_i=0$ thus making the entire product, i.e., determinant, zero.
 \\
+\newpage
 \vskip 0.1cm
 \noindent
 {\bf 3.a)}  A matrix $A \in \mathcal{M}_{n \times n}(F)$ is called
 skew-symmetric if $A^t = -A$. If $F = \C$ and $n$ is odd, show that
 $\det(A) = 0$ if $A$ is skew-symmetric. \\
 \\
-Remember that the $\det(A(i|j)) = \det(A(j|i))$.  Let $E_j$ be the determinant based on rows and $E_j'$ be the determinant based on columns then
+Notice that since the determinant is $n$-linear we get $\det(kA) = k^n\det(A)$.  This is evident when we factor $k$ out of each column of $A$.\\
+\\
+Suppose $\det(A) \ne 0$.  Then $A$ is invertible and $AA^{-1}=I$.  Hence 
 \begin{align*}
-	E_j(A) &= \sum_{i=1}^n (-1)^{i+j}A_{ij} D(A(i|j))\\
-	E_j'(A) &= \sum_{i=1}^n (-1)^{i+j}A_{ji} D(A(j|i))
-\end{align*}then for every pair $i,j$ there are two terms  $A_{ij}D(A(i|j))= -A_{ji}D(A(j|i))$ each being the negative of the other and canceling each other out, that is, unless $n$ is odd where there will be an additional outstanding term that is not canceled out.  \\
+	I &= AA^{-1}\\
+	1&= \det(A)\det(A^{-1})\\
+	&=\det(A^t)\det(A^{-1})\\
+	&= \det(-A)\det(A^{-1}) \\
+	&= (-1)^n\det(A)\det(A^{-1})
+\end{align*}which is only true when $n$ is even.  Otherwise, when $n$ is odd $\det(A) = 0$\\
 \\
 {\bf b)}  A matrix $A \in \mathcal{M}_{n \times n}(F)$ is called orthogonal if $A^tA = I$. Show that $\det(A) = \pm 1$ if $A$ is orthogonal. \\
 \\
@@ -114,14 +131,31 @@ Remember that the $\det(A(i|j)) = \det(A(j|i))$.  Let $E_j$ be the determinant b
 {\bf c)}  A matrix $A \in \mathcal{M}_{n \times n}(\C)$ is called unitary if $A^*A = I$. Here $A^*$ is the conjugate transpose of $A$ defined as $A_{ij}^* = \bar{A}_{ji}$ where 
 $\bar{z}$ is the conjugate of a complex number $z$.  Show that $|\det(A)| = 1$ if $A$ is unitary. \\
 \\
+Let $B=A^*A$ then the diagonal entries will be of the form $$B_{ii}= \sum_{j=1}^n A^*_{ij}A_{ji}=\sum_{j=1}^n (a_{ij}-ib_{ij})(a_{ji}+ib_{ji})=\sum_{j=1}^n (a_{ij}^2+b_{ij}^2)=1$$  This is essentially the value $A_i\cdot A_i=|A_i| ^2$ (where $A_i$ is a column vector of $A$).  Similarly, off diagonal entries are effectively $A_i\cdot A_j = 0$ which means that they're orthogonal to each other and linearly independent.  So, the magnitude of each vector $A_i$ is 1 and they are orthogonal to each other, we call this an orthonormal basis which makes up all of $A$ and hence $|\det(A)|=1$
 \\
 
+\newpage
 \vskip 0.1cm
 \noindent
 {\bf 4.} Let $A$ be an $m \times n$ matrix with entries from a field $F$. For simplicity, we assume $m \leq n$. Now for any $k \leq m$ let $I = \{i_1, i_2, \ldots, i_k\}$ where $
 1 \leq i_1 < i_2 < \cdots < i_k \leq m$ and $J = \{j_1, j_2, \ldots, j_k\}$ where $1 \leq j_1 < j_2 < \cdots < j_k \leq n$. We define $A(I,J)$ as the $k \times k$ matrix obtained from 
 $A$ by using the rows of $A$ indexed by $I$ and the columns of $A$ indexed by $J$. The determinant of $A(I,J)$ is called a $k$-minor of $A$. Show that $\rank(A)  = k$ 
-if and only if there exists a nonzero $k$-minor of $A$ and all $k+1$-minors of $A$ are zero. 
+if and only if there exists a nonzero $k$-minor of $A$ and all $k+1$-minors of $A$ are zero. \\
+\\
+Let $k=2$.  Then, given any $A(I,J)$ we'll have
+\begin{align*}
+	A(I,J) &= \begin{pmatrix}
+		a_{I_1J_1} & a_{I_1J_2} \\
+		a_{I_2J_1} & a_{I_2J_2}
+	\end{pmatrix} \\
+	\det(A(I,J)) &= a_{I_1J_1}a_{I_2J_2}-a_{I_1J_2}a_{I_2J_1}
+\end{align*}if this equals zero then
+\begin{align*}
+	a_{I_1J_1}a_{I_2J_2}-a_{I_1J_2}a_{I_2J_1} &=0 \\
+	a_{I_1J_1}\frac{a_{I_2J_2}}{a_{I_2J_1}}-a_{I_1J_2}&=0\\
+\end{align*}which implies that the two 2-dimensional vectors represented here are linearly dependent.  If this is true for ALL combinations of $I,J$ then all of the vectors represented by the columns of $A$ are linearly dependent and further, if there is just one combination where $\det(A(I,J)) \ne 0$ then the corresponding 2-dimensional vectors must be linearly independent.  This implies that rank$(A)$ is at least 2.\\
+\\
+Assuming that the rank$(A) = k$ and that there exists indices for $I,J$ such that $B=A(I,J)$ and $\det(A(I,J)) \ne 0$.  At this point, rank$(B) = k$.  Expand $B$ to include another row and another column from $A$ and call it $B'$.  The additional column will be linearly dependent on the columns of $B$.  That is, through a series of column manipulations we can fill the $k+1\ts{th}$ extra column of $B'$ with zeros.  These manipulations will have no effect on $\det(B')$ and that will be zero.  Hence, all expanded matrices will have a determinant of zero.
 
 \newpage
 \vskip 0.1cm
@@ -136,12 +170,14 @@ Let $B = \det(cI-A)$ then
 		\vdots & \vdots & \ddots & \vdots \\
 		-A_{n1} & -A_{n2} & \cdots & c-A_{nn}\\
 	\end{pmatrix}
-\end{align*}all $A_{ij}$ are constants.  Thus the only terms with variables in them will be along the diagonal.  Essentially the trace of $B$ will determine the potential values for $c$. And,
-\begin{align*}
-	\mathrm{tr}(B) &= (c-A_{11})(c-A_{22})\cdots(c-A_{nn})
-\end{align*}which will be a polynomial in $c$ of degree $n$.  The zeros of this polynomial will determine values of $c$ that bring the determinant to zero.  Hence there are at most $n$ values of $c$ where $\det(cI-A)=0$.\\
+\end{align*}all $A_{ij}$ are constants. This will generate an expression of terms each with $n$ factors which is essentially a polynomial in $c$ with degree at most $n$.  This can be represented by $(c-b_1)(c-b_2)\cdots(c-b_n)$ for some constants $b_i, i=1,\dots, n$.  Any one of these will set the entire polynomial to zero.  Since each $b_i$ need not be unique, we say "at most" $n$ values for $c$.\\
 \\
-{\bf b)} Let $A, B\in \mathcal{M}_{n \times n}(F)$ where $A$ is invertible. Show that there are at most $n$ scalars $c \in F$ such that $cA - B$ is not invertible. \\
+{\bf b)} Let $A, B\in \mathcal{M}_{n \times n}(F)$ where $A$ is invertible. Show that there are at most $n$ scalars $c \in F$ such that $cA - B$ is not invertible.
+\\
+\begin{align*}
+	A^{-1}(cA-B) = A^{-1}cA-A^{-1}B = cA^{-1}A-A^{-1}B = cI-A^{-1}B 
+\end{align*}$A^{-1}B$ is an $n\times n$ matrix.  Thus $cA-B$ will have no more than $n$ values for $c$ which make $\det(cA-B)=0$, hence non-invertible.
+ \\
 
 \newpage
 \vskip 0.1cm
@@ -193,15 +229,15 @@ Step 1: We know that
 	D_{11}(A_1') &= a_{22}D_{11}(A_2') \\
 	D_{12}(A_1') &= a_{21}D_{11}(A_2') \\
 	E_1(A_1') &= (a_{11}a_{22} - a_{12}a_{21})D_{11}(A_2')	\\
-	&= D(A_2)D_{11}(A_2') \\
-	\text{and } E_1(A) &= D(A_1)D(A_2)D_{11}(A_2')
+	&= \det(A_2)D_{11}(A_2') \\
+	\text{and } E_1(A) &= \det(A_1)\det(A_2)D_{11}(A_2')
 \end{align*}Step 3: Each of the three terms in $E_1(A_2')$ will generate a matrix with the same form as $A_1'$.  That is, each will have a $2\times 2$ matrix in the first rows and first columns followed by zeros and a matrix $A_3'$ containing the remainder of $A$.  Just as in Step 2 each of these will generate a term of the form $D_{ij}(A_2')D_{11}(A_3')$  That is, 
 \begin{align*}
-	E_1(A_2') &= D(A_3)D_{11}(A_3') \\
-	\text{and } E_1(A) &= D(A_1)D(A_2)D(A_3)D_{11}(A_3')
-\end{align*}Next Step: it should be clear now that the $4\times 4$ matrix will generate four $3 \times 3$ matrices which we apply Step 3 to each and will sum to be a determinant for $A_4$ multiplied by the determinant of the remaining matrix.  Extrapolating to $n$ we get $D_{11}(A_n) = D(A_n)$
+	E_1(A_2') &= \det(A_3)D_{11}(A_3') \\
+	\text{and } E_1(A) &= \det(A_1)\det(A_2)\det(A_3)D_{11}(A_3')
+\end{align*}Next Step: it should be clear now that the $4\times 4$ matrix will generate four $3 \times 3$ matrices which we apply Step 3 to each and will sum to be a determinant for $A_4$ multiplied by the determinant of the remaining matrix.  Extrapolating to $n$ we get $D_{11}(A_n) = \det(A_n)$
 \begin{align*}
-	E_1(A) &= D(A_1)D(A_2)\cdots D(A_n)
+	E_1(A) &= \det(A_1)\det(A_2)\cdots \det(A_n)
 \end{align*}
 
 
