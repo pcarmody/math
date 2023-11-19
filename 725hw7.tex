@@ -18,6 +18,8 @@
 
 \newcommand{\nullspace}{\mathrm{null}}
 \newcommand{\rank}{\mathrm{rank}}
+\newcommand{\trace}{\mathrm{tr}}
+\newcommand{\TWOXTWO}[4]{\PAREN{ \begin{array}{c c} #1&#2 \\ #3 & #4 \end{array} }}
 
 
 \oddsidemargin 0pt
@@ -61,38 +63,112 @@ What is the characteristic and minimal polynomials of the identity operator on $
 \noindent
 {\bf 2.}  Let $A, B \in \mathcal{M}_{n \times n}(F)$.  Prove that $AB$ and $BA$ have the same eigenvalues.\\
 \\
-If $A,B$ are both diagonalizable then let $A', B'$ be the 'diagonalized' versions of $A,B$, respectively.  Then $AB = A'B' = B'A' = BA$, hence, commutative.  Thus $\det(xI-AB) = \det(xI-BA)$.
+If $F$ is algebraically closed, then every $A,B \in \mathcal{M}_{n\times n}(F)$ is similar to upper triangular matrices, $A', B'$, respectively. Let $P$ be the change of basis matrix between $A$ and $A'$.  Notice that 
 \begin{align*}
-	AB_{ij} &= \sum_{k=1}^n a_{kj}b_{jk}
-\end{align*}
+	\det(P(xI-A)P^{-1}) &= \det(PxIP^{-1}-PAP^{-1}) \\
+		&= \det(xI-PAP^{-1})\\
+		&= \det(xI-A')
+\end{align*}thus, similar matrices have the same eigenvalues. Then, being upper triangular
+\begin{align*}
+	\det(xI-A'B') &= \sum_{k=1}^n (x-a'_{kk}b'_{kk})\\
+	 &= \sum_{k=1}^n (x-b'_{kk}a'_{kk})\\
+	 &=\det(xI-B'A')
+\end{align*} hence have the same eigenvalues.
 
+\newpage
 \vskip 0.1cm
 \noindent
 {\bf 3.a)}  Let $N \in \mathcal{M}_{2 \times 2}(F)$ such that $N^2 = 0$. Show that either $N = 0$ or it is similar to $\left( \begin{array}{cc} 0 & 0 \\ 1 & 0 \end{array} \right)$.\\
+\\
+Let $N'$ be the lower triangular matrix simliuar to $N$.  Thus, 
+\begin{align*}
+	N' &= \left( \begin{array}{cc}
+		a & 0 \\
+		b & c
+	\end{array}
+	\right)\\
+	N'^2 &= \left( \begin{array}{cc}
+		a^2 & 0 \\
+		0 & c^2
+	\end{array}
+	\right)
+\end{align*}which implies that $a=c=0$.  Thus, $b$ maybe any value.  When $b=0, N=0$, otherwise when $b=1$ all other potential values are merely scalar multiples.
+\\
 {\bf b)}  Suppose $A$ is a $ 2 \times 2$ matrix with complex entries. Prove that $A$ is similar to either $\left( \begin{array}{cc} a & 0 \\ 0  & b \end{array} \right)$ or
 $\left( \begin{array}{cc} a & 0 \\ 1 & a \end{array} \right)$.\\
+\\
+By the corollary, for every $A\in \mathcal{M}_{2\times 2}(F)$ there is a similar matrix $A'$ that is triangular.\\
+First: $A'=\left( \begin{array}{cc} a & 0 \\ 0  & b \end{array} \right)$\\
+Theorem 6 states that A is diagonalizable if and only if the eigenvalues are distinct, i.e., the multiplicity of each eigenvalue is one.  If the eigenvalues are distinct then the similar matrix must be of this form.  \\
+Then $A'=\left( \begin{array}{cc} a & 0 \\ 1 & a \end{array} \right)$.\\
+If it is not diagonalizable then it must be triangular and the multiplicity of the single eigenvalue must be greater than 1, namely 2, which means that both elements on the diagonal are the same and that one of the remaining elements is non-zero and the other is zero.\\
 
+\newpage
 \vskip 0.1cm
 \noindent
 {\bf 4.a)} Let $A \, = \, \left( \begin{array}{ccccr} 0 & 0 & 0 & \cdots & -a_0 \\ 1 & 0 & 0 & \cdots & -a_1 \\ 0 & 1 & 0 & \cdots & -a_2 \\ 
 \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 1 & -a_{n-1} \end{array} \right)$. What is the characteristic polynomial of $A$? [Hint: use induction].
 Conclude that any monic polynomial is the characteristic polynomial of some matrix. \\
+\\
+For $n=2$ we have $xI-A=\left(\begin{array}{cc}
+x&-a_0 \\\
+1&x-a_1
+\end{array} \right)$ and $\det(xI-A) = x(x-a_1)+a_0=x^2-a_1x+a_0$\\
+For $n=3$ we have $xI-A=\left(\begin{array}{ccc}
+x& 0&-a_0 \\
+1& x&-a_1 \\
+0&1 &x-a_2
+\end{array} \right)$ and $\det(xI-A) = x(x(x-a_2)-a_1)-a_0=x^3-a_2x^2+a_1x-a_0$\\
+For $n=4$ we have $xI-A=\left(\begin{array}{cccc}
+x&0& 0&-a_0 \\
+1&x& 0&-a_1 \\
+0&1&x &-a_2 \\
+0&0&0&x-a_3
+\end{array} \right)$ and 
+\begin{align*}
+	\det(xI-A) &= x\det\left(\begin{array}{ccc}
+		x&0&-a_1\\
+		1&x&-a_2\\
+		0&1&x-a_3
+\end{array}	 \right)+a_0\det\left( \begin{array}{ccc}
+	1 & x & 0\\
+	0 & 1 & x\\
+	0 & 0 & 1
+\end{array} \right) \\
+	&= x(x^3-a_3x^2+a_2x-a_1)+a_0 \\
+	&= x^4-a_3x^3+a_2x^2-a_1x+a_0
+\end{align*}In general, $$x^n-a_{n-1}x^{n-1}+a_{n-2}x^{n-2}-\cdots+(-1)^{n-1}a_1x+(-1)^na_0$$
+\\
 {\bf b)} Show that the minimal polynomial and the characteristic polynomial of $\left( \begin{array}{ccr} 0 & 0 & -c \\ 1 & 0 & -b \\ 0 & 1 & -a \end{array} \right)$ are equal.\\
+\\
+The characteristic polynomial is $x^3-ax^2+bx-c$
 
 
+\newpage
 \vskip 0.1cm
 \noindent
 {\bf 5.} Prove that any square matrix $A$ where $A^2 = A$ is diagonalizable. \\
+\\
+Let $m(x)$ be the minimum polynomial for $A$.  Clearly, the polynomial $p(x)=x^2-x$ we have $p(A)=0$ which has distinct roots and must be divisible by $m$ which implies that it is diagonalizable.
+\\
 
 \vskip 0.1cm
 \noindent
-{\bf 6.} Let $T$ be a linear operator an a finite dimensional vector space $V$. Show that if  every subspace of $V$ is $T$-invariant, then $T$ is a scalar multiple
- of the identity operator.\\
-
+{\bf 6.} Let $T$ be a linear operator an a finite dimensional vector space $V$. Show that if  every subspace of $V$ is $T$-invariant, then $T$ is a scalar multiple of the identity operator.\\
+\\
+Let $W$ be a subspace that is $T$-invariant, then 
+\begin{align*}
+	[T]&= \left(\begin{array}{cc}
+		[T_w] & 0 \\
+		0 & C
+\end{array}	 \right)
+\end{align*}for some matrix $C$ and where $T_w: W \to W$.  However, any subspace of $W$ will also be $T$-invariant as will all of $V$.  Extrapolating, downward we can see that the from of $[T]$ will degenerate to placing a single value in first row and first column.  Extrapolating upward to $n$ we can see that eventually th entire diagonal is filled making it diagonalizable and homogenous.\\
 
 \vskip 0.1cm
 \noindent
-{\bf 7.}  True or false?: if a triangular matrix is similar to a diagonal matrix then it is already a diagonal matrix.
+{\bf 7.}  True or false?: if a triangular matrix is similar to a diagonal matrix then it is already a diagonal matrix.\\
+\\
+True: Let $P$ be our change of basis matrix and $P=[p_{ij}]$ and $P^{-1}=[q_{ij}]$.  Let, $B$ be triangular then $B=[\delta_{ij}b_{ij}]$ and $A$ be similar to $B, A = PBP^{-1}$.  Then $PB = \left [\,\sum_{k=1}^n p_{ik}\delta_{kj}b_{kj}\,\right ]=\left[\,\sum_{k=1}^n p_{kk}b_{kk}\,\right ]$ which is diagonal and similarly when we apply $P^{-1}$.  Thus, $A$ is diagonal.
 
 
 

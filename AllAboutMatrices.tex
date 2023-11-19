@@ -1,0 +1,141 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\usepackage{enumitem}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\NULL}{\mathrm{null}}
+\newcommand{\IP}[1]{\left \langle\, #1 \,\right \rangle}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\MATRIX}{\mathcal{M}_{n\times n}}
+
+\begin{document}
+
+%\homework{}{Homework IX}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+All about Matrices/Transformations
+\end{center}
+
+\vskip 1.0 cm
+
+Important terms:
+\begin{enumerate}
+	\item minimum polynomial: The polynomial, $p$, with lowest degree such that $p(T)=0, \, \forall x\in F$.
+	\begin{enumerate}[label=\roman*)]
+		\item The roots of the minimum polynomial are eigenvalues.
+		\item If the roots have singular multiplicity, then the matrix is diagonalizable.
+	
+	\end{enumerate}
+		
+	\item characteristic polynomial
+	
+		$\det(xI-T)$ forms a polynomial.
+		\begin{enumerate}[label=\roman*)]
+			\item the characteristic polynomial is divided by the minimum polynomial.
+			\item the characteristic polynomial and the minimum polynomial have the same roots, i.e, the same eigenvalues
+			\item if all of the factors of the characteristic polynomial are simple (i.e., have degree one) then it is the minimum polynomial.
+		\end{enumerate}
+		
+	\item triangularizable: a matrix that has zeros below the diagonal.  All matrices over the complex numbers are triangulizable.
+	
+	\item diagonalizable: a matrix that has zeros everywhere except the diagonal.
+	\item \textbf{Inner Product Space} defines an inner product.  The primary ability of the Inner Product is define orthogonality, orthonormal basis and norm.  An inner product $\IP{}$ has the following properties.
+	\begin{enumerate}[label=\roman*)]
+		\item $\IP{u+v,w} = \IP{u,w}+\IP{v,w}$
+		\item $\IP{cv,w} = c\IP{v,w}$ and $\IP{v,dw}=\overline{d}\IP{w,w}$
+		\item $\IP{w,v} = \overline{\IP{v,w}}$
+		\item $\IP{v,v} > 0$ and $\IP{v,v}=0$ if $v=0$
+	\end{enumerate}
+	\item norm: is a function $||\cdot||: F \to \R$ with the following properties:
+	\begin{enumerate}[label=\roman*)]
+		\item $||\cdot||\ge 0$.
+		\item $||cv||=|c|\, ||v||$.
+		\item $||v+w||\le ||v||+||w||$ (triangular inequality).
+	\end{enumerate}
+	\item orthogonal: $u,v$ are orthogonal is $\IP{u,v}=0$ and $u\ne 0$ and $v \ne 0$.\\
+	if $Q$ is an \textit{orthogonal matrix} if $QQ^T=I$.
+	\item orthonomal. $u,v$ are said to be orthonormal if they both have length one.\\
+		Every finite dimensional inner product space has an orthonormal basis.  Every linear operator $T$ has an upper triangular matrix $[T]_B^B$ w.r.t. an orthonormal basis.
+	\item orthogonal compliment.  Given any set $S \subseteq V$ then $S^\perp=\{v \in V\,:\, \IP{v,w}=0,\, \forall w \in S\}$\\
+	Any subspace $W \subseteq V$, then $V=W\oplus W^\perp$.
+	\item adjoint: $T^* \in \LL(W,V) \to \IP{Tv,w}_W=\IP{v,T^*w}_V$
+	
+	Properties (analogous to complex arithmetic):
+	\begin{enumerate}[label=\roman*)]
+		\item Additive: $(S+T)^*=S^*+T^*,\, \forall S,T \in \LL(V,W)$.
+		\item Scalar Multiplication: $(\lambda T)^* = \overline{\lambda}T^*,\, \forall T \in \LL(V,W) \,\&\, \lambda \in F$
+		\item Multiplication anti-commutative: $(S \circ T)^* = T^*\circ S^*,\, \forall T \in \LL(U,V) \, \& \, S \in \LL(V,W)$
+		\item Inverse: $(T^*)^*=T, \, \forall T \in \LL(V,V)$
+		\item If $T=U_1+iU_2$ then 
+		\begin{enumerate}[label=\alph*)]
+			\item $U_1=\frac{1}{2}(T+T^*), \,U_1^*=U_1$
+			\item $U_2=\frac{1}{2}(T-T^*), \,U_2^*=U_2$
+			\item Note: $U_1,\, U_2$ "look" like real numbers.
+		\end{enumerate}
+	\end{enumerate}
+	Matrices: \\
+	Given orthonormal bases $B, B'$ on $V, W$, respectively. then $[T]_{B'}^B = A, [T^*]_B^{B'}=A^* \implies A^*= \overline{A^T}$, i.e, if $W=V$ then $T$ is an operator and $A$ is Hermitian/Symmetric.
+	\item self-adjoint: $T=T^*$
+	\begin{enumerate}[label=\alph*)]
+		\item All $\lambda \in \R$ for eigenvalues of $T$.
+		\item $\IP{Tv,v} \in \R$ even if $V$ is complex.
+		\item if $\IP{Tv,v}=0,\,\forall v \in V$ then $T=0$.
+	\end{enumerate}
+	\item normal: If $TT^*=T^*T$ then $T$ is said to be normal.  Self-adjoint implies Normal but not visa versa.
+	\begin{enumerate}[label=\alph*)]
+		\item If $Tv=\lambda v$ then $T^*v= \overline{\lambda}v$.
+		\item $T$ normal $\iff$ diagonalizable w.r.t. orthonormal basis.
+		\item $[T]_B^B$ is hermitian, i.e, $A=[T]_B^B =\overline{A^T}=A^*$
+		\item $\exists Q \to QQ^*=I$ and $A=Q^*\Lambda Q$ where $\Lambda$ is a diagonal matrix consisting of eigenvalues and $Q$ is a matrix consisting of orthonormal column eigenvectors (i.e., unitary).
+		\item iff $||Tv||=||T^*v||,\, \forall v \in V$.
+		\item eigenvectors from different eigenvalues are orthogonal to each other.
+	\end{enumerate}
+	\item unitary: a matrix made up of orthonormal column vectors.
+	\item (semi-)positive definite when $\IP{Tv,v} > 0,\,\forall v\ne 0$ semi- implies $\IP{Tv.v} \ge 0,\,\forall v\ne 0$.  The following are equivalent
+	\begin{enumerate}[label=\roman*)]
+		\item $T$ is (semi-)positive definite.
+		\item eigenvalues of $T$ are (semi-)positive.
+		\item $\exists R \in \LL(V) \implies T=RR^*$.
+	\end{enumerate}
+\end{enumerate}
+
+Important theorems:
+\begin{itemize}
+	\item Fundamental Theorem of Algebra
+	
+		Most notably that $\C$ is algebraically closed (i.e., all polynomials have a zero).
+\end{itemize}
+\end{document}

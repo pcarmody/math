@@ -1,0 +1,213 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\NULL}{\mathrm{null}}
+\newcommand{\IP}[1]{\left \langle\, #1 \,\right \rangle}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\MATRIX}{\mathcal{M}_{n\times n}}
+\newcommand{\trace}{\mathrm{tr}}
+
+\begin{document}
+
+%\homework{}{Homework IX}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#9 -- Due 11/15/23
+\end{center}
+
+\vskip 1.0 cm
+
+\noindent
+{\bf 1.} Let $T$ be an operator on a finite dimensional inner product space. \\
+{\bf a)} Show that $\mathrm{range} (T^*)$ is equal to the orthogonal complement of $\mathrm{null}(T)$. \\
+\\
+For $v \in \NULL(T)$ we have $\IP{Tv,w}=0$ for all $w \in W$.  And $\IP{Tv,w} = \IP{v,T^*w} =0$.  Which means that $T^*w$ must be orthogonal to $v$ for all $w$, hence $\range(T)$ is orthogonal to all $v \in \NULL(T)$.\\
+\\
+{\bf b)} Assume that $T$ is invertible. Prove that $T^*$ is also invertible and $(T^*)^{-1} = (T^{-1})^*$. \\
+\begin{align*}
+	I &= I^*\\
+	TT^{-1} &= (TT^{-1})^* \\
+	&= (T^{-1})^*T^*\\
+	(TT^{-1})^{-1} &= ((T^{-1})^*T^*)^{-1}\\
+	I &= (T^*)^{-1}((T^{-1})^*)^{-1} \\
+	(T^{-1})^* &= (T^*)^{-1}\\
+\end{align*}
+
+
+\vskip 0.1cm
+\noindent
+{\bf 2.} Let $V = {\mathcal M}_{n \times n}(\C)$  with the inner product $\langle A, \, B \rangle = \mathrm{tr}(AB^*)$. Let $P$ be a fixed invertible matrix in $V$, and let $T_P$ be the linear operator on $V$ defined by $T_P(A) = P^{-1} A P$. Find the adjoint of $T_P$. \\
+\begin{align*}
+	\IP{T_P(A),A} &= \trace(P^{-1}APA^*) = \trace(AP^{-1}A^*P) = \IP{A, T_P(A^*)}\\
+	T_P^*{A} &= T_P(A^*)
+\end{align*}We can commute $P$ and $P^{-1}$ because they are invertible.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 3.}  Let $V$ be a finite dimensional inner product space and let $W$ be a subspace of $V$. Then $V = W \oplus W^\perp$ where $W^\perp$ is the orthogonal complement 
+of $W$ in $V$. In this case every vector $ v \in V$ can be written as $v = w+u$ where $w \in W$ and $u \in W^\perp$ are unique vectors. We define a linear operator $U \, : \, V \mapsto V$
+by $U(v) = w-u$ where $v = w + u$ is the unique decomposition. \\ \\
+{\bf a)} Prove that $U$ is both self-adjoint and unitary. [Hint: diagonalize $U$].\\
+\\
+Since $V$ is a finite dimensional inner product space, there exists an orthonormal basis $B$.  Also, $W$ is $U$-invariant, i.e., $x \in W, \, \IP{U(v),x} = \IP{w-u,x} = \IP{w,x}-\IP{u,x}=\IP{w,x}$.  Then
+\begin{align*}
+	[U]_B^B &= \left( \begin{array}{cc}
+		U|_W & 0 \\
+		0 & U|_{W^\perp}
+\end{array}	 \right)
+\end{align*}We can see that $||U|_W(w)||=||w||$ which means that $U|_W$ is unitary and $||U|_{W^\perp}(u)||=||u||$ which means that $U|_{W^\perp}$ is also unitary, thus $[U]_B^B$ is also unitary.  Let $x=a+b$ where $a \in W$ and $b \in W^\perp$. Then,
+\begin{align*}
+	\IP{U(v),x} &= \IP{w-u,x} \\
+	&=\IP{w,x}-\IP{u,x}\\
+	&=\IP{w,a}+\IP{w,b}-\IP{u,a}-\IP{u,b}\\
+	\text{since } \IP{u,a} &= \IP{w,b} = 0\\
+	\IP{U(v),x}&=\IP{w,a}-\IP{w,b}+\IP{u,a}-\IP{u,b}\\
+	&= \IP{w+u,a-b}\\
+	&= \IP{v, U(x)}
+\end{align*} hence self-adjoint.
+\\
+
+{\bf b)} Prove that, conversely, if an operator on $V$ is both self-adjoint and unitary, it has to be as $U$ induced by some subspace $W$. [Hint: what are the eigenvalues of this operator? ]. \\
+\\
+Let $\lambda$ be an eigenvalue for $U$ and $x$ be the  eigenvector associated with $\lambda$.  $U(x) = \lambda x$.  Since $U$ is unitary we have 
+\begin{align*}
+	U(x)|| &= ||x|| \\
+	&= ||\lambda x||\\
+	&= |\lambda|\, ||x||
+\end{align*}since $\lambda \in \R$, $\lambda$ is 1 or -1.
+ Since, $U$ is self-adjoint, the eigenvectors of distinct eigenvalues are orthogonal to each other.  Thus, the eigenspace for $\lambda_1=1$ will be orthogonal to the eigenspace for $\lambda_{-1} = -1$.  Let $W$ be the eigenspace for $\lambda_1$ then $W^\perp$ will be the eigenspace for $\lambda_{-1}$.  Thus, we must have $U|_W(v)=v$ and $U|_{W^\perp}(v)=-v$ and $U=U_W\oplus U_{W^\perp}$ or $U(v)=w-u$ when $w\in W$ and $u\in W^\perp$.
+ 
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 4.} Prove that $T$ is normal if and only if $T = U_1 + i U_2$ where $U_1$ and $U_2$ are self-adjoint which commute.  \\
+\\Suppose there exists $V_1, V_2$ such that $T=V_1+iV_2$ then 
+\begin{align*}
+	T+T &= (U_1 + i U_2)-(V_1+iV_2) \\
+	&= (U_1-V_1) +i(U_2-V_2)\\
+	U_1&= V_1 \text{ and } U_2=V_2
+\end{align*}since $T$ is normal, $U_1$ and $U_2$ are self-adjoint.  And,
+\begin{align*}
+	U_1&=\frac{1}{2}(T+T^*), \,U_1^*=U_1\\
+	U_2&=\frac{1}{2}(T-T^*), \,U_2^*=U_2\\
+	U_1U_2 &= \left(\frac{1}{2}(T+T^*)\right)\left( \frac{1}{2}(T-T^*)\right)\\
+	T &\text{ is normal and commutes with } T^*\\
+	&= \left( \frac{1}{2}(T-T^*)\right)\left(\frac{1}{2}(T+T^*)\right)\\
+	&= U_2U_1\\
+\end{align*}
+
+\vskip 0.1cm
+\noindent
+{\bf 5.}  Let $T$ be a normal operator on a finite dimensional complex inner product space. Show that there exists a polynomial $f$ with complex 
+coefficients such that $T^* = f(T)$. [Hint: diagonalize $T$].\\
+\\
+Since $T$ is normal, $T=Q^*\Lambda Q$ where $Q$ is orthonormal and made up of column vectors of eigenvectors and $\Lambda$ is diagonal filled with eigenvalues of $T$.  Then we can see that for any term $f(x)=x^n$ then $f(T)=T^n = (Q^*\Lambda Q)(Q^*\Lambda Q)\cdots(Q^*\Lambda Q)$, $n$ times.  Since $QQ^*=I$ we can see that $T^n=Q^*\Lambda ^n Q$.  All polynomials are made up of these terms, and we can factor out $Q, Q^*$ from each we have $f(T)=Q^*f(\Lambda)Q$ for any polynomials $f$. The adjoint, $T^*=(Q^*\Lambda Q)^* = Q^*\Lambda^* Q)$.  Thus, we are now looking for a solution to $\Lambda^*=f(\Lambda)$.  Both $\Lambda$ and $\Lambda^*$ are diagonal and filled with the same eigenvalues.  It sems life $f(x)=x$.\\
+
+\vskip 0.1cm 
+\noindent 
+{\bf 6.} Suppose $T$ is a self-adjoint operator on a complex inner product space $V$ of finite dimension. Let $\lambda \in \C$, and $\epsilon > 0$. Suppose
+there exists $v \in V$ such that $|| v || = 1$ and $||Tv - \lambda v|| < \epsilon$. Prove that $T$ has an eigenvalue $\mu$ such that $|\lambda - \mu| < \epsilon$. \\
+\begin{align*}
+	T &= Q^*\Lambda Q\\
+	||Tv-\lambda v||&= ||Q^*\Lambda Q v - \lambda v||\\
+	&= ||Q^*\Lambda Q  - \lambda ||\, |v|\\
+	&= ||Q^*\Lambda Q  - \lambda ||\\
+	&< \epsilon
+\end{align*}there must exist an eigenvalue $\mu$ such that $|\mu - \lambda| < \epsilon|$
+
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+These extra questions will help you go through the proof of the following theorem. \\
+\begin{theorem} Let $A \in \mathcal{M}_{n \times n}(\C)$ be an invertible matrix. Then there exists a unique lower triangular matrix $L$ with positive diagonal elements such that $LA$ is unitary.
+\end{theorem}
+
+\vskip 0.2cm
+\noindent
+{\bf 1.} Let $\alpha_1, \ldots, \alpha_n$ be the rows of $A$ and let $\beta_1, \ldots, \beta_n$ be an orthogonal basis obtained by the Gram-Schmidt procedure. Recall that
+this means $\mathrm{span}(\alpha_1, \ldots, \alpha_j) = \mathrm{span}(\beta_1, \ldots, \beta_j)$ for each $j=1, \ldots, n$. Show that $\beta_j = \alpha_j - \sum_{i < j} c_{ij} \alpha_i$
+for each $j=1, \ldots, n$ and some scalars $c_{ij}$. [Hint: how does Gram-Schmidt work? Review.] \\
+
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.}  Let $U$ be the matrix whose $i$th row is $\beta_i/ ||\beta_i||$. Clearly, $U$ is unitary. Construct the matrix $L$ as in the statement of the theorem such that $LA = U$. \\
+
+\vskip 0.1cm
+\noindent 
+{\bf 3.}  Now you will prove the uniqueness of $L$. Suppose $L_1$ and $L_2$ are two lower triangular matrices with positive diagonals such that $L_1A$ and $L_2A$ are both 
+unitary. First prove that $(L_1A)(L_2A)^{-1} = L_1L_2^{-1}$ is lower triangular and unitary. Conclude that $(L_1L_2^{-1})^* = (L_1L_2^{-1})^{-1}$  and hence
+$L_1L_2^{-1}$ is simultaneouly upper triangular and lower triangular.   Hence $L_1L_2^{-1}$ is a diagonal matrix with positive diagonal entries. Finally, using the fact
+$L_1L_2^{-1}$ is also unitary and hence has  eigenvalues with absolute value one, argue that $L_1L_2^{-1} = I$. \\ 
+
+\vskip 0.1cm
+\noindent
+{\bf 4.}  As a corollary, prove that for every complex invertible matrix $A$ there exists a unique lower triangular matrix $N$ with positive diagonals and a unique unitary matrix $U$
+such that $A = NU$. \\
+
+
+
+
+
+%\vskip 0.1cm
+%\noindent
+%{\bf 5.} 
+
+
+%\vskip 0.1cm
+%\noindent
+%{\bf 6.} We will consider the vector space $ V = \mathcal{P}^{(n)}(\R)$ of polynomials at most degree $n$. Let 
+%$$[x]_k := x(x-1)(x-2) \cdots (x-k+1)$$
+%for $k \geq 1$ and $[x]_0 = 1$. \\
+%{\bf a)} Show that $([x]_0, [x]_1, [x]_2, \ldots, [x]_n)$ is a basis of $V$. [Hint: argue that   
+%$[x]_k = x^k + a(k,k-1) x^{k-1} + \cdots + a(k,1) x + a(k,0)$ where $a(k,j)$ are integers. Construct the $(n+1) \times (n+1)$ matrix
+%which expresses each $[x]_k$ in the basis $(1,x,x^2, \ldots, x^n)$. Show that this matrix is invertible].\\
+%{\bf b)} Now prove that $x^k = \sum_{j=0}^k S(k,j) [x]_j$ where $S(k,j)$ are integers. \\
+%{\bf c)} Show that $S(k,0) = 0 $ for $k \geq 1$. Also show that $S(k,k) = 1$ for $k\geq 0 $. \\
+%{\bf d)} Prove that if $ 1 \leq j \leq k-1$ then
+%$$ S(k,j) = j S(k-1, j) + S(k-1, j-1).$$ 
+%
+%\vskip 0.1cm
+%\noindent
+%The above exercise shows that $S(k,j)$ are nonnegative integers. They are called {\it Stirling numbers of the second kind}. 
+\end{document}

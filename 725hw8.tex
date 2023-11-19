@@ -1,0 +1,232 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+
+
+\begin{document}
+
+%\homework{}{Homework VIII}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#8 -- Due 11/3/23
+\end{center}
+
+\vskip 1.0 cm
+
+\newcommand{\IP}[1]{\left\langle #1 \,\right\rangle}
+\newcommand{\trace}{\mathrm{tr}}
+\noindent
+{\bf 1.a)} Let $V$ be a vector space with an inner product $\langle \, , \, \rangle$ on it. Prove that if $\langle v, w \rangle = 0$ for all $w \in V$ then $v = 0$. \\
+\\
+$\IP{v+u,v} = \IP{v,v}+\IP{u,v}=0$ which implies that $\IP{v,v}=0$ which implies that $v=0$\\
+\\
+{\bf b)} Let $V$ be a vector space with an inner product $\langle \, , \, \rangle$ on it. Prove that if $\langle v, w \rangle = \langle u, w \rangle$ for all $w \in V$ then $v = u$. \\
+\\
+$\IP{u+v,w} = \IP{u,w}+\IP{v,w} = 2\IP{u,w}=\IP{2u,w}$ which implies that $u+v=2u$ and $v=u$\\
+\\
+{\bf c)} Now let $V$ be a finite dimensional inner product space and let $\mathcal{B} = \{ w_1, \ldots, w_n \}$ be a basis of $V$. Prove that for given scalars 
+$c_1, \ldots, c_n$ there exists a unique $v \in V$ such that $\langle v , w_i \rangle = c_i$ for $i=1, \ldots, n$.  \\
+\\
+Suppose that there are two such vectors, $u,v$ such that $\IP{u,w_i}=\IP{v,w_i} =c_i$ for all $i=1,\dots,n$.  Then $\IP{u,w_i}-\IP{v,w_i}=\IP{u-v,w_i}=0$ for all $i=1,\dots,n$. $w_i\ne 0$ for all $i=1,\dots,n$ because each of these are basis vectors.  Therefore, $u-v=0$ and $u=v$.\\
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 2.}  Let $V = \mathcal{P}^{(n)}(\R)$. Show that
+$$ \langle a_0 + a_1x+ \cdots + a_nx^n \, , \, b_0 + b_1x + \cdots + b_n x^n \rangle  \, = \, \sum_{i,j} \frac{a_ib_j}{i+j+1}$$
+is an inner product on $V$. [Hint: Consider $\int_0^1  \, f(t) g(t) \, dt$]. \\
+\\
+\begin{align*}
+	\left( \sum_{i=0}^n a_ix^i \right) \left(\sum_{j=0}^n b_jx^j \right) &= \sum_{i=0}^n \left ( a_ix^i\left(\sum_{j=0}^n b_jx^j \right) \right)\\
+	&= \sum_{i,j=0}^n a_ib_jx^{i+j}
+\end{align*}If we use the inner product as defined as 
+\begin{align*}
+	\IP{,} &= \int_0^1  \, f(t) g(t) \, dt\\
+	\langle a_0 + a_1x+ \cdots + a_nx^n \, , \, b_0 + b_1x + \cdots + b_n x^n \rangle &= \int_0^1 \sum_{i,j=0}^n a_ib_jt^{i+j} dt \\
+	&= \left . \sum_{i,j=0}^n \frac{a_ib_j}{i+j+1}t^{i+j+1} \right |_0^1\\
+	&= \sum_{i,j=0}^n \frac{a_ib_j}{i+j+1}a_ib_j
+\end{align*}
+\\
+
+\newpage 
+\vskip 0.1cm
+\noindent
+{\bf 3.a)}  Let $ V = \mathcal{P}^{(3)}(\R)$ with the inner product $\langle f \, , \, g \rangle = \int_{-1}^1 \, f(t)g(t) \, dt$. Apply the Gram-Schmidt process to the basis $\{1, x, x^2, x^3 \}$
+to obtain the first few {\it Legendre polynomials}. \\
+\\
+Let $\{w_1, w_2, w_3, w_4\} = \{1, x, x^2, x^3 \}$ then 
+\begin{align*}
+	u_j &= w_j-\IP{w_j,v_1}v_2-\cdots-\IP{w_j,v_{j-1}} & v_j = \frac{u_j}{||u_j||}\\
+	\\
+	u_1 &= 1 & v_1 = \frac{u_1}{||u_1||}= 1\\
+	u_2 &= w_2 - \IP{w_2,v_1}v_1 \\
+	&= x - \IP{x,1} \\
+	&= x - \int_{-1}^1 x \,dx \\
+	&= x & v_2 = \frac{u_2}{||u_2||} = x\\
+	u_3 &= w_3 - \IP{w_3,v_1}v_1 - \IP{w_3,v_2}v_2\\
+	&= x^2 - \int_{-1}^1 x^2 dx - \int_{-1}^1 x^2\cdot x \, dx \\
+	&= x^2 - \frac{1}{3}x^3|_{-1}^1-\frac{1}{4}x^4|_{-1}^1\\
+	&= x^2 - \frac{2}{3},\, ||u_3|| = \sqrt{1+2^2/3^2} = 1/3 & v_3 = \frac{u_3}{||u_3||} = 3(x^2-1)\\
+	u_4 &= w_4 - \IP{w_4,v_1}v_1 - \IP{w_4,v_2}v_2 - \IP{w_4,v_3}v_3\\
+	&= x^3 - \int_{-1}^1 x^3\,dx - \int_{-1}^1 x^3\cdot x\,dx - \int_{-1}^1 x^3\left( 3(x^2-1) \right) \,dx \\
+	&= x^3 - \frac{2}{5} - \int_{-1}^1 (3x^5-3x^3)\, dx \\
+	&= x^3 -\frac{2}{5}, \, ||u_4|| = \sqrt{1+\frac{4}{25}}=\frac{\sqrt{29}}{5} & v_4 = \frac{u_4}{||u_4||} = \frac{5(x^3-2)}{\sqrt{29}}
+\end{align*}
+\\
+\newpage
+{\bf b)} Now use the inner product $\int_{-\infty}^{+\infty} \, f(t) g(t) e^{-t^2} \, dt$ on $V$  and apply the Gram-Schmidt process to the  basis $\{1, x, x^2, x^3 \}$ to obtain the first few {\it Hermite polynomials}. \\
+\\
+\begin{align*}
+	u_1 &= w_1 & v_1 = \frac{u_1}{||u_1|} = 1 \\
+	u_2 &= w_2 - \IP{w_2, v_1}v_1 \\
+	&= x - \int_{-\infty}^{+\infty} \, t e^{-t^2} \, dt \\
+	&= x + \int_{\infty}^\infty \frac{1}{2}e^{v'} \, dv', \,\text{where } v' = -t^2, \, dv' = 2t\,dt \\
+	&= x - \frac{1}{2}(e^{-t^2})|_{-\infty}^\infty & v_2 = \frac{u_2}{||u_2||} = x\\
+	u_3 &= w_3 - \IP{w_3,v_1}v_1 - \IP{w_3,v_2}v_2\\
+	&= x^2-\IP{x^2,1}-\IP{x^2,x}x\\
+	&= x^2 - \int_{-\infty}^{+\infty} \, t^2 e^{-t^2} \, dt - \left(\int_{-\infty}^{+\infty} \, t^2 \cdot t \, e^{-t^2} \, dt\right)
+\end{align*}
+\\
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 4.} Let $\{v_1, \ldots, v_n\}$ be an orthonormal set of vectors in an inner product space $V$. Prove that  $\sum_{i=1}^n |\langle w, v_i\rangle|^2 \leq || w||^2$ 
+for any $w \in V$, and the equality holds if and only if $  w = \sum_{i=1}^n \langle w, v_i \rangle v_i$. \\
+\\
+\begin{align*}
+	|| w || &= \IP{w,w}\\
+	|| w||^2 &= \left(\sum_{i=1}^n \IP{w,v_i}\right)^2\\
+	&= \sum_{i=1}^n \IP{w,v_i}^2 + \sum_{i=1}^n\sum_{j=1}^n \IP{w,v_i}\IP{w,v_j}\\
+	&\geq \sum_{i=1}^n \IP{w,v_i}^2
+\end{align*}
+\\
+
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 5.} Let $V = \mathcal{M}_{n \times n}(\C)$ with an inner product defined by $\left \langle A, B \,\right \rangle \, :=  \, \mathrm{tr}(AB^*)$. Determine the orthogonal complement
+of the subspace of diagonal matrices in $V$. \\
+\\
+Let $D$ be the subspace of diagonal matrices.  Then, $D^\perp = \{A \in \mathcal{M}_{n\times n}(\C): \IP{A,B} = 0,$ for all $B \in D\}$.  That is 
+\begin{align*}
+	\IP{A,B} &= \trace(AB^*) \\
+	&= \trace\left([A_{ij}\overline{B_{ji}}]\right) \\
+	&= \sum_{i=1}^n A_{ii}\overline{B_{ii}} \\
+	&= 0
+\end{align*}since $B \in D$ we must allow that $\overline{B_{ii}} \ne 0$ therefore each $A_{ii}=0$.  Thus, $D^\perp$ must be the set of matrices with zeros along the diagonal.
+\\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 6.} Let $W$ be a subspace of a finite dimensional inner product space $V$, and let $E$ be the orthogonal projection operator onto $W$. Prove that
+$\langle Ev, w \rangle = \langle v, Ew\rangle$ for all $v,w \in V$. \\
+\\
+Let $B=\{ b_1,\dots, b_n\}$ be the orthonormal basis such that $[E]_B^B$ is upper triangular and $v=\{v_1, \dots, v_n\}=\sum_{i=1}^n v_ib_i, w=\{w_1, \dots, w_n\}=\sum_{i=1}^n w_ib_i $ under this basis.  When $Ev = [E]_B^B v = \sum_{i=1}^n \sum_{j=i}^n E_{ij}v_jb_j$. Then
+\begin{align*}
+	\IP{Ev,w} &= \IP{\sum_{i=1}^n \sum_{j=i}^n E_{ij}v_jb_j, w}\\
+	&= \sum_{i=1}^n \IP{\sum_{j=i}^n E_{ij}v_jb_j, w} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}v_j\IP{b_j, w} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}v_j\IP{b_j, \sum_{k=1}^n w_kb_k} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}v_j\sum_{k=1}^n w_k\IP{b_j, b_k} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}v_j\sum_{k=1}^n w_k\delta_{jk} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}v_j w_j
+\end{align*}in a similar manner
+\begin{align*}
+	\IP{v, Ew} &= \IP{v, \sum_{i=1}^n \sum_{j=i}^n E_{ij}w_jb_j} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}w_j\IP{v, b_j} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}w_j\IP{\sum_{k=1}^n v_kb_k, b_j} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}w_j\sum_{k=1}^n v_k\IP{b_k, b_j} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}w_j\sum_{k=1}^n v_k\delta_{jk} \\
+	&= \sum_{i=1}^n \sum_{j=i}^n E_{ij}w_j v_j
+\end{align*}
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 7.}  Let $\mathcal{B} = \{v_1, \ldots, v_n \}$ be an orthonormal basis in an inner product space $V$, and let $T$ be a linear operator with $A = [T]_{\mathcal{B}}^{\mathcal{B}}$. 
+Prove that $A_{ij} = \langle Tv_j, v_i \rangle$. \\
+\\
+Given any $x \in V, x = \sum_{i=1}^n \IP{x,v_i}v_i$.  Then, 
+\begin{align*}
+	T(x) &= T(\sum_{i=1}^n \IP{x,v_i}v_i) \\
+	&= \sum_{i=1}^n T(\IP{x,v_i}v_i) \\
+	&= \sum_{i=1}^n \IP{\sum_{j=1}^n T(x_jv_j),v_i}v_i \\
+	&= \sum_{i=1}^n \sum_{j=1}^n x_j \IP{T(x_j),v_i} v_i\\
+	T(x)_i &= \sum_{j=1}^n x_j \IP{T(x_j),v_i} v_i\\
+	T(x) &= Ax\\
+	&= \left [\sum_{j=1}^n A_{ij}x_j \right ] \\
+	T(x)_i &= \sum_{j=1}^n A_{ij}x_i  \\
+	A_{ij} &= \IP{T(x_j),v_i}
+\end{align*}
+
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+{\bf 1.} Let $V$ and $W$ be two inner product spaces (with their own inner products) and let $ T \, : \, V \mapsto W$ be a linear transformation. We will attempt to measure the {\it size}
+of $T$ as follows. We let  the {\it norm} of $T$ to be $||T|| \, := \, \sup_{||x|| = 1} ||Tx||$. Prove the following about the norm of $T$:\\
+{\bf a)} $||cT || = |c| ||T||$ for any scalar $c$,\\
+{\bf b)} if $S$ is another linear transformation then $||S + T || \leq ||S|| + ||T||$.\\
+
+
+\vskip 0.1cm
+\noindent 
+{\bf 2.}  Let $T$ be as in the question above. Show the following: \\
+{\bf a)} $||Tx|| \leq ||T|| ||x||$ for any $x \in V$.\\
+{\bf b)} Let $S$ be yet another inner product space and $U \, : \, W \mapsto S$ be a linear transformation. Then $|| S \circ T || \leq ||S|| ||T||$. \\
+
+\vskip 0.1cm
+\noindent 
+{\bf 3.}  Let $V$ be a finite-dimensional inner product space and $T$ a linear operator on $V$ that is invertible. Let $S$ be another linear operator on $V$ that is ``close'' to $T$ 
+in the following sense: $||T - S || \leq 1/||T^{-1}||$. Prove that $S$ is also invertible. [Hint: let $U = T-S$ and factor $S = T \circ (I - T^{-1} \circ U)$. Argue that you just have to show
+that $(I - T^{-1} \circ U)$ is invertible, hence it is enough to prove that the nullspace of $(I-T^{-1} \circ U)$ is trivial.  Prove this by contradiction. ]\\
+
+\vskip 0.1cm
+\noindent
+{\bf 4.)}  Let $V$ be a finite-dimensional inner product space and $T$ a linear operator on $V$. First of all, note that we can replace $\sup$ with $\max$ in the definition of the norm
+of $T$:  $|| T || \, := \, \max_{||x || = 1} ||Tx||$. \\
+{\bf a)} Now let $\lambda$ be an eigenvalue of $T$. Show that $ ||T || \geq |\lambda|$. \\
+{\bf b)} We define $r(T) = \max_i |\lambda_i|$ to be the {\it spectral radius} of $T$ where $\lambda_1, \ldots, \lambda_k$ are the distinct eigenvalues of $T$. Conclude that
+$||T|| \geq r(T)$. \\
+{\bf c)} Also show that $||T^j||^{1/j} \geq r(T)$ for any integer $j \geq 1$. One can show (though it requires some work) that $r(T) \, = \, \lim_{j \mapsto \infty} ||T^j||^{1/j}$.\\ 
+
+
+
+\end{document}
