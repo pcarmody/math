@@ -1,0 +1,223 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsthm, amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{blkarray}
+
+\theoremstyle{definition}  % Heading is bold, text is roman
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\ojo}[1]{{\sffamily\bfseries\boldmath[#1]}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\nullspace}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 10pt
+\topmargin -10pt
+\headsep 10pt
+\textheight 8.4in
+\textwidth 7in
+
+%\input{../header}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\NULL}{\mathrm{null}}
+\newcommand{\IP}[1]{\left \langle\, #1 \,\right \rangle}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\MATRIX}{\mathcal{M}_{n\times n}}
+\newcommand{\trace}{\mathrm{tr}}
+
+
+\begin{document}
+
+%\homework{}{Homework X}
+\begin{center}
+\Large{Math 725 -- Advanced Linear Algebra}\\
+\large{Paul Carmody}\\
+Assignment \#10 -- Due 12/1/23
+\end{center}
+
+\vskip 1.0 cm
+\noindent
+{\bf 1.} Let $T$ be a normal operator on a finite dimensional inner product space. Prove that $T$ is self-adjoint, positive definite, or unitary if the eigenvalues  of $T$ are 
+real, positive, or absolute value one, respectively. \\
+\\
+\textbf{Self-adjoint implies real eigenvalues.}\\
+\indent $T=T^*$ thus $\IP{Tv,v} = \IP{v,T^*v} = \IP{\overline{Tv}, v}$ which implies that $Tv=\overline{Tv}$ for all $v \in V$ and hence $Tv \in \R$.  Given any eigenvalue $\lambda$ and eigvenvector $v$, $Tv=\lambda v=\overline{\lambda v}$ which implies that $\lambda = \overline{\lambda}$.  Hence $\lambda \in \R$.\\
+\\
+\textbf{Positive-definite implies positive eigenvalues.}\\
+\indent Positive-definite means that $\IP{Tv,v}>0$ for all $v \in V$.  Given an eigenvalue $\lambda$ and associated eigenvector $v$ we have $\IP{Tv,v}=\IP{\lambda v,v} = \lambda \IP{v,v} > 0$.  Since $\IP{v,v}> 0$ for all $v \in V, \, \lambda > 0.$\\
+\\
+\textbf{Unitary implies eigenvalues are one.}\\
+\indent $T$ is unitary means that there exists an orthornormal basis such that the matrix $A$ associated with $T$ has the property that $A^*A = I$.  The eigenvalues for $A^*$ and the eigenvalues for $A$ are the same any eigenvector $v$ with eigenvalue $\lambda$ will allow the following equation: $v^Tv=v^TIv=v^TA^*Av= (\lambda v^T)(\lambda v)=\lambda^2 v^T v$ which implies that $\lambda^2=1$ and, being real, it must be one.
+\\
+
+\vskip 0.1cm
+\noindent
+{\bf 2.} Let $T$ be an operator on a finite dimensional inner product space that is both positive definite and unitary. Prove that $T= I$. \\
+\\
+$T$ is positive definite implies that $T$ is diagonalizable.  $T$ is unitary implies that its eigenvalue are 1.  Hence, a diagonal matrix with 1 on the diagonal is the identity.
+%Since $T$ is unitary then $\IP{v,v} = \IP{Tv,Tv} = (Tv)^TTv= v^TT^*Tv=v^Tv$ which implies that $T^*T=I$
+\\
+
+
+\vskip 0.1cm
+\noindent
+{\bf 3.} Let $A$ be an $n \times n$ real symmetric matrix with eigenvalues $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n$. Show that
+$$ \lambda_1 = \max \{ x^T A x \, : \, ||x||_2 = 1\} \quad \mbox{and} \quad \lambda_n = \min \{ x^T A x \, : \, ||x||_2 = 1\}.$$
+Prove that the maximum value is achieved when $x = \pm u_1$ where $u_1$ is a unit eigenvector associated to $\lambda_1$ and the minimum value
+is achieved when $x=\pm u_n$ where $u_n$ is a unit eigenvector associated to $\lambda_n$. \\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 4.} The Hilbert matrix $H_{n+1}$ is an $(n+1) \times (n+1)$ matrix whose $(i,j)$ entry is $\frac{1}{i+j-1}$. \\
+\\
+{\bf a)} Write down $H_4$.
+\begin{align*}
+	\left ( \begin{array}{cccc}
+		1 & \frac{1}{2} & \frac{1}{3} & \frac{1}{4}\\
+		\frac{1}{2} & \frac{1}{3} & \frac{1}{4} & \frac{1}{5}\\
+		\frac{1}{3} & \frac{1}{4} & \frac{1}{5} & \frac{1}{6}\\
+		\frac{1}{4} & \frac{1}{5} & \frac{1}{6} & \frac{1}{7}\\
+\end{array}	 \right )
+\end{align*}
+\\
+{\bf b)} Prove that if $v_1, \ldots, v_n$ are linearly independent vectors in a real inner product space $V$, then the matrix $K$ whose $(i,j)$ entry is $\langle v_i, v_j \rangle$ is a symmetric positive definite matrix. Also prove that such a matrix is invertible. \\
+\\
+Since all $v_i,v_j \in \R$ then $\IP{v_i,v_j}= \IP{v_j,v_i}$.  Hence K is symmetric.  All entries for $K$ are greater than zero.  Thus, $Ku$ will only increase the elements in $u$ and $\IP{Ku,u}>0$.  $K$ is both positive and symmetric.\\
+\\
+{\bf c)} Show that $H_{n+1}$ is a symmetric positive definite matrix. [Hint: Consider $V = \mathcal{P}^{(n)}$ and the inner product $\langle f, \, g\rangle = \int_0^1 f(t)g(t) dt$.] \\
+\\
+Allowing for the standard orthonormal basis for $\PP^{(n)},\, 1,x,x^2, \dots, x^n$.  We can see that defining the inner product as $\langle f, \, g\rangle = \int_0^1 f(t)g(t) dt$ we'll get a transformation matrix taking the inner product of corresponding basis vectors
+\begin{align*}
+\begin{blockarray}{cccccc}
+ & 1 & x & x^2 & \cdots & x^n  \\
+\begin{block}{c(ccccc)}
+  1 & 1 & 1/2 & 1/3 & \cdots & 1/n  \\
+  x & 1/2 & 1/3 & 1/4 & \cdots & 1/(n+1)  \\
+  x^2 & 1/3 & 1/4 & 1/5 & \cdots & 1/(n+2)  \\
+  \vdots & \vdots & \vdots & \vdots & \ddots & \vdots  \\
+  x^n & 1/n & 1/(n+1) & 1/(n+2) & \cdots & 1/(2n-1)  \\
+\end{block}
+\end{blockarray}
+\end{align*}\\
+And since $ \int_0^1 f(t)g(t) dt>0$ for all $f,g \in \PP^{(n)}$ and $f$ and $g$ commutes we see that it is symmetric as well.\\
+\\
+{\bf d)} Conclude the nontrivial fact that $H_{n+1}$ is invertible. \\
+
+\newpage
+\vskip 0.1cm
+\noindent
+{\bf 5.} Let $\mathcal{S}_n$ be the vector spaceof all $n \times n$ symmetric real matrices and let $PSD_n \subset \mathcal{S}_n$ be the set of all $n \times n$ positive semidefinite matrices.
+Prove that $PSD_n$ is a convex cone in $\mathcal{S}_n$, i.e., show that
+\begin{itemize}
+\item[i)] if $A \in PSD_n$ and $\lambda \geq 0$ then $\lambda A \in PSD_n$, and \\
+
+$A \in PSD_n$ then $\IP{Av,v} > 0$ for all $v\in V$.  then $\IP{\lambda Av,v} = \lambda \IP{Av,v}$ which must be non-negative when $\lambda$ is non-negative.\\
+
+\item[ii)] If $A, B \in PSD_n$ and $\lambda, \mu \geq 0$ with $\lambda + \mu = 1$ then $\lambda A + \mu B \in PSD_n$. \\
+
+$\IP{(\lambda A + \mu B)v,v} = \IP{\lambda A v + \mu B v, v} = \IP{\lambda A v,v} + \IP{\mu B v,v} = \lambda \IP{Av,v} + \mu \IP{Bv,v}$.  All terms are non-negative so the whole expression must be non-negative.
+\end{itemize}
+
+\vskip 0.2cm
+\noindent
+{\bf 6.} If $A$ and $B$ are two real $n \times n$ symmetric matrices, we write $A \succeq B$ if $A-B$ is positive semidefinite.  Prove
+\begin{itemize}
+\item[i)] Additivity:  if $A_1 \succeq B_1$ and $A_2 \succeq B_2$ then $A_1 + A_2 \succeq B_1  + B_2$, 
+
+We know from 5 ii) above that 
+\begin{align*}
+%	A_1 \succeq B_1 \implies A_1-B_2 \in PSD_n &\text{ and } A_2 \succeq B_2 \implies A_2-B_2 \in PSD_n\\
+	(A_1-B_1)+(A_2-B_2) &\in PSD_n\\
+	(A_1 + A_2) -  (B_1  + B_2) &\in PSD_n \\
+	A_1 + A_2 \succeq B_1  + B_2
+\end{align*}
+
+\item[ii)] Transitivity: if $A \succeq B$ and $B \succeq C$ then $A \succeq C$. 
+\begin{align*}
+	A -B &\in PSD_n\\
+	B-C &\in PSD_n\\
+	(A-B)+(B-C) &\in PSD_n \text{ from 5 ii above}\\
+	A-C &\in PSD_n \\ 
+	A &\succeq C
+\end{align*}
+
+\item[iii)] Multiplicativity:  if $A \succeq B$ and $Q$ is an invertible matrix then $Q A Q^t \succeq Q B Q^t$. 
+\begin{align*}
+	Q(A-B)Q^t &= QAQ^t-QBA^t \implies Q A Q^t \succeq Q B Q^t
+\end{align*}
+
+\end{itemize}
+
+
+
+
+
+
+\vfill
+\eject
+\noindent {\it Extra Questions}\\
+
+\vskip 0.2cm
+\noindent
+{\bf 1.} Let $A$ be $n \times n$ real symmetric positive matrix. Show that 
+$$ \frac{\pi^{\frac{n}{2}}}{\sqrt{\det A}} \, = \, \int_{\mathbb{R}^n} \, e^{- \langle x, Ax \rangle} \, dx.$$
+
+
+%\vskip 0.1cm
+%\noindent 
+%{\bf 2.}  Let $U$ be the matrix whose $i$th row is $\beta_i/ ||\beta_i||$. Clearly, $U$ is unitary. Construct the matrix $L$ as in the statement of the theorem such that $LA = U$. \\
+
+%\vskip 0.1cm
+%\noindent 
+%{\bf 3.}  Now you will prove the uniqueness of $L$. Suppose $L_1$ and $L_2$ are two lower triangular matrices with positive diagonals such that $L_1A$ and $L_2A$ are both 
+%unitary. First prove that $(L_1A)(L_2A)^{-1} = L_1L_2^{-1}$ is lower triangular and unitary. Conclude that $(L_1L_2^{-1})^* = (L_1L_2^{-1})^{-1}$  and hence
+%$L_1L_2^{-1}$ is simultaneouly upper triangular and lower triangular.   Hence $L_1L_2^{-1}$ is a diagonal matrix with positive diagonal entries. Finally, using the fact
+%$L_1L_2^{-1}$ is also unitary and hence has  eigenvalues with absolute value one, argue that $L_1L_2^{-1} = I$. \\ 
+
+%\vskip 0.1cm
+%\noindent
+%{\bf 4.)}  As a corollary, prove that for every complex invertible matrix $A$ there exists a unique lower triangular matrix $N$ with positive diagonals and a unique unitary matrix $U$
+%such that $A = NU$. \\
+
+
+
+
+
+%\vskip 0.1cm
+%\noindent
+%{\bf 5.} 
+
+
+%\vskip 0.1cm
+%\noindent
+%{\bf 6.} We will consider the vector space $ V = \mathcal{P}^{(n)}(\R)$ of polynomials at most degree $n$. Let 
+%$$[x]_k := x(x-1)(x-2) \cdots (x-k+1)$$
+%for $k \geq 1$ and $[x]_0 = 1$. \\
+%{\bf a)} Show that $([x]_0, [x]_1, [x]_2, \ldots, [x]_n)$ is a basis of $V$. [Hint: argue that   
+%$[x]_k = x^k + a(k,k-1) x^{k-1} + \cdots + a(k,1) x + a(k,0)$ where $a(k,j)$ are integers. Construct the $(n+1) \times (n+1)$ matrix
+%which expresses each $[x]_k$ in the basis $(1,x,x^2, \ldots, x^n)$. Show that this matrix is invertible].\\
+%{\bf b)} Now prove that $x^k = \sum_{j=0}^k S(k,j) [x]_j$ where $S(k,j)$ are integers. \\
+%{\bf c)} Show that $S(k,0) = 0 $ for $k \geq 1$. Also show that $S(k,k) = 1$ for $k\geq 0 $. \\
+%{\bf d)} Prove that if $ 1 \leq j \leq k-1$ then
+%$$ S(k,j) = j S(k-1, j) + S(k-1, j-1).$$ 
+%
+%\vskip 0.1cm
+%\noindent
+%The above exercise shows that $S(k,j)$ are nonnegative integers. They are called {\it Stirling numbers of the second kind}. 
+\end{document}
