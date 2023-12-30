@@ -134,6 +134,32 @@ Important terms:
 		\item eigenvalues of $T$ are (semi-)positive.
 		\item $\exists R \in \LL(V) \implies T=RR^*$.
 	\end{enumerate}
+	\item Theorem: Let $f(x_1,\dots,x_n)$ be a polynomial in $\R$ coefficients with degree $2d$ and $X^T$ be the set of possible terms whose exponents that added up to less than or equal to $2d$.  Then $f$ is a Sum of Squares if and only if there exists a positive semi-definite matrix $A$ such that $f=X^TAX$.\\
+	
+	This is useful in positive-definite multi-variable polynomials.  These all have even valued degrees (hence the $2d$ term), then bodes the question are they the sum of squares polynomials (i.e., equal to $\sum p_i^2$ where $p_i$ are multivariable polynomials).\\
+	
+	\item Definition: The \textbf{\textit{Singular Value Decomposition}}, $\sigma_1, \sigma_2,\dots, \sigma_r$ of $A \in \MM_{n\times n}(\R)$ are the positive square roots of eigenvalues $\sigma_i = \sqrt{\lambda_i}$ where $\lambda_i \ne 0$ of the matrix $K = A^TA$ (which is positive definite, hence all $\lambda_i\ge 0$).
+	\item Single Value Decomposition Theorem: $A \in \MM_{m\times n}(\R)$ of rank $r$ can be factored as $A=P\Sigma Q^T$ where 
+	\begin{itemize}
+		\item $P \in \MM_{m\times r}(\R)$ with ornormal columns (i.e, $P^TP=I_r$.
+		\item $\Sigma$ is a diagonal matrix made up of $\sigma_1, \sigma_2, \dots, \sigma_r$.
+		\item $Q^T \in \MM_{r\times n}(\R)$ orthonormal rows $(Q^TQ=I_r)$.\\
+	\end{itemize}
+	
+	\item Pseudo-Inverse (not square): $A \in \MM_{m\times n}(F)$ and $A=U\Sigma V^T$ then $A^+\in \MM_{n\times m}(F)$ and \[A^+=V\Sigma^{-1}U^T\]
+	if $A$ is square then
+	\begin{align*}
+		A^+ = (A^TA)^{-1}A^T
+	\end{align*}
+	\item Definition: Given $A \in \MM_{n\times n}(\R)$ then we define the \textbf{\textit{norm}} of $A$ as 
+	\begin{align*}
+		||A|| := \max_{||x||=1} ||Ax||
+	\end{align*}\\
+	Remark: if $A$ has an SVD of $\sigma_1 \ge \sigma_2 \ge\cdots \ge \sigma_r > 0$ then $||A|| = \sigma_1$.\\
+	\item Eichart-Mintsky-Young:  Let $A=\sum_{j=1}^r \sigma_j u_j v_j^T$ (the Single Value Decomposition of $A$ as the sum of rank 1 matrices).  For each $1\le p \le r$ let $A_p=\sum_{j=1}^p \sigma_j u_j v_j^T$ (a rank $p$ matrix).  Then, 
+	\begin{align*}
+		|| A - A_p|| = \min_{B \in F^{n\times n}} ||A-B|| \text{ where } \rank (B) \le p
+	\end{align*}hence $A_p$ is the \textit{closest} rank $p$ matrix to $A$.
 \end{enumerate}
 
 Important theorems:
@@ -142,4 +168,6 @@ Important theorems:
 	
 		Most notably that $\C$ is algebraically closed (i.e., all polynomials have a zero).
 \end{itemize}
+
+
 \end{document}

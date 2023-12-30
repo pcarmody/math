@@ -53,32 +53,73 @@ Assignment \#11 -- Due 12/8/23
 %\homework{}{Homework XI}
 
 \noindent
-{\bf 1.} Let $A$ be an invertible square matrix.  Show that $|\det A| = \sigma_1 \sigma_2 \cdots \sigma_n$. \\
-
+{\bf 1.} Let $A$ be an invertible square matrix.  Show that $|\det A| = \sigma_1 \sigma_2 \cdots \sigma_n$. 
+\begin{align*}
+	A &= U \Sigma V^T \\
+	|\det A| &= |\det(U \Sigma V^T)|\\
+	&= |\det(U)\det( \Sigma)\det (V^T)| \\
+	&= |\det(\Sigma)| \\
+	&= |\sigma_1\cdot\sigma_2\cdots\sigma_n| \\
+	&= \sigma_1\cdot\sigma_2\cdots\sigma_n 
+\end{align*}because $U$ and $V$ are orthonormal, their determinant is one and all $\sigma_i>0$.
+\\
 
 
 \vskip 0.1cm
 \noindent
 {\bf 2.}  Let $A$ be a nonzero $m \times n$ matrix. Prove that $\sigma_1 \, = \, \max \{|| Au || \, : \, || u || = 1\}$. \\ 
-
+\\
+Suppose that this is not true.  Then let $\mu = \max \{|| Au || \, : \, || u || = 1\}$ and let $u'$ be such that $\mu = ||Au'||$ and $||u'|| = 1$.  Then, $\sigma_1-\mu \ge 0$ because $\sigma_1$ is the greatest eigenvalue which implies that $||Au'|| = \mu < ||\sigma_1 u'|| = \sigma_1$ hence a contradiction.\\
 
 \vskip 0.1cm
 \noindent
 {\bf 3.}  Let $A$ and $A'$ be two nonzero $m \times n$ matrices with respective largest singular values $\sigma_1$ and 
-$\sigma_1'$. Prove that the largest singular value of $A + A'$ is bounded above by $\sigma_1 + \sigma_1'$. \\
+$\sigma_1'$. Prove that the largest singular value of $A + A'$ is bounded above by $\sigma_1 + \sigma_1'$. 
+\begin{align*}
+	||(A+A')x|| &\le ||Ax||+||A'x||\\
+%	&\le ||\sigma_1 x||+||\sigma'_1 x||\\
+	&\le (||A||+||A'||)||x|| \\
+	&\le (\sigma_1 + \sigma'_1)||x||
+\end{align*}
  
 
 \vskip 0.1cm
 \noindent
 {\bf 4.} Suppose $A$ is an $m \times n$ matrix and $B$ is $n \times m$ matrix obtained by rotating $A$ ninety degrees clockwise on paper
 (not a standard matrix operation). Do $A$ and $B$ have the same singular values? Prove or give a counterexample. \\
+\begin{align*}
+	\text{Let } A &= \left( \begin{array}{ccccc}
+		\lambda_1 & 0 & \cdots & 0 & 0\\
+		0 & \lambda_2 & \cdots & 0 & 0\\
+		\vdots & \vdots & \ddots & \vdots & \vdots \\
+		0 & 0 & \cdots & \lambda_n & 0
+	\end{array}	 \right) \\
+	\text{Then } B &= \left(\begin{array}{cccc}
+		0 & \cdots & 0 & \lambda_1 \\
+		0 & \cdots & \lambda_2 & 0 \\
+		\vdots & \vdots & \vdots & \vdots \\
+		\lambda_n & 0 & \cdots & 0 \\
+		0 & 0 & \cdots & 0
+	\end{array}	 \right)
+\end{align*}Clearly, $A$ has distinct eigenvalues of $\lambda_i$ which are not at all the same for $B$.
 
 
 \vskip 0.1cm
 \noindent
 {\bf 5.} Let $A$ be an $m \times n$ matrix of rank $r > 0$ with singular values $\sigma_1, \ldots, \sigma_r$. 
 Show that $|| A ||_F = \sqrt{\sigma_1^2 + \ldots + \sigma_r^2}$. \\
-
+\\
+Let the SVD of $A = U\Sigma V^T$ then
+\begin{align*}
+	||A||_F &= \sqrt{\sum_{i=1}^n\sum_{j=1}^m A_{ij}^2 }\\
+	& = ||A^T|| \\
+	||A^T A|| &= || (U\Sigma V^T)^TU\Sigma V^T|| \\
+	&= ||V\Sigma^T U^TU\Sigma V^T|| \\
+	&= ||V\Sigma^T \Sigma V^T|| \\
+	&= ||\Sigma^T \Sigma || \\
+	&= \sum_{i=1}^r \Sigma_{ii}^2 \\
+	&= \sum_{i=1}^r \sigma_{i}^2 \\
+\end{align*}
 
 
 
