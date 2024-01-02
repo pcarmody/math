@@ -4,3 +4,4 @@
 \contentsline {section}{\numberline {1.3}Finite Closed Topology -- Exercises}{6}{section.1.3}%
 \contentsline {chapter}{\numberline {2}The Euclidean Topology}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Euclidian Space -- Exercises}{8}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Basis for a Topology -- Exercises}{9}{section.2.2}%
