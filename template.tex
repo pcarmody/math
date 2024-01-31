@@ -1,0 +1,99 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Topology without Tears}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Sidney Morris}
+\newcommand{\DUEDATE}{Jan 6, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{Daily}
+\newcommand{\ROOM}{Remote}
+
+%\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\COV}[1]{(#1_1 \quad \cdots \quad #1_n)}
+\newcommand{\CONTRA}[1]{\PAREN{\begin{array}{c}
+              #1^1\\
+              \vdots \\ 
+              #1^n
+         \end{array}}}
+\newcommand{\SPECIAL}[1]{\begin{center}
+	{\Large \textbf{\textit{\\#1}} }
+\end{center}
+}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\SSS}{\mathbb{S}}
+\newcommand{\SB}{\mathcal{S}}
+
+\begin{document}
+
+\begin{center}
+\huge{Mathematical Creativity vs Time}
+\end{center}
+
+\begin{tikzpicture}
+%\tikzstyle{every node}=[inner sep=1cm];
+%\node (v0) at (0:0) {$v_0$};
+\node (v1) at (0:8) {Assim./Accomm.};
+\node (v2) at (30:8) {Aesthetic};
+\node (v3) at (2*30:8) {Gestalt};
+\node (v4) at (3*30:8) {Free Market};
+\node (v5) at (4*30:8) {Scholarly};
+\node (v6) at (5*30:8) {Uncertainty};
+\node (v7) at (6*30:8) {Cog. Equil.};
+\draw[->] (v2) .. controls +(down:1cm) and +(up:1cm) .. node[right] {F:Optimization} (v1);
+\draw[->] (v3) .. controls +(right:1cm) and +(up:1cm) ..  node[right] {E}(v2);
+\draw[->] (v4) .. controls +(right:1cm) and +(up:1cm) ..  node[above] {D}(v3);
+\draw[-<] (v5) .. controls +(up:1cm) and +(left:1cm) ..  node[above] {C}(v4);
+\draw[->] (v6) .. controls +(up:1cm) and +(left:1cm) ..  node[left] {B}(v5);
+\draw[->] (v7) .. controls +(up:1cm) and +(down:1cm) .. node[left] {A}(v6);
+%(v2) -- (v5)
+\draw[->] (v3) -- node[below] {Supersaturation} (v1);
+\draw[->] (v4) -- node[left] {Inspiration} (v1);
+\draw[->] (v5) -- node[left] {Research} (v1);
+\draw[->] (v6) -- node[left] {Direct Answer} (v1);
+\draw[->] (v7) -- node[below] {}  (v1);
+%\draw[->] (-9,-1) -- node[left] {Effort} (-9,8);
+\draw[->] (-8,-1) --node[below] {Time} (8,-1);
+\end{tikzpicture}
+
+
+
+\end{document}
