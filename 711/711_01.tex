@@ -1,0 +1,127 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{wasysym}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#1}
+\newcommand{\DUEDATE}{February 15, 2024}
+\newcommand{\SEMESTER}{Summer 2023}
+\newcommand{\SCHEDULE}{T/Th 2:00 -- 3:20}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert\,}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+\vskip 0.5cm
+
+Page. 65 \#11, \textbf{(Convex set, segment)}  A subset $A$ of a vector space $X$ is said to be \textit{convex} if $x,y \in A$ implies $$ M= \{z\in Z \,|\, z=\alpha x+(1-\alpha)y, \, 0\le \alpha\le 1\} \subset A $$ $M$ is called \textit{a closed segment} with \textit{boundary points} $x$ and $y$; any other $z \in M$ is called an \textit{interior point} of $M$.  Show that the \textit{closed unit ball}  $$ \tilde{B}(0;1)=\{x\in X\,|\,||x||\le 1\} $$ in a normed space $X$ is convex.\\
+\includegraphics[scale=.7]{p65ex11.png} 
+\\ \\
+Let, $x,y \in \tilde{B}(0;1)$ which implies that $||x|| \le 1$ and $||y|| \le 1$.  Given any point $m \in M$ there exists $\alpha$ where $0\le \alpha \le 1$, such that $m=\alpha x + (1-\alpha)y$.  Thus, $||m|| = ||\alpha x + (1-\alpha)y||$
+\begin{align*}
+	\NORM{m} &= \NORM{\alpha x + (1-\alpha)y} \\
+		&\le ||\alpha x|| + ||(1-\alpha)y||\\
+		&\le |\alpha| \, ||x|| + |1-\alpha| \, ||y|| \\
+	\text{Let } p &= \max(||x||,||y||) \\
+	||m|| &\le |\alpha| \, p + |1-\alpha| \, p \\
+		&\le (|\alpha| + |(1-\alpha)|)p \\
+		&\le p \\
+	\therefore m &\in \tilde{B}(0;1)
+\end{align*}$x,y$ are arbitrary points and $m$ is an arbitrary point between them.  Hence, $\tilde{B}(0;1)$ must be convex.
+
+\newpage
+Page. 70 
+\begin{enumerate}
+	\item Show that $c \subset \ell^\infty$ is a vector space of $\ell^\infty$ (cf. 1.5-3) and so is $c_0$, the space of all sequences of scalars converging to zero.\\
+	\\
+	Given any $x,y \in \ell^\infty$ and $c_x, c_y$ are bounds for these sequences with $x = (\eta_j) \le c_x$ and $y=(\xi_j) \le c_y$.  Then given any $\alpha \in \C$ we have
+	\begin{align*}
+		\alpha(x + y) &= \alpha(\eta_j + \xi_j)_{j=1}^\infty & \text{component-wise addition} \\
+		&= (\alpha\eta_j + \alpha\xi_j)_{j=1}^\infty \\
+		|\alpha\eta_j + \alpha\xi_j|_{j=1}^\infty &\le |\alpha|(c_x + c_y)
+	\end{align*}thus we have a new bounded sequence, that is $\alpha(x+y) \in \ell^\infty$.  Thus, $\ell^\infty$ is a vector space.\\ \\
+	Notice that if $c_x = c_y = 0$ that $|\eta_j + \xi_j| \le c_x+c_y = 0$ for all $1 \le j < \infty$, thus $x+y \in c_0$.\\
+	
+	\item Show that $c_0$ in Prob 1 is a \textit{closed} subspace of $\ell^\infty$, so that $c_0$ is complete by 1.5-2 and 1.4-7. \\
+	\\
+	Let $x,y \in \ell^\infty \backslash c_0$ each converges to real numbers $c_x, c_y$, respectively.  Note that $c_x,c_y$ are strictly greater than zero.  Thus, $d(x,y) \le \max(c_x, c_y)$ and is distinctly not zero.  Hence, given any $\epsilon> 0$ there exists $B(x;\epsilon) \subset \ell^\infty\backslash c_0$.  Thus  $\ell^\infty\backslash c_0$ must be open which indicates that $c_0$ must be closed.\\
+	
+	\item In $\ell^\infty$, let $Y$ be the subset of all sequences with only finitely many nonzero terms.  Show that $Y$ is a subspace of $\ell^\infty$ but not a closed subspace. 
+	
+	\setcounter{enumi}{7}
+	\item If in a normed space $X$, absolute convergence of any series always implies convergence of that series, show that $X$ is complete.
+	
+	\item Show that in a Banach space, an absolutely convergent series is convergent.
+	
+	\item \textbf{(Schauder basis)} Show that if a normed space has a Shauder basis, it is separable.
+	
+	\item Show that $(e_n)$, where $e_n=(\delta_{nj})$, is a Schauder basis for $\ell^p$, where $1 \le p < +\infty$.
+	
+	\setcounter{enumi}{14}
+	\item \textbf{(Product of normed spaces)}  If $(X_1,||\cdot||_1)$ and $(X_2, ||\cdot||_2)$ are normed spaces, show that the product vector space $X=X_1\times X_2$ (cf. prob 13, Sec 2.1) becomes a normed space if we define
+	\begin{align*}
+		 ||x||=\max\PAREN{||x_1||_1, ||x_2||_2} \text{ where } x=(x_1, x_2).
+	\end{align*}
+\end{enumerate}
+
+\newpage
+
+Page. 76 \#1.  Give examples of subspaces of $\ell^\infty$ and $\ell^2$ which are not closed.
+
+\LARGE{\textbf{$$ \BLUE{\boldsymbol{>}} \, \RED{\boldsymbol{\Sigma}^\Psi_{\male}}  \boldsymbol{\cdot} \GREEN{\text{C}^8_5} \, \BLUE{\boldsymbol{<}} $$}}\\
+%\Large{$$ \left\rangle \, \Sigma^\Psi_{\male}  \boldsymbol{\cdot} \textlarge dot{C}^8_5 \, \right\langle $$}\\
+
+\end{document}
