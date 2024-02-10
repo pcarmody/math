@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{hyperref}
+\usepackage{wasysym}
 
 \usepackage{multicol}
 \usepackage{fancyhdr}
@@ -16,6 +17,8 @@
 \usetikzlibrary{shapes.geometric}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{xcolor}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
 
 \hypersetup{
     colorlinks=true,
@@ -45,6 +48,8 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}} 
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
 \newcommand{\COV}[1]{(#1_1 \quad \cdots \quad #1_n)}
 \newcommand{\CONTRA}[1]{\PAREN{\begin{array}{c}
               #1^1\\
@@ -63,6 +68,12 @@
 \newcommand{\SB}{\mathcal{S}}
 
 \begin{document}
+
+\LARGE{\textbf{$$ \BLUE{\boldsymbol{>}} \, \RED{\boldsymbol{\Sigma}^\Psi_{\male}}  \boldsymbol{\ast} \GREEN{\text{C}^\text{8}_\text{5}} \, \BLUE{\boldsymbol{<}} $$}}
+\Large{\begin{center}
+	More than the sum of my parts
+\end{center}}
+%\Large{$$ \left\rangle \, \Sigma^\Psi_{\male}  \boldsymbol{\cdot} \textlarge dot{C}^8_5 \, \right\langle $$}\\
 
 \begin{tikzpicture}
     \node[regular polygon,draw,regular polygon sides = 12, rotate=15] (p) at (0,0) {Creativity};

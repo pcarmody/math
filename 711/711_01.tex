@@ -5,7 +5,6 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{hyperref}
-\usepackage{wasysym}
 
 \usepackage{multicol}
 \usepackage{fancyhdr}
@@ -99,10 +98,17 @@ Page. 70
 	\\
 	Let $x,y \in \ell^\infty \backslash c_0$ each converges to real numbers $c_x, c_y$, respectively.  Note that $c_x,c_y$ are strictly greater than zero.  Thus, $d(x,y) \le \max(c_x, c_y)$ and is distinctly not zero.  Hence, given any $\epsilon> 0$ there exists $B(x;\epsilon) \subset \ell^\infty\backslash c_0$.  Thus  $\ell^\infty\backslash c_0$ must be open which indicates that $c_0$ must be closed.\\
 	
-	\item In $\ell^\infty$, let $Y$ be the subset of all sequences with only finitely many nonzero terms.  Show that $Y$ is a subspace of $\ell^\infty$ but not a closed subspace. 
+	\item In $\ell^\infty$, let $Y$ be the subset of all sequences with only finitely many nonzero terms.  Show that $Y$ is a subspace of $\ell^\infty$ but not a closed subspace. \\
+	\\
+	Let $x = (\eta_m), y=(\xi_m) \in \ell^\infty$ such that $I_x, I_y$ each represent a list of indices where $x_i \ne 0$ when $i \in I_x$ and similarly to $I_y$.  Then, we can see that $x+y$ will be the sequence $(z_m) = \PAREN{\eta_m + \xi_m}$.  We can see that when $j \in I_x \cup I_y$ that $z_j \ne 0$.  Hence, $I_z$ (the set of indices for non-zero entries in $z$) will be $I_z=I_x\cup I_y$.  Thus, $z \in Y$.  Given any $\alpha > 0$ we can see that it has no effect on $I_x$, thus $(\alpha \eta_m) \in Y$.  Since it is closed under addition and scalar multiplication it must be a vector space.\\
+	\\
+	Let $x_1= \{1,0,\dots \} \in Y$, that is, it has 1 in the first component.  And $x_2 = \{1,1,0\dots\}$ and so on.  The general term $x_i$ means that this the first $i$ components are 1 and the remaining are zero.  Clearly, $x_i \in Y$ for all $i\in\N$.  However, the limit point of $x_i$ as $i$ increases without bound is $x_\infty=\{1, 1, \dots\}$ with one repeating forever.  $x_\infty \not \in Y$ hence a sequence in $Y$ does not contain its limit points which means that $Y$ is not closed.
+	\\
 	
 	\setcounter{enumi}{7}
-	\item If in a normed space $X$, absolute convergence of any series always implies convergence of that series, show that $X$ is complete.
+	\item If in a normed space $X$, absolute convergence of any series always implies convergence of that series, show that $X$ is complete.\\
+	\\
+	Suppose that $X$ is not complete.  Then there exists $x = (\eta_m) \in X$ that is an absolutely convergent series and converges but does NOT have a convergent subsequence.  $\SUM{i=1}{\infty} \NORM{\eta_i} < \infty$, also $\exists s$ such that $s = \LIM{n\to \infty} \eta_n$ 
 	
 	\item Show that in a Banach space, an absolutely convergent series is convergent.
 	
@@ -121,7 +127,5 @@ Page. 70
 
 Page. 76 \#1.  Give examples of subspaces of $\ell^\infty$ and $\ell^2$ which are not closed.
 
-\LARGE{\textbf{$$ \BLUE{\boldsymbol{>}} \, \RED{\boldsymbol{\Sigma}^\Psi_{\male}}  \boldsymbol{\cdot} \GREEN{\text{C}^8_5} \, \BLUE{\boldsymbol{<}} $$}}\\
-%\Large{$$ \left\rangle \, \Sigma^\Psi_{\male}  \boldsymbol{\cdot} \textlarge dot{C}^8_5 \, \right\langle $$}\\
 
 \end{document}
