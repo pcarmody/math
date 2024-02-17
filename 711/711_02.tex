@@ -1,0 +1,107 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#2}
+\newcommand{\DUEDATE}{March 1, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 2:00 -- 3:20}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert\,}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+\vskip 0.5cm
+p. 81 \#7.  If $\dim Y < \infty$ in Riesz's lemma 2.5-4, show that one can even choose $\theta = 1$.
+
+\newpage
+ p. 101 \#3, 5, 6, 7, 8, 9. 
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item If $T \ne 0$ is a bounded linear operator, show that for any $x \in \mathcal{D}(T)$ such that $\NORM{x} < 1$ we have the strict inequality $\NORM{Tx} < \NORM{T}$.
+	
+	\setcounter{enumi}{4}
+	\item Show tyhat the operator $T: \ell^\infty \to \ell^\infty$ defined by $y = (\eta_i)=Tx, \eta_j=\xi/j, x=(\xi_j),$ is linear and bounded.
+	\item \textbf{(Range)} Show that the range $\mathcal{R}(T)$ of a bounded linear operator $T: X\to Y$ need not be closed in $Y$.  \textit{Hint.} Use $T$ in Prob 5.
+	\item \textbf{(Inverse operator)} Let $T$ be a bounded linear operator from a normed space $X$ onto a normed space $Y$.  If there is a positive $b$ such that $$ \NORM{Tx}\ge b\NORM{x} \text{ for all } x \in X$$ show that then $T^{-1}:Y-to x$ exists and is bounded.
+	\item Show that the inverse $T^{-1}:\mathcal{R}(T)\to X$ of a bounded linear operator $T:X\to Y$ need not be bounded.  \textit{Hint.}  Use $T$ in Prob. 5.
+	\item Let $T: C[0,1] \to C[0,1]$ be defined by 
+	\begin{align*}
+		y(t) = \int_0^1 x(\tau) d\tau.
+	\end{align*}Find $\mathcal{R}(T)$ and $T^{-1}:\mathcal{R}(T)\to C[0,1]$.  Is $T^{-1}$ linear and bounded?
+\end{enumerate}
+\newpage 
+
+p. 109 \#2, 3, 4.
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Show that the functionals defined on $C[a,b]$ by 
+	\begin{align*}
+		f_1(x) &= \int_a^b x(t)y_0(t)dt & (y_o\in C[a,b]) \\
+		f_2(x) &= \alpha x(a) + \beta x(b) & (\alpha, \beta \text{ fixed})
+	\end{align*}are linear and bounded.
+	\item Find the norm of the linear functional $f$ defined on $C[-1,1]$ by 
+	\begin{align*}
+		f(x) = \int_{-1}^0 x(t)dt-\int_0^1 x(t) dt.
+	\end{align*}
+	\item Show that
+	\begin{align*}
+		f_1(x) &= \max_{t\in J} x(t) \\
+		 & & J=[a,b]\\
+		 f(2) &= \min_{t \in J} x(t)
+	\end{align*}define functionals on $C[a,b]$.  Are they linear? Bounded?
+\end{enumerate}
+\end{document}
