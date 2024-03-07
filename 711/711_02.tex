@@ -34,7 +34,7 @@
 \newcommand{\ASSIGNMENT}{Assignment \#2}
 \newcommand{\DUEDATE}{March 1, 2024}
 \newcommand{\SEMESTER}{Spring 2024}
-\newcommand{\SCHEDULE}{T/Th 2:00 -- 3:20}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
 \newcommand{\ROOM}{Remote}
 
 \pagestyle{fancy}
@@ -65,23 +65,69 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 \vskip 0.5cm
-p. 81 \#7.  If $\dim Y < \infty$ in Riesz's lemma 2.5-4, show that one can even choose $\theta = 1$.
+p. 81 \#7.  If $\dim Y < \infty$ in Riesz's lemma 2.5-4, show that one can even choose $\theta = 1$.\\
+\\
+To restate the theorem: \textbf{F. Riesz's Lemma}. Let $Y$ and $Z$ be subspaces of a normed space $X$ (of any dimension), and suppose that $Y$ is closed and is a proper
+subset of $Z$. Then for every real number $\theta$ in the interval (0,1) there is a
+$z \in Z$ such that $\NORM{z}= 1,\NORM{z - y} < \theta$ for all $y \in Y$.\\
+\\
+Suppose that we had a sequence $\theta_m$ such that $\LIM{m->\infty} \theta_m =1$ and there is a corresponding sequence $z_m$ such that $\NORM{z_m} = 1$ and $\NORM{z_m-y}<\theta_m$ for all $y \in Y$ and $m \in \N$.  Since, $\dim Y < \infty$, $Y$ is closed and bounded, hence every sequence converges.  Thus, the sequence $\NORM{z_m -y }$ converges to 1 and can include 1.
 
 \newpage
  p. 101 \#3, 5, 6, 7, 8, 9. 
 \begin{enumerate}
 	\setcounter{enumi}{2}
-	\item If $T \ne 0$ is a bounded linear operator, show that for any $x \in \mathcal{D}(T)$ such that $\NORM{x} < 1$ we have the strict inequality $\NORM{Tx} < \NORM{T}$.
+	\item If $T \ne 0$ is a bounded linear operator, show that for any $x \in \mathcal{D}(T)$ such that $\NORM{x} < 1$ we have the strict inequality $\NORM{Tx} < \NORM{T}$.\\
+	\\
+	Since $T$ is bounded, $\exists c \to \NORM{Tx}\le c||x||$ and $c = \NORM{T}$.  When, $\NORM{x} = 1$ we have $\NORM{Tx} \le \NORM{T}$ and otherwise
+	\begin{align*}
+		\NORM{T} &= \sup_{x\in\mathcal{D}(T),x\ne 0} \frac{\NORM{Tx}}{\NORM{x}} \\
+		\NORM{Tx} &\le  \sup_{x\in\mathcal{D}(T),x\ne 0} \frac{\NORM{Tx}}{\NORM{x}} \\
+		1 & \le \sup_{x\in\mathcal{D}(T),x\ne 0} \frac{1}{\NORM{x}}
+	\end{align*}which is a strict inequality for $\NORM{x}<1$.
 	
 	\setcounter{enumi}{4}
-	\item Show that the operator $T: \ell^\infty \to \ell^\infty$ defined by $y = (\eta_i)=Tx, \eta_j=\xi/j, x=(\xi_j),$ is linear and bounded.
-	\item \textbf{(Range)} Show that the range $\mathcal{R}(T)$ of a bounded linear operator $T: X\to Y$ need not be closed in $Y$.  \textit{Hint.} Use $T$ in Prob 5.
-	\item \textbf{(Inverse operator)} Let $T$ be a bounded linear operator from a normed space $X$ onto a normed space $Y$.  If there is a positive $b$ such that $$ \NORM{Tx}\ge b\NORM{x} \text{ for all } x \in X$$ show that then $T^{-1}:Y\to x$ exists and is bounded.
-	\item Show that the inverse $T^{-1}:\mathcal{R}(T)\to X$ of a bounded linear operator $T:X\to Y$ need not be bounded.  \textit{Hint.}  Use $T$ in Prob. 5.
+	\item Show that the operator $T: \ell^\infty \to \ell^\infty$ defined by $y = (\eta_i)=Tx, \eta_j=\xi_j/j, x=(\xi_j),$ is linear and bounded.\\
+	\begin{align*}
+		T : \ell^\infty &\to \ell^\infty \\
+		x=(\xi_j) &\mapsto y = (\xi_j/j)\\
+		\\
+		\text{let } u&= (\zeta_j)\\
+		T(\alpha x + \beta u) &= \PAREN{ \PAREN{\alpha (\xi_j)+ \beta (\zeta_j)}/j } \\
+		&= \PAREN{ \alpha (\xi_j)/j+ \beta (\zeta_j)/j } \\
+		&= \PAREN{ \alpha (\xi_j/j)+ \beta (\zeta_j/j) } \\
+		&= \PAREN{ \alpha (\xi_j/j) }+ \PAREN{\beta (\zeta_j/j) } \\
+		&= \alpha \PAREN{ (\xi_j/j) }+ \beta\PAREN{ (\zeta_j/j) } \\
+		&= \alpha Tx + \beta Tu \\
+		\\
+		\exists c>0 \to \NORM{Tx} &\le c \NORM{x}, \, \forall x\in \ell^\infty
+	\end{align*}Let $j\in \N$ be such that $\NORM{x} = \xi_j$.  Even if $j=1$ we can see that $\NORM{Tx} \le \xi_j$ because $\xi_j \ge \xi_j/j$ for all $j$.  Thus, $\NORM{Tx} \le \NORM{x}$, hence $T$ is bounded.
+	\item \textbf{(Range)} Show that the range $\mathcal{R}(T)$ of a bounded linear operator $T: X\to Y$ need not be closed in $Y$.  \textit{Hint.} Use $T$ in Prob 5.\\
+	\\
+	Let $x=(\xi_m) \in \ell^\infty$ and $\LIM{m\to \infty} \xi_m = 0$.  Then, from Prob 5, 
+	\begin{align*}
+		T : \ell^\infty &\to \ell^\infty \\
+		x=(\xi_j) &\mapsto y = (\xi_j/j)\\
+		Tx &= (\xi_j/j)
+	\end{align*}Notice that if $1/j< \xi_j$ then $\xi_j/j > 1$, that is, if there exists $N$ such that $n>N$ implies that $1/n < \xi_n$ then $Tx$ does not converge to zero.  Hence, the range of $Tx$ is open.\\
+	\\
+	\item \textbf{(Inverse operator)} Let $T$ be a bounded linear operator from a normed space $X$ onto a normed space $Y$.  If there is a positive $b$ such that $$ \NORM{Tx}\ge b\NORM{x} \text{ for all } x \in X$$ show that then $T^{-1}:Y\to X$ exists and is bounded.\\
+	
+	Notice that $\NORM{Tx} \ge b\NORM{x}$ implies that $T0 = 0$ which makes it injective, hence an inverse exists.  Then,
+	\begin{align*}
+		\NORM{T^{-1}x} &\le b\NORM{T^{-1}Tx} \le b\NORM{x}
+	\end{align*}means that $T$ is bounded.
+	\newpage
+	\item Show that the inverse $T^{-1}:\mathcal{R}(T)\to X$ of a bounded linear operator $T:X\to Y$ need not be bounded.  \textit{Hint.}  Use $T$ in Prob. 5.\\
+	\\
+	Using $T$ as defined in Prob. 5, $T^{-1}y = (\eta_j j)$.  Clearly there is no $c$ such that $\NORM{T^{-1}y} \le c\NORM{y}$ for all $y$, therefore $T^{-1}$ can be unbounded.
+	\\
 	\item Let $T: C[0,1] \to C[0,1]$ be defined by 
 	\begin{align*}
-		y(t) = \int_0^1 x(\tau) d\tau.
-	\end{align*}Find $\mathcal{R}(T)$ and $T^{-1}:\mathcal{R}(T)\to C[0,1]$.  Is $T^{-1}$ linear and bounded?
+		y(t) = \int_0^t x(\tau) d\tau.
+	\end{align*}Find $\mathcal{R}(T)$ and $T^{-1}:\mathcal{R}(T)\to C[0,1]$.  Is $T^{-1}$ linear and bounded?\\
+	\\
+	After integration, each $y(t)$ will be the anti-derivative of $x(\tau)$, which is a differentiable function.  That is $\mathcal{R}(T)$ will be the set of differentiable functions on $[0,1]$.  $T^{-1}(z) = z'$.  $\NORM{T^{-1}z} =\SUP{t\in[0,1]} z'(t)$.  However, notice that given a polynomial $z^n$ then $T^{-1}(z^n)= nz^{n-1}$ and $\NORM{T^{-1}(z^n)} = n$.  $n$ is arbitrary, therefore, $T^{-1}$ is not bounded.
 \end{enumerate}
 \newpage 
 
@@ -92,16 +138,48 @@ p. 109 \#2, 3, 4.
 	\begin{align*}
 		f_1(x) &= \int_a^b x(t)y_0(t)dt & (y_o\in C[a,b]) \\
 		f_2(x) &= \alpha x(a) + \beta x(b) & (\alpha, \beta \text{ fixed})
-	\end{align*}are linear and bounded.
+	\end{align*}are linear and bounded.\\
+	Let $p,q \in C[a,b]$
+	\begin{align*}
+		f_1(\alpha p + q) &= \int_a^b (\alpha p+q)(t)y_0(t)dt = \alpha\int_a^b p(t)y_0(t)dt + \int_a^b q(t)y_0(t)dt = \alpha f_1(p)+f_1(q)\\ \\
+		f_2(\gamma p+q) &= \alpha (\gamma p+q)(a) + \beta (\gamma p+q)(b) \\
+		&= \alpha \gamma p(a)+\alpha q(a) + \beta \gamma p(b)+\beta q(b) \\
+		&= \gamma f_2(p)+f_2(q)
+	\end{align*}
+	\begin{align*}
+		\NORM{f_1(x)} &\le \max_{t\in [a,b]} (|x(t)y_0(t)|) \\
+		&\le \max_{t\in [a,b]} (|x(t)| |y_0(t)|) \\
+		&\le \NORM{y_0} \NORM{x}
+	\end{align*}$\NORM{y_0}$ is a constant, hence $f_1$ is bounded.  Then, with the extreme value theorem, there exists $s \in [a,b]$ such that $x(s) \ge x(t), \forall t \in [a,b]$ 
+	\begin{align*}
+		\NORM{f_2(x)} &\le | \alpha x(s) + \beta x(s) | \\
+		&\le | x(s) (\alpha + \beta)| \\
+		&\le |\alpha + \beta| |x(s)| \\
+		&\le |\alpha + \beta| \NORM{x(s)}
+	\end{align*}hence $f_2$ is bounded.
+	\\
 	\item Find the norm of the linear functional $f$ defined on $C[-1,1]$ by 
 	\begin{align*}
 		f(x) = \int_{-1}^0 x(t)dt-\int_0^1 x(t) dt.
-	\end{align*}
+	\end{align*}Let $g, h$ linear functionals on $C[-1,1]$ and $g(x) = \int_{-1}^0 x(t)dt,\, h(x) = -\int_0^1 x(t) dt$ then
+	\begin{align*}
+		f(x) &= (g+h)(x) \\
+		\NORM{f} &\le \NORM{g} + \NORM{h} \\
+		\NORM{g(x)} &= \BARS{\int_{-1}^0 x(t)dt} \le \max_{t\in [-1,0]} \BARS{x(t)}\\
+		\NORM{h(x)} &= \BARS{-\int_0^1 x(t)dt} \le \max_{t\in [0,1]} \BARS{x(t)}\\
+		\NORM{f} &\le \max\PAREN{\NORM{g},\NORM{h}} = \max_{t\in [-1,1]} \BARS{x(t)}\\
+	\end{align*} 
 	\item Show that
 	\begin{align*}
 		f_1(x) &= \max_{t\in J} x(t) \\
 		 & & J=[a,b]\\
 		 f(2) &= \min_{t \in J} x(t)
-	\end{align*}define functionals on $C[a,b]$.  Are they linear? Bounded?
+	\end{align*}define functionals on $C[a,b]$.  Are they linear? Bounded?\\
+	\\
+	It seems pretty clear that 
+	\begin{align*}
+		\max_{t\in J} (x+y)(t) &\ne \max_{t\in J}x(t) + \max_{t\in J} y(t) \\
+		\text{ and } \min_{t\in J} (x+y)(t) &\ne \min_{t\in J}x(t) + \min_{t\in J} y(t) 
+	\end{align*}so, they cannot be linear. They are, however, limited by that fact that being continuous functions each $x \in C[a,b]$ must have finite values on the entire interval (no points go to infinity).  Hence, bounded.
 \end{enumerate}
 \end{document}

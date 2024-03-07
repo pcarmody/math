@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.11.24)  20 FEB 2024 09:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.11.24)  6 MAR 2024 10:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Creativity.tex
-(./Creativity.tex
+**711_03.tex
+(./711_03.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -237,12 +237,6 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
 \Hy@SectionHShift=\skip55
-)
-(/usr/share/texlive/texmf-dist/tex/latex/wasysym/wasysym.sty
-Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
-\symwasy=\mathgroup6
-LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
-(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
@@ -665,10 +659,6 @@ File: pgflibraryarrows.meta.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfarrowlinewidth=\dimen269
 )))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibrarypositioning.code.tex
-File: tikzlibrarypositioning.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
@@ -699,47 +689,37 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen277
 \Gm@dimlist=\toks41
 )
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
-Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
-)
-Package hyperref Info: Option `colorlinks' set `true' on input line 30.
- (./MyMacros.tex
+Package hyperref Info: Option `colorlinks' set `true' on input line 28.
+ (../MyMacros.tex
 \c@theorem=\count301
 \c@corollary=\count302
-)
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count303
 \l__pdf_internal_box=\box105
 )
-(./Creativity.aux)
-\openout1 = `Creativity.aux'.
+(./711_03.aux)
+\openout1 = `711_03.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 7
-0.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
-File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
-)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 \AtBeginShipoutBox=\box106
-Package hyperref Info: Link coloring ON on input line 70.
-
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package hyperref Info: Link coloring ON on input line 58.
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -750,13 +730,13 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count304
 )
-LaTeX Info: Redefining \ref on input line 70.
-LaTeX Info: Redefining \pageref on input line 70.
-LaTeX Info: Redefining \nameref on input line 70.
+LaTeX Info: Redefining \ref on input line 58.
+LaTeX Info: Redefining \pageref on input line 58.
+LaTeX Info: Redefining \nameref on input line 58.
 
-(./Creativity.out) (./Creativity.out)
+(./711_03.out) (./711_03.out)
 \@outlinefile=\write4
-\openout4 = `Creativity.out'.
+\openout4 = `711_03.out'.
 
  ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -815,71 +795,63 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 68.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 72
-.
+Underfull \hbox (badness 10000) in paragraph at lines 67--72
 
-(/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
-File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
-)
-<example-image.pdf, id=7, 321.2pt x 240.9pt>
-File: example-image.pdf Graphic file (type pdf)
-<use example-image.pdf>
-Package pdftex.def Info: example-image.pdf  used on input line 88.
-(pdftex.def)             Requested size: 525.23788pt x 393.9427pt.
-
-Overfull \hbox (54.04933pt too wide) in paragraph at lines 104--105
-[][] 
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
- </usr/share/texlive/texmf-dist/tex/latex/mwe/example-image.pdf>]
-Overfull \hbox (72.86784pt too wide) in paragraph at lines 135--136
-[][] 
- []
-
-[2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 168.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
- (./Creativity.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
-Package rerunfilecheck Info: File `Creativity.out' has not changed.
+]
+<711_03_fig25.png, id=24, 534.99875pt x 284.06125pt>
+File: 711_03_fig25.png Graphic file (type png)
+<use 711_03_fig25.png>
+Package pdftex.def Info: 711_03_fig25.png  used on input line 98.
+(pdftex.def)             Requested size: 427.99957pt x 227.24928pt.
+ [2 <./711_03_fig25.png>] [3]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 122.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 122.
+ (./711_03.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 122.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 122.
+Package rerunfilecheck Info: File `711_03.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 122.
  ) 
 Here is how much of TeX's memory you used:
- 19938 strings out of 483140
- 382525 string characters out of 5965150
- 635316 words of memory out of 5000000
- 34561 multiletter control sequences out of 15000+600000
- 553993 words of font info for 78 fonts, out of 8000000 for 9000
+ 19266 strings out of 483140
+ 371136 string characters out of 5965150
+ 625369 words of memory out of 5000000
+ 33905 multiletter control sequences out of 15000+600000
+ 534989 words of font info for 35 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 60i,11n,86p,411b,805s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/wasy-type1/wasyb10.pfb>
-Output written on Creativity.pdf (2 pages, 78937 bytes).
+ 60i,14n,86p,407b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
+0.pfb>
+Output written on 711_03.pdf (3 pages, 142758 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
- 3 named destinations out of 1000 (max. 500000)
+ 85 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

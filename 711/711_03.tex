@@ -1,0 +1,122 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#3}
+\newcommand{\DUEDATE}{March 17, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+p. 126 \#8 
+Show that the dual space of the space $c_0$ is $\ell^1$.(Cf. Prob. 1 in Sec. 2.3.)\\
+\\
+Want to show that
+\begin{enumerate}
+	\item every element of $c_0'$ is an element of $\ell^1$
+	
+	Let $(e_k)$ be the unique Shauder basis for $\ell^1$ where $e_k = (\delta_{jk})$.  Let $x = (\xi_j) \in c_0$, that is $\LIM{j\to \infty} \xi_j = 0$ which has the unique representation $x=\SUM{j=1}{\infty} \xi_j e_j$. Let $f \in c_0'$, that is $f: c_0 \to \R$ which is linear and bounded.  Therefore, 
+	\begin{align*}
+		f(x) &= \SUM{j=1}{\infty} \xi_j f(e_j)\\
+		|f(e_j)| &\le \NORM{f}\NORM{e_j} = \NORM{f} \\
+		\NORM{f(x)} &\le \NORM{f} \BARS{\SUM{j=1}{\infty} \xi_j} \le \NORM{f} \SUM{j=1}{\infty} |\xi_j| = \NORM{f} \NORM{x}_{\ell^1}
+	\end{align*}which means that $f \in \ell^1$.
+	
+	\item that the norm over $c_0'$ is the norm over $\ell^1$.  want to show that $|f(x)| = \NORM{x}$.  Let $\gamma = \SUP{j} f(e_j)$
+	\begin{align*}
+		|f(x)| &= \BARS{\SUM{j=1}{\infty} \xi_j f(e_j)} \le \gamma \SUM{j=1}{\infty} |\xi_j| = \gamma \NORM{x}
+	\end{align*}
+\end{enumerate}
+
+\noindent p. 135 \#9 Prove
+\begin{align*}
+	\RR \ABRACKET{x,y} &= \frac{1}{4}\PAREN{\NORM{x+y}^2-\NORM{x-y}^2} \\
+	\IM \ABRACKET{x,y} &= \frac{1}{4}\PAREN{\NORM{x+iy}^2-\NORM{x-iy}^2} 
+\end{align*}
+
+\newpage
+p. 141 \#7-10, 
+\begin{enumerate}
+	\setcounter{enumi}{6}
+	\item Show that in an inner product space, $x \perp y$ if and only if $\NORM{x+\alpha y}=\NORM{x-\alpha y}$ (see Fig. 25.)\\
+	\includegraphics[scale=0.8]{711_03_fig25.png} 
+	
+	\item Show that in an inner product space, $x \perp y$ if and only if $\NORM{x+\alpha y}\ge \NORM{x}$ for all scalars $\alpha$.
+	
+	\item Let $V$ be the vector space of all continuous complex-valued functions on $J-[a,b]$.  Let $X_1 = \PAREN{V, \NORM{\cdot}_\infty}$, where $\NORM{x}_\infty = \MAX{t\in J}\BARS{x(t)}$; and let $X_2 = \PAREN{v, \NORM{\cdot}_2}$, where
+	\begin{align*}
+		\NORM{x}_2 = \ABRACKET{x,x}^{1/2}, \text{     } \ABRACKET{x,y} = \int_a^b x(t)\CONJ{y(t)} dt
+	\end{align*}  Show that the identity mapping $x \mapsto x$ of $X_1$ onto $X_2$ is continuous.\\(It is not a homeomorphism.  $X_2$ is not complete.)
+	
+	\item \textbf{(Zero Operator)}  Let $T: X to X$ be a bounded linear operator on a complex inner product space $X$.  If $\ABRACKET{Tx,x} = 0$ for al $x \in X$, show that $T=0$.\\
+	Show that this does not hold in the case of a real inner product space. \textit{Hint.} Consider a rotation of the Euclidiean plane.
+\end{enumerate}
+\newpage
+p. 150 \#2, 3a, 6, 
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Show that the subset $M = \{y =(\eta_j)\,|\, \sum \eta_j = 1\}$ of complex space $\C^n$ (cf 3.1-4) is complete and convex.  Find the vector of minimum norm in $M$.
+	
+	\item (a) Show that the vector space $X$ of all real-valued continuous functions on $[-1,a]$ is the direct sum of the set of all even continuous functions and the set of all odd continuous functions on $[-1,1]$.
+	
+	\setcounter{enumi}{5}
+	\item Show that $Y=\{x\,|\, x=(\xi_j)\in \ell^2, \xi_{2n}=0, n\in \N\}$ is a closed subspace of $\ell^2$ and find $Y^\perp$.  What is $Y^\perp$ if $Y=$ span$\{e_1,\cdots,e_n\}\subset \ell^2$, where $e_j = (\delta_{jk})$?
+
+\end{enumerate}
+\end{document}
