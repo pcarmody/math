@@ -84,10 +84,31 @@ Want to show that
 	\end{align*}
 \end{enumerate}
 
+
 \noindent p. 135 \#9 Prove
 \begin{align*}
 	\RR \ABRACKET{x,y} &= \frac{1}{4}\PAREN{\NORM{x+y}^2-\NORM{x-y}^2} \\
 	\IM \ABRACKET{x,y} &= \frac{1}{4}\PAREN{\NORM{x+iy}^2-\NORM{x-iy}^2} 
+\end{align*} Remember that
+\begin{align*}
+	\NORM{x+y}^2 &= \NORM{x}^y + \NORM{y}^2 +2 \RR \ABRACKET{x,y}\\
+	\text{ and } \NORM{x+y}^2+\NORM{x-y}^2 &= 2 \NORM{x}^2+2\NORM{y}^2 \\
+	\text{ thus } 2 \RR \ABRACKET{x,y} &= \NORM{x+y}^2 - \NORM{x}^2 - \NORM{y}^2 \\
+	&= \NORM{x+y}^2 - (\NORM{x}^2 + \NORM{y}^2) \\
+	&= \NORM{x+y}^2 - \frac{1}{2}\PAREN{ \NORM{x+y}^2+\NORM{x-y}^2} \\
+	4 \RR \ABRACKET{x,y} &= \NORM{x+y}^2-\NORM{x-y}^2 \\
+	\RR \ABRACKET{x,y} &= \frac{1}{4}\PAREN{\NORM{x+y}^2-\NORM{x-y}^2} \\
+\end{align*}Notice that 
+\begin{align*}
+	\text{ Notice } \NORM{x+iy}^2+\NORM{x-iy}^2 &= 2 \NORM{x}^2+2\NORM{y}^2\\
+	\NORM{x-iy}^2 &= \ABRACKET{x-iy,x-iy}\\
+		&= \ABRACKET{x,x-iy}+\ABRACKET{iy,x-iy} \\
+		&= \ABRACKET{x,x} + \ABRACKET{x,iy} -\ABRACKET{iy,x}+\ABRACKET{iy,iy}\\
+		&= \NORM{x}^2 + |i|^2\NORM{y}^2 -i\ABRACKET{x,y} -i\CONJ{\ABRACKET{x,y}} \\
+		&= \NORM{x}^2 + \NORM{y}^2 + 2\IM\ABRACKET{x,y} \\
+	2\IM\ABRACKET{x,y} &= \NORM{x-iy}^2 - \PAREN{\NORM{x}^2 + \NORM{y}^2} \\
+		&= \NORM{x-iy}^2 - \frac{1}{2}\PAREN{\NORM{x+iy}^2+\NORM{x-iy}^2} \\
+	4\IM\ABRACKET{x,y} &= \NORM{x-iy}^2 -\NORM{x+iy}^2\\
 \end{align*}
 
 \newpage
@@ -95,28 +116,91 @@ p. 141 \#7-10,
 \begin{enumerate}
 	\setcounter{enumi}{6}
 	\item Show that in an inner product space, $x \perp y$ if and only if $\NORM{x+\alpha y}=\NORM{x-\alpha y}$ (see Fig. 25.)\\
-	\includegraphics[scale=0.8]{711_03_fig25.png} 
+	\includegraphics[scale=0.8]{711_03_fig25.png} \\
+	Assuming that $x \perp y$ then $\ABRACKET{x,y} = 0$ and
+	\begin{align*}
+		\NORM{x+\alpha y}^2 &= \NORM{x}^2 + |\alpha|^2\NORM{y}^2 +2|\alpha|\RR\ABRACKET{x,y} \\
+		&= \NORM{x}^2 + |\alpha|^2\NORM{y}^2 \\
+		\NORM{x-\alpha y}^2 &= \NORM{x}^2 + |\alpha|^2\NORM{y}^2 -2|\alpha|\RR\ABRACKET{x,y} \\
+		&= \NORM{x}^2 + |\alpha|^2\NORM{y}^2
+	\end{align*}Asuming that they are equal
+	\begin{align*}
+		\NORM{x+\alpha y}^2-\NORM{x-\alpha y}^2 &= \PAREN{\NORM{x}^2 + |\alpha|^2\NORM{y}^2 +2|\alpha|\RR\ABRACKET{x,y}} - \PAREN{\NORM{x}^2 + |\alpha|^2\NORM{y}^2 -2\BARS{\alpha}\RR\ABRACKET{x,y}} \\
+		&= 4|\alpha|\RR\ABRACKET{x,y}
+	\end{align*}which can  only be zero when $\RR\ABRACKET{x,y}=0$ or $x \perp y$.
 	
-	\item Show that in an inner product space, $x \perp y$ if and only if $\NORM{x+\alpha y}\ge \NORM{x}$ for all scalars $\alpha$.
+	\item Show that in an inner product space, $x \perp y$ if and only if $\NORM{x+\alpha y}\ge \NORM{x}$ for all scalars $\alpha$.\\
 	
-	\item Let $V$ be the vector space of all continuous complex-valued functions on $J-[a,b]$.  Let $X_1 = \PAREN{V, \NORM{\cdot}_\infty}$, where $\NORM{x}_\infty = \MAX{t\in J}\BARS{x(t)}$; and let $X_2 = \PAREN{v, \NORM{\cdot}_2}$, where
+	Assuming that $x \perp y$ then
+	\begin{align*}
+		\NORM{x+\alpha y}^2 &= \NORM{x}^2 + |\alpha|^2\NORM{y}^2 +2|\alpha|\RR\ABRACKET{x,y} \\
+		&= \NORM{x}^2 + |\alpha|^2\NORM{y}^2
+	\end{align*}$|\alpha| \ge 0$ for all $\alpha$ as well as $\NORM{y} \ge 0$ for all $y$.  Thus, $\NORM{x+\alpha y}\ge \NORM{x}$.\\
+	Assuming that this statement is true then for all $\alpha \in \C$ and $y \in Y$
+	\begin{align*}
+		\NORM{x}^2 + |\alpha|^2\NORM{y}^2 +2|\alpha|\RR\ABRACKET{x,y} &\ge \NORM{x}^2 \\
+		|\alpha|^2\NORM{y}^2 +2|\alpha|\RR\ABRACKET{x,y} &\ge 0 \\
+		|\alpha|^2\NORM{y}^2 &\ge -2|\alpha|\RR\ABRACKET{x,y}
+	\end{align*}the left side is positive and the right side is negative therefore $\RR\ABRACKET{x,y}=0$ and $x \perp y$.
+	
+	\newpage
+	\item Let $V$ be the vector space of all continuous complex-valued functions on $J=[a,b]$.  Let $X_1 = \PAREN{V, \NORM{\cdot}_\infty}$, where $\NORM{x}_\infty = \MAX{t\in J}\BARS{x(t)}$; and let $X_2 = \PAREN{V, \NORM{\cdot}_2}$, where
 	\begin{align*}
 		\NORM{x}_2 = \ABRACKET{x,x}^{1/2}, \text{     } \ABRACKET{x,y} = \int_a^b x(t)\CONJ{y(t)} dt
-	\end{align*}  Show that the identity mapping $x \mapsto x$ of $X_1$ onto $X_2$ is continuous.\\(It is not a homeomorphism.  $X_2$ is not complete.)
+	\end{align*}  Show that the identity mapping $x \mapsto x$ of $X_1$ onto $X_2$ is continuous.\\(It is not a homeomorphism.  $X_2$ is not complete.)\\
 	
-	\item \textbf{(Zero Operator)}  Let $T: X to X$ be a bounded linear operator on a complex inner product space $X$.  If $\ABRACKET{Tx,x} = 0$ for al $x \in X$, show that $T=0$.\\
+	Let $T: X_1 \to X_2$ such that $Tx=x$.  We want to show that given any $\epsilon > 0$ when $\NORM{Tx - Ty} < \epsilon$, then $\NORM{x-y} \le \delta$ for some $\delta>0$ dependent on $\epsilon$.
+	\begin{align*}
+		\epsilon > \NORM{Tx - Ty}_2^2 &= \ABRACKET{x-y, x-y} \\
+		&= \int_a^b \PAREN{x(t)-y(t)}\CONJ{\PAREN{x(t)-y(t)}}dt \\
+		&= \int_a^b \RR\PAREN{x(t)-y(t)}^2 + \IM\PAREN{x(t)-y(t)}^2 dt \\
+		&\ge \int_a^b \NORM{x(t)-y(t)}_2^2 dt
+	\end{align*}by the Extreme Value Theorem, there exists $p \in J$ such that $x(p) \ge x(t)-y(t),\forall t\in J$ i.e., $|x(p)-y(p)| = \NORM{x-y}_\infty$.  Thus.
+	\begin{align*}
+		\int_a^b \NORM{x(t)-y(t)}_2^2 dt \le (b-a) (x(p)-y(p))^2 = (b-a)\NORM{x-y}_\infty^2 < \delta
+	\end{align*}
+	
+	\item \textbf{(Zero Operator)}  Let $T: X \to X$ be a bounded linear operator on a complex inner product space $X$.  If $\ABRACKET{Tx,x} = 0$ for all $x \in X$, show that $T=0$.\\
 	Show that this does not hold in the case of a real inner product space. \textit{Hint.} Consider a rotation of the Euclidiean plane.
+	\begin{align*}
+		0 &= \ABRACKET{T(x+y),x+y} \\
+		&= \ABRACKET{Tx+Ty, x+y} \\
+		&= \ABRACKET{Tx, x+y}+\ABRACKET{Ty,x+y} \\
+		&= \ABRACKET{Tx,x} + \ABRACKET{Tx,y} + \ABRACKET{Ty,x} + \ABRACKET{Ty,y}\\
+		&= \ABRACKET{Tx,y} + \ABRACKET{Ty,x}
+	\end{align*}The Inner Product is positive definite, which means that the only way that the right side can be equal to zero is if $Tx=0$ for $x\in x$.
 \end{enumerate}
 \newpage
 p. 150 \#2, 3a, 6, 
 \begin{enumerate}
 	\setcounter{enumi}{1}
-	\item Show that the subset $M = \{y =(\eta_j)\,|\, \sum \eta_j = 1\}$ of complex space $\C^n$ (cf 3.1-4) is complete and convex.  Find the vector of minimum norm in $M$.
+	\item Show that the subset $M = \{y =(\eta_j)\,|\, \sum \eta_j = 1\}$ of complex space $\textbf{C}^n$ (cf 3.1-4) is complete and convex.  Find the vector of minimum norm in $M$.
 	
-	\item (a) Show that the vector space $X$ of all real-valued continuous functions on $[-1,a]$ is the direct sum of the set of all even continuous functions and the set of all odd continuous functions on $[-1,1]$.
+	\begin{align*}
+		\ABRACKET{x,y} &= \sum \xi_j \CONJ{\eta_j}\\
+		\NORM{x}^2 &= \sum \xi_j \CONJ{\xi_j}
+	\end{align*}
+	
+	\item (a) Show that the vector space $X$ of all real-valued continuous functions on $[-1,1]$ is the direct sum of the set of all even continuous functions and the set of all odd continuous functions on $[-1,1]$.\\
+	
+	Define the inner product over the set of continuous functions on $[-1,1]$ as 
+	\begin{align*}
+		\ABRACKET{x,y} &= \int_{-1}^1 x(t)y(t) dt 
+	\end{align*}Let $E$ be the set of even functions.  That is for all $f \in E$ then $f(x) = f(-x)$. Let $g \in E^\perp$ then
+	\begin{align*}
+		0 &= \ABRACKET{f,g} = \int_{-1}^1 f(t)g(t) dt\\
+		&= \int_{-1}^0 f(t) g(t) dt + \int_{0}^1 f(t)g(t) dt\\
+	\end{align*}notice that the function $h(t)=f(t)g(t)$ on $t\in[-1,1]$ is odd.  Yet, $f$ is even, thus $g$ must be odd.  Since $g$ is arbitrary $E^\perp$ is filled with odd functions. And we know that $X = E \oplus E^\perp$.
 	
 	\setcounter{enumi}{5}
-	\item Show that $Y=\{x\,|\, x=(\xi_j)\in \ell^2, \xi_{2n}=0, n\in \N\}$ is a closed subspace of $\ell^2$ and find $Y^\perp$.  What is $Y^\perp$ if $Y=$ span$\{e_1,\cdots,e_n\}\subset \ell^2$, where $e_j = (\delta_{jk})$?
+	\item Show that $Y=\{x\,|\, x=(\xi_j)\in \ell^2, \xi_{2n}=0, n\in \N\}$ is a closed subspace of $\ell^2$ and find $Y^\perp$.  What is $Y^\perp$ if $Y=$ span$\{e_1,\cdots,e_n\}\subset \ell^2$, where $e_j = (\delta_{jk})$?\\
+	\\
+	Let $x = (\xi_j), y = (\eta_j) \in Y$.  Then, $x+\alpha y = (\xi_j + \alpha \eta_j)$.  Whenever, $j$ is even $\xi_j = \eta_j=0$ and $\xi_j + \alpha \eta_j = 0$ thus $x+\alpha y \in Y$. Further, let $x_n = (\xi^n_j) \in Y$ be a convergent sequence and $x_n \to x$.  NOTE: $\xi^n$ is NOT an exponent but an index.  Then
+	\begin{align*}
+		\NORM{x_n-x}^2 &= \sum_{i=1}^\infty (\xi^n_i-\xi_i)^2
+	\end{align*}when $i$ is even we have zero.  Each of the terms on the right must be positive.  Thus, $\LIM{n \to \infty} \NORM{x_n -x}^2 = 0$ which implies that $\xi^m_n \to \xi_i$ for all $i\in \N$. Thus, $x \in Y$ and $Y$ is closed.\\
+	\\
+	
 
 \end{enumerate}
 \end{document}
