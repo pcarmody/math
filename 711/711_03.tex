@@ -180,6 +180,21 @@ p. 150 \#2, 3a, 6,
 		\ABRACKET{x,y} &= \sum \xi_j \CONJ{\eta_j}\\
 		\NORM{x}^2 &= \sum \xi_j \CONJ{\xi_j}
 	\end{align*}
+	$M$ is convex if given any two points $x=(\xi_n),y=(\eta_n) \in M$ then $z\in M$ where $z=\alpha x+(1-\alpha)y$ and any $0\le \alpha \le 1$.
+	\begin{align*}
+		z&=\alpha x+(1-\alpha)y \\
+		&=\alpha (\xi_n)+(1-\alpha) (\eta_n) \\
+		&=\PAREN{ (\alpha \xi_n) + (\eta_n) -(\alpha \eta_n)}\\
+		&= \PAREN{ \alpha \xi_n + \eta_n - \alpha \eta_n} \\	
+		\text{let } z &= ( \zeta_n )\\
+		\sum \zeta_n & = \sum \PAREN{ \alpha \xi_n + \eta_n - \alpha \eta_n }\\
+		&= \sum \alpha \xi_n + \sum \eta_n - \sum \alpha \eta_n \\
+		&= \alpha \sum \xi_n + \sum \eta_n - \alpha \sum \eta_n \\
+		&= \alpha +1 - \alpha \\
+		&= 1
+	\end{align*}	$M$ is complete when every sequences in $M$ converges to an element in $M$.\\
+	Given a convergent sequence $x_p = ( \xi^p_n) \in M$ where $p$ is an index then $\sum \xi^p_n=1$ for all $p\in \N$.  If $x_p \to x$ then $x \in M$.
+	\\
 	
 	\item (a) Show that the vector space $X$ of all real-valued continuous functions on $[-1,1]$ is the direct sum of the set of all even continuous functions and the set of all odd continuous functions on $[-1,1]$.\\
 	
