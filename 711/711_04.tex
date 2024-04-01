@@ -123,9 +123,33 @@ $(\Leftarrow)$Assuming that this is true for all $x,y \in H$ and we have an orth
 	f(x) &= \sum_{j=1}^\infty \xi_j\CONJ{\zeta_j} & [z=(\zeta_j)\in \ell^2].
 \end{align*}
 
+Given $x = (\xi_n) \in \ell^2$. Let $f$ be a bounded linear functional.  Then, by the Reisz Representation Theorem
+\begin{align*}
+	f: \ell^2 &\to K & K = \R \text{ or } \C\\
+	f(x) &= \ABRACKET{x,z} &\text{ for some } z = (\zeta_n) \in \ell^2 \\ 
+	&= \ABRACKET{(\xi_n),(\zeta_m)} \\
+	&= \sum_{k=1}^\infty \xi_k \CONJ{\zeta_k}
+\end{align*}\\
+
 \noindent \#4 Consider Prob. 3.  If the mapping $X \to X'$ given by $z \mapsto f$ is surjective, show that $X$ must be a Hilbert space.\\
 
+Given $z$ then $f$ is a bounded linear functional on $X$ with $\NORM{z}=\NORM{f}$.
+\begin{align*}
+	z &\mapsto f(x)=\ABRACKET{x,z}
+\end{align*}
+
 \noindent \#5 Show that the dual space of the real space $\ell^2$ is $\ell^2$. (Use 3.8-1.)\\
+\\
+Let $f \in \ell^{2'}$.  Then there exists $z = (\zeta_n) \in \ell^2$ such that $f(x) = \ABRACKET{x,z}$ for all $x \in \ell^2$.  Hence, for $x=(\xi_n)$ we have
+\begin{align*}
+	f(x) &= \ABRACKET{x,z} \\
+	&= \ABRACKET{(\xi_n),(\zeta_m)} \\
+	&= \sum_{k=1}^\infty \xi_k \zeta_k \\
+	&= \ABRACKET{(\zeta_m), (\xi_n)} \\
+	&= \ABRACKET{z,x}
+\end{align*}
+\\
+\\
 
 \noindent \#7 Show that the dual space $H'$ of a Hilbert space $H$ is a Hilbert space with inner product $\ABRACKET{\cdot, \cdot}_1$ defined by
 \begin{align*}
