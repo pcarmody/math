@@ -144,16 +144,60 @@ Let $f \in \ell^{2'}$.  Then there exists $z = (\zeta_n) \in \ell^2$ such that $
 \begin{align*}
 	f(x) &= \ABRACKET{x,z} \\
 	&= \ABRACKET{(\xi_n),(\zeta_m)} \\
-	&= \sum_{k=1}^\infty \xi_k \zeta_k \\
-	&= \ABRACKET{(\zeta_m), (\xi_n)} \\
-	&= \ABRACKET{z,x}
-\end{align*}
+	&= \sum_{k=1}^\infty \xi_k \zeta_k 
+\end{align*}which converges due to Cauchy-Schwartz, thus $f \in \ell^2$ for all $f \in \ell^{2'}$.
 \\
 \\
 
 \noindent \#7 Show that the dual space $H'$ of a Hilbert space $H$ is a Hilbert space with inner product $\ABRACKET{\cdot, \cdot}_1$ defined by
 \begin{align*}
-	\ABRACKET{f_x,f_v}_1 &= \CONJ{\ABRACKET{z,v}}= \ABRACKET{v,z},
+	\ABRACKET{f_z,f_v}_1 &= \CONJ{\ABRACKET{z,v}}= \ABRACKET{v,z},
 \end{align*}where $f_z(x) = \ABRACKET{x,z}$, etc.
+
+\begin{align*}
+	f_z(x) &= \ABRACKET{x, z}\\
+	f_v(x) &= \ABRACKET{x, v}\\
+\end{align*}
+\noindent Show that the inner product has all of the properties.  Let $f_u, f_v, f_w \in H'$ and $u, v, w \in H$ and $f_u(x) = \ABRACKET{x,u}, f_v(x) = \ABRACKET{x, v}$ and $f_w(x) = \ABRACKET{x,w}$ for all $x \in H$.
+\begin{enumerate}[label=(IP\arabic*)]
+	\item $\ABRACKET{x+y,z} = \ABRACKET{x,z}+\ABRACKET{y,z}$
+
+	\begin{align*}
+		(f_u+f_v)(x) &= f_u(x)+f_v(x) =  \ABRACKET{x,u}+\ABRACKET{x, v} = \ABRACKET{x, u+v}\\ \\
+		\therefore\ABRACKET{f_u+f_v,f_w}_1 &= \ABRACKET{w, u+v} \\
+		&= \ABRACKET{w,u}+\ABRACKET{w, v} \\
+		&= \ABRACKET{f_u,f_w}_1 + \ABRACKET{f_v,f_w}_1
+	\end{align*}
+	
+	\item $\ABRACKET{\alpha x,z} = \alpha\ABRACKET{x,z}$
+
+	\begin{align*}
+		\ABRACKET{\alpha f,g} &=
+	\end{align*}		
+	
+	\item $\ABRACKET{x,z} = \CONJ{\ABRACKET{z,x}}$
+	
+	\begin{align*}
+		\text{Since } \ABRACKET{f_u, f_v}_1 &= \ABRACKET{v,u} \text{ and } \ABRACKET{f_v, f_u}_1 = \ABRACKET{u,v}\\
+		\CONJ{\ABRACKET{f_v, f_u}_1} &= \CONJ{\ABRACKET{u,v}} = \ABRACKET{v,u} = \ABRACKET{f_u, f_v}_1
+	\end{align*}
+	
+	\item $\ABRACKET{x,x} \ge 0$ and $\ABRACKET{x,x}=0 \iff x=0$.
+
+	\begin{align*}
+		\ABRACKET{f_v, f_v}_1 &= \ABRACKET{v,v} = \NORM{v} \ge 0 \\
+		\ABRACKET{f_v, f_v}_1 &= 0 \iff v=0  \\
+		\text{thus } f_v(x) &= \ABRACKET{x, 0}=0, \forall x \in H
+	\end{align*}	Hence $f$ is the zero function.
+	
+\end{enumerate}
+Finally, let $(z_k)$ be a convergent sequence in $H$ and $z_n,z_m \in (z_k)$ be any two elements.  The representative elements in $H'$ are $f_{z_n}, f_{z_m}$, respectively.  We know that $\NORM{z_n - z_m} < \epsilon$ for some number $\epsilon > 0$
+\begin{align*}
+	\NORM{z_n - z_m}^2 &= \ABRACKET{z_n - z_m, z_n - z_m}\\
+	&= \NORM{z_n}+\NORM{z_m} -2\ABRACKET{z_n,z_m} \\
+	&= \NORM{f_{z_n}} + \NORM{f_{z_m}} -2\ABRACKET{f_{z_m}, f_{z_n}} \\
+	&= \NORM{f_{z_n}, f_{z_m}}^2\\
+	\therefore \NORM{f_{z_n}- f_{z_m}} &< \epsilon
+\end{align*} and $H'$ is complete.
 
 \end{document}

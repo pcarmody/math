@@ -74,16 +74,28 @@ p. 200 \#2,3,4,5,6,10.
 	\end{align*}
 	
 	\begin{align*}
-		(TT^{-1})^* &= (T^{-1})^*T^*\\
-		TT^{-1} &= T^*(T^*)^{-1} \\
-		(T^{-1})^*T^* &= ((T^*)^{-1})^*T^{**}
+		\ABRACKET{Tx, y} &= \ABRACKET{x, T^*y}\\
+		\ABRACKET{T^{-1}Tx, y} &= \ABRACKET{T^{-1}x, T^*y}\\
+		\ABRACKET{x,y} &= \ABRACKET{T^{-1}x, T^*y}\\
+		\ABRACKET{x, (T^*)^{-1}y} &= \ABRACKET{T^{-1}x, (T^*)^{-1}T^*y}\\
+		&= \ABRACKET{T^{-1}x, y} \\
+		&= \ABRACKET{x, (T^{-1})^*y} \\
+		(T^*)^{-1}&=(T^{-1})^*
 	\end{align*}
 	
-	\item if $(T_n)$ is a sequence of bounded linear operators on a Hilbert space adn $T_n \to T$, show that $T_n^*\to T^*$.
+	\item If $(T_n)$ is a sequence of bounded linear operators on a Hilbert space and $T_n \to T$, show that $T_n^*\to T^*$.
+	
+	\begin{align*}
+		\NORM{T_n -T}^2 &\ge \NORM{T_n}^2 - \NORM{T}^2 = \NORM{T_n^*}^2 - \NORM{T^*}^2 \ge \NORM{T_n^*-T^*}^2\\
+		\text{similarly, }  \NORM{T_n^*-T^*}^2 &\ge  \NORM{T_n^*}^2 - \NORM{T^*}^2 = \NORM{T_n}^2 - \NORM{T}^2 \ge \NORM{T_n -T}^2 \\
+		\text{hence } \NORM{T_n -T}^2 &= \NORM{T_n^*-T^*}^2
+	\end{align*}	We know that given any $N>0$ then for all $n > N$ when $\NORM{T_n -T} < \epsilon$ implies that $\NORM{T_n^*-T^*}<\epsilon$.  Therefore, $T_n^* \to T^*$.
 	
 	\item Let $H_1$ and $H_2$ be Hilbert spaces and $T: H_1 \to H_2$ a bounded linear operator.  If $M_1\subset H_1$ and $M_2 \subset H_2$ are such that $T(M_1) \subset M_2$, show that $M_1^\perp \subset T^*(M_2^\perp)$.
 	
-	\item Let $M_1$ and $M_2$ in Prov. 4 be closed subspaces.   Show that then $T(M_1)\subset M_2$ if and only if $M_1^\perp \supset T^*(M_2^\perp)$.
+	 Let $x \in M_1$ and $z \in M_2^\perp$ and $x \not \in \mathcal{N}(T)$.Then, $\ABRACKET{Tx, z}=0$ implies $\ABRACKET{x, T^*z}=0$ and either $T^*z \in \mathcal{N}(T^*)$ or $T^*z \perp x$.  $x$ is arbitrary, therefore $T^*z \perp \SPAN(M_1)$ or $T^*z \in M_1^\perp$.  Thus, $T^*z \in \mathcal{N}(T^*) \cup M_1^\perp$.  $z$ is arbitrary so $T^*(M_2^\perp) = \mathcal{N}(T^*) \cup M_1^\perp$, hence, $M_1^\perp \subset T^*(M_2^\perp)$.
+	
+	\item Let $M_1$ and $M_2$ in Prob. 4 be closed subspaces.   Show that $T(M_1)\subset M_2$ if and only if $M_1^\perp \supset T^*(M_2^\perp)$.
 	
 	\item If $M_1=\mathcal{N}(T)=\{x\,|\,Tx=0\}$ in Prob. 4, show that 
 	\begin{enumerate}
