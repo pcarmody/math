@@ -1,0 +1,114 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#6}
+\newcommand{\DUEDATE}{May 2, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+\newcommand{\NLL}{\mathcal{N}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert}
+%\newcommand{\HAT}[1]{}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+p. 224 \#4, 7, 8, 9, 
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Let $p$ be defined on a vector space $X$ and satisfy (1) and (2). Show that for any given $x_0 \in X$ there is a linear functional $\tilde{f}$ on $X$ such that $\tilde{f}(x_0)=p(x_0)$ and $|\tilde{f}(x)| \le p(x)$ for all $x \in X$.\\
+	\\
+	Let $f \in X'$ and $f(x_0)=p(x_0)$.  Clearly, $f$ is defined on the subspace spanned by $x_0$, that is, $f$ is linear and $f(\alpha x_0)=\alpha f(x_0)$.  The Hahn-Banach Theorem says that there exists an extension of $f$, namely, $\tilde{f} \in X'$ such that $|\tilde{f}(x)| \le p(x)$ for all $x \in X$.
+	
+	\setcounter{enumi}{6}
+	\item Give another proof of Theorem 4.3-3 in the case of a Hilbert space.
+	
+	\textbf{Theorem 4.3-3a: (Bounded linear functionals, Hilbert).}  Let $X$ be a Hibert space and let $x_0\ne 0$ be any element in $X$.  Then there exists a bounded linear functional $\tilde{f}$ on $X$ such that 
+	\begin{align*}
+	\NORM{\tilde{f}} &= 1, &\tilde{f}(x_0)= \NORM{x_0}
+	\end{align*}
+	
+	Proof: Let $x_0 \in X$, then $Z$ is the subspace spanned by $x_0$. Any Cauchy sequence in $Z$ will converge because that same sequence is in $X$ which is complete.  Hence. $Z$ is also complete.  We know that, for any $f_g \in Z'$ there exists a $g \in Z$ such that $f_g(x) = \ABRACKET{x,g}$ and $\NORM{f_g} = 1$.  By Hahn-Bannach, there exists an extension $\tilde{f} \in X'$ such that $\NORM{\tilde{f}} = 1$ and $|f(x_0)| = \NORM{\tilde{f}} \NORM{x_0} = \NORM{x}$.
+	
+	\item Let $X$ be a normed space and $X'$ its dual space. If $X \ne \{0\}$, show that $X'$ cannot be $\{0\}$.
+	
+	Let $f(x) = \NORM{x}$, this is linear by definition. Therefore, $f \in X'$.  We can see that when $x \ne 0$ that $f(x) \ne 0$. Therefore $f$ is not the zero function and $X \ne \{ 0 \}$.
+	
+	\item Show that for a separable normed space $X$, theorem 4.3-2 can be proved directly, without the use of Zorn's Lemma (which was used indirectly, namely, in the proof of Theorem 4.2-1).
+	
+\end{enumerate}
+\newpage
+p. 255 \#10, 11, 13, 14,
+
+\begin{enumerate}
+	\setcounter{enumi}{9}
+	\item \textbf{(Space $c-0$)}  Let $y=(\eta_j), \eta_j \in \C$, be such that $\sum  \xi_j\eta_j$ converges for every $x=(\xi_j)\in c_0$, where $c_0\in l^\infty$ is the subspace of all complex sequences converge to zero. Show that $\sum |\eta_j|< \infty$.  (Use 4.7-3)
+	
+	\item Let $X$ be a Banach space, $Y$ a normed space and $T_n\in B(X,YT)$ such that $(T_nx)$ is Cauchy in $Y$ for every $x \in X$.  Show that $(\NORM{T_n})$ is bounded.
+	
+	\setcounter{enumi}{12}
+	\item  If $(x_n)$ in a Banach space $X$ is such that $(f(x_n))$ is bounded for all $ f\in X'$, show that $(\NORM{x_n})$ is bounded.
+	\item if $X$ and $Y$ are Banach spaces and $T_n\in B(X,Y), n=1,2,\cdots,$ show that equivalent statements are:
+	\begin{enumerate}
+		\item $(\NORM{T_n})$ is bounded.
+		\item $(\NORM{T_nx})$ is bounded for all $x \in X$.
+		\item $(|g(T_nx)|$ is bounded for all $x\in X$ and all $g \in Y'$.
+	\end{enumerate}
+\end{enumerate}
+\end{document}
