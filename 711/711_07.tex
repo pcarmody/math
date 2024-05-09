@@ -1,0 +1,113 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#7}
+\newcommand{\DUEDATE}{May 16, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+\newcommand{\NLL}{\mathcal{N}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert}
+%\newcommand{\HAT}[1]{}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+p. 290 \#6, 7 
+\begin{enumerate}
+	\setcounter{enumi}{5}
+	\item Let $X$ and $Y$ be Banach spaces and $T: X \to Y$ an injective bounded linear operator.  Show that $T^{-1}:\mathcal{R}(T) \to X$ is bounded if and only if $\mathcal{R}(T)$ is closed in $Y$.
+	
+	\begin{itemize}
+		\item $(\Rightarrow)$ $T^{-1}:\mathcal{R}(T) \to X$ is bounded. $\NORM{T^{-1}y} = \NORM{T^{-1}}\NORM{y}$.  Given any Cauchy sequence $(y_n)\subset \mathcal{R}(T)$ must converge and let $y$ be such that $y_n \to y$.
+		\item $(\Leftarrow)$ $\mathcal{R}(T)$ is closed.
+	\end{itemize}
+	
+	\item Let $T: X \to Y$ be a bounded linear operator, where $X$ and $Y$ are Banach spaces.  If $T$ is bijective, show that there are positive real numbers $a$ and $b$ such that $a \NORM{x} \le \NORM{Tx}\le b  \NORM{x}$ for all $ x \in X$.
+\end{enumerate}
+\newpage p. 296 \# 8, 9, 10 
+\begin{enumerate}
+	\setcounter{enumi}{7}
+	\item Let $X$ and $Y$ be normed spaces and let $T: X \to Y$ be a closed linear operator.  
+	\begin{enumerate}
+		\item Show that the image $A$ of a compact subset $C \subset X$ is closed in Y.
+		\item Show that the inverse image $B$ of a compact subset $K \subset Y$ is closed in $X$.  (Cf. Def. 2.5-1)
+	\end{enumerate}
+	
+	\item If $T: X \to Y$ is a closed linear opearator, where $X$ and $Y$ are normed spaces and $Y$ is compact, show that $T$ is bounded.
+	
+	\item Let $X$ and $Y$ be normed spaces and $X$ compact.  If $T: X \to Y$ is a bijective closed linear operator, show that $T^{-1}$ is bounded.
+
+\end{enumerate}
+\newpage p. 246 \#2, 3, 4 
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Give a simpler proof of Lemma 4.6-7 for the case tha t$X$ is a Hilbert space.
+	\item If a normed space $X$ is reflexive, show that $X'$ is reflexive.
+	\item Show that a Banach space $X$ is reflexive if and only if its dual space $X'$ is reflexive.  (\textit{Hint.}  It can be shown that a closed subspace fo a reflexive Banach space is reflexive.  Use this fact, without proving it.)
+\end{enumerate}
+
+\newpage p. 268 \#4, 7
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Show that weak convergence in footnote 6 implies weak$^*$ convergence.  Shwo that the converse holds if $X$ is reflecive.
+	\setcounter{enumi}{6}
+	\item Let $T_n \in B(X,Y)$, where $X$ is a Banach space.  If $(T_n)$ is strongly operator convergent, show that $(\NORM{T_n})$ is bounded.
+
+\end{enumerate}
+\end{document}
