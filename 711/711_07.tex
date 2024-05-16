@@ -97,19 +97,23 @@ p. 290 \#6, 7
 		
 		\item Show that the inverse image $B$ of a compact subset $K \subset Y$ is closed in $X$.  (Cf. Def. 2.5-1)
 		
-		
+		Let $(y_n) \in K$ and let $\alpha\subset \N$ be an ordered set of indices such that $(y_{\alpha_n})$ converges and let $y = (y_{\alpha_n})$. Then $\NORM{(y_{\alpha_n}) - y} \to 0$ as $n \to \infty$.  Thus, $\NORM{T^{-1}y_{\alpha_n} - T^{-1}y} = \NORM{T^{-1}(y_{\alpha_n} - y)} \le \NORM{T^{-1}}\NORM{y_{\alpha_n}-y} \to 0$ as $n \to \infty$.  Sine $T^{-1}$ is closed $T^{-1}y \in B$ and $B$ is closed.
 		
 	\end{enumerate}
 	
 	\item If $T: X \to Y$ is a closed linear opearator, where $X$ and $Y$ are normed spaces and $Y$ is compact, show that $T$ is bounded.
 	
+	Let $(x_n)$ be a sequence in $X$ then since $Y$ is compact $(Tx_n)$ converges and let $y = Tx_n$ as $n \to \infty$ and let $x$ be such that $Tx=y$. Thus $\NORM{Tx_n - y} = \NORM{Tx_n -Tx} \le M\NORM{x_n-x} \to 0$.  Thus, $T$ is bounded.
+	
 	\item Let $X$ and $Y$ be normed spaces and $X$ compact.  If $T: X \to Y$ is a bijective closed linear operator, show that $T^{-1}$ is bounded.
+	
+	Let $A \subset X$ be closed and bounded.  $T$ is bijective implies that $T^{-1}TA = A$  thus $(T^{-1})^{-1}(C) = T(C) \subset Y$ which is compact, that implies that $T^{-1}$ is continuous and hence, bounded.
 
 \end{enumerate}
 \newpage p. 246 \#2, 3, 4 
 \begin{enumerate}
 	\setcounter{enumi}{1}
-	\item Give a simpler proof of Lemma 4.6-7 for the case tha t$X$ is a Hilbert space.
+	\item Give a simpler proof of Lemma 4.6-7 for the case that $X$ is a Hilbert space.
 	\item If a normed space $X$ is reflexive, show that $X'$ is reflexive.
 	\item Show that a Banach space $X$ is reflexive if and only if its dual space $X'$ is reflexive.  (\textit{Hint.}  It can be shown that a closed subspace fo a reflexive Banach space is reflexive.  Use this fact, without proving it.)
 \end{enumerate}
