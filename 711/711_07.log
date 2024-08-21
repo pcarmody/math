@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2024.3.22)  13 MAY 2024 09:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2024.3.22)  16 MAY 2024 14:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -808,19 +808,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ] [2] [3] [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 129.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 129.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 153.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 153.
  (./711_07.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 129.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 129.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 153.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 153.
 Package rerunfilecheck Info: File `711_07.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 129.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 153.
  ) 
 Here is how much of TeX's memory you used:
  19266 strings out of 483140
  371085 string characters out of 5965151
- 625373 words of memory out of 5000000
+ 627373 words of memory out of 5000000
  33903 multiletter control sequences out of 15000+600000
  535016 words of font info for 35 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -834,13 +834,15 @@ f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbol
-s/msbm10.pfb>
-Output written on 711_07.pdf (4 pages, 111164 bytes).
+sfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
+.pfb>
+Output written on 711_07.pdf (4 pages, 132055 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
- 73 compressed objects within 1 object stream
+ 100 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  17 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

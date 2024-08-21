@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{report}
+\documentclass[landscape, 10pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -67,6 +67,13 @@
 \newcommand{\SSS}{\mathbb{S}}
 \newcommand{\SB}{\mathcal{S}}
 
+\newcommand{\ngram}[4]{% outer radius, tips, rot angle, options
+\pgfmathsetmacro{\starangle}{360/#2}
+\pgfmathsetmacro{\innerradius}{#1*sin(90-\starangle)/sin(90+\starangle/2)}
+\tstar{\innerradius}{#1}{#2}{#3}{#4}
+}
+
+
 \begin{document}
 
 \LARGE{\textbf{$$ \BLUE{\boldsymbol{\exists !}} \, \GREEN{\text{C}^\text{8}_\text{5}}\, \ORANGE{\boldsymbol{\in}}\, \RED{\boldsymbol{\Sigma}^\Psi_{\male}}   \, \BLUE{\boldsymbol{!}} $$}}
@@ -79,6 +86,36 @@
     \node[regular polygon,draw,regular polygon sides = 12, rotate=15] (p) at (0,0) {Creativity};
     \node[circle,fill=green] at (7.25,6.75){\small 2};
 \end{tikzpicture}
+
+\begin{tikzpicture}
+\draw (1,1) node[anchor=north east,ellipse,scale=1.75, draw, fill=green]{Access} -- (4,4) node[anchor=south west, ellipse, scale=1.4,draw,fill=black!60!green]{Achievement} (1,4) node[anchor=south east,ellipse,scale=1.9, draw, fill=brown]{Power} -- (4,1) node[anchor=north west,ellipse,scale=1.75,draw, fill=yellow]{Identity};
+\end{tikzpicture}
+\newpage
+
+
+\begin{tikzpicture}
+\draw (1,2) node[anchor=east,ellipse,scale=1.75, draw, fill=green]{Access} -- 
+	(4,2) node[anchor=west, ellipse, scale=1.4,draw,fill=black!40!green]{Achievement} 
+	(2.5,4) node[anchor=south,ellipse,scale=1.9, draw, fill=brown]{Power} -- 
+	(2.5,0) node[anchor=north,ellipse,scale=1.75,draw, fill=yellow]{Identity};
+\end{tikzpicture}
+\newpage
+% Dominant Axis
+\begin{tikzpicture}
+\draw (1,2) node[anchor=east,ellipse,scale=1.75, draw, fill=green]{Access} -- 
+	(4,2) node[anchor=west, ellipse, scale=1.4,draw,fill=black!40!green]{Achievement} 
+	(2.5,4) node[anchor=south,ellipse,scale=1.9, draw, fill=gray]{Power} -- 
+	(2.5,0) node[anchor=north,ellipse,scale=1.75,draw, fill=gray]{Identity};
+\end{tikzpicture}
+\newpage
+% Critical Axis
+\begin{tikzpicture}
+\draw (1,2) node[anchor=east,ellipse,scale=1.75, draw, fill=gray]{Access} -- 
+	(4,2) node[anchor=west, ellipse, scale=1.4,draw,fill=gray]{Achievement} 
+	(2.5,4) node[anchor=south,ellipse,scale=1.9, draw, fill=brown]{Power} -- 
+	(2.5,0) node[anchor=north,ellipse,scale=1.75,draw, fill=yellow]{Identity};
+\end{tikzpicture}
+\newpage
 
 \begin{tikzpicture}
  
@@ -112,23 +149,23 @@
 %\tikzstyle{every node}=[inner sep=1cm];
 %\node (v0) at (0:0) {$v_0$};
 \node (v1) at (0:8) {Assim./Accomm.};
-\node (v2) at (30:8) {Aesthetic};
-\node (v3) at (2*30:8) {Gestalt};
-\node (v4) at (3*30:8) {Free Market};
-\node (v5) at (4*30:8) {Scholarly};
-\node (v6) at (5*30:8) {Uncertainty};
+\node[text=black!60!red] (v2) at (30:8) {Aesthetic};
+\node[text=black!45!red] (v3) at (2*30:8) {Gestalt};
+\node[text=black!30!red] (v4) at (3*30:8) {Free Market};
+\node[text=black!15!red] (v5) at (4*30:8) {Scholarly};
+\node[text=red] (v6) at (5*30:8) {Uncertainty};
 \node (v7) at (6*30:8) {Cog. Equil.};
-\draw[->] (v2) .. controls +(down:1cm) and +(up:1cm) .. node[right] {F:Optimization} (v1);
-\draw[->] (v3) .. controls +(right:1cm) and +(up:1cm) ..  node[right] {E}(v2);
-\draw[->] (v4) .. controls +(right:1cm) and +(up:1cm) ..  node[above] {D}(v3);
-\draw[-<] (v5) .. controls +(up:1cm) and +(left:1cm) ..  node[above] {C}(v4);
-\draw[->] (v6) .. controls +(up:1cm) and +(left:1cm) ..  node[left] {B}(v5);
-\draw[->] (v7) .. controls +(up:1cm) and +(down:1cm) .. node[left] {A}(v6);
+\draw[->, color=black!60!red] (v2) .. controls +(down:1cm) and +(up:1cm) .. node[right, text=black!60!red] {F:Optimization} (v1);
+\draw[->, , color=black!60!red] (v3) .. controls +(right:1cm) and +(up:1cm) ..  node[right] {E}(v2);
+\draw[->, , color=black!45!red] (v4) .. controls +(right:1cm) and +(up:1cm) ..  node[above] {D}(v3);
+\draw[-<, color=black!30!red] (v5) .. controls +(up:1cm) and +(left:1cm) ..  node[above] {C}(v4);
+\draw[->, color=black!15!red] (v6) .. controls +(up:1cm) and +(left:1cm) ..  node[left] {B}(v5);
+\draw[->, color=red] (v7) .. controls +(up:1cm) and +(down:1cm) .. node[left] {A}(v6);
 %(v2) -- (v5)
-\draw[->] (v3) -- node[below] {Supersaturation} (v1);
-\draw[->] (v4) -- node[left] {Inspiration} (v1);
-\draw[->] (v5) -- node[left] {Research} (v1);
-\draw[->] (v6) -- node[left] {Direct Answer} (v1);
+\draw[->, color=black!45!red] (v3) -- node[below, text=black!45!red] {Supersaturation} (v1);
+\draw[->, color=black!30!red] (v4) -- node[left, text=black!30!red] {Inspiration} (v1);
+\draw[->, color=black!15!red] (v5) -- node[left, text=black!15!red] {Research} (v1);
+\draw[->, color=red] (v6) -- node[left, text=red] {Direct Answer} (v1);
 \draw[->] (v7) -- node[below] {}  (v1);
 %\draw[->] (-9,-1) -- node[left] {Effort} (-9,8);
 \draw[->] (-8,-1) --node[below] {Time} (8,-1);
@@ -136,9 +173,30 @@
 
 \begin{tikzpicture}
 
-\node (SelfEfficacy) at (0,5.5) {Social Cognitive Perspective};
-\node (Creativity) at (-4,0) {Creativity};
-\node (Equity) at (4, 0) {Equity};
+\node (SelfEfficacy) at (0,5.5) {\BLUE{Social Cognitive Perspective}};
+\node (Creativity) at (-4,0) {\RED{Creativity}};
+\node (Equity) at (4, 0) {\GREEN{Equity}};
+\node (PersonalAuthority) at (0,2) {Personal Authority};
+%\draw [<->] (Equity) -- (SelfEfficacy);
+\path [->,bend left=10] (SelfEfficacy) edge node {} (Equity);
+    \path [->,bend left=10] (Equity) edge node {} (SelfEfficacy);
+%\draw [<->] (SelfEfficacy) -- (Creativity);
+\path [->,bend left=10] (Creativity) edge node {} (SelfEfficacy);
+    \path [->,bend left=10] (SelfEfficacy) edge node {} (Creativity);
+%\draw [<->] (Creativity) -- (Equity);
+\path [->,bend left=10] (Equity) edge node {} (Creativity);
+    \path [->,bend left=10] (Creativity) edge node {} (Equity);
+\end{tikzpicture}
+
+%\node[regular polygon,draw,regular polygon sides = 12, rotate=15] (p) at (0,0) {Creativity};
+\begin{tikzpicture}
+
+%\node (SelfEfficacy) at (0,5.5) {\BLUE{Social Cognitive Perspective}};
+%\node (Creativity) at (-4,0) {\RED{Creativity}};
+%\node (Equity) at (4, 0) {\GREEN{Equity}};
+\node[regular polygon,draw,regular polygon sides = 3,scale=0.8, fill=blue] (p) at (0,5.5) {SCP};
+\node[regular polygon,draw,regular polygon sides = 7,scale=0.8,  fill=red] (p) at (-4,0) {Creativity};
+\node[diamond,draw,regular polygon sides = 4,scale=1.2, fill=green] (p) at (4,0) {Equity};
 \node (PersonalAuthority) at (0,2) {Personal Authority};
 %\draw [<->] (Equity) -- (SelfEfficacy);
 \path [->,bend left=10] (SelfEfficacy) edge node {} (Equity);
@@ -164,5 +222,7 @@
      (e)  .. controls +(-1,1) and +(-2,0) .. (a) 
       -- (d) -- (c);
 \end{tikzpicture}
+
+
 
 \end{document}
