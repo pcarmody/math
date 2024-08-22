@@ -6,8 +6,8 @@
 \contentsline {section}{\numberline {2.1}Euclidian Space -- Exercises}{8}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Basis for a Topology -- Exercises}{10}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Basis for a Given Topology}{11}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Important Definitions}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Basic and T-spaces}{12}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Homeomorphisms}{12}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Countability and Topologies}{13}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Miscellaneous}{13}{section.3.4}%
+\contentsline {chapter}{\numberline {50}Important Definitions}{12}{chapter.50}%
+\contentsline {section}{\numberline {50.1}Basic and T-spaces}{12}{section.50.1}%
+\contentsline {section}{\numberline {50.2}Homeomorphisms}{12}{section.50.2}%
+\contentsline {section}{\numberline {50.3}Countability and Topologies}{13}{section.50.3}%
+\contentsline {section}{\numberline {50.4}Miscellaneous}{13}{section.50.4}%

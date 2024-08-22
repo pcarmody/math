@@ -237,20 +237,20 @@
 \newpage
 \item Let $(X,\TT)$ be a topological space with the property that every subset is closed.  Prove that it is a discrete space.
 
-\begin{align*}
-	S \subseteq X \implies X\backslash X \text{ is open } \implies X\backslash S \in \TT \\
+\BLUE{\begin{align*}
+	S \subseteq X \implies X\backslash S \text{ is open } \implies X\backslash S \in \TT \\
 	T \in \TT \implies X\backslash T \text{ is closed} \implies T \subseteq X
-\end{align*}
+\end{align*} }
 
 \item Observe that if $(X,\TT)$ is a discrete space or an indiscrete space, then every open set is a clopen set.  Find a topology $\TT$ on the set $X=\{a,b,c,d\}$ which is not discrete and is not indiscrete but has the property that every open set is clopen.
 
-Let $\TT = \{X, \emptyset, \{a\}, \{b,c,d\}\}$
+\BLUE{Let $\TT = \{X, \emptyset, \{a\}, \{b,c,d\}\}$}
 
 \item Let $X$ be an infinite set.  If $\TT$ is a topology on $X$ such that every infinite subset of $X$ is closed, prove that $\TT$ is the discrete topology.
 
 \begin{align*}
 	S \subseteq X \text{ and } |S| = \infty\\
-	| X\backslash S | < \infty \implies X\backslash S \text{ is open}\\
+	| X\backslash S | < \infty \implies X\backslash S \text{ is open}
 \end{align*}there are an infinite number of finite subsets whose compliment is infinite and closed.  These are precisely what make up a discrete topology.
 
 \item Let $X$ be an infinite set and $\TT$ a topology on $X$ with the property that the only infinite subset of $X$ which is open is $X$ itself.  Is $(X,\TT)$ necessarily an indiscrete space?
@@ -267,7 +267,7 @@ Let $\TT = \{X, \emptyset, \{a\}, \{b,c,d\}\}$
 \end{enumerate}
 
 \item \begin{enumerate}[label=(\roman*)]
-	\item A recorded in \url{http://en.wikipedia.org/wiki/Finite_topological_space}, the number of distinct topologies on a set with $n \in \N$ points can be very large even for small $n$; namely when $n =2$, there are 4 topologies;  when $n=3$, there are 29 topologies:  when $n=4$, there are 355 topologies;  when $n=5$, there are 6942 topologies etc.  Using mathematical induction, prove that as $n$ increases the number of topologies increases.\\
+	\item A recorded in \url{http://en.wikipedia.org/wiki/Finite_topological_space}, the number of distinct topologies on a set with $n \in \N$ points can be very large even for small $n$; namely when $n =2$, there are 4 topologies;  when $n=3$, there are 29 topologies:  when $n=4$, there are 355 topologies;  when $n=5$, there are 6942 topologies etc.  Using mathematical induction, prove that as $n$ increases the number of topologies increases.
 %	[Hint. It suffices to show that if a set with $n$ points has $M$ distinct topolgies, then a set with $n+1$ points has at least $M+1$ topologies.]
 	
 	\item Using mathematical induction prove that if the finite set $X$ has $n \in \N$ then it has at least $(n-1)!$ distinct topolgies.\\
@@ -395,15 +395,15 @@ $\TT_2$ consists of $\N,\emptyset$, and every $\{n, n+1, \dots\}$, for $n$ any p
 
 \item Prove that if $a,b \in \R$ with $a < b$ then neither $[a,b)$ nor $(a,b]$ is an open subset of $\R$.  Also show that neither is a closed subset of $\R$.
 
-In the case of $[a,b)$ there is no set $a \in (x,y)$ because $x < a$ implies that $x+\frac{|x-a|}{2}$ would have to be a member of $[a,b)$ which it cannot.  Similarly for $(a,b]$.
+\BLUE{In the case of $[a,b)$ there is no set $a \in (x,y)$ because $x < a$ implies that $x+\frac{|x-a|}{2}$ would have to be a member of $[a,b)$ which it cannot.  Similarly for $(a,b]$. }
 
 \item Prove that the sets $[a,\infty)$ and $(-\infty, a]$ are closed subsets of $\R$.
 
-The composite of $[a,\infty)$ is $(-\infty, a)$ which is open and similarly for $(-\infty, a]$.
+\BLUE{The complement of $[a,\infty)$ is $(-\infty, a)$ which is open and similarly for $(-\infty, a]$.}
 
 \item Show, by example, that the union of an infinite number of closed subsets of $\R$ is not necessarily a closed subset of $\R$.
 
-Define $S_i = [1/i, 1]$ then $\mathcal{S} = \cup_{i=1}^\infty S_i$.  Obviously, given any $n \in \N$ there is a closed set $S_n=[1/n, 1]$ and there exists $(1/(n+1),1) \subseteq \mathcal{S}$ such that $1/n \in  (1/(n+1),1)$ hence $\mathcal{S}$ must be open.
+\BLUE{Define $S_i = [1/i, 1]$ then $\mathcal{S} = \cup_{i=1}^\infty S_i$.  Obviously, given any $n \in \N$ there is a closed set $S_n=[1/n, 1]$ and there exists $(1/(n+1),1) \subseteq \mathcal{S}$ such that $1/n \in  (1/(n+1),1)$ hence $\mathcal{S}$ must be open.}
 
 \item Prove each of the following statements.
 \begin{enumerate}[label=(\roman*)]
@@ -414,7 +414,7 @@ Define $S_i = [1/i, 1]$ then $\mathcal{S} = \cup_{i=1}^\infty S_i$.  Obviously, 
 
 \item If $F$ is a non-empty finite subset of $\R$, show that $F$ is closed in $\R$ but that $F$ is not open in $\R$.
 
-\item if $F$ is non-empty countable subset of $\R$, prove that $F$ is not an open set, but that $F$ may or may not be a closed set depending on the choice of $F$.
+\item If $F$ is non-empty countable subset of $\R$, prove that $F$ is not an open set, but that $F$ may or may not be a closed set depending on the choice of $F$.
 
 \item \begin{enumerate}[label=(\roman*)]
 
@@ -544,7 +544,7 @@ Define $S_i = [1/i, 1]$ then $\mathcal{S} = \cup_{i=1}^\infty S_i$.  Obviously, 
 	
 	\item the collection of all "open" squares;
 	
-	\item the colection of all "open" rectangles;
+	\item the collection of all "open" rectangles;
 	
 	\item the collection of all "open" triangles";
 	
@@ -598,7 +598,7 @@ Define $S_i = [1/i, 1]$ then $\mathcal{S} = \cup_{i=1}^\infty S_i$.  Obviously, 
 \item Let $\SB$ be the collection of all circles in the plane which have their centres on the X-axis.  If $\SB$ is a subbasis for a topology $\TT$ on $\R^2$, describe the open sets in $(\R^2, \TT)$.
 
 \end{enumerate} % Basis for a Given Topology
-
+\setcounter{chapter}{49} 
 \chapter{Important Definitions}
 
 \section{Basic and T-spaces}
@@ -632,6 +632,9 @@ $A$ of $X$ and any point $x \in X \backslash A$, there exist open sets $U$ and $
 said to be a $T_3$-space
 \end{definition}
 
+\begin{definition}[Dense] Let $A$ be a subset of a topological space $(X, \TT)$.  Then, $A$ is said to be \DEFINE{dense in $X$} or \DEFINE{everywhere dense in $X$} if $\CONJ{A} =X$.
+\end{definition}
+
 \section{Homeomorphisms}
 
 \begin{remark}Preserved by Homeomorphisms
@@ -650,8 +653,7 @@ said to be a $T_3$-space
 \end{enumerate}
 \end{remark}
 
-\begin{remark}two spaces $(X,\TT ) and (Y, \TT_1 )$ cannot be homeomorphic if $X$ and $Y$ have different cardinalities (e.g. $X$ is countable and $Y$ is 
-uncountable)or if $\TT$ and $\TT_1$ have different cardinalities.
+\begin{remark}two spaces $(X,\TT ) \AND (Y, \TT_1 )$ cannot be homeomorphic if $X$ and $Y$ have different cardinalities (e.g. $X$ is countable and $Y$ is uncountable) or if $\TT$ and $\TT_1$ have different cardinalities.
 \end{remark}
 
 \section{Countability and Topologies}
@@ -671,7 +673,7 @@ uncountable)or if $\TT$ and $\TT_1$ have different cardinalities.
 \begin{definition}[Product Topology]Let $\BB_1$ be a basis for a topology $\TT_1$ on a set $X$ and $\BB_2$ a basis for a topology $T_2$ on a set $Y$.  the set $X \times Y$ consists of all ordered pairs $\ABRACKET{x,y}, x \in X$ and $y \in Y$.  Let $\BB$ be the collection of subsets of $X \times Y$ consisting of all the sets $B_1 \times B_2$ where $B_1 \in \BB_1$ and $B_2 \in \BB_2$.  Prove that $\BB$ is a basis for a topology on $X \times Y$.  the topology so defined is called the \DEFINE{product topology} on $X \times Y$.
 \end{definition}
 
-\begin{definition}[Subbasis] Let $(X, \TT)$ be a topological space.  A non-empty collection $\SB$ of open subsets of $X$ is said to be \DEFINE{subbasis} of $\TT$ if the collection of all finite intersections fo members of $\SB$ forms a basis for $\TT$.
+\begin{definition}[Subbasis] Let $(X, \TT)$ be a topological space.  A non-empty collection $\SB$ of open subsets of $X$ is said to be \DEFINE{subbasis} of $\TT$ if the collection of \underline{all finite intersections} of members of $\SB$ forms a basis for $\TT$.
 \end{definition}
 
 \section{Miscellaneous}
