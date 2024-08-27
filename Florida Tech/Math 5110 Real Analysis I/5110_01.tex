@@ -66,7 +66,13 @@ We say a function $f: \R \to \R$ is \textit{continuous} at a point $a \in \R$ if
 \begin{enumerate}[label=(\alph*)]
 \item Show that $f(x)=x^2$ is continuous at $x=2$.
 
-\BLUE{Given an $\epsilon > 0$, when $|f(x)-4|< \epsilon$, $ |x^2 -4| < \epsilon$.  Let $\delta < \sqrt{\epsilon + 4}$ }
+\RED{Given an $\epsilon > 0$, when $|f(x)-4|< \epsilon$, $ |x^2 -4| < \epsilon$.  Let $\delta < \sqrt{\epsilon + 4}$ \\
+If \begin{align*}
+	(2+\delta)^2-4 &< \epsilon \\
+	(2+\delta)^2&< \epsilon +4\\
+	2+\delta < \sqrt{\epsilon +4} \\
+	\delta < \sqrt{\epsilon+4}-2
+\end{align*} }
 
 \item Suppose that $f$ is continuous at $a$ and $f(a) \ne 0$. Show that $f$ is nonzero in some open interval containing $a$.
 
@@ -90,6 +96,7 @@ We say a function $f: \R \to \R$ is \textit{continuous} at a point $a \in \R$ if
 \end{align*}$f(x)$ is both continuous and differentiaable at $x=0$. }
 \end{enumerate}
 
+\newpage
 \item This problem reviews $\sup$ and $\inf$.
 
 For any subset $A \subset \R$, we say that $M$ is an \textit{upper bound} for $A$ if $x \le M$ for all $x \in A$.  If a set $A$ has a finite upper bound, we say it is \textit{boundared above}.  It is a theorem about the set $\R$ that \textit{for any set $A \subset \R$ that is bounded above, there exists a least (smallest) upper bound for $A$.}  This least upper bound is called supermum of $A$, and denoted $\sup A$.  By definition, the number $\sup A$ has two properties.
@@ -131,6 +138,7 @@ Similarly, any set that is bounded below has a \textit{greatest lower bound} cal
 
 \end{enumerate}
 
+\newpage
 \item Section 1.1, Exercise 5, 6, 13.
 
 \begin{description}
@@ -146,7 +154,8 @@ Similarly, any set that is bounded below has a \textit{greatest lower bound} cal
 \end{align*}
 
 \RED{Let's start by expanding the center term\begin{align*}
-	\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2 &= \sum_{i=1}^n a_i^2\sum_{j=1}^n b_j^2 + \sum_{i=1}^nb_i^2\sum_{j=1}^n a_i^2 - 2\sum_{i=1}^na_ib_i\sum_{j=1}^na_jb_j \\
+	\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2 &= \sum_{i=1}^n\sum_{j=1}^n ( (a_ib_j)^2+(a_jb_i)^2 -(a_ib_ja_jb_i)^2)\\
+	&= \sum_{i=1}^n a_i^2\sum_{j=1}^n b_j^2 + \sum_{i=1}^nb_i^2\sum_{j=1}^n a_i^2 - 2\sum_{i=1}^na_ib_i\sum_{j=1}^na_jb_j \\
 	&= 2\PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^nb_j^2}-2\PAREN{\sum_{i=1}^na_ib_i}^2
 \end{align*}Equation 1.3 then becomes
 \begin{align*}
@@ -157,8 +166,22 @@ Similarly, any set that is bounded below has a \textit{greatest lower bound} cal
 	\PAREN{\sum_{i=1}^na_ib_i}^2+\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2&= \PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2} \\
 	\PAREN{\sum_{i=1}^na_ib_i}^2&=\PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2} - \frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2 \\
 	\therefore \BARS{\sum_{i=1}^na_ib_i} &\le \PAREN{\sum_{i=1}^na_i^2}^{1/2}\PAREN{\sum_{j=1}^n b_j^2}^{1/2}
+\end{align*}Let's start by taking the square of the distance from $a+b$ to zero using the $\ell^2$.
+\begin{align*}
+	d_{\ell^2}(a+b, 0)^2 &= \sum_{i=1}^n (a_i+b_i)^2 \\
+	&= \sum_{i=1}^n (a_i^2 + b_i^2 + 2a_ib_i) \\
+	&= \sum_{i=1}^n a_i^2 + \sum_{i=1}^nb_i^2 + 2\sum_{i=1}^na_ib_i 
+\end{align*}apply Cauchy-Schwarz and factor.
+\begin{align*}
+	d_{\ell^2}(a+b, 0)^2 &\le d_{\ell^2}(a,0) + d_{\ell^2}(b, 0) + 2 \PAREN{\sum_{i=1}^na_i^2}^{1/2}\PAREN{\sum_{j=1}^n b_j^2}^{1/2} \\
+	&\le d_{\ell^2}(a,0) + d_{\ell^2}(b, 0) + 2\PAREN{ d_{\ell^2}(a,0)\cdot d_{\ell^2}(b,0) }^{1/2} \\
+	&\le \PAREN{ d_{\ell^2}(a,0)^{1/2} + d_{\ell^2}(b,0)^{1/2}}^2
+\end{align*}Expand the $\ell^2$ metrics and take the square root of both sides and 
+\begin{align*}
+	\PAREN{\sum_{i=1}^n(a_i+b_i)^2}^{1/2} &\le \PAREN{\sum_{i=1}^n a_i^2}^{1/2}+\PAREN{\sum_{i=j}^n b_j^2}^{1/2}
 \end{align*} }
 
+\newpage
 \item \textit{Exercise 1.1.6}  Show that $(\R^n, d_{l^2})$ in Example 1.1.6 is indeed a metric space. (Hint: use Exercise 1.1.5)\\
 \textbf{Example 1.1.6} (Euclidean spaces). Let $n \ge 1$ be a natural number, and let $\R^n$ be the space of $n$-tupes of real numbers:
 \begin{align*}
@@ -166,9 +189,25 @@ Similarly, any set that is bounded below has a \textit{greatest lower bound} cal
 \end{align*}We define the \textit{Euclidean metric} (also called the\textit{ $l^2$ metric}) $d_{l^2}: \R^n \times \R^n \to \R$ by
 \begin{align*}
 	d_{l^2} ((x_1, \dots, x_n), (y_1, \dots, y_n)) &= \sqrt{(x_1-y_1)^2+\cdots+ (x_n-y_n)^2}\\
-	&= \PAREN{\sum_{i=1}^n (x_i-y_y)^2 }
+	&= \PAREN{\sum_{i=1}^n (x_i-y_i)^2 }^{1/2}
 \end{align*}
 
+\BLUE{We must prove that $d_{\ell^2}$ is symmetric, positive definite and that the triangle inequality holds.
+\begin{description}
+	\item Symmetric: show that $d_{\ell^2}(x,y) = d_{\ell^2}(y,x)$.
+		\begin{align*}
+			d_{l^2} ((x_1, \dots, x_n), (y_1, \dots, y_n)) &= \PAREN{\sum_{i=1}^n (x_i-y_i)^2 }^{1/2} \\
+			&= \PAREN{\sum_{i=1}^n (y_i-x_i)^2 }^{1/2} \\
+			&= d_{l^2} ((y_1, \dots, y_n), (x_1, \dots, x_n))
+		\end{align*}
+	\item Positive Definite: show that $d_{\ell^2}(x,y)\ge 0$ and $d_{\ell^2}(x,y) = 0 \to x=y$.\\
+	The square root is taken as a positive value.  $d_{l^2} ((x_1, \dots, x_n), (y_1, \dots, y_n))=0$ implies that each $x_i - y_i=0$ therefore $x=y$.
+	\item Triangle Inequality: show that $d_{\ell^2}(x,z) \le d_{\ell^2}(x,y)+d_{\ell^2}(y,z)$\\
+	Excercise 1.1.5 proves the triangulate inequality replacing $a_i = x_i$ and $b_i = y_i$.
+\end{description}
+}
+
+\newpage
 \item \textit{Exercise 1.1.13} Prove Proposition 1.1.19.
 \textbf{Proposition 1.1.19} (Convergence in a the discrete metric).  \textit{Let $X$ be any set, and let $d_{\text{disc}}$ be the discrete metric on $X$.  let $(x^{(x=n)})_{n=m}^\infty$ be a sequence of points in $X$, and let $x$ be a point in $X$. Then $(x^{(n)})_{n=m}^\infty$ convergent to $x$ with respect to the discrete metric $d_{\text{disc}}$ if and only if there exists $N \ge m$ sucht ath $x^{(n)}=x$ for all $n \ge N$. }
 
