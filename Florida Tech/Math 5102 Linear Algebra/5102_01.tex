@@ -27,13 +27,16 @@
 
 %\urlstyle{same}
 
-\newcommand{\CLASSNAME}{Math 5201 -- Linear Algebra w/Perera}
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
 \newcommand{\STUDENTNAME}{Paul Carmody}
 \newcommand{\ASSIGNMENT}{Homework \#1 }
 \newcommand{\DUEDATE}{September 2, 2024}
 \newcommand{\SEMESTER}{Fall 2024}
-\newcommand{\SCHEDULE}{MW 12:30 -- 1:145}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
 \newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -49,9 +52,112 @@
 
 \begin{center}
 	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
 \end{center}
 \begin{center}
 	\STUDENTNAME \\
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
+Page \#14: 7, 10, 11, 20, 21\\
+\begin{enumerate}
+	\setcounter{enumi}{6}
+	\item Let $S = \{0,1\}$ and $F=R$.  If $\FF(S,R)$, show that $f=g$ and $f+g=h$, where $f(t) = 2t+1, g(t)=1+4t-2t^2$, and $h(t) = 5^t+1$.
+	\begin{itemize}
+		\item $f=g$
+		
+		$f(0)= 2(0)+1=1$ and $g(0)1+4(0)-2(0)^2=1 \to f(0) = g(0)$\\
+		$f(1)= 2(1)+1=3$ and $g(1)1+4(1)-2(1)^2=1+4-2=3 \to f(1) = g(1)$\\
+		$f=g$ since $f(s)=g(s)$ for all $s \in S$
+		
+		\item $f+g = h$
+		
+		\begin{align*}
+			(f+g)(t) &= f(t)+g(t)\\
+			&=2t+1+1+4t-2t^2 \\
+			&= 2+6t-2t^2 \\
+			(f+g)(0) &= 2+6(0)-2(0)^2 = 2 \\
+			(f+g)(1) &= 2+6(1)-2(1)^2 = 6 \\ \\
+			h(0) &= 5^0+1 = 2 \\
+			h(1) &= 5^1+1 = 6 \\ \\
+			(f+g)(0) &= h(0) \AND (f+g)(1) = h(1) \\ \\
+			\therefore f+g &= h \text{ since } (f+g)(t) = h(t), \forall t \in S
+		\end{align*}
+	\end{itemize}
+	
+	\setcounter{enumi}{9}
+	\item Let $V$ denote the set of all differentiable real-valued functions defined on the real line.  Prove that $V$ is a vector space with the operations of additons and scalar multiplication defined in Example 3.
+	
+	From Example 3 we have
+	\begin{align*}
+		(f+g)(s) = f(s)+g(s)\AND (cf)(s)= c\SQBRACKET{f(s)}, \forall s \in \R
+	\end{align*}  From the additive rule of differentiation $(f+g)'(s) = f'(s)+g'(s)$ which implies that $(f+g) \in V$ and from the multiplicative rule of differentiation we know that $(cf)'(s)=c[f'(s)]$ which implies that $cf \in V$.  Hence $V$ is a vector space.
+	
+	\item Let $V=\{0\}$ consist of a single vector $0$ and define $0+0=0$ and $c0=0$ for each scalar $c$ in $F$.  Prove that $V$ is a vector space over $F$.  ($V$ is called the \textbf{zero vector space}).
+	
+	Given any $v,w \in V$ we have $v+w=0+0=0 \in V$ and for all $c\in F, cv=c(0)=0 \in V$.  Therefore $V$ is a vector space.
+	\setcounter{enumi}{19}
+	\item Let $V$ be the set of sequences $\{a_n\}$ of real numbers.  (See Example 5 for the definition of a sequence.)  For $\{a_n\},\{b_n\} \in V$ and any real number $t$, define
+	\begin{align*}
+		\{a_n\}+\{b_n\} = \{a_n+b _n\} \text{ and } t\{a_n\} = \{ta_n\}.
+	\end{align*}Prove that, with these operations, $V$ is a vector space. over $\R$.
+	
+	Given any two real sequences $\{a_n\},\{b_n\} \in V$, we can see that the sequence $\{a_n + b_n\}$ is made up of real numbers, namely $a_i+b_i$ for all $i\in \N$, making it a real sequence.  We can also see that $\{c a_n\}$ is made up of real numbers, namely $ca_i$ for all $i \in \N$, making it a real sequence.  Hence, $V$ is a vector space.
+	
+	\item Let $V$ and $W$ be vector spaces over a field $F$.  Let 
+	\begin{align*}
+		Z = \BRACKET{\PAREN{v,w}: v \in V \AND w \in W}
+	\end{align*}Prove that $Z$ is a vector space over $F$ with the operations
+	\begin{align*}
+	\PAREN{v_1, w_1}+\PAREN{v_2, w_2} = \PAREN{v_1+v_2, w_1+w_2} \AND c\PAREN{v_1, w_1}=\PAREN{cv_1.cw_1}
+	\end{align*}
+	
+	Given $v_1, v_2 \in V$ and $w_1, w_2 \in W$ we can see that by definition $z_1=(v_1, w_1), z_2=(v_2, w_2) \in Z$.  We want to show that $z_1 + z_2 \in Z$ and $cz_1 \in Z$ for all $c \in F$.  \\
+	Well, $z_1+z_2 = \PAREN{v_1, w_1}+\PAREN{v_2, w_2} = \PAREN{v_1+v_2, w_1+w_2}$ and since $V,W$ are vector spaces we know that $v_1+v_2\in V$ and $w_1+w_2 \in W$. Therefore, $z_1+z_2 \in Z$. \\
+	Additionally, $cz_1 = c(v_1, w_1) = (cv_1, cw_1)$ and we know that $cv_1 \in V$ and $cw_1 \in W$ therefore $cz_1 \in Z$.\\
+	Hence, $Z$ is a vector space.
+\end{enumerate}
+\newpage
+
+Page \#20: 3, 4, 5, 10, 15, 19
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item Prove that $(aA+bB)^t = aA^t+bB^t$ for any $A,B\in \MMN(F)$ and any $a,b \in F$.
+	
+	\begin{align*}
+		A^t &\implies [A_{ij}]^t = [A_{ji}] \\
+		(aA+bB)^t &= \SQBRACKET{(aA + bB)_{ji}} \\
+		 &= \SQBRACKET{ aA_{ji}+bB_{ji} } \\
+		 &= a\SQBRACKET{A_{ji}}+b\SQBRACKET{B_{ji}} \\
+		 &= aA^t + bB^t
+	\end{align*}
+	
+	\item Prove that $(A^t)^t=A$ for each $A \in \MMN(F)$.
+	
+	Let $B = A^t = [A_{ji}]$ and $B^t = [A_{ji}]^t = [A_{ij}] = A$.
+	
+	\item Prove that $A+A^t$ is symmetric for any square matrix $A$.
+	
+	$A = [A_{ij}]$ and $A^t = [A_{ji}]$.  Therefore $A+A^t = [A_{ij}]+[A_{ji}]=[A_{ij}+A_{ji}$.  Given any $i, j \in [1, \dots, n]$ we can see that $(A+A^t)_{ij}=A_{ij}+A_{ji}=A_{ji}+A_{ij}=(A+A^t)_{ji}$, hence symmetric.
+	
+	\setcounter{enumi}{9}
+	\item Prove that $W_1= \BRACKET{\PAREN{a_1,a_2,\dots, a_n} \in F^n: a_1+a_2+\cdots+a_n=0}$ is a subspace of $F^n$, but $W_2= \BRACKET{\PAREN{a_1,a_2,\dots, a_n} \in F^n: a_1+a_2+\cdots+a_n=1}$ is not.
+	
+	Given $a=\PAREN{a_1,a_2,\dots, a_n},b=\PAREN{b_1,b_2,\dots, b_n} \in W_1$ we can see that $a+b = \PAREN{a_1+b_1, a_2+b_2, \dots, a_n+b_n}$ and $a_1+b_1+a_2+b_2+\cdots_n+b_n = a_1+a_2+\cdots+a_n+b_1+b_2+\cdots+b_n=0+0=0$ therefore $a+b \in W_1$.  Similarly, $ca = c\PAREN{a_1,a_2,\dots, a_n}= \PAREN{ca_1,ca_2,\dots, ca_n}$ and $ca_1+ca_2+\cdots+ca_n= c(a_1+a_2+\cdots+a_n)=c(0)=0.$ Therefore $W_1$ is a vector space. \\
+	However, let $a=\PAREN{a_1,a_2,\dots, a_n},b=\PAREN{b_1,b_2,\dots, b_n} \in W_2$ we can see that $a+b = \PAREN{a_1+b_1, a_2+b_2, \dots, a_n+b_n}$ and $a_1+b_1+a_2+b_2+\cdots_n+b_n = a_1+a_2+\cdots+a_n+b_1+b_2+\cdots+b_n=1+1=2$ which means that $a+b \not \in W_2$.
+	\setcounter{enumi}{14}
+	\item  Is the set of all differentiable real-valued functions defined on $\R$ a subspace of $C(\R)$?  Justify your answer.
+	
+	Yes. If $f,g\in C(\R)$ are differentiable, by the addition rule so is $f+g$, i.e., $(f+g)'=f'+g'$, and so is $cf$, i.e., $(cf)'=cf'$, for all $c\in F$.
+	
+	\setcounter{enumi}{18}
+	\item Let $W_1$ and $W_2$ be subspaces of a vector space $V$.  Prove that $W_1 \bigcup W_2$ is a subspace of $V$ if and only if $W_1 \subseteq W_2$ or $W_2 \subseteq W_1$.
+	
+	Let $w_1 \in W_1, w_2 \in W_2$ and specifically $w_1 \not \in W_2$.  Clearly, $w_1, w_2 \in W_1\cap W_2$, if $x=w_1 + w_2 \in W_1\cup W_2$ then $x \in W_1$, $x \in W_1 \cap W_2$, or $x \in W_2$.  Cases: 
+	\begin{description}
+	\item $x \in W_1$: this implies that both $w_1, w_2 \in W_1$, hence $W_2 \subseteq W_1$.
+	\item $x \in W_1 \cap W_2$: this also implies  that both $w_1, w_2 \in W_1$, hence $W_2 \subseteq W_1$.
+	\item $x \in W_2$: this is a contraction from our assumption  that $w_1 \not \in W_2$.
+	\end{description}
+	
+\end{enumerate}
 \end{document}

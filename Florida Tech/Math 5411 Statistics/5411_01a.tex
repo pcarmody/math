@@ -1,0 +1,93 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#1 }
+\newcommand{\DUEDATE}{August 27, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+1. Prove the property C and D in page 5 of the textbook. \\
+
+\textbf{Property C.} If $A \subset B$, then $P(A) \le P(B)$.  \\
+\BLUE{Since $A \subset B$ let $C = B\backslash A$.
+\begin{align*}
+	\LET C = B \backslash A\\
+	B &= A \sqcup C\\
+	P(B) &= P(A) + P(C)\\
+	P(B) &\ge P(A)
+\end{align*} }
+
+\textbf{Property D} Addition Law $P(A \cup B) = P(A) + P(B)- P(A \cap B)$. \\ \\
+\BLUE{ Notice that\begin{align*}
+	P(A) &= P\PAREN{ (A\backslash B) \sqcup (A \cap B) } = P(A\backslash B)+P (A \cap B) \\
+	P(B) &= P\PAREN{ (B\backslash A) \sqcup (A \cap B) } = P(B\backslash A)+P (A \cap B) \\ 
+	&\AND \\
+	A \cup B &= (A\backslash B) \sqcup (A \cap B) \sqcup (B \backslash A)
+\end{align*}Then
+\begin{align*}
+	P(A \cup B) &= P(A\backslash B) +P (A \cap B) + P(B \backslash A) \\
+		P(A \cup B) + P(A \cap B) &= \PAREN{ P(A\backslash B) +P (A \cap B)} + \PAREN{P(B \backslash A) + P(A \cap B)} \\
+		&= P(A)+P(B) \\
+	P(A \cup B) &= P(A) + P(B)- P(A \cap B)
+\end{align*} }
+\newpage
+
+2. Read the textbook up to page 11 and solve modified Example F as: How many people must you ask to have a 50:50 chance of finding someone who share your birth month?\\
+\\\BLUE{ Using a similar argument.  Asking $n$ people with the event is that one of those birthdays is the same month as my own.  The total number of outcomes is $12^n$ and the total number of failures, $A^c = 11^n$.  Thus, $P(A^c) = \frac{11^n}{12^n}$ and $P(A) = 1-\frac{11^n}{12^n}$.  Therefore, for $P(A) = 0.5$ we have 
+\begin{align*}
+	\frac{11^n}{12^n}=0.5\\
+	n= \frac{\ln 0.5}{\ln \frac{11}{12} } \approx 8
+\end{align*} }
+
+\end{document}

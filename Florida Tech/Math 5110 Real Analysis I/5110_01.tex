@@ -27,7 +27,7 @@
 
 %\urlstyle{same}
 
-\newcommand{\CLASSNAME}{Math 5102 -- Real Analysis I}
+\newcommand{\CLASSNAME}{Math 5110 -- Real Analysis I}
 \newcommand{\STUDENTNAME}{Paul Carmody}
 \newcommand{\ASSIGNMENT}{Homework \#1 }
 \newcommand{\DUEDATE}{September 2, 2024}
@@ -58,96 +58,182 @@
 	\STUDENTNAME \\
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
-Page \#14: 7, 10, 11, 20, 21\\
-\begin{enumerate}
-	\setcounter{enumi}{6}
-	\item Let $S = \{0,1\}$ and $F=R$.  If $\FF(S,R)$, show that $f=g$ and $f+g=h$, where $f(t) = 2t+1, g(t)=1+4t-2t^2$, and $h(t) = 5^t+1$.
-	\begin{itemize}
-		\item $f=g$
-		
-		$f(0)= 2(0)+1=1$ and $g(0)1+4(0)-2(0)^2=1 \to f(0) = g(0)$\\
-		$f(1)= 2(1)+1=3$ and $g(1)1+4(1)-2(1)^2=1+4-2=3 \to f(1) = g(1)$\\
-		$f=g$ since $f(s)=g(s)$ for all $s \in S$
-		
-		\item $f+g = h$
-		
-		\begin{align*}
-			(f+g)(t) &= f(t)+g(t)\\
-			&=2t+1+1+4t-2t^2 \\
-			&= 2+6t-2t^2 \\
-			(f+g)(0) &= 2+6(0)-2(0)^2 = 2 \\
-			(f+g)(1) &= 2+6(1)-2(1)^2 = 6 \\ \\
-			h(0) &= 5^0+1 = 2 \\
-			h(1) &= 5^1+1 = 6 \\ \\
-			(f+g)(0) &= h(0) \AND (f+g)(1) = h(1) \\ \\
-			\therefore f+g &= h \text{ since } (f+g)(t) = h(t), \forall t \in S
-		\end{align*}
-	\end{itemize}
-	
-	\setcounter{enumi}{9}
-	\item Let $V$ denote the set of all differentiable real-valued functions defined on the real line.  Prove that $V$ is a vector space with the operations of additons and scalar multiplication defined in Example 3.
-	
-	From Example 3 we have
-	\begin{align*}
-		(f+g)(s) = f(s)+g(s)\AND (cf)(s)= c\SQBRACKET{f(s)}, \forall s \in \R
-	\end{align*}  From the additive rule of differentiation $(f+g)'(s) = f'(s)+g'(s)$ which implies that $(f+g) \in V$ and from the multiplicative rule of differentiation we know that $(cf)'(s)=c[f'(s)]$ which implies that $cf \in V$.  Hence $V$ is a vector space.
-	
-	\item Let $V=\{0\}$ consist of a single vector $0$ and define $0+0=0$ and $c0=0$ for each scalar $c$ in $F$.  Prove that $V$ is a vector space over $F$.  ($V$ is called the \textbf{zero vector space}).
-	
-	Given any $v,w \in V$ we have $v+w=0+0=0 \in V$ and for all $c\in F, cv=c(0)=0 \in V$.  Therefore $V$ is a vector space.
-	\setcounter{enumi}{19}
-	\item Let $V$ be the set of sequences $\{a_n\}$ of real numbers.  (See Example 5 for the definition of a sequence.)  For $\{a_n\},\{b_n\} \in V$ and any real number $t$, define
-	\begin{align*}
-		\{a_n\}+\{b_n\} = \{a_n+b _n\} \text{ and } t\{a_n\} = \{ta_n\}.
-	\end{align*}Prove that, with these operations, $V$ is a vector space. over $\R$.
-	
-	Given any two real sequences $\{a_n\},\{b_n\} \in V$, we can see that the sequence $\{a_n + b_n\}$ is made up of real numbers, namely $a_i+b_i$ for all $i\in \N$, making it a real sequence.  We can also see that $\{c a_n\}$ is made up of real numbers, namely $ca_i$ for all $i \in \N$, making it a real sequence.  Hence, $V$ is a vector space.
-	
-	\item Let $V$ and $W$ be vector spaces over a field $F$.  Let 
-	\begin{align*}
-		Z = \BRACKET{\PAREN{v,w}: v \in V \AND w \in W}
-	\end{align*}Prove that $Z$ is a vector space over $F$ with the operations
-	\begin{align*}
-	\PAREN{v_1, w_1}+\PAREN{v_2, w_2} = \PAREN{v_1+v_2, w_1+w_2} \AND c\PAREN{v_1, w_1}=\PAREN{cv_1.cw_1}
-	\end{align*}
-	
-	Given $v_1, v_2 \in V$ and $w_1, w_2 \in W$ we can see that by definition $z_1=(v_1, w_1), z_2=(v_2, w_2) \in Z$.  We want to show that $z_1 + z_2 \in Z$ and $cz_1 \in Z$ for all $c \in F$.  \\
-	Well, $z_1+z_2 = \PAREN{v_1, w_1}+\PAREN{v_2, w_2} = \PAREN{v_1+v_2, w_1+w_2}$ and since $V,W$ are vector spaces we know that $v_1+v_2\in V$ and $w_1+w_2 \in W$. Therefore, $z_1+z_2 \in Z$. \\
-	Additionally, $cz_1 = c(v_1, w_1) = (cv_1, cw_1)$ and we know that $cv_1 \in V$ and $cw_1 \in W$ therefore $cz_1 \in Z$.\\
-	Hence, $Z$ is a vector space.
-\end{enumerate}
-\newpage
 
-Page \#20: 3, 4, 5, 10, 15, 19
-\begin{enumerate}
-	\setcounter{enumi}{2}
-	\item Prove that $(aA+bB)^t = aA^t+bB^t$ for any $A,B\in \MMN(F)$ and any $a,b \in F$.
-	
-	\begin{align*}
-		A^t &\implies [A_{ij}]^t = [A_{ji}] \\
-		(aA+bB)_t &= \SQBRACKET{(aA + bB)_{ji}} \\
-		 &= \SQBRACKET{ aA_{ji}+bB_{ji} } \\
-		 &= a\SQBRACKET{A_{ji}}+b\SQBRACKET{B_{ji}} \\
-		 &= aA^t + bB^t
-	\end{align*}
-	
-	\item Prove that $(A^t)^t=A$ for each $A \in \MMN(F)$.
-	
-	Let $B = A^t = [A_{ji}]$ and $B^t = [A_{ji}]^t = [A_{ij}] = A$.
-	
-	\item Prove that $A+A^t$ is symmetric for any square matrix $A$.
-	
-	$A = [A_{ij}]$ and $A^t = [A_{ji}]$.  Therefore $A+A^t = [A_{ij}]+[A_{ji}]=[A_{ij}+A_{ji}$.  Given any $i, j in [1, \dots, n]$ we can see that $(A+A^t)_{ij}=A_{ij}+A_{ji}=A_{ji}+A_{ij}=(A+A^t)_{ji}$, hence symmetric.
-	
-	\setcounter{enumi}{9}
-	\item Prove that $W_1= \BRACKET{\PAREN{a_1,a_2,\dots, a_n} \in F^n: a_1+a_2+\cdots+a_n=0}$ is a subspace of $F^n$, but $W_2= \BRACKET{\PAREN{a_1,a_2,\dots, a_n} \in F^n: a_1+a_2+\cdots+a_n=1}$ is not.
-	
-	Given $a=\PAREN{a_1,a_2,\dots, a_n},b=\PAREN{b_1,b_2,\dots, b_n} \in W_1$ we can see that $a+b = \PAREN{a_1+b_1, a_2+b_2, \dots, a_n+b_n}$ and $a_1+b_1+a_2+b_2+\cdots_n+b_n = a_1+a_2+\cdots+a_n+b_1+b_2+\cdots+b_n=0+0=0$ therefore $a+b \in W_1$.  Similarly, $ca = c\PAREN{a_1,a_2,\dots, a_n}= \PAREN{ca_1,ca_2,\dots, ca_n}$ and $ca_1+ca_2+\cdots+ca_n= c(a_1+a_2+\cdots+a_n)=c(0)=0.$ Therefore $W_1$ is a vector space. \\
-	However, let $a=\PAREN{a_1,a_2,\dots, a_n},b=\PAREN{b_1,b_2,\dots, b_n} \in W_2$ we can see that $a+b = \PAREN{a_1+b_1, a_2+b_2, \dots, a_n+b_n}$ and $a_1+b_1+a_2+b_2+\cdots_n+b_n = a_1+a_2+\cdots+a_n+b_1+b_2+\cdots+b_n=1+1=2$ which means that $a+b \not \in W_2$.
-	\setcounter{enumi}{14}
-	\item  Is the set of all differentiable real-valued functions defined on $\R$ a subspace of $C(\R)$?  Justify your answer.
-	\setcounter{enumi}{18}
-	\item Let $W_1$ and $W_2$ be subspaces of a vector space $V$.  Prove that $W_1 \bigcup W_2$ is a subspace of $V$ if and only if $W_1 \subseteq W_2$ or $W_2 \subseteq W_1$.
-	
+\begin{enumerate}[label=\Roman*.]
+\item This problem review continuity for functions on real line.
+
+We say a function $f: \R \to \R$ is \textit{continuous} at a point $a \in \R$ if for any $\epsilon > 0$, there is a $\delta > 0$ such that $|x-a| < \delta$ implies $|f(x)-f(a)|< \epsilon$.
+\begin{enumerate}[label=(\alph*)]
+\item Show that $f(x)=x^2$ is continuous at $x=2$.
+
+\BLUE{Given an $\epsilon > 0$, when $|f(x)-4|< \epsilon$, $ |x^2 -4| < \epsilon$.  Let $\delta < \sqrt{\epsilon + 4}$ \\
+If \begin{align*}
+	(2+\delta)^2-4 &< \epsilon \\
+	(2+\delta)^2&< \epsilon +4\\
+	2+\delta < \sqrt{\epsilon +4} \\
+	\delta < \sqrt{\epsilon+4}-2
+\end{align*} }
+
+\item Suppose that $f$ is continuous at $a$ and $f(a) \ne 0$. Show that $f$ is nonzero in some open interval containing $a$.
+
+\BLUE{Since $f$ is continuous at $a$ and $f(a) \ne 0$ then for every $\epsilon > 0$ such that when $|f(x)-f(a)| < \epsilon$.  Without loss of generality, assume $f(a) > 0$.  Choose $\epsilon < f(a)$ then $0 < f(a)-\epsilon < f(x) < f(a) + \epsilon$.  Therefore, $f(x) \ne 0$ }
+
 \end{enumerate}
+
+\item This problem review derivatives.
+\begin{enumerate}[label=(\alph*)]
+\item Let $f(x)=x^n$ for some positive integer $n$.  Using the definition of the derivative, and the binomial theorem, show that $f'^{n-1}$.
+\item Is the function 
+\begin{align*}
+	f(x) &= \BINDEF{x^2, & x \le 0,}{-x^2, & x \le 0}
+\end{align*}differentiable at $x=0$.
+
+\BLUE{
+\begin{align*}
+	\lim_{x \to 0^-} f(x) &= \lim_{x \to 0^-} x^2 = 0 \\
+	\lim_{x \to 0^+} f(x) &= \lim_{x \to 0^+} x^2 = 0 \\
+	\lim_{x \to 0^-} f(x) &= \lim_{x \to 0^+} f(x)
+\end{align*}$f(x)$ is both continuous and differentiaable at $x=0$. }
+\end{enumerate}
+
+\newpage
+\item This problem reviews $\sup$ and $\inf$.
+
+For any subset $A \subset \R$, we say that $M$ is an \textit{upper bound} for $A$ if $x \le M$ for all $x \in A$.  If a set $A$ has a finite upper bound, we say it is \textit{boundared above}.  It is a theorem about the set $\R$ that \textit{for any set $A \subset \R$ that is bounded above, there exists a least (smallest) upper bound for $A$.}  This least upper bound is called supermum of $A$, and denoted $\sup A$.  By definition, the number $\sup A$ has two properties.
+\begin{enumerate}[label = (\roman*)]
+\item $x \le \sup A$ for all $x \in A$ (i.e., $\sup A$ is an upper bound for $M$).
+\item for any $M$ that is an upper bound for $A$, we have $\sup A \le M$.
+\end{enumerate}For sets that are not bounded above, we say that $\sup A = + \infty$.  we often write things like 
+\begin{align*}
+	\sup_{x \in A} f(x),
+\end{align*}to denote the supremum of the set $\{ f(x): x \in A\}$, where $f$ is a some function.
+
+Similarly, any set that is bounded below has a \textit{greatest lower bound} called the \textit{infimum}, denoted $\inf A$.  It satisfies the same properties as $\sup A$ with the inequalities reversed.
+\begin{enumerate}[label=(\alph*)]
+
+\item Find $\sup A$ and $\inf A$ for $A = (1,2]$, $A=\{1,\frac{1}{2},\frac{1}{3}, \cdots \}$, and $A = \{0,1,2,3,\dots\}$.
+
+\begin{itemize}
+\item $A = (1,2]$, \BLUE{ $\sup A = 2$ and $\inf A = 1$ }
+\item $A=\{1,\frac{1}{2},\frac{1}{3}, \cdots \}$, \BLUE{ $\sup A = 1$, and $\inf A = \LIM{n\to \infty} \frac{1}{n} = 0$.}
+\item $A = \{0,1,2,3,\dots\}$.  \BLUE{ $\sup A = \LIM{n\to \infty} = \infty$, and $\inf A = 0$}
+\end{itemize}
+
+\item Find $\SUP{x \in (0, 1)}(1+x^2)^{-1}$
+
+\BLUE{ Let $f(x) = (1+x^2)^{-1}$.  On the interval $(0,1)$ we can see that it is strictly decreasing, that is $a<b \implies f(a)> f(b)$.  Thus, $\SUP{x \in (0, 1)}f(x) = f(0) = (1+0^2)^{-1} = 1$.}
+
+\item Assume that $\sup A < \infty$, and show that for every $\epsilon > 0$, there exists $x \in A$ such that $x > \sup A - \epsilon$.
+
+\BLUE{Given any $\epsilon > 0$ let $x > \sup A - \epsilon$.  If $x \not \in A$ then $x$ is an upper bound of $A$, i.e., $x \in M$ and $x< \sup A$, but that violates proper (ii).  Hence, $x \in A$.} 
+
+\item For any two functions $f,g : \R \to \R$, and any set $A \subset \R$, show that $\SUP{x \in A}(f(x)+g(x)) \le \SUP{x\in A} f(x) + \SUP{x\in A} g(x)$.
+
+\BLUE{
+\begin{align*}
+	f(x) &\le \SUP{x\in A} f(x) \AND g(x) \le \SUP{x\in A} g(x), \forall x \in {x \in A}\\
+	\therefore f(x) + g(x) &\le \SUP{x\in A} f(x) + \SUP{x\in A} g(x), \forall x \in A \\
+	\AND \SUP{x \in A}(f(x)+g(x)) &\le \SUP{x\in A} f(x) + \SUP{x\in A} g(x)
+\end{align*} }
+
+\end{enumerate}
+
+\newpage
+\item Section 1.1, Exercise 5, 6, 13.
+
+\begin{description}
+\item \textit{Exercise 1.1.5}. Let $n \ge 1$, and let $a_1, a_2, \dots, a_n$ and $b_1, b_2, \dots, b_n$ be real numbers verify the identity
+\begin{align*}
+	&\PAREN{\sum_{i=1}^na_ib_i}^2+\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2= \PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2}, &(1.3)
+\end{align*}and conclude \textit{Cauchy-Schwarz inequality}
+\begin{align*}
+	\BARS{\sum_{i=1}^n a_1b_i} \le \PAREN{\sum_{i=1}^na_i^2}^{1/2}\PAREN{\sum_{j=1}^nb_j^2}^{1/2}
+\end{align*}Then use the Cauchy-Schwarz inequality to prove the \textit{triangle inequality}
+\begin{align*}
+	\PAREN{\sum_{i=1}^n(a_i+b_i)^2}^{1/2} \le \PAREN{\sum_{i=1}^n a_i^2}^{1/2}+\PAREN{\sum_{i=j}^n b_j^2}^{1/2}
+\end{align*}
+
+\RED{Let's start by expanding the center term\begin{align*}
+	\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2 &= \sum_{i=1}^n\sum_{j=1}^n ( (a_ib_j)^2+(a_jb_i)^2 -(a_ib_ja_jb_i)^2)\\
+	&= \sum_{i=1}^n a_i^2\sum_{j=1}^n b_j^2 + \sum_{i=1}^nb_i^2\sum_{j=1}^n a_i^2 - 2\sum_{i=1}^na_ib_i\sum_{j=1}^na_jb_j \\
+	&= 2\PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^nb_j^2}-2\PAREN{\sum_{i=1}^na_ib_i}^2
+\end{align*}Equation 1.3 then becomes
+\begin{align*}
+	\PAREN{\sum_{i=1}^na_ib_i}^2+\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2= \PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2} \\
+	\PAREN{\sum_{i=1}^na_ib_i}^2+\PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^nb_j^2}-\PAREN{\sum_{i=1}^na_ib_i}^2= \PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2}
+\end{align*}which is true.  Since
+\begin{align*}
+	\PAREN{\sum_{i=1}^na_ib_i}^2+\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2&= \PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2} \\
+	\PAREN{\sum_{i=1}^na_ib_i}^2&=\PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^n b_j^2} - \frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2 \\
+	\therefore \BARS{\sum_{i=1}^na_ib_i} &\le \PAREN{\sum_{i=1}^na_i^2}^{1/2}\PAREN{\sum_{j=1}^n b_j^2}^{1/2}
+\end{align*}Let's start by taking the square of the distance from $a+b$ to zero using the $\ell^2$.
+\begin{align*}
+	d_{\ell^2}(a+b, 0)^2 &= \sum_{i=1}^n (a_i+b_i)^2 \\
+	&= \sum_{i=1}^n (a_i^2 + b_i^2 + 2a_ib_i) \\
+	&= \sum_{i=1}^n a_i^2 + \sum_{i=1}^nb_i^2 + 2\sum_{i=1}^na_ib_i 
+\end{align*}apply Cauchy-Schwarz and factor.
+\begin{align*}
+	d_{\ell^2}(a+b, 0)^2 &\le d_{\ell^2}(a,0) + d_{\ell^2}(b, 0) + 2 \PAREN{\sum_{i=1}^na_i^2}^{1/2}\PAREN{\sum_{j=1}^n b_j^2}^{1/2} \\
+	&\le d_{\ell^2}(a,0) + d_{\ell^2}(b, 0) + 2\PAREN{ d_{\ell^2}(a,0)\cdot d_{\ell^2}(b,0) }^{1/2} \\
+	&\le \PAREN{ d_{\ell^2}(a,0)^{1/2} + d_{\ell^2}(b,0)^{1/2}}^2
+\end{align*}Expand the $\ell^2$ metrics and take the square root of both sides and 
+\begin{align*}
+	\PAREN{\sum_{i=1}^n(a_i+b_i)^2}^{1/2} &\le \PAREN{\sum_{i=1}^n a_i^2}^{1/2}+\PAREN{\sum_{i=j}^n b_j^2}^{1/2}
+\end{align*} }
+
+\newpage
+\item \textit{Exercise 1.1.6}  Show that $(\R^n, d_{l^2})$ in Example 1.1.6 is indeed a metric space. (Hint: use Exercise 1.1.5)\\
+\textbf{Example 1.1.6} (Euclidean spaces). Let $n \ge 1$ be a natural number, and let $\R^n$ be the space of $n$-tupes of real numbers:
+\begin{align*}
+	\R^n = \{(x_1,x_2, \dots, x_n): x_1, \dots, x_n \in \R\}
+\end{align*}We define the \textit{Euclidean metric} (also called the\textit{ $l^2$ metric}) $d_{l^2}: \R^n \times \R^n \to \R$ by
+\begin{align*}
+	d_{l^2} ((x_1, \dots, x_n), (y_1, \dots, y_n)) &= \sqrt{(x_1-y_1)^2+\cdots+ (x_n-y_n)^2}\\
+	&= \PAREN{\sum_{i=1}^n (x_i-y_i)^2 }^{1/2}
+\end{align*}
+
+\BLUE{We must prove that $d_{\ell^2}$ is symmetric, positive definite and that the triangle inequality holds.
+\begin{description}
+	\item Symmetric: show that $d_{\ell^2}(x,y) = d_{\ell^2}(y,x)$.
+		\begin{align*}
+			d_{l^2} ((x_1, \dots, x_n), (y_1, \dots, y_n)) &= \PAREN{\sum_{i=1}^n (x_i-y_i)^2 }^{1/2} \\
+			&= \PAREN{\sum_{i=1}^n (y_i-x_i)^2 }^{1/2} \\
+			&= d_{l^2} ((y_1, \dots, y_n), (x_1, \dots, x_n))
+		\end{align*}
+	\item Positive Definite: show that $d_{\ell^2}(x,y)\ge 0$ and $d_{\ell^2}(x,y) = 0 \to x=y$.\\
+	The square root is taken as a positive value.  $d_{l^2} ((x_1, \dots, x_n), (y_1, \dots, y_n))=0$ implies that each $x_i - y_i=0$ therefore $x=y$.
+	\item Triangle Inequality: show that $d_{\ell^2}(x,z) \le d_{\ell^2}(x,y)+d_{\ell^2}(y,z)$\\
+	Excercise 1.1.5 proves the triangulate inequality replacing $a_i = x_i$ and $b_i = y_i$.
+\end{description}
+}
+
+\newpage
+\item \textit{Exercise 1.1.13} Prove Proposition 1.1.19.
+\textbf{Proposition 1.1.19} (Convergence in a the discrete metric).  \textit{Let $X$ be any set, and let $d_{\text{disc}}$ be the discrete metric on $X$.  let $(x^{(x=n)})_{n=m}^\infty$ be a sequence of points in $X$, and let $x$ be a point in $X$. Then $(x^{(n)})_{n=m}^\infty$ convergent to $x$ with respect to the discrete metric $d_{\text{disc}}$ if and only if there exists $N \ge m$ sucht ath $x^{(n)}=x$ for all $n \ge N$. }
+
+\item For this problem only, you do not need to give proofs.  just write the answers.
+
+For each set, idenitfy the boundary, interior, and closure of $A$, and say whether $A$ is open, closed, both or neither.  We are working in $\R^2$ with the standard distance.  Unless othewise noted, the ambient space is $\R^2$.
+\begin{enumerate}[label=(\alph*)]
+\item $A = \{(x_1,x_2) \in \R^2: x_1 < 1\}$
+\item $A = \{(1/n, 2/n) : n=1,2,3,\dots\}$ (Note: $(1/n, 2/n)$ is a vector in $\R^2$, not an open intevarl in $\R$.).
+\item $A \ \{x=(x_1,x_2) \in \R^2: x_1 > 0, d(x,0) \le 1\}$, in the relative topology with respect to $Y = \{(x_1, x_2) \in \R^2: x_1 > 0\}$.
+
+\end{enumerate}
+
+\item Let $(X, d)$ be a metric space.
+\begin{enumerate}[label=(\alph*)]
+
+\item For a given piont $x_0 \in X$, show the singleton set $\{x_0\}$ is closed.
+\item Let $x_0 \in X$ and $r > 0$. Show that the ball
+\begin{align*}
+	B(x_0, r) &= \{x \in X : d(x, x_0) < r\}
+\end{align*}is open
+
+\end{enumerate}
+
+\end{description}
+
+\end{enumerate}
+
 \end{document}
