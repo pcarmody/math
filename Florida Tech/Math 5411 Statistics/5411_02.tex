@@ -1,0 +1,169 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#2 }
+\newcommand{\DUEDATE}{September 4, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+\S 1.8 Page 27 excercises 2, 3, 9, 11, 15, and 16 
+
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Two six-sided dice are thrown sequentially, and the face values that come up are recorded.
+	
+	\begin{enumerate}[label=\alph*.]
+	\item List the sample space.
+	\BLUE{ 
+	\begin{align*}
+		\Omega = \{\, &(1,1),(1,2),(1,3),(1,4),(1,5),(1,6), \\
+			&(2,1),(2,2),(2,3),(2,4),(2,5),(2,6), \\
+			&(3,1),(3,2),(3,3),(3,4),(3,5),(3,6), \\
+			&(4,1),(4,2),(4,3),(4,4),(4,5),(4,6), \\
+			&(5,1),(5,2),(5,3),(5,4),(5,5),(5,6), \\
+			&(6,1),(6,2),(6,3),(6,4),(6,5),(6,6)\,
+		\}
+	\end{align*} }
+	\item List the elements that make up the following events:
+	\begin{enumerate}
+	\item $A =$ sum of the two values is at leat 5.
+\BLUE{
+	\begin{align*}
+		A = \{\, &(1,4),(1,5),(1,6), \\
+			&(2,3),(2,4),(2,5),(2,6), \\
+			&(3,2),(3,3),(3,4),(3,5),(3,6), \\
+			&(4,1),(4,2),(4,3),(4,4),(4,5),(4,6), \\
+			&(5,1),(5,2),(5,3),(5,4),(5,5),(5,6), \\
+			&(6,1),(6,2),(6,3),(6,4),(6,5),(6,6)\,
+		\}
+	\end{align*} }
+	\item $B =$ the valute of the first die is higher than the value of the second.
+\BLUE{ \begin{align*}
+	B = \{\,&(2,1),\\
+			&(3,1),(3,2),\\
+			&(4,1),(4,2),(4,3), \\
+			&(5,1),(5,2),(5,3),(5,4),\\
+			&(6,1),(6,2),(6,3),(6,4),(6,5)\,
+		\}
+\end{align*}
+}
+	\item $C =$ the first value is 4.
+\BLUE{
+\begin{align*}
+		C = \{\, &(4,1),(4,2),(4,3),(4,4),(4,5),(4,6)\,  	\}
+	\end{align*} }
+	
+	\end{enumerate}
+	\item List the elements of the following:
+	\begin{enumerate}
+	\item $A \cap C$
+	
+\BLUE{\begin{align*}
+	A \cap C =  \{\, &(4,1),(4,2),(4,3),(4,4),(4,5),(4,6) 	\, \} = C
+\end{align*}
+}
+	\item $B \cup C$
+\BLUE{\begin{align*}
+	B\cup C = \{\,&(2,1),\\
+			&(3,1),(3,2),\\
+%			&(4,1),(4,2),(4,3), \\
+			&(4,1),(4,2),(4,3),(4,4),(4,5),(4,6),  \\
+			&(5,1),(5,2),(5,3),(5,4),\\
+			&(6,1),(6,2),(6,3),(6,4),(6,5)\,
+		\}
+\end{align*} }
+	\item $A \cap(B\cup C)$
+\BLUE{\begin{align*}
+	A\cap(B\cup C) = \{\,&(3,2),\\
+%			&(4,1),(4,2),(4,3), \\
+			&(4,1),(4,2),(4,3),(4,4),(4,5),(4,6),  \\
+			&(5,1),(5,2),(5,3),(5,4),\\
+			&(6,1),(6,2),(6,3),(6,4),(6,5)\,
+		\}
+\end{align*}
+}
+	\end{enumerate}
+	
+	\end{enumerate}
+	\item An urn contains three red balls, two green balls, and one white ball.  Three balls are drawn without replacement from the urn, the colors are noted in sequence.  List the sample space.  Define events $A$, $B$, and $C$ as you wish and find their unions and intersections.
+	
+\BLUE{
+}
+	\setcounter{enumi}{8}
+	\item The weather forecaster says that the probability of rain on Saturday is 25\% and that the probability of rain on Sunday is 25\%.  Is the probability of rain during the weekend 50\%?  Why or why not?
+
+\BLUE{	
+	No, the probability of rain during the weekend is NOT 50\%. The sample space for Saturday is different from the sample space for Sunday.  Suppose, for example, that the probability for rain on each of the next 3 days, Monday, Tuesday, Wednesday, was also 25\%.  If the answer were yes that there would be 125\% chance of rain on those 5 days which is impossible. }
+	
+	\setcounter{enumi}{10}
+	\item The first three digits of a university telephone exchange are 452.  If all the sequences of the remaining four digits are equally likely, what is the probability that a randomly selected universtiy phone number contains seven distinct digits?
+	
+\BLUE{The first digits digites are 4, 5, and 2.  The remaining four digits can be taken from the set $D=\{\, 1,3,6,7,8,9,0\,\}$.  The size of the sample space will be $|\,\Omega\,| = 10,000$ (remember that 4, 5 and 2 can be used in the sample space). Define event $A$ as 4 digits taken from set $D$ which are distinct from each other.  That is 7 choices for the first digit, 6 choices for the second digit, 5 choices for the third digit and 4 choices for the last digit.
+\begin{align*}
+	\BARS{A} &= (7)(6)(5)(4) = 840 \\
+	P(A) &= \BARS{A}/\BARS{\Omega} = 840/10000 = 0.084
+\end{align*}about one in twelve.
+}
+	\setcounter{enumi}{14}
+	\item How many different meals can be made from four kinds of meat, six vegetables, and the three starches if a meal consissts of one selection from each group.
+	
+\BLUE{\begin{align*}
+	\BARS{M} &= 4, \BARS{V} = 6, \BARS{S} = 3\\
+	\binom{ \BARS{M}+ \BARS{V} +\BARS{S}}{\BARS{M},\,\BARS{V},\, \BARS{S}} &= \binom{13}{4,6,3} = \frac{13!}{4!6!3!} = \frac{13\cdot 12\cdot 11\cdot 10\cdot 9\cdot 8\cdot 7\cdot }{4!3!} = 60,060
+\end{align*}
+}
+	\item How many different letter arrangements can be obtained from the letters of the word \textit{satistically}, using all the letters?
+
+\end{enumerate}
+\end{document}

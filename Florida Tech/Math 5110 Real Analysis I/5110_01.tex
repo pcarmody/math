@@ -153,7 +153,7 @@ Similarly, any set that is bounded below has a \textit{greatest lower bound} cal
 	\PAREN{\sum_{i=1}^n(a_i+b_i)^2}^{1/2} \le \PAREN{\sum_{i=1}^n a_i^2}^{1/2}+\PAREN{\sum_{i=j}^n b_j^2}^{1/2}
 \end{align*}
 
-\RED{Let's start by expanding the center term\begin{align*}
+\BLUE{Let's start by expanding the center term\begin{align*}
 	\sum_{i=1}^n\sum_{j=1}^n(a_ib_j-a_jb_i)^2 &= \sum_{i=1}^n\sum_{j=1}^n ( (a_ib_j)^2+(a_jb_i)^2 -(a_ib_ja_jb_i)^2)\\
 	&= \sum_{i=1}^n a_i^2\sum_{j=1}^n b_j^2 + \sum_{i=1}^nb_i^2\sum_{j=1}^n a_i^2 - 2\sum_{i=1}^na_ib_i\sum_{j=1}^na_jb_j \\
 	&= 2\PAREN{\sum_{i=1}^na_i^2}\PAREN{\sum_{j=1}^nb_j^2}-2\PAREN{\sum_{i=1}^na_ib_i}^2
@@ -208,31 +208,62 @@ Similarly, any set that is bounded below has a \textit{greatest lower bound} cal
 }
 
 \newpage
-\item \textit{Exercise 1.1.13} Prove Proposition 1.1.19.
-\textbf{Proposition 1.1.19} (Convergence in a the discrete metric).  \textit{Let $X$ be any set, and let $d_{\text{disc}}$ be the discrete metric on $X$.  let $(x^{(x=n)})_{n=m}^\infty$ be a sequence of points in $X$, and let $x$ be a point in $X$. Then $(x^{(n)})_{n=m}^\infty$ convergent to $x$ with respect to the discrete metric $d_{\text{disc}}$ if and only if there exists $N \ge m$ sucht ath $x^{(n)}=x$ for all $n \ge N$. }
+\item \textit{Exercise 1.1.13} Prove Proposition 1.1.19.\\
+\textbf{Proposition 1.1.19} (Convergence in a the discrete metric).  \textit{Let $X$ be any set, and let $d_{\text{disc}}$ be the discrete metric on $X$.  Let $(x^{(n)})_{n=m}^\infty$ be a sequence of points in $X$, and let $x$ be a point in $X$. Then $(x^{(n)})_{n=m}^\infty$ convergent to $x$ with respect to the discrete metric $d_{\text{disc}}$ if and only if there exists $N \ge m$ such that $x^{(n)}=x$ for all $n \ge N$. }\\
 
-\item For this problem only, you do not need to give proofs.  just write the answers.
-
-For each set, idenitfy the boundary, interior, and closure of $A$, and say whether $A$ is open, closed, both or neither.  We are working in $\R^2$ with the standard distance.  Unless othewise noted, the ambient space is $\R^2$.
-\begin{enumerate}[label=(\alph*)]
-\item $A = \{(x_1,x_2) \in \R^2: x_1 < 1\}$
-\item $A = \{(1/n, 2/n) : n=1,2,3,\dots\}$ (Note: $(1/n, 2/n)$ is a vector in $\R^2$, not an open intevarl in $\R$.).
-\item $A \ \{x=(x_1,x_2) \in \R^2: x_1 > 0, d(x,0) \le 1\}$, in the relative topology with respect to $Y = \{(x_1, x_2) \in \R^2: x_1 > 0\}$.
-
-\end{enumerate}
-
-\item Let $(X, d)$ be a metric space.
-\begin{enumerate}[label=(\alph*)]
-
-\item For a given piont $x_0 \in X$, show the singleton set $\{x_0\}$ is closed.
-\item Let $x_0 \in X$ and $r > 0$. Show that the ball
+\BLUE{
+Remember that:
 \begin{align*}
-	B(x_0, r) &= \{x \in X : d(x, x_0) < r\}
-\end{align*}is open
-
-\end{enumerate}
+	d_{\text{disc}}(x,y)= \BINDEF{1 & x=y}{0 & x\ne y}
+\end{align*}\begin{description}
+	\item $(\Longrightarrow)$ assume that $x^{(n)} \to x$ under $d_{\text{disc}}$.
+	Then, for any $\epsilon>0$ there exists $n\in \N$ such that $x^{(n)}-x < \epsilon$.  Clearly, $x^{(n)} - x$ can be equal to either 1 or 0.  Thus, $x^{(n)}-x=0$ or $x^{(n)} = x$ and hence true for all $n>N$.
+	\item $(\Longleftarrow)$ assume that $\exists N>m$ such that when $n> N, x^{(n)}=x$.
+	Given any $\epsilon > 0$ and $n>N$ we can see that $x^{(n)}-x=0<\epsilon$.  Therefore $x^{(n)}\to x$.
+\end{description}
+}
 
 \end{description}
+
+\newpage
+\item For this problem only, you do not need to give proofs.  Just write the answers.
+
+For each set, identify the boundary, interior, and closure of $A$, and say whether $A$ is open , closed, both or neither.  We are working in $\R^2$ with standard distance.  Unless othewise noted, the ambient space is $\R^2$.
+\begin{enumerate}[label=(\alph*)]
+\item $A = \{(x_1, x_2) \in \R^2 : x_1 < 1 \}$.
+
+\BLUE{
+Boundary: $\partial A = \{(x_1, x_2) \in \R^2 : x_1 = 1\}$\\
+Interior: $A^o = \{(x_1, x_2) \in \R^2 : x_1 < 1\}$\\
+Closure: $\CONJ{A} = \{(x_1, x_2) \in \R^2 : x_1 \le 1\}$
+}
+
+\item $A=\{(1/n, 2/n): n=1,2,3, \dots\}$ (Note: $(1/n, 2/n)$ is a vector in $\R^2$, not an open interval in $\R$.)
+
+\BLUE{
+Boundary: $\partial A=A$\\
+Interior: $A^o = A$\\
+Closure: $\CONJ{A} = A$
+}
+
+\item $A =\{x=(x_1,x_2) \in \R^2: x_1 >0, d(x,0) \le 1\}$, in the relative topology with respect to $Y = \{(x_1,x_2) \in \R^2:x_1 > 0 \}$.
+
+\BLUE{
+Boundary: $\partial_Y A = \{x=(x_1,x_2) \in \R^2:  x_1=0, d(x,0) = 1\}$ the right semi-circle combined with the y-axis from 1 to -1.\\
+Interior: $A^o = \{x=(x_1,x_2) \in \R^2: x_1 >0, d(x,0) < 1\}$\\
+Closure: $\CONJ{A} = \{x=(x_1,x_2) \in \R^2: x_1 \ge 0, d(x,0) \le 1\}$
+}
+
+\end{enumerate}
+
+\item Let $(X,d)$ be a metric space.
+\begin{enumerate}[label=(\alph*)]
+\item For a given point $x_0 \in X$, show the singleton set $\{x_0\}$ is closed.
+\item Let $x_0 \in X$ and $r > 0$.  Show that the ball 
+\begin{align*}
+	B(x_0,r) = \{x \in X: d(x,x_0) < r\}
+\end{align*}is open.
+\end{enumerate}
 
 \end{enumerate}
 
