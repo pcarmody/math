@@ -138,7 +138,43 @@
 	\end{enumerate}
 	\item An urn contains three red balls, two green balls, and one white ball.  Three balls are drawn without replacement from the urn, the colors are noted in sequence.  List the sample space.  Define events $A$, $B$, and $C$ as you wish and find their unions and intersections.
 	
-\BLUE{
+\BLUE{$A =$ select exactly one red ball.  $B= $ any combination as long as the first ball is red.  $C = $ at least one red ball.  \\
+\begin{align*}
+	A = \{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R) \,\} \\
+	B = \{\, &(R, W, G), \, (R, G, W),\, (R, G, G), \,(R, R, G),\, (R, R, W),\, (R, R, R)  \,\}\\\
+	C = \{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R), \\
+	&(R, R, G), \, (R, R, W),\, (R, G, R), \, (R, W, R), \, (G, R, R),\, (W, R, R), \, (R, R, R)   \,\} \\ \\
+	A \cup B =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R) \,\} \\
+		= & A\\
+	A \cup C =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R), \\
+	&(R, R, G), \, (R, R, W),\, (R, G, R), \, (R, W, R), \, (G, R, R),\, (W, R, R), \, (R, R, R)   \,\}\\
+		= & C\\
+	B \cup C =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R), \\
+	&(R, R, G), \, (R, R, W),\, (R, G, R), \, (R, W, R), \, (G, R, R),\, (W, R, R), \, (R, R, R)   \,\}\\
+		= & C\\
+	A \cap B =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G) \,\}\\
+	A \cap C =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R) \,\}\\
+		= & A \\
+	B \cap C =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G), \,(R, R, G),\, (R, R, W),\, (R, R, R)  \,\}\\
+		= &B\\
+	A \cup B \cup C =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G), 
+	( W, R, G), \, (G, R, W),\, (G, R, G),
+	(G, W, R), \, (W, G, R),\, (G, G, R), \\
+	&(R, R, G), \, (R, R, W),\, (R, G, R), \, (R, W, R), \, (G, R, R),\, (W, R, R), \, (R, R, R)   \,\}\\
+	A \cap B \cap C =\{\, &(R, W, G), \, (R, G, W),\, (R, G, G) \,\}
+\end{align*}
 }
 	\setcounter{enumi}{8}
 	\item The weather forecaster says that the probability of rain on Saturday is 25\% and that the probability of rain on Sunday is 25\%.  Is the probability of rain during the weekend 50\%?  Why or why not?
@@ -156,14 +192,21 @@
 \end{align*}about one in twelve.
 }
 	\setcounter{enumi}{14}
-	\item How many different meals can be made from four kinds of meat, six vegetables, and the three starches if a meal consissts of one selection from each group.
+	\item How many different meals can be made from four kinds of meat, six vegetables, and three starches if a meal consissts of one selection from each group.
 	
 \BLUE{\begin{align*}
 	\BARS{M} &= 4, \BARS{V} = 6, \BARS{S} = 3\\
-	\binom{ \BARS{M}+ \BARS{V} +\BARS{S}}{\BARS{M},\,\BARS{V},\, \BARS{S}} &= \binom{13}{4,6,3} = \frac{13!}{4!6!3!} = \frac{13\cdot 12\cdot 11\cdot 10\cdot 9\cdot 8\cdot 7\cdot }{4!3!} = 60,060
+	\BARS{M} \cdot \BARS{V}\cdot\BARS{S} &= 4 \cdot 6 \cdot 3 = 72
 \end{align*}
 }
-	\item How many different letter arrangements can be obtained from the letters of the word \textit{satistically}, using all the letters?
+
+	\item How many different letter arrangements can be obtained from the letters of the word \textit{statistically}, using all the letters?
+	
+	\BLUE{
+	The recurrance of letters is s-2, a-2, t-3, i-2, c-1, l-2, y-1.  The total number of letters is 13.  Thus total number of complete combination $C$ is
+	\begin{align*}
+		C = \binom{13}{2,2,3,2,2,1,1} = 64,864,800
+	\end{align*} }
 
 \end{enumerate}
 \end{document}
