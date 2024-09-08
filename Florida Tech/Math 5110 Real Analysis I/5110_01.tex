@@ -79,10 +79,33 @@ If \begin{align*}
 \BLUE{Since $f$ is continuous at $a$ and $f(a) \ne 0$ then for every $\epsilon > 0$ such that when $|f(x)-f(a)| < \epsilon$.  Without loss of generality, assume $f(a)$ is positive, $f(a) > 0$.  Choose $0<\epsilon < f(a)$ then $0 < f(a)-\epsilon < f(x) < f(a) + \epsilon$.  Therefore, $f(x) \ne 0$ }
 
 \end{enumerate}
-
+\newpage
 \item This problem review derivatives.
 \begin{enumerate}[label=(\alph*)]
-\item Let $f(x)=x^n$ for some positive integer $n$.  Using the definition of the derivative, and the binomial theorem, show that $f'^{n-1}$.
+\item Let $f(x)=x^n$ for some positive integer $n$.  Using the definition of the derivative, and the binomial theorem, show that $f'(x^n) = nx^{n-1}$.
+
+\BLUE{
+\begin{align*}
+	(a+b)^n &= \sum_{k=0}^{n} \binom{n}{k} a^{n-k}b^{k}\\
+	f'(x) &= \lim_{h\to 0} \frac{f(x-h)-f(x)}{h} \\
+	f(x) &= x^n \\
+\end{align*}thus
+\begin{align*}
+	f'(x^n) &= \lim_{h\to 0} \frac{(x-h)^n-x^n}{h} \\
+	&= \lim_{h\to 0} \frac{\sum_{k=0}^{n} \binom{n}{k} x^{n-k}(-h)^{k}-x^n}{h} 
+\end{align*} remove the first entry from the summation
+\begin{align*}
+	f'(x^n) &= \lim_{h\to 0} \frac{x^n+\sum_{k=1}^{n} \binom{n}{k} x^{n-k}h^{k}-x^n}{h} \\
+	&= \lim_{h\to 0} \frac{\sum_{k=1}^{n} \binom{n}{k} x^{n-k}h^{k}}{h} \\
+	&= \sum_{k=1}^{n}\lim_{h\to 0} \frac{ \binom{n}{k} x^{n-k}h^{k}}{h} \\
+	&= \lim_{h\to 0} \frac{ \binom{n}{1} x^{n-1}h}{h} + \lim_{h\to 0} \frac{ \binom{n}{2} x^{n-2}h^2}{h} + \cdots + \lim_{h\to 0} \frac{ \binom{n}{n} x^{0}h^n}{h}\\
+	&= n x^{n-1} + \lim_{h\to 0} \frac{ \binom{n}{2} x^{n-2}h^2}{h} + \cdots + \lim_{h\to 0} \frac{ \binom{n}{n} x^{0}h^n}{h}
+\end{align*}the $\LIM{h\to 0} \frac{h^k}{h} = \LIM{h \to 0} h^{k-1} = 0$ for all $k\ge 1$ therefore
+\begin{align*}
+	f'(x^n) &= nx^{n-1}
+\end{align*}
+}
+
 \item Is the function 
 \begin{align*}
 	f(x) &= \BINDEF{x^2, & x \le 0,}{-x^2, & x \le 0}
@@ -235,15 +258,17 @@ For each set, identify the boundary, interior, and closure of $A$, and say wheth
 \BLUE{
 Boundary: $\partial A = \{(x_1, x_2) \in \R^2 : x_1 = 1\}$\\
 Interior: $A^o = \{(x_1, x_2) \in \R^2 : x_1 < 1\}$\\
-Closure: $\CONJ{A} = \{(x_1, x_2) \in \R^2 : x_1 \le 1\}$
+Closure: $\CONJ{A} = \{(x_1, x_2) \in \R^2 : x_1 \le 1\}$\\
+$A$ is open.
 }
 
 \item $A=\{(1/n, 2/n): n=1,2,3, \dots\}$ (Note: $(1/n, 2/n)$ is a vector in $\R^2$, not an open interval in $\R$.)
 
 \BLUE{
 Boundary: $\partial A=A$\\
-Interior: $A^o = A$\\
-Closure: $\CONJ{A} = A$
+Interior: $A^o = \emptyset$\\
+Closure: $\CONJ{A} = A$ \\
+$A$ is closed.
 }
 
 \item $A =\{x=(x_1,x_2) \in \R^2: x_1 >0, d(x,0) \le 1\}$, in the relative topology with respect to $Y = \{(x_1,x_2) \in \R^2:x_1 > 0 \}$.
@@ -251,7 +276,8 @@ Closure: $\CONJ{A} = A$
 \BLUE{
 Boundary: $\partial_Y A = \{x=(x_1,x_2) \in \R^2:  x_1=0, d(x,0) = 1\}$ the right semi-circle combined with the y-axis from 1 to -1.\\
 Interior: $A^o = \{x=(x_1,x_2) \in \R^2: x_1 >0, d(x,0) < 1\}$\\
-Closure: $\CONJ{A} = \{x=(x_1,x_2) \in \R^2: x_1 \ge 0, d(x,0) \le 1\}$
+Closure: $\CONJ{A} = \{x=(x_1,x_2) \in \R^2: x_1 \ge 0, d(x,0) \le 1\}$ \\
+$A$ is closed relative to $Y$.
 }
 
 \end{enumerate}
@@ -260,7 +286,7 @@ Closure: $\CONJ{A} = \{x=(x_1,x_2) \in \R^2: x_1 \ge 0, d(x,0) \le 1\}$
 \begin{enumerate}[label=(\alph*)]
 \item For a given point $x_0 \in X$, show the singleton set $\{x_0\}$ is closed.
 
-\BLUE{let $E = \{x_0\}^c= X \backslash \{ x_0\}$.  Given any $x \in E$ and $0< \epsilon > | x_0 -x|$ we can easily see that there exists a ball $B=B_d(x, \epsilon)$ such that $B \cap \{x_0\} = \emptyset$.  Further, $\partial E  \{ x_0 \}$ and $\{x_0\}\not \in E$ thus $E$ is open.  This implies that $E^c=\{x_0\}$ is closed
+\BLUE{let $E = \{x_0\}^c= X \backslash \{ x_0\}$.  Given any $x \in E$ and $0< \epsilon < | x_0 -x|$ we can easily see that there exists a ball $B=B_d(x, \epsilon)$ such that $B \cap \{x_0\} = \emptyset$.  Further, $\partial E  = \{ x_0 \}$ and $\{x_0\}\not \in E$ thus $E$ is open.  This implies that $E^c=\{x_0\}$ is closed.
 }
 
 \item Let $x_0 \in X$ and $r > 0$.  Show that the ball 
@@ -268,7 +294,11 @@ Closure: $\CONJ{A} = \{x=(x_1,x_2) \in \R^2: x_1 \ge 0, d(x,0) \le 1\}$
 	B(x_0,r) = \{x \in X: d(x,x_0) < r\}
 \end{align*}is open.
 
-\BLUE{
+\BLUE{Let $E = B(x_0,r), x \in E$ and $0<\epsilon_x < r-d(x_0,x)$.  Then, for any $y \in B(x, \epsilon_x)$ we can see that $d(x_0,y)< d(x_0,x)+\epsilon_x < y$ therefore $y \in E$ and the open ball $B(x,\epsilon_x) \subset E$.  \begin{align*}
+	\bigcup_{x \in E} x &= E\\
+	\text{then } B(x,\epsilon_x) &\subset E, \forall x \in E\\
+	\bigcup_{x \in E} B(x, \epsilon_x) &= E
+\end{align*}thus $B(x_0,r)$ is the union of open balls.
 }
 \end{enumerate}
 
