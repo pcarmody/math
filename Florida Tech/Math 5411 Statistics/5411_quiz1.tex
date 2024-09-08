@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Quiz \#1 }
+\newcommand{\DUEDATE}{September 4, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+We roll two six-sided dice and record the sum of face values of them. 
+
+a) List the sample space.
+
+$\Omega = \{ 2,3,4,5,6,7,8,9,12\}$\\
+
+b) List the elements in event A: the recorded value is odd.
+
+$A = \{ 3,5,7,9,11\}$\\
+
+c) Calculate the probability of event A.
+
+$P(A) = |A|/|\Omega| = 5/9$\\
+
+d) Are the outcomes of this experiment equally likely? 
+
+No.  For example, there is only one way to get a 2, but thee are several ways to get a 7 (2+4, 3+4, 6+1).  Thus $P(7) > P(2)$\\
+
+e) If you answered Yes to part d, find the probability of each outcome.
+
+    If you answered No to part d, find the outcome(s) with the highest probability.   
+    
+$P(7) = 6/12 = 1/2$\\
+
+
+
+\end{document}
