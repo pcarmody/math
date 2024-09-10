@@ -1,0 +1,129 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5110 -- Real Analysis I}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#2 }
+\newcommand{\DUEDATE}{September 18, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Liu}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}[label=\Roman*.]
+\item Consider a sequence $x_n$ of real numbers.  The \textit{limit inferiior} and \textit{limit superior} of $x_n$ are defined by 
+\begin{align*}
+	\LIMINFN x_n = \lim_{n->\infty}\PAREN{\inf_{k \ge n} x_k }, \,\, \LIMSUPN x_n = \lim_{n->\infty}\PAREN{\sup_{k \ge n} x_k }
+\end{align*}
+	\begin{enumerate}[label=(\alph*)]
+		\item Show that
+			\begin{align*}
+				\LIMINFN x_n = \sum_{n\ge 0} \PAREN{\inf_{k\ge n} x_n}
+			\end{align*}and
+			\begin{align*}
+				\LIMSUPN x_n = \inf\PAREN{\sup_{k\ge n} x_n}
+			\end{align*}
+		\item Show that $\LIMINFN x_n$ and $\LIMSUPN x_n$ are well-defined for any sequence $x_n$.  (Unlike $\LIM{n\to\infty} x_n$.)  We allow values of $\infty$ and $-\infty$
+		\item Let $x_n$ be a bounded sequence, and let $L$ be the set of limit points of $x_n$, i.e., the set of all limits of subsequences of $x_n$.  Show $\LIMINFN x_n = \inf L$ and $\LIMSUPN = \sup L$.
+		\item Let $x_n$ be a bounded sequence.  Conclude using (c) that $\LIMINFN x_n \le \LIMSUPN x_n$, with equality if and only if $x_n$ is convergent.
+	\end{enumerate}
+	
+	\item Prove that for any (possibly uncountable) collection $(F_\alpha)_{\alpha\in A}$ of closed sets, the intersection $F = \bigcup_{\alpha \in A} F_\alpha$ is closed, in two ways.
+	\begin{enumerate}[label=(\alph*)]
+		\item Using the fact that any union of open sets is open, and DeMorgan's Laws from set theory, which state
+		\begin{align*}
+			X\backslash \PAREN{\bigcup_{\alpha\in A} E_\alpha } = \bigcap_{\alpha \in A} \PAREN{X \backslash E_\alpha} \AND X\backslash\PAREN{\bigcap_{\alpha \in A} E_\alpha} = \bigcup_{\alpha\in A} \PAREN{X \backslash E_\alpha}
+		\end{align*}for all collection of sets $(E_\alpha)_{\alpha\in A}$
+		
+		\item More directly, using the fact that a set $G$ is closed if and only if for any convergent sequence $(x_n)$ with all $x_n \in G$, the limit $x$ is also in $G$.
+	\end{enumerate}
+	
+	\item\begin{enumerate}[label=(\alph*)]
+		\item Let $(x_n)$ be a Cauchy sequence in a metric space $X$.  Show that if a subsequence $(x_{n_j})$ of $x_n$ converges to $x$, then the entire sequence also converges to $x$.
+		\item Show that the metric space
+		\begin{align*}
+			C^1((-1,1))=\{f:(-1,1)\to\R, f \text{ is differentiable and }f'\text{ is continuous in }(1,-1)\}
+		\end{align*}with the metric
+		\begin{align*}
+			d(f,g) = \sup_{x\in (-1,1)} |f(x)-g(x)|,
+		\end{align*}is not complete.  (Hint: similar to the proof that the rational numbers are not complete, find a sequence $C'((-1,1))$ that converges in $d$ metric to a function that is not in $C^1((-=1,1))$, and show that this sequence is Cauchy.)
+	\end{enumerate}
+	
+	\item Let $A$ and $B$ be subsets of the metric space $X$.  which one of the following is true?
+	\begin{align}
+		(A\cup B)^o &= A^o \cup B^o, &\label{eq:eq1}\tag{2.1}\\
+		(A \cup B)^o &\subset A^o\cup B^o, & \text{"=" fails for some $A$ and $B$} \label{eq:eq1}\tag{2.2} \\
+		(A\cup B)^o &\supset A^o\cup B^o, &\text{"=" fails for some $A$ and $B$}\label{eq:eq1}\tag{2.3}
+	\end{align}
+	
+	\item Leet $C^0([a,b])$ be the space of continuous functions on $[a,b]$, with the metric $d(f,g) = \SUP{x\in [a,b]}|f(x)-g(x)|$.
+	
+	Show that the map $I: C^0([a,b]) \to \R$ defined by $I(f)=\int_a^b f(x) dx$ is continuous mapping from $C^0([a,b])$ to $\R$.
+	
+	\item Prove Propostion 2.3.2 in the text, in two different ways.:
+	\begin{enumerate}[label=\alph*)]
+		\item As a consequence of Theorem 2.3.1 in text.
+		\item Directly, using the sequential definition of compactness.
+		\textbf{Proposition 2.3.2} (Maximum principle). \textit{ Let $(X,d)$ be a compact metric space, and let $f:X \to \R$ be a contnuous function.  Then $f$ is bounded.  Furthermore, $f$ attains its maximum at some point $x_{\max} \in X$, and also attains its minimum at some point $x_{\min} \in X$. }
+	\end{enumerate}
+	
+	\item Let $f:\R^n \to \R$ be a continuous function such that 
+	\begin{align*}
+		\lim_{|x| \to \infty} &= + \infty
+	\end{align*}Prove that $f$ attains its minimum.
+	
+	Recall that by definition, the limit in (??) means that Given $A > 0$, there is $R>0$ such that 
+	\begin{align*}
+		f(x) >A \text{    for all } x \not\in B_R
+	\end{align*}in other words, $f(x) >A$ whenever $|x| \ge R$. Here, $|x| = d_2(x,0)$ and $d_2$ is the standard Euclidean distance defined in Example 1.4.
+\end{enumerate}
+\end{document}
