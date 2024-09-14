@@ -60,19 +60,31 @@
 \end{center} 
 
 \begin{enumerate}[label=\Roman*.]
-\item Consider a sequence $x_n$ of real numbers.  The \textit{limit inferiior} and \textit{limit superior} of $x_n$ are defined by 
+\item Consider a sequence $x_n$ of real numbers.  The \textit{limit inferior} and \textit{limit superior} of $x_n$ are defined by 
 \begin{align*}
 	\LIMINFN x_n = \lim_{n->\infty}\PAREN{\inf_{k \ge n} x_k }, \,\, \LIMSUPN x_n = \lim_{n->\infty}\PAREN{\sup_{k \ge n} x_k }
 \end{align*}
 	\begin{enumerate}[label=(\alph*)]
 		\item Show that
 			\begin{align*}
-				\LIMINFN x_n = \sum_{n\ge 0} \PAREN{\inf_{k\ge n} x_n}
+				\LIMINFN x_n = \sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_l}
 			\end{align*}and
 			\begin{align*}
-				\LIMSUPN x_n = \inf\PAREN{\sup_{k\ge n} x_n}
+				\LIMSUPN x_n = \inf_{k\ge n}\PAREN{\sup_{k\ge n} x_n}
 			\end{align*}
+		
+		\BLUE{If $\{ x_n \}$ were not bounded then this questions has no value.  Assuming, then, that $x_n$ is bounded above by its least upper bound, $M$, and below by its most lower bound, $L$.  We need to be aware of a repeating sequence or subsequence.  For example, $x_n = c$ where $c$ or $x_n = \{1/2, c, 1/4, c, 1/6, c, 1/8, \dots \}$.  These sequences are also bounded and form trivial solutions to this question.\\
+		We will focus, then, on the convergent subsequence, $\{ x_{\alpha_k}\}$ where $\alpha_k \in A$ and $A$ is an infinite list of indices.  We have two types of these convergent sequences those that coverge increasingly and those that converge decreasingly.  
+		\begin{description}
+			\item \textbf{Converge Increasingly}.  These subsequences may have many values but as $n \to \infty$ we see that $|x_{\alpha_n} - M| \to 0$ and without loss of generality, allow it to be Cauchy. \\ Claim: given any $n\ge 0$, the $\INF{k\ge n} x_{\alpha_k} = x_{\alpha_n}$.  We can see that given any $\epsilon >0$ there is $N \in \N$ we have $|x_{\alpha_n} - x_{\alpha_k} | < \epsilon$ whenever $N < n < k$.  That is, the subsequence is increasing, thus, $x_{\alpha_n} < x_{\alpha_k}$ for all $k \ge n$.  Thus $\INF{k \ge n} x_{\alpha_k} = x_{\alpha_n}$.  Further, a $n \to \infty$ the infimum $\INF{k \ge n} x_{\alpha_k}$ increases thus the supremum of these values is
+			\begin{align*}
+				\LIMINFN x_{\alpha_n} = \sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_{\alpha_k} }
+			\end{align*}
+\end{description}		
+		}
+		
 		\item Show that $\LIMINFN x_n$ and $\LIMSUPN x_n$ are well-defined for any sequence $x_n$.  (Unlike $\LIM{n\to\infty} x_n$.)  We allow values of $\infty$ and $-\infty$
+		
 		\item Let $x_n$ be a bounded sequence, and let $L$ be the set of limit points of $x_n$, i.e., the set of all limits of subsequences of $x_n$.  Show $\LIMINFN x_n = \inf L$ and $\LIMSUPN = \sup L$.
 		\item Let $x_n$ be a bounded sequence.  Conclude using (c) that $\LIMINFN x_n \le \LIMSUPN x_n$, with equality if and only if $x_n$ is convergent.
 	\end{enumerate}
@@ -84,7 +96,18 @@
 			X\backslash \PAREN{\bigcup_{\alpha\in A} E_\alpha } = \bigcap_{\alpha \in A} \PAREN{X \backslash E_\alpha} \AND X\backslash\PAREN{\bigcap_{\alpha \in A} E_\alpha} = \bigcup_{\alpha\in A} \PAREN{X \backslash E_\alpha}
 		\end{align*}for all collection of sets $(E_\alpha)_{\alpha\in A}$
 		
+		\BLUE{Given that every open set, $E\in X$ is the union of other open sets $\bigcup_{\alpha \in A} E_\alpha$ for some index set $A$ (whether countable or uncountable).  We know that the complement is closed and the complement can be expressed as
+		\begin{align*}
+			E^c &= X\backslash E \\
+			&= X\backslash \PAREN{\bigcup_{\alpha\in A} E_\alpha }\\
+			&= \bigcap_{\alpha \in A} \PAREN{X \backslash E_\alpha}
+		\end{align*}each $E_\alpha$ is the complement of an open set, hence they are closed.  Thus, $E^c$ which is closed is made up of the intersection of closed sets.
+		}
+		
 		\item More directly, using the fact that a set $G$ is closed if and only if for any convergent sequence $(x_n)$ with all $x_n \in G$, the limit $x$ is also in $G$.
+		
+		\BLUE{Let $F, G \in X$ be closed sets and let $(x_n) \subset G$ and $(y_n) \subset F$ both be convergent sequences. Further, we let $(x_n), (y_n) \subset G\cap F$. Not that $F$ closed means that $(x_n) \in F$ implies that $\LIMN x_n \in F$, thus $\LIMN x_n \in G \cap F$ and a similar argument can be made for $y_n$ and $G$.  Thus sequences contained in $G\cap F$ must also contain their limits and $G\cap F$ is closed.  This can extend to any number of intersections.
+		}
 	\end{enumerate}
 	
 	\item\begin{enumerate}[label=(\alph*)]
@@ -94,8 +117,9 @@
 			C^1((-1,1))=\{f:(-1,1)\to\R, f \text{ is differentiable and }f'\text{ is continuous in }(1,-1)\}
 		\end{align*}with the metric
 		\begin{align*}
-			d(f,g) = \sup_{x\in (-1,1)} |f(x)-g(x)|,
+			d(f,g) = \sup_{x\in (-1,1)} |f(x)-g(x)|
 		\end{align*}is not complete.  (Hint: similar to the proof that the rational numbers are not complete, find a sequence $C'((-1,1))$ that converges in $d$ metric to a function that is not in $C^1((-=1,1))$, and show that this sequence is Cauchy.)
+,r to the proof that the rational numbers are not complete, find a sequence $C'((-1,1))$ that converges in $d$ metric to a function that is not in $C^1((-=1,1))$, and show that this sequence is Cauchy.)
 	\end{enumerate}
 	
 	\item Let $A$ and $B$ be subsets of the metric space $X$.  which one of the following is true?
@@ -105,7 +129,7 @@
 		(A\cup B)^o &\supset A^o\cup B^o, &\text{"=" fails for some $A$ and $B$}\label{eq:eq1}\tag{2.3}
 	\end{align}
 	
-	\item Leet $C^0([a,b])$ be the space of continuous functions on $[a,b]$, with the metric $d(f,g) = \SUP{x\in [a,b]}|f(x)-g(x)|$.
+	\item Let $C^0([a,b])$ be the space of continuous functions on $[a,b]$, with the metric $d(f,g) = \SUP{x\in [a,b]}|f(x)-g(x)|$.
 	
 	Show that the map $I: C^0([a,b]) \to \R$ defined by $I(f)=\int_a^b f(x) dx$ is continuous mapping from $C^0([a,b])$ to $\R$.
 	
@@ -118,7 +142,7 @@
 	
 	\item Let $f:\R^n \to \R$ be a continuous function such that 
 	\begin{align*}
-		\lim_{|x| \to \infty} &= + \infty
+		\lim_{|x| \to \infty} f(x) &= + \infty
 	\end{align*}Prove that $f$ attains its minimum.
 	
 	Recall that by definition, the limit in (??) means that Given $A > 0$, there is $R>0$ such that 
