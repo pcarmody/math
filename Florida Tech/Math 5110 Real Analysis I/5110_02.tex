@@ -133,6 +133,18 @@
 	
 	Show that the map $I: C^0([a,b]) \to \R$ defined by $I(f)=\int_a^b f(x) dx$ is continuous mapping from $C^0([a,b])$ to $\R$.
 	
+	\BLUE{$I$ is continuous if for ever $\epsilon > 0$ there exists $\delta > 0$ such that $d(I(f),I(g))<\epsilon$ whenever $d(f,g) < \delta$. Or 
+	\begin{align*}
+		d(I(f),I(g)) &= \SUP{x\in [a,b]}|I(f(x))-I(g(x))|\\
+			&= \SUP{x\in [a,b]}\BARS{\int_a^b f(x) dx-\int_a^b g(x) dx}\\
+			&= \SUP{x\in [a,b]}\BARS{\int_a^b f(x) - g(x) dx}\\
+			&= \SUP{x\in [a,b]}\int_a^b \BARS{f(x) - g(x)} dx\\
+			&\le \int_a^b \SUP{x\in [a,b]}\BARS{f(x) - g(x)} dx\\
+			&\le \int_a^b d(f,g) dx\\
+			&\le d(f,g)[b-a]
+	\end{align*}Thus when $\epsilon > 0$ choose $\delta < [b-a]d(f,g)$.  Hence, $I$ is continuous.
+	}
+	
 	\item Prove Propostion 2.3.2 in the text, in two different ways.:
 	\begin{enumerate}[label=\alph*)]
 		\item As a consequence of Theorem 2.3.1 in text.
