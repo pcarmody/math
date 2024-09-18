@@ -67,26 +67,38 @@
 	\begin{enumerate}[label=(\alph*)]
 		\item Show that
 			\begin{align*}
-				\LIMINFN x_n = \sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_l}
+				\LIMINFN x_n = \sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_k}
 			\end{align*}and
 			\begin{align*}
-				\LIMSUPN x_n = \inf_{k\ge n}\PAREN{\sup_{k\ge n} x_n}
+				\LIMSUPN x_n = \inf_{k\ge 0}\PAREN{\sup_{k\ge n} x_k}
 			\end{align*}
 		
-		\BLUE{If $\{ x_n \}$ were not bounded then this questions has no value.  Assuming, then, that $x_n$ is bounded above by its least upper bound, $M$, and below by its most lower bound, $L$.  We need to be aware of a repeating sequence or subsequence.  For example, $x_n = c$ where $c$ or $x_n = \{1/2, c, 1/4, c, 1/6, c, 1/8, \dots \}$.  These sequences are also bounded and form trivial solutions to this question.\\
-		We will focus, then, on the convergent subsequence, $\{ x_{\alpha_k}\}$ where $\alpha_k \in A$ and $A$ is an infinite list of indices.  We have two types of these convergent sequences those that coverge increasingly and those that converge decreasingly.  
-		\begin{description}
-			\item \textbf{Converge Increasingly}.  These subsequences may have many values but as $n \to \infty$ we see that $|x_{\alpha_n} - M| \to 0$ and without loss of generality, allow it to be Cauchy. \\ Claim: given any $n\ge 0$, the $\INF{k\ge n} x_{\alpha_k} = x_{\alpha_n}$.  We can see that given any $\epsilon >0$ there is $N \in \N$ we have $|x_{\alpha_n} - x_{\alpha_k} | < \epsilon$ whenever $N < n < k$.  That is, the subsequence is increasing, thus, $x_{\alpha_n} < x_{\alpha_k}$ for all $k \ge n$.  Thus $\INF{k \ge n} x_{\alpha_k} = x_{\alpha_n}$.  Further, a $n \to \infty$ the infimum $\INF{k \ge n} x_{\alpha_k}$ increases thus the supremum of these values is
-			\begin{align*}
-				\LIMINFN x_{\alpha_n} = \sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_{\alpha_k} }
-			\end{align*}
-\end{description}		
+		\BLUE{First, $\LIMINFN$: Let $y_n = \underset{k\ge n}\inf\, x_k$. Then, given any $j>k, y_k \le y_j$.  That is, $y_n$ is a bounded increasing sequence.  All $y_n \le \underset{n \to \infty}\sup y_n$  Thus, the $\LIMN y_n = \underset{n\ge 0}\sup\, y_n$.\\
+		Next, $\LIMSUPN$:  Let $z_n = \underset{k\ge n}\sup\, x_k$. Then, given any $j>k, z_k \ge z_j$.  That is, $z_n$ is a bounded decreasing sequence.  All $z_n \ge \underset{n \to \infty}\inf z_n$  Thus, the $\LIMN z_n = \underset{n\ge 0}\inf\, z_n$.\\
 		}
 		
 		\item Show that $\LIMINFN x_n$ and $\LIMSUPN x_n$ are well-defined for any sequence $x_n$.  (Unlike $\LIM{n\to\infty} x_n$.)  We allow values of $\infty$ and $-\infty$
-		
+
+		\BLUE{Using $(y_n)$ from (a), that must exist one and only one value for $\LIMN y_n$ as it is bounded and increasing, thus its limit is well-defined.  Similarly, for $(z_n)$.
+		}
+				
 		\item Let $x_n$ be a bounded sequence, and let $L$ be the set of limit points of $x_n$, i.e., the set of all limits of subsequences of $x_n$.  Show $\LIMINFN x_n = \inf L$ and $\LIMSUPN = \sup L$.
+		
+		\BLUE{Let $L$ be the set of limit points for $x_n$.  Then, for any $w \in L$ there is a $(w_k)\in (x_n)$ subsequence such that $\underset{k\to \infty}\lim w_k = w$.  The $\underset{k\to\infty}\inf w_k \ge \inf L \ge \LIMINFN x_n.$  However, from (a) we can see that 
+		\begin{align*}
+				\LIMINFN x_n = \sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_k}		
+		\end{align*}therefore $\LIMINFN x_n \ge \inf L$ thus $\LIMINFN x_n = \inf L$.\\
+		Similarly, for $\LIMSUPN x_n$.
+		}
 		\item Let $x_n$ be a bounded sequence.  Conclude using (c) that $\LIMINFN x_n \le \LIMSUPN x_n$, with equality if and only if $x_n$ is convergent.
+		
+		\BLUE{By definition, $\inf L \le \sup L$ therefore $\LIMINFN x_n \le \LIMSUPN x_n$.  Therefore, from (a)
+		\begin{align*}
+				\sup_{n\ge 0} \PAREN{\inf_{k\ge n} x_k} \le \inf_{n\ge 0}\PAREN{\sup_{k\ge n} x_k}
+		\end{align*}Now using $(y_n)$ and $(z_n)$ from (a) we can see that we have \begin{align*}
+			\sup_{n\ge 0} \,y_n \le \inf_{n\ge 0}\,z_n
+		\end{align*}we have a bounded increasing sequence on the left less than a bounded decreasing sequence on the right.  They can only be equal if they converge to the same value.
+		}
 	\end{enumerate}
 	
 	\item Prove that for any (possibly uncountable) collection $(F_\alpha)_{\alpha\in A}$ of closed sets, the intersection $F = \bigcup_{\alpha \in A} F_\alpha$ is closed, in two ways.
@@ -112,14 +124,27 @@
 	
 	\item\begin{enumerate}[label=(\alph*)]
 		\item Let $(x_n)$ be a Cauchy sequence in a metric space $X$.  Show that if a subsequence $(x_{n_j})$ of $x_n$ converges to $x$, then the entire sequence also converges to $x$.
+		
+		\BLUE{Let $(x_n)$ be Cauchy and let $(x_{n_j})$ be a convergent subsequence of $(x_n)$.  Then, there exists for every $\epsilon > 0$ there is $N \in \N$ such that whenever $j,k > N, |x_{n_j} - x_{n_k} | < \epsilon$.  Let $M = \min\{n_j, n_k\}$.  We can see that $|x_m-x_k| < \epsilon$.  $x_m, x_k \in x_n$ and $x_n$ is Cauchy, therefore all this is true for all elements of $m,k >M$, hence $(x_n)$ converges.
+		}
 		\item Show that the metric space
 		\begin{align*}
-			C^1((-1,1))=\{f:(-1,1)\to\R, f \text{ is differentiable and }f'\text{ is continuous in }(1,-1)\}
+			C^1\PAREN{(-1,1)}=\{f:(-1,1)\to\R, f \text{ is differentiable and }f'\text{ is continuous in }(1,-1)\}
 		\end{align*}with the metric
 		\begin{align*}
 			d(f,g) = \sup_{x\in (-1,1)} |f(x)-g(x)|
-		\end{align*}is not complete.  (Hint: similar to the proof that the rational numbers are not complete, find a sequence $C'((-1,1))$ that converges in $d$ metric to a function that is not in $C^1((-=1,1))$, and show that this sequence is Cauchy.)
-,r to the proof that the rational numbers are not complete, find a sequence $C'((-1,1))$ that converges in $d$ metric to a function that is not in $C^1((-=1,1))$, and show that this sequence is Cauchy.)
+		\end{align*}is not complete.  (Hint: similar to the proof that the rational numbers are not complete, find a sequence $C^1\PAREN{(-1,1)}$ that converges in $d$ metric to a function that is not in $C^1\PAREN{(-1,1)}$, and show that this sequence is Cauchy.)
+		
+		\BLUE{Let $f_n(x) = x^{\frac{1}{2n+1}}$. We can see that given any $\epsilon > 0$ there is $N \in \N$ such that $n,m >N$ the distance 
+		\begin{align*}
+			d(f_n,f_m)&=\sup_{x\in (-1,1)} |f_n(x)-f_m(x)| \\
+			&=\sup_{x\in (-1,1)} |x^{1/2n+1}-x^{1/2m+1}| \\
+		 	&< \epsilon
+		\end{align*}The functions are all differentiable and their derivatives are continuous, but
+		\begin{align*}
+				\lim_{n\to\infty} x^{\frac{1}{2n+1}} = \BINDEF{-1 & x<0}{1 & x>0}, \forall x \in (-1,1)
+		\end{align*}which is not a member of $C^1\PAREN{(-1,1)}$
+		}
 	\end{enumerate}
 	
 	\item Let $A$ and $B$ be subsets of the metric space $X$.  which one of the following is true?
@@ -128,6 +153,8 @@
 		(A \cup B)^o &\subset A^o\cup B^o, & \text{"=" fails for some $A$ and $B$} \label{eq:eq1}\tag{2.2} \\
 		(A\cup B)^o &\supset A^o\cup B^o, &\text{"=" fails for some $A$ and $B$}\label{eq:eq1}\tag{2.3}
 	\end{align}
+	
+	\BLUE{(2.3) Consider $X = \R^3$ and $A$ is the open unit disc in the X-Y plane centered at the origin and $B$ is the open unit disc in the Y-Z plane centered at the origin.  $(A \cup B)^o \supset A^o\cup B^o$. }
 	
 	\item Let $C^0([a,b])$ be the space of continuous functions on $[a,b]$, with the metric $d(f,g) = \SUP{x\in [a,b]}|f(x)-g(x)|$.
 	
@@ -142,14 +169,22 @@
 			&\le \int_a^b \SUP{x\in [a,b]}\BARS{f(x) - g(x)} dx\\
 			&\le \int_a^b d(f,g) dx\\
 			&\le d(f,g)[b-a]
-	\end{align*}Thus when $\epsilon > 0$ choose $\delta < [b-a]d(f,g)$.  Hence, $I$ is continuous.
+	\end{align*}Thus when $\epsilon > 0$ choose $\delta > [b-a]d(f,g)$.  Hence, $I$ is continuous.
 	}
 	
-	\item Prove Propostion 2.3.2 in the text, in two different ways.:
+	\item \textbf{Proposition 2.3.2} (Maximum principle). \textit{ Let $(X,d)$ be a compact metric space, and let $f:X \to \R$ be a contnuous function.  Then $f$ is bounded.  Furthermore, $f$ attains its maximum at some point $x_{\max} \in X$, and also attains its minimum at some point $x_{\min} \in X$. }. \\
+	Prove Propostion 2.3.2 in the text, in two different ways.:
 	\begin{enumerate}[label=\alph*)]
 		\item As a consequence of Theorem 2.3.1 in text.
+		
+		\BLUE{Let $f: X \to \R$ be a continuous function on a compact set $X$.  Then, by 2.3.1, $f(X)$ is a compact set.  Every compact set in $\R$ is an interval.  Let $\ABRACKET{a,b}$ be that interval, that is, $f: X \to \ABRACKET{a,b}$.  If $f$ were unbounded, then there would exist an $x \in X$ such that $f(x) \not \in \ABRACKET{a,b}$ which cannot happen.  Therefore, there must exists values in the domain $x_{\min}$ and $x_{\max}$ which are the maximum and minimum values of $f$, namely, $a, b$, respectively.
+		}
+		
 		\item Directly, using the sequential definition of compactness.
-		\textbf{Proposition 2.3.2} (Maximum principle). \textit{ Let $(X,d)$ be a compact metric space, and let $f:X \to \R$ be a contnuous function.  Then $f$ is bounded.  Furthermore, $f$ attains its maximum at some point $x_{\max} \in X$, and also attains its minimum at some point $x_{\min} \in X$. }
+		
+		\BLUE{Let $(x_n) \in X$ be any sequence in the compact space $X$.  Being compact, $(x_n)$ must converge and $\LIMN x_n = x \in X$.  Let $f: X \to \R$ be a continuous function.  $x_n$ converges implies that $f(x_n)$ also converges.  Therefore, $\LIMN f(x_n) = f(x)$ and is finite (otherwise $f$ would not be continuous).  Therefore, there exists an upper and lower bound of $f$.  Let $L$ be the lower bound and $(y_n) \in f(X)$ be a sequence such that $\LIMN y_n = L$.  Then, let $z_i$ be such that $f(z_i) = y_i$ for all $i$.  Then, we have a sequence $(z_n)\in X$ which must converge.  Thus, $\LIMN f(z_n) = L$ and $\LIMN z_n = x_{\min}$.  \\Similarly, for $x_{\max}$.
+		}
+
 	\end{enumerate}
 	
 	\item Let $f:\R^n \to \R$ be a continuous function such that 
@@ -161,5 +196,8 @@
 	\begin{align*}
 		f(x) >A \text{    for all } x \not\in B_R
 	\end{align*}in other words, $f(x) >A$ whenever $|x| \ge R$. Here, $|x| = d_2(x,0)$ and $d_2$ is the standard Euclidean distance defined in Example 1.4.
+	
+	\BLUE{Given any $A> 0$ there exists an $R>0$ such that $f(x) >A$ whenever $|x| > R$.  Therefore, $f(x) \le A$ whenever $|x| < R$.  $f(x)$ is bounded on $B_R$.  Hence there exists an interval $\ABRACKET{a,b} \in \R$ such that $F(B_R) \subset \ABRACKET{a,b}$. Therefore $f(x)$ is continuous on an interval, i.e., a compact set, and assumes a greatest and least value for some $x_{\min}, x_{\max} \in B_R$.
+	}
 \end{enumerate}
 \end{document}
