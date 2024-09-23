@@ -1,0 +1,107 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{color,soul}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#5 }
+\newcommand{\DUEDATE}{September 23, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+Questions 1, 3, 7, 10, 14, 27, 31 from Chapter 2 starting on Page 64.
+
+\begin{enumerate}
+	\item Suppose that $X$ is a discrete random variable with $P(x=0)=.25 P(X=1)=.125, P(x=2)=.125$, and $P(x=3)=.5$.  Graph the frequencey function and the cumulative distribution fuction of $X$.
+%	<<>>=
+%	data=c(.25,.125,.125,.5)
+%	x=seq(0,3)
+%	barplot(x,freq)
+%	@
+	\setcounter{enumi}{2}
+	\item The following table shows the cumulative distribution function of a discrete random variable.  Find the frequency function.
+	\begin{align*}
+	\begin{array}{cc}
+		\hline
+		k&F(k) \\
+		\hline
+		0 & 0 \\
+		1 & .1 \\
+		2 & .3 \\
+		3 & .7 \\
+		4 & .8 \\
+		5 & 1.0 \\
+		\hline
+	\end{array}
+	\end{align*}
+	\setcounter{enumi}{6}
+	\item Find the cdf of a Bernouilli random variable.
+	\setcounter{enumi}{9}
+	\item Appending three extra bits to a 4-bit word in a particular way (a Hamming code) allows detection and correction of up to one error in any of the bits.  If each bit has probability of .05 of being changed during communication, and the bits are changed independently of each other, what is teh probability that the word is correctly received (that is, 0 or 1 bit is in error)?  How does this probability compare to the probabiliyt that the word will be transmitted correctly with no check bits, in which case all four bits would have to be transmitted correctly for the word to be correct?
+	\setcounter{enumi}{13}
+	\item Two boys play basketball in the following way.  They take turns shooting and stop when a basket is amde.  Player A goes first and has a probability $p_1$ of making a basket on any throw.  Player B, who shoots second, has a probability $p_2$ of making a second basket.  The outcomes of the successive trialsare assumed to be independent.
+	\begin{enumerate}
+		\item Find the frequency function for the total number of attempts.
+		\item What is the probability that player A wins?
+	\end{enumerate}
+	\setcounter{enumi}{26}
+	\item Suppose that a rare disease has an incidence of 1 in 1000.  Assuming that members of the population are affected independently, find the probability of $k$ cases in a population of 100,000 for $k=0,1,2.$
+	\setcounter{enumi}{30}
+	\item Phone calls are received at a certain residence as a Poisson process with parameter $\lambda=2$ per hour.
+	\begin{enumerate}
+		\item If Diane takes a 10-min. shower, what is the probability taht the phone rings during that time?
+		\item How long ca her shower be if she wishes the probability of receiving no phone calls to be at most .5?
+	\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
