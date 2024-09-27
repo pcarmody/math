@@ -1,0 +1,78 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#4 }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+Page 74: 3, 5, 13, 17, 20
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item $T\,:\, \R^3 \to \R^2$ defined by $T(a_1,a_2,a_3) = (a_1-a_2, 2a_3)$.
+	\setcounter{enumi}{4}
+	\item $T\,:\, P_2(\R)\to P_3(\R)$ defined by $T(f(x)) = xf(x)+f'(x)$.
+	\setcounter{enumi}{12}
+	\item Let $V$ and $W$ be vector spaces, let $T\,:\,V\to W$ be linear, and let $\{w_1,w_2, \dots, w_k\}$ be a linearly independent subset of $R(T)$.  Prove that $S=\{v_1,v_2,\dots, v_k\}$ is chosen so that $T(v_i)=w_i$ for $i =1,2,\dots,k$, then $S$ is linearly independent.
+	\setcounter{enumi}{16}
+	\item Let $V$ and $W$ be finite-dimensional vector spaces and $T\,:\, v \to W$ be linear.
+	\begin{enumerate}
+		\item Prove that if $\dim(V) < \dim(W)$, then $T$ cannot be onto.
+		\item Prove that if $\dim(V) >\dim(W)$, then $T$ cannot be one-to-one.
+	\end{enumerate}
+	\setcounter{enumi}{19}
+	\item Let $V$ and $W$ be vector spaces with subspaces $V_1$ adn $W_1$, respectively.  If $T\,:\,V\to W$ is linear, prove that $T(V_1)$ is subspace of $W$ and that $\{x \in V\,:\, T(x) \in W_1\}$ is a subspace of $V$.
+\end{enumerate}
+\end{document}

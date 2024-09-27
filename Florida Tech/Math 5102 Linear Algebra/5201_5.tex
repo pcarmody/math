@@ -1,0 +1,107 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#5 }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+Page 84: 4, 8, 9, 13, 16
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Define
+	\begin{align*}
+		T\,:\, M_{2\times 1}(R)\to P_2(R)\text{ by } T\TWOXTWO{a}{b}{c}{d}=(a+b)+(2d)x+bx^2.
+	\end{align*}Let
+	\begin{align*}
+		\beta =\BRACKET{\TWOXTWO{1}{0}{0}{0}, \TWOXTWO{0}{1}{0}{0}\TWOXTWO{0}{0}{1}{0},\TWOXTWO{0}{0}{0}{1}} \AND \gamma = \{1,x,x^2\}
+	\end{align*}Computer $[T]_\beta^\gamma$.
+	\setcounter{enumi}{7}
+	\item Let $V$ be an $n$-dimensional vector space with an ordere basis $\beta$.  Define $T\,:\,V \to F^n$ by $\{T(x)=[x]_\beta$.  Prove that $T$ is linear.
+	\item Let $V$ be the vector space fo complex numbes over the field $R$.  Define $T\,:\,V \to V$ by $T(z)=\CONJ{z}$, where $\CONJ{z}$ is the complex conjugate of $z$.  Prove that $T$ is linear, and compute $[T]_\beta$, where $\beta=\{1,i\}$.  (Recall by Exersise 38 of Section 2.1 that $T$ is not linear if $V$ is regarded as a vector space over the field $C$.)
+	\setcounter{enumi}{12}
+	\item Let $V$ and $W$ be vector spaces, and let $T$ and $U$ be nonzero linear transformations from $V$ into $W$  If $R(t) \cap R(U) = \{0\}$, prove that $\{T,U\}$ is linearly independent subset of $\mathcal{l}(V,W)$.
+	\setcounter{enumi}{15}
+	\item Let $V$ and $W$ be vector spaces such that $\dim(V)=\dim (W)$, and let $T\,:\,V \to W$ be linear.  Show that there exist ordered bases $\beta$ and $\gamma$ for $V$ and $W$, respectively, such that $[T]_\beta^\gamma$ is a diagonal matrix.
+\end{enumerate}
+
+\newpage
+Page 96: 3, 9, 11, 12, 13
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item Let $g(x)=3+x$.  Let $T\,:\, P_2(R)\to P_2(R)$ adn $U\,:\, P_2(R) \to \R^3$ be the linear transformations respectively defined by 
+	\begin{align*}
+	T(f(x)) = f'(x)g(x)+2f(x)\AND U(a+bx+cx^2)=(a+b,c,a-b).
+	\end{align*}Let $\beta$ and $\gamma$ be the standard ordered bases of $P_2(R)$ and $\R^3$, respectively
+	\begin{enumerate}
+		\item Compute $[U]_\beta^\gamma, [T]_\beta^gamma$ directly.  Then use Theorem 2.11 to verify your results.
+		\item Let $h(x) =3-2x+x^2$.  Compute $[h(x)]_\beta$ and $[U(h(x))\_\gamma$.  Then use $[U]_\beta^\gamma$ from (a) and Theorem 2.14 to veriy your results.
+	\end{enumerate}
+	\setcounter{enumi}{8}
+	\item Find linear transformations $U,T\,:\,F^2\to F^2$ such that $UT=T_0$ (the zero transformation) but $TU\ne T_0$.  Use your answer to find matrices $A$ and $B$ such that $AB=0$ but $BA \ne 0$.
+	\setcounter{enumi}{10}
+	\item Let $V$ be a vector space, and let $T\,:\,V\to V$ be linear.  Prove that $T^2=T_0$ if and only if $R(T)\subseteq N(T)$.
+	\item Let $V,W$ and $Z$ be vector spaces, and let $\,:\, V\to W$ and $U:\,:\,W \to Z$ be linear.
+	\begin{enumerate}
+		\item Prove that if $UT$ is one-to-one, then $T$ is one-to-one. Must $U$ also be one-to-one?
+		\item Proive that if $UT$ is onto, then $U$ is onto.  Must $T$ also be onto?
+		\item Prove that if $U$ and $T$ are one-to-one and onto, then $UT$ is also.
+	\end{enumerate}
+	\item Let $A$ and$B$ be $n\times n$ matrices.  Recall that the trace of $A$ is defined by 
+	\begin{align*}
+		\TR(A) = \sum_{i=1}^n A_{ii}
+	\end{align*}Prove that $\TR(AB)=\TR(BA)$ and $\TR(A)=\TR(A^t)$
+\end{enumerate}
+\end{document}

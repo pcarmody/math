@@ -46,6 +46,7 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\HIGHLIGHT}[1]{\fcolorbox{black}{yellow}{#1}}
 
 \begin{document}
 
@@ -61,12 +62,19 @@
 Questions 1, 3, 7, 10, 14, 27, 31 from Chapter 2 starting on Page 64.
 
 \begin{enumerate}
-	\item Suppose that $X$ is a discrete random variable with $P(x=0)=.25 P(X=1)=.125, P(x=2)=.125$, and $P(x=3)=.5$.  Graph the frequencey function and the cumulative distribution fuction of $X$.
+	\item Suppose that $X$ is a discrete random variable with $P(x=0)=.25 P(X=1)=.125, P(x=2)=.125$, and $P(x=3)=.5$.  Graph the frequencey function and the cumulative distribution function of $X$.\\
+	
+	\HIGHLIGHT{The frequency function is}\\
+	\HIGHLIGHT{\includegraphics[scale=0.5]{../../../../../math5411/5411_05_02.pdf}} \\
+	
+	\HIGHLIGHT{The cummulative distribution function is} \\
+	\HIGHLIGHT{\includegraphics[scale=0.5]{../../../../../math5411/5411_05_03.pdf} }
 %	<<>>=
 %	data=c(.25,.125,.125,.5)
 %	x=seq(0,3)
 %	barplot(x,freq)
 %	@
+\newpage
 	\setcounter{enumi}{2}
 	\item The following table shows the cumulative distribution function of a discrete random variable.  Find the frequency function.
 	\begin{align*}
@@ -83,23 +91,65 @@ Questions 1, 3, 7, 10, 14, 27, 31 from Chapter 2 starting on Page 64.
 		\hline
 	\end{array}
 	\end{align*}
+	
+	\HIGHLIGHT{The cummulative distribution function, $F(X=x_i) = \SUM{n=0}i P(x_i), i=0,\dots,5$.  Thus $P(X=k)  =F(k)-F(k-1)$}
+	\begin{align*}
+	\begin{array}{cc}
+		\hline
+		k& P(X=k) \\
+		\hline
+		0 & 0 \\
+		1 & .1 \\
+		2 & .2 \\
+		3 & .4 \\
+		4 & .1 \\
+		5 & .2 \\
+		\hline
+	\end{array}
+	\end{align*}We can verify this by checking that $\SUM{k=0}5 P(X=k) = 1$.
+	
 	\setcounter{enumi}{6}
 	\item Find the cdf of a Bernouilli random variable.
+	
+	\HIGHLIGHT{Let $p$ be the probabily of success.  Then, $F(0) = 1-p, F(1) = p+(1-p)=1$}
 	\setcounter{enumi}{9}
-	\item Appending three extra bits to a 4-bit word in a particular way (a Hamming code) allows detection and correction of up to one error in any of the bits.  If each bit has probability of .05 of being changed during communication, and the bits are changed independently of each other, what is teh probability that the word is correctly received (that is, 0 or 1 bit is in error)?  How does this probability compare to the probabiliyt that the word will be transmitted correctly with no check bits, in which case all four bits would have to be transmitted correctly for the word to be correct?
+	\item Appending three extra bits to a 4-bit word in a particular way (a Hamming code) allows detection and correction of up to one error in any of the bits.  If each bit has probability of .05 of being changed during communication, and the bits are changed independently of each other, what is the probability that the word is correctly received (that is, 0 or 1 bit is in error)?  How does this probability compare to the probabiliy that the word will be transmitted correctly with no check bits, in which case all four bits would have to be transmitted correctly for the word to be correct?
+	
+	\HIGHLIGHT{7 bits means that the size of the sample space is $2^7=128$. Allowing $0$ or $1$ bits to be in error}\\\HIGHLIGHT{ with $p=0.5$ and 7 bits or $\frac{\binom{7}{2} \cdot 0.05}{2^7}=\frac{21*0.05}{128}=0.0082.$. That is a 99.18\% accuracy.}\\
+	\HIGHLIGHT{\textbf{No check bits.}  The probability of each correct bit is $p=.95$ with four bits,}\\ \HIGHLIGHT{ the probability that all are correct is $=(.95)^4=.8145$ or $81.45\%$.
+	}
+	
 	\setcounter{enumi}{13}
-	\item Two boys play basketball in the following way.  They take turns shooting and stop when a basket is amde.  Player A goes first and has a probability $p_1$ of making a basket on any throw.  Player B, who shoots second, has a probability $p_2$ of making a second basket.  The outcomes of the successive trialsare assumed to be independent.
+	\item Two boys play basketball in the following way.  They take turns shooting and stop when a basket is made.  Player A goes first and has a probability $p_1$ of making a basket on any throw.  Player B, who shoots second, has a probability $p_2$ of making a second basket.  The outcomes of the successive trials are assumed to be independent.
 	\begin{enumerate}
 		\item Find the frequency function for the total number of attempts.
+		
+		\begin{align*}
+			&\begin{array}{ccc}
+			\hline
+			k & F(k) \\
+			\hline
+			0 & p_1 \\
+			1 & (1-F(0)) p_2 &= (1-p_1)p_2\\
+			2 & (1-F(1)) p_1 &= (1-(1-p_1)p_2)p_1 \\
+			3 & (1-F(2)) p_2 &= (1-(1-(1-p_1)p_2)p_1)p_2 \\
+			\end{array}
+		\end{align*}
+		
 		\item What is the probability that player A wins?
 	\end{enumerate}
 	\setcounter{enumi}{26}
 	\item Suppose that a rare disease has an incidence of 1 in 1000.  Assuming that members of the population are affected independently, find the probability of $k$ cases in a population of 100,000 for $k=0,1,2.$
+	
 	\setcounter{enumi}{30}
 	\item Phone calls are received at a certain residence as a Poisson process with parameter $\lambda=2$ per hour.
 	\begin{enumerate}
-		\item If Diane takes a 10-min. shower, what is the probability taht the phone rings during that time?
-		\item How long ca her shower be if she wishes the probability of receiving no phone calls to be at most .5?
+		\item If Diane takes a 10-min. shower, what is the probability that the phone rings during that time?
+		
+		\HIGHLIGHT{This is a Poisson distribution with a modified $\lambda = 2/6$ for the ten minute interval in quesitons}\\\HIGHLIGHT{which comes to $P(X=1) = \frac{\lambda^k}{k!}e^{-\lambda} = \frac{(1/3)^1}{1!}e^{-1/3} = e^{-1/3}/3 = 0.24$}
+		\item How long can her shower be if she wishes the probability of receiving no phone calls to be at most .5?
+		\HIGHLIGHT{$P(X=0)=0.5 = \frac{\lambda_{p=0.5}^k}{k!}e^{-\lambda_{p=0.5}} = e^{-\lambda_{p=0.5}}$ or $\lambda_{p=0.5} = - \ln 0.5=.69$ or $\lambda_{p=0.5} = 0.69 = 2x$}\\\HIGHLIGHT{ where $x=.346$ hours or 20 minutes.
+		}
 	\end{enumerate}
 
 \end{enumerate}

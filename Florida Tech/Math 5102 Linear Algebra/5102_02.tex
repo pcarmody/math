@@ -1,0 +1,122 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra }
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#2 }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME -- \ASSIGNMENT} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+Page 34: 9, 10, 12, 13
+\begin{enumerate}
+	
+	\setcounter{enumi}{8}
+	\item Show that the matrices
+	\begin{align*}
+		\TWOXTWO{1}{0}{0}{0}, \, \TWOXTWO{0}{1}{0}{0}, \, \TWOXTWO{0}{0}{1}{0}, \, \AND \TWOXTWO{0}{0}{0}{1}
+	\end{align*}generates $M_{2 \times 2}(F)$.
+	
+	\BLUE{
+	\begin{align*}
+		\LET v_1 &= \TWOXTWO{1}{0}{0}{0}, \, v_2=\TWOXTWO{0}{1}{0}{0}, \, v_3=\TWOXTWO{0}{0}{1}{0}, \, \AND v_4=\TWOXTWO{0}{0}{0}{1}
+	\end{align*}Given any $A \in M_{2\times 2}(F)$ where 
+	\begin{align*}
+		A = \TWOXTWO{a}{b}{c}{d}, a,b,c,d \in F
+	\end{align*}It is easy to see that 
+	\begin{align*}
+		A = av_1+bv_2+cv_3+dv_4.
+	\end{align*}Hence any element of $M_{2 \times 2}(F)$ can be described as a linear combination of $\{ v_1, v_2, v_3, v_4\}$.
+	}
+	
+	\item Show that if 
+	\begin{align*}
+		M_1 &= \TWOXTWO{1}{0}{0}{0}, \, M_2 =  \TWOXTWO{0}{0}{0}{1}, \, \AND \TWOXTWO{0}{1}{1}{0}
+	\end{align*}then span of $\{ M_1, M_2, M_3 \}$ is the set of all symmetric $2 \times 2$ matrices.
+	
+	\BLUE{Given any symmetric matrix $B$ 
+	\begin{align*}
+		B &= \TWOXTWO{a}{b}{b}{c} \\
+		  &= aM_1 + bM_2 + c M_3
+	\end{align*}thus $\SPAN\{ M_1, M_2, M_3 \}$ is the set symmetric matrices.  Moreover, $\SPAN\{ M_1, M_2, M_3 \}$ cannot span the set of $M_{2\times 2}$ matrices as the dimensions are different.
+	}
+		
+	\setcounter{enumi}{11}
+	\item Show that a subset $W$ of a vector space $V$ is a subspace of $V$ if and only if $\SPAN(W) = W$.
+	
+	\BLUE{
+	\begin{description}
+		\item Show that $\SPAN(W) \subseteq W$\\
+		Let $w \in \SPAN(W)$ then there exist $a_i$ such that $w = \SUM{i=1}{n} a_iw_i$ for some $w_i \in W$.  These represent a linear combination of elements of $W$.
+		\item Show that $\SPAN(W) \supseteq W$
+	\end{description}
+	}
+	\item Show that if $S_1$ and $S_2$ are subsets of a vector space $V$ such that $S_1 \subseteq S_2$, then $\SPAN(S_1)\subseteq \SPAN(S_2)$.  In particular, if $S_1 \subseteq S_2$ and $\SPAN(S_1) =V$, deduce that $\SPAN(S_2) = V$.
+\end{enumerate}
+\newpage
+\newcommand{\TTH}{^{\text{th}}}
+Page 41: 6, 7, 11, 19, 20
+\begin{enumerate}
+	\setcounter{enumi}{5}
+	\item In $M_{m\times n}(F)$, let $E^{ij}$ denote the matrix whos eonly nonzero entry is 1 in the $i\TTH$ row and $j\TTH$ column. Prove that $\{ E^{ij}\,:\, 1 \le i \le m, \, 1 \le j \le n \}$ is linearly independent.
+	\item Recall from Exampe 3 in Section 1.3 that the sete of diagonal matrices in $M_{2 \times 2}(F)$ is a subspace.  Find a linearly independent set that generats this subspace.
+		
+	\setcounter{enumi}{10}
+	\item Let $S = \{u_1,u_2, \dots, u_n\}$ be a linearly indpendent subset of a vector space $V$ over the field $\Z_2$.  How many vectors are there in $\SPAN(S)$? Justify your answer.
+		
+	\setcounter{enumi}{18}
+	\item Prove that if $\{A_1, A_2, \dots, A_k\}$ is a linearly independent subset of $M_{m \times n}(F)$, then $\{A^t_1,A^t_2,\dots, A^t_k\}$ is also linearly independent.
+	\item  Let $f,g \in \mathcal{F}(\R, \R)$ be the functions defined by $f(t) = e^{rt}$ and $g(t) = e^{st}$, where $r \ne s$.  Prove that $f$ and $g$ are linearly independent in $\mathcal{F}(\R, \R)$.
+	
+\end{enumerate}
+\end{document}
