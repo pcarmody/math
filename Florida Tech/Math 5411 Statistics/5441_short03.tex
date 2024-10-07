@@ -64,7 +64,7 @@ Chapter 4: 2, 5, 6 (a,c,d), 14
 	\setcounter{enumi}{1}
 	\item If $X$ is a discrete uniform random variable -- that is, $P(X=k)=1/n$ for $k=1,2,\dots,n$--find $E(X)$ and $\VAR(X)$.
 	
-	\begin{align*}
+	\BLUE{\begin{align*}
 		E(X) &= \sum_{k=1}^n kp(X=k)\\
 		&=  \sum_{k=1}^n k(1/k) \\
 		&=  \sum_{k=1}^n 1 \\
@@ -72,12 +72,11 @@ Chapter 4: 2, 5, 6 (a,c,d), 14
 		\\	
 		\VAR(X) &= E[(x - \mu)^2]\\
 		&=  \sum_{k=1}^n (k-\mu)^2p(X=k) \\
-		&=  \sum_{k=1}^n (k-1)^2(1/k) \\
-		&=  \sum_{k=1}^n \frac{k^2-2k+1}{k}\\
-		&=  \sum_{k=1}^n (k-2+1/k) \\
-		&= 	\sum_{k=1}^n k -2n + \sum_{k=1}^n1/k \\
-		&= \frac{n(n+1)}{2}	-2n + \sum_{k=1}^n1/k
-	\end{align*}
+		&=  \sum_{k=1}^n (k-n)^2(1/k) \\
+		&=  \sum_{k=1}^n \frac{k^2-2kn+n^2}{k} \\
+		&=  \sum_{k=1}^n k-2n+\frac{n^2}{k} \\
+		&= \frac{n(n+1)}{2} -2n^2+ n^2\sum_{k=1}^n 1/k 
+	\end{align*} }
 	\setcounter{enumi}{4}
 	\newpage
 	\item Let $X$ have the density 
@@ -99,10 +98,14 @@ Chapter 4: 2, 5, 6 (a,c,d), 14
 		&=  \int_{-1}^1 (x - \mu)^2f(x)dx \\
 		&=  \int_{-1}^1 \PAREN{x - \frac{\alpha}{3}}^2\frac{1+\alpha x}{2}dx \\
 		&=  \int_{-1}^1 \PAREN{x^2-\frac{2\alpha x}{3} + \frac{\alpha^2}{9}}\frac{1+\alpha x}{2}dx \\
-		&=  \frac{1}{2}\int_{-1}^1 x^2-\frac{2\alpha x}{3} + \frac{\alpha^2}{9} + \alpha x^3-\frac{2\alpha^2 x^2}{3} + \frac{\alpha^3 x}{9}) dx \\
-		&=  \frac{1}{2}\int_{-1}^1 -\frac{2\alpha x}{3} + \frac{\alpha^2}{9} + \alpha x^3 + \frac{\alpha^3 x}{9} dx \\
-		&= \frac{1}{2}\SQBRACKET{-\frac{2\alpha x^2}{6} + \frac{\alpha^2x}{9} + \alpha x^4/4 + \frac{\alpha^3 x^2}{18}}_{-1}^1 \\
-		&= \frac{1}{2}\PAREN{-\frac{4\alpha}{6} + \frac{2\alpha^2}{9} + \frac{\alpha}{2}  + \frac{\alpha^3}{9}}
+		&=  \frac{1}{2}\int_{-1}^1 x^2-\frac{2\alpha x}{3} + \frac{\alpha^2}{9} + \alpha x^3-\frac{2\alpha^2 x^2}{3} + \frac{\alpha^3 x}{9} dx 
+	\end{align*}remove the odd numbered exponents as they are symmetric around the origin
+	\begin{align*}
+		\VAR(X) &=  \frac{1}{2}\int_{-1}^1 x^2 + \frac{\alpha^2}{9} -\frac{2\alpha^2 x^2}{3} dx \\
+		&=  \frac{1}{2}\int_{-1}^1 \frac{\alpha^2}{9} -\frac{3+2\alpha^2}{3}x^2 dx \\
+		&=  \frac{1}{2}\SQBRACKET{\frac{\alpha^2}{9}x-(3+2\alpha^2)x^3}_{-1}^1 \\
+		&= \frac{\alpha^2}{9}-3-2\alpha^2 \\
+		&= \frac{19}{9}\alpha^2-3
 	\end{align*}
 	}
 	\item Let $X$ be a continuous random variable with probability density function $f(x) = 2x, 0\le x \le 1$.
