@@ -1,0 +1,168 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{color,soul}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework Short \#3 }
+\newcommand{\DUEDATE}{October 7, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\HIGHLIGHT}[1]{\fcolorbox{black}{yellow}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+Chapter 4: 2, 5, 6 (a,c,d), 14
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item If $X$ is a discrete uniform random variable -- that is, $P(X=k)=1/n$ for $k=1,2,\dots,n$--find $E(X)$ and $\VAR(X)$.
+	
+	\begin{align*}
+		E(X) &= \sum_{k=1}^n kp(X=k)\\
+		&=  \sum_{k=1}^n k(1/k) \\
+		&=  \sum_{k=1}^n 1 \\
+		\mu &= n\\
+		\\	
+		\VAR(X) &= E[(x - \mu)^2]\\
+		&=  \sum_{k=1}^n (k-\mu)^2p(X=k) \\
+		&=  \sum_{k=1}^n (k-1)^2(1/k) \\
+		&=  \sum_{k=1}^n \frac{k^2-2k+1}{k}\\
+		&=  \sum_{k=1}^n (k-2+1/k) \\
+		&= 	\sum_{k=1}^n k -2n + \sum_{k=1}^n1/k \\
+		&= \frac{n(n+1)}{2}	-2n + \sum_{k=1}^n1/k
+	\end{align*}
+	\setcounter{enumi}{4}
+	\newpage
+	\item Let $X$ have the density 
+	\begin{align*}
+		f(x) &= \frac{1+\alpha x}{2}, \, -1 \le x \le 1, \, -1\le \alpha \le 1
+	\end{align*}Find $E(X)$ and $\VAR(X)$.
+	
+	\BLUE{\begin{align*}
+		E(X) &= \int_{-\infty}^\infty xf(x) dx \\
+		&= \int_{-1}^1 x\frac{1+\alpha x}{2}dx \\
+		&= \int_{-1}^1 \frac{x+\alpha x^2}{2}dx \\
+		&= \frac{1}{2}\int_{-1}^1 x+\alpha x^2dx \\
+		&= \frac{1}{2}\SQBRACKET{\frac{x^2}{2} + \frac{\alpha x^3}{3}}_{-1}^1 \\
+		&= \frac{1}{2}\PAREN{\PAREN{\frac{1}{2} + \frac{\alpha}{3}}-\PAREN{\frac{1}{2} + \frac{-\alpha}{3}}} \\
+		&= \frac{1}{2}\PAREN{\frac{\alpha}{3}+\frac{\alpha}{3}} \\
+		&= \frac{\alpha}{3} \\
+		\\
+		\VAR(X) &= E[(x - \mu)^2]\\
+		&=  \int_{-1}^1 (x - \mu)^2f(x)dx \\
+		&=  \int_{-1}^1 \PAREN{x - \frac{\alpha}{3}}^2\frac{1+\alpha x}{2}dx \\
+		&=  \int_{-1}^1 \PAREN{x^2-\frac{2\alpha x}{3} + \frac{\alpha^2}{9}}\frac{1+\alpha x}{2}dx \\
+		&=  \frac{1}{2}\int_{-1}^1 x^2-\frac{2\alpha x}{3} + \frac{\alpha^2}{9} + \alpha x^3-\frac{2\alpha^2 x^2}{3} + \frac{\alpha^3 x}{9}) dx \\
+		&=  \frac{1}{2}\int_{-1}^1 -\frac{2\alpha x}{3} + \frac{\alpha^2}{9} + \alpha x^3 + \frac{\alpha^3 x}{9} dx \\
+		&= \frac{1}{2}\SQBRACKET{-\frac{2\alpha x^2}{6} + \frac{\alpha^2x}{9} + \alpha x^4/4 + \frac{\alpha^3 x^2}{18}}_{-1}^1 \\
+		&= \frac{1}{2}\PAREN{-\frac{4\alpha}{6} + \frac{2\alpha^2}{9} + \frac{\alpha}{2}  + \frac{\alpha^3}{9}}
+	\end{align*}
+	}
+	\item Let $X$ be a continuous random variable with probability density function $f(x) = 2x, 0\le x \le 1$.
+	\begin{enumerate}
+		\item Find $E(X)$.
+		\BLUE{\begin{align*}
+			E(X) &= \int_{-\infty}^\infty  xf(x)dx \\
+			&=  \int_{0}^1  x(2x)dx \\
+			&=  \int_{0}^1  2x^2 \\
+			&= \SQBRACKET{\frac{2x^3}{3}}_{0}^1 \\
+			&= \frac{2}{3}
+		\end{align*} }
+		\setcounter{enumi}{2}
+		\item Use Theorem A in Section 4.1.1 to find $E(X^2)$ and compare to your answer part(b).
+		\BLUE{\begin{align*}
+			E(X^2) &= \int_{-\infty}^\infty  x^2f(x)dx \\
+			&=  \int_{0}^1  x^2(2x)dx \\
+			&=  \int_{0}^1  2x^3 \\
+			&= \SQBRACKET{\frac{x^4}{2}}_{0}^1 \\
+			&= \frac{1}{2}
+		\end{align*}
+		}
+		\item Find $\VAR(X)$ according to the definition of variance given in Section 4.2.  Also, find $\VAR(X)$ by using Theorem B of Section 4.2.
+		\BLUE{\begin{align*}
+			\VAR(X) &= E(X^2) - \mu^2 \\
+			&= \frac{1}{2} - \PAREN{\frac{2}{3}}^2 \\
+			&= \frac{1}{2} - \frac{4}{9}\\
+			&= \frac{5}{18}
+		\end{align*}
+		}
+	\end{enumerate}
+	\setcounter{enumi}{13}
+	\item Let $X$ be a continuous random variable with the density function
+	\begin{align*}
+		f(x)=2x, \, 0\le x \le 1
+	\end{align*}
+	\begin{enumerate}
+		\item Find $E(X)$.
+		\BLUE{\begin{align*}
+			E(X) &= \int_{-\infty}^\infty  xf(x)dx \\
+			&=  \int_{0}^1  x(2x)dx \\
+			&=  \int_{0}^1  2x^2 \\
+			&= \SQBRACKET{\frac{2x^3}{3}}_{0}^1 \\
+			&= \frac{2}{3}
+		\end{align*} 
+		}
+		\item Find $E(X^2)$ and $\VAR(X)$.
+		\BLUE{\begin{align*}
+			E(X^2) &= \int_{-\infty}^\infty  x^2f(x)dx \\
+			&=  \int_{0}^1  x^2(2x)dx \\
+			&=  \int_{0}^1  2x^3 \\
+			&= \SQBRACKET{\frac{x^4}{2}}_{0}^1 \\
+			&= \frac{1}{2}\\
+			\\
+			\VAR(X) &= E(X^2) - \mu^2 \\
+			&= \frac{1}{2} - \PAREN{\frac{2}{3}}^2 \\
+			&= \frac{1}{2} - \frac{4}{9}\\
+			&= \frac{5}{18}
+			\end{align*}
+		}
+	\end{enumerate}
+\end{enumerate}
+\end{document}

@@ -31,8 +31,8 @@
 \newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
 \newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
 \newcommand{\STUDENTNAME}{Paul Carmody}
-\newcommand{\ASSIGNMENT}{Homework \#6 }
-\newcommand{\DUEDATE}{September 30, 2024}
+\newcommand{\ASSIGNMENT}{Homework Short \#2 }
+\newcommand{\DUEDATE}{October 2, 2024}
 \newcommand{\SEMESTER}{Fall 2024}
 \newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
 \newcommand{\ROOM}{Remote}
@@ -59,35 +59,24 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center}
 
-1. Derive the CDF for X~Uniform$(a=min, b=max)$. Start with the PDF of X and use the definition of CDF.
-It means find the $P(X \le x) = F(X=x)$ for $x < a, a < x < b$, and $x > b$.
-\BLUE{
-\begin{align*}
-	P(X=x) &= h, x \in [a,b]\\
-	F(X=x) &= P(X \le x) = \int_{-\infty}^x P(t) \, dt\\
-		&= \int_{-\infty}^a P(t) dt + \int_a^x P(t)\, dt\\
-		&= \int_{-\infty}^a 0\, dt + \int_a^x h\, dt\\
-		&= h(x-a)
-\end{align*}which is zero for $x \le a$, a line with slope $h$ for $x$ from $a$ to $b$, and 1 for $x \ge b$.\\}
-
-2. Show $P(x_1 \le x \le x_2) = F(x_2) - F(x_1)$
+1. Replace rate $(\lambda)$ and rather use scale $\beta = 1/\lambda$ in Gamma probability density function and derive it based on scale.  
 
 \BLUE{\begin{align*}
-	F(X=x) &= P(X \le x) = \int_{-\infty}^x P(t) dt\\
-	F(X=x_2) &= P(x \le x_2) = \int_{-\infty}^{x_2} P(t) dt\\
-	\text{Since } x_1 \le x &\le x_2 \\
-	F(x_2) &= P(x \le x_2) = \int_{-\infty}^{x_1} P(t) dt + \int_{x_1}^{x_2} P(t) dt\\	
-		&= P(x \le x_2) = F(x_1) + P(x_1 \le x \le x_2)\\	
-	\therefore P(x_1 \le x \le x_2) &= F(x_2) - F(x_1)
-\end{align*} }
+	f(x|\alpha,\beta) &= \BINDEF{\frac{1}{\beta^\alpha \Gamma(\alpha)}x^{\alpha-1}e^{-x/\beta}}{0& \text{otherwise}} \\
+	f(x|\alpha,\lambda)&= \BINDEF{\frac{\lambda^{\alpha}}{ \Gamma(\alpha)}  x^{\alpha-1}e^{-x\lambda}}{0& \text{otherwise}} 
+\end{align*}
+}
+ 
 
-3. Find CDF for X~Normal$(\mu, \sigma)$. 
-
+2. Find the parameter "p" of a Geometric probability density function given the following Geometric sequence:
 \BLUE{\begin{align*}
-	p(x) &= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \\
-	c(t) &= \int_{-\infty}^t \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\, dx \\
-	\LET u &= \frac{x-\mu}{\sigma\sqrt{2}},\, du = \frac{1}{\sigma\sqrt{2}} dx \\
-	c(t) &= \frac{1}{\sqrt{\pi}} \int_{-\infty}^t e^{-u^2} \,du
-\end{align*} }
-
+P(X = 1) &= 1/2 \\
+P(X = 2) &= 1/4\\
+P(X = 3) &= 1/8\\
+P(X = 4) &= 1/16\\
+	\\
+	\sum_{i=0}^\infty (1/2)^i &= 1 \\
+	p\sum_{i=0}^\infty (1-p)^j = 1 &\implies p = 1/2
+\end{align*}
+}
 \end{document}
