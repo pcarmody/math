@@ -1,0 +1,100 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#6 }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+Page 107: 3, 4, 5, 15, 16
+
+\begin{enumerate}[label=Page 107:\arabic*.]
+	\setcounter{enumi}{2}
+	\item Which of the following pairs of vector spaces are isomorphic?  Justify your answers.
+	\begin{enumerate}[label=(\alph*)]
+		\item $F^3$ and $P_3(F)$.
+		\item $F^4$ and $P_3(F)$.
+		\item $M_{2\times 2}(\R)$ and $P_3(\R)$.
+		\item $V=\{A \in M_{2\times 2}(\R): $tr$(A) = 0\}$ and $\R^4$.	
+	\end{enumerate}
+	\item Let $A$ and $B$ be $n \times n$ matrices.  Prove taht $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+	\item Let $A$ be invertible. Prove that $A^t$ is invertible and $(A^t)^{-1} = (A^{-1})^t$.
+	\setcounter{enumi}{14}
+	\item Let $V$ and $W$ be $n$-dimensional vector spaces, and let $T: V \to W$ be a linear transformation.  Suppose that $\beta$ is a basis for $V$.  Prove that $T$ is an isomorphism if and only if $T(\beta)$ is a basis for $W$.
+	\item Let $B$ be an $n\times n$ invertyible matrix.  Define $\Phi: M_{n\times n}(F) \to M_{n\times n}\to (F)$ by $\Phi(A) = B^{-1}AB$.  Prove that $\Phi$ is an isomorphism.
+\end{enumerate}
+
+Page 116: 4, 11
+\begin{enumerate}[label=Page 116:\arabic*)]
+	\setcounter{enumi}{3}
+	\item Let $T$ be teh linear operator $\R^2$ defined by 
+	\begin{align*}
+		T\binom{a}{b} &= \binom{2a+b}{a-3b}
+	\end{align*}Let $\beta$ be the standard ordered basis for $\R^2$, and let 
+	\begin{align*}
+		\beta' &= \BRACKET{\binom{1}{1}, \binom{1}{2}}
+	\end{align*}Use Theorem 2.23 and the fact that
+	\begin{align*}
+		\TWOXTWO{1}{1}{1}{2}^{-1} &= \TWOXTWO{2}{-1}{-1}{1}
+	\end{align*}to find $[T]_{\beta'}$
+	\setcounter{enumi}{10}
+	\item Let $V$ be a finite-dimensional vector space with ordered bases $\alpha, \beta$ and $\gamma$.
+	\begin{enumerate}[label=(\alph*)]
+		\item Prove that if $Q$ and $R$ are the changed of coordinate matrices that change $\alpha$-coordinates in $\beta$-coordinates and $\beta$-coordiantes into $\gamma$-coordinates, respectiely, then $RQ$ si the change of coordinate matrix that changes $\alpha$-coordinates to $\gamma$-coordinates.
+		\item Prove that if $Q$ chjanges $\alpha$-coordinates into $\beta$-coordinates, then $Q^{-1}$ changes $\beta$-coordinates into $\alpha$-coordinates.
+	
+	\end{enumerate}
+\end{enumerate}
+\end{document}

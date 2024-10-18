@@ -1,0 +1,103 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Cheatsheet for Midterm }
+\newcommand{\DUEDATE}{October 21, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+\begin{description}
+\item \textbf{Terms \& Symbols:}
+	\begin{description}
+		\item $X$ is the set values that can be attained by some random variable $x$.
+		\item \DEFINE{Sample Space} $\Omega$ the values that are attained by the random variable.
+		\item \DEFINE{Discrete Random Variable} a data point that can take specific list of values.  That is, there is a one-to-one correspondence between elements of $X$ and $\N$ and it is finite.
+		\item \DEFINE{Continuous Random Variable} a data point that comes from a range of values.
+		\item \DEFINE{Probability, $p$,} of a random variable $x$ is $p: X \to [0,1]$ and indicates the likelihood of $x$ appearing in $X$.  In the discrete case: 
+		\begin{align*}
+			p(X=x) = \frac{\BARS{\{y\in X: y=x\}}}{|\Omega|}
+		\end{align*}
+		\item \DEFINE{Probability Mass Function, PMF} a function $p: X \to [0,1]$ indicating the values of the probabilities by element for a discrete random variable.
+		\item \DEFINE{Cumulative Mass Function, CMF}, $F(x) = p(X\le x)$ for a discrete random variable.
+		\item \DEFINE{Probability Density Function, PDF} $f: (-\infty,\infty) \to [0,1]$ whose area under the graph is the probability by range for a continuous random variable.
+		\begin{align*}
+			p(a < x < b) &= \int_a^b f(x)dx
+		\end{align*}
+		\item \DEFINE{Cumulative Density Function, CDF} $F: (-\infty,\infty) \to [0,1]$ which the cumulative probability up to the point $x$ for a continuous random variable.  That is
+		\begin{align*}
+			F(x) = p(X< x) &= \int_{-\infty}^x f(t) dt
+		\end{align*}
+		
+		\item A \DEFINE{Permutation} of a discrete set, $X$, is a one-to-one correspondence of all elements in $X$.  If $n$ is the index of the elements in $X$ then the permutation $P(n)$ is a different complete ordering of $X$ (i.e., no replacement).
+		\item A \DEFINE{Combination} is a subset of the elements of $X$ in a specific order (i.e., no replacement).
+	\end{description}
+	
+\item \textbf{Random Variable Types:}
+\begin{description}
+	\item Bernouli: $p:\{0,1\}\to [0,1]$, $p(x)=\BINDEF{1 & x=1}{0 & x=0}$
+	\item Uniform: $p:[a,b] \to [0,1]$, $p(x) = \BINDEF{\frac{1}{b-a} & a \le x \le b}{0 & \text{otherwise}}$
+	\item Binomial$(n,p)$ indicates $n$ trials with each probability of success for each trial of $p$.  Thus, the probability of $k$ success in $n$ trials is
+	\begin{align*}
+		p(X=k) &= \binom{n}{k}p^k(1-p)^{n-k}
+	\end{align*}
+	\item Negative Binomial and Exponential.
+	\item Hypergeometric
+	\item Poisson
+\end{description}
+\item \textbf{Distributions:}
+
+\end{description}
+
+
+\end{document}
