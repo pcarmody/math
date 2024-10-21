@@ -81,21 +81,80 @@
 		
 		\item A \DEFINE{Permutation} of a discrete set, $X$, is a one-to-one correspondence of all elements in $X$.  If $n$ is the index of the elements in $X$ then the permutation $P(n)$ is a different complete ordering of $X$ (i.e., no replacement).
 		\item A \DEFINE{Combination} is a subset of the elements of $X$ in a specific order (i.e., no replacement).
-	\end{description}
+		\item \DEFINE{Conditional Probability, $P(A|B)$}, read "the probability of event $A$ given first event $B$" has occurred.
+		\begin{align*}
+			P(A|B) &= P(A \cap B)P(B) & P(B) \ne 0\\
+			P(B|A) &= P(A \cap B)P(A) & P(A) \ne 0
+		\end{align*}
+		
+		\item Events $A$ and $B$ are said to be \DEFINE{independent} if $P(A\cap B) = P(A)P(B)$.  Also, typically, $P(A \cup B) = P(A)+P(B)-P(A\cap B)$.
+	\end{description}	
 	
+\item \textbf{Counting}
+
+	\begin{align*}
+		|\Omega| &= p^n & \text{with replacement, e.g., flip a coin $n$ times}\\
+		|\Omega| &= n! & \text{without replacement}\\
+		\binom{n}{r} &= \frac{n!}{r!(n-r)!} & \text{$n$ choose $r$ unordered} \\
+		2^n &= \sum_{i=0}^n \binom{n}{i} \\
+		\binom{n}{k_1\dots k_i} &= \frac{n!}{k_1!\cdots k_i!} & \text{$k_i$ form a partition on n}
+	\end{align*}
 \item \textbf{Random Variable Types:}
 \begin{description}
-	\item Bernouli: $p:\{0,1\}\to [0,1]$, $p(x)=\BINDEF{1 & x=1}{0 & x=0}$
-	\item Uniform: $p:[a,b] \to [0,1]$, $p(x) = \BINDEF{\frac{1}{b-a} & a \le x \le b}{0 & \text{otherwise}}$
-	\item Binomial$(n,p)$ indicates $n$ trials with each probability of success for each trial of $p$.  Thus, the probability of $k$ success in $n$ trials is
+	\item \textbf{Bernouli:} $p:\{0,1\}\to [0,1]$, $p(x)=\BINDEF{1 & x=1}{0 & x=0}$
+	\item \textbf{Uniform:} $p:[a,b] \to [0,1]$, $p(x) = \BINDEF{\frac{1}{b-a} & a \le x \le b}{0 & \text{otherwise}}$
+	\item \textbf{Binomial$(n,p)$} indicates $n$ trials with probability of success for each trial of $p$.  Thus, the probability of $k$ success in $n$ trials is
 	\begin{align*}
 		p(X=k) &= \binom{n}{k}p^k(1-p)^{n-k}
 	\end{align*}
-	\item Negative Binomial and Exponential.
-	\item Hypergeometric
-	\item Poisson
+	\item \textbf{Negative Binomial and Geometric:} first execute $r$ successes then determine the probability of $k$ failures.
+	\begin{align*}
+		P(X=k) &= \binom{k-1}{r-1}p^r(1-p)^{k-r} & \text{$r$ successes}\\ 
+		P(X=k) &= p(1-p)^k & \text{$r=1$ implies geometric}
+	\end{align*}
+	\item \textbf{Hypergeometric:} urn contains $n$ balls $r$ of them are black $n-r$ are not.  Draw $m$ balls with $k$ the number of black balls drawn.
+	\begin{align*}
+		P(X=k) &= \frac{\binom{r}{k}\binom{n-r}{m-k}}{\binom{n}{k}}
+	\end{align*}
+	\item \textbf{Poisson:} $\lambda$ is the parameterized count per unit time, $k$ is the count per unit time. \textit{(this can be used in place of Binomial if $n$ is very high and $p$ is very low, $\lambda = nxp$)}.
+	\begin{align*}
+		P(X=k) &= \frac{\lambda^k}{k!}e^{-\lambda}
+	\end{align*}
+	
+	\item \textbf{Exponential Decay: }
+	\begin{align*}
+		f(x) &= \BINDEF{\lambda e^{-\lambda} & x \ge 0}{0 & \text{otherwise}}
+	\end{align*}
+	
+	\item \textbf{Gamma Distribution: }$\alpha$ shape parameter $\lambda$ scale parameter.  $\beta = 1/\lambda$ is the rate parameter
+	\begin{align*}
+		g(t) &= \frac{\lambda^\alpha}{\Gamma(\alpha)}t^{\alpha-1}e^{-\lambda t} = \frac{1}{\beta^\alpha\Gamma(\alpha)}t^{\alpha-1}e^{\beta t} \\
+		\Gamma(t) &= \int_0^\infty u^{x-1}e^{-u} du,\, x >0 \\
+		\Gamma(n+1) &= n!
+	\end{align*}
+	
+	\item \textbf{Normal Distributions:} $\mu$ mean, $\sigma$ standard deviation, \DEFINE{Standard Normal Distribution} is $\mu=0, \sigma = 1$.
+	\begin{align*}
+		f(x) &= \frac{1}{\sigma\sqrt{2}}e^{-(x-\mu)^2/2\sigma^2} \\
+		f(x) &= \frac{1}{\sqrt{2}}e^{-x^2/2} & \text{Standard Normal Distribution}
+	\end{align*}
 \end{description}
-\item \textbf{Distributions:}
+\item \textbf{Expected Values and Variance:}
+	\begin{description}
+		\item Expected and Variance:
+		\begin{align*}
+			\mu = E[X] &= \sum_i x_ip(x_i) \AND E[X] = \int_{-\infty}^\infty xf(x)dx \\
+			\sigma^2 = V[X] &= E[X^2]-(E(X])^2\\
+			&= \sum_i x_i^2p(x_i) - \PAREN{\sum_i x_ip(x_i)}^2 \AND V[X] = \int_{-\infty}^\infty x^2f(x)dx - \PAREN{\int_{-\infty}^\infty xf(x)dx}^2
+		\end{align*}
+		\item Moment Generating Function (MFG):
+		\begin{align*}
+			M(t) &= \sum_x e^{tx} p(x) \AND M(t)=\int_{-\infty}^\infty e^{tx}f(x)dx & \text{raw}\\
+			M^{(r)}(0) &= E[X^r] & \text{center} \\
+			E[X] &= M'(0)\\
+			V[X] &= M''(0) - (M'(0))^2
+		\end{align*}
+	\end{description}
 
 \end{description}
 
