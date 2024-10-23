@@ -1,0 +1,93 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#8 }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Page 151: 5: Prev that $E$ is an elementary matrix if and only if $E^t$.
+
+\noindent Page 166: 3 Prove that for any $m \times n$ matrix $A$, rank$(A) = 0$ if an donly if $A$ is the zero matrix.\\
+
+\noindent Page 166:  6: For each of the following linear transformations $T$, determine whether $T$ is invertible, and comute $T^{-1}$ if it exists.
+\begin{enumerate}[label=(\alph*)]
+\item $T: \P_2(\R) \to \P(\R)$ defined by $T(f(x))=f''(x)+2fg'(x)-f(x).$.
+\item $T:\P_2(\R) \to \P(\R)$ defined by $T(f(x))=(x+1)f'(x)$.
+\item $T: \R^3\to \R^3$ defined by
+\begin{align*}
+	T(a_1,a_2,a_3) &= (a_1+2a_2+a_3, -a_1+a_2+2a_3,a_1+a_3).
+\end{align*} 
+\item $T:\R^3 \to \P_2(\R)$ defined by 
+\begin{align*}
+	T(a_1,a_2,a_3) &= (a_1+a_2+a_3)+(a_1-a_2+a_3)x+a_1x^2.
+\end{align*}
+
+\item $T:\P_2(\R) \to \R^3 $ defined by $T(f(x))=(f(-1), f(0),f(1))$.
+
+\item $T: M_{2\time 2}(\R) \to \R^4$ defined by 
+\begin{align*}
+	T(A) &= (\TR( A), \TR(A^t), \TR(EA), \TR(AE))
+\end{align*}where
+\begin{align*}
+	E=\TWOXTWO{0}{1}{1}{0}
+\end{align*}
+
+\end{enumerate}
+
+\noindent Page 166:  8: Let $A$ be an $m \times n$ matrix.  Prove that if $c$ is any nonzero scalar, then rank$(cA) = $ rank$(A)$.\\
+
+\end{document}

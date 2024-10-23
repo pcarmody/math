@@ -1,0 +1,69 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#9 }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Page 180: 6  Let $T:\R^3\to \R^2$ be defined by $T(a,b,c)=(a+b,2a-c)$.  Determine $T^{-1}(1,11)$.\\
+
+\noindent Page 180:8 Let $T:\R^3\to \R^3$ be defined by $T(a,b,c)=(a+b,b-2c,a+2c)$.  For each vector $v$ in $\R^3$, determine whether $v \in R(T)$.
+\begin{enumerate}[label=(\alph*)]
+	\item $v=(1,3,-2)$
+	\item $v = (2,1,1)$
+\end{enumerate}
+\end{document}

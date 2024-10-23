@@ -1,0 +1,127 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5110 -- Real Analysis I}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#3 }
+\newcommand{\DUEDATE}{TBD: October 31, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Liu}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}[label=\Roman*.]
+\item Let $\Omega \subset \R^m, a \in \Omega^o$.  If $f:\Omega \to \R$ is continuous at $a, g: \Omega \to \R$ is differentiable at $a$ and $g(a) = 0$, show that $fg$ is differentiable at $a$.  (Note $fg$ is the function whose value at $x \in \Omega$ is $f(x)g(x)$.
+
+\item \RED{skip II}
+
+\item Find the total derivative (i.e., derivative matrices) of the following functions at the given points.
+\begin{enumerate}[label=(\alph*)]
+	\item $f(x_1,x_2,x_3) = \PAREN{\begin{array}{c}
+		x_2 \\ 
+		x_1x_3^2 \\
+		x_1+x_2+x_3
+	\end{array} }$ at $(x_1,x_2,x_3) = (1,0,1)$.
+	
+	\item $f(x) = \binom{x^2}{e6x}$ at $x=3$.
+	
+	\item $f(x_1,x_2,x_3,x_4) = x_1^2+2x_2x_4+\sin(x_3x_4)$ at $(x_1,x_2,x_3,x_4) = (1,1,0,1)$
+\end{enumerate}
+
+\item Section 6.2 Problem 2.
+
+	\textit{Exercise 6.2.2}.  Prove Lemma 6.2.4. (Hint: prove by contradiction.  If $L_1 \ne L_2$, then there exists a vector $v$ such that $L_1v \ne L_2v$; this vector must be non-zero (why?).  Now apply the definition of derivative, and try to specialize to the case where $x=x_0+tv$ for some scalar $t$, to obtain a contradiction.)
+
+\newcommand{\RRR}{\mathbb{R}}	
+	\textbf{Lemma 6.2.4} (Uniqueness of derivatives).  \textit{Let $E$ be  subset of $\RRR^n, f: E\to \RRR^m$ be a function, $x_0\in E$ be an interior point of $E$, and let $L_1: \RRR^n\to \RRR^m$ and $L_2: \RRR^n\to \RRR^m$ be linear transformations.  Suppose that $f$ is differentiable at $x_0$ with derivatives $L_1$, and also diffentiable at $x_0$ with derivative $L_2$.  Then $L_1=L_2$}
+	
+	\item Section 6.3, problem 3 and problem 4.
+	
+	\textit{Exercise 6.3.3.}  Let $f: \RRR^2 \to \RRR$ be a function defined by $f(x,y) := \frac{x^3}{x^2+y^2}$ when $(x,y) \ne (0,0)$, and $f(0,0) := 0$.  Show that $f$ is not differentiable at $(0,0)$, despite being differentiable in every direction $v \in \RRR^2$ at $(0,0)$. Explain why this does not contradict Thoerem 6.3.8.
+	
+	\textbf{Exercise 6.3.4.}  Let $f: \RRR^n \to \RRR^m$ be a differentiable function such that $f'(x) = 0$ for all $x \in \RRR^n$.  Shwo that $f$ is constant.  (Hint: you may use the mean-value theorem or fundamental theorem of calculus for one-dimensional functions, but bear in mind that there is a direct analogue to these theorems for several-variable functions.  I would not advise proeeding via first principles.)  For a tougher challenge, replace the domain $\RRR^n$ by an open connected subet $\Omega$ of $\RRR^n$.
+
+\item Let $f: \R^m \to \R$ be differentiable, $\alpha \in \R$.  If $f(tx)=t^\alpha f(x)$	for $\forall x \in \R^m$ and $t> 0$, we say that $f$ is homogeneous of order $\alpha$.  Show that $f$ is homogeneous of order $\alpha$ iff $x \cdot \nabla f(x)=\alpha f(x)$, that is
+\begin{align*}
+	x^1\partial_1 f(x)+\cdots+x^m\partial_m f(x) = \alpha f(x). \
+\end{align*}This equation is classically written as 
+\begin{align*}
+	x^1 \PART{f}{x^1}+\cdots+\PART{f}{x^m} = \alpha f(x).
+\end{align*}Hint: As in the development of the theory in the text, a basic idea to study multivariable functions is to convert them into single-variable functions by restricting the variable $x$ in a fixed direction.  For example, for this problem you may consider the function $\varphi(t) = f(t)$.
+	
+\item \begin{enumerate}[label=(\alph*)]
+
+	\item Let $f: \R^m \to \R^m$ be a $C^1$-map,$$ |f(x)-f(y)|\ge |x-y|, \forall x,y \in \R^m,$$ then $\forall a \in \R^m, \det f'(a) \ne 0$.
+	
+	\item Let $f: \R^2\to \R^2$ be differentiable, and assume $f(0,0)=\ABRACKET{1,2}$, and $$ Df(0,0)=\TWOXTWO{1}{3}{2}{0}.$$ Let $g(x,y)=\ABRACKET{xy^2, y+2, 2x-3y}.$.  Find $D(g\circ f)(0,0)$.
+	
+\end{enumerate}
+	\item Let $f:E\to \R$ be defined on some open set $E \subset \R^2$, and assume the partial derivatives$\PART{f}{x_1}, \PART{f}{x_2}$ are bounded in $E$.  Prove that $f$ is continuous in $E$.
+	
+	\textit{Hint: } Proceed as in the proof of Theorem 6.3.8 (continuity of partial derivatives implies $f$ is differentiable) which we discussed in class.
+	
+	\item Let $F(x,y,z) = \PAREN{\begin{array}{c}
+		x+y \\
+		x^2y \\
+		z+2x	
+	\end{array} }.$
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item At what points $x_0, y_0, z_0)$ does $F$ have a local inverse, i.e., a function $F^{-1}$ defined on an open set $V$ containing $F(x_0, y_o, z_o)$, such that $F(F^{-1}(x,y,z))=(x,y,z)$ for all $(x,y,z) \in V$?
+		
+		\item What is $D(F^{-1})(2,1,3)$?  (Hint: $F(1,1,1)=(2,1,3)$.)
+	\end{enumerate}
+	
+	\item When does the equation $x_1^2+2x_2^3-xd^4+\ln(1+x_4^21)=1$ define a function $x_4=g(x_1,x_2,x_3)$ implicitly? Find $\nabla g(1,0,-1)$.
+\end{enumerate}
+
+\end{document}
