@@ -65,21 +65,65 @@ Page 107: 3, 4, 5, 15, 16
 	\item Which of the following pairs of vector spaces are isomorphic?  Justify your answers.
 	\begin{enumerate}[label=(\alph*)]
 		\item $F^3$ and $P_3(F)$.
+		
+		\BLUE{not isomorphic $\dim F^3 = 3$ and $\dim P_3(F) = 4$.}
+		
 		\item $F^4$ and $P_3(F)$.
+		
+		\BLUE{isomorphic $\dim F^4 = 4$ and $\dim P_3(F) = 4$.}
+		
 		\item $M_{2\times 2}(\R)$ and $P_3(\R)$.
+		
+		\BLUE{isomorphic $\dim M_{2\times 2} = 4$ and $\dim P_3(F) = 4$.}
+		
 		\item $V=\{A \in M_{2\times 2}(\R): $tr$(A) = 0\}$ and $\R^4$.	
+		
+		\BLUE{Not isomorphic.  $\dim V = 2$ and $\dim \R^4 = 4$}
 	\end{enumerate}
-	\item Let $A$ and $B$ be $n \times n$ matrices.  Prove taht $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+	\item Let $A$ and $B$ be $n \times n$ matrices.  Prove that $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+	
+	\BLUE{\begin{align*}
+		(AB)^{-1}(AB) &= I \\
+		(AB)^{-1}ABB^{-1} &= IB^{-1} \\
+		(AB)^{-1}AA^{-1} &= B^{-1}A^{-1} \\
+		(AB)^{-1} &= B^{-1}A^{-1} 
+	\end{align*}
+	}
+	
 	\item Let $A$ be invertible. Prove that $A^t$ is invertible and $(A^t)^{-1} = (A^{-1})^t$.
+	
+	\BLUE{\begin{align*}
+		AA^{-1} &= I \\
+		(AA^{-1})^t &= I^t \\
+		A^t(A^{-1})^t &= I \\
+		(A^t)^{-1} &= (A^{-1})^t
+	\end{align*}
+	}
+	
 	\setcounter{enumi}{14}
 	\item Let $V$ and $W$ be $n$-dimensional vector spaces, and let $T: V \to W$ be a linear transformation.  Suppose that $\beta$ is a basis for $V$.  Prove that $T$ is an isomorphism if and only if $T(\beta)$ is a basis for $W$.
-	\item Let $B$ be an $n\times n$ invertyible matrix.  Define $\Phi: M_{n\times n}(F) \to M_{n\times n}\to (F)$ by $\Phi(A) = B^{-1}AB$.  Prove that $\Phi$ is an isomorphism.
+	
+	\BLUE{\begin{description}
+		\item $(\Longrightarrow)$ $T$ is an isomorphism, thus $T$ is one-to-one and onto.  Thus, 
+		\begin{align*}
+			\forall w \in W, \,&!\exists v \in V \to v = \sum_{i=1}^n \alpha_i\beta_i \AND T(v) = w\\
+			w &= T(v) = T\PAREN{\sum_{i=1}^n \alpha_i\beta_i} = \sum_{i=1}^n \alpha_iT(\beta_i) \\
+			\text{also } \forall i,j, i\ne j, 0&= aT(\beta_i) - bT(\beta_j) = T(a\beta_i - b\beta_j) \to a=b=0 \\
+			\therefore \SPAN\BRACKET{T(\beta_i)} &= W
+		\end{align*}
+		\item $(\Longleftarrow)$ $\BRACKET{T(\beta_i)}$ is a basis for $W$.
+		\begin{align*}
+			\dim \SPAN\BRACKET{T(\beta_i)} &= n \to \text{onto}
+		\end{align*}
+	\end{description}
+	}
+	\item Let $B$ be an $n\times n$ invertible matrix.  Define $\Phi: M_{n\times n}(F) \to M_{n\times n}\to (F)$ by $\Phi(A) = B^{-1}AB$.  Prove that $\Phi$ is an isomorphism.
 \end{enumerate}
 
 Page 116: 4, 11
 \begin{enumerate}[label=Page 116:\arabic*)]
 	\setcounter{enumi}{3}
-	\item Let $T$ be teh linear operator $\R^2$ defined by 
+	\item Let $T$ be the linear operator $\R^2$ defined by 
 	\begin{align*}
 		T\binom{a}{b} &= \binom{2a+b}{a-3b}
 	\end{align*}Let $\beta$ be the standard ordered basis for $\R^2$, and let 
@@ -89,11 +133,27 @@ Page 116: 4, 11
 	\begin{align*}
 		\TWOXTWO{1}{1}{1}{2}^{-1} &= \TWOXTWO{2}{-1}{-1}{1}
 	\end{align*}to find $[T]_{\beta'}$
+	
+	\BLUE{\begin{align*}
+		T\binom{1}{0} &= \binom{1}{1}, \, T\binom{0}{1} = \binom{1}{-3}\implies [T]_\beta = \TWOXTWO{1}{1}{1}{-3}\\
+		[T]_{\beta'} &= Q^{-1}[T]_\beta Q\\\
+		&= \TWOXTWO{2}{-1}{-1}{1}\TWOXTWO{1}{1}{1}{-3}\TWOXTWO{1}{1}{1}{2} \\
+		&= \TWOXTWO{1}{5}{-1}{-4}\TWOXTWO{1}{1}{1}{2} \\
+		&= \TWOXTWO{6}{11}{-5}{-7}
+	\end{align*}
+	}
 	\setcounter{enumi}{10}
 	\item Let $V$ be a finite-dimensional vector space with ordered bases $\alpha, \beta$ and $\gamma$.
 	\begin{enumerate}[label=(\alph*)]
-		\item Prove that if $Q$ and $R$ are the changed of coordinate matrices that change $\alpha$-coordinates in $\beta$-coordinates and $\beta$-coordiantes into $\gamma$-coordinates, respectiely, then $RQ$ si the change of coordinate matrix that changes $\alpha$-coordinates to $\gamma$-coordinates.
-		\item Prove that if $Q$ chjanges $\alpha$-coordinates into $\beta$-coordinates, then $Q^{-1}$ changes $\beta$-coordinates into $\alpha$-coordinates.
+		\item Prove that if $Q$ and $R$ are the changed of coordinate matrices that change $\alpha$-coordinates in $\beta$-coordinates and $\beta$-coordiantes into $\gamma$-coordinates, respectively, then $RQ$ is the change of coordinate matrix that changes $\alpha$-coordinates to $\gamma$-coordinates.
+		
+		\BLUE{$Q$ and $R$ are invertible and therefore commutative.\begin{align*}
+			[T]_\beta &= Q^{-1}[T]_\alpha Q \AND T_\gamma = R^{-1}[T]_\beta R \\
+			T_\gamma &= R^{-1}\PAREN{Q^{-1}[T]_\alpha Q} R \\			
+			&= (QR)^{-1}[T]_\alpha QR
+		\end{align*}		
+		}
+		\item Prove that if $Q$ changes $\alpha$-coordinates into $\beta$-coordinates, then $Q^{-1}$ changes $\beta$-coordinates into $\alpha$-coordinates.
 	
 	\end{enumerate}
 \end{enumerate}

@@ -59,9 +59,9 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 
-Page 116: 4, 11 \\
+\noindent Page 116: 4, 11 \\
 
-Page 116: 4 Let $T$ be the linear operator on $\R^2$ defined by 
+\noindent Page 116: 4. Let $T$ be the linear operator on $\R^2$ defined by 
 \begin{align*}
 	T\binom{a}{b}=\binom{2a+b}{a-3b}
 \end{align*}let $\beta$ be the standard ordered basis for $\R^2$, and let
@@ -73,40 +73,94 @@ Page 116: 4 Let $T$ be the linear operator on $\R^2$ defined by
 \end{align*}to find $[T]_{\beta'}$\\
 
 
-Page 116: 11 Let $V$ be a finite-dimensional vector space with ordered bases $\alpha, \beta$ and $\gamma$.
+\noindent Page 116: 11 Let $V$ be a finite-dimensional vector space with ordered bases $\alpha, \beta$ and $\gamma$.
 	\begin{enumerate}[label=(\alph*)]
-		\item Prove that if $Q$ and $R$ are the changed of coordinate matrices that change $\alpha$-coordinates in $\beta$-coordinates and $\beta$-coordiantes into $\gamma$-coordinates, respectiely, then $RQ$ si the change of coordinate matrix that changes $\alpha$-coordinates to $\gamma$-coordinates.
+		\item Prove that if $Q$ and $R$ are the changed of coordinate matrices that change $\alpha$-coordinates in $\beta$-coordinates and $\beta$-coordiantes into $\gamma$-coordinates, respectiely, then $RQ$ is the change of coordinate matrix that changes $\alpha$-coordinates to $\gamma$-coordinates.
 		\item Prove that if $Q$ changes $\alpha$-coordinates into $\beta$-coordinates, then $Q^{-1}$ changes $\beta$-coordinates into $\alpha$-coordinates.
 	\end{enumerate} 
 
-Page 124: 3, 6, 7, 11 \\
+\noindent Page 124: 3, 6, 7, 11 \\
 
-Page 124: 3 For each of the following vector spaces $V$ adn basses $\beta$, find explicit formulas for vectors of the dual basis $\beta^*$ for $V^*$, as in Example 4.
+\noindent Page 124: 3. For each of the following vector spaces $V$ and bases $\beta$, find explicit formulas for vectors of the dual basis $\beta^*$ for $V^*$, as in Example 4.
 \begin{enumerate}[label=(\alph*)]
 	\item $V = \R^3; \beta=\{(1,0,1),(1,2,1),(0,0,1)\}$
-	\item $V=\P-2(\R); \beta=\{1,x,x6^\}$
+	
+	\BLUE{\begin{align*}
+		\delta_{ij} &= f_i(\beta_j) \\
+		&\begin{array}{cccc}
+			i\backslash j & 1            & 2 & 3 \\
+			1 & 1 = f_1(1,0,1) & 0=f_1(1,2,1) & 0=f_1 (0,0,1)\\
+			  & 1 = a+c        & 0= a+2b+1 & 0=c \\
+			  & f_1(x,y,z) = x-\frac{1}{2}y\\ \\
+			2 & 0 = f_2(1,0,1) & 1=f_2(1,2,1) & 0=f_2 (0,0,1)\\
+			  & d=-f & 1=d+2e+f & f=0 \\
+			  & f_2(x,y,z) = \frac{1}{2}y \\ \\
+			3 & 0 = f_3(1,0,1) & 0=f_3(1,2,1) & 1=f_3 (0,0,1)\\
+			  & k = -m & 0=k+2l+m & 1=m \\
+			  & f_3(x,y,z) = -x+z
+		\end{array}
+	\end{align*}
+	}	
+	
+	\item $V=P_2(\R); \beta=\{1,x,x^2\}$
+	
+	\BLUE{\begin{align*}
+		f_i(\beta_j) &= \delta_{ij}\\
+		&\begin{array}{cccc}
+		i\backslash j & 1 & x & x^2 \\
+		1  & 1= f_1(1,0,0) & 0=f_1(0,1,0) & 0=f_1(0,0,1)\\
+		   & f_1(x,y,z) = x \\
+		2  & 0= f_2(1,0,0) & 1=f_2(0,1,0) & 0=f_2(0,0,1)\\
+		   & f_2(x,y,z) = y \\
+		3  & 0= f_3(1,0,0) & 0=f_3(0,1,0) & 1=f_3(0,0,1) \\
+		   & f_3(x,y,z) = z
+		\end{array}
+	\end{align*}
+	}
 
 \end{enumerate}
 
-Page 124: 6 Define $f \in (\R^2)^*$ by $f(x,y)=2x+y$and $T: \R^2\to \R^2$ by $T(x,y) = (3x+2y,x)$.
+\noindent Page 124: 6 Define $f \in (\R^2)^*$ by $f(x,y)=2x+y$ and $T: \R^2\to \R^2$ by $T(x,y) = (3x+2y,x)$.
 \begin{enumerate}[label=(\alph*)]
 \item Compute $T^t(f)$.
-\item Compute $[T^t]_{\beta^*}$, where $\beta$ is the standard ordered basis for $\R^2$ adn $\beta^*=\{f_1,f_2\}$ is teh dual basis, by finding scalars $a,b,c,$ and $d$ such that $T^t(f_1)=af_1+cf_2$ and $T^t(f_2)=bf_1+df_2$.
-\item Compute $[T]_\beta$ and $([T]_\beta)^t$, and compare your results with (b).
+\BLUE{\begin{align*}
+	T^t(f) &= (f\circ T)(x,y) =f(T(x,y))=f(3x+2y,x) = 2(3x+2y)+x = 7x+4y
+\end{align*}
+}
+
+\item Compute $[T^t]_{\beta^*}$, where $\beta$ is the standard ordered basis for $\R^2$ and $\beta^*=\{f_1,f_2\}$ is the dual basis, by finding scalars $a,b,c,$ and $d$ such that $T^t(f_1)=af_1+cf_2$ and $T^t(f_2)=bf_1+df_2$.
+
+\BLUE{\begin{align*}
+	\beta^* &= \{ x, y\}\\
+	T^t(x) &= ax+cy, \, T^t(y) = bx+dy \\
+	T^t(f(x,y)) &= T^(2x+y) \\
+		&= T^(2x)+T^(y) \\
+		&= af_1(T(2,0))
+\end{align*}
+}
+
+\item Compute $[T]_\beta$ and $\PAREN{[T]_\beta}^t$, and compare your results with (b).
+
+\BLUE{\begin{align*}
+	T(1,0) &= \binom{3}{1} \AND T(0,1) = \binom{2}{0}\\
+	[T]_\beta &= \TWOXTWO{3}{2}{1}{0} \\
+	\PAREN{[T]_\beta}^t &= \TWOXTWO{3}{1}{2}{0}
+\end{align*}
+}
 \end{enumerate} 
 
-Page 124: 7 Let $V=\P_1(\R)$ and $W=\R^2$ with respective standard ordered bases $\beta$ and $\gamma$.  Define $T:V\to W$ by
+\noindent Page 124: 7 Let $V=P_1(\R)$ and $W=\R^2$ with respective standard ordered bases $\beta$ and $\gamma$.  Define $T:V\to W$ by
 \begin{align*}
 	T(p9x))&= )p(0)-2p(1),p(0)+p'(0)),
 \end{align*}where $p'(x)$ is the derivative of $p(x)$.
 \begin{enumerate}
 	\item For $f ]\in W^*$ defined by $f(a,b)=a-2b$, comptuer $T^t(f)$.
-	\item Compute $[T^t]_{\gamma^*}^{\beta^*}$ withoutappelaing to Theorem 2.25.
-	\item Compute $[T]_\beta^\gamma$ adn its transpose, and compare your results with (b).
+	\item Compute $[T^t]_{\gamma^*}^{\beta^*}$ without appelaing to Theorem 2.25.
+	\item Compute $[T]_\beta^\gamma$ and its transpose, and compare your results with (b).
 	
 \end{enumerate}
 
-Page 124: 11 let $V$ and $W$ be infinite-dimensional vector spaces over $F$, and let $\psi_1$ and $\psi-2$ be the isomorphisms between $V$ adn $V^{**}$ and $W$ and $W^{**}$, respectively, as defined in Theorem 2.26.  Let $T: V \to W$ be linear, and defien $T^{tt}=(T^t)^t$.  Prove that the diagram depicted in Figure 2.6 commutes (i.e, prove that $\psi_2 T = T^{tt}\psi_1$).
+\noindent Page 124: 11 let $V$ and $W$ be infinite-dimensional vector spaces over $F$, and let $\psi_1$ and $\psi_2$ be the isomorphisms between $V$ and $V^{**}$ and $W$ and $W^{**}$, respectively, as defined in Theorem 2.26.  Let $T: V \to W$ be linear, and defien $T^{tt}=(T^t)^t$.  Prove that the diagram depicted in Figure 2.6 commutes (i.e, prove that $\psi_2 T = T^{tt}\psi_1$).
 \begin{align*}
 	\begin{array}{ccc}
 		V & \overset{T} \longrightarrow & W \\
