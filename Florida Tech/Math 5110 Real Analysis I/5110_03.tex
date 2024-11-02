@@ -72,9 +72,48 @@
 		x_1+x_2+x_3
 	\end{array} }$ at $(x_1,x_2,x_3) = (1,0,1)$.
 	
+	\BLUE{\begin{align*}
+		&\begin{array}{c|lccc}
+			& & \partial_1 f_i & \partial_2 f_i & \partial_3 f_i\\ \hline
+			f_1 & x_2 & 0 & 1 & 0\\
+			f_2 & x_1x_3 & x_3 & 0 & x_1 \\
+			f_3 & x_1+x_2+x_3 & 1 & 1 & 1
+		\end{array} \\ \\
+		J_f(x_1, x_2, x_3) &= \THREEXTHREE{0}{1}{0}{x_3}{0}{x_1}{1}{1}{1} \\
+		J_f(1,0,1) &= \THREEXTHREE{0}{1}{0}{1}{0}{1}{1}{1}{1}
+	\end{align*}
+	}
+	
 	\item $f(x) = \binom{x^2}{e^x}$ at $x=3$.
 	
+	\BLUE{\begin{align*}
+		f'(x) &= \binom{2x}{e^x} \AND f'(3) = \binom{6}{e^3}
+\end{align*}	
+	}
+	
 	\item $f(x_1,x_2,x_3,x_4) = x_1^2+2x_2x_4+\sin(x_3x_4)$ at $(x_1,x_2,x_3,x_4) = (1,1,0,1)$
+	
+	\BLUE{\begin{align*}
+		\partial_{x_1}f &= 2x_1\\
+		\partial_{x_2}f &= 2x_4\\
+		\partial_{x_3}f &= x_4\cos(x_3x_4)\\
+		\partial_{x_4}f &= 2x_2+x_3\cos(x_3x_4) \\
+		\\
+		J_f(x_1,x_2,x_3,x_4) &= \PAREN{\begin{array}{c}
+			2x_1\\
+			2x_4\\
+			x_4\cos(x_3x_4)\\
+			2x_2+x_3\cos(x_3x_4)		
+		\end{array} }\\
+		J_f(1,1,0,1) &= \PAREN{\begin{array}{c}
+			2 \\
+			2 \\
+			1 \\
+			2
+		\end{array}
+		} 
+	\end{align*}
+	}
 \end{enumerate}
 
 \item Section 6.2 Problem 2.
@@ -83,6 +122,13 @@
 
 \newcommand{\RRR}{\mathbb{R}}	
 	\textbf{Lemma 6.2.4} (Uniqueness of derivatives).  \textit{Let $E$ be  subset of $\RRR^n, f: E\to \RRR^m$ be a function, $x_0\in E$ be an interior point of $E$, and let $L_1: \RRR^n\to \RRR^m$ and $L_2: \RRR^n\to \RRR^m$ be linear transformations.  Suppose that $f$ is differentiable at $x_0$ with derivatives $L_1$, and also diffentiable at $x_0$ with derivative $L_2$.  Then $L_1=L_2$}
+\newcommand{\NORM}[1]{\left \lVert\, #1\, \right \lVert}	
+
+	\BLUE{Let $L_1, L_2: \RRR^n \to \RRR^m$ be linear transformations and $L_1 \ne L_2$.  Also, let $E \subset \RRR^n$ and $f: E \to \RRR^m$ be a function that is differentiable at a point $x_0 \in E^o$ with derivatives $L_1$ and $L_2$ at $x_0$.  First, $\det f'(x_0) \ne 0$ because $f$ is differentialable at $x_0$ and since $L_2 \ne L_1$ there exists a non-zero vector $v$ such that $L_1 v \ne L_2 v$.
+	\begin{align*}
+		\lim_{x \to x_0} \frac{\NORM{f(x)-(f(x_0)+L_1(x-x_0))}}{\NORM{x-x_0}}
+	\end{align*}
+	}
 	
 	\item Section 6.3, problem 3 and problem 4.
 	
