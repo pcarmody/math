@@ -1,0 +1,111 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5110 -- Real Analysis I}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework Exercises 1 }
+\newcommand{\DUEDATE}{December 11, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Liu}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\newcommand{\VOL}{\text{ vol}}
+\begin{enumerate}
+\item Let $f: X \to Y$
+\begin{enumerate}[label=(\alph*)]
+	\item If $f$ is continuous, $A \subset X$.  Show that $f(\CONJ{A}) \subseteq \CONJ{f(A)}$.
+	
+	\BLUE{$f$ is continuous means that given any open set $V \subset Y$ then $f^{-1}(V)$ is open.  Let $A = f^{-1}(V)$.  Then, $\CONJ{A} = A \cup \partial A$ and $A \cap \partial A = \empty$, that is they are disjoint. Thus,
+	\begin{align*}
+		f(\CONJ{A}) &= f(A \cup \partial A) \\
+		&= f(A) \cup f(\partial A)
+\end{align*}	How do I show that $f(\partial A) \subset \CONJ{f(A)}$?\\
+	\\
+	Let $\{x_n\} \subset A$ such that $\LIMN x_n = x \in \partial A$.  $f(x_n) \in f(A),\, \forall n$.  Either, $\LIMN f(x_n) = f(x) \in f(A)$ or for any $\epsilon >0, \exists N>0 \to |f(x)-f(x_n)| < \epsilon$ whenever $n>N$.  That is, $f(x) \not \in A$ but infinitely close to $f(A)$ hence $f(x) \in \partial A$.  Thus, in general, $f(x_n) \in f(A) \cup \partial f(A) = \CONJ{f(A)}, \, \forall n$.
+	}
+	
+	\item Suppose $f(\CONJ{A})\subset \CONJ{f(A)}$ for all $A \subset X$, is $f$ continuous?  Prove your claim.
+	
+	\RED{Let $C \subset f(X)$ and let $\{y_n\} \to y \in \CONJ{C}$.  Then $\exists \{x_n\}\in f^{-1}(\CONJ{C}) \to f(x_n) = y_n$.  Furthermore, for every $\epsilon > 0,\, \exists N>0 \to |y_n-y|=|f(x_n)-y|< \epsilon \implies n>N$.  Actually, it says more than that.  Because $\{y_n\} \to y \in \CONJ{C}$ we can say that it converges uniformly ($\CONJ{C}$ is closed and bounded), that is for every $\epsilon > 0,\, \exists N>0 \to |y_n-y_m|=|f(x_n)-f(x_m)|< \epsilon \implies n,m>N$.  We can see that $f^{-1}(\CONJ{C})$ is also bounded, therefore $\{x_n\}$ must converge.  Let $A =f^{-1}(\CONJ{C})$.  Clearly, all $\{x_n\}\in A$ given any $\{y_n\}\in C$.  Hence, $f$ is continuous.
+	}
+\end{enumerate}
+
+\item Let $X$ be a compact metric space, $f: X \to X$ satisfies $$ d(f(x), f(y)) < d(x,y) \text{ for all distinct } x,y \in X.$$  Show that there is a unique $x^* \in X$ such that $f(x^*)=x^*$.
+
+\RED{What its really saying is given a function that maps back onto itself and that the space between mappings is always less than the space between beginnings, then there is a point where function maps back onto itself.\\
+Given any $x,x_1 \in X$ then let $\epsilon_1 = d(x,x_1) - d(f(x), f(x_1))$.  Pick $x_2\in X$ such that $d(x_1,x_2) <\epsilon_1$ then $d(f(x_1), f(x_2)< d(x_1,x_2) <\epsilon_1$.  Pick $\epsilon_2 = d(x_1, x_2) - d(f(x_1), f(x_2))$.  Clearly, $\epsilon_2 < \epsilon_1$.  Repeat this over and over again: $\epsilon_i = d(x_{i-1},x_i) -d(f(x_{i-1}),f(x_i))$ and pick $x_i\in X$ such that $d(x_{i-1}, x_i) < \epsilon_{i-1}$.  We can see that $\epsilon_i \to 0$ as $i\to \infty$.
+}
+
+\item Let $f:[a,b]\times [c,d] \to \R$ be continuous, $\varphi_n:[a,b]\to [c,d]$ converges uniformly on $[a,b]$.  Show that $F_n := f(\cdot, \varphi_n(\cdot))$ also converges uniformaly on $[a,b]$.
+
+\item Let $D=(a,b)\times(c,d), f: D \to \R$ satisfies  the following
+\begin{enumerate}
+	\item for $\forall y \in (c,d), f(\cdot,y) \in C\, (a,b)$.
+	\item for all $x\in (a,b), f(x, \cdot)$ is Lipschitz, namely there is $L > 0$ such that $$ \BARS{f(x,y_1)-f(x,y_2)}\le L\BARS{y_1 - y_2}\text{ for } y_1,y_2 \in (c,d)$$Show that $v \in C(D)$.
+\end{enumerate}
+
+\item If $f : \R^2 \to \R$ has bounded partial derivative $\partial_x f$ and $\partial_y f$, show that $f \in C(\R^2)$.
+
+\item Let $f: \R^2 \to \R$.  If $\partial_x f(0,0)$ exists and $\partial_f f$ is continuous at $(0,0)$.  Show that $f$ is differentiable at $(0,0)$.
+
+\item Show that $f: B_r^m(a) \to \R^n$ is differentiable at $a$ iff there is a map $A:B_r(0)\to \R^{n\times m}$ continuous at $a$ such that $$f(a+h)-f(a)=A(h)h\text{ for } h\in B^r(0).$$
+
+\item Let $f: B_r^m(a) \to \R^n$ be differentiable at $a$, $$\BARS{f(x)-f(a)}\ge\BARS{x-a}\text{ for }x \in B_r(a).$$ Show that rank$ f'(a)=m$.
+
+\item Let $f: \R^m\to \R$ be continuously differentiable, $h \in \R^m$.  If $f$ is bounded and $h\cdot \nabla f(x) -f(x)$ for all $ x \in \R^m$, show that $f(x) =0$ for al l$x \in \R^m$.
+
+\item Let $\Omega \subset \R^2$ be open and connected.  If $f: \Omega \to \R$ be diffentiable, $\nabla f(x,y)=0$ for all $(x,y) \in \Omega$.  Show that $f$ is a constant function.
+
+\end{enumerate}
+
+\end{document}

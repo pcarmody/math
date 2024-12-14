@@ -156,6 +156,50 @@
 		\end{align*}
 	\end{description}
 
+\item \textbf{Samples and Estimators}
+
+	\begin{align*}
+		\theta &\in \{ p, \mu, \sigma_X^2, \sigma _X\} & \text{actual from population}\\
+		\hat{\theta} &\in \{ \hat{p}=X/N,\, \hat{\mu}=\bar{X}=\frac{\sum X_i}{N},\, \sigma_{\hat{\theta}}^2 = S^2 = E[(\bar{X}-X_i)^2],\, \sigma_{\hat{\theta}}=S \} &\text{from sample}\\
+		E[X] &= \mu 
+	\end{align*}
+
+\item \textbf{Confidence Intervals}
+	\begin{align*}
+		z_\theta &= \frac{\theta-\mu_\theta}{\sigma_\theta}	\\
+		z_{0.05} &= 1.644,\, z_{0.025} = 1.96,\, z_{0.01} = 2.32 \\
+		CI &= \mu \pm z_{\alpha/2}\sigma
+	\end{align*}		
+\item \textbf{Two Sample Confidence Intevals}
+	\begin{align*}
+		& \BINDEF{ H_0 : \hat{\theta_1} - \hat{\theta_2} = 0 & \text{ no difference }}
+			{H_a: | \hat{\theta_1} - \hat{\theta_2} | > 0	 & \text{ one is larger than the other } } \\
+		X &= \mu_1 - \mu_2 \\
+		\sigma &= \sqrt{\frac{p_1p_2}{n_1}+\frac{p_1p_2}{n_2}}
+	\end{align*}
+	
+\item \textbf{Mean Squared Variance}
+	\begin{align*}
+		\text{Var}(X-x_0) &= E[(X-x_0)^2]- [E[(x-x_0)]^2 \\
+		MSE &= E[(X-x_0)^2] = \text{Var}(X-x_0) + [E[(x-x_0)]^2 \\
+		&= \sigma^2 + \beta^2 & \text{variance plus the bias}
+	\end{align*}
+	
+\item \textbf{Covariance and Correlation}
+\begin{align*}
+	\text{Cov}(X,Y) &= E[(X-\mu_x)(Y-\mu_y)]\\
+	\text{Cov}(V,V) &= \text{Var}(V) \\
+	\text{Var}(U, V) &= \sum_{i=1}^n\sum_{j=1}^m b_id_j\text{Cov}(X_i, Y_j) \\
+	\rho &= \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}} & \text{correlation coefficient}
+\end{align*}
+
+\item \textbf{Two Sample Proportion}
+\begin{align*}
+	\hat{p} &= \frac{x_1+x_2}{n_1+n_2} = \frac{\hat{p_1}n_i+\hat{p_2}n_2}{n_1+n_2}\\
+	\hat{q} &= 1-\hat{p} \\
+	\hat{p_1}&=\frac{x_1}{n_1},\, \hat{p_2} = \frac{x_2}{n_2} \\
+	z &= \frac{(\hat{p_1}-\hat{p_2})-(p_1-p_2)}{\sqrt{\frac{\hat{p}\hat{q}}{n_1}+\frac{\hat{p}\hat{q}}{n_2}}}
+\end{align*}
 \end{description}
 
 

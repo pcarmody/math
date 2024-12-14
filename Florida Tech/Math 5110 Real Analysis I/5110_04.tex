@@ -1,0 +1,165 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5110 -- Real Analysis I}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#4 }
+\newcommand{\DUEDATE}{November 25, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Liu}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\newcommand{\VOL}{\text{ vol}}
+\begin{enumerate}[label=\Roman*.]
+\item \textit{Exercise 7.2.2.}  Let $A$ be a subset of $\R^n$, and let $B$ be a subset of $\R^m$.  Note that the Cartesian product $\{(a,b): a\in A, b\in B\}$ is then a subset of $\R_{n+m}$.  Show that $m_{n+m}^*(A\times B) \le m_n^*(A)m_m^*(B)$.  (It is in fact true that $m_{n+m}^*(A\times B) = m_n^*(A)m_m^*(B)$. but is substantially harder to prove).
+
+In Exercise 7.2.3-7.2.5, we assume that $\R^n$ is Euclidean space, and we have a notion of measurable set in $\R^n$ (which may or may not coincide with the notion of Lebesgue Measurable set)  and a notion of measure (which may or may not coincide with Lebesque measure) which obeys axioms (i)-(xiii).
+
+\BLUE{Since $m^*(\Omega)$ is defined as \footnote{I've substitute $B$ with $C$ from the definition in the text.}
+\begin{align*}
+	m^*(\Omega) &= \inf\BRACKET{\sum_{j\in J}\VOL (C_j)\,:\, (C_j)_{j\in J}\text{ covers }\Omega;\, J\text{ at most countable}}.
+\end{align*}where $(C_j)_{j\in J}$ is a covering for $\Omega$.  Then there exists boxes $(\alpha_k)_{k \in K}$ and $(\beta_l)_{l\in L}$ which are coverings for $A$ and $B$, respectively. And, clearly,
+\begin{align*}
+	m^*(A) &\le \sum_{k\in K} \VOL(\alpha_k) \AND m^*(B) \le \sum_{l\in L} \VOL(\beta_l)
+\end{align*}define a covering $J$ such that
+\begin{align*}
+	\delta_{k,l} &= \alpha_k \times \beta_l
+\end{align*}$\delta_{k,l}$ is countable as it is a union of two countable sets and it is a covering over $A\times B$.  And, since each $\alpha_k$ and $\beta_l$ is a box, then 
+\begin{align*}
+	m^*(\delta_{k,l}) &= m^*(\alpha_k)m^*(\beta_l),\,\forall k\in K, \, l \in L \\
+	m^*(A \times B) &\le \sum_{k\in K,\, l\in L} m^*(\delta_{k,l}) \\
+	\sum_{k\in K,\, l\in L} m^*(\delta_{k,l}) &= \sum_{k\in K,\, l\in L} m^*(\alpha_k)m^*(\beta_l) \\
+	&\le \sum_{k\in K} m^*(\alpha_k) \sum_{l \in L} m^*(\beta_l) & \text{Cauchy-Schwarz} \\
+	&\le m^*(A)m^*(B)
+\end{align*}
+}
+
+\newpage
+\item Section 7.4, problems 1,4 (only parts (e) and (f)).
+
+\textit{Exercise 7.4.1.}  If $A$ is an open interval in $\R$, show that $m^*(A)=m^*(A\cap (0,\infty))+m^*(A\backslash (0,\infty))$.
+
+\BLUE{From Lemma 7.4.8 (\textit{countable additivity)}, we can see that the two sets are disjoint, i.e., 
+\begin{align*}
+	&(A\cap (0,\infty)) \,\cap\, (A\backslash (0,\infty)) = \emptyset \\
+	\AND A &= (A\cap (0,\infty)) \,\sqcup \, (A\backslash (0,\infty)) \\
+	m^*(A)&=m^*(A\cap (0,\infty))+m^*(A\backslash (0,\infty))
+\end{align*}
+}
+
+\textit{Exercise 7.4.4.}  Prove Lemma 7.4.4. (Hints: for (c) first prove that 
+
+(e) \textit{Every open box, and every closed box, is measurable.}
+
+\BLUE{Let $C$ be an open box, $C=\prod_{i=1}^n (a_i, b_i)$.  Define two half-spaces $A_i = \BRACKET{(x_1,\dots,x_n)\in \R^n\,|\, x_i > a_i) }$ and $B_i = \BRACKET{(x_1,\dots,x_n)\in \R^n\,|\, x_i < b_i) }$ for each $i= 1,\dots, n$.  Given any $x\in C$ where $x=(x_1,\dots, x_n)$ then $x_i \in (A_i \cap B_i)$, therefore $C = \bigcap_{i=1}^n (A_i \cap B_i)$.  Each half-space $A_i$ and $B_i$ is measurable and $C$ is the intersection of finitely many measurable sets and is therefore measurable.
+}
+
+(f) \textit{any set $E$ of outer measure zero (i.e., $m^*(E) =0)$ is measurable.}
+
+\BLUE{Let $T \subseteq \R^n$ be any measurable subset.  Let $E$ be a set with $m^*(E)=0$.  Then,
+\begin{align*}
+	T &= (T\cap E) \bigcup (T\backslash E) \\
+	m^*(T) &= m^*\PAREN{(T\cap E) \bigcup (T\backslash E)} \\
+	&= m^*\PAREN{(T\cap E)} + m^*\PAREN{(T\backslash E)} 
+\end{align*}Given any $x \in T\cap E$ clearly $x \in E$ thus $m^*(T\cap E) = 0$.  Therefore $m^*(T) = m^*\PAREN{(T\backslash E)}$.  Also, $x\in T\backslash E$ indicates that $x \in T$ thus $m^*(T) = m^*\PAREN{(T\backslash E)}$.  This is true for all open sets $T \in \R$ therefore $E$ is measurable.
+}
+
+\newpage
+\item Let $C$ be a parameterized curve in $\R^2$.  In other words, $C$ is the image for a function $\phi:[a,b]\to \R^2$.  Show that if $\phi$ is continuously differentiable in $[a,b]$, then $C$ has outer measure 0.
+
+\textit{Hint: } Partition $[a,b]$ into $N$ equal subintervals, and use the Mean Value Inequality to show that the image of each subinterval is bounded in terms of $N$, i.e., fits inside an open rectangle of side length that can be explicitly bounded in terms of $N$.  Add up the total 2-dimensional volume of the covering obtained in this way, and show that it can be made arbitrarily small by taking $N$ large.
+
+\textit{Warning:}  If $\phi$ is only continuous, then the result fails. One can construct a continuous $\phi$ such that $$ \phi([a,b])=[0,1]\times[0,1].$$
+
+\BLUE{Divide $[a,b]$ into $n$ equal subintervals.  Each subinterval, $[a_i,b_i]$ has lenght $1/n$ and will have an intermediate value $\zeta_i \in [a_i,b_i]$ such that $\phi'(\zeta_i)/n = \phi(b_i)-\phi(a_i)$.  The volume of each subinterval can be represented by $\phi'(\zeta_i)/n$.  $\phi$ is bounded, and if it is continuously differentiable, $\phi'$ is bounded, too.  Thus, $\LIMN \phi'(\zeta_i)/n=0$ and  $\LIMN \SUM{i=1}{n}\phi'(\zeta_i)/n = 0$.  $m_2^*$ is a measure of area and therefore $m^*(C)= \int_a^b \phi(t) dt = \LIMN \SUM{i=1}{n}\phi'(\zeta_i)/n =0$.
+}
+
+\newpage
+\item \RED{skip}
+\item Suppose $A_i \in \mathcal{M}, A_1 \subset A_2 \subset \cdots \subset A_n \subset A_{n+1} \subset \cdots$.
+\begin{enumerate}[label=(\alph*)]
+	\item if $m(A_1) < \infty$, show that 
+	\begin{align*}
+		m\PAREN{\bigcap_{n=1}^\infty A_n} &= \lim_{n\to\infty} m(A_n).
+	\end{align*}
+	
+	\BLUE{Since each $A_i$ is strictly contained in $A_{i+1}$ we can say that
+	\begin{align*}
+		A_{i-1} \cap A_i &= A_{i-1} \\
+		\OR A_1 \cap A_2 &= A_1 \\
+		\therefore A_1 \cap A_i &= A_1, \, \forall i=1,\dots\AND\lim_{n\to \infty} m(A_n) = m(A_1) \\
+		A_1 &= \bigcap_{n=1}^\infty A_n = A_1\\
+		m\PAREN{\bigcap_{n=1}^\infty A_n} &= m(A_1)
+	\end{align*}
+	}
+	
+	\item Show by example that if $m(A_1)=\infty$, the above conclusion may be wrong.
+	
+	\BLUE{Let $A_1$ be an open box with $A_1= \prod_{i=1}^n (a_i, b_i)$ where all $a_i, b_i < \infty$ except $b_1 = \infty$.  Clearly, $A_1$ is a half-space and is therefore measureable.  Let $A_2\supset A_1$ be the same as $A_1$ except that $b_2=\infty$.  In general,let $A_i\supset A_{i-1}$ and be the same as $A_{i-1}$ except for $b_i = \infty$.  We can clearly see that 
+	\begin{align*}
+		A_1 &\subset A_2 \subset \cdots A_{n-1} \subseteq A_n \subseteq \cdots 
+\end{align*}	but we cannot know $\LIMN m(A_n)$.
+	}
+
+\end{enumerate}
+
+\item Let $\Omega \subset \R^n$ be measurable.  $f: \Omega \to \R$ is a function.  If $f^2$ is measurable, and the set 
+\begin{align*}
+	A=\{x\in\Omega\,|\, f(x) > 0\}
+\end{align*}is also measurable.  Show that $f$ is measurable.
+
+\BLUE{Let $h=f^2$ which is measurable.  Therefore. given open set $V \in \R^n$ there exists a measurable set $U \in \R^n$ such that $h(U) = V$. Let $g = f|_A$ and choose $V = g(A)$ and $U$ such that $h(U)=V$.  Therefore, $g(f(U))=V$ or $f|_A(f(U))=V$ or $f_A(A)=V$.  $A$ is measurable and is mapped to an open set.  Therefore, $f$ is measurable.
+}
+
+\end{enumerate}
+\end{document}

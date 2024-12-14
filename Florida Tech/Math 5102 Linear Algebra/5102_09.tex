@@ -59,7 +59,52 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 
-\noindent Page 180: 6  Let $T:\R^3\to \R^2$ be defined by $T(a,b,c)=(a+b,2a-c)$.  Determine $T^{-1}(1,11)$.\\
+\noindent Page 180: 6  Let $T:\R^3\to \R^2$ be defined by $T(a,b,c)=(a+b,2a-c)$.  Determine $T^{-1}(1,11)$.
+
+\BLUE{\begin{align*}
+	a+b &= 1 \\
+	2a-c &= 11 \\
+	b &= 1-a \AND c = 2a-11 \\
+	T^{-1}(a,b) &= (a, 1-a, 2a-11)\\
+	T(a,b,c) &= \PAREN{\begin{array}{ccc}
+		1 & 1 & 0\\
+		2 & 0 & -1
+	\end{array}
+	}\PAREN{\begin{array}{c}
+		a\\b\\c
+	\end{array}
+	}\\
+	T^{-1}(a,b) &= \PAREN{\begin{array}{cc}
+		u & v \\
+		w & x \\
+		y & z
+	\end{array}
+	}\PAREN{\begin{array}{c}
+		a\\b
+	\end{array}
+	}\\
+	\TWOXTWO{1}{0}{0}{1} &= \PAREN{\begin{array}{ccc}
+		1 & 1 & 0\\
+		2 & 0 & -1
+	\end{array}
+	}\PAREN{\begin{array}{cc}
+		u & v \\
+		w & x \\
+		y & z
+	\end{array}
+	} = \PAREN{\begin{array}{cc}
+		u+w & v+x \\
+		2u-y & 2v-z
+	\end{array}
+	} \\
+	A^{-1} &= \PAREN{\begin{array}{cc}
+		u & v\\
+		1-u & -v\\
+		2u & 2v-1
+	\end{array}
+	}
+\end{align*}
+}
 
 \noindent Page 180:8 Let $T:\R^3\to \R^3$ be defined by $T(a,b,c)=(a+b,b-2c,a+2c)$.  For each vector $v$ in $\R^3$, determine whether $v \in R(T)$.
 \begin{enumerate}[label=(\alph*)]

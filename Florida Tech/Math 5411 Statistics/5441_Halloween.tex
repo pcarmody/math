@@ -1,0 +1,70 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{color,soul}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Halloween }
+\newcommand{\DUEDATE}{October 28, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\HIGHLIGHT}[1]{\fcolorbox{black}{yellow}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+\noindent\textbf{Consider 18 students including yourself in the class and superheroes from two groups of DC and Marvel. Because you do not know the favorite group of the other 17 students, you may consider each student is a fan of either DC or Marvel with the chance of 50/50, and ones favorite superhero is among top 50 superheroes of their favorite group (Dc or Marvel). \\ \\
+What is the chance that at least one student is wearing the same costume as you. Write the detailed solution on a cape (cape may or may not be part of the original costume).\\}
+
+\BLUE{Restate the problem: the sample space is the number of DC superheros, $n_{\text{DC}}$, plus the number of Marvel superheros $n_{\text{Marvel}}$ or $\Omega =  n_{\text{DC}}+n_{\text{Marvel}} = 50 + 50 = 100$.  Assuming that I choose a costume resembling one (and only one) of these superheroes (and that costumes themselves are distinctly different from each other, i.e., DC and Marvel cannot both have "Superman"), \\ \textbf{\textit{What is the probability of at least one student is wearing the same costume as me?}}\\
+\\
+The probability that not one of the $n$ students in the class picks my costume is $p_n =(1-p)^{n-1}$.  
+The probability that at least one student picked my constume would be $p_{\text{me}}=1-p_n=1-(1-p)^{n-1}$ With $n=18$ and $p=0.01$ we have $p_{\text{me}} = 1-(1-0.01)^{1-18}=1-(0.99^{17}=0.157.$
+}
+
+\end{document}

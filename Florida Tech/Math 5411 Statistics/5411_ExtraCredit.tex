@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Extra Credit }
+\newcommand{\DUEDATE}{December 8, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+\begin{align*}
+	\begin{array}{l|c|c}
+	& \text{Brent} & \text{WTT} \\
+	\mu & \bar{X_b} = 72.6 & \bar{X_W} = 69.89 \\
+	\sigma^2 & S_B^2 = 2.5 & S_W^2 = 30 \\
+	N & n_B = 32 & n_W = 40 \\
+	N_E & n_{B,E} = 26 & n_{W,E} = 31
+	\end{array}
+\end{align*}\begin{align*}
+	\hat{p_B}&=\frac{x_B}{n_B} = 26/32=0.813,\\ \hat{p_W} &= \frac{x_W}{n_W}=31/40=0.775 \\
+	\hat{p} &= \frac{x_B+x_W}{n_B+n_W} = \frac{26+31}{32+40} = 0.792\\
+	\hat{q} &= 1-\hat{p} = 0.208\\
+	z &= \frac{(\hat{p_B}-\hat{p_W})-(p_B-p_W)}{\sqrt{\frac{\hat{p}\hat{q}}{n_B}+\frac{\hat{p}\hat{q}}{n_W}}} = \frac{(0.813-0.775)-0}{\sqrt{\frac{(0.792)(0.208)}{26}+\frac{(0.792)(0.208)}{31}}} = \frac{0.038}{\sqrt{\frac{0.647}{26}+\frac{0.647}{31 }}} = 0.177 \\ 
+	z_{0.98} &= 2.053 \\
+	z_{0.85} &= 1.036 \\ \\	
+	\sigma_{\text{diff}} &= \sqrt{\frac{S_B^2}{n_B}\frac{S_W^2}{n_W}} = 0.214\\
+	CI &= (\hat{p_B}-\hat{p_W}) \pm z_{1-\alpha} \sigma_{\text{diff}} \\
+	CI_{98}&= (0.813-0.775)\pm 2.053(0.214)\\
+		&= 0.038 \pm 0.439 \\
+	CI_{85}&= (0.813-0.775)\pm 1.036(0.214)\\
+		&= 0.038 \pm 0.228
+\end{align*}Judging by the z-score we cannot must reject the null hypothesis for 98\% and, naturally, appears to work for 85\%. 
+
+
+
+\end{document}

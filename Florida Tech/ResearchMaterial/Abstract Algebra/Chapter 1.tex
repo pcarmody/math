@@ -1,0 +1,2565 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Abstract Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Dummitt and Foote}
+\newcommand{\DUEDATE}{May 6, 20222}
+\newcommand{\SEMESTER}{Spring 2021}
+\newcommand{\SCHEDULE}{T/Th 2:00 -- 3:20}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\COV}[1]{(#1_1 \quad \cdots \quad #1_n)}
+\newcommand{\CONTRA}[1]{\PAREN{\begin{array}{c}
+              #1^1\\
+              \vdots \\ 
+              #1^n
+         \end{array}}}
+
+\title{Abstract Algebra}
+\author{Dummitt and Foote}
+\date{Spring 2022}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction to Groups}
+\section{Basic Axioms and Examples}
+
+\begin{definition}[Fundamental Terms].
+\begin{enumerate}
+	\item A \DEFINE{binary operation *} on a set $G$ is a function  $*: G \times G \to G$.  For any $a,b \in G$ we shall write $a * b$ for $*(a,b)$.
+	\item A binary operation $*$ on a set $G$ is \DEFINE{associative} if for all $a, b,c \in G$ we have $a* (b*c)=(a*b)*c$.
+	\item if $*$ is a binary operation on a set $G$ we say elements $a$ and $b$ of $G$ \DEFINE{commute} if $a*b=b*a$.  We say $*$ (or $G$) is \DEFINE{commutative} if for all $a, b\in G, a*b = b*a$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Group].
+\begin{enumerate}
+	\item A \DEFINE{group} is an ordered pair $(G.*)$ where $G$ is a set and $*$ is a binary operator on $G$ satisfying the following axioms:
+	
+	\begin{enumerate}
+		\item $(a*b*c=a*(b*c)$, for $ a,b,\in in G$, .i.e., $*$ is \DEFINE{associative}, 
+		\item there exists an element $e$ in $G$, called \DEFINE{identity} of $G$, such that for every $a \in G$ we have $a*e=e*a = a$,
+		\item for each $a \in G$ there is an element $a^{-1}$ of $G$, called an \DEFINE{inverse} such that $a*a^{-1}=a^{-1}*a=e$.
+	\end{enumerate}
+	
+	\item The group $(G,*)$ is called \DEFINE{abelian} (or \DEFINE{commutative}) if $a*b=b*a$ for all $a,b, \in G$.
+\end{enumerate}
+
+\end{definition}
+
+\begin{prop} If $G$ is a group under the operation $*$, then
+\begin{enumerate}
+	\item The identity of $G$ is unique.
+	
+	\BLUE{Let there exist two identity elements $e_1, e_2$ such that $e1 \ne e2$.  Then for any $a \in G$, $a=e_1a=e_2a$.  Let $a = e_1$ then $e_1 = e_1 * e_1 = e_1 *e_2 = e_2$}
+	
+	\item for each $a \in G, a^{-1}$ is uniquely determined.
+	
+	\BLUE{Proof by Contradiciton: Let $b = a^{-1}$ and $c = a^{-1}$ and $b \ne c$.  Then $ba=e=ca$.  Multiply both sides on the right by $a^{-1}$, that is $baa^{-1}=caa^{-1} \to be=ce \implies b=c$}
+	
+	\item $(a^{-1})^{-1}=a$ for all $a \in G$.
+	
+	\BLUE{Let $b = a^{-1}$.  $e=ba$ and $b^{-1}=b^{-1}ba = ea=a$}	
+	
+	\item $(a*b)^{-1}=(b^{-1})*(a^{-1})$
+	
+	\BLUE{\begin{align*}
+		c&=a*b \\
+		c*b^{-1} &= a*b*b^{-1} \\
+		a^{-1}*c*b^{-1} &= a^{-1}*a*b*b^{-1} = a*a^{-1}*b^{-1}*b = e
+	\end{align*}
+	}
+	
+	\item for any $a_1, a_2, \dots, a_n \in G$ the value of $a_1*a_2*\cdots*a_n$ is independent of how the expression is bracketed (this is called \DEFINE{generalized associative law}).
+	
+	\BLUE{Inductive Proof:}
+\end{enumerate}
+\end{prop}
+
+\begin{prop}Let $G$ be a group and let $a,b  \in G$.  The equations $ax=b$ and $ya=b$ have unique solutions for $x,y \in G$.  In particular, the left and right cancellation laws hold in $G$, i.e.,
+\begin{enumerate}
+	\item if $au=av$, then $u=v$, and
+	\item if $ub=vb$, then $u=v$.
+\end{enumerate}
+\end{prop}
+
+\begin{definition} For $G$ a group and $x \in G$ define the \DEFINE{order} of $x$ to be the smallest positive integer $n$ such that $x^n=1$, and denote this integer by $|x|$.  In this case $x$ is to be of order $n$.  If no positive power of $x$ is the identity, the order of $x$, is defined to be infinity and $x$ is said to be of infinite order.
+\end{definition}
+
+\begin{definition} Let $G=\{g_1, g_2,\dots,g_n\}$ be a finite group with $g_1 = 1$.  The multiplication table or group table of $G$ is the $n\times n$ matrix whose $i,j$ entry is the group element $g_ig_j$.
+\end{definition}
+
+\begin{definition} An operator, $*$, is said to be \DEFINE{well-defined} if for all $a,b,c,d \in G$  if $a*b=c$ and $d*b=c$ then $a=d$.
+\end{definition}
+
+\subsection{Exercises}
+
+Let $G$ be a group.
+\begin{enumerate}
+	\item Determine which of the following binary operations are associative:
+	\begin{enumerate}
+		\item the operation $*$ on $\Z$ define by $ a*b=a-b$.
+		
+		\BLUE{No, because $3-4-5 = (3-4)-5 = -1-5=-6$ or $3-4-5 = 3-(4-5) = 3-(-1) = 4$}
+		
+		\item the operation $*$ on $\R$ defined by $a*b=a+b+ab$.
+
+		\BLUE{\begin{align*}
+			a*(b*c) &= a*(b+c+bc) = a+b+c+bc+a(b+c+bc) = a+b+c+bc+ab+ac+abc \\
+			(a*b)*c &= (a*b)+c+ (a*b)c = (a + b + ab)c+ (a+b+ab)c = ac+bc+abc+ac+bc+2abc
+		\end{align*}}		
+		
+		\item the operation $*$ on $\Q$ defined by $a*b=\frac{a+b}{5}$.
+		
+		\BLUE{\begin{align*}
+			a*b*c &= a*(b*c) = a*\PAREN{\frac{b+c}{5}} = \frac{a+\PAREN{\frac{b+c}{5}}}{5} = \frac{5a+b+c}{25} \\
+			&= (a*b)*c = \frac{(a*b)+c}{5}= \frac{\frac{a+b}{5}+c}{5} = \frac{a+b+5c}{25}
+		\end{align*}}
+		
+		\item the operation $*$ on $\Z \times \Z$ defined $(a,b)*(c,d)=(ad+bc, bd)$.
+		
+		\BLUE{\begin{align*}
+			(a,b)*(c,d)*(e,f) &= ((a,b)*(c,d))*(e,f) = (ad+bc, bd)*(e,f)=((ad+bc)f+bde, bdf) \\
+			&= (a,b)*((c,d)*(e,f)) = (a,b)*(cf+de, df) = (adf+b(df+de),bdf)
+		\end{align*}		 }
+		
+		\item the operation $*$ on $\Q-\{0\}$ defined by $a*b=\frac{a}{b}$.
+		
+		\BLUE{\begin{align*}
+			\frac{ab}{c} \ne \frac{a}{bc}
+		\end{align*}
+		}
+	\end{enumerate}
+	
+	\item Decide which of the binary operations in the preceding exercise are commutative.
+	\begin{enumerate}
+		\item the operation $*$ on $\Z$ define by $ a*b=a-b$.
+		
+		\BLUE{ \begin{align*}
+			a-b &= b-a \\
+			&= a-b+a\\
+			&=b-a+a \\
+			&=b \\
+			a &= 2b
+		\end{align*}} and not true for all $a$		  
+		
+		\item the operation $*$ on $\R$ defined by $a*b=a+b+ab$.
+		
+		\BLUE{
+		\begin{align*}
+			a*b &= a+b+ab = b+a+ba = b*a
+		\end{align*}which is true for all $a,b \in \R$.
+		}
+		
+		\item the operation $*$ on $\Q$ defined by $a*b=\frac{a+b}{5}$.
+		
+		\BLUE{
+		\begin{align*}
+			a*b=\frac{a+b}{5} = a*b=\frac{b+a}{5} = b*a
+		\end{align*}
+		}
+		
+		\item the operation $*$ on $\Z \times \Z$ defined $(a,b)*(c,d)=(ad+bc, bd)$.
+		
+		\BLUE{
+		\begin{align*}
+			(a,b)*(c,d)&=(ad+bc, bd) =(cb+da, db) = (c,d)*(a,b)
+		\end{align*}
+		}
+		
+		\item the operation $*$ on $\Q-\{0\}$ defined by $a*b=\frac{a}{b}$.
+		
+		\BLUE{
+		\begin{align*}
+			a*b - b*a &=\frac{a}{b} - \frac{b}{a} = \frac{a^2-b^2}{ab} =0
+		\end{align*}which is only true when $a^2 = b^2$ or $a = \pm b$.  Hence, NOT commutative.
+		}
+		
+	\end{enumerate}	
+	
+	\item Prove that addition of residue classes in $\Z/n\Z$ is associative (you may assume it is well defined).
+	
+	\BLUE{Given $a,b,c \in [0, \dots, n-1]$.  If $a+b+c \le n-1$ we know that this is associative because $a,b,c, a+b+c \in \Z$.  We need only prove that this is true when $a+b+c > n-1$
+	}
+	
+	\item Prove that multiplication of residue classes in $\Z/n\Z$ is associative (you may assume it is well defined).c
+	
+	\item Prove for all $n >1$ that $\Z/n\Z$ is not a group under multiplication of residue classes.
+	
+	\BLUE{Let $n=6$ (or any even number for that matter).  There is no $a\in Z/nZ$ such that $a*2 = 1$
+	}
+	
+	\item Determine which of the following sets are groups under addition:
+	\begin{enumerate}
+		\item The set of rational numbers (include$0=0/1$) in lowest terms whose denomination are odd.
+		
+		\BLUE{Let $a,b,c,d \in \Z$ where $b, d$ are odd. Then
+		\begin{align*}
+			\LET x = \frac{a}{b} + \frac{c}{d} &= \frac{ad+bc}{bd}
+		\end{align*} we know $bc$ is an even number therefore $x$ is not a member of this set.  Hence, it does not form a group.
+		}\\ \RED{We might have to go further than this and show that the numerator is not divisible by the denominator}
+		
+		\item the set of rational numbers (including$0=0/1$) in lowest terms whose denomitators are even.
+		
+		\RED{Sinilar to 6a we must show that the numerator is not divisible by the denominator and that, if so, it is still even.
+		}
+		
+		\item the set of rational numbers of absolute value $< 1$.
+		
+		\BLUE{ No because $0.9+0.9=1.8 > 1$ }
+		
+		\item the set of rational numbers of absolute value $\ge 1$ together with 0.
+		
+		\BLUE{ no because 1 does not have an inverse }
+		
+		\item the set of rational numbers with denominators equal to 1 or 2.		
+		\BLUE{ \begin{description}
+			\item Is it associative?
+			\item Does it have an identity?
+			\item Is there an inverse for each element?		
+		\end{description}		 
+		}
+		
+		\item the set of rational number denominators equal to 1,2, or 3.
+		\BLUE{Same as 6a, verify that if the numerator is divisible by 1,2, or 3 that the denominator becomes 1,2, or 3.
+		}
+	\end{enumerate}
+	
+	\item Let $G=\{x\in \R\,|\, 0\le x < 1\}$ and for $x,y \in G$ let $x*y$ be the fractional part of $x+y$ (i.e., $x*y=x+y-[x+y]$ where $[a]$ is the greatest integer less than or equal to a).  Prove that $*$ is a well defined binary operation on $G$ and that $G$ is an abelian group under $*$ (called the \textit{real numbers mod 1}).
+		\begin{itemize}
+			\item Well-defined
+			
+			\begin{align*}
+				\LET a*b&=c \AND a*d=c \\
+				a+b-[a+b] &= a+d-[a+d] \\
+				-a+a+b-[a+b] &= -a+a+d-[a+d] \\
+				b-[a-b] &= d-[a+d] \\
+				-d+b -[a-b] &=-d+d-[a+d] \\
+				-d+b &= [a+b]-[a+d] \\
+				&= [b-d]
+			\end{align*}which can only be true if $b=d$.
+			
+			\item Is it associative?	
+			
+			\begin{align*}
+				a*(b*c) &= a*(b+c-[b+c]) \\
+					&= a+(b+c-[b+c])-[a+(b+c-[b+c])] \\
+					&= a+b+c-[b+c] -[a+b+c-[b+c]] \\
+					&= a+b+c-[a+b+c]\\
+					&= (a+b)+c-[[a+b]-c] \\
+					&= (a*b)*c
+			\end{align*}
+			
+			\item Does it have an identity?
+			
+			Assume that the identity exists and let $e$ be the identity.  Then, 
+			\begin{align*}
+				a &= e*a \\
+					&= e+a-[e+a] \\
+				-a+a &= -a+e+a-[e+a] \\
+				0 &= e-[e+a] \\				
+				e &= [e+a] \\
+				e &= 0
+			\end{align*}
+			
+			\item Is there an inverse for each element?	
+			
+			\BLUE{Given any $a\in G$ then
+			\begin{align*}
+				0&= a*b = a+b-[a+b] \\
+				a+b &= [a+b] \\
+			\end{align*}
+			}	
+			\item Does it commute?
+			
+			\BLUE{Since the integer part and the fraction parts both commute and they are linearly independent of each other, then the $*$ operator commutes.  That is,
+			\begin{align*}
+				a*b &= a+b-[a+b]\\
+				&= b+a-[b+a] \\
+				&= b*a
+			\end{align*} }
+		\end{itemize}		 
+	
+	\item Let $G = \{z\in \C\,|\, z^n=1$ for some $n \in \Z^+\}$.
+		\begin{enumerate}
+			\item Prove that $G$ is a group under multiplication (called the group of \textit{roots of unity} in $\C$).
+			
+			\BLUE{First note the following examples:
+			\begin{align*}
+				n=2 \implies &G=\{ 1, -1 \} = \{ 1, e^{i\frac{\pi}{2}}\}\\
+				n=3 \implies &G=\{ 1,\, \frac{2}{\sqrt{3}}+i\frac{1}{\sqrt{3}},\, -\frac{2}{\sqrt{3}}+i\frac{1}{\sqrt{3}} \} = \{1, e^{i\frac{2\pi}{3}}, e^{i\frac{-2\pi}{3}}\}\\
+				n=4 \implies &G=\{ 1, -1, i, -i \} = \{ 1, -1, e^{i\frac{\pi}{2}}, e^{i\frac{-\pi}{2}}\} \\
+				\text{in general } &G=\{e^{i \frac{2\pi k}{n}}, k=0,1,2, \dots, n-1\}
+			\end{align*}The elements of each set are on the unit circle and there are precisely $n$ elements in each set.
+			} 
+			
+			\item Prove that $G$ is not a group under addition.
+			
+			\BLUE{ Simple.  For $n=2$ we have $1+(-1)=0 \not \in G$ }
+		\end{enumerate}
+		
+	\item Let $G = \{a+b\sqrt{2} \in \R\,|\, a,n \in\Q\}$.
+	\begin{enumerate}
+		\item Prove that $G$ is a group under addition.
+		\begin{description}
+			\item Associative?
+			
+			\BLUE{Let $a,b,c,d,f,g \in \R$ and $a+b\sqrt{2}, c+d\sqrt{2}$, and $f+g\sqrt{2}\in G$.  Then
+			\begin{align}
+				[(a+b\sqrt{2})+ (c+d\sqrt{2})]+f+g\sqrt{2} &= (a+b\sqrt{2}+ c+d\sqrt{2})+f+g\sqrt{2} \\
+				&= a+b\sqrt{2}+ c+d\sqrt{2}+f+g\sqrt{2} \\
+				&= a+b\sqrt{2}+ (c+d\sqrt{2}+f+g\sqrt{2})
+			\end{align} (1.1) because real numbers are associative, (1.2) \& (1.3) for the same reason.
+			}
+			
+			\item Identity exists?
+
+			\BLUE{Let $e = 0+0\sqrt{2}$.  Then given any 
+			\begin{align*}
+				0+0\sqrt{2} &= a+b\sqrt{2} + c + d\sqrt{2} \\
+				&= a+c = 0 \AND b+d = 0 \\
+				\therefore -(a+b\sqrt{2}) &= c+d\sqrt{2}
+			\end{align*}
+			}
+
+			\item Inverses exists and are unique?
+			
+		\end{description}
+		
+		\item Prove that nonzero elements of $G$ are a group under multiplication. ["Rationalize the denominators" to find multiplicative inverses.]
+		\begin{description}
+			\item Associative?
+			\BLUE{
+			\begin{align*}
+				[(a+b\sqrt{2})(c+d\sqrt{2})](f+g\sqrt{2}) &= (ac+ad\sqrt{2}+b\sqrt{2}c+2bd)(f+g\sqrt{2}) \\
+				&= acf+acg\sqrt{2}+adf\sqrt{2}+adg\sqrt{2} +b\sqrt{2}cf+2bcg+2bdf+2bdg\sqrt{2} \\
+				&=(a+b\sqrt{2})(cf+cg\sqrt{2}+df\sqrt{2}+2dg) \\
+				&= (a+b\sqrt{2})[(c+d\sqrt{2})(f+g\sqrt{2})]
+			\end{align*}
+			}			
+			
+			\item Identity exists?
+			
+			\BLUE{Let $e=1+0\sqrt{2}$ then
+			\begin{align*}
+				(a+b\sqrt{2})(1+0\sqrt{2})&= a+b\sqrt{2}
+			\end{align*}
+			}
+
+			\item Inverses exists and are unique?
+			
+			\BLUE{
+			\begin{align*}
+				1 &=(a+b\sqrt{2})(c+d\sqrt{2})\\
+				&= ac+2bd+\sqrt{2}(bc+ad) \\
+				\therefore bc &= -ad \AND 1=ac+2bd \\
+				\AND c &= \frac{-ad}{b} \AND d = \frac{1}{2b-\frac{a^2}{b}} 
+			\end{align*}
+			}
+			
+		\end{description}
+
+	\end{enumerate}
+	
+	\item Prove that a finite group is abelian if and only if its group table is a symmetric matrix.
+	
+	\begin{description}
+	\item $(\Rightarrow)$  \BLUE{Assuming that $G$ is abelian then given any two elements $g_i, g_j$ then $g_i g_j= g_j g_i$.  Given that the $i\ITH$ column and $j\ITH$ row will have value $g_ig_j$ respectively, then the $j\ITH$ column and the $i\ITH$ row will have $g_jg_i$ which is the same.}
+	\item $(\Leftarrow)$ \BLUE{similar argument to above.}
+	\end{description}
+	
+	\item Find the order of each element of additive group $\Z/12\Z$.
+	
+	\BLUE{Order of 1 is 12, 2 is 6, 3 is 4, 4 is 3, 5 is 12, 6 is 2, 7 is 12, 8 is 3, 9 is 4, 10 is 5, 11 is 12
+	}
+	
+	\item Find the orders of the following elements of the multiplicative group $(\Z/12\Z)^\times\,:\, \BAR{1},\BAR{-1}, \BAR{5}, \BAR{7}, \BAR{-7}, \BAR{13}$.
+	
+	\BLUE{$(\Z/12\Z)^\times\,:\, |\BAR{1}|= |\BAR{13}|=1,|\BAR{-1}|=| \BAR{5}|= |\BAR{7}|=| \BAR{-7}|=2 $.
+	}
+	
+	\item Find the orders of the following element so fthe additive group $(\Z/36\Z)^\times\,:\, \BAR{1}, \BAR{2},\BAR{6},\BAR{9},\BAR{10}.\BAR{12},\BAR{-1}, \BAR{-10}, \BAR{-18}$.
+	
+	\BLUE{$(\Z/36\Z)^\times\,:\, |\BAR{1}|=1, |\BAR{2}|=\infty,|\BAR{6}|=\infty,|\BAR{9}|=\infty,|\BAR{10}|=\infty.|\BAR{12}|=\infty,|\BAR{-1}|=2, |\BAR{-10}|=\infty, |\BAR{-18}|=\infty$.}
+	
+	\item Find the orders of the following elements of the multiplicative group $(\Z/36\Z)^\times\,:\, \BAR{1}, \BAR{-1}, \BAR{5}, \BAR{13},\BAR{-13},\BAR{17}$.
+	
+	\item Prove that $(a_1a_2\dots a_n)^{-1}=a_n^{-1}a_{n-1}^{-1}\dots a_1^{-1}$ for all $a_1, a_2, \dots, a_n \in G$.
+	
+	\BLUE{Notice that $(a_1a_2\dots a_n)^{-1} = (a_2a_3\dots a_n)^{-1}a_1^{-1} = (a_3a_4\dots a_n)^{-1}a_2^{-1}a_1^{-1}$  Continuing in this way until we get the desired result.
+	}
+	
+	\item Let $x$ be an element of $G$.  Prove that $x^2=1$ if and only if $\BARS{x}$ is either 1 or 2.
+	
+	\item Let $x$ be an element of $G$.  Prove that if $\BARS{x}=n$  for some positive integer $n$ then $x^{-1}=x^{n-1}$.
+	
+	\BLUE{\begin{align*}
+		x^{-1}&=x^{n-1}\\
+		xx^{-1}&=xx^{n-1}\\
+		1&=x^n
+	\end{align*}
+	}
+	
+	\item Let $x$ and $y$ be elements of $G$.  Prove that $xy=yx$ if and only if $y^{-1}xy=x$ if and only if $x^{-1}y^{-1}xy=1$.
+	
+	\BLUE{if $xy=yx$ then $y^{-1}xy=y^{-1}yx=x$ and if $y^{-1}xy=x$ then $y^{-1}xy=yy^{-1}xy=yx$
+	}
+	
+	\item Let $x \in G$ and let $a,b \in \Z^+$.
+	\begin{enumerate}
+		\item Prove that $x^{a+b}=x^ax^b$ and $(x^a)^b=x^{ab}$.
+		
+		\BLUE{Notice that $xx^a = x^{a+1}$.  Then assume that it is true for $b-1$, that is, $x^{b-1}x^a = x^{b-1+a}$ then $xx^{b-1}x^a = x^{1+b-1+a}=x^{a+b}$
+		}
+		
+		\item Prove that $(x^a)^{-1}=x^{-a}$
+		
+		\BLUE{$1=x^ax^{-a}=x^{a-a}=x^0=1$ 
+		}
+		
+		\item Establish part (a) for arbitrary integers $a$ and $b$ (positive, negative or zero).
+	\end{enumerate}
+	
+	\item For $x$ an element in $G$ show that $x$ and $x^{-1}$ have the same order.
+	
+	\BLUE{Let $|x|=n$ then $x^n = 1$ and $x^nx^{-n} = 1x^{-n} =(x^{-1})^n = 1$ }
+	
+	\item Let $G$ be a finite group and let $x$ be an element of $G$ of order $n$.  Prove that if $n$ is odd, then $x=(x^2)^k$ for some $k$.
+	
+	\BLUE{ $x^n=1$ if $n$ is odd then there exists $k$ such that $n=2k-1$.  Therefore $x^n=x^{2k-1}=1$ and $xx^{2k-1}=(x^2)^k=x$
+	}
+	
+	\item If $x$ and $g$ are elements of the group $G$, prove that $\BARS{x}=\BARS{g^{-1}xg}$.  Deduce that $\BARS{ab}= \BARS{ba}$ for all $a,b \in G$.
+	
+	\BLUE{\begin{align*}
+		(g^{-1}xg)^n &= \underbrace{g^{-1}xgg^{-1}xg\dots}_{n\text{times}} \\
+			&= g^{-1}x^n g \\
+			&= g^{-1}g\\
+			&= 1\\
+		\therefore \BARS{g^{-1}xg^x} &= n
+	\end{align*}
+	}
+	
+	\item Suppose $x \in G$ and $\BARS{x}=n<\infty$.  If $n=st$ for some positive integers $s$ and $t$, prove that $\BARS{x^s}=t$.
+	
+	\BLUE{$x^n=(x^s)^t = 1$ which implies that $\BARS{x^s} = t$.
+	}
+	
+	\item if $a$ and $b$ are \textit{commuting} elements of $G$, prove that $(ab)^n=a^nb^n$ for all $n \in \Z$.  [Do this by induction for positive $n$ first.]
+	
+	\item Prove that if $x^2=1$ for $x \in G$ then $G$ is abelian.
+	
+	\BLUE{Given $a,b \in G$ then $a^2=b^2=1$, also $(ab)^2=1$.  Therefore $1=abab=aa$ and $bab=a$ which implies that $bab^2=ab$ and $ba=ab$.
+	}
+	
+	\item Assume $H$ is a nonempty subset of $(G,*)$ which is closed under the binary operation on $G$ and is closed under inverses, i.e., for all $h,k\in H, h*k$ and $h^{-1}\in H$;  Prove that $H$ is a group under the operation * restricted to $H$ (such a subset $H$ is called a \textit{subgroup} of $G$).
+	
+	\BLUE{The key point is that for every $h,k\in H \implies h^{-1}\in H$ and $ h*k\in H$.
+	}
+	
+	\item Prove that if $x$ is an element of the group $G$ then $\{x^n\,|\,n\in\Z\}$ is a subgroup (cf, the preceding exercise) of $G$ (called the \textit{cyclic subgroup} of $G$ generated by $x$).
+	
+	\BLUE{Let $h,k \in G$ then there exists $i,k \in\Z$ such that $x^i=h, x^j=k$.  Clearly $hk=x^ix^j=x^{i+j}\in G$.  Further, $h^{-1} = (x^i)^{-1}$ hence $1=hh^{-1}=x^i(x^i)^{-1}$ therefore $h^{-1} = x^{-i} \in G$.
+	}
+	
+	\item Let $(A,*)$ and $(B,\circ)$ be groups and let $A \times B$ be their direct product (as defined in Example 6).  Verify all the group axioms for $A \times B$:
+	\begin{enumerate}
+		\item prove that the associative law holds:  \\for all $(a_i,b_i)\in A \times B, i=1,2,3\, (a_1,b_1)[(a_2,b_2)(a_3,b_3)]=[(a_1,b_1,)(a_2,b_2)](a_3,b_3)$
+		\item prove that $(1,1)$ is the identity of $A\times B$, and
+		\item prove that the inverse of $(a,b)$ is $(a^{-1},b^{-1})$.
+	\end{enumerate}
+	
+	\item Prove that $A\times B$ is an abelian group if and only if both $A$ and $B$ are abelian.
+	
+	\item Prove that the elements $(a,1)$ and $(1,b)$ of $A\times B$ commute and deduce that the order of $(a,b)$ is the least common multiple of $\BAR{a}$ and $\BAR{b}$.
+	
+	\item Prove that any finite group $G$ of even order contains an element of order 2. [Let $t(G)$ be the set $\{g \in G\,|\, g \ne g^{-1}\}$.  Show that $t(G)$ has an even number of elements and every nonidentity element of $G-t(G)$ has order 2.]
+	
+	\item If $x$ is an element of finite order $n$ in $G$, Prove that the element $1, x,x^2,\dots, x^{n-1}$ are all distinct.  Deduce that $\BARS{x} \le \BARS{G}$.
+	
+	\item Let $x$ be an element of finite order $n$ in $G$.
+	\begin{enumerate}
+		\item Prove that if $n$ is odd then $x^i \ne x^{-i}$ for all $i=1,2,\dots,n-1$.
+		
+		\item Prove that if $n=2k$ and $1 \le i<n$ then $x^i=x^{-i}$ if and only if $i=k$.
+	\end{enumerate}
+	
+	\item If $x$ is an element of infinite order in $G$, prove that the elements $x^n,n \in \Z$ are all distinct.
+	
+	\item If $x$ is an element of finite order $n$ in $G$, use the Division Algorithm to show that any integral power of $x$ equals one of the elements in the set $\{1,x,x^2,\dots,x^{n-1}\}$ (so these are all distinct elements of the cyclic subgroup (cf, Exercise 27 above) of $G$ generated by $x$).
+	
+	\item Assume $G=\{1,a,b,c\}$ is a group of order 4 with identity 1. Assume also that $G$ has no elements of order 4 (so by Exercise 32, every element has order $\le 3$).  Use the cancellation laws to show that rhere is a unique group table for $G$.  Deduce that $G$ is abelian.
+	
+\end{enumerate}
+
+\section{Dihedral Groups}
+
+\begin{definition}[Dihedral Group $D_{2n}$] For each $n \in\Z^+, n \ge 3$  let $D_{2n}$ be the set of symmetries of a regular $n$-gon, i.e., a rotation and/or flipping of the points of the $n$-gon onto itself. Note: $n$ refers to the number of points and $2n$ refers to the number of ways that the shape can be imposed on those points, hence the order of the group.
+\end{definition}
+
+\begin{remark}Note that rotation, $r$, and flipping or switching, $s$, are operations that a can be performed on any dihedral element and equations from one element two the other will result in just these two operations.  These are examples of \textit{generators}.
+
+\end{remark}
+
+\begin{definition}[Generators]A subset $S$ of a group $G$ with the property that every element in $G$ can be written as a (finite) product of elements in $S$ and their inverses is called a \DEFINE{set of generators by $S$} or \DEFINE{$S$ generates $G$}.
+\end{definition}
+
+\begin{definition}[Relations] Any equations in a general group $G$ that the generators satisfy are called \DEFINE{relations} in $G$.  Thus, in $D_{2n}$ we have relations: $r^n=1,s^2=1$, and $rs=sr^{-1}$.  Moreover, in $D_{2n}$ these three relations have the additional property that \textit{any} other relation between elements of the group may be derived from these three.
+\end{definition}
+
+\begin{definition}[Presentation]In general, if some group $G$ is generated by a subset $S$ and there is some collection of relations, say $R_1, R_2, \dots, R_m$ (here each $R_i$ is an equation of the elements from $S \cup \{1\}$) such that any relation among the elemnts of $S$ can be deduced from these we shall call these generators and relations a \DEFINE{presentation} of $G$ and write
+\begin{align*}
+	G &= \ABRACKET{S\,|\,R_1, R_2, \dots,R_m}.
+\end{align*}One presentation for the dihedral group $D_{2n}$ (using the generators and relations above) is then
+\begin{align*}
+	D_{2n} &= \ABRACKET{r,s\,|\,r^n=s^2=1,rs=sr^{-1}}.
+\end{align*}
+\end{definition}
+
+\subsection{Exercises}
+
+In these exercises, $D_{2n}$ has the usual presentation $D_{2n} = \ABRACKET{r,s\,|\,r^n=s^2=1,rs=sr^{-1}}$.
+
+\begin{enumerate}
+
+\item Compute the order of each of the elements in the following groups:
+	\begin{enumerate}
+	\item $D_6$.
+	
+	\BLUE{$|x_0|=|r^0|=1, |x_1|=|r^1|=3, |x_2|=|r^2|=3,|x_3|=|sr^0|=2, |x_4|=|sr^1|=2,|x_5|=|sr^2|=2$
+	}
+	
+	\item $D_8$
+	
+	\BLUE{$|x_0|=|r^0|=1, |x_1|=|r^r|=4, |x_2|=|r^2|=2,|x_3|=|r^3|=4, |x_4|=|sr^0|=2,|x_5|=|sr^1|=2, |x_6|=|sr^2|=2,|x_7|=|sr^3|=2$
+	}
+	
+	\item$D_{10}$
+	
+	\BLUE{$x_0, x_1, x_2,x_3, x_4,x_5, x_6,x_7, x_8, x_9$
+	}
+	
+	\end{enumerate}
+
+\item Use the generators and relations above to show that if $x$ is any element of $D_{2n}$ which is not a power of $r$, then $rx=xr^{-1}$.
+
+\BLUE{
+	Let $x \in G$ and there is $k\in \Z+$ such that $x=r^ks$.
+  	\begin{align*}
+  		rx&=rr^ks = r^krs = r^ksr^{-1} = xr^{-1}
+	\end{align*}   
+  }
+
+\item Use the generators and relations above to show that every element of $D_{2n}$ which is not a power of $r$ has order 2.  Deduce that $D_{2n}$ is generated by the two elements $s$ and $sr$, both of which have order 2.
+
+\BLUE{$x=r^ks$ then $ xx^{-1}=1, r^ksx^{-1}=1, x^{-1}=sr^{-k}$
+}
+
+\item If $n=2k$ is even and $n \ge 4$, show that $z=r^k$ is an element of order 2 which commutes with all elements of $D_{2n}$.  Show also that $z$ is the only nonidentity element of $D_{2n}$ which commutes with all elements of $D_{2n}$. [cf. Exercise 33 of section 1.]
+
+\BLUE{$r^n=1$  and $z=r^k$, $z^2=(r^k)^2=r^2={2k}=r^n=1$\\
+Let there be $i$ such that  $x\in D_{2n}, r^i=x$.  Then $zx = r^kr^i=r^{k+i}=r^{i+k}=r^ir^k=xz$\\
+Let there be $j$ such that $x\in D_{2n}, x=r^js$.  The $zx = r^kr^js = r^{k+j}s=r^{j}r^ks=r^jsr^{-k}=r^jsr^k=xz$.\\
+$k$ is the only element that can do this because $z=r^k=r^{-k}$.
+}
+
+\item If $n$ is odd and $n\ge 3$, show that the identity is the only element of $D_{2n}$ which commutes with all elements of $D_{2n}$.
+
+\BLUE{the whole thing depends on finding an element $x=r^k$ such that
+\begin{align*}
+	r^k&=r^{-k}\\
+	r^kr^k&=r^kr^{-k}\\
+	r^2k&=r^{k-k}=r^0=1\\
+	r^2k&=r^n
+\end{align*}but $n$ is odd and there is no $k\in \Z$ such that $2k=n$.
+}
+
+\item Let $x$ and $y$ be elements of order 2 in any group $G$.  Prove that if $t=xy$ then $tx=xt^{-1}$ (so that if $n=\BARS{xy}<\infty$ then $x,t$ satisfy the same relations in $G$ as $s,r$ do in $D+{2n}$).
+
+\BLUE{$1=tt^{-1}=xyt^{-1} \to x=yt^{-1} \to yx=t^{-1} \to xyx=tx \to tx=xt^{-1}$
+}
+
+\item Show that $\ABRACKET{a,b\,|\,a^s=b^s=(ab)^n=1}$ gives a presentation for $D_{2n}$ in terms of the two generators $a=s$ and $b=sr$ of order 2 computed in Exercise  3 above. [Show that the relations for $r$ and $s$ follow from the relations for $a$ and $b$ and, conversely, the relations for $a$ and$b$ follow from those for $r$ and $s$.]
+
+\item Find the order of the cyclic subroup of $D_{2n}$ generated by $r$ (cf Exercise 27 of Section 1).
+
+\BLUE{$|D_{2n}| = 2n$ and $|s|=2$ that is, given any $x=sr^k$ for some $k$, there can be at most $n$ of these.  That leaves $n$ more that have the form $x=r^k$.
+}
+
+\end{enumerate}
+
+In each of Exercises 9 to 13 you can find the order of the group of rigid motions in $\R^3$ (also called the group of rotations) of the given Platonic solid by following the proof for the order of $D_{2n}$; find the number of positions to which an adjacent pair of vertices can be sent.  Alternatively, you can find the number of places to which a given face may be sent and, once a face is fixed, the number of positions to which a vertex on that face may be sent.
+
+\begin{enumerate}
+\setcounter{enumi}{8}
+\item Let $G$ be the group of rigid motions in $\R^3$ of a tetrahedron.  Show that $|G|=12$.
+
+\item Let $G$ be the group of rigid motions in $\R^3$ of a cube.  Show that $|G|=24$.
+
+\item Let $G$ be the group of rigid motions in $\R^3$ of an octahedran.  Show that $|G|=24$.
+
+\item Let $G$ be the group of rigid motions in $\R^3$ of a dodecahedron.  Show that $|G|=60$.
+
+\item Let $G$ be the group of rigid motions in $\R^3$ of a icosahedron.  Show that $|G|=60$.
+
+\item Find a set of generators for $\Z$.
+
+\item Find a set of generators and relations for $\Z/n\Z$.
+
+\item Show that the group $\ABRACKET{x_1,y_1)\,|\,x_1^2=y_1^2=(x_1y_1)^2=1}$ is the dihedral group $D_4$ (where $x_1$ may be replaced by the letter $r$ and $y_1$ by $s$).  [Show that the last relation is the same as: $x_1y_1=y_1x_1^{-1}$.]
+
+\item Let $X_{2n}$ be the group whose representaion is displayed in (1.2).
+\begin{enumerate}
+	\item Show that if $n=3$, then $X_{2n}$ has order 6, and it has the same generators and relations as $D_6$ where $x$ is replaced by $r$ and $y$ by $s$.
+	
+	\item Show that if $(3,n)=1$, then $x$ satisfies the additional relation: $x=1$.  In this case deduce that $X_{2n}$ has order 2.  [Use the facts that $x^n=1$ and $x^3=1$.]
+
+\end{enumerate}
+
+\item Let $Y$ be the group whose presentation is displayed in (1.3).
+\begin{enumerate}
+	\item Show that $v^2=v^{-1}$. [Use the relation: $v^3=1$.]
+	
+	\item  Show that $v$ commutes with $u^3$.  [Show that $v^2u^3v=u^3$ by writing the left hand side as $(v^2u^2)(uv)$ and using the relation to reduce this to the right hand side.  Then use part (a).]
+	
+	\item Show that $v$ commutes with $u$.  [Show that $u^9=u$ and then use part (b).]
+	
+	\item Show that $uv=1$.  [Use part (c) and the last relation.]
+	
+	\item Show that $u=1$, deduce that $v=1$, and conclude that $y=1$.  [Use part(d) and the equation $u^4v^3=1$.]
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Symmetric Groups}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+
+\item Let $\sigma$ be the permutation (1 3 5)(2 4) and let $\tau$ be the permutation (1 5)(2 3).  Find the cycle decompositions of each of the following:
+\begin{enumerate}
+	\item $\sigma^2$
+	
+	\BLUE{$\sigma^2 =$ (1 3 5)(2 4)(1 3 5)(2 4) = (1 5 3)}
+	
+	\item $\sigma\tau$
+	
+	\BLUE{$\sigma\tau =$ (1 3 5)(2 4)(1 5)(2 3) = (2 5 3 4)}
+	
+	\item $\tau\sigma$
+	
+	\BLUE{$\tau\sigma =$ (1 5)(2 3)(1 3 5)(2 4) = (1 2 4 3)}
+	
+\end{enumerate}
+
+\item Let $\sigma = $ (1 13 5 10)(3 15 8)(4 14 11 7 12 9) and $\tau = $ (1 14)(2 9 15 13 4)(3 10)(5 12 7)(8 11).  Find the cycle decompositions of the following permutations:
+\begin{enumerate}
+	\item $\sigma^2$
+	
+	\BLUE{$\sigma^2 =$ (1 13 5 10)(3 15 8)(4 14 11 7 12 9)(1 13 5 10)(3 15 8)(4 14 11 7 12 9) = (1 5)(3 8 15)(4 11 12)(7 9 14)}
+	
+	\item $\sigma\tau$
+	
+	\BLUE{$\sigma\tau = $ (1 13 5 10)(3 15 8)(4 14 11 7 12 9)(1 14)(2 9 15 13 4)(3 10)(5 12 7)(8 11) = (1 11 3)(2 4)(5 9 8 7 10 15)}
+	
+	\item $\tau \sigma$
+	
+	\BLUE{$\tau \sigma = $ (1 14)(2 9 15 13 4)(3 10)(5 12 7)(8 11)(1 13 5 10)(3 15 8)(4 14 11 7 12 9) = (1 4)(2 9)(3 13 12 15 11 5)(8 10 14)}
+	
+	\item $\tau^2\sigma$
+	
+	\BLUE{$\tau^2\sigma =$ [(1 14)(2 9 15 13 4)(3 10)(5 12 7)(8 11)] [(1 14)(2 9 15 13 4)(3 10)(5 12 7)(8 11)] [(1 13 5 10)(3 15 8)(4 14 11 7 12 9)] = (1 2 15 8 3 4 14 11 12 13 7 5 10)}
+\end{enumerate}
+
+\item For each of the permutations whose cycle decompositions were computed in the preceding two exercises compute its order.  \BLUE{Note: since each of the sub-cycles are disjoint, we know that each will have an order of its own and the whole composite cycle will have the order of the least common multiple.}
+\begin{enumerate}
+	\item $|\sigma^2|$
+	
+	\BLUE{Since $\sigma^2 = $ (1 5)(3 8 15)(4 11 12)(7 9 14) we must find 
+	\begin{itemize}
+		\item $|$(1 5)$| = 2$
+		\item $|$(3 8 15)$| = 3$
+		\item $|$(4 11 12)$| = 3$
+		\item $|$(7 9 14)$| = 3$
+	\end{itemize} Thus when $k=6$ or $|\sigma^2|=6$
+	}
+	
+	\item $|\sigma\tau|$
+	
+	\BLUE{
+		$\sigma\tau = $ (1 11 3)(2 4)(5 9 8 7 10 15) we must find
+		\begin{itemize}
+			\item $|$(1 11 3)$|$ = 3
+			\item $|$(2 4)$|$= 2
+			\item $|$(5 9 8 7 10 15)$|$ = 6
+		\end{itemize}  Thus when $k=6$ or $|\sigma\tau|=6$
+	}
+	
+	\item $|\tau \sigma|$
+	\item $|\tau^2\sigma|$
+\end{enumerate}
+
+\item Compute the order of each of the elements of the following groups (a) $S_3$ (b) $S_4$
+\begin{enumerate}
+	\item $S_3$ \BLUE{(1) (1 2) (2 3) (1 3) (1 2 3) (1 3 2)}
+	\item $S_4$ \BLUE{(1) (1 2) (1 3) (1 4) (2 3) (2 4) (3 4) (1 2 3) (1 3 2) (1 2 4) (1 4 2) (1 3 4) (1 4 3) (2 3 4) (2 4 3) (1 2 4 3) (1 3 2 4) (1 3 4 2) (1 4 2 3) (1 4 3 2) (1 2)(3 4) (1 3)(2 4) (1 4)(2 3)}
+\end{enumerate}
+
+\item find the order of (1 12 8 10 4)(2 13)(5 11 7)(6 9). \BLUE{30}
+
+\item Write out the cycle decompsition of each element of order 4 in $S_4$.
+
+\BLUE{(1 2 4 3) (1 3 2 4) (1 3 4 2) (1 4 2 3) (1 4 3 2)}
+
+\item Write out the cycle decomposition of each element of order 2 in $S_4$.
+
+\BLUE{(1 2) (1 3) (1 4) (2 3) (2 4) (3 4) (1 2)(3 4) (1 3)(2 4) (1 4)(2 3)
+}
+
+\item Prove that if $\Omega=\{1,2,3,\dots\}$ then $S_\Omega$ is an infinite group (do not say $\infty!=\infty$).
+
+\BLUE{Proof by Contradiction: assume that $S_\Omega$ is finite then determine which $n$ makes $S_\Omega=S_n$.}
+
+\item \begin{enumerate}
+	\item Let $\sigma$ be the 12-cycle.  For which positive integers $i$ is $\sigma^i$ also a 12-cycle?
+	
+	\BLUE{Squaring $\sigma$ will generate two 6-cyclces.  Cubing $\sigma$ will generate three 4-cycles and $\sigma^4$ generates four 3-cycles.  It is clear that, since it is a permuation, all elements must be accounted for.  Thus, if the power, $k$, divides 12 it will separate into $k$ different $k/12$-cycles.\\
+	Five, however, does not divide into 12 thus it will consume all of the elements into a single 12-cycle.
+	}
+	
+	\item Let $\tau$ by the 8-cycle. For which positive integers $i$ is $\tau^i$ an 8-cycle?
+	
+	\BLUE{
+	$\tau =$ (1 2 3 4 5 6 7 8)\\
+	$\tau^2 = $ (1 3 5 7)(2 4 6 8) \\
+	$\tau^3 = $ (1 4 7 2 5 8 3 6)
+	}
+	
+	\item Let $\omega$ be the 14-cycle.  For which positive integers $i$ is $\omega^i$ also a 14-cycle?
+	
+	\BLUE{
+	$\omega = $ (1 2 3 4 5 6 7 8 9 10 11 12 13 14)\\
+	$\omega^2 = $ (1 3 5 7 9 11 13)(2 4 6 8 10 12 14) \\
+	$\omega^3 = $ (1 4 7 10 13 2 5 8 11 14 3 6 9 12) \\
+	\\Once again it is the first power that does not divide 14.
+	}
+\end{enumerate}
+
+\item Prove that if $\sigma$ is the $m$-cycle $(a_1, a_2, \dots, a_m)$, then for all $i \in \{1,2,\dots,m\}, \sigma^i(a_k)=a_{k+i}$, where $k+i$ is replaced by its least residue mod $m$ when $k+i>m$.  Deduce that $|\sigma|=m$.
+
+\BLUE{Note that $\sigma(a_m) = a_1, \sigma^2(a_m)=\sigma(\sigma(a_m))=\sigma(a_1) = a_2$\\
+Now, in general,  $\sigma(a_k) = a_{k+1}, \sigma^2(a_k)=\sigma(\sigma(a_k))=\sigma(a_{k+1}) = a_{k+2} \dots \sigma^i(a_k) = \underbrace{\sigma(\sigma(\dots))}_\text{i times} = a_{k+i}$
+}
+
+\item Let $\sigma$ be the $m$-cycle (1 2 $\dots$ $m$).  Show that $\sigma^i$ is also an $m$-cycle if and only if $i$ is relative prime to $m$
+
+\BLUE{If $i|m \to \exists d \in \Z, id=m$.  Then, $\sigma^i$ will be $i$ $d$-cycles.  After all, all $m$ elements must be represented.  When $i$ is relative prime to $m$ then $d=1$ and $\sigma^i$ must be an $m$-cycle.
+}
+
+\item \begin{enumerate}
+	\item if $\tau=$ (1 2)(3 4)(5 6)(7 8)(9 10) determine whether there is an $n$-cycle $\sigma (n\ge 10)$ with $\tau=\sigma^k$ for some integer $k$.
+	
+	\BLUE{Suppose that $\tau$ is some power of $\sigma$ that is $\tau = \sigma^i$ where $\sigma$ is a 10-cycle.  Clearly, 5 divides 10 so, from the last problem, there must be a $\sigma$ such that $\sigma^5= \tau$.\\
+	Let's try (1 3 5 7 9 2 4 6 8 10)
+	}
+	
+	\item if $\tau =$  (1 2)(3 4 5) determine whether there is an $n$-cycle $\sigma (n \ge 5)$ with $\tau=\sigma^k$ for some integer $k$.
+	\RED{
+	\begin{align*}
+		\begin{array}{c|c|c}
+			\sigma&	& \CYCLE{1&3&5&2&4} \\
+			\hline
+			\sigma^2&\CYCLE{1&3&5&2&4} & \CYCLE{1&5&4&3&2} \\
+			\sigma^3&\CYCLE{1&5&4&3&2} & \CYCLE{1&2&3&4&5}
+		\end{array}
+	\end{align*}It seems that every 5-cycle generates a 5-cycle and cannot generate a 2-cycle followed by a 3-cycle.  I suspect that this because it is prime.  Could a 6-cycle do this?
+	}
+\end{enumerate}
+
+\item Show that an element has order 2 in $S_n$ if and only if its cycle decomposition is a product of commuting 2-cycles.
+
+\item Let $p$ be a prime.  Show that an element has order $p$ in $S_n$ if and only if its cycle decomposition is a product of commuting $p$-cycles.  Show by an explicit example that this need not be the case if $p$ is not prime.
+
+\item Prove that the order of an element in $S_n$ equals the least common multiple of the lengths of the cycles in its cycle decomposition. [Use Exercise 10 and Exercise 24 of Section 1.]
+
+\item Show that if $n \ge m$ then the number of $m$-cycles in $S_n$ is given by
+\begin{align*}
+	\frac{n(n-1)(n-1)\cdots(n-m+1)}{m}
+\end{align*}[Count the number of ways of forming an $m$-cycle and divide by the numberof representations of a particular $m$-cycle.]
+
+\item Show that if $n\ge 4$ then the number of permutations in $S_n$ which are the product of two disjount 2-cycles is $n(n-1)(n-2)(n-3)/8$.
+
+\item Find all numbers $n$ such that $S_5$ contains an element of order $n$.
+
+\BLUE{
+2:\\
+3:\\
+4:\\
+5: $\CYCLE{1&2&3&4&5}$ $\CYCLE{1&2&3&5&4}$ $\CYCLE{1&2&4&3&5}$ $\CYCLE{1&2&4&5&3}$ $\CYCLE{1&2&3&5&4}$ $\CYCLE{1&2&5&3&4}$ $\CYCLE{1&2&5&4&3}$ $\CYCLE{1&3&3&4&5}$ $\CYCLE{1&3&2&5&4}$ $\CYCLE{1&3&2&4&5}$ $\CYCLE{1&3&4&2&5}$ $\CYCLE{1&3&4&5&2}$\dots
+}
+
+\item Find all numbers $n$ such that $S_7$ contains an element of order $n$.
+
+\item Find a set of generators and relations for $S_3$.
+
+\end{enumerate}
+
+\section{Matrix Groups}
+
+\begin{definition}[Field].\begin{enumerate}
+	\item a \DEFINE{field} is a set $F$ together with two binary operations $+$ and $\cdot$ on $F$ such that $(F, +)$ is an abelian group (call its identity 0) and $(F-\{0\},\cdot)$ is also an abelian group, and the following \textit{distributive} law holds:
+	\begin{align*}
+		a\cdot(b+c)=(a\cdot b)+(a\cdot c), \text{  for all } a,b,c \in F
+	\end{align*}
+	
+	\item for any field $F$ let $F^\times = F-\{0\}$.
+\end{enumerate}
+\end{definition}
+
+\newcommand{\GLN}{GL_n(F)}
+\newcommand{\FF}{\mathbb{F}}
+
+\begin{definition}[General Linear Matrices $\GLN$] 
+For each $n \in \Z^+$ let $\GLN$ be the set of all $n \times n$ matrices whose entries come from $\FF$ and whose determinant is nonzero, i.e., 
+\begin{align*}
+	\GLN=\{A\,|\, A \text{ is an $n \times n$ matrix with entries from $F$ and } \det(A)\ne 0\}
+\end{align*}
+\end{definition}
+
+\subsection{Exercises}
+
+Let $F$ be a field and let $n \in \Z^+$.\footnote{For the sake of argument, $\FF = \R$}
+
+\begin{enumerate}
+
+\item Prove that $|GL_2(\FF_2)| =6$.
+
+\BLUE{Let $X \in GL_2(F_2)$ and $X=\TWOXTWO{a}{b}{c}{d}$ where $a,b,c,d \in \Z/2\Z$.  It must also be that $ad-bc \ne 0$ and therefore $ad\ne bc$.  
+}
+
+\item Write out all the elements $GL_2(\FF_2)$ and compute the order of each element.
+
+\BLUE{
+$\TWOXTWO{1}{0}{1}{1}$\\
+$\TWOXTWO{1}{1}{0}{1}$\\
+$\TWOXTWO{1}{0}{0}{1}$\\
+$\TWOXTWO{1}{1}{1}{0}$\\
+$\TWOXTWO{0}{1}{1}{1}$\\
+$\TWOXTWO{0}{1}{1}{0}$\\
+}
+
+\item Show that $GL_2(\FF_2)$ is non-abelian.
+
+\BLUE{
+\begin{align*}
+	\TWOXTWO{1}{1}{0}{1}\TWOXTWO{1}{0}{1}{1} & \ne \TWOXTWO{1}{0}{1}{1}\TWOXTWO{1}{1}{0}{1} \\
+	\TWOXTWO{2}{1}{1}{1} &\ne \TWOXTWO{1}{1}{1}{2}
+\end{align*}
+}
+
+\item Show that if $n$ is not prime than $\Z/n\Z$ is not a field.
+
+\BLUE{Let $n$ be any non-prime integer.  Then, there exists a $d$ such that $d|n$ and $x$ such that $dx=n$. Thus, $dx=0 \not \in F - \{0\}$.
+}
+
+\item Show that $GL_n(F)$ is a finite group if and only if $F$ has a finite number of elements.
+
+\item If $|F|=q$ is finite prove that $|GL_n(F)| < q^{n^2}$.
+
+\item Let $P$ be a prime.  Prove that the order of $GL_2(\FF_p)$ is $p^4-p^3-p^2+p$ (do not just quote the order formula in this section. [Subtract the number of $2 \times 2$ matrices which is \textit{not} invertible from the total number of $2\times 2$ matrices over $\FF_p$.  You may use the fact that a $2\times 2$ matrix is not invertible if and ony if one row is multiple of th eother.]
+
+\item Show that $GL_n(F)$ is non-abelian for any $n \ge 2$ and any $F$.
+
+\item Prove that the binary operation of matrix multiplication of $2\times 2$ with real number entries is associative.
+
+\item Let $G=\SQBRACKET{\TWOXTWO{a}{b}{0}{c}\,|\, a,b,c \in \R, a\ne 0, c\ne 0}$.
+\begin{enumerate}
+	\item Compute the product of $\TWOXTWO{a_1}{b_1}{0}{c_1}$ and $\TWOXTWO{a_2}{b_2}{0}{c_2}$ to show that $G$ is closed under matrix multiplication.
+	
+	\BLUE{\begin{align*}
+		\TWOXTWO{a_1}{b_1}{0}{c_1}\TWOXTWO{a_2}{b_2}{0}{c_2} = 
+		\TWOXTWO{a_1a_2}{a_1b_2+b_1c_2}{0}{c_1c_2}
+	\end{align*}
+	}
+	
+	\item Find the matrix $N=\TWOXTWO{a}{b}{0}{c}$ and deduce that $G$ is closed under inverses.
+	
+	\BLUE{First, since it is closed under multiplication and $I_2 \in G$ then there must exist another matrix $M \in G$ such that $I=MX$.
+	\begin{align*}
+		\TWOXTWO{1}{0}{0}{1} &= \TWOXTWO{a}{b}{0}{c}\TWOXTWO{w}{x}{y}{z}\\	
+		&= \TWOXTWO{aw+by}{ax+bz}{cy}{cz} \\
+		\therefore y&=0
+	\end{align*}
+	}
+	
+	\item Deduce that $G$ is a subgroup of $GL_2(\R)$ (cf Exercise 26, Section 1).
+
+	\BLUE{
+		Clearly, any $X\in G \implies X \in GL_X(\R)$ and, given any two elements $X, Y \in G \implies XY \in G$ and $x^{-1} \in G$.  Therefore, $G \SUBGROUP GL_2(\R)$ 
+	}
+	\item Prove that the set of elements of $G$ whose two diagonal entries are equal (i.e., $a=c$) is also a subgroup of $G_2(\R)$.
+	
+	\BLUE{First, $I_2 \in G$ hence it contains an identity.\\
+	Next, is it associative? \\
+	Then, does it contain inverses? 
+	}
+\end{enumerate}
+	
+\end{enumerate}
+
+The next exercise introduces the \textit{Heisenberg group} over the field $F$ and develops some of its basic properties.  When $F = \R$ this group plays an important role in quantum mechanics and signal theory by giving a group theoretic interpretation (due to H. Weyl) of Heisenberg's Uncertainty Principle.  Note also that the Heisenberg group may be defined more generally -- for example with entries in $\Z$.
+
+\begin{enumerate}
+	\setcounter{enumi}{10}
+	\item Let $H(F) = \SQBRACKET{\THREEXTHREE{1}{a}{b}{0}{1}{c}{0}{0}{1} \,|\,a,b,c \in F}$ == called the \DEFINE{Heisenberg group over $F$}.  Let $X=\THREEXTHREE{1}{a}{b}{0}{1}{c}{0}{0}{1}$ and $Y = \THREEXTHREE{1}{d}{e}{0}{1}{f}{0}{0}{1}$ be elements in $H(F)$.
+	\begin{enumerate}
+		\item Computer the matrix product $XY$ and deduce that $H(F)$ is closed under matrix multiplication.  Exhibit explicit matrices such that $XY\ne YX$ (so that $H(F)$ is always non-abelian).
+		
+		\item Find an explicit formula for the matrix inverse $X^{-1}$ and deduce that $H(F)$ is closed under inverses.
+		
+		\item Prove the associative law for $H(F)$ and deduce tha $H(F)$ is a group of order $|F|^3$.
+		
+		\item Find the order of each element of the finite group $H(\Z/2\Z)$.
+		
+		\item Prove that every nonidentity element of the group $H(\R)$ has infinite order.
+	\end{enumerate}
+\end{enumerate}
+
+\section{The Quaternion Group}
+
+\begin{definition}[Quaternion Group, $Q_8$]The \DEFINE{quaternion group}, $Q_8$ is defined by 
+\begin{align*}
+	Q_8=\{1,-1,i,-i,j,-jk,-k\}
+\end{align*}with produce $\cdot$ computer as follows
+\begin{align*}
+	1\cdot a=1\cdot =a, \text{ for all }a \in Q_8\\
+	(-1)\cdot(-1) = 1, (-1)\cdot a=a \cdot (-1) = -a, \text{ for all } a \in Q_8 \\
+	i \cdot i = j \cdot j = k \cdot k = -1 \\
+	i \cdot j = k, j \cdot i = -k \\
+	j \cdot k = i, k \cdot j = -i \\
+	k \cdot i = j, i \cdot k = -j
+\end{align*}
+
+\end{definition}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+	\item Compute the order of each of the elements in $Q_8$.
+	
+	\BLUE{$|1|=1,\,|-1|=2,\,|i|=|j|=|k|=4,|-i|=|-j|=|-k|=4$
+	}
+	
+	\item Write out the group tables for $S_3, D_8$ and $Q_8$.
+	
+	\BLUE{
+	\begin{align*}
+		&\begin{array}{c|cccccc}
+			S_3& \CYCLE{1} & \CYCLE{1&2&3} & \CYCLE{1&3&2} &\CYCLE{1&2}&\CYCLE{1&3}& \CYCLE{2&3} \\
+			\hline
+			\CYCLE{1} & \CYCLE{1} &\CYCLE{1&2&3} & \CYCLE{1&3&2} &\CYCLE{1&2}&\CYCLE{1&3}& \CYCLE{2&3} \\
+			\CYCLE{1&2&3} & \CYCLE{1&2&3} & \CYCLE{1&3&2} & \CYCLE{1} & \CYCLE{1&3} & \CYCLE{2&3} & \CYCLE{1&2} \\
+			\CYCLE{1&3&2} & \CYCLE{1&3&2} & \CYCLE{1} &\CYCLE{1&2&3} &\CYCLE{2&3} &\CYCLE{1&2} & \CYCLE{1&3}\\
+			\CYCLE{1&2} & \CYCLE{1&2} & \CYCLE{2&3} & \CYCLE{1&3} & \CYCLE{1} &\CYCLE{1&3&2} & \CYCLE{1&2&3}\\
+			\CYCLE{1&3} & \CYCLE{1&3} & \CYCLE{1&2} & \CYCLE{2&3} & \CYCLE{1&2&3} &\CYCLE{1}& \CYCLE{1&3&2}\\
+			\CYCLE{2&3} & \CYCLE{2&3} & \CYCLE{1&3} & \CYCLE{1&2}& \CYCLE{1&3&2} &\CYCLE{1&2&3} & \CYCLE{1}
+		\end{array}\\
+		&\begin{array}{c|cccccccc}
+			D_8 & 1     & r    & r^2  & r^3  & s   & sr   & sr^2 & sr^3\\
+			\hline
+			1    & 1    & r    & r^2  & r^3  & s   & sr   & sr^2  & sr^3\\ 
+			r    & r    & r^2  & r^3  & 1    & sr  & sr^2 & sr^3 & s\\ 
+			r^2  & r^2  & r^3  & 1    & r    & sr^2& sr^3 & s    & sr\\
+			r^3  &r^3   & 1    & r    &r^2   & sr^3& s    & sr  & sr^2\\
+			s    & s    & sr   & sr^2 &sr^3  & 1   & r    &  r^2 &  r^3\\
+			sr   & sr   & sr^2  & sr^3& s    & r   & r^2  & r^2 & 1\\
+			sr^2 &sr^2 & sr^3   & s   & sr   & r^2 & r^3  & 1   & r\\
+			sr^3 &sr^3 & s      & sr  & sr^2 & r^3 & 1    & r  &r^2
+		\end{array}\\
+		&\begin{array}{c|ccccccccc}
+		Q_8 &  1 & -1 & i & -i & j & -j &  k & -k \\
+		\hline
+		1  & 1 & -1 &  i & -i &  j & -j &  k & -k \\
+		-1 & 1 &  1 & -i &  i & -j &  j & -k & k\\
+		i  & i & -i & -1 &  1 &  k & -k & -j & j\\
+		-i & -i&  i &  1 & -1 & -k &  k &  j & -j\\
+		j  & j & -i & -k &  k & -1 &  1 &  i & -i\\
+		-j & -j&  i &  k & -k & 1 &  -1 & -i & i\\
+		k  & k & -k &  j & -j & =i &  i & -1 & 1\\
+		-k & -k&  k & -j &  j &  i & -i &  1 & =1\\	
+		\end{array}
+	\end{align*}
+	}
+	
+	\item Find a set of generators and relations for $Q_8$.
+\end{enumerate}
+
+\section{Homomorphisms, Isomorphisms and Automorphisms}
+
+\begin{definition}[Homomorphisms] Let $(G, \star)$ and $(H, \diamond)$ be groups.  A map $\varphi : G\HOMO H$ such that 
+\begin{align*}
+	\varphi(x\star y)=\varphi(x)\diamond\varphi(y), \text{ for all } x,y \in G
+\end{align*}is called a \DEFINE{homomorphism}.  If $\varphi$ is bijective then it is called a \DEFINE{isomorphism} and $G$ and $H$ are said to be \DEFINE{isomorphic}, written as $G \cong H$ ($G \cong_g H$ reads as "$G$ is isomorphic by group to $H$".)
+\end{definition}
+
+\begin{remark} If $\varphi: G \to H$ is an isomorphism (i.e., $\varphi: G \ISO H$) then
+\begin{enumerate}
+	\item $|G| = |H|$
+	
+	\item $G$ is abelian if and only if $H$ is abelian.
+	
+	\item for all $x \in G, |x|=|\varphi(x)|.$
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Kernel]Define the \DEFINE{kernel} of $\varphi$ to be $\{g \in G : \varphi(g)=1_H\}$ (so the kernel is the set of elements in $G$ which map to the identity of $H$, i.e., is the fiber over the identity of $H$).
+\end{definition}
+
+\begin{definition}[Automophism]Let $G$ be a group and let $\AUT(G)$ be the set of all isomorphism from $G$ to $G$.  $\AUT(G)$ is called the \DEFINE{automorphism group} of $G$ and the elements of $\AUT(G)$ are called \DEFINE{automorphisms} of $G$.).
+\end{definition}
+
+\subsection{Exercises}
+
+Let $G$ and $H$ be groups
+
+\begin{enumerate}
+	\item Let $\varphi: G \HOMO H$.
+	\begin{enumerate}
+		\item Prove that $\varphi(x^n)=\varphi(x)^n$ for all $n \in \Z^+$
+		
+		\BLUE{First, $\varphi(x^2) = \varphi(x)\varphi(x)=\varphi(x)^2$.  \\
+		Assume that it is true for $n$, that is, $\varphi(x^n)=\varphi(x)^n$.  Now let's take $\varphi(x^{n+1})=\varphi(x^n\cdot x)=\varphi(x)^n\varphi(x)=\varphi(x)^{n+1}$
+		}
+		
+		\item Do part (a) for $n=-1$ and deduce that $\varphi(x^n)= \varphi(x)^n$ for all $n \in \Z$
+		
+		\BLUE{
+		$1=xx^{-1}$ then $\varphi(1)=\varphi(xx^{-1})=\varphi(x)\varphi(x^{-1}) = 1 \implies \varphi(x^{-1})=\varphi(x)^{-1}$.
+		}
+	\end{enumerate}
+	
+	\item If $\varphi : G\ISO H$, prove that $|\varphi(x)|=|x|$ for all $x\in G$.  Deduce that any two isomorphic groups have the same number of elements of order $n$ for each $n \in \Z^+$.  Is the result true if $\varphi$ is only assumed to be a homomorphism?
+	
+	\BLUE{Let $|x|=n$ then $1=\varphi(1)=\varphi(x^n)=\varphi(x)^n$.  This is only true because $\varphi$ is injective.  So, if it is an injective homormorphism then it would also be true.
+	}
+	
+	\item If $\varphi : G \ISO H$, prove that $G$ is abelian if and only if $H$ is abelian.  If $\varphi: G \HOMO H$, what additional conditions on $\varphi$ (if any) are sufficeint to ensure that if $G$ is abelian, then so is $H$?
+	
+	\BLUE{Let $x,y\in G$ then $xy=yx$ and 
+	\begin{align*}
+		\varphi(xy) &= \varphi(yx) \\
+		&\iff\\
+		\varphi(x)\varphi(y) &= \varphi(y)\varphi(x)
+	\end{align*}therefore $H$ is abelian.
+	}
+
+	\item Prove that the multiplicative groups $\R-\{0\}$ and $\C-\{0\}$ are not isomorphic.
+	
+	\BLUE{An isomorphism is bijective. There is no mapping from $\R-\{0\} \to \C-\{0\}$ that is bijective.  For example, there is no $x\in\R-\{0\}$ such that $\varphi(x^2) = -1$.
+	}
+	
+	\item Prove that the additive groups $\R$ and $\Q$ are not isomorphic.
+	
+	\BLUE{There is no $x \in \Q$ such that $x+x = \sqrt{2}$.
+	}
+	
+	\item Prove that the additive groups $\Z$ and $\Q$ are not isomorphic.
+	
+	\item Prove that $D_8$ and $Q_8$ are not isomorphic.
+	
+	\BLUE{There is no element $x$ in $D_8$ such that $x^2=s$.
+	}
+	
+	\item Prove that if $n \ne m, S_n$ and $S_m$ are not isomorphic.
+	
+	\BLUE{$|S_n| \ne |S_m|$}
+	
+	\item Prove that $D_{24}$ and $S_4$ are not isomorphic.
+	
+	\BLUE{$D_{24}$ is abelian, $S_4$ is not }
+	
+	\item Fill in the details of the proof that the symmetric groups $S_\Delta$ and $S_\Omega$ are isomorphic if $|\Delta|=|\Omega|$ as follows: let $\theta : \Delta \leftrightarrow \Omega$.  Define
+	\begin{align*}
+		\varphi : S_\Delta \to S_\Omega \text{ by } \varphi(\sigma)=\theta\circ\sigma\circ\theta^{-1} \text{ for all } \sigma \in S_\Delta
+	\end{align*}and prove the following:
+	\begin{enumerate}
+		\item $\varphi$ is well defined, that is, if $\sigma$ is a permutation of $\Delta$ then $\theta\circ\sigma\circ\theta^{-1}$ is a permutation of $\Omega$.
+		
+		\item $\varphi$ is an injection from $S_\Delta$ onto $S_\Omega$. [Find a 2-sided inverse for $\varphi$]
+		
+		\item $\varphi$ is a homomorphism, that is, $\varphi(\sigma\circ\tau)=\varphi(\sigma)\circ\varphi(\tau)$.\\
+		Note the similrity to the \textit{change of basis} or \textit{similarity} transformations of matrices (we shall see the connectionb between these later in the text).
+	\end{enumerate}
+	
+	\item Let $A$ and $B$ be groups.  Prove that $A \times A \cong B \times A$.
+	
+	\BLUE{Let $\varphi((a,b)) = (b,a)$}
+	
+	\item Let $A, B$, and $C$ be groups and let $G=A\times B$ and $H=B\times C$.  Prove that $G\times C \cong A \times H$.
+	
+	\item Let $G$ and $H$ be groups and let $\varphi: G \HOMO H$.  Prove that the image of $\varphi, \varphi(G),$ is a subgroup of $H$ (cf. Exercise 26 of Section 1).  Prove that if $\varphi$ is injective then $G \cong \varphi(G)$.
+	
+	\BLUE{Let $x,y \in G$ then $\varphi(x), \varphi(y) \in \varphi(G)\subseteq H$.  Further, $\varphi(xy)=\varphi(x)\varphi(y) \in \varphi(G)$ and $\varphi(1)=\varphi(xx^{-1} = \varphi(x)\varphi(x^{-1})=\varphi(x)\varphi(x)^{-1} = 1$.  Therefore, $\varphi(G) \SUBGROUP H$.
+	}
+	
+	\item Let $G$ and $H$ be groups and let $\varphi: G \HOMO H$. Define the \textit{kernel} of $\varphi$ to be $\{g \in G : \varphi(g)=1_H\}$ (so the kernel is the set of element sin $G$ which map to the identity of $H$, i.e., is the fiber over the identity of $H$).  Prove that the kernel of $\varphi$ is a subgroup (cf. Exercise 26 of Section 1) of $G$.  Prove that $\varphi$ is injective if and only if the kernel of $\varphi$ is the identity of subgroup of $G$.
+	
+	\BLUE{Let $x,y \in \KER(\varphi)$.  Then $\varphi(xy)=\varphi(x)\varphi(y)=1\cdot 1= 1 \in \KER(\varphi).$  Also, $\varphi(1\cdot x) = \varphi(1)\varphi(x) = varphi(1)\cdot 1 \implies \varphi(1) \in \KER(\varphi)$.  Lastly, $1= \varphi(xx^{-1}) = \varphi(x)\varphi(x)^{-1} \implies \varphi(x)^{-1} \in \KER(\varphi)$
+	}
+	
+	\item Define a map $\pi: \R^2 \to \R$ by  $\pi((x,y))=x$.  Prove that $\pi$ is a homomorphism and find the kernel of $\pi$ (cf Exercise 14).
+	
+	\BLUE{Let $a,b \in \R^2$ such that $a=(x,y), b=(u,v)$.  Then $\pi(ab)=\pi(a)\pi(b)=xu \to ab=(xu, yv), \pi(ab)= xu$.  And $\KER(\pi)=\{a=(x,y) \,|\, \pi((x,y))= 1\}$ or when $a=(1,y), \forall y \in \R$.
+	}
+	
+	\item Let $A$ and $B$ be groups and let $G$ be their direct product, $A \times B$. Prove that the maps $\pi_1: G \to A$ and $\pi_2: G \to B$ defined by $\pi_1((a,b))=a$ and $\pi_2((a,b))=b$ are homomorphisms and find their kernels (cf. Exercise 14).
+	
+	\item Let $B$ be any group.  Prove that the map from $G$ to itself defined by $g \mapsto g^{-1}$ is a homomorphism if and only if $G$ is abelian.
+	
+	\BLUE{Let $g,h \in G$ and $\varphi(g)= g^{-1}, \forall g \in G$.  Then, $\varphi(gh)=\varphi(g)\varphi(h)=g^{-1}h^{-1}=(gh)^{-1}=h^{-1}g^{-1}$.  Hence, abelian.
+	}
+	
+	\item Let $G$ be any group. Prove that the map from $G$ to itself defined by $g \mapsto g^2$ is a homomorphism if and only if $G$ is abelian.
+	
+	\BLUE{Let $\varphi(g) = g^2$.  
+	\begin{align*}
+		\varphi(gh) &= \varphi(g)\varphi(h)\\
+		(gh)^2&= g^2h^2 \\
+		ghgh &= gghh \\
+		g^{-1}ghghh^{-1} &= g^{-1}gghhh^{-1} \\
+		gh&=hg
+	\end{align*}hence abelian.
+	}
+	
+	\item Let $G = \{z \in \C\, |\,z^n=1$ for some $n \in \Z^+\}$.  Prove that for any fixed integer $k > 1$ the map from $G$ to itself defined by $z \mapsto z^k$ is a surjective homomorphism but is not an isomorphism.
+	
+	\BLUE{Let $k >1$ and $\varphi(z)=z^k$ where $z \in G$.  Then given any $w \in G$ we can find the $k\ITH$ root of $w$, namely $y$.  $y^k=w=z^k$ for some $z\in G$. Hence, $y=z$. However, it is not isomorphic, as there are $k-1$ elements that whose value raied to the power of $k$ equals 1.
+	}
+	
+	\item Let $G$ be a group and let $\AUT(G)$ be the set of all isomorphism from $G$ to $G$.  Prove that $\AUT(G)$ is a group under function composition (called the \textit{automorphism group} of $G$ and the elements of $\AUT(G)$ are called \textit{automorphisms} of $G$.).
+	
+	\BLUE{Let $\varphi, \phi, \pi \in \AUT(G)$. \\
+	\underline{Associative}?  Does $(\varphi \circ \phi) \circ \pi = \varphi \circ (\phi \circ \pi)$?\\
+	\underline{Identity exist}?  $I: G \to G$ such that $I(g)=g,\, \forall g \in G$.  Then, $(\phi\circ I)(g)=\phi(I(g))=\phi(g) \implies \phi \circ I = \phi$\\
+	\underline{Inverses}? each element is an isomorphism, which means that it is bijective and hence has an inverse.\\
+	}
+	
+	\item Prove that for each fixed nonzero $k \in \Q$ the map from $\Q$ to itself defined by $q \mapsto kq$ is an automorphism of $\Q$ (cf.Exercise 20).
+	
+	\BLUE{Let $\varphi(q)=kq$ for some $k\in \Q$.  Need to show that $\varphi$ is a bijection.
+	}
+	
+	\item Let $A$ be an \underline{abelian group} and fix some $k \in \Z$.  Prove that the map $a \mapsto a^k$ is a homomorphism from $A$ to itself.  If $k = -1$  prove that this homomorphism is an isomorphism (i.e., is an automorphism of $A$).
+	
+	\BLUE{Let $a,b \in A$ and let $\varphi(a) = a^k$ for some $k$.  Then, $\varphi(ab)= (ab)^k= \underbrace{ab\dots ab}_{k\text{-times}}$.  Since $A$ is commutative we have $\underbrace{ab\dots ab}_{k\text{-times}}=a^kb^k=\varphi(a)\varphi(b)$ and hence a homomorphism.  If $k=-1$ then $\varphi$ is injective because each inverse is unique, and surjective because every $a \in A$ has an inverse, hence an isomorphism.
+	}
+	
+	\item Let $G$ be a finite group which possesses an automorphism $\sigma$ (cf.Exercise 20) such that $\sigma(g)=g$ if and only if $g=1$.  If $\sigma^2$ is the identity map from $G$ to $G$, prove that $G$ is abelian (such an automorphism $\sigma$ is called \textit{fixed point free} of order 2).  [Show that every element of $G$ can be written in the from $x^{-1}\sigma(x)$ and apply $\sigma$ to such an expression.]
+	
+	\item Let $G$ be a finite group and let $x$ nd $y$ be distinct elements of order 2 in $G$ that generate $G$.  Prove that $G\cong D_{2n}$, where $n =|xy|$. [See Exercise 6 in Section 2.]
+	
+	\item Let $n \in \Z^+$, let $r$ and $s$ be the usual generators of $D_{2n}$ and let $\theta=2\pi/n$.
+	\begin{enumerate}
+		\item Prove that the marix $\TWOXTWO{\cos \theta}{-\sin\theta}{\sin\theta}{\cos\theta}$ is the matrix of the linear transformation which rotates the $x,y$ plane about the origin in a counterclockwise direction by $\theta$ radians.
+		
+		\item Prove that the map $\varphi : D_{2n}\to GL_2{\R}$ defined on the gener/ators by 
+		\begin{align*}
+			\varphi(r)=\TWOXTWO{\cos \theta}{-\sin\theta}{\sin\theta}{\cos\theta} \AND \phi(s)=\TWOXTWO{0}{1}{1}{0}
+		\end{align*}extends to a homomorphism of $D_{2n}$ into $GL_2(\R)$.
+		
+		\item Prove that the homomorphism $\varphi$ in part (b) is injective.
+		
+	\end{enumerate}
+	
+	\item Let $i$ and $j$ be the generators of $Q_8$ described in Section 5.  Prove that the map $\varphi$ from $Q_8$ to $GL_2(\C)$ defined on generators by 
+	\begin{align*}
+		\varphi(i) = \TWOXTWO{\sqrt{-1}}{0}{0}{-\sqrt{-1}} \AND \varphi(j)=\TWOXTWO{0}{-1}{1}{0}
+	\end{align*}extend to a homomorphism.  Prove that $\varphi$ is injective.
+	
+\end{enumerate}
+
+\section{Group Actions}
+
+\begin{definition}[Group Action] A \DEFINE{group action} of a group $G$ on a set $A$ is a map from $G \times A$ to $A$ (written as $g\cdot a$, for all $g \in G$ and $a \in A$) satisfying the following properties:
+\begin{enumerate}
+	\item $g_1\cdot (g_2 \cdot a) = (g_1g_2)\cdot a$, for all $g_1, g_2 \in G, a \in A$, and 
+	\item $1\cdot a = a$ for all $a \in A$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark} Let the group $G$ act on the set $A$.  For each fixed $g\in G$ we get a map $\sigma_g$ defined by
+\begin{align*}
+	\sigma_g: A &\to A\\
+	\sigma_g(a)&=g\cdot a
+\end{align*}with two important facts:
+\begin{enumerate}
+	\item For each fixed $g \in G, \sigma_g$ is a \textit{permutation} of $A$, and 
+	\item for each map from $G$ to $S_A$ defined by $g \mapsto \sigma_g$ is a homomorphism.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Permutation Representation] The homomorphism from $G$ to $S_A$ given above is called the \\ \DEFINE{permutation representation} associated to the given action.  It is easy to see that the process is reverisble in the sense that if $\varphi: G \to S_A$ is any homomorphism from a group $G$ to the symmetric group on a set $A$, then the map from $G\times A$ to $A$ defined by 
+\begin{align*}
+	g\cdot a=\varphi(g)(a), \text{ for all } g \in G, \AND a \in A
+\end{align*}satisfies the properties of a group action of $G$ on $A$.  Thus actions of a group $G$ on a set $A$ and the homoomorphisms from $G$ into the symmetric group $S_A$ are in bijective correspondence (i.e., are essentially the same notion, phrased in different terminology).
+\end{definition}
+
+\begin{definition}If $G$ acts on a set $B$ and distinct elements of $G$ induce distinct permutations of $B$, the action is said to be \DEFINE{faithful}  A faithful action is therefore one in which the associated permutation representation is injective.
+\end{definition}
+
+\begin{definition}[Conjugation]Let $G$ be a any group and let $A = G$.  Show that he maps defined by $g\cdot a=gag^{-1}$ for all $g,a\in G$ \textit{do} satisfy the axioms of a (left) group action (this action of $G$ of itself is called \DEFINE{conjugation}).
+\end{definition}
+
+\begin{definition}[Orbits]Let $H$ be a group acting on a set $A$.  Prove that the relation $\sim$ on $A$ defined by 
+	\begin{align*}
+		a \sim b \iff a =hb \text{ for some } h \in H
+	\end{align*}is an equivalence relation.  (for each $x \in A$, the equivalence class of $x$ under $\sim$ is called the \DEFINE{orbit} of $x$ under the action of $H$.  The orbits under the action of $H$ partition the set $A$.)
+\end{definition} 
+
+\begin{theorem}[Lagrange's Theorem]
+	\begin{center}
+		If $G$ is a finite group and $H$ is a subgoup of $G$ then $|H|$ divides $|G|$.
+	\end{center}
+\end{theorem}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+	\item Let $F$ be a field.  Show that the multiplicative group of nonzero elements of $G$ (denoted by $F^\times$) acts on the set $F$ by $g\cdot a=ga$, where $g \in F^\times,a \in F$ and $ga$ is the usual product in $F$ of the two field elements (state clearly which axioms in the definiton of a filed are used).
+	
+	\item Show that the additive group $\Z$ acts on itself by $z\cdot a=z+a$ for all $z,a \in \Z$
+	
+	\item Show that the additive group $\R$ acts on the $x,y$ plane $\R \times \R$ by $r\cdot(x,y)=(x+ry,y)$.
+	
+	\item Let $G$ be a group acting on a set of $A$ and fix some $a \in A$.  Show that he following sets are subgroups of $G$ (cf.  Exercise 26 of Section 1):
+	\begin{enumerate}
+		\item the kernel of the action,
+		\item $\{g \in G\,|\, ga=a\} -$ this subgroup is called the \textit{stabilizer} of $a$ in $G$.
+	\end{enumerate}
+	
+	\item Prove that the kernel of an action of the group $G$ on the set $A$ is the same as the kernel of the corresponding permutation representation $G \to S_A$ (cf.  Exercise 14 in Section 6).
+	
+	\item Prove that a group $G$ acts faithfuly on as set $A$ if and only if the kernel of the action is the set consisting only of the identity.
+	
+	\item Prove that in Example 2 in this section the action is faithful.
+	
+	\item Let $A$ be a nonempty set and let $k$ be a positive integer with $k \le |A|$.  The symmetric group $S_A$ acts on the set $B$ consisting of all subsets of $A$ of cardinality $k$ by $\sigma \cdot \{a_1,\cdot,a_k\} = \{\sigma(a_1), \dots, \sigma(a_k)\}$.
+	\begin{enumerate}
+		\item Prove that this is a group action.
+		\item Describe explicitly how the elements $\CYCLE{1&2}$ and $\CYCLE{1&2&3}$ act on the six 2-element subsets of \{1,2,3,4\}.
+	\end{enumerate}
+	
+	\item Do both parts of the preceding exercise wth "ordered $k$-tuples" in place of $k$-element subsets," where the action on $k$-tuples is defined as above but with set braces replaced by parentheses (not that, for example, the 2-tuple (1,2) and (2,1) are different even though the sets $\{1,2\}$ and $\{2,1\}$ are the same, so the sets being acted upon are different).
+	
+	\item With reference to the preceding two exercises determine:
+	\begin{enumerate}
+		\item for which value sof $k$ the action of $S_n$ on $k$-element subsets is faithful, and
+		\item for which values of $k$ th eaction of $S_n$ on orderd $k$-tuples is faithful.
+	\end{enumerate}
+	
+	\item Write out the cycle decompowition o fthe eight permutations in $S_4$ corresponding to the elements of $D_8$ given by the action of $D_8$ on the vertices of a square (where the vertices of the square are labelled as in section 2).
+	
+	\item Assume $n$ is an even positive integer and show that $D_{2n}$ acts on the set consisting of pairs of opposite vertice of a regular $n$-gon.  Find the kernel fo this action (label vertices as usual).
+	
+	\item Find the kernel of th eleft regular action.
+	
+	\item Let $G$ be a group and $A=G$.  Show that if $G$ is non-abelian then the maps defined by $g\cdot a=ag$ for all $g,a \in G$ do \textit{not} satisfy the axioms of a (left) group action of $G$ on itself.
+	
+	\item Let $G$ be any group and let $A=G$.  Show that the maps defined by $g\cdot ag^{-1}$ for all $g,a \in G$ \textit{do} satisfy the axioms of a left group action of $G$ on itself.
+	
+	\item Let $G$ be a any group and let $A = G$.  Show that the maps defined by $g\cdot a=gag^{-1}$ for all $g,a\in G$ \textit{o} satisfy the axioms of a (left) group action (this action of $G$ of itself is called \textit{conjugation}).
+	
+	\item Let $G$ be a group and let $G$ act on itself by left conjugation, so each $g \in G$ maps $G$ to $G$ by
+	\begin{align*}
+		x \mapsto gxg^{-1}
+	\end{align*}For fixed $G\in G$, prove that conjugation by $g$ is an isomorphism from $G$ onto itself (i.e., is an automorphism of G - cf. Exercise 20, section 6).  Decuce that $x$ and $gxg^{-1}$ have the same order for all $x$ in $G$ and that for any subset $A$ of $G, |A| = |gAg^{-1}|$ (here $gag^{-1} = \{gag^{-1}\,|\, a \in A\}$).
+	
+	\item Let $H$ be a group acting on aset $A$.  Prove that the relation $\sim$ on $A$ defined by 
+	\begin{align*}
+		a \sim b \iff a =hb \text{ for some } h \in H
+	\end{align*}is an equivalence relation.  (for each $x \in A$, the equivalence class of $x$ under $\sim$ is called the \textit{orbit} of $x$ under the action of $H$.  The orbits under the action of $H$ partition the set $A$.)
+	
+	\item Let $H$ be a subgroup of (cf. Exercsie 26 of Section 10 of the finite group $G$ and let $H$ act on $G$ (here $A=G$) by left multiplication.  Let $x \in G$ and let $\mathcal{O}$ be the orbit of $x$ under the action of $H$.  Prove that the map 
+	\begin{align*}
+		H \to \mathcal{O} \text{ defined by } h \mapsto hx
+	\end{align*}is a bijection (hence all orbits have cardinality $|H|$).  From this and the preceding exerecise deduce \textit{Lagrange's Theorem}:
+	\begin{center}
+		\textit{if $G$ is a finite group and $H$ is a subgoup of $G$ then $|H|$ divides $|G|$.}
+	\end{center}
+	
+	\item Show that the group of rigid motions of a tetrahedron is isomorphic to a subgroup (cf. Exercise 26 of Section 1) of $S_4$.
+	
+	\item Show that the group of rigid motions of a cube is isomorphic to $S_4$.  [This group acts on the set of four pairs of opposite vertices.]
+	
+	\item Show that the group of rigid motions of an octahedron is isomorphic to a subgroup (cf.  Exerci e 26 of Section 1) of $S_4$. [This group acts on the set of four paris of opposite faces.]  Deduce that the groups of rigid motions of a cube and octahedron are isomorphic.  (These groups are isomorphic because these solids are 'dual" -- \textit{introduction to Geometry} by H. Coxeter, Wiley, 1961.  We shall see later that the groups of rigid motions of the dodecahedron and icosahedron are isomorphic as well - these solids are also dual.)
+	
+	\item Explain why the action of the group of rigid motions of a cube on the set of three pairs of opposite faces is not faithful.  Find the kernel of this action.
+	
+\end{enumerate}
+
+\chapter{Subgroups}
+\section{Definitions and Examples}
+
+\begin{definition}[Subgroup]Let $G$ be a group.  The subset $H$ of $G$ is a \DEFINE{subgroup}  of $G$ if $H$ is nonempty and $H$ is closed under products and inverses (i.e., $x,y \in H\implies x^{-1} \in H\AND xy \in H$).  If $H$ is a subgroup of $G$ we shall write $H \le G$.
+\end{definition}
+
+\begin{prop}[The Subgroup Criterion] A subset $H$ of a group $G$ is a subgroup if and only if 
+\begin{enumerate}
+	\item $H \ne \emptyset$, and 
+	\item for all $x,y \in H, xy^{-1} \in H$.
+\end{enumerate}
+\end{prop}
+
+\begin{definition}[Special Linear Group, $SL_n(F)$]Define the \DEFINE{special linear group} on a field $F$, $SL_n(F)$ as:
+\begin{align*}
+	SL_n(F)=\{A \in GL_n(F)\,|\, \det(A) = 1\}.
+\end{align*}Note $SL_n(F) \le GL_n(F)$.
+\end{definition}
+
+\subsection{Exercises}
+
+Let $G$ be a group.
+
+\begin{enumerate}
+
+\item In each of (a) - (e) prove that the specified subset is a subgroup of the given group:
+\begin{enumerate}
+	\item the set of complex numbers of the from $a+ai,a \in \R$ (under addition).
+	
+	\BLUE{Let $a+ai, b+bi \in H$.  $(b+bi)^{-1}=-b-bi$.  Is $(a+ai)+(-b-bi) \in H$?
+	\begin{align*}
+		(a+ai)+(-b-bi) &= (a-b)+(a-b)i \in H
+	\end{align*}
+	}
+	
+	\item the set of complex numbers of absolute value 1, i.e., the unit circle in the complex plane (under multiplication).
+	
+	\BLUE{
+	\begin{align*}
+		\LET x,y & \in H \AND x=e^{i\theta}, y=e^{i\phi} \\
+		y^{-1} &= y^{-i\phi} \\
+		xy^{-1} &= e^{i\theta}e^{-i\phi} \\
+		&= e^{i(\theta-\phi)} \\
+		\AND \BARS{e^{i(\theta-\phi)}} &= 1 \implies xy^{-1} \in H
+	\end{align*}
+	}
+	
+	\item for fixed $n \in \Z^+$ the set of rational numbers whose denominators divide $n$ (under addition).
+	
+	\BLUE{
+	\begin{align*}
+				\LET x,y & \in H \AND x=\frac{a}{b}, y=\frac{c}{d} \WHERE b|n, d|n\\
+				x\cdot y^{-1} &= \frac{a}{b}-\frac{c}{d} \\
+				&= \frac{ad-bc}{bd} \\
+			\text{clearly } bd|n &\therefore x\cdot y^{-1} \in H
+	\end{align*}When $bd > n$ we can multiple top and bottom by the corresponding elements (i.e., where $bb'=n$ and $dd'= n$ and factor out an $n$ reducing the fraction to one where the denominator divdes $n$.
+	}
+	
+	\item for fixed $n \in \Z^+$ the set of rational numbers whose denominators are relatively prime to $n$ (under addition).
+	
+	\BLUE{similar to previous exercise}
+	
+	\item the set of nonzero real numbers whose square is a rational number (under mutiplication).
+	
+	\BLUE{Let $p,q \in \R \to p^2, q^2 \in \Q$.  Then $(q^{-1})^2 = q^{-2} = \frac{1}{q^2} \in \Q$. Therefore, $q^{-1} \in H$.\\
+	$pq^{-1} = \frac{p}{q}$ and $\PAREN{pq^{-1}}^2 = \frac{p^2}{q^2} \in \Q$
+	}
+	
+\end{enumerate}
+
+\item In each of (a) - (e) prove that the specified subset is \textit{not} a subgroup of the given group:
+\begin{enumerate}
+	\item the set of 2-cycles in $S_n$ for $n \ge 3$.
+	
+	\BLUE{the identity is not a 2-cycle.}
+	
+	\item the set of reflections in $D_{2n}$ for $n \ge 3$.
+	
+	\BLUE{the identity is not a reflection}
+	
+	\item for $n$ as a composite integer $> 1$ and $G$ a group  containing an element of order $n$, the set $\{x \in G\,|\, |x|=n\} \cup \{1\}$.
+	
+	\BLUE{h
+	}
+	
+	\item the set of (positive and negative) odd integers in $\Z$ together with 0.
+	
+	\BLUE{the sum of two odd integers is even}
+	
+	\item the set of real numbers whose square is a rational number (under addition).
+	
+	\RED{Let $p, q \in H$  then $(p+q)^2=p^2+q^2+2pq \not \in H$.
+	}
+	
+\end{enumerate}
+
+\item Show that the following subsets of the dihedral group $D_8$ are actually subgroups:
+\begin{enumerate}
+	\item $\{1,r^2, s,sr^2\}$,
+	\item $\{1,r^2,sr,sr^3\}$.
+\end{enumerate}
+
+\item Give an explicit example of a group $G$ and an infinite subset $H$ of $G$ that is closed under the group operation but is not a subgroup of $G$.
+
+\item Prove that $G$ cannot have a subgoup $H$ with $|H|=n-1$, where $n=|G|>2$.
+
+\BLUE{$H =\{z \,|\, z=1/d, d \in \Z\}$ over addition}
+
+\item Let $G$ be an abelian group, Prove that $\{g \in G\,|\,|g|< \infty \}$ is a subgroup of $G$ (called the \textit{torsion subgroup} of $G$).  Give an explicit example where this set is not a subgroup when $G$ is non-abelian.
+
+\item Fix some $n \in \Z$ with $n > 1$. Find the torsion subgroup (cf. the previous exercise) of $\Z \times (Z/n\Z)$.  Show that the set of elements of infinite order together with the identity is \textit{not} a subgroup of this direct product.
+
+\item Let $H$ and $K$ be subgroups of $G$.  Prove that $H \cup K$ is a subgroup if and only if either $H \subseteq K$ or $k \subseteq H$.
+
+\item Let $G=GL_n(F)$, where $F$ is any field.  Define 
+\begin{align*}
+	SL_n(F)=\{A \in GL_n(F)\,|\, \det(A) = 1\}
+\end{align*}(called the \textit{special linear group}).  Prove that $SL_n(F) \le GL_n(F)$.
+
+\BLUE{Let $x,y \in SL_n(F)$ then $\det(y^{-1}) = 1 \implies y^{-1} \in SL_n(F)$.  \\Then, $\det(xy^{-1})= \det(x)\det(y^{-1})=1\cdot 1 \implies xy^{-1} \in SL_n(F)$.
+}
+
+\item \begin{enumerate}
+	\item Prove that if $H$ and $K$ are subgroups of $G$ then so is their intersection $H\cap K$.
+	
+	\BLUE{First 1 is in $H \cap K$, hence not empty.  Next, if $y \in H \cap K$ then $y^{-1} \in H$ and $y^{-1} \in K$ therefore $y^{-1} \in H \cap K$.  A similar argument holds for $x,y \in H\cap K \implies xy\in H\cap K$
+	}
+	
+	\item Prove that the intersection of an arbitrary nonempty collection ofsubgroups of $G$ is again a subgroup of $G$ (do not assume the collection is countable).
+\end{enumerate}
+
+\item Let $A$ and $B$ be groups.  Prove that the following sets are subgroups of the direct product $A\times B$.:
+\begin{enumerate}
+	\item $\{(a,1)\,|\, a \in A\}$
+	\item $\{(1,b)\,|\, b \in B\}$
+	\item $\{(a,a)\,|\, a\in A\}$, where here we assume $B=A$ (called the \textit{diagonal subgroup}).
+\end{enumerate}
+
+\item Let $A$ be an abelian group and fix some $n \in \Z$.  Prove thate the following sets are subgroups of $A$:
+\begin{enumerate}
+	\item $\{a^n\,|\, a \in A\}$
+	\item $\{a \in A \,|\, a^n=1\}$.
+\end{enumerate}
+
+\item Let $H$ be a subgroup of the additive group of rational numbers with the property that $1s\in H$ for every nonzero element $x$ of $H$. Prove that $H=0$ or $\Q$.
+
+\item Show that $\{x \in D_{2n}\,|\,x^2=1\}$ is not a subgroup of $D_{2n}$ (here $n \ge 3$).
+
+\item Let $H_1 \le H_2\le \cdots$ be an ascending chain of subgroups of $G$.  Prove that $\cup_{i=1}^\infty H_i$ is a subgroup of $G$.
+
+\BLUE{Inductive Proof.}
+
+\item Let $n \in \Z^+$ and let $G$ be a field.  Prove that the set $\{(a_{ij}=0$ for all $i >j\}$ is a subgroup of $GL_n(F)$ (called the group of \textit{upper triangular} matrices.
+
+\item Let $n \in \Z^+$ and let $F$ be a field.  Prove that the set $\{(a_{ij}) \in GL_n(F)\,|\, a_{ij}=0$ for all $i>j,$ and $a_{ii} ==1$ for all $i\}$ is a subgroup of $GL_n(F)$.
+\end{enumerate}
+
+\section{Centralizers and Normalizers, Stabilizers and Kernels}
+
+\begin{definition}[Centralizer]Define $C_G(A)=\{g \in G\,|\,gag^{-1}=a, \forall a \in A\}$.  This subset of $G$ is called the \DEFINE{centralizer} of $A$ in $G$.  Since $gag^{-1}=a$ if and only if $ga=ag, C_G(A)$ is the set of elements of $G$ which commute with every element of $A$.
+\end{definition}
+Note: The centralizer is the set of $g$s that commute with EVERY element in $A$.
+
+\begin{definition}[Center]Define $Z(G) =\{g \in G\,|\,gx=xg, \forall x \in G\}$, the set of elements commuting with all the elements of $G$.  This subset of $G$ is called the \DEFINE{center} of $G$.
+\end{definition}
+
+\begin{definition}[Normalizer]Define $gAg^{-1}=\{gag^{-1}\,|\, a \in A\}$.  Define the \DEFINE{normalizer} of $A$ in $G$ to be the set $N_G(A)=\{g\in G\,|\,gAg^{-1}=A\}$.
+\end{definition}
+Note: the normalizer is the set of $g$s whose commute in any $a\in A$ is also in $A$ but not necessarily equal.
+
+\begin{definition}[Stabilizer] The \DEFINE{stabilizer} of $s \in G$ is the set 
+\begin{align*}
+	G_s=\{g\in G\,|\, g\cdot s=s\}.
+\end{align*}
+\end{definition}
+Note: given some point $s$ this is the set of elements in $G$ that have no effect on it.
+
+\begin{definition}[Kernel]The \DEFINE{kernel} of an action is a subgroup, where the kernel of the action of $G$ on $S$ is defined as
+\begin{align*}
+	\{ g\in G\,|\, g\cdot s=s, \forall s \in S\}.
+\end{align*}Note: the kernel depends on the entire set $S$ and it is the subgroup of $G$ that doesn't effect it (set of stabilizers).
+\end{definition}
+
+\subsection{Exercises}
+\begin{enumerate}
+
+\item Prove that $C_G(A) = \{g \in G \,|\,g^{-1}ag=a, \forall a \in A\}$.
+
+\BLUE{
+\begin{align*}
+	gag^{-1} &= a\\
+	g^{-1}gag &= g^{-1}a\\
+	agg^{-1}&=g^{-1}ag\\
+	a&=g^{-1}ag
+\end{align*}
+}
+
+\item Prove that $C_G(Z(G)) = G$ and deduce that $N_G(Z(G))=G$.
+
+\BLUE{
+\begin{align*}
+	C_G(A)=\{g \in G\,|\,gag^{-1}=a, \forall a \in A\} \\
+	N_G(A)=\{g\in G\,|\,gAg^{-1}=A\}
+\end{align*}
+}
+
+\item Prove that if $A$ and $B$ are subsets of $G$ with $A \subseteq B$ then $C_G(B)$ is a subgroup of $C_G(A)$.
+p $G$.
+
+\item For each $S_3, D_8, $ and $Q_8$ compute the centalizers of each element and find the center of each group.  Does Lagranges's Theorem (Exercise 19 in Section 1.7) simplify your work?
+
+\item In each of the parts (a) to (c) show that for the specified group and subgroup $A$ of $G$, $C_G(A)=A$ and $N_G(A)=G$.
+\begin{enumerate}
+	\item $G=S_3$ and $A=\{1, \CYCLE{1&2&3}, \CYCLE{1&3&2}\}$.
+	\item $G=D_8$ and $A=\{1,2,r^2,sr^2\}$.
+	\item $G=D_{10}$ and $A=\{1,r,r^2,r^3, r^4\}$
+\end{enumerate}
+
+\item Let $H$ be a subgroup of the group $G$.
+\begin{enumerate}
+	\item Show that $H \le N_G(H)$.  Give an example to show that this is not necessarily true if $H$ is not a subgroup.
+	\item Show that $H \le C_G(H)$ if and only if $H$ is abelian.
+\end{enumerate}
+
+\item Let $n \in \Z$ wiht $n \ge 3$.  Prove the following:
+\begin{enumerate}
+	\item $Z(D_{2n}) =1$ if $n$ is odd.
+	\item $Z(D_{2n}) =\{1,r^k\}$ if $n=2k$.
+\end{enumerate}
+
+\item Let $G=S_n$ fix an $i \in \{1, 2, \dots, n\}$ and let $G_i=\{\sigma\in G\,|\,\sigma(i)=i\}$ (the stabilizer of $i$ in $G$).  Use group actions to prove that $G_i$ is a subgroup of $G$.  Find $|G_i|$.
+
+\item For any subgroup $H$ of $G$ and any nonempty subset of $A$ of $G$ define $N_H(A)$ to be the set $\{h \in H\,|\,hAh^{-1}=A\}$.  Show that $N_H(A)=N_G(A)\cap H$ and deduce that $N_H(A)$ is a subgroup of $H$ (note that $A$ need not be a subset of $H$).
+
+\item Let $H$ be a subgroup of order 2 in $G$.  Show that $N_G(H)=C_G(H)$.  Deduce that if $N_G(H)=G$ then $H \le Z(G)$.
+
+\item Prove that $Z(G) \le N_G(A)$ for any subset $A$ of $G$.
+
+\item Let $R$ be the set of al polynomials with integer coefficients in teh independendent variables $x_1, x_2, x_3, x_4,$ i.e., the numbers of $R$ are finite sums of elements of the form $Ax_1^{r_1}x_2^{r_2}x_3^{r_3}x_r^{r_4}$, where $a$ is any integer and $r_1, \dots, r_4$ are nonnegative integers.  For example,
+\begin{align*}
+	12x_1^5x_32^7x_4-18x_2^3x_3+11x_1^gx_2x_3^3x_4^{23}
+\end{align*}is a typical element of $R$.  Each $\sigma \in S_4$ gives a permutation of $\{x_1, \dots, x_4\}$ by defining $\sigma \cdot x_i=x_{\sigma_i}$.  This may be extended to a map from $R$ to $R$ by defining
+\begin{align*}
+	\sigma\cdot p(x_1,x_2,x_3,x_4) &= p(x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)},x_{\sigma(4)})
+\end{align*}for all $p(x_1,x_2,x_3,x_4) \in \R$ (i.e., $\sigma$ simly permutes the indices of the variables).  For example, if $\sigma = $(1 2)(3 4) and $p(x_1,x_2,x_3,x_4)$ is the polynomial in (*) above, then 
+\begin{align*}
+	\sigma\cdot p(x_1,x_2,x_3,x_4)& = 12x_2^5x_1^7x_3-18x_1^3x_4+11x_2^6x_1x_4^3x_3^{23}\\
+		&=12x_1^7x_2^5x_3-17x_1^3x_4+11x_1x_2^6x_3^{23}x_4^3.
+\end{align*}
+
+\begin{enumerate}
+	\item Let $p=p(x_1,x_2,x_3,x_4)$ be a polynomial in (*) above, let $\sigma=$(1 2 3 4) and $\tau=$(1 2 3).  \\Compute $\sigma\cdot p,\tau\cdot(\sigma\cdot p), (\tau\circ \sigma)\cdot p$, and $(\sigma\circ\tau)\cdot p$.
+	
+	\item Prove that these definitions give a (left) group action of $S_4$ or $R$.
+
+	\item  Exhibit all permutations in $S_4$ that stabilize $x_4$ and prove that they form a subgoup isomorphic to $S_3$.
+	
+	\item Exhibit all permutations in $S_4$ that stabilize the element $x_1+x_2$ and prove that they form an abelian subgroup of order 4.
+	
+	\item Exhibit all permutations in $S_4$ that stabilize the elements $x_1x_2+x_3x_4$ and prove that they form a subgroup isomorphic to the diheral group of order 8.
+	
+	\item Show that the permutations in $S_4$ that stabilize the element $(x_1+x_2)(x_3+x_4)$ are exactly the same as those found in part (e). (The two polynomials appearing in parts (e) and (f) are the subgroup that stabilizes them awill play an imporant rolebin the study of roots of quartic equationsi in Section 14.6.)
+\end{enumerate}
+
+\item Let $n$ be a positive integer and let $R$ be the set of all polynomials with integer coefficients in the independnent variables $x_1, x_2, \dots, x_n$, i.e., the members of $R$ are finite sums of elements of the from $ax_1^{r_1}x_2^{r^2}\cdots x_n^{r_n}$, where $a$ is any integer and $r_1, \dots, r_n$ are nonnegative integers.  For each $\sigma \in S_n$ define a map 
+\begin{align*}
+	\sigma:R\to R \text{ by } \sigma p(x_1,x_2,x_3,x_4)=p(x_{\sigma{1}},x_{\sigma{2}},\dots,x_{\sigma{n}}).
+\end{align*}Prove that this defines a (left) group action of $S_n$ on $R$.
+
+\item Let $H(F)$ be the Heisenberg group over the field $F$ introduced in Exercise 11 of Section 1.4. Determine which matrices lie in the center of $H(F)$ and prove that $Z(H(F))$ is isomorphic to the additive group $F$.
+
+\end{enumerate}
+
+\section{Cyclic Groups and Cyclic Subgroups}
+
+\begin{definition}[Cyclic Group] A group $H$ is \DEFINE{cyclic} if $H$ can be generated by a single element, i.e., there is some element $x \in H$ such that $H = \{x^n\,|\,n \in \Z\}$  (where as usual the operation is multiplication).  We shall write $H = \ABRACKET{x}$ and say $H$ is \textit{generated} by $x$ (and $x$ is a \textit{generator} of $H$).
+\end{definition}
+
+\begin{prop}If $H = \ABRACKET{x}$, then $|H|=|x|$ (where if one side of this equality is infinite, so is the other).  More specifically:
+\begin{enumerate}
+	\item if $|H| = n < \infty$, then $x^n=1$ and $1,x,x^2,\dots, x^{n-1}$ are all the distinct elements of $H$, and 
+	\item if $|H|=\infty$, then $x^n\ne 1$ for all $n\ne0$ and $x^a\ne x^b$ for all $a \ne b$. (Note: infinite and distinct elements, countable?).
+\end{enumerate}
+\end{prop}
+
+\begin{prop}Let $G$ be an arbitrary group, $x \in G$ and let $m,n\in \Z$.  If $x^n=1$ and $x^m=1$, then $x^d=1$, where $d=(m,n)$.  In particualr, if $x^m=1$ for some $m \in \Z$, then $|x|$ divides $m$.
+\end{prop}
+
+\begin{theorem}Any two cyclic groups of the same order are isomorphic.  More specifically, 
+\begin{enumerate}
+	\item if $n\in \Z^+$ and $\ABRACKET{x}$ and $\ABRACKET{y}$ are both cyclic groups of order $n$, then the map
+	\begin{align*}
+		\varphi: \ABRACKET{x} &\to \ABRACKET{y}\\
+		x^k &\mapsto y^k
+	\end{align*}is well defined and is an isormophism.
+	
+	\item if $\ABRACKET{x}$ is an infinite cyclic group, the map 
+	\begin{align*}
+		\varphi: \Z &\to \ABRACKET{x} \\
+		k &\mapsto x^k
+	\end{align*}is well defined and is an isomorphism.
+\end{enumerate}
+\end{theorem}
+
+\begin{prop} Let $G$ be a group, let $x \in G$ and let $a \in \Z-\{0\}$.
+\begin{enumerate}
+	\item If $|x| = \infty$, then $|x^a|=\infty$.
+	\item If $|x| = n < \infty$, then $|x^a|=\frac{n}{(n,a)}$.
+	\item In particular, if $|x|=n<\infty$ and $a$ is a positive integer dividing $n$, then $|x^a|=\frac{n}{a}$.
+\end{enumerate}
+\end{prop}
+
+\begin{prop}Let $H = \ABRACKET{x}$.
+\begin{enumerate}
+	\item Assume $|x|=\infty$.  Then $H = \ABRACKET{x^a}$ if and only if $a = \pm 1$.
+	\item Assume $|x|=n < \infty$.  Then $H =\ABRACKET{x^a}$ if and only if $(a,n)=1$.  In particular, the number of generators of $H$ is $\varphi(n)$ (where $\varphi$ is Euler's $\varphi$-funtion).
+\end{enumerate}
+\end{prop}
+
+\begin{theorem}Let $H = \ABRACKET{x}$ be a cyclic group.
+\begin{enumerate}
+	\item Every subgroup of $H$ is cyclic.  More precisely, if $K \le H$, then either $K=\{1\}$ or $K = \ABRACKET{x^d}$, where $d$ is the smallest positive integer such that $x^d\in K$.
+	\item $|H|=\infty$, then for any distinct nonnegative integers $a$ and $b, \ABRACKET{x^a} \ne \ABRACKET{x^b}$.  Furthermore, for every integer $m, \ABRACKET{x^m}=\ABRACKET{x^{|m|}}$, where $|m|$ denotes the absolute value of $m$, so that the nontrivial subgroups of $H$ correspond bijectively with the integers $1,2,3,\dots$.
+	\item if $|H|=n<\infty$, then for each positive integer $a$ dividing $n$ there is a unique subgroup of $H$ of order $a$.  This subgroup is the cyclic group $\ABRACKET{x^d}$, where $d=\frac{n}{a}$.  Furthermore, for every integer $n, \ABRACKET{x^m}=\ABRACKET{x^{(n,m)}}$, so that the subgroups of $H$ correspond bijectively with the positive divisors of $m$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[Notation]For each $n \in\Z^+$, let $\Z_n$ be the cyclic group of order $n$.  Also, notice that $\ZMOD{n}$ is the set of equivalence classes $\BAR{k}\equiv k \MOD n$ for all $k\in \Z$.
+\end{remark}
+
+\subsection{Exercises}
+\begin{enumerate}
+	\item Find all subgroups of $\Z_{45}=\ABRACKET{x}$, giving a generator for each.  Describe the containments between these subgroups.
+	
+	\BLUE{45 is a composite number which decomposes into the following primes $5*3*3$.  This means that we have all of the combinations of these three numbers: 3, 5, 9, 15. And these will generate the following subgroups:
+	\begin{itemize}
+		\item 3: \{0,3,6,9,12,15,18,21,24,27,30,33,36,39,42\}
+		\item 5: \{0,5,10,15,20,25,30,35,40\}
+		\item 9: \{0,9,18,27,36\}
+		\item 15: \{0,15,30\}
+	\end{itemize}
+	}
+	
+	\item If $x$ is an element of the finite group $G$ and $|x|=|G|$, prove that $G = \ABRACKET{x}$.  Give an explicit example to show that this result need not be true if $G$ is an infinite group.
+	
+	\BLUE{From Proposition 2.3.2, every element $y \in H$ is represented by some element $x^k$ for some $k\in \Z$.  Thus, $H = \ABRACKET{x}$\\
+	Let $G = \Z$.  Then $|G|=\infty$ and it is clear that $2 \in \Z, |2| = \infty$ and that $3 \not \in \ABRACKET{2}$.
+	}
+	
+	\item Find all generators for $\Z/48\Z$.
+	
+	\RED{48 is a composite number whose prime decomposition is 48=2*2*2*2*3.  Any combination of these primes will divide 48 and, hence, be a generator for $\ZMOD{48}$.  Namely, 2,4,8,16,3,6,12,24.
+	\begin{itemize}
+		\item 2: \{0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46\}
+		\item 4: \{0,4,8,12,16,20,24,28,32,36,40,44\}
+		\item 8: \{0,8,16,24,32,40\}
+		\item 16: \{0,16,32\}
+		\item 3: \{0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45\}
+		\item 6: \{0,6,12,18,24,30,36,42\}
+		\item 12: \{0,12,24,36\}
+		\item 24: \{0,24\}
+		\item note that
+		\begin{itemize}
+			\item $\ABRACKET{16}\le\ABRACKET{8}\le\ABRACKET{4}\le\ABRACKET{2}$
+			\item $\ABRACKET{24}\le\ABRACKET{12}\le\ABRACKET{6}\le\ABRACKET{2}$
+			\item $\ABRACKET{24}\le\ABRACKET{12}\le\ABRACKET{6}\le\ABRACKET{3}$
+		\end{itemize}
+	\end{itemize}\textbf{OOPS.  These are the subgroups of $\ZMOD{48}$ not the generators.  The generators are the relative primes between to 48 which are less than 48.}\\
+	}\BLUE{The relative primes in $\ZMOD{48}$ of 48 are 1, 5,7,11,13,17,23,31,37,41,43,47.  Each of these generates $\ZMOD{48}$.
+	}
+	
+	\item Find all generators for $\Z/202\Z$.
+	
+	\BLUE{The relative primes of $\ZMOD{202}$.
+	}
+	
+	\item Find the number of generators for $\Z/49000\Z$.
+	
+	\BLUE{what is $\varphi(49000)$?
+	}
+	
+	\item In $\Z/48\Z$ write out all elements of $\ABRACKET{\BAR{a}}$ for every $\BAR{a}$.  Find all inclusions between subgroups in $\Z/48\Z$.
+	
+	\BLUE{see Exercise 3}
+	
+	\item Let $\Z_{48}=\ABRACKET{x}$ and use the isomorphsim $\Z/48\Z \cong \Z_{48}$ as given by $\BAR{1} \mapsto x$ to list all subgroups of $\Z_{48}$ as compute in the preceding exercise.
+	
+	\BLUE{See Exercise 3}
+	
+	\item Let $\Z_{48}=\ABRACKET{x}$.  For which integers $a$ does the map defined by $\BAR{1}\mapsto x^a$ extend to an \textit{isomorphism} from $\Z/48\Z$ onto $\Z_{48}$
+	
+	\BLUE{Reworded: Given $x$, a relative prime of 48, for which integers $a$ does $x^a$ equal another relative prime?}
+	
+	\item Let $\Z_{36}=\ABRACKET{x}$.  For which integers $a$ does the map $\psi_a$ defined by $\psi_a: \BAR{1}\mapsto x^a$ extend to a \textit{well defined homomorphism} from $\Z/48\Z$ into $\Z_{36}$. Can $\psi_a$ ever be a surjective homomorphism? 
+	
+	\item What is the order or $\BAR{30}$ in $\Z/54\Z$?  Write out all of the elements and their orders in $\ABRACKET{\BAR{30}}$.
+	
+	\BLUE{$\ABRACKET{\BAR{30}} = \{0, 30, 6, 36, 12, 42, 18, 48, 24\}$ and $\BARS{\ABRACKET{\BAR{30}}}=9$\\
+	Or by the Theorem $\BARS{\ABRACKET{\BAR{30}}}\frac{54}{(30,54)}=\frac{54}{6}=9$
+	}
+	
+	\item Find all cyclic subgroups of $D_8$.  Find a proper subgroup of $D_8$ which is not cyclic.
+	
+	\item Prove that the following groups are \textit{not} cyclic:
+	\begin{enumerate}
+		\item $\Z_2 \times \Z_2$.
+		
+		\BLUE{If it were cyclic then there would exist an $x$ such that $\ABRACKET{x}=\Z_2 \times \Z_2$  That is given any element $(a,b)\in\Z_2 \times \Z_2$ we would need to find $x^d=(a,b)$ for some $d$.
+		}
+		
+		\item $\Z_2 \times \Z$.
+		\item $\Z\times \Z$.
+	\end{enumerate}\BLUE{Ultimately, all of these are Linearly Independent two dimensional spaces which cannont be defined by a single varialbe.}
+	
+	\item Prove that the following pairs of groups are \textit{not} isomorphic:
+	\begin{enumerate}
+		\item $\Z\times \Z_2$ and $\Z$.
+		\item $\Q \times \Z_2$ and $\Q$.
+	\end{enumerate}\BLUE{Ultimately, all of these are Linearly Independent two dimensional spaces which cannont befined by a single varialbe.}
+	
+	\item Let $\sigma = $ (1 2 3 4 5 6 7 8 9 10 11 12).  For each of the following integers $a$ compute $\sigma^a$: $a=13, ,6,626,1195-6,-81,-570$ and $-1211$.
+	
+	\BLUE{We must understand that $\sigma^{12} = \sigma$.  Thus $\sigma^a = \sigma^{a \MOD 12}.$
+	}
+	
+	\item Prove that $\Q\times\Q$ is not cyclic.
+	
+	\item Assume $|x|=n$ and $|y|=m$.  Suppose that $x$ and $y$ \textit{commute}: $xy=yx$.  Prove that $|xy|$ divides the lest common multiple of $m$ and $n$.  Need this be true if $x$ and$y$ do not commute?  Give and example of commuting elements $x,y$ such that the order of $xy$ is not equal to the lest common multiple of $|x|$ and $|y|$.
+	
+	\item Find a presentation for $\Z_n$ with one generator.
+	
+	\item Show that if $H$ is any group and $h$ is an element of $H$ with $h^n=1$, then there is a unique homomorphism from $\Z_n=\ABRACKET{x}$ to $H$ such that $x \mapsto h$.
+	
+	\BLUE{$\Z_n = \{x^a\MOD n\,|\, x|n=1, a \in \{0.1.\dots,n-1\}\,\}$
+	}
+	
+	\item Show that if $H$ is any group and $h$ is an element of $H$, then there is a unique homomorphism from $\Z$ to $H$ such that $1 \mapsto h$.
+	
+	\item Let $p$ be a prime and let $n$ be a positive integer.  Show that if $x$ is an element of the group $G$ such that $x^{p^n}=1$ then $|x|=p^m$ for some $m \le n$.
+	
+	\item Let $p$ be an odd prime and let $n$ be a positive integer.  Use the Binomial Theorem to show that \\$(1+p)^{p^{n-1}} \equiv 1(\MOD p^n)$ but $(1+p)^{p^{n-2}} \not \equiv 1(\MOD p^n)$.  Deduce that $1+p$ is an element of order $p^{n-1}$ in the multiplicative group $(\Z/p^n\Z)^\times$.
+	
+	\item Let $n$ be an integer $\ge 3$.  Use the Binomial Theorem to show that $(a+2^2)^{2^{n-2}}\equiv 1(\MOD 2^n)$but $(1+s^s)^{2^{n-3}}\not\equiv 1(\MOD 2^n)$.  Deduce that 5 is an element of order $2^{n-2}$ in the multiplicative group $\ZMOD{2^n}$.
+	
+	\item Show that $(\ZMOD{2^n})^\times$ is not cyclic for any $n \ge 3$.  [Find two distinc subgroups of order 2.]
+	
+	\item Let $G$ be a finite group and let $ x\in G$.
+	\begin{enumerate}
+		\item Prove that if $g \in N_G(\ABRACKET{x})$ then $gxg^{-1}=x^a$ for some $a \in \Z$.
+		
+		\BLUE{Let $g \in N_G(\ABRACKET{x})$ and $n = |N_G(\ABRACKET{x})|$.  Let there exist $a,b \in \Z$ such that $gx^ag^{-1}=x^a$ and $gx^bg^{-1} = x^b$.  Then $x^ax^b=gx^ag^{-1}gx^bg^{-1} = gx^ax^bg^{-1} = x^{a+b\MOD n}$.  
+		}
+		
+		\item Prove conversely that if $gxg^{-1}=x^a$ for some $a \in \Z$ then $g \in N_G(\ABRACKET{x})$. [Show first that $gx^kg^{-1}=(gxg^{-1})^k=x^{ak}$ for ay integer $k$, so that $g\ABRACKET{x}g^{-1}\le \ABRACKET{x}$.  If $x$ has order $n$, show that the element $gx^ig^{-1}, i=0,1,\dots,n-1$ are distinct, so that $|g\ABRACKET{x}g^{-1}|=|\ABRACKET{x}|=n$ and conclude that $g\ABRACKET{x}g^{-1}=\ABRACKET{x}.$]
+
+	\end{enumerate}
+	Note that this cuts down some of the work in computing normalizers of cyclic subgroups since one does not have to check $ghg^{-1} \in \ABRACKET{x}$ for every $h \in \ABRACKET{x}$
+
+	\item Let $G$ be a cyclic group of order $n$ and let $k$ be an intger relatively prime to $n$.  Prove that the map $x \mapsto x^k$ is surjective.  Use Lagrange's Theorem (Exercise 19, Section 1.7) to prove the same is true for any finite group of order $n$.  (For some $k$ each element has a $k\ITH$	root in $G$.  It follows from Cauchy's Theorem in Section 3.2 that if $k$ is not relatively prime to the order of $G$ then the map $x \mapsto x^k$ is not surjective.)
+	
+	\item Let $\Z_n$ be a cyclic group of order $n$ and for each integer $a$ let 
+	\begin{align*}
+		\sigma_a: \Z_n \to \Z_n \text{ by } \sigma_a(x) = x^a \text{ for all } x \in \Z_n.
+	\end{align*}
+	\begin{enumerate}
+		\item Prove that $\sigma_a$ is an automorphism of $\Z_n$  if and only if $a$ and $n$ are relatively prime (automorphisms were introduced in Exercise 20, Section 1.6).
+		\item Prove that $\sigma_a=\sigma_b$ if and only if $a\equiv b(\MOD n)$.
+		\item Prove that \textit{every} automorphism of $\Z_n$ is equal to $\sigma_a$ for some integer $a$.
+		
+		\item Prove that $\sigma_a\circ\sigma_b=\sigma_{ab}$.  Deduce that the map $\BAR{a}\mapsto \sigma_a$ is an isomorphism of $(\ZMOD{n})^\times$ onto the automorphism group of $\Z_n$ (so $\AUT(\Z_n)$ is an abelian group of order $\varphi(n)$).
+	\end{enumerate}
+\end{enumerate}
+
+\section{Subgroups generated by Subsets of a Group}
+
+\begin{prop}If $\mathcal{A}$ is any nonempty collection of subgroups of $G$, then the intersection of all mumbers of $\mathcal{A}$ is also a subgroup of $G$.
+\end{prop}
+
+\begin{definition}[Subgroup of $G$ generated by $A$]  If $A$ is any subset of a group $G$ define
+\begin{align*}
+	\ABRACKET{A} &= \bigcap_{A\subseteq H, H\le G} H.
+\end{align*}This is called the \DEFINE{subgroup of $G$ generated by $A$}.\textbf{\textit{Note: the intersection of all subgroups that contain $A$.}}
+\end{definition}
+
+\begin{definition}[Closure of $A$]The set which is the \DEFINE{closure of $A$} under the group operation (and the process of taking inverses).  Let
+\begin{align*}
+	\BAR{A} = \{a_1^{\epsilon_1},a_2^{\epsilon_2},\dots,a_n^{\epsilon_n}\,|\, n \in \Z, n \ge 0 \AND a_i \in A, \epsilon_i = \pm 1 \text{ for each } i \}
+\end{align*}where $\BAR{A} = \{1\}$ if $A = \emptyset$, so that $\BAR{A}$ is the set of all finite products (called \textit{words}) of elements of $A$ and inverses of elements of $A$.  Not that the $a_i$'s need not be distinct, so $a^2$ is written $aa$ in the notation defining $\BAR{A}$.  Note also that $A$ is not assumed to be a finite (or even countable) set.
+\end{definition}
+
+\begin{prop}$\BAR{A} = \ABRACKET{A}$, that is the closure of $A$ is also the smallest subgroup containing $A$.
+\end{prop}
+
+\begin{definition}Misc.
+\begin{itemize}
+
+\item A group $H$ is called \DEFINE{finitely generated} if there is a finite set $A$ such that $H = \ABRACKET{A}$.
+
+\item A subgroup $M$ of a group $G$ is called a \DEFINE{maximal subgroup} if $M\ne G$ and the only subgroups of $G$ which contain $M$ are $M$ and $G$.
+
+\end{itemize}
+\end{definition}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+
+\item Prove that if $H$ is a subgroup of $G$ then $\ABRACKET{H} = H$.
+
+\BLUE{suppose that there were an $x\in \ABRACKET{H}$ but $x\not \in H$.  The $\BARS{\ABRACKET{H}} > \BARS{H}$.  However, $H$ is a group hence $\ABRACKET{H}$ is not the smallest possible subgroup in $G$.
+}
+
+\item Prove that if $A$ is a subset of $B$ then $\ABRACKET{A}\le \ABRACKET{B}$.  Give an example where $A \subseteq B$ with $A \ne B$ but $\ABRACKET{A}=\ABRACKET{B}$.
+
+\BLUE{The elements of $S_3$ that are of order 2 are (1 2), (2 3) and (1 3).  Any two of this will utilize every one of the base elements.  Further the product/powers of these two elements will generate the remaining elements of $S_3$.
+}
+
+\item Prove that if $H$ is an abelian subgroup of a group $G$ then $(\ABRACKET{H, Z(G)})$ is abelian.  Give an explicit example of an abelian subgroup of $H$ of a group $G$ such that $\ABRACKET{H, C_G(H)}$ is not abelian.
+
+\item Prove that if $H$ is a subgroup of $G$ then $H$ is generated by the set $H - \{1\}$
+
+\BLUE{Essentially, every subgroup contains 1 and the smallest sugroup containing all of the elements of $H$ except one contains 1.
+}
+
+\item Prove that the subgroup generated by any two distinct elements of order 2 in $S_3$ is all of $S_3$.
+
+\BLUE{The only elements of order two are transpositions and there are only 3 of them (1 2), (2 3), (1 3).  Any two of these will require all 3 of the base elements to be part of the closure.  Hence, $S_3$.
+}
+
+\item Prove that the subgroup of $S_4$ generate by (1 2) and (1 2)(3 4) is a noncyclic group of order 4.
+
+\BLUE{(1 2) has order 2.\\
+(1 2)(3 4) has order 2.\\
+(1 2)(1 2)(3 4) = (3 4) which has order 2.\\
+(1) is necessary to make it group (must have identity.\\
+That makes 4 elements.
+}
+
+\item Prove that the subgroup $S_4$ generated by (1 2) and (1 3)(2 4) is isomorphic to the dihedral group of order 8.
+
+\RED{$	D_{8} = \ABRACKET{r,s\,|\,r^4=s^2=1,rs=sr^{-1}}.$
+Notice that that $\BARS{\CYCLE{1&2}} = 2$  now show that $\BARS{\CYCLE{1&3}\CYCLE{2&4}}=4$ Will this be enough?  I think that we still have to demonstrate a 1-to-1 relationship between the elements of $D_8$ and $S_4$.
+}
+
+\item Prove that $S_4=\ABRACKET{\CYCLE{1&2&3&4},\CYCLE{1&2&4&3}}$.
+
+\RED{Demonstrate that each generates a subgroup whose intersection is (1)}
+
+\item Prove that $SL_2(\FF_3)$ is the subgroup $GL_2(\FF_3)$ generated by $\TWOXTWO{1}{1}{0}{1}$ and $\TWOXTWO{1}{1}{1}{1}$. [Recall from Exercise 9 of Section 1 that $SL_2(\FF_3)$ is the sugroup of matrices of determinant 1.  You may assume this subgroup has order 24 - this will be an exercise in section 3.2]
+
+\RED{Let $A= \TWOXTWO{a}{b}{c}{d} \in SL_2(\FF_3)$.  Hence $\det(A) = ad-bc = 1$  Since $a,b,c,d \in \{0,1,2\}$  This is true when \begin{align*}
+	ad-bc &= 2-1, \TWOXTWO{2}{1}{1}{1}, \TWOXTWO{1}{1}{1}{2}\\ 
+	&= 1-0, \TWOXTWO{1}{0}{0}{1},\TWOXTWO{1}{1}{0}{1},\TWOXTWO{1}{0}{1}{1},\TWOXTWO{1}{-1}{0}{1},\\ &\TWOXTWO{1}{0}{-1}{1},\TWOXTWO{-1}{0}{0}{-1},\TWOXTWO{-1}{1}{0}{-1},\TWOXTWO{-1}{0}{1}{-1},\\
+	&\TWOXTWO{-1}{-1}{0}{-1},\TWOXTWO{-1}{0}{-1}{-1}\\
+	&= 0-(-1),\TWOXTWO{0}{1}{-1}{0},\TWOXTWO{0}{1}{-1}{0}\\
+	&= -1-(-2),\TWOXTWO{1}{-2}{1}{-1}, \TWOXTWO{1}{1}{-2}{-1},\TWOXTWO{1}{2}{-1}{-1}, \TWOXTWO{1}{-1}{2}{-1}\\
+	&\TWOXTWO{-1}{-2}{1}{1}, \TWOXTWO{-1}{1}{-2}{1},\TWOXTWO{-1}{2}{-1}{1}, \TWOXTWO{-1}{-1}{2}{1},
+\end{align*}
+}
+
+\item Prove that the subgroup $SL_2(\FF_3)$ generated by $\TWOXTWO{0}{-1}{1}{0}$ and $\TWOXTWO{1}{1}{1}{-1}$ is isomorphic to the quaternion group of order 8. [Use a presentation for $Q_8$]
+
+\item Show that $SL_2(\FF_3)$ and $S_4$ are two nonisomorphic groups of order 24.
+
+\RED{Demonstrate that $SL_2(\FF_3)$ had order 24.  Then demonstrate that there cannot be a one-to-one correspondence that suports the operations
+}
+
+\item Prove that the subgroup of upper triangular matrices in $GL_3(\FF_2)$ is isomorphic to the dihedral group of order 8 (cf. Exercise 16, Section 1).  [First find the order of this subgroup.]
+
+\BLUE{Given any $A$ of interest it will have the form $\THREEXTHREE{a}{b}{c}{0}{d}{e}{0}{0}{f}$ and the fact that $adf \ne 0$.  Thus, $a,d,f \in \{1\}$ and $b,c,e \in \{0,1\}$.
+}
+
+\item Prove that the multiplicative group of positive rational numbers is generated by the set $\{\frac{1}{p}\,|\,p$ is a prime $\}$.
+
+\BLUE{Clearly, to include every inverse of $\frac{1}{p}$ would include all prime numbers as well,  Multiplication of any two of these would be of the form $\frac{p}{q}$ where $p,q$ are primes.  Any multiplicative combination will describe any object $\frac{a}{b}$ where $a,b \in \Z$.
+}
+
+\item A group $H$ is called \textit{finitely generated} if there is a finite set $A$ such that $H = \ABRACKET{A}$.
+\begin{enumerate}
+	\item Prove that every finite group is finitely generated.
+	\item Prove that $\Z$ is finitely generated.
+	\item Prove that every finitely generated subgroup of the additve group $\Q$ is cyclic. [If $H$ is finitely generated subgroup of $\Q$, show that $H \le \BRACKET{\frac{1}{k}}$, where $k$ is the product of all the denominators which appear in a set of generators for $H$.]
+\end{enumerate}
+
+\item Exhibit a proper subgroup of $\Q$ which is not cyclic.
+
+\item A subgroup $M$ of a group $G$ is called a \textit{maximal subgroup} if $M\ne G$ and the only subgroups of $G$ which contain $M$ are $M$ and $G$.
+\begin{enumerate}
+	\item Prove that if $H$ is a proper subgoup of the finite group $G$ then there is a maximal subgroup of $G$ containing $H$.
+	\item Show that the subgroup of all rotations in a dihedral group is a maximal subgroup.
+	
+	\BLUE{$D_{2n}=\{r,s\,|\,r^n=s^2=1, rs=sr^{-1}\}$  The set of rotations are $H=\{1, r, r^2, \dots, r^{n-1}\}$.  Suppose that there exits a subgroup $K$ such that $H < K < D_{2n}$ then there must exist $y \in G$ and $y \not \in K$.  Let $x \in K$ and $x \not \in H$. $x = sr^k$ for some $k$ which means that $x^{-1} = sr^{n-k}$, further it implies $s \in K$ which extrapolates $K$ to all of $D_{2n}$.  Therefore, $K=D_{2n}$, hence $H$ is maximal.
+	}
+	
+	\item Show that if $G = \ABRACKET{x}$ is a cyclic group of order $n \ge 1$ then a subgroup $H$ is maximal if and only if $H = \ABRACKET{x^p}$ for some prime $p$ dividing $n$.
+	
+	\BLUE{Let $p$ be prime such that $p|n$ and $k$ be such that $kp = n$.  Since, $G=\ABRACKET{x}$ then $x^n=1$ and 
+	\begin{align*}
+		1 &= x^n=x^{pk}=(x^p)^k \implies x^p=1
+	\end{align*}
+	Let $n=100$ and $x=12$ and $G=\ABRACKET{12}$ where all elements of $G$ are less than or equal to 1200.  $100 = 2\cdot 2\cdot 5 \cdot 5$ and $12^2 =144$ and $\ABRACKET{144}$ is maximal under $G$.
+	}\RED{Notice that $\ABRACKET{12^{25}}$ will have fewer elements in it than $\ABRACKET{12^5}$ and that that $\ABRACKET{12^{25}} \subseteq \ABRACKET{12^5}$.  Intuitively speaking, the largest proper subgroups of a cycle are those generted by $x^p$ where $p$ is a prime and $p|n$.}
+	
+\end{enumerate}
+
+\item This is an exerecise involving Zorn's Lemma (see Appendix I) to prove that every nontrival finitely generated group possesses maximal subgroups.  Let $G$ be a finitely generated group, say $G = \ABRACKET{g_1, g_2, \dots, g_n}$, and let $\mathcal{S}$ be the set of all proper subgroups of $G$.  Then $\mathcal{S}$ is partially ordered by inclusion.  Let $\mathcal{C}$ be a chain in $\mathcal{S}$.
+\begin{enumerate}
+	\item Prove that the union, $H$, of all subgroups in $\mathcal{C}$ is a subgroup of $G$.
+	\item Prove that $H$ is \textit{proper} subgroup.  [If not, each $g_i$ must lie in $H$ and so must lie in some element of the chain $\mathcal{C}$.  Use the defintiion of a chain to arrive at a contradiction.]
+	\item Use Zorn's Lemma to show that $\mathcal{S}$ has a maximal element (which is, by definition, a maximal subgroup).
+\end{enumerate}
+
+\item Let $p$ be a prime and let $Z = \{z \in \C\,|\,z^{p^n}=1$ for some $n \in \Z^+\}$ (so $Z$ is the multiplicative group of all $p$-power roots of unity in $\C$).  For each $k \in \Z^+$, let $H_k = \{z \in Z\,|\,z^{p^k}=1\}$ (the group of $p^k\ITH$ roots of unit).  Prove the following:
+\begin{enumerate}
+	\item $H_k \le H_m$ if and only if $k \le m$.
+	\item $H_k$ is cyclic for all $k$ (assume that or any $n \in \Z^+,\{e^{2\pi it/n}\,|\, t=0,1,\dots,n-1\}$ is the set of all $n\ITH$ roots of 1 in $\C$)
+	\item Every proper subgroup of $Z$ equal $H_k$ for some $k \in \Z^+$ (in particular, every proper subgroup of $Z$ is finite and cyclic).
+	\item $\Z$ is not finitely generated.
+\end{enumerate}
+
+\item A nontrivial abelian group $A$ (wrtiten multiplicatively) is called \textit{divisible} if for each element $a \in A$ and each nonzero integer $k$ there is an element $x \in A$ such that $x^k = a$, i.e., each element has a $k\ITH$ root in $A$ (in additive notation, each element is the $k\ITH$ multiple of some element in $A$).
+\begin{enumerate}
+	\item Prove that the additive group of rational numbers, $\Q$, is divisible.
+	\item Prove that no finite abelian group is divisible.
+\end{enumerate}
+
+\item Prove that if $A$ and $B$ are nontrivial abelian groups, then $A \times B$ is divisible if and only if both $A$ and $B$ are divisible groups.
+
+\end{enumerate}
+
+\section{The Lattice of Subgroups of a Group}
+
+\chapter{Quotient Groups and Homomorphisms}
+
+\section{Definitions and Examples}
+
+\begin{definition}[Kernel] If $\varphi$ is a homomorphism $\varphi: G \to H$, the \DEFINE{kernel} of $\varphi$ is the set
+\begin{align*}
+	\KER(\varphi) \equiv \{g \in G\,|\,\varphi(g)=1\}
+\end{align*}and will be denonted $\KER \varphi$ (here 1 is the identity of $H$).
+\end{definition}
+
+\begin{prop}Let $G$ and $H$ be groups and let $\varphi: G \to H$ be a homomorphism.
+\begin{enumerate}
+	\item $\varphi(1_G)=1_H$, where $1_G$ and $1_H$ are the identities of $G$ and $H$, respectively.
+	\item $\varphi(g^{-1})=\varphi(g)^{-1}$ for all $g \in G$.
+	\item $\varphi(g^n)=\varphi(g)^n$ for all $n \in \Z$.
+	\item $\KER \varphi$ is a subgroup of $G$.
+	\item $\IM\varphi$, the image of $G$ under $\varphi$, is a subgroup of $H$.
+\end{enumerate}
+\end{prop}
+
+\begin{definition}[Quotient Group or Factor Group]Let $\varphi:G\to H$ be a homomorphism with the kernel $K$.  The \DEFINE{quotient group or factor group}, $G/K$ (read $G$  \textit{modulo} $K$ or simply $G\MOD K$) is the group whose elements are the fibers of $\varphi$ with group operation defined above;  namely if $X$ is the fiber above $a$ and $Y$ is the fiber above $b$ then the product $X$ with $Y$ defined to be the fiber above the product $ab$.
+\end{definition}
+
+\begin{prop}Let $\varphi:G \to H$ be a homomorphism of groups with kernel $K$.  Let $X \in G/K$ be the fiber above $a$, i.e., $X=\varphi^{-1}(a)$.  Then
+\begin{enumerate}
+	\item For any $u \in X$.  $X=\{uk\,|\,k\in K\}$
+	\item For any $u \in X$.  $X=\{ku\,|\,k \in K\}$
+\end{enumerate}
+\end{prop}
+
+\begin{definition}[Coset]For any $N \le G$ and any $g \in G$ let
+\begin{align*}
+	gN=\{gn\,|\, n\in N\}\AND Ng=\{ng\,|\,n \in N\}
+\end{align*}called respectively a \DEFINE{left coset} and a \DEFINE{a right coset} of $N$ in $G$.  Any element of a coset is called a \DEFINE{representative} for the coset. \\
+\BLUE{Note: \textbf{cosets} are another name for \textbf{fibers} without needing to define a homomorphism.  It will later be shown that given a set of cosets to a subgroup, there will exist a homomorphism that defines them as fibers Proposition 3.1.11.}
+\end{definition}
+
+\begin{theorem}
+Let $G$ be group and let $K$ be the kernel of some homomorphism from $G$ to another group.  Then the set whose elements are the left cosets of $K$ in $G$ with operation defined by
+\begin{align*}
+	uK \circ vK=(uv)K
+\end{align*}forms a group, $G/K$.  In particular, this operation is well defined in the sense that if $u_1$ is any element in $uK$ and $v_1$ is any element in $vK$, then $u_1v_1 \in uvK$, i.e.,e $u_1v_1K = uvK$ so that the multiplication does not depend on the choice of representatives for the cosets.  The same statement is true with "right cosets" in place of "left cosets".
+\end{theorem}
+
+\begin{prop} Let $N$ be any subgroup of the group $G$.  The set of left cosets of $N$ in $G$ form a partition of $G$.  Furthermore, for all $u,v \in G, uN=vN$ if and only if $v^{-1}u\in N$ and in particular, $uN=vN$ if and only if $u$ and $v$ are representatives of the same coset.
+\end{prop}
+
+\begin{prop} Let $G$ be a group and let $N$ be a subgroup of $G$.
+\begin{enumerate}
+	\item The operation on the set of left cosets of $N$ in $G$ described by
+	\begin{align*}
+		uN\cdot vN=(uv)N
+	\end{align*}is well defined if and only if $gng^{-1}\in N$ for all $g \in G$ and all $n \in N$.
+	\item If the above operation is well defined, then it makes the set of left cosets of $N$ in $G$ into a group.  In particular the identiy of this group is the coset $1N$ and the inverse of $gN$ is the coset $g^{-1}N$ i.e, $(gN)^{-1}=g^{-1}N$.
+\end{enumerate}
+\end{prop}
+
+\newcommand{\NORMAL}{\trianglelefteq}
+\begin{definition}[Conjugate, Normal, Normalize]The element $gng^{-1}$ is called the \DEFINE{conjugate} of $n \in N$ by $g$.  The element $g$ is said to \DEFINE{normalize} $N$ if $gNg^{-1} = N$.  A subgroup $N$ of a group $G$ is called \DEFINE{normal} if every element of $G$ normalizes $N$, i.e., if $gNg^{-1}=N$ for all $g \in G$.  If $N$ is a normal subgroup of $G$ we shall write $N \NORMAL G$
+\end{definition}
+
+\begin{theorem}
+Let $N$ be a subgroup of the group $G$.  The following are equivalent:
+\begin{enumerate}
+	\item $N \NORMAL G$
+	\item $N_G(N)=G$ (recall $N_G(N)$ is the normalizer of $G$ of $N$)
+	\item $gN=Ng$ for all $g \in G$
+	\item the operation on left cosets of $N$ in $G$ described in previous proposition makes the set of left cosets into a group
+	\item $gNg^{-1} \subseteq N$ for all $g \in G$.
+\end{enumerate}
+\end{theorem}
+
+\begin{prop}A subgroup $N$ of the group $G$ is normal if and only if it is the kernel of some homomorphism.
+\end{prop}
+
+\begin{definition}Let $N \NORMAL G$.  The homomorphism $\pi: G \to G/N$ defined by $\pi(g)=gN$ is called \DEFINE{natural projection (homomorphism)} of $G$ onto $G/N$.  If $\BAR{H} \le G/N$ is a subgroup of $G/N$, the \DEFINE{complete preimage} of $\BAR{H}$ in $G$ is the preimage of $\BAR{H}$ under the natural projection homomorphism.
+\end{definition}
+
+\subsection{Exercises}
+
+Let $G$ and $H$ be groups.
+
+\begin{enumerate}
+	\item Let $\varphi: G\to H$ be a homomorphism and let $E$ be a subgroup of $H$.  Prove that $\varphi^{-1}(E)\le G$ (i.e., the preimage or pullback of a subgroup under a homomorphism is a subgroup).  If $E \NORMAL H$ prove that $\varphi^{-1}(E) \NORMAL G$.  Deduce that $\KER\varphi \NORMAL G$.
+	
+	\BLUE{Given $a,b \in E$ and let $x,y \in G$ such that $\varphi(x)=a, \varphi(y)=b$, hence $x,y \in \varphi^{-1}(E)$.  Since $E$ is a group $ab \in E$.  Thus, $\varphi(x)\varphi(y) = ab$ and $\varphi(xy) \in E$ because $\varphi$ is a homomorphism. Thus, $xy \in \varphi^{-1}(E)$\\
+	$E \NORMAL H$ means that $hah^{-1}=a$ for all $h \in H$.  Hence, $\varphi^{-1}(a)=\varphi^{-1}(hah^{-1})=\varphi^{-1}(h)\varphi^{-1}(a)\varphi^{-1}(h^{-1})$ for all $h \in H$ hence $\varphi^{-1}(E) \NORMAL G$.
+	}
+	
+	\item Let $\varphi : G \to H$ be a homomorphism of groups with kernel $K$ and let $a,b \in \varphi(G)$.  Let $X \in G/K$ be the fiber above $a$ and let $Y$ be the fiber above $b$, i.e., $X=\varphi^{-1}(a), Y=\varphi^{-1}(b)$. Fix an element $u$ of $X$ (so $\varphi(u)=a$).  Prove that if $XY=Z$ in the quotient group $G/K$ and $w$ is any member of $Z$, then there is some $v \in Y$ such that $uv=w$. [Show $u^{-1}w \in Y$.]
+	
+	\BLUE{Let $u \in X$ and $v \in Y$.  Since $XY=Z \in G/K$ and $w \in Z$.  Now, $\varphi(uv)=\varphi(u)\varphi(v)=ab$ and $\varphi(w)=ab$ therefore $\varphi(w)=\varphi(u)\varphi(v)$ and hence $\varphi(u)^{-1}\varphi(w)=\varphi(v)$ and $u^{-1}w = v \in Y$.
+	}
+	
+	\item Let $A$ be an abelian group and let $B$ be a subgroup of $A$.  Prove that $A/B$ is abelian.  Give an example of a non-abelian group $G$ containing a proper normal subgroup $N$ such that $G/N$ is abelian.
+	
+	\item Prove that in the quotient group $G/N, (gN)^\alpha=g^\alpha N$ for all $\alpha \in \Z$.
+	
+	\BLUE{Inductive proof:  notice that $(gN)^2=gNgN=ggNN=g^2N$}
+	
+	\item Use the preceding exercise to prove that the order of the element $gN$ in $G/N$ is $n$, where $n$ is the smallest positive integer such that $g^n \in N$ (and $gN$ is infinite order if no such positive integer exists).  Give an example to show that the order of $gN$ in $G/N$ may be strictly smaller than the order of $g$ in $G$.
+	
+	\BLUE{Notice that in $G=\ZMOD{84}$ we choose the subgroup $N=\ZMOD{21}$. Given any number, say 6, then $6N=\{0, 126, 252, 378\}=\{0,21,42,63\}=\{0, 42, 0, 42\}$ hence, of order 2. \\
+	84, 168, 252, 336
+	}
+	
+	\item Define $\varphi:\R^\times \to \{\pm1\}$ by letting $\varphi(x)$ be $x$ divided by the absolute value of $x$.  Describe the fibers of $\varphi$ and prove that $\varphi$ is a homomorphism.
+	
+	\BLUE{
+	\begin{align*}
+		\varphi(x) &= \frac{x}{|x|} \\
+			&= \BINDEF{1 : x=|x| }{-1 : -x=|x| } \\
+			&\AND \\
+		\varphi(xy) &= \frac{x}{|x|} \frac{y}{|y|} = \frac{xy}{|x||y|} = \frac{xy}{|xy|}
+	\end{align*}which is true for all $x,y \in \R^\times$ and there are two fibers, those less than zero and those greater than zero.  
+	}
+	
+	\item Define $\pi:\R^2 \to \R$ by $\pi((x,y))=x+y$. Prove that $\pi$ is a surjective homomorphism and describe the kernel and fibers of $\pi$ geometrically.
+	
+	\BLUE{It is surjective because any real number is the sum of two other real numbers.  The kernel is $x+y=1$ which is a line through the point (0,-1) at a $135^\circ$.  The fibers are all lines $135^\circ$ to the x-axis.
+	}
+	
+	\item Let $\varphi: \R^\times\to\R^\times$ be the map sending $x$ to the absolute value of $x$.  Prove that $\varphi$ is a homomorphism and find the image of $\varphi$.  Describe the kernel and the fibers of $\varphi$.
+	
+	\BLUE{\begin{align*}
+		\varphi: \R^\times &\to \R^\times \\
+			x &\mapsto |x|
+	\end{align*}
+	\begin{align*}
+		\varphi(xy) &= |xy| = |x||y| = \varphi(x)\varphi(y) \, \forall x,y \in \R^\times
+	\end{align*}The kernel is the graph the line of $45^\circ$ from the origin to the upper left and the graph of the line $45^\circ$ from the origin to the upper right.  The fibers are the set of numbers and their negative.  That is $\{(x,-x) \,|\, x  \in \R^\times\}$
+	}
+	
+	\item Define $\varphi:\C^\times \to\R^\times$ by $\varphi(a+bi)=a^2+b^2$.  Prove that $\varphi$ is a homomorphism and find the image of $\varphi$.  Describe the kernel and the fibers of $\varphi$ geometrically (as subsets of the plane).
+	
+	\RED{\begin{align*}
+		\varphi: \C^\times &\to \$^\times \\
+		a+bi &\mapsto a^2+b^2
+	\end{align*}
+	\begin{align*}
+		\varphi((a+bi)(c+di)) &= \varphi(ac-bd +i(bc+ad)) \\	
+			&= (ac-bd)^2+(bc+ad)^2 
+	\end{align*}
+	}
+	
+	\item Let $\varphi: \ZMOD{8} \to \ZMOD{4}$ by $\varphi(\BAR{a})$.  Show that this is a well defined, surjective homomorphism and describe its fibers and kernel explicitly (showing that $\varphi$ is well defined involves the fact that $\BAR{a}$ has a different meaning in the domain and range of $\varphi$).
+	
+	\BLUE{$\ker \varphi = \{ g \in \Z/8\Z : \varphi(g) = \} = \{ \BAR{1}, \BAR{4}\}$.
+	}
+	
+	\item Let $F$ be a  field and let $G = \BRACKET{\RBAR{\TWOXTWO{a}{b}{0}{c}} a,b,c \in F, ac \ne 0} \le GL_2(F)$.
+	\begin{enumerate}
+		\item Prove that the map $\varphi: \TWOXTWO{a}{b}{0}{c} \mapsto a$ is a surjective homomorphism from $G$ onto $F^\times$(recall that $F^\times$ is the multiplictive group of nonzero elements in $F$).  Describe the fibers and kernel of $\varphi$.
+		
+		\item Prove that the map $\psi:\TWOXTWO{a}{b}{0}{c}\mapsto (a,c)$ is a surjective homomorphism from $G$ onto $F^\times \times F^\times$.  Describe the fibers and kernel of $\psi$.
+		
+		\item Let $H = \BRACKET{\RBAR{\TWOXTWO{1}{b}{0}{1}} b \in F}$.  Prove that $H$ is isomorphic to the additive group $F$.
+	\end{enumerate}
+	
+	\item Let $G$ be the additive group in real numbers, let $H$ be the multiplicative group of complex numbers of absolute value 1 (the unit circle $S^1$ in the complex plane) and let $\varphi : G \to H$ be the homomorphism $\varphi: r \mapsto e^{2\pi ir}$.  draw the points on a real line which lie in the kernel of $\varphi$.  Describe similarly the elements in the fibers of $\varphi$ above the point -1,$i$, and $e^{4\pi i/3}$ of $H$. Figure 1 of the text for this homomorphism $\varphi$ is usually depicted using the following diagram [See Fig. 5 on page 84(99)].
+	
+	\BLUE{What maps to 1 in $\varphi$?  Hence, 
+	\begin{align*}
+		1 &= e^{2\pi ir} \implies 2\pi ir \in \{0, 2\pi, 4\pi, \dots\} \\
+		r &\in \{0,1,2,\dots\} = \N
+	\end{align*}
+	}
+	
+	\item Repeat the preceding exercise with the map $\varphi$ replaced by the map $\varphi:r \mapsto e^{4\pi ir}$.
+	
+	\item Consider the additive quotient group $\Q/\Z$.
+	\begin{enumerate}
+		\item Show that every coset of $\Z$ in $\Q$ contains exactly one representative $q \in \Q$ in the range $0\le q< 1$.
+		
+		\BLUE{Given any $q \in Q$ then the left-coset $q+\Z = \{\dots, q-2, q-1, q, q+1, q+2, \dots\}$.  Let $x,y \in q+\Z$ and $0\le x,y < 1$.  There there exists $a,b \in \Z$ such that $x = q+a, y=q+b$. Notice that $x-y=q+a-(q+b) = a-b$.  $a-b$ must be an integer and if $a-b \ge 1$ then $x-y \ge 1$ and hence one of them is not in the range $[0,1)$.  Therefore, $a-b=0$ and $x=y$.
+		}
+		
+		\item Show that every element of $\Q/\Z$ has finite order but that there are elements of arbitrarily larger order.
+		
+		\BLUE{The identity of $\Q/\Z$ is $\Z$.  Notice that $\frac{1}{2}\Z \in \Q/\Z$ and that $\BARS{\frac{1}{2}\Z} = 2$.  In fact, in general, for every $n \in \Z, \BARS{\frac{1}{n}\Z} = n$.  Notice further that for any $n,m \in \Z, \BARS{\frac{m}{n}\Z} = n$.  Thus, any $q\in \Q$ can be defined as $q=\frac{m}{n}$ an hence $\BARS{q\Z}=n$ and finite, yet, arbitrarily large.
+		}
+		
+		\item Show that $\Q/\Z$ is the torsion subgroup of $\R/\Z$ (cf. Exercise 6, Section 2.1).
+
+		\BLUE{A torsion subgroup is $\{g \in G\,|\,|g|< \infty\}$.  The question is, does $\Q/\Z$ contain ALL finite order elements of $\R/\Z$?
+		}		
+		
+		\item Prove that $\Q/\Z$ is ismorphic to the multiplicative group of root of unity in $\C^\times$.
+		
+		\BLUE{
+		\begin{align*}
+			\WTS \Q/\Z \cong \C^\times, \, \exists \varphi: \Q/\Z\to \C^\times \implies \varphi(q) = z, |z|=1
+		\end{align*}and $\varphi$ is surjective and injective.
+		\begin{align*}
+			\LET \varphi(m/n) = e^{2\pi i m/n}
+		\end{align*}need to show it is 1-to-1 and onto.
+		}
+	\end{enumerate}
+	
+	\item Prove that a quotient of a divisilbe abelian group by any proper subgroup is also divisible.  Deduce that $\Q/\Z$ is divisible(cf Exercise 19, Section 2.4).
+	
+	\item Let $G$ be a group, let $N$ be a normal subgroup of $G$ and let $\BAR{G} = \ABRACKET{\BAR{x},\BAR{y}}$.  Prove more generally that if $G = \ABRACKET{S}$ for any subset $S$ of $G$, then $\BAR{G}=\ABRACKET{\BAR{S}}$.
+	
+	\item Let $G$ be the dihedral grup of order 16 (whose lattice appears in Section 2.5):
+	\begin{align*}
+		G = \ABRACKET{r,s\,|\,r^8=s^2=1, rs=sr^{-1}}
+	\end{align*}and let $\BAR{G} = G/\ABRACKET{r^4}$ be the quotient of $G$ by the subgroup generated by $r^4$ (this subgroup is the center of $G$,  hence is normal)
+	\begin{enumerate}
+		\item Show that the order of $\BAR{G}$ is 8.
+		
+		\BLUE{ $\BAR{1}=\ABRACKET{r^4} = (1, r^4) = r^4\ABRACKET{r^4}=\BAR{r^4}$ is the kernel \\
+		$\BAR{r}=r\ABRACKET{r^4} = (r, r^5) = r^5\ABRACKET{r^4}=\BAR{r^5}$ \\
+		$\BAR{r^2}=r^2\ABRACKET{r^4} = (r^2, r^6) = r^g\ABRACKET{r^4}=\BAR{r^6}$\\
+		$\BAR{r^3}=r^3\ABRACKET{r^4}= (r^3, r^7) = r^7\ABRACKET{r^4}=\BAR{r^7}$\\
+		each of these can be multiplied by $s$ giving 4 more.
+		}
+		
+		\item Exhibit each element in $\BAR{G}$ in the form $\BAR{s}^a\BAR{r}^b$, for some integers $a$ and $b$.
+		\item Find the order of each of the elements of $\BAR{G}$ exhibited in (b)
+		\item Write each of the following elements of $\BAR{G}$ in the form $\BAR{s}^a\BAR{r}^b$ and $b$ as in (b): $\BAR{rs}, \BAR{sr^{-2}s}, \BAR{s^{-1}r^{-1}sr}$.
+		\item Prove that $\BAR{H}=\ABRACKET{\BAR{s}, \BAR{r}^2}$ is a normal subgroup of $\BAR{G}$ and$\BAR{H}$ is isomorphic to the Klein 4-group.  Describe the isomorphism type of the complete preimage of $\BAR{H}$ in $G$.
+		\item Find the center of $\BAR{G}$ and describe the isomorphism type of $\BAR{G}/Z(\BAR{G})$.
+	\end{enumerate}
+	
+	\item Let $G$ be a quasidihedral group of order 16 (whose lattice was computed in Exercise 11 of Section 2.5)
+	\begin{align*}
+		G = \BLBRACKET{\sigma, \tau}{ \sigma^8=\tau^2=1, \sigma\tau=\tau\sigma^3}
+	\end{align*}and let $\BAR{G}=G/\ABRACKET{\sigma^4}$ be the quotient of $G$ by the subgroup generated by $\sigma^4$ (this subgroup is the center of $G$, hence is normal).
+	\begin{enumerate}
+		\item Show that the order of $\BAR{G}$ is 8.
+		\item Exhibit each element of $\BAR{G}$ in the form $\BAR{\tau}^a,\BAR{\sigma}^b$, for some integers $a$ and $b$.
+		\item Find the order of each of the elements of $\BAR{G}$ exhibited in (b).
+		\item Write each of the following elements of $\BAR{G}$ in the form $\BAR{\tau}^a,\BAR{\sigma}^b$, for some integers $a$ and$b$ as in (b): $\BAR{\sigma\tau}, \BAR{\tau\sigma^{-2}\tau}, \BAR{\tau^{-1}\sigma^{-1}\tau\sigma}$.
+		\item Prove that $\BAR{G}\cong D^8$.
+	\end{enumerate}
+	
+	\item Let $G$ be the modular group of order 16 (whose lattice was computed in Exercise 14 of Section 2.5)
+	\begin{align*}
+		G &= \BLBRACKET{u,v}{u^2=v^8=1, vu=uv^5}
+	\end{align*}and let $\BAR{G}=G/\ABRACKET{v^4}$ be the quotient of $G$ by the subgroup generated by $v^4$ (this subgroup is contained in the center of $G$, hence is normal).
+	\begin{enumerate}
+		\item Show that the order of $\BAR{G}$ is 8.
+		
+		\item Exhibit each element of $\BAR{G}$ in the form $\BAR{u}^a,\BAR{v}^b$, for some integers $a$ and $b$.
+		\item Find the order of each of the elements of $\BAR{G}$ exhibited in (b).
+		\item Write each of the following elements of $\BAR{G}$ in the form $\BAR{u}^a,\BAR{v}^b$, for some integers $a$ and$b$ as in (b): $\BAR{uv}, \BAR{uv^{-2}u}, \BAR{u^{-1}v^{-1}uv}$.
+		\item Prove that $\BAR{G}\cong \Z_2 \times \Z^4$.
+	\end{enumerate}
+	
+	\item Let $G=\ZMOD{24}$ and let $\tilde{G} = G/\ABRACKET{12}$, where for each integer $a$ we simplify notation by writing $\tilde{\BAR{a}}$ as $\tilde{a}$.
+	\begin{enumerate}
+		\item Show that $\tilde{G}= \{\tilde{0},\tilde{1}, \dots, \tilde{11}\}$.
+		\item Find the order of each element of $\tilde{G}$.
+		\item Prove that $\tilde{G}\cong \ZMOD{12}$.  (Thus $(\ZMOD{24})/(12\Z/24\Z)\cong\ZMOD{12} $, just as if we inverted and cancelled the $24\Z$'s.)
+	\end{enumerate}
+	
+	\item Let $G= \Z_4 \times \Z_4$ be given in terms of the following generators and relations:
+	\begin{align*}
+		G = \ABRACKET{x,y\,|\,x^4=y^4=1, xy=yx}
+	\end{align*}Let $\BAR{G}=G/\ABRACKET{x^2y^2}$ (note that every subgroup of the abelian group $G$ is normal).
+	\begin{enumerate}
+		\item Show that the order of $\BAR{G}$ is 8.
+		\item Exhibit each element of $\BAR{G}$ in the form $\BAR{x}^a,\BAR{y}^b$, for some integers $a$ and $b$.
+		\item Find the order of each of the elements of $\BAR{G}$ exhibited in (b).
+		\item Prove that $\BAR{G}\cong \Z_4 \times \Z^2$.
+	\end{enumerate}
+	
+	\item \begin{enumerate}
+		\item Prove that if $H$ and $K$ are nomal subgroups of a group $G$ then their intersection $H \cap K$ is also a normal subgroup of $G$.
+		
+		\BLUE{Let $x \in H \cap K$ then $xg = gx$ for all $g \in G$ because $x \in H$ as well as because $x \in K$.  Hence, $H\cap K \NORMAL G$.
+		}
+		
+		\item Prove that the intersection of an arbitrary nonempty collection of normal subgroups of a group is a normal subgroup (do not assume the collection is countable).
+	\end{enumerate}
+	
+	\item Prove that the join (cf. Section 2.5) of any nonempty collection of normal subgroups of a group is a normal subgroup.
+	
+	\item Prove that if $N \NORMAL G$ and $H$ is any subgroup of $G$ then $N \cap H\NORMAL H$. 
+	
+	\BLUE{Given $x \in N \cap H$.  Then, $xg=gx$ for all $g\in G$.  If $h \in H$ then we know that $xh = hx$, hence 	
+	}
+	
+	\item \begin{enumerate}
+		\item Prove that a subgroup $N$ of $G$ is normal if and only if $gNg^{-1}\subseteq N$ for \textit{all} $g \in G$.
+		
+		\item Let $G=GL_2(\Q)$, let $N$ be the subgroup of upper triangular matrices with integer entries and 1's on the digonal, and let $g$ be the diagonal matrix with entries 2,1.  Show that $gNg^{-1} \subseteq N$ but $g$ does \textit{not} normalize $N$.
+	\end{enumerate}
+	
+	\item Let $a,b \in G$.
+	\begin{enumerate}
+		\item Prove that the conjugate of the product of $a$ and $b$ is the product of the conjugate of $a$ and the conugate of $b$.  Prove that the order of $a$ and that the order of any conjugate of $a$ are the same.
+		
+		\BLUE{The conjugate of $ab$ is $gabg^{-1}$ for some $g \in G$.  Notice that $gag^{-1}gbg^{-1}=gabg^{-1}$.\\
+		Let $|a|=n$ then $a^n=1$.$\to (gag^{-1})^n=gag^{-1}\cdot gag^{-1}\cdot gag^{-1} \cdots gag^{-1} = ga\cdot a\cdot a \cdots ag^{-1}=ga^ng^{-1}=gg^{-1}=1$
+		}
+		
+		\item Prove that the conjugate of $a^{-1}$ is inverse of the conjugate of $a$.
+		
+		\BLUE{$(gag^{-1})^{-1}=g^{-1}a^{-1}g$
+		}
+		
+		\item Let $N = \ABRACKET{S}$ for some subset $S$ of $G$.  Prove that $N\NORMAL G$ if $gSg^{-1}\subseteq N$ for all $g \in G$.
+		
+		\item Deduce that if $N$ is cyclic group $\ABRACKET{x}$ then $N$ is normal in $G$ if and only if for each $g \in G, gxg^{-1}=x^k$ for some $k\in\Z$.
+		\item Let $n$ be a positive integer. Prove that the subgroup $N$ of $G$ generated by all the elements of $G$ of order $n$ is a normal subgroup of $G$.
+	\end{enumerate}
+	
+	\item Let $N$ be a \textit{finite} subgroup of a group $G$.  Show that $gNg^{-1} \subseteq N$ if and only if $gNg^{-1}=N$.  Deduce that $N_G(N)=\BLBRACKET{g\in G}{gNg^{-1}\subseteq N}$.
+	
+	\item Let $N$ be a \textit{finite} subgroup of a group $G$ and assume $N = \ABRACKET{S}$ for some subset $S$ of $G$.  Prove that an element $g\in G$ normalizes $N$ if and only if $gSg^{-1} \subseteq N$.
+	
+	\item Let $N$ be a \textit{finite} subgroup of $G$ and suppose $G = \ABRACKET{T}$ and $N=\ABRACKET{S}$ from some subsets $S$ and $T$ of $G$.  Prove that $N$ is normal in $G$ if and only if $tSt^{-1}\subseteq N$ for all $t \in T$.
+	
+	\item Let $N \le G$ and let $g\in G$.  Prove that $gN=Ng$ if and only if $g\in N_G(N)$.
+	
+	\item Prove that if $H \le G$ and $N$ is a normal subgroup of $H$ then $H \le N_G(N)$.  Deduce that $N_G(N)$ is the largest subgroup of $G$ in which $N$ is normal (i.e., is the join of all subgroups $H$ for which $N \NORMAL H$).
+	
+	\item Prove that every subgroup of $Q_8$ is normal.  For each subgroup find the isomorphism type of its corresponding quotient.  [You may use the lattice of subgroups for $Q_8$ in Section 2.5]
+	
+	\item Find all normal subgroups of $D_8$ and for each of these find the isomorphism type of its corresponding quotient.  [You may use the lattice of subgroups for $D_8$ in Section 2.5.]
+	
+	\item Let $D_{2n}=\ABRACKET{r,s\,|\,r^n=s^2=1, rs=sr^{-1}}$ be the usual presentation of the dihedreal group of order $2n$ and let $k$ be  a positive integer dividing $n$.
+	\begin{enumerate}
+		\item Prove that $\ABRACKET{r^k}$ is a normal subgroup of $D_{2n}$.
+		\item Prove that $D_{2n}/\ABRACKET{r^k} \cong D_{2k}$
+	\end{enumerate}
+	
+	\item Prove that $SL_n(F) \NORMAL GL_n(F)$ and describe the isormophism type of the quotient group (cf.  Exercise 9, Section 2.1).
+	
+	\item Prove that if $G/Z(G)$ is cyclic then $G$ is abelian.  [If $G/Z(G)$ is cyclic with generator $xZ(G)$, show that every element of $G$ can be written in the from $x^a z$ for some integer $a \in \Z$ and some element $z \in Z(G)$.]
+	
+	\item Let $A$ and $B$ be groups.  Show that $\{(a,1)\,|\,a\in A\}$ is a normal subgroup of $A\times B$ and the quotient of $A\times B$ by this subgroup is isomorphic to $B$.
+	
+	\item Let $A$ be an abelian group and let $D$ be the (diagonal) subgroup $\{(a,a)\,|\,a\in A\}$ of $A\times A$.  Prove that $D$ is a normal subgroup of $A\times A$ and $(A\times A)/D\cong A$.
+	
+	\item Suppose $A$ is the non-abelian group $S_3$ and $D$ is the diagonal subgroup $\{(a,a)\,|\,a\in A\}$ of $A\times A$.  Prove that $D$ is not normal in $A\times A$.
+	
+	\item Let $G$ be a group, let $N$ be a normal subgroup of $G$ and let $\BAR{G}=G/N$.  Prove that $\BAR{x}$ and $\BAR{y}$ commute in $\BAR{G}$ if and only if $x^{-1}y^{-1}xy \in N$.  (The element $x^{-1}y^{-1}xy$ is called the \textit{commutator} of $x$ and $y$ and is denoted by $[x,y]$.)
+	
+	\item Let $G$ be a group.  Prove that $N=\ABRACKET{x^{-1}y^{-1}xy\,|\,x,y\in G}$ is a normal subgroup of $G$ and $G/N$ is abelian ($N$ is called the \textit{commutator subgroup} of $G$).
+	
+	\item Assume both $H$ and $K$ are normal subgroups of $G$ with $H \cap K=1$.  Prove that $xy=yx$ for all $x \in H$ and $y \in K$. [Show that $x^{-1}y^{-1}xy\in H\cap K$.]
+	
+	\item Assume $\mathcal{P}=\{A_i\,|\,i \in I\}$ is any partition of $G$ with property that $\mathcal{P}$ is a group under the "quotient operation" defined as follows: to compute the product of $A_i$ with $A_j$ take any element $a_i$ of $A_i$ and any element $a_j$ of $A_j$ and let $A_iA_j$ be the element $\mathcal{P}$ containing $a_ia_j$ (this operation is assumed to be well defind).  Prove that the element of $\mathcal{P}$ that contains the identity of $G$ is a normal subgroup of $G$ and the elements of $\mathcal{P}$ are the cosets of this subgroup (so $\mathcal{P}$ is just a quotient group of $G$ in the usual sense).
+	
+\end{enumerate}
+
+\section{More on Cosets and Lagrange's Theorem}
+
+\begin{theorem}[Lagrange's Theorem]
+If $G$ s a finite group and $H$ is a subgroup of $G$, then the order of $H$ divides the order of $G$ (i.e., $|H|\,\left.\right|\,|G|$) and the number of left cosets of $H$ in $G$ equals $\frac{|G|}{|H|}$.
+
+\begin{remark}The \textit{full converse} of Lagrange's Theorem is \textit{not} true:  namely, if $G$ is a finite group and $n$ divides $|G|$, then $G$ need not have a subgroup of order $n$.
+\end{remark}
+\end{theorem}
+
+\begin{definition} If $G$ is a group (possibly infinite) and $H \le G$, the number of left cosets of $H$ in $G$ is called the \textit{index} of $H$ in $G$ and is denoted by $|G:H|$.
+\end{definition}
+
+\begin{corollary}  If $G$ is a finite group and $x \in G$, then the order of $x$ divides the order of $G$.  In particular $x^{|G|}=1$ for all $x$ in $G$.
+\end{corollary}
+
+\begin{corollary}  If $G$ is a group of prime order $p$, then $G$ is cyclic, hence $G \cong \Z_p$.
+\end{corollary}
+
+\begin{theorem}[Cauchy's Theorem]  If $G$ is a finite group and $p$ is a prime dividing $|G|$, then $G$ has an element of order $p$.
+
+\end{theorem}
+
+\begin{theorem}[Sylow] If $G$ is a finite group of order $p^\alpha m$, where $p$ is prime and $p$ does not divide $m$, then $G$ has a subgroup of order $p^\alpha$.
+\end{theorem}
+
+\begin{definition}Let $H$ and $K$ be subgroups of a group and define 
+\begin{align*}
+	H\, K &= \{hk\,|\,h \in H, k\in K\}
+\end{align*}
+\end{definition}
+
+\begin{prop}  If $H$ and $K$ are finite subgroups of a group then 
+\begin{align*}
+	|H\,K| = \frac{|H||K|}{|H\cap K|}
+\end{align*}Note:\begin{align*}
+	H\,K = \bigcup_{h\in H} h\, K
+\end{align*}
+\end{prop}
+
+\begin{prop}  If $H$ and $K$ are subgroups of a group, $H\,K$ is a subgroup if and only if $H\,K = K\, H$
+\end{prop}
+
+\begin{definition}If $A$ is any set of $N_G(K)$ (or $C_G(K)$), we shall say $A$ \textit{normalizes} $K$ (\textit{centralizes} $K$, respectively).\footnote{\textit{centralize} means that each element commutes with every element in $G$.  \textit{normalize} means that each element in $G$ will commute 'in some way' with elements in the normalized group.}
+\end{definition}
+
+\subsection{Exercises}
+
+Let $G$ be a group.
+\begin{enumerate}
+	\item Which of the following are permissible orders for subgroups of a group of order 120: 1,2,5,7,9,15,60,240?  For each permissible order give the corresponding index.
+	
+	\BLUE{1, 2, 5 are all prime and divide 120.  These are permissilble.\\
+		7,9 do not divide 120 so they are not permissible.\\
+		The order of a subgroup can't be bigger than the group so 240 is not permissible.\\
+		60 has an index of 2, therefore it is permissible.\\
+		Is 15 a permissible order of a subgroup of 120? \\
+		a group of order three is $H=$ (0, 40, 80)  a subgroup of order 5 is $K=$ (0, 24, 48, 72, 96).  Then we can see that $H \cap K = \{0\}$ and $|H \cap K|=1$ therefore $|H\,K| = 15$ and is a subgroup.
+		}
+	
+	\item Prove that the lattice of subgroups of $S_3$ in Section 2.5 is correct (i.e., prove that it contains all subgroups of $S_3$ and that their pairwise joins and intersections are correctly drawn).
+	
+	\item Prove that the lattice of subgroups of $Q_8$ in Section 2.5 is correct.
+	
+	\item Show that if $|G|=pq$ for some primes $p$ and $q$  (not necessarily distinct) then either $G$ is abelian or $Z(G) = 1$.  [See Exercise 36 in Section 1.]
+	
+	\BLUE{Since $|G| = pq$ we know that there exists a subgroup $H$ such that $|H|=p$ and a subgroup $K$  such that $|K|=q$.  From this we can see that $H \cong \Z_p, K \cong \Z_q$.  Then, for any $h \in H$ there exists an $n \in \Z$ such that $h = p^n$ and for any $k \in K$ there exists an $m \in \Z$ such that $k=q^m$. From the theorem, under what conditions are $h=k$?  $p^n=q^m$ can only be true when $p=q$ or when $n=m=0$ because each is prime.  Thus, $\frac{|H||K|}{|H\cap K|} = \frac{pq}{pq}=1$ or $\frac{pq}{1}=pq$ which implies that the group is abelian or $Z(G)=1$.
+	}
+	
+	\item Let $H$ be a subgroup of $G$ and fix some elements $g \in G$.
+	\begin{enumerate}
+		\item Prove that $gHg^{-1}$ is a subgroup of $G$ of the same order as $H$.
+		
+		\BLUE{Let $h_1, h_2 \in H$.  Then $gh_1g^{-1}gh_2g^{-1} = gh_1h_2g^{-1} \in gHg^{-1}$.  Therefore a group. Which implies that the order is the same.  If $H$ is unique than it commutes with all elements $g \in G$ and is therefore normal.
+		}
+		
+		\item Deduce that if $n \in \Z^+$ and $H$ is the unique subgroup of $G$ of order $n$ then $H \NORMAL G$.
+	\end{enumerate}
+	
+	\item Let $H \le G$ and let $g \in G$.  Prove that if the right coset $Hg$ equals \textit{some} left coset of $H$ in $G$ then it equals the left coset $gH$ and $g$ must be in $N_G(H)$.
+	
+	\item Let $H \le G$ and define a relation $\sim$ on $G$ by $a \sim b$ if and only if $b^{-1}a \in H$.  Prove that $\sim$ is an equivalence relation and describe the equivalence class of each $a \in G$.  Use this to prove Proposition 4.
+	
+	\BLUE{We must show that $\sim$ is reflexive, symmetric and transitive.
+	\begin{itemize}
+	\item Reflexive ($a\sim a$): $a\sim a \implies a^{-1}a =1 \in H$.  TRUE.
+	\item Symmetric ($a\sim b \iff b \sim a$): $a \sim b \implies b^{-1}a \in H$.  Notice $(a \sim b)^{-1} = (b^{-1}a)^{-1} = a^{-1}b = b\sim a \in H$.  TRUE
+	\item Transitive ($a\sim b, b \sim c \implies a \sim c$):
+	\begin{align*}
+		a \sim b &\implies b^{-1}a \in H\\
+		b \sim c &\implies c^{-1}b \in H\\
+		(b\sim c)(a \sim b) &= (c^{-1}b)(b^{-1}a) = c^{-1}bb^{-1}a = c^{-1}a = c \sim a \in H 
+	\end{align*}and since $\sim$ is symmetric $a\sim c \in H$.  TRUE.
+	\end{itemize}
+	}
+	
+	\item Prove that if $H$ and $K$ are finite subgroups of $G$ whose orders are relatively prime then $H \cap K = 1$.
+	
+	\BLUE{From this we can see that $H \cong \Z_p, K \cong \Z_q$.  Then, for any $h \in H$ there exists an $n \in \Z$ such that $h = p^n$ and for any $k \in K$ there exists an $m \in \Z$ such that $k=q^m$. From the theorem, under what conditions are $h=k$?  $p^n=q^m$ can only be true when $p=q$ or when $n=m=0$ because each is prime.  Thus, $\frac{|H||K|}{|H\cap K|} = \frac{pq}{pq}=1$.
+	}
+	
+	\item This exercise outlines a proof of Cauchy's Theorem due to James McKay (\textit{Another proof of Cauchy's group theorem} Amer.  Math.  monthly, 66(1959), p. 119).  Let $G$ be a finite group and let $p$ be a prime dividing $|G|$.  Let $\mathcal{S}$ denote the set of $p$-tuples of elements of $G$ the product of whose coordinates is 1:
+	\begin{align*}
+		\mathcal{S} = \{(x_1,x_2,\dots,x_p)\,|\,x_i\in G \AND x_1x_2\cdots x_p = 1\}
+	\end{align*}
+	\begin{enumerate}
+		\item Show that $\mathcal{S}$ has $|G|^{p-1}$ elements, hence has order divisible by $p$.\footnote{Define the relation $\sim$ on $\mathcal{S}$ by letting $\alpha \sim \beta$ if $\beta$ is a cyclic permutation of $\alpha$.}
+		\item Show that a cyclic permutation of an element of $\mathcal{S}$ is again an element of $\mathcal{S}$.
+		
+		\item Prove that $sim$ is an equivalence relation on $\mathcal{S}$.
+		\item Prove that an equivalence class contains a single element if and only if it is of the form $(x,x,\dots,x)$ with $x^p=1$.
+		\item Prove that every equivalence class has order 1 or $p$ (this uses the fact that $p$ is a \textit{prime}).  Deduce that $|G|^{p-1}=k+pd$,  where $k$ is the number of classes of sie 1 and $d$ is the number of classees of size $p$.
+		\item Since $\{(1,1,\dots,1)\}$ is an equivalence class of size 1, conclude that from (e) that there must be a nonidentity element $x$ in $G$ with $x^p=1$, i.e., $G$ contains an element of order $p$. [Show $p\,|\,k$ and so $k >1$.]
+	\end{enumerate}
+	
+	\item Suppose $H$ and $K$ are subgroups of finite index in the (possibly infinite) group of $G$ with $|G:H|=m$ and $|G:K|=n$.  Prove that $\LCM(m,n) \le|G:H\cap K| \le mn$.  Deduce that if $m$ and $n$ are relatively prime then $|G:H\cap K|=|G:H|\cdot|G:K|$.
+	
+	\BLUE{(this is a start) From Lagrange's Theorem we have, at least for finite groups, we have
+	\begin{align*}
+		m=|G:H| &= \frac{|G|}{|H|} \\
+		n=|G:K| &= \frac{|G|}{|K|} \\
+		mn &= \frac{|G|}{|H|}\cdot\frac{|G|}{|K|} \\
+		|G:H\cap K| &= \frac{|G|}{|H\cap K|} \le \frac{|G|}{|H|}  \AND \frac{|G|}{|K|}
+	\end{align*} $|H\cap K|$ must divide $|G|$ and $|H\cap K|$ must divide both $|H|$ and $|K|$ therefore $\LCM(|H|,|K|)\le|G:H\cap K|$
+	}
+	
+	\item $H \le K\le G$.  Prove that $|G:H|=|G:K|\cdot|K:H|$ (do not assume $G$ is finite).
+	
+	\BLUE{\begin{align*}
+		|G:H|&=\frac{|G|}{|H|}, |G:K|=\frac{|G|}{|K|} \AND 	|K:H|= \frac{|K|}{|H|} \\
+		|G| &= |G:H||H| = |G:K||K| \AND |K:H||H|=|K|\\
+		|G:H||H| &= |G:K||K:H||H| \\
+		|G:H| &= |G:K||K:H|
+	\end{align*}
+	}
+	
+	\item Let $H \le G$.  Prove that the map $x\mapsto x^{-1}$ sends each left coset of $H$ in $G$ onto a right coset of $H$ and gives a bijection between the set of left coset and the set of right cosets of $H$ in $G$ (hence the number of left cosets of $H$ in $G$ equals the number of right cosets).
+	
+	\BLUE{Let $\varphi : G \to G$ such that $\varphi(x)=x^{-1}$.  Then, let $K \in G/H$ and any coset $gK$ implies that $\varphi(gk)= (gk)^{-1}= k^{-1}g^{-1}$.  Which is clearly a bijection with right cosets on the right of the equation.  This indicates that the number of left cosets equals the number of right cosets.
+	}
+	
+	\item Fix any labelling of the vertices of a square and use this to identify $D_8$ as a subgroup o $S_4$.  Prove that the elements of $D_8$ and $\ABRACKET{\CYCLE{1&2&3}}$ do not commute in $S_4$.
+	
+	\item Prove that $S_4$ does not have a normal subgroup of order 8 or a normal subgroup of order 3.
+	
+	\item Let $G=S_n$ and for fixed $i\in \{1,2,\dots,n\}$ let $G_i$ be the stabilizer of $i$.  Prove that $G_i \cong S_{n-1}$.
+	
+	\BLUE{The stablizer is defined as $G_s=\{g\in G\,|\, g\cdot s=s\}$. Where $\cdot$ is the composition operation. Thus, $s$ would be any element of $S_n$ with $s$ in it. 
+	}
+	
+	\item Use Lagrange's Theorem in the multiplicative group $(\Z/p\Z)^\times$ to prove \textit{Fermat's Little Theorem}: if $p$ is a prime then $a^p\equiv a(\MOD{p})$ for all $a \in \Z$
+	
+	\BLUE{Let $G=\ZMOD{n}$ for some $n \in Z^+$.  Let $x\in G$ and we know that $|x|\,|\, n$.  WTOG, we can select $x$ such that $|x|=p$ where $p$ is prime.  Therefore $x^p \equiv x\MOD{n}$. If $n$ is prime then $p$ can be either 1 or $n$ and since $x$ is arbitrary this is true for all $x \in G$.
+	}
+	
+	\item Let $p$ be a prime and let $n$ be a positive integer.  Find the order of $\BAR{p}$ in $(\Z/(p^n-1)\Z)^\times$ and deduce that $n\,|\, \varphi-1$ (her $\varphi$ is Euler's function).
+	
+	\item Let $G$ be a finite group, let $H$ be a subgroup of $G$ and let $N \NORMAL G$.  Prove that if $|H|$ and $|G:N|$ are relatively prime then $H\le N$.
+	
+	\item Prove that if $N$ is a normal subgroup of the finite group $G$ and $(|N|,|G:N|)=1$ then $N$ is the unique subgroup of $G$ of order $|N|$.
+	
+	\item If $A$ is an abelian group with $A\NORMAL G$ and $B$ is any subgoup of $G$ prove that $A\cap B \NORMAL AB$.
+	
+	\item Prove that $\Q$ has no proper subgroups of finite index.  Deduce that $\Q/\Z$ has no proper subgroups of finite index.  [Recall Exercise 21, Section 1.6 and Exercise 15, Section 1.]
+	
+	\item Use Lagrange's Theorem in the mutiplicative group $(\Z/n\Z)^\times$ to prove \textit{Euler's Theorem:} $a^{\varphi(n)}\equiv 1\MOD{n}$ for every integer $a$ relatively prime to $n$, where $\varphi$ denotes Euler's $\varphi$-function.
+	
+	\item Determine the last two digits of $3^{3^{100}}$. [Determine $3^{100} \MOD{\varphi(100)}$ and use the previous exercise.]
+\end{enumerate}
+
+\section{The Isomorphism Theorems}
+
+\begin{theorem}[The First Isomorphsim Theorem]
+if $\varphi:G\to H$ is a homomorphism of groups, then $\ker \varphi \NORMAL G$ and $G/\ker \varphi \cong \varphi(G)$.
+\end{theorem}
+
+\begin{corollary}  Let $\varphi: G \to H$ be a homomorphism of groups.
+\begin{enumerate}
+\item $\varphi$ is injective if and only if $\ker \varphi = 1$.
+\item $|G:\ker \varphi | = |\varphi(G)|$
+\end{enumerate}
+\end{corollary}
+
+\begin{theorem}[The Second or Diamond Isomorphism Theorem]  Let $G$ be a group, let $A$ and $B$ be subgroups of $G$ and assume $A \le N_G(B)$.  Then $AB$ is a subgroup of $G$, $B\NORMAL AB, A \cap B \NORMAL A$ and $AB/B\cong A/A\cap B$.
+
+\end{theorem}
+
+\begin{theorem}[The Third Isomorphism Theorem]  Let $G$ be a group and let $H$ and $K$ be normal subgroups of $G$ with $H \le K$.  Then $K/H\NORMAL G/H$ and 
+\begin{align*}
+	(G/H)/(K/H)\cong G/K.
+\end{align*}If we denote the quotient by $H$ with a bar, this can be written
+\begin{align*}
+	\BAR{G}/\BAR{K}\cong G/K.
+\end{align*}
+
+\end{theorem}
+
+\begin{theorem}[The Fourth or Lattice Isomorphsm Theorem]  Let $G$ be a group and let $N$ be a normal subgroup of $G$.  Then there is a bijectionfrom teh set of subgroups $A$ of $G$ which contain $N$ onto the set of subgroups $\BAR{A}=A/N$ of $G/N$.  In particular, every subgroup of $\BAR{G}$is of the form $A/N$ for som esubgroup $A$ of $G$ containing $N$ (namely, its preimagein $G$ under the natural projecton homomorphism from $G$ to $/N$).  This bijection has teh following properies: for all $A,B \le G$ with $N \le A$ and $N \le B$,
+\begin{enumerate}
+\item  $A\le B$ if and only if $\BAR{A} \le \BAR{B}$,
+\item if $A \le B$, then $|B:A|=|\BAR{B}:\BAR{A}|$.
+\item $\BAR{\ABRACKET{A,B}} = \ABRACKET{\BAR{A},\BAR{B}}$,
+\item $\BAR{A\cap B} = \BAR{A}\cap \BAR{B}$, and
+\item $A \NORMAL G$ if and only if $\BAR{A}\NORMAL\BAR{G}$.
+\end{enumerate}
+
+\end{theorem}
+
+\subsection{Exercises}
+
+Let $G$ be a group.
+\begin{enumerate}
+\item Let $F$ be a finite field of order $q$ and let $n \in \Z^+$.  Prove that $|GL_n(F) : SL_n(F)|=q-1$.  [See Exercise 35, Section 1.]
+
+\item Prove all parts of the Lattice Isomorphism Theorem.
+
+\item Prove that if $H$ is a normal subgroup of $G$ of prime index $p$ then for all $K \le G$ either 
+\begin{enumerate}
+	\item $K \le H$ or
+	\item $G = HK$ and $|K:K\cap H|=p$.
+	
+	\BLUE{First, according to the Diamond Isomorphism Theorem 
+	\begin{align*}
+		KH/H &\cong K/(K\cap H) \\
+		|KH/H| &= |KH: H| = p\\
+	\end{align*}
+	}
+	
+\end{enumerate}
+
+\item Let $C$ be a normal subgroup of the group $A$ and let $D$ be a normal subgroup of the group $B$.  Prove that $(C \times D) \NORMAL (A \times B)$ and $(A\times B)/(C\times D) \cong (A/C)\times (B/D)$.
+
+\item Let $Q D_{16}=\ABRACKET{\sigma, \tau}$ be the quasidihedral group describe in Exercise 11 of Section 2.4.  Prove that $\ABRACKET{\sigma^4}$ is normal in $Q D_{16}$ and use the Lattice Isomorphism Theorem to draw the lattice of subgroups of $Q D_{16}/\ABRACKET{\sigma^4}$.  Which group of order 8 has the same lattice as this quotient? Use generators and relations for $Q D_{16}/\ABRACKET{\sigma^4}$ to decide the isomorphism type of this group.
+
+\item Let $M = \ABRACKET{\mu,\nu}$ be the modular group of order 16 describe in Exercise 14 of Section 2.5. Prove that $\ABRACKET{\nu^4}$ is normal in $M$ and use the Lattice Isomorphism Theorem to draw the lattice of subgroups of $/\ABRACKET{\nu^4}$. Which group of order 8 has the same lattice as this quotient?  Use generators and relations for $\ABRACKET{\nu^4}$ to decide the isomorphism type of this group.
+
+\item Let $M$ and $N$ be normal subgroups of $G$ such that $G = MN$.  Pove that $G/M\cap N)\cong (G/M)\times (G/N)$.
+
+\item Let $p$ be a prime and let $G$ be the grou pof $p$-power roots of 1 in $\C$ (cf. Exercise 18, Section 2.4).  Prove that the map $z \mapsto z^p$ is a surjective homomorphism.  Deduce that $G$ is isomorphic to a proper quotient of itself.
+
+\item Let $p$ be a prime and let $G$ be a group of order $p^a m$, where $p$ does not divide $m$.  Assume $P$ is a subgroup of $G$ of order $p^a$ and $N$ is a normal subgroup of $G$ of order $p^b n$, where $p$ does not divide $n$.  Prove that $|P\cap N|=p^b$ and $|PN/N|=p^{a-b}$. (the subgroup $P$ of $G$ is called the \textit{Sylow p-subgroup} of $G$.  This exercise shows that the intersection of any Sylow $p$-subgroup of $G$ with a normal subgroup $N$ is a Sylow $p$-subgroup of $N$.)
+
+\item Generealize the preceding exercise as follows.  $A$ subgroup $H$ of a finite group $G$ is called a \textit{Hall subgroup} of $G$ if its index in $G$ is relatively prime to its order:  $(|G:H|,|H|)=1$.  Prove that if $H$ is a Hall subgroup of $G$ and $N \NORMAL G$, then $H\cap N$ is a Hall subgroup of $N$ and $HN/N$ is a Hall subgroup of $G/N$.
+\end{enumerate}
+
+\end{document}

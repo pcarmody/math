@@ -1,0 +1,136 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5110 -- Real Analysis I}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#5 }
+\newcommand{\DUEDATE}{December 11, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Liu}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\newcommand{\VOL}{\text{ vol}}
+\begin{enumerate}[label=\Roman*.]
+\item Section 7.4, Problem 10.
+	\textit{Exercise 7.4.10}.  Let $A \subseteq B \subseteq \R^n$.  Show that if $B$ is Lebesque measurable with measure zero, then $A$ is also Legesque measurable with measure zero.
+	
+	\BLUE{Assuming that $\R^n$ forms a complete measure space, $A\subseteq B$ implies that $A$ is measurable \\
+	Recall the measure of a set is always non-negative
+		\begin{align*}
+			A \subseteq B &\to m(A) \le m(B) = 0\\
+			\therefore m(A) &= 0
+		\end{align*}
+	}
+	
+\item Section 7.5, problem 5
+
+	\textit{Exercise 7.5.5}.  Let $f: \R^n \to \R$ be Legesque measurable, and let $g: \R^n \to \R$ be a function which agrees with $f$ outside of a set of measure zero, thus there exists a set $A \subseteq \R^n$ of measure zero that $f(x) = g(x)$ for all $x \in \R^n\backslash A$.  Show that $g$ is also Lebesque measurable.  (Hint: Use Exercse 7.4.10)
+	
+	\BLUE{Let $B \subseteq \R$. Then,
+	\begin{align*}
+		g^{-1}(B) = (g^{-1}(B)\cap \R^n\backslash A) \cup (g^{-1}(B)\cap A)
+	\end{align*}we know that $f(x)=g(x), x \in \R^n\backslash A$ so
+	\begin{align*}
+		g^{-1}(B)\cap \R^n\backslash A = f^{-1}(B)\cap \R^n\backslash A
+	\end{align*}and $f^{-1}(B)\cap \R^n\backslash A$ is measurable. Also, $g^{-1}(B)\cap A$ is also measurable because $A$ is measurable.  Therefore, $g^{-1}(B)$ is measurable as it is the union of two measurable sets.  Hence $g$ is a measurable function.
+	}
+
+\item Let $f:\Omega \to [0,\infty)$ be measurable, $\Omega =\bigcup_{k=1}^\infty \Omega_k \in \mathcal{M}, \Omega_k \subseteq \Omega_{k+1}$  for all $k$.  Then $$ \int_\Omega f = \lim_{k\to \infty} \int_{\Omega_k} f$$\textit{Remark:}  If $f$ is simple, then the result is precisely Lemma 4.27.
+
+\item Show that $$ \lim_{n\to\infty} \int_{[0,n]}\PAREN{1+\frac{x}{n}}^n e^{-2x} dx = \int_{[0,\infty]} e^{-x}dx$$.
+
+\BLUE{\begin{align*}
+	\lim_{n\to\infty} \int_{[0,n]}\PAREN{1+\frac{x}{n}}^n e^{-2x} dx &= \lim_{n\to\infty} \int_{[0,n]}\lim_{k\to \infty} \PAREN{1+\frac{x}{k}}^k e^{-2x} dx \\
+	&= \lim_{n\to\infty} \int_{[0,n]} e^{-x} dx \\
+	&= \int_{[0,\infty]} e^{-x} dx
+\end{align*}
+}
+
+\item If $f \in L(\Omega)$, then $$ \lim_{r \to \infty} \int_{\Omega \backslash B_r} f = 0$$\textit{Note: } Recall $B_r$ is a the $r$-ball at the origin.  If $\Omega$ is bounded then eventually $\Omega \backslash B_r = \emptyset$ (in this case integral is regarded to be zero) but our $\Omega$ maybe unbounded.
+
+\BLUE{Choose $n$ such that $\{g>n\} \subseteq \Omega \backslash B_r$.  Then, we have 
+\begin{align*}
+	m(\{g>n\}) \le m(\Omega \backslash B_r) 
+\end{align*}As $r \to \infty$ continue to choose higher values of $n$, eventually $n \to \infty$ and we know that $\LIMN m(\{g>k\}) = 0$ thus $m(\Omega \backslash B_r) \to 0$.
+}
+
+\item \RED{skip}
+
+\item \begin{enumerate}[label=(\alph*)]
+	\item Let $f \ge 0$ be integrable on $[a,b]$.  Prove that the function 
+	\begin{align*}
+		F(x) = \int_a^x f(t) dt
+	\end{align*}is continuous on $[a,b]$.  (Hint: for fixed $x$, use the Dominated Convergence Theorem to show that $F(x+1/n)=F(x) \to 0$ and $F(x-1/n)-F(x) \to 0$ as $n\to \infty$.  Then use this to prove continuity of $F$ at $x$.)
+	
+\item Assume $f$ is Riemann integrable on $[a,b]$, and let $F$ be defined as in (a). Show that $F$ is differentiable almost everywhere, and the equality $F'(x)=f(x)$ is true almost everywhere.
+	(The same is true for any (Lebesque) integrable function $f$, but this is harder to prove.)
+\end{enumerate}
+	
+\item Find an example of a uniformly bounded sequence of functions $f_n:\R\to[0,\infty)$ so that each $f_n$ is Riemann integrable, but $f_n$ converges pointwise to a function that is not Riemann integrable.
+	
+	(We know this problem can't occur with the Lebesque integral,  because a pointwise limit of measurable functions is measuable.)
+	
+	\BLUE{Step 1: divide $[0,1]$ into thirds then $f_1 = 1$ for the middle third and zero otherwise.\\
+	Step 2: divide each subinterval of Step 1 into thirds then $f_2 =1$ for the middle of each of these subintervals\\
+	Step 3: repeat step 2 using in the subintervals of Step 2 defining $f_3$ accordingly\\
+	Repeat:
+	Each $f_n$ is Rieman Integral.  $f_n \to f$ is not.
+	}
+	
+\item Suppose $\rho: [0,\infty)\to \R$ is decreasing and continuous, $m(E)=m(B_r)$, where $E$ is a measurable subset of $\R^n$ and $B_r\subset \R^n$ is the $r$-ball at the origin.  Show that 
+\begin{align*}
+	\int_E \rho(|x|) dx \le \int_{B_R} \rho(|x|)dx.
+\end{align*}
+
+\end{enumerate}
+\end{document}

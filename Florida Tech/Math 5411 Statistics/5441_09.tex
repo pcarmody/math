@@ -1,0 +1,91 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{color,soul}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#9 }
+\newcommand{\DUEDATE}{November 4, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\HIGHLIGHT}[1]{\fcolorbox{black}{yellow}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+\noindent Example 1: Deal two cards from a well-shuffled eck. let the random variable $X$ be the number of aces dealt and let the randome variable $Y$ bt the number of face cards dealt.  Find $f(x,y)$ and calculate the probability that the hand will contain more aces than face cards.
+
+\BLUE{There are four aces, $|X| = 4$ and 12 face cards $|Y| = 12$.  The entire sample set of valid hands is 
+\begin{align*}
+	\mathcal{A} &= \{(x,y)\,|\, (0,0), (0,1), (0,2), (1,0), (1,1), (2,0) \} \\ \\
+	f_{X,Y}(0,0) &= \frac{\binom{36}{2}}{\binom{52}{2}}, \, \frac{\text{number of numbered hands}}{\text{number of cards}}\\
+	f_{X,Y}(0,1) &= \frac{\binom{36}{1}\binom{12}{1}}{\binom{52}{2}}, \, \frac{\text{one numbered, one face}}{\text{number of cards}}\\
+	f_{X,Y}(0,2) &= \frac{\binom{12}{2}}{\binom{52}{2}}, \, \frac{\text{two face}}{\text{number of numbered hands}}\\
+	f_{X,Y}(1,0) &= \frac{\binom{4}{1}\binom{36}{1}}{\binom{52}{2}}, \, \frac{\text{one ace, one numbered}}{\text{number of numbered hands}}\\
+	f_{X,Y}(1,1) &= \frac{\binom{4}{1}\binom{12}{1}}{\binom{52}{2}}, \, \frac{\text{one ace, one face}}{\text{number of numbered hands}}\\
+	f_{X,Y}(2,0) &= \frac{\binom{4}{2}}{\binom{52}{2}}, \, \frac{\text{two aces}}{\text{number of numbered hands}}\\
+	\\
+	&\text{more aces than face cards is }\\
+	f_{X,Y}(2,0)+f_{X,Y}(1,0) &= \frac{\binom{4}{2}}{\binom{52}{2}} + \frac{\binom{4}{}\binom{36}{1}}{\binom{52}{2}} = \frac{4*3+4\cdot 36}{(52\cdot 51)/2} = 0.118
+\end{align*}
+}
+
+\noindent Example 3  Jordan and Greta agree to meet at the library between 2:00 PM and 3:00 PM.  Their arrival times are independent and uniformly distributed, between 2:00 and 3:00.  If they wait 20 minutes for the other, find the probability that they meet.
+
+\BLUE{This is a bivariant uniform distribution.  Let $X$ be the arrival time (minute) for Jordan and $Y$ be the arrival time (minute) for Greta.  Thus
+\begin{align*}
+	f_x(x) &= \frac{1}{60}, \, 0\le x \le 60\\
+	f_Y(y) &= \frac{1}{60}, \, 0\le y \le 60\\
+	\mathcal{A} &= \{(x,y)\,|\, 0\le x \le 60,\, 0\le y \le 60 \}\\
+	f_{X,Y}(x,y) &= \frac{1}{60*60} = \frac{1}{3600}, \, \text{probability of meeting at the exact same minute}\\
+	f_{X,Y}(|X-Y|\le 20) &= \frac{3600-(60-20)^2}{3600},\, \frac{\text{area of coincidence}}{\text{area of all possible outcomes}} \\
+	&= 0.5555
+\end{align*}Note the "area of non-coincidence" are two isosceles right trianges of side 40, making a square.
+}
+\end{document}

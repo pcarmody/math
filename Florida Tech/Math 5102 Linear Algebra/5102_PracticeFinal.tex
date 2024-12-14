@@ -1,0 +1,117 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5102 -- Linear Algebra}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Practice Final }
+\newcommand{\DUEDATE}{NONE}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Penera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}
+	\item Let $V$ be a vector space over $F$, let $W$ be an inner product space over $F$ with inner product $\ABRACKET{\cdot, \cdot}_W$, and let $T:V\to W$ be a linear transformation.  Show that 
+	\begin{align*}
+		\ABRACKET{x,y}_V &= \ABRACKET{T(x), T(y)}_W, x,y \in V
+	\end{align*}defines an inner product of $V$ if and only if $T$ is one-to-one.
+	
+	\BLUE{Define $\ABRACKET{\cdot,\cdot}_V$ in this way
+	\begin{align*}
+		 x &\not \in N(T)\\
+		0 &= \ABRACKET{x, 0} = \ABRACKET{T(x), T(0)}=0\\
+		T(0) &= 0\\
+		0 &= \ABRACKET{T(x),T(y)} \to T(y) \in N(T)
+	\end{align*}
+	}
+	
+	\item Let $V$ be an inner produce space over $F$ and let $W$ bve a subspace of $V$.  Show that $(W^\perp)^\perp = W$.
+	
+	\BLUE{Primarily, this is a 'set based' equation, thus we must show subset and superset in order to show equality
+	\begin{itemize}
+		\item $\subseteq$ that is, let $v \in (W^\perp)^\perp$ then for every $x \in W^\perp, \ABRACKET{x,v}=0$.  Let $y \in W$ then $\ABRACKET{x,y} = \ABRACKET{x,v}=0$.  Then $2\ABRACKET{x,y+v}=0$.  $x$ is arbitrary and non-zero therefore $y+v=0$ and $v \in W$.
+		\item $\supseteq$
+\end{itemize}	
+	}
+	
+	\item Let $V$ be an inner product space over $F$ and let $\beta = \{v_1, \dots, v_n\}$ be an orthornormal basis for $V$. Show that
+	\begin{align*}
+		\ABRACKET{x,y} &= \sum_{i=1}^n \ABRACKET{x,v_i}\CONJ{\ABRACKET{y, v_i}}
+	\end{align*}for all $x,y \in V$.
+	
+	\BLUE{\begin{align*}
+		y &= \sum \ABRACKET{y_i, v_i}\\
+		x &= \sum \ABRACKET{x, v_i}\\
+		\ABRACKET{x,y} &= \ABRACKET{x, \sum \ABRACKET{y_i, v_i}} = \sum \ABRACKET{x,\ABRACKET{y_i, v_i}} = 
+	\end{align*}
+	}
+	
+	\item Let $V$ be an inner product space and let $T$ be an invertible linear operator on $V$.  Show that $T^*$ is invertible and $(T^*)^{-1}= (T^{-1})^*$.
+	
+	\BLUE{\begin{align*}
+		I &= TT^{-1} \\
+		I^* &= (TT^{-1})^* = T^*(T^{-1})^* \\
+		(T^*)^{-1}I &= (T^*)^{-1}T^*(T^{-1})^* \\
+		(T^*)^{-1} &= (T^{-1})^* \\
+	\end{align*}
+	}
+	
+	\item Let $V = W \oplus W^\perp$ and let $T$ be the projection on $W$ along $W^\perp$.  Show that $T^*=T$.
+	
+	\BLUE{\begin{align*}
+		R(T) \perp W \to R(T) \subseteq W \\
+		\forall x\in V, \, \ABRACKET{x,y}
+\end{align*}	
+	}
+	
+\end{enumerate}
+\end{document}

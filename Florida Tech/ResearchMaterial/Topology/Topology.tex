@@ -1,0 +1,688 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Topology without Tears}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Sidney Morris}
+\newcommand{\DUEDATE}{Jan 6, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{Daily}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\COV}[1]{(#1_1 \quad \cdots \quad #1_n)}
+\newcommand{\CONTRA}[1]{\PAREN{\begin{array}{c}
+              #1^1\\
+              \vdots \\ 
+              #1^n
+         \end{array}}}
+\newcommand{\SPECIAL}[1]{\begin{center}
+	{\Large \textbf{\textit{\\#1}} }
+\end{center}
+}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\SSS}{\mathbb{S}}
+\newcommand{\SB}{\mathcal{S}}
+
+\title{Topology without Tears}
+\author{Sidney A. Morris}
+\date{June 2020}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Topology Spaces}
+\section{Topology -- Exercises }
+
+\begin{enumerate}
+\item Let $x = \{a,b,c,d,e,f\}$.  Determine whether or not each of the following collections of subsets of $X$ is a topology on $X$:
+\begin{enumerate}
+
+	\item $\TT_1= \{X, \emptyset, \{a\}, \{a,f\},\{b,f\},\{a,b,f\}\};$
+	
+	No, $\{a,f\} \cap \{b,f\} = \{f\} \not \in \TT$.
+	
+	\item $\TT_2 = \{X, \emptyset, \{a,b,f\},\{a,b,d\},\{a,b,d,f\}\};$
+	
+	No, $\{a,b,f\}\cap\{a,b,d\} \not \in \TT$.
+	
+	\item $\TT_3 = \{X, \emptyset, \{f\}, \{e,f\}, \{a,f\}\}	;$
+	
+	No, $\{e,f\} \cup \{a,f\} = \{a,e,f\} \not \in \TT$.
+\end{enumerate}
+
+\item Let $X=\{a,b,c,d,e,f\}$.  Which of the following collections of subsets of $X$ is a topology on $X$? (Justify your answer.)
+
+\begin{enumerate}
+	\item $\TT_1 = \{X,\emptyset, \{c\},\{b,d,e\}, \{b,c,d,e\}, \{b\}\};$
+	\item $\TT_2 = \{X, \emptyset, \{a\}, \{b,d,e\}, \{a,b,d\},\{a,b,d,e\}\};$
+	\item $\TT_3 = \{X, \emptyset, \{b\}, \{a,b,c\}, \{d,e,f\}, \{b,d,e,f\}\};\}$
+\end{enumerate}
+
+\item If $X=\{a,b,c,d,e,f\}$, and $\TT$ is the discrete topology on $X$, which of hte following statements are true?
+
+\noindent
+\begin{enumerate*}
+	\item \textbf{$X \in \TT;$ YES}
+	\item $\{X\} \in \TT;$ NO
+	\item $\{\emptyset\} \in \TT;$ NO
+	\item \textbf{$\emptyset \in \TT;$ YES}\\
+	\item $\emptyset \in X;  NO$
+	\item $\{\emptyset\} \in X; NO$
+	\item \textbf{$\{a\}\in \TT$; YES}
+	\item $a \in \TT;$ NO\\
+	\item \textbf{$\emptyset \subseteq X;$ YES}
+	\item $\{a\}\in X;$ NO
+	\item \textbf{$\{\emptyset\} \subseteq X;$ YES}
+	\item \textbf{$a \in X;$ YES}\\ 
+	\item \textbf{$X\subseteq \TT;$ YES}
+	\item $X\subseteq \TT;$ YES
+	\item $\{X\} \subseteq \TT;$ NO
+	\item $a \subseteq \TT;$ NO
+\end{enumerate*}
+
+\item Let $(X, \TT)$ be any topological space.  Verify that \textbf{\textit{the intersection of any finite number of members of $\TT$ is a member of $\TT$}}.
+
+\item Let $\R$ be the set of all real numbers.  Prove that each of the following collections of subsets of $\R$ is a topology
+\begin{enumerate}[label=(\roman*)]
+	\item $\TT_1$ consists of $\R, \emptyset$, and every interval $(-n,n)$, for $n$ any positive integer, where $(-n,n)$ denotes the set $\{x \in\R:-n<x<n\};$
+	\item $\TT_2$ consists of $\R, \emptyset$, and every interval $[-n,n]$, for $n$ any positive integer, where $[-n,n]$ denotes the set $\{x \in\R:-n\le x\le n\};$
+	\item $\TT_3$ consists of $\R, \emptyset$, and every interval $[n,\infty)$, for $n$ any positive integer, where $[n,\infty)$ denotes the set $\{x \in\R:n\le x\};$
+\end{enumerate}
+
+\item 
+\begin{enumerate}[label=(\roman*)]
+	\item $\TT_1$ consists of $\N, \emptyset$, and every set $\{1,2,\dots,n\}$, for $n$ any positive integer. (This is called \textbf{\textit{initial segment topology}}).
+	\item $\TT_2$ consists of $\N,\emptyset$, and every $\{n, n+1, \dots\}$, for $n$ any positive integer. (This is called the \textbf{\textit{final segment topology}}.)
+\end{enumerate}
+
+\item List all possible topologies on the following sets:
+\begin{enumerate}
+	\item $X = \{a,b\};$
+	\item $Y = \{a,b,c\};$
+\end{enumerate}
+
+\item Let $X$ be an infinite set and $\TT$ a topology on $X$.  If every infinte subset of $X$ is in $\TT$, prove that $\TT$ is the discrete topology.
+
+\item Let $\R$ be the set of all real numbers Precisely three of the followin ten collections are subsets of $\R$ are topologies.  Identify these and justifey your answer.
+\begin{enumerate}[label=(\roman*)]
+	\item $\TT_1$ consists of $\R, \emptyset$, and every interval $(a,b)$, for $a$ and $b$ any real numbers where $a<b$.
+	\item $\TT_2$ consists of $\R, \emptyset$ and every interval $(-r,r)$, for $r$ any positive real number.
+	\item $\TT_3$ consists of $\R,\emptyset$, and every interval $(-r,r)$, for $r$ any positive rational number;
+	\item $\TT_4$ consists of $\R,\emptyset$, and every interval $[-r,r]$, for $r$ any positive rational number;
+	\item $\TT_5$ consists of $\R,\emptyset$, and every interval $(-r,r)$, for $r$ any positive irrational number;
+	\item $\TT_6$ consists of $\R,\emptyset$, and every interval $[-r,r]$, for $r$ any positive irrational number;
+	\item $\TT_7$ consists of $\R,\emptyset$, and every interval $[-r,r)$, for $r$ any positive real number;
+	\item $\TT_8$ consists of $\R,\emptyset$, and every interval $(-r,r]$, for $r$ any positive real number;
+	\item $\TT_9$ consists of $\R,\emptyset$, and every interval $[-r,r]$,  and every interval $(-1,r)$, for $r$ any positive real number;
+	\item $\TT_{10}$ consists of $\R, \emptyset$, every internval $[-n,n]$, and every interval $(-r,r)$, for $n$ any positive intger and $r$ any positive real number.
+\end{enumerate}
+
+\end{enumerate}
+%end of 1.1 Exercises
+
+\newpage
+\section{Open Sets - Exercises}
+
+\begin{enumerate}
+\item List all 64 subsets of the set $X$ in Example 1.1.2.  Write down, next to each set, whether it is (i) clopen, (ii) neither open nor closed; (iii) open but not closed; (iv) closed but not open.
+
+\newcommand{\OPEN}{\text{,open}}
+\newcommand{\CLOSED}{\text{,closed}}
+\newcommand{\CLOPEN}{\text{,clopen}}
+\newcommand{\NOTT}{\text{,neither}}
+\textbf{\textit{Example 1.1.2}}: Let $X=\{a,b,c,d,e,f\}$ and \[ \TT_1=\{X,\emptyset, \{a\}, \{c,d\},\{a,c,d\},\{b,c,d,e,f\}\}.\]
+\begin{itemize}
+	\item size one
+	\begin{align*}
+		\begin{array}{cccccc}
+			\{a\}\CLOPEN&\{b\}\NOTT&\{c\}\NOTT&\{d\}\NOTT&\{e\}\NOTT&\{f\}\NOTT
+		\end{array}
+	\end{align*}
+	
+	\item size two
+	\begin{align*}
+		\begin{array}{ccccc}
+			\{a,b\}\NOTT&\{a,c\}&\{a,d\}&\{a,e\}&\{a,f\}\\
+			\{b,c\}&\{b,d\}&\{b,e\}&\{b,f\}\\
+			\{c,d\}\OPEN&\{c,e\}&\{d,f\}\\
+			\{d,e\}&\{d,f\}\\
+			\{e,f\}\\
+		\end{array}
+	\end{align*}
+	
+	\item size three
+	\begin{align*}
+		\begin{array}{cccc}
+			\{a,b,c\} & \{a,b,d\} & \{a,b,e\} & \{a,b,f\}\\
+			\{a,c,d\}\OPEN & \{a,c,e\} & \{a,c,f\}\\
+			\{a,d,e\} & \{a,d,f\}\\
+			\{a,e,f\}\\
+			\{b,c,d\} & \{b,c,e\} & \{b,c,f\}\\
+			\{b,d,e\} & \{b,d,f\}\\
+			\{b,e,f\}\\
+			\{c,d,e\} & \{c,d,f\}\\
+			\{c,e,f\}\\
+			\{d,e,f\}
+		\end{array}
+	\end{align*}
+	
+	\item size four
+	\begin{align*}
+		\begin{array}{ccc}
+			\{a,b,c,d\} & \{a,b,c,e\} & \{a,b,c,f\}\\
+			\{a,b,d,e\} & \{a,b,d,f\}\\
+			\{a,b,e,f\}\\
+			\{b,c,d,e\} & \{b,c,d,f\}\\
+			\{c,d,e,f\}
+		\end{array}
+	\end{align*}
+	
+	\item size five
+	\begin{align*}
+		\begin{array}{cc}
+			\{a,b,c,d,e\} & \{a,b,c,d,f\} \\
+			\{a,b,c,e,f\}\\
+			\{a,b,d,e,f\}\\
+			\{a,c,d,e,f\}\\
+			\{b,c,d,e,f\}\CLOPEN
+		\end{array}
+	\end{align*}
+	
+	\item size six
+	
+		$\{a,b,c,d,e,f\}\OPEN$
+\end{itemize}
+
+\newpage
+\item Let $(X,\TT)$ be a topological space with the property that every subset is closed.  Prove that it is a discrete space.
+
+\BLUE{\begin{align*}
+	S \subseteq X \implies X\backslash S \text{ is open } \implies X\backslash S \in \TT \\
+	T \in \TT \implies X\backslash T \text{ is closed} \implies T \subseteq X
+\end{align*} }
+
+\item Observe that if $(X,\TT)$ is a discrete space or an indiscrete space, then every open set is a clopen set.  Find a topology $\TT$ on the set $X=\{a,b,c,d\}$ which is not discrete and is not indiscrete but has the property that every open set is clopen.
+
+\BLUE{Let $\TT = \{X, \emptyset, \{a\}, \{b,c,d\}\}$}
+
+\item Let $X$ be an infinite set.  If $\TT$ is a topology on $X$ such that every infinite subset of $X$ is closed, prove that $\TT$ is the discrete topology.
+
+\begin{align*}
+	S \subseteq X \text{ and } |S| = \infty\\
+	| X\backslash S | < \infty \implies X\backslash S \text{ is open}
+\end{align*}there are an infinite number of finite subsets whose compliment is infinite and closed.  These are precisely what make up a discrete topology.
+
+\item Let $X$ be an infinite set and $\TT$ a topology on $X$ with the property that the only infinite subset of $X$ which is open is $X$ itself.  Is $(X,\TT)$ necessarily an indiscrete space?
+
+\item \begin{enumerate}[label=(\roman*)]
+	\item Let $\TT$ be a topology on a set $X$ such that $\TT$ consists of precisely for sets; that is, $\TT = \{X,\emptyset, A,B\}$, where $A$ and $B$ are non-empty distinct proper subsets of $X$.  [$A$ is a \textbf{\textit{proper subset}} of $X$ means that $A \subseteq X$ and $A \ne X$.  This si denoted by $A\subset X$.]  Prove that $A$ and $B$ must satisfy exactly one of the following conditions.
+	\begin{center}
+	(a) $B=X\backslash A;$    (b) $A \subset B$;    (c) $B\subset A$;	
+	\end{center}
+[Hint. Firstly show that $A$ and $B$ must satisfy at least one of the conditions and then show that they cannot satisfy more than one of the conditions.]
+
+\item Using (i) list all topologies on $X =\{1,2,3,4\}$ which consist of exactly four sets.
+	
+\end{enumerate}
+
+\item \begin{enumerate}[label=(\roman*)]
+	\item A recorded in \url{http://en.wikipedia.org/wiki/Finite_topological_space}, the number of distinct topologies on a set with $n \in \N$ points can be very large even for small $n$; namely when $n =2$, there are 4 topologies;  when $n=3$, there are 29 topologies:  when $n=4$, there are 355 topologies;  when $n=5$, there are 6942 topologies etc.  Using mathematical induction, prove that as $n$ increases the number of topologies increases.
+%	[Hint. It suffices to show that if a set with $n$ points has $M$ distinct topolgies, then a set with $n+1$ points has at least $M+1$ topologies.]
+	
+	\item Using mathematical induction prove that if the finite set $X$ has $n \in \N$ then it has at least $(n-1)!$ distinct topolgies.\\
+%	[Hint. Let $X = \{x_1,\dots,x_n\}$ and $Y=\{x_1,\dots, x_n,x_{n+1}\}$.  If $\TT$ is any topologyon $X$, fix an $i \in \{1,2,\dots,n\}.$  Definte a topology $\TT_i$ on $Y$ as follows: For each open set $U \in \TT$, definte $U_i$ by replacign any occurrence of $x_i$ in $U$ by $x_{n+1}$; then $\TT_i$ consists of all $U_i$ plus the set $Y$.  Verify that $\TT_i$ is indeed a topology on $y$.  Deduce that for each topology on $X$, there are at least $n$ distinct topologies on $Y$.]
+	
+	\item If $X$ is any infintie set of cardinality $\mathfrak{N}$, prove that there are at least $2^\mathfrak{N}$ distinct topologies on $X$.  Deduce that every infinite set has an uncountable number of distinct topolgies on it.
+	%[Hint. Prove that there are at least $2^\mathfrak{N}$ distinct topologies with precisely 3 open sets.  For an introduction to cardinal numbers, see Appendix 1.]
+\end{enumerate}
+\end{enumerate}
+
+\newpage
+\section{Finite Closed Topology -- Exercises}
+
+\begin{enumerate}
+	\item Let $f$ be a function from a set $X$ into a set $Y$.  Then we stated in Example 1.3.9 that
+\begin{align}
+	f^{-1}\left(\bigcup_{j\in J}B_j \right) = \bigcup_{j\in J}f^{-1}(B_j)
+\end{align} and 
+\begin{align}
+	f^{-1}\left( B_1 \bigcap B_2\right) = f^{-1}(B_1)\cap f^{-1}(B_2)
+\end{align} 
+for any subsets $B_j$ of $Y$ and any index set $J$.
+\begin{enumerate}
+	\item Prove that (1.1) is true
+	
+	\begin{align*}
+		\text{Let } y &\in \bigcup_{j \in J} B_j\\
+		\exists k \in J &\to y \in B_k \\
+		f^{-1}(y) &\in f^{-1}\left(\bigcup_{j\in J} B_j\right) \text{ and } f^{-1}(y) \in f^{-1}(B_k) \\
+		f^{-1}(B_k) & \subseteq f^{-1}\left(\bigcup_{j\in J} B_j\right)
+	\end{align*}since there MUST be a $k$ for each $y$ then it must be that all $\cup_{j\in J}f^{-1}(B_j) \subseteq f^{-1}\left(\bigcup_{j\in J} B_j\right)$
+	
+	\item Prove that (1.2) is true.
+	\item Find (concrete) sets $A_1,A_2, X$, and $Y$ and a function $f: $X$ \to Y$ such that $f(A_1\cap A_2)\ne f(A_1)\cap f(A_2)$, where $A_1 \subseteq X$ and $A_2 \subseteq X$.
+\end{enumerate}
+
+\item Is the topology $\TT$ described in Exercises 1.1 \#6 (ii) the finite-closed topology?
+
+$\TT_2$ consists of $\N,\emptyset$, and every $\{n, n+1, \dots\}$, for $n$ any positive integer. (This is called the \textbf{\textit{final segment topology}}.)
+
+\SPECIAL{$T_1$-spaces}
+
+\item A topological space $(X, \TT)$ is said to be a \textbf{$T_1$-space} if every singleton set $\{x\}$ is closed in $(X,\TT)$.  Show that precisely two of the following nine topological spaces are $T_1$-spaces. (Justify your answer).
+\begin{enumerate}[label=(\roman*)]
+	\item a discrete space.
+	\item an indiscrete space with at least two points.
+	\item an infinite set with the finite-closed topology.
+	\item Exampe 1.1.2;
+	\item Exercise 1.1 \#5 (i)
+	
+	$\TT_1$ consists of $\R, \emptyset$, and every interval $(-n,n)$, for $n$ any positive integer, where $(-n,n)$ denotes the set $\{x \in\R:-n<x<n\};$
+	
+	\item Exercise 1.1 \#5 (ii)
+	
+	$\TT_2$ consists of $\R, \emptyset$, and every interval $[-n,n]$, for $n$ any positive integer, where $[-n,n]$ denotes the set $\{x \in\R:-n\le x\le n\};$
+	
+	\item Exercise 1.1 \#5 (iii)
+	
+	$\TT_3$ consists of $\R, \emptyset$, and every interval $[n,\infty)$, for $n$ any positive integer, where $[n,\infty)$ denotes the set $\{x \in\R:n\le x\};$
+	
+	\item Exercise 1.1 \#6 (i)
+	
+	$\TT_1$ consists of $\N, \emptyset$, and every set $\{1,2,\dots,n\}$, for $n$ any positive integer. (This is called \textbf{\textit{initial segment topology}}).
+	
+	\item Exercise 1.1 \#6 (ii)
+	
+	$\TT_2$ consists of $\N,\emptyset$, and every $\{n, n+1, \dots\}$, for $n$ any positive integer. (This is called the \textbf{\textit{final segment topology}}.)
+	
+\end{enumerate}
+
+\item Let $\TT$ be the finite-closed topology on a set $X$.  If $\TT$ is also the discrete topology, prove that the set $X$ is finite.
+
+\SPECIAL{$T_0$-space and the Sierpinsi Space}
+
+\item A topological space $(X,\TT)$ is said to be a \textbf{$T_0$-space} if for each pair of distinct points $a,b$ in $X$, either there exist an open seet containing $a$ and not $b$, or there exists an open set containing $b$ and not $a$.
+
+\begin{enumerate}[label=(\roman*)]
+	\item Prove that every $T_1$-space is a $T_0$-space.
+	\item Which of $(i)-(iv)$ in Exercise 3 above are $T_0$-spaces?
+	\item Put a topology $\TT$ on the set $X=\{0,1\}$ so that $(X,\TT)$ will be a $T_0$-space but not a $T_1$-space. [known as the \textbf{Sierpinski space}.]
+	\item Prove that each of the topological spaces described in Exercise 1.1 \#6 is a $T_0$-space.
+\end{enumerate}
+
+	\SPECIAL{Countable-Closed Topology}
+
+\item Let $X$ be any infinite set.  The \textbf{\textit{countable-closed topology}} is defined to be the topology having as its closed sets $X$ and all countable subsets of $X$.  Prove that this is indeed a topology on $X$.
+
+\item Let $\TT_1$ and $\TT_2$ be two topologies on a set $X$.  Prove each of the following statements.
+\begin{enumerate}[label=(\roman*)]
+	\item $\TT_3$ is definted by $\TT_3 = \TT_1 \cup \TT_2$, then $\TT_3$ is not necessarily a topology on $X$. 
+	\item If $\TT_4$ is defined by $\TT_4 = \TT_1 \cap \TT_2$, then $\TT_4$ is a topology on $X$.
+	\item If $(X,\TT_1)$ and $(X,\TT_2)$ are $T_1$-spaces, then $(X,\TT_4)$ is a $T_1$-space.
+	\item If $(X,\TT_1)$ and $(X,\TT_2)$ are $T_0$-spaces, then $(X,\TT_4)$ is not necessarily a $T_0$-space.
+	\item If $\TT_1, \TT_2, \dots, \TT_n$ are topologies on a set $X$, the $\TT = \bigcap_{i=1}^n \TT_i$ is a toplogy on $X$.
+	\item If for each $i \in I$, for some index set $I$, each $\TT_i$ is a topology on the set $X$, then $\TT = \bigcap_{i\in I} \TT_i$ is a topology on $X$.
+\end{enumerate}
+
+\SPECIAL{Distinct $T_1$-topologies on a Finite Set}
+
+\item In Wikipedia \url{//enwikipedia.org/wiki/Finite_topological_space}, as we noted in Exercise 1.2 \#7, it says that the number of topologies on a finite set with $n \in \N$ points can be quite large, even for small $n$.  This is also true even for $T_0$-spaces; for $n=5$, ther are 4231 distinct $T_0$-spaces.  Prove, using mathemtaical induction, that as $n$ increases, the number of $T_0$-spaces increases.
+
+\item A topological space $(X,T)$ is said to be a \textbf{\textit{door space}} if every subset of $X$ is either an open set or a closed set (or both).
+\begin{enumerate}[label=(\roman*)]
+	\item Is a discrete space a door space?
+	\item Is an indiscrete space a door space?
+	\item If $X$ is an infintie set and $\TT$ is the finite-closed topology, is $(X,\TT)$ a door space?
+	\item Let $X$ be the set $\{a,b,c,d\}$.  Identify those topologies $\TT$ on $X$ which make it into a door space.
+\end{enumerate}
+
+\SPECIAL{Saturated Sets}
+
+\item A subset $S$ of a topological space $(X,\TT)$ is said to be \textbf{saturated} if it is an intersection of open sets in $(X, \TT)$.
+\begin{enumerate}[label=(\roman*)]
+	\item Verify that every open set is a saturated set.
+	\item Verify that in a $T_1$-space every set is saturated set.
+	\item Give an example of a topological space which has atleast one subset which is not saturated.
+	\item Is it true that if the topological sapce $(X, \TT)$ is such that every subset is saturated, then $(X,\TT)$ is a $T_1$-space?
+\end{enumerate}
+\end{enumerate} % Finite Closed Topology Exercises
+
+\chapter{The Euclidean Topology}
+\section{Euclidian Space -- Exercises}
+
+\begin{enumerate}
+
+\item Prove that if $a,b \in \R$ with $a < b$ then neither $[a,b)$ nor $(a,b]$ is an open subset of $\R$.  Also show that neither is a closed subset of $\R$.
+
+\BLUE{In the case of $[a,b)$ there is no set $a \in (x,y)$ because $x < a$ implies that $x+\frac{|x-a|}{2}$ would have to be a member of $[a,b)$ which it cannot.  Similarly for $(a,b]$. }
+
+\item Prove that the sets $[a,\infty)$ and $(-\infty, a]$ are closed subsets of $\R$.
+
+\BLUE{The complement of $[a,\infty)$ is $(-\infty, a)$ which is open and similarly for $(-\infty, a]$.}
+
+\item Show, by example, that the union of an infinite number of closed subsets of $\R$ is not necessarily a closed subset of $\R$.
+
+\BLUE{Define $S_i = [1/i, 1]$ then $\mathcal{S} = \cup_{i=1}^\infty S_i$.  Obviously, given any $n \in \N$ there is a closed set $S_n=[1/n, 1]$ and there exists $(1/(n+1),1) \subseteq \mathcal{S}$ such that $1/n \in  (1/(n+1),1)$ hence $\mathcal{S}$ must be open.}
+
+\item Prove each of the following statements.
+\begin{enumerate}[label=(\roman*)]
+	\item The set $\Z$ of all integers is not an open set of $\R$.
+	\item The set $\mathbb{P}$ of all prime numbers is a closed subset of $\R$ but not an open subset of $\R$.
+	\item The set $\mathbb{I}$ of all irrational numbers is neither a closed subset nor an open subset of $\R$.
+\end{enumerate}
+
+\item If $F$ is a non-empty finite subset of $\R$, show that $F$ is closed in $\R$ but that $F$ is not open in $\R$.
+
+\item If $F$ is non-empty countable subset of $\R$, prove that $F$ is not an open set, but that $F$ may or may not be a closed set depending on the choice of $F$.
+
+\item \begin{enumerate}[label=(\roman*)]
+
+	\item Let $S=\{0,1,1/2,1/3,1/4,1/5, \dots, 1/n, \dots\}$.  Prove that the set $S$ is closed in the euclidean topology on $\R$.
+	
+	\item Is the set $T=\{1,1/2,1/3,1/4,1/5,\dots,1/n, \dots\}$ closed in $\R$?
+	
+	\item Is the set $\{\sqrt{2}, 2\sqrt{2},3\sqrt{2},\dots, n\sqrt{2}, \dots\}$ closed in $\R$?
+
+\end{enumerate}
+	
+	\SPECIAL{$F_\sigma$-Sets and $G_\delta$-sets.}
+
+\item \begin{enumerate}[label=(\roman*)]
+
+	\item Let $(X, \TT)$ be a topological space.  \begin{center} A subset $S$ of $X$ is said to be an \DEFINE{$F_\sigma$ set} if it is the \textbf{union of a countable number of closed sets}.\end{center} Prove that all open intervals $(a,b)$ and all closed intervals $[a,b]$ are $F_\sigma$-sets in $\R$.\\
+	
+	\textbf{All open intervals:} Define $n \in \N$ then we can see that \[ (a,b) = \bigcup_{n=2}^\infty \SQBRACKET{a+\frac{1}{n}, b-\frac{1}{n}}.\] The left side is made up of countable number of closed sets.\\
+	\\
+	\textbf{All closed intervals} are a countable union of closed intervals.\\
+	
+	\item Let $(X, \TT)$ be topological space.  \begin{center}A subset $T$ of $X$ is said to be a \DEFINE{$G_\delta$-set} if it is the \textbf{intersection of a countable number of open sets}.\end{center}  Prove that all open intervals $(a,b)$ and all closed intervals	 $[a,b]$ are $G_\delta$-sets in $\R$.\\
+	
+	\textbf{All open intervals:} every $(a,b)=(a,b) \cap \emptyset$ both of which are open.\\
+	\\
+	\textbf{All closed intervals:} Define $n\in \N$ then \[ [a,b] = \bigcap_{n=1}^\infty \PAREN{a-\frac{1}{n}, b+\frac{1}{n}}\]\\
+	
+	\item Prove that the set $\Q$ of rationals is an $F_\sigma$-set in $\R$.  
+	
+	For every $q \in \Q$ there exists $a,b \in \Z$ such that $a = \frac{a}{b}$.  There are countable number of elements for $a$ and countable number of elements for $b$, the union of which leads to countable number of elements for $\Q$.  Each of these elements is closed, hence $F_\sigma$.
+	
+	\item Verify that the complement of an $F_\sigma$-set is a $G_\delta$-set and the complement of a $G_\delta$-set is an $F_\sigma$-set.
+	
+	Given any $(a,b) \in F_\sigma$ then 
+	\begin{align*}
+		(a,b)^C &= (-\infty, a] \cup [b, \infty) \\
+		&= \PAREN{\bigcup_{i+1}^\infty \PAREN{\infty, a-\frac{1}{i}}} \bigcup \PAREN{\bigcup_{j=1}^\infty \PAREN{\b+\frac{1}{j}}}
+	\end{align*}
+	
+
+\end{enumerate}
+
+\end{enumerate}  %2.1 Euclidian Topology
+
+\newpage
+\section{Basis for a Topology -- Exercises}
+
+\begin{enumerate}
+
+\item In this exercise you will prove that disc $\{\ABRACKET{x,y}, : x^2+y^2< 1\}$ is an open set of $\R^2$, and then that every open disc in the plane is an open set.
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Let $\ABRACKET{a,b}$ be any point in the disc $D = \{\ABRACKET{x,y} : x^2+y^2 < 1\}$.  Put $r=\sqrt{a^2+b^2}$.  Let $R_{\ABRACKET{a,b}}$ be the open rectangle with vertices at the points $\ABRACKET{a\pm \frac{1-r}{8}, b\pm \frac{1-r}{8}}$.  Verify that $R_{\ABRACKET{a,b}} \subset D$.
+	
+	\item Using (i) show that \[ D = \bigcup_{\ABRACKET{a,b}\in D} R_{\ABRACKET{a,b}}. \]
+	
+	\item Deduce from (ii) that $D$ is an open set in $\R^2$.
+	
+	\item Show that every disc $\{\ABRACKET{x,y}:(x-a)^2+(y-b)^2<c^2,a,b,c \in \R\}$ is open in $\R^2$.
+
+\end{enumerate}
+
+\item In this exercise you will show that the collection of all open discs in $\R^2$ is a basis for a topology on $\R^2$. [Later we shall see that this is the euclidean topology.]
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Let $D_1$ and $D_2$ be any open discs in $\R^2$  wtih $D_1 \cap D_2 \ne \emptyset$.  If $\ABRACKET{a,b}$ is any point in $D_1 \cap D_2$, show that there exists an open disc $D_{\ABRACKET{a,b}}$ with center $\ABRACKET{a,b}$ such that $D_{\ABRACKET{A,B}} \subset D_1 \cap D_2$. [Hint: draw a picture and use a method similar to that of Exercsie 1 (i).]
+	
+	\item Show that \[ D_1 \cap D_2 = \bigcup_{\ABRACKET{a,b}\in D_1 \cap D_2} D_{\ABRACKET{a,b}} \]
+	
+	\item Using (ii) and Proposition 2.2.8, prove that the collection of all open discs in $\R^2$ is a basis for a topology on $\R^2$.
+
+\end{enumerate}
+
+\item Let $\BB$ be a collection of all open intervals $(a,b)$ in $\R$ with $a < b$ and $a$ and $b$ rational numbers.  Prove that $\BB$ is a basis for euclidean topology on $\R$.[Compare this with Proposition 2.2.1 and Example 2.2.3 where $a$ and $b$ where not necessarily rational.]
+
+\SPECIAL{Second Axiom of Countability}
+
+\item A topological space $(X, \TT)$ is said to satisfy the \DEFINE{second axiom of countability} or to be \DEFINE{second countable} if there exists a basis $\BB$ for $\TT$, where $\BB$ consists of only a countable number of sets.
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Using Exercise 3 above show that $\R$ satisfies the second axiom of countability.
+	
+	\item Prove that the discrete topology on an uncountable set does not satisfy the second axiom of countability. [Hint: It is \underline{not} enough to show that one particular basis is uncountable.  You must prove that \underline{every} basis for this topology is uncountable.]
+	
+	\item Prove that $\R^n$ satisfies the second axiom of countability, for each positive integer $n$.
+	
+	\item Let $(X, \TT)$ be the set of all integers with the finite-closed topology.  Does the space $(X, \TT)$ satisfy the second axiom of countability?
+	
+\end{enumerate}
+
+\item Prove the following statements:
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Let $m$ and $c$ be real numbers.  Then the line $L=\{\ABRACKET{x,y}: y=mx+c\}$ is a closed subset of $\R^2$
+	
+	\item Let $\SSS^1$ be the unit circle given by $\SSS^1 = \{\ABRACKET{x,y} \in \R^2 : X^2+y^2=1\}$.  Then $\SSS^1$ is a closed subset of $\R^2$.
+	
+	\item Let $\SSS^n$ be the unit $n$-sphere give by \[ \SSS^n = \{\ABRACKET{x_1,x_2,\dots,x_n} \in \R^n : x_1^2+x_2^2+\cdots+x_n^2 = 1\}.\]  Then $\SSS^n$ is closed subset of $\R^{n+1}$.
+	
+	\item Let $B^n$ be the closed unit $n$-ball give by \[ B^n = \{\ABRACKET{x_1,x_2,\dots,x_n} \in \R^n : x_1^2+x_2^2+\cdots+x_n^2 \le 1\}.\]  Then $B^n$ is a closed subset of $\R^n$.
+	
+	\item the curve $C = \{\ABRACKET{x,y}\in\R^2 : xy=1\}$ is a closed subset of $\R^2$
+
+\end{enumerate}
+
+\SPECIAL{Product Topology}
+\item Let $\BB_1$ be a basis for a topology $\TT_1$ on a set $X$ and $\BB_2$ a basis for a topology $T_2$ on a set $Y$.  the set $X \times Y$ consists of all ordered pairs $\ABRACKET{x,y}, $X$ \in X$ and $y \in Y$.  Let $\BB$ be the collection of subsets of $X \times Y$ consisting of all the sets $B_1 \times B_2$ where $B_1 \in \BB_1$ and $B_2 \in \BB_2$.  Prove that $\BB$ is a basis for a topology on $X \times Y$.  the topology so defined is called the \DEFINE{product topology} on $X \times Y$.
+
+\item Using Exercise 3 above and Exercise 2.1 \#8, prove that every open subset of $\R$ is an $F_\sigma$-set and a $G_\delta$-set.
+\end{enumerate} % Basis for a Topology
+
+\section{Basis for a Given Topology}
+
+\begin{enumerate}
+
+\item Determine whether or not aeach of the following collections is a basis for the euclidean topology on $\R^2$.
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item the collection of all "open" squares with sides parallel to the axes;
+	
+	\item the collection of all "open" discs;
+	
+	\item the collection of all "open" squares;
+	
+	\item the collection of all "open" rectangles;
+	
+	\item the collection of all "open" triangles";
+	
+\end{enumerate}
+
+\item \begin{enumerate}[label=(\roman*)]
+
+	\item Let $\BB$ be a basis for a topology $\TT$ on a non-0empty set $X$.  If $\BB_1$ is a collection of subsets of $X$ sucht that $\TT \subseteq \BB_1 \subseteq \BB$, prove that $\BB_1$ is also a basis for $\TT$.
+	
+	\item Deduce from (i) that there exist an uncountable number of distinct bases for the euclidean topology on $\R$.
+
+\end{enumerate}
+
+\item Let $\BB = \{(a,b]:a,b\in \R, a < b\}$.  As seen in Example 2.3.1, $\BB$ is a basis for a topology $\TT$ on $\R$ and $\TT$ is \underline{not} the eucliden topology on $\R$.  nevfertheless, show that each interval $(a,b)$ is open in $(\R, \TT)$.
+
+\item Let $C[0,1]$ be the set of all continuous real-valued functions on $[0,1]$.
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Show that the collection $\MM$, where $\MM = \{M(f,\epsilon):f \in C[0,1]$ and $\epsilon$ is a positive real number$\}$ and \[M(f,\epsilon) = \BRACKET{g:g \in C[0,1]\text{ and }\int_0^1|f-g|< \epsilon},\] is a basis for a topology $\TT_1$ on $C[0,1]$
+	
+	\item Show that the collection $\UU$, where $\UU=\BRACKET{U(f,\epsilon):f\in C[0,1]\AND \epsilon \in \R^+}$ and \[M(f,\epsilon) = \BRACKET{g:g\in C[0,1]\AND \sup_{x\in[0,1]} |f(x)-g(x)|< \epsilon},\] is a basis for a topology $\TT_2$ on $C[0,1]$
+	
+	\item Prove that $\TT_1 \ne \TT_2$.
+
+\end{enumerate}
+
+\SPECIAL{Subbasis for a Topology}
+
+\item Let $(X, \TT)$ be a topological space.  A non-empty collection $\SB$ of open subsets of $X$ is said to be \DEFINE{subbasis} of $\TT$ if the collection of all finite intersections fo members of $\SB$ forms a basis for $\TT$.
+\begin{enumerate}[label=(\roman*)]
+
+	\item Prove that the collection of all open intervals of the form $(a, \infty)$ or $(-\infty, b)$ is a subbasis for the euclidean topology on $\R$.
+	
+	\item Prove the $\SB = \{\{a\}, \{a,c,d\},\{b,c,d,e,f\}\}$ is a subbasis for the topology $\TT_1$ of Example 1.1.2.
+
+\end{enumerate}
+
+\item Let $\SB$ be a subbasis for a topology $\TT$ on the set $\R$.  (See Exercise 5 above.)  If all of the closed intervals $[a,b]$, with $a<b$, are in $\SB$, prove that $\TT$ is the discrete topology.
+
+\item Let $X$ be a set with at least two elements and $\SB$ the colections of all $X \backslash \{x\}, $X$ \in X$.  Prove that $\SB$ is a subbasis for the finite-closed topology on $X$.
+
+\item Let $X$ be any infinite set and $\TT$ the discrete topology on $X$.  Find a subbasis $\SB$ for $\TT$ such that $\SB$ does not contain any singleton sets.
+
+\item Let $\SB$ be a collection of all straight lines in the plane $\R^2$.  If $\SB$ is a subbasis for a topology $\TT$ on the set $\R^2$, what is the topology?
+
+\item Let $\SB$ be a collection of all straight lines in the plane which are parallel to the X-axis.  If $\SB$ is a subbasis for4 a topology $\TT$ on $\R^2$, describe the open set in $(\R^2, \TT)$.
+
+\item Let $\SB$ be a collection of all circles in the plane. If $\SB$ is a subbasis for a topology $\TT$ on $\R^2$, describe the open sets in $(\R^2, \TT)$.
+
+\item Let $\SB$ be the collection of all circles in the plane which have their centres on the X-axis.  If $\SB$ is a subbasis for a topology $\TT$ on $\R^2$, describe the open sets in $(\R^2, \TT)$.
+
+\end{enumerate} % Basis for a Given Topology
+\setcounter{chapter}{49} 
+\chapter{Important Definitions}
+
+\section{Basic and T-spaces}
+
+\begin{definition}[Discrete/Indiscrete Topologies]Let $X$ be any non-empty set and let $\TT$ be the collection of all subsets of $X$ . Then topological space ($X$, $\TT$) is called \DEFINE{the discrete topology} on the set $X$.\\
+\\
+Let X be any non-empty set and is called \DEFINE{the indiscrete topology} and $(X, \TT) \to \TT = \{X, \emptyset\}$.
+\end{definition}
+
+\begin{definition}[Finite-Closed Topologies]Let $X$ be any non-empty set. A topology $\TT$ on $X$ is called the \DEFINE{finite-closed topology or the cofinite topology} if the closed subsets
+of $X$ are $X$ and all finite subsets of $X$ ; that is, the open sets are $\emptyset$ and all subsets of $X$ which have finite complements.
+\end{definition}
+
+\begin{definition}[Countable-Closed Topologies]
+\end{definition}
+
+\begin{definition}[$T_0$ Spaces]A topological space $(X,\TT)$ is said to be a \textbf{$T_0$-space} if for each pair of distinct points $a,b$ in $X$, either there exist an open set containing $a$ and not $b$, or there exists an open set containing $b$ and not $a$.
+\end{definition}
+
+\begin{definition}[$T_1$ Spaces]A topological space $(X, \TT)$ is said to be a \textbf{$T_1$-space} if every singleton set $\{x\}$ is closed in $(X,\TT)$.
+\end{definition}
+
+\begin{definition}[$T_2$ Space or Hausdorf]A topological space $(X,
+\TT )$ is said to be Hausdorff (or a $T_2$-space) if given any
+pair of distinct points $a, b$ in $X$ there exist open sets $U$ and $V$ such that $a \in U, b \in V,$ and $U \cap V = \emptyset$ .
+\end{definition}
+
+\begin{definition}[$T_3$ Spaces, Regular Space]A topological space $(X,
+\TT )$ is said to be a regular space if for any closed subset
+$A$ of $X$ and any point $x \in X \backslash A$, there exist open sets $U$ and $V$ such that $x \in U, A \subseteq V$, and $U \cap V = \emptyset$ . If $(X, \TT )$ is regular and a $T_1$-space, then it is
+said to be a $T_3$-space
+\end{definition}
+
+\begin{definition}[Dense] Let $A$ be a subset of a topological space $(X, \TT)$.  Then, $A$ is said to be \DEFINE{dense in $X$} or \DEFINE{everywhere dense in $X$} if $\CONJ{A} =X$.
+\end{definition}
+
+\section{Homeomorphisms}
+
+\begin{remark}Preserved by Homeomorphisms
+\begin{enumerate}
+	\item $T_0$-space;
+	\item $T_1$-space;
+	\item $T_2$-space;
+	\item Regular space;
+	\item $T_3$-space;
+	\item Second Axiom of Countability.
+	\item Separable Space;
+	\item Discrete Space;
+	\item Indiscrete Space;
+	\item Finite-closed topology;
+	\item Countable-closed topology;
+\end{enumerate}
+\end{remark}
+
+\begin{remark}two spaces $(X,\TT ) \AND (Y, \TT_1 )$ cannot be homeomorphic if $X$ and $Y$ have different cardinalities (e.g. $X$ is countable and $Y$ is uncountable) or if $\TT$ and $\TT_1$ have different cardinalities.
+\end{remark}
+
+\section{Countability and Topologies}
+
+\begin{definition}[Countable-closed topology] Let $X$ be any infinite set.  The \textbf{\textit{countable-closed topology}} is defined to be the topology having as its closed sets $X$ and all countable subsets of $X$.
+\end{definition}
+
+\begin{definition}[Second Axiom of Countability]A topological space $(X, \TT)$ is said to satisfy the \DEFINE{second axiom of countability} or to be \DEFINE{second countable} if there exists a basis $\BB$ for $\TT$, where $\BB$ consists of only a countable number of sets.
+\end{definition}
+
+\begin{definition}[$F_\sigma$ set]Let $(X, \TT)$ be a topological space.  \begin{center} A subset $S$ of $X$ is said to be an \DEFINE{$F_\sigma$ set} if it is the \textbf{union of a countable number of closed sets}.\end{center}
+\end{definition}
+
+\begin{definition}[$G_\delta$-set]Let $(X, \TT)$ be topological space.  \begin{center}A subset $T$ of $X$ is said to be a \DEFINE{$G_\delta$-set} if it is the \textbf{intersection of a countable number of open sets}.\end{center}
+\end{definition}
+
+\begin{definition}[Product Topology]Let $\BB_1$ be a basis for a topology $\TT_1$ on a set $X$ and $\BB_2$ a basis for a topology $T_2$ on a set $Y$.  the set $X \times Y$ consists of all ordered pairs $\ABRACKET{x,y}, x \in X$ and $y \in Y$.  Let $\BB$ be the collection of subsets of $X \times Y$ consisting of all the sets $B_1 \times B_2$ where $B_1 \in \BB_1$ and $B_2 \in \BB_2$.  Prove that $\BB$ is a basis for a topology on $X \times Y$.  the topology so defined is called the \DEFINE{product topology} on $X \times Y$.
+\end{definition}
+
+\begin{definition}[Subbasis] Let $(X, \TT)$ be a topological space.  A non-empty collection $\SB$ of open subsets of $X$ is said to be \DEFINE{subbasis} of $\TT$ if the collection of \underline{all finite intersections} of members of $\SB$ forms a basis for $\TT$.
+\end{definition}
+
+\section{Miscellaneous}
+
+\begin{definition}[Door Space] A topological space $(X,T)$ is said to be a \textbf{\textit{door space}} if every subset of $X$ is either an open set or a closed set (or both)
+\end{definition}
+
+\begin{definition}[Saturated Topological Space]A subset $S$ of a topological space $(X,\TT)$ is said to be \textbf{saturated} if it is an intersection of open sets in $(X, \TT)$.
+\end{definition}
+
+
+\end{document}

@@ -1,0 +1,111 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5411 -- Mathematical Statistics I}
+\newcommand{\PROFESSOR}{Nezamoddini-Kachouie}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#10 }
+\newcommand{\DUEDATE}{November 14, 2024}
+\newcommand{\SEMESTER}{Fall 2024}
+\newcommand{\SCHEDULE}{MW 5:30 -- 6:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center}
+
+1. Review the attached document below and show that sample variance (with $n-1$ in denominator) is unbiased. \\
+
+\noindent \BLUE{(quoting from the text on page 3)\\
+We start with our definition of $S^2$
+\begin{align*}
+	S^2 &= \frac{1}{n} \sum_{i=1}^n \PAREN{X_i-\bar{X}}^2
+ \end{align*}To find the \textit{mean of $S^2$}, we'll the difference between our observation using two steps.
+ \begin{enumerate}
+ 	\item $X_i$ to the sample mean $\hat{X}$
+ 	\item from the sample mean to the distribution mean.
+ \end{enumerate}that is
+ \begin{align*}
+ 	X_i - \mu &= (X_i-\hat{X})+(\hat{X} - \mu)
+ \end{align*}thus
+	\begin{align*}
+		\sum_{i=1}^n \PAREN{X_i - \mu}^2 &= \sum_{i=1}^n (X_i-\hat{X})+(\hat{X} - \mu)\\
+			&= \sum_{i=1}^n \PAREN{X_i - \mu}^2 + 2 \sum_{i=1}^n \PAREN{X_i - \mu}\PAREN{\hat{X}-\mu} + \sum_{i=1}^n \PAREN{\hat{X} - \mu}^2 \\
+			&= \sum_{i=1}^n \PAREN{X_i - \mu}^2 + 2\PAREN{\hat{X}-\mu} \sum_{i=1}^n \PAREN{X_i - \mu} + \sum_{i=1}^n \PAREN{\hat{X} - \mu}^2 &\text{Note: }\hat{X} = \mu \\
+			&= \sum_{i=1}^n \PAREN{X_i - \mu}^2 + n \PAREN{\hat{X} - \mu}^2 & (1)
+	\end{align*}Using (1) in the definition of $S^2$ we have
+	\begin{align*}
+		S^2 &= \frac{1}{n} \sum_{i=1}^n \PAREN{X_i-\bar{X}}^2 \\
+			&= \frac{1}{n} \sum_{i=1}^n \PAREN{X_i - \mu}^2 + \PAREN{\hat{X} - \mu}^2 \\
+	\end{align*}Examining the \textit{expected value} of variance, keeping in mind its linear properties, we have
+	\begin{align*}
+		E[S^2] &= E\SQBRACKET{\frac{1}{n} \sum_{i=1}^n \PAREN{X_i - \mu}^2 +  \PAREN{\hat{X} - \mu}^2} \\
+			&= \frac{1}{n} \sum_{i=1}^n E\SQBRACKET{(X_i-\mu)^2}-E\SQBRACKET{(\bar{X}-\mu)^2} \\
+			&= \frac{1}{n} \sum_{i=1}^n \text{Var}(X_i) - \text{Var}(\hat{X}) \\
+			&= \frac{1}{n} n\sigma^2 - \frac{\sigma^2}{n} \\
+			&= \frac{n-1}{n}\sigma^2
+	\end{align*}this is NOT the same as the \textit{true} variance $\sigma^2$.  Hence $S^2$ is a biased estimator for $\sigma^2$.  However, if we define the unbiased variance, $S_u^2$ as 
+	\begin{align*}
+		S_u^2 &= \frac{n}{n-1} S^2 \\
+		E\SQBRACKET{S_u^2} &= E\SQBRACKET{\frac{n}{n-1} S^2} \\
+			&= \frac{n}{n-1} E\SQBRACKET{S^2} \\
+			&= \frac{n}{n-1} \PAREN{\frac{n-1}{n}\sigma^2} \\
+			&= \sigma^2
+	\end{align*} }
+
+2. Find the variance of estimator of probability of success, $\hat{p}  = X/n$, where $X$ is the number of successes and $n$ is the sample size. Notice that $X$ has Binomial distribution.
+
+\BLUE{
+\begin{align*}
+	V(\hat{p}) &= V(X/n) \\
+	&= \frac{1}{n^2} E\SQBRACKET{(X- \mu)^2} \\
+	&= \frac{1}{n^2} V(X) \\
+	&= \frac{1}{n^2} \PAREN{ E[X^2]- E[X]^2] }\\
+	&= E[X^2/n^2] - (\mu/n)^2 \\
+	&= E[\hat{p}^2]-E[\hat{p}]^2
+\end{align*} }
+
+\end{document}

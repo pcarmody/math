@@ -60,10 +60,24 @@
 \end{center} 
 
 \begin{enumerate}[label=\Roman*.]
-\item Let $\Omega \subset \R^m, a \in \Omega^o$.  If $f:\Omega \to \R$ is continuous at $a, g: \Omega \to \R$ is differentiable at $a$ and $g(a) = 0$, show that $fg$ is differentiable at $a$.  (Note $fg$ is the function whose value at $x \in \Omega$ is $f(x)g(x)$.
+\item Let $\Omega \subset \R^m, a \in \Omega^o$.  If $f:\Omega \to \R$ is continuous at $a, g: \Omega \to \R$ is differentiable at $a$ and $g(a) = 0$, show that $fg$ is differentiable at $a$.  (Note $fg$ is the function whose value at $x \in \Omega$ is $f(x)g(x))$.
+
+\BLUE{$g$ is differentiable at $a$ means that there exists a transformation $L$ such that 
+\begin{align*}
+	0 &= \lim_{x \to a} \frac{g(x) - (g(a)-L(x-a))}{|x-a|} \\
+	&= \lim_{x \to a} \frac{g(x) + L(x-a)}{|x-a|} \\
+	&= L 
+\end{align*}Let's look at the following
+\begin{align*}
+	\lim_{x \to a} \frac{f(x)g(x) - (f(a)g(a)-L(x-a))}{|x-a|} &= \lim_{x \to a} \frac{f(x)g(x) + L(x-a)}{|x-a|} \\
+	&= \lim_{x \to a} \frac{f(x)g(x)}{|x-a|} + \lim_{x\to a} \frac{L(x-a)}{|x-a|} \\
+	&= 0 + L
+\end{align*}thus a transformation exists for $(fg)(a)$ that satisfies the definition for differentiation.
+}
 
 \item \RED{skip II}
 
+\newpage
 \item Find the total derivative (i.e., derivative matrices) of the following functions at the given points.
 \begin{enumerate}[label=(\alph*)]
 	\item $f(x_1,x_2,x_3) = \PAREN{\begin{array}{c}
@@ -116,6 +130,7 @@
 	}
 \end{enumerate}
 
+\newpage
 \item Section 6.2 Problem 2.
 
 	\textit{Exercise 6.2.2}.  Prove Lemma 6.2.4. (Hint: prove by contradiction.  If $L_1 \ne L_2$, then there exists a vector $v$ such that $L_1v \ne L_2v$; this vector must be non-zero (why?).  Now apply the definition of derivative, and try to specialize to the case where $x=x_0+tv$ for some scalar $t$, to obtain a contradiction.)
@@ -126,35 +141,116 @@
 
 	\BLUE{Let $L_1, L_2: \RRR^n \to \RRR^m$ be linear transformations and $L_1 \ne L_2$.  Also, let $E \subset \RRR^n$ and $f: E \to \RRR^m$ be a function that is differentiable at a point $x_0 \in E^o$ with derivatives $L_1$ and $L_2$ at $x_0$.  First, $\det f'(x_0) \ne 0$ because $f$ is differentialable at $x_0$ and since $L_2 \ne L_1$ there exists a non-zero vector $v$ such that $L_1 v \ne L_2 v$.
 	\begin{align*}
-		\lim_{x \to x_0} \frac{\NORM{f(x)-(f(x_0)+L_1(x-x_0))}}{\NORM{x-x_0}}
-	\end{align*}
+		\text{for any } x &= x_0+tv \AND x_0 \ne 0\\
+		L_1x &= L_1(x_0+tv) \AND L_2x = L_2(x_0+tv) \\
+		L_1x_0 &= L_1x+L_1(tv) \AND L_2x_0 = L_2x+L_2(tv) \\
+		L_1x+L_1(tv) &= L_2x+L_2(tv) \\
+		L_1x-L_2x &= L_1(tv)+L_2(tv) \\
+		(L_1-L_2)x &= (L_1-L_2)(tv) \\
+		x &= tv \\
+		\therefore x_0 &= 0 \, \Rightarrow\Leftarrow
+	\end{align*}hence $L_1 = L_2$ making it unique.
 	}
 	
+	\newpage
 	\item Section 6.3, problem 3 and problem 4.
 	
 	\textit{Exercise 6.3.3.}  Let $f: \RRR^2 \to \RRR$ be a function defined by $f(x,y) := \frac{x^3}{x^2+y^2}$ when $(x,y) \ne (0,0)$, and $f(0,0) := 0$.  Show that $f$ is not differentiable at $(0,0)$, despite being differentiable in every direction $v \in \RRR^2$ at $(0,0)$. Explain why this does not contradict Thoerem 6.3.8.
 	
-	\textbf{Exercise 6.3.4.}  Let $f: \RRR^n \to \RRR^m$ be a differentiable function such that $f'(x) = 0$ for all $x \in \RRR^n$.  Shwo that $f$ is constant.  (Hint: you may use the mean-value theorem or fundamental theorem of calculus for one-dimensional functions, but bear in mind that there is a direct analogue to these theorems for several-variable functions.  I would not advise proeeding via first principles.)  For a tougher challenge, replace the domain $\RRR^n$ by an open connected subet $\Omega$ of $\RRR^n$.
+	\BLUE{\begin{align*}
+		f(x,y) &= \frac{x^3}{x^2+y^2} \\
+		\partial_x f(x,y) &= \frac{3x^2}{x^2+y^2}  -\frac{2x^3}{x^3+y^2}\\
+		\partial_y f(x,y) &= \frac{-2x^3}{x^2+y^2} 
+	\end{align*}if we hold $x$ constant as $y \to 0$ we can see that $\partial_y f(x,y) \to \infty$ which means that $\partial_y f(x,y)$ is not continuous.  Theorem 6.3.8 states that the first partial derivatives must be continuous at $(0,0)$ for $f(x,y)$ to be differentiable at $(0,0)$.\\
+	}
+	
+	\textit{Exercise 6.3.4.}  Let $f: \RRR^n \to \RRR^m$ be a differentiable function such that $f'(x) = 0$ for all $x \in \RRR^n$.  Show that $f$ is constant.  (Hint: you may use the mean-value theorem or fundamental theorem of calculus for one-dimensional functions, but bear in mind that there is a direct analogue to these theorems for several-variable functions.  I would not advise proeeding via first principles.)  For a tougher challenge, replace the domain $\RRR^n$ by an open connected subet $\Omega$ of $\RRR^n$.
+	
+	\BLUE{\begin{align*}
+		\LET \Omega &\subset \RRR^n \AND [a,b] \in \Omega\\
+		\exists \xi \in [a,b] & \to |f(b)-f(a)|\le f'(\xi)|b-a| & \text{mean value theorem}\\
+		|f(b)-f(a)| &\le 0\\
+		f(b)=f(a)
+\end{align*}	$a$ and $b$ are arbitrary thus $f(x)=f(a)$ for all $x\in \RRR^n$, thus $f$ is a constant function.
+	}
 
+\newpage
 \item Let $f: \R^m \to \R$ be differentiable, $\alpha \in \R$.  If $f(tx)=t^\alpha f(x)$	for $\forall x \in \R^m$ and $t> 0$, we say that $f$ is homogeneous of order $\alpha$.  Show that $f$ is homogeneous of order $\alpha$ iff $x \cdot \nabla f(x)=\alpha f(x)$, that is
 \begin{align*}
 	x^1\partial_1 f(x)+\cdots+x^m\partial_m f(x) = \alpha f(x). \
 \end{align*}This equation is classically written as 
 \begin{align*}
-	x^1 \PART{f}{x^1}+\cdots+\PART{f}{x^m} = \alpha f(x).
+	x^1 \PART{f}{x^1}+\cdots+x^m\PART{f}{x^m} = \alpha f(x).
 \end{align*}Hint: As in the development of the theory in the text, a basic idea to study multivariable functions is to convert them into single-variable functions by restricting the variable $x$ in a fixed direction.  For example, for this problem you may consider the function $\varphi(t) = f(t)$.
+
+\BLUE{\begin{description}
+\item $(\Rightarrow)$ $f$ is homogenous of order $\alpha$, that is, $f(tx)= t^\alpha f(x)$. Then,
+\begin{align*}
+	\LET \varphi(t) &= f(tx) = t^\alpha f(x)\\
+	\varphi'(t) &= f'(tx)\cdot x = \alpha t^{\alpha-1}f(x) \\
+	\LET t=1 \to f'(x)\cdot x &= \alpha f(x)
+\end{align*}
+\item $(\Leftarrow)$ assume that $x\cdot \nabla f(x) = \alpha f(x)$.  Let $x = ty$ then
+\begin{align*}
+	\LET \varphi(t) &= f(xt) \\
+	\varphi'(t) &= x\cdot f'(tx) = \alpha f(tx) = \alpha \varphi(t)
+\end{align*}this is an ordinary differential equation whose solution is $\varphi(t) = Ct^\alpha$.  Notice $\varphi(1) = C = f(x)$.  Thus, $\varphi(t) = f(tx) = t^\alpha f(x)$.
+\end{description}
+}
 	
+\newpage
 \item \begin{enumerate}[label=(\alph*)]
 
 	\item Let $f: \R^m \to \R^m$ be a $C^1$-map,$$ |f(x)-f(y)|\ge |x-y|, \forall x,y \in \R^m,$$ then $\forall a \in \R^m, \det f'(a) \ne 0$.
 	
 	\item Let $f: \R^2\to \R^2$ be differentiable, and assume $f(0,0)=\ABRACKET{1,2}$, and $$ Df(0,0)=\TWOXTWO{1}{3}{2}{0}.$$ Let $g(x,y)=\ABRACKET{xy^2, y+2, 2x-3y}.$.  Find $D(g\circ f)(0,0)$.
-	
+
+	\BLUE{\begin{align*}
+		g(x,y)&=\ABRACKET{xy^2, y+2, 2x-3y} \\
+		g'(x,y) &= \PAREN{\begin{array}{cc}
+			\frac{\partial g_1(x,y)}{\partial x} & \frac{\partial  g_1(x,y)}{\partial y} \\
+			\frac{\partial g_2(x,y)}{\partial x} & \frac{\partial  g_2(x,y)}{\partial y} \\
+			\frac{\partial g_3(x,y)}{\partial x} & \frac{\partial g_3(x,y)}{\partial y} \\
+		\end{array}		 }\\
+		&= \PAREN{\begin{array}{cc}
+			y^2 & x \\
+			0 & 1 \\
+			2-3y & 2x-3
+		\end{array}
+		}\\
+		D(g \circ f)(0,0) &= Dg(f(0,0))Df(0,0) \\
+		&= Dg(1,2)Df(0,0) \\
+		&= \PAREN{\begin{array}{cc}
+				4 & 1 \\
+				0 & 1 \\
+				-4 & -1
+			\end{array}		 }\TWOXTWO{1}{3}{2}{0} \\
+		&= \PAREN{\begin{array}{cc}
+			6 & 12 \\
+			2 & 0 \\
+			-6 & -12	
+		\end{array}		 }
+	\end{align*}
+	}
+		
 \end{enumerate}
+
+\newpage
 	\item Let $f:E\to \R$ be defined on some open set $E \subset \R^2$, and assume the partial derivatives$\PART{f}{x_1}, \PART{f}{x_2}$ are bounded in $E$.  Prove that $f$ is continuous in $E$.
 	
 	\textit{Hint: } Proceed as in the proof of Theorem 6.3.8 (continuity of partial derivatives implies $f$ is differentiable) which we discussed in class.
+
+	\BLUE{Since the partial derivatives are bounded, let $M_i =\max \PART{F}{x_i}$.  Then let $M = (M_1\,\, M_2)$.  They are bounded and therefore continuous. Thus we can say that
+	\begin{align*}
+		L &= f'(x_0) \\
+		\forall \epsilon > 0, \, \epsilon &> \frac{ \BARS{ f(x)-f(x_0)-L(x - x_0) }}{|x-x_0|}, \, \text{whenever } \delta > |x-x_0| \text{ for some } \delta >0 \\
+		&\le \frac{ \BARS{ f(x)-f(x_0)-M(x - x_0) }}{|x-x_0|} \\
+		\epsilon |x-x_0| &\le \BARS{ f(x)-f(x_0)-M(x - x_0) } \\
+		\epsilon\delta &\ge \BARS{ f(x)-f(x_0)}
+	\end{align*}
+	}
 	
+	\newpage
 	\item Let $F(x,y,z) = \PAREN{\begin{array}{c}
 		x+y \\
 		x^2y \\
@@ -162,12 +258,51 @@
 	\end{array} }.$
 	
 	\begin{enumerate}[label=(\alph*)]
-		\item At what points $x_0, y_0, z_0)$ does $F$ have a local inverse, i.e., a function $F^{-1}$ defined on an open set $V$ containing $F(x_0, y_o, z_o)$, such that $F(F^{-1}(x,y,z))=(x,y,z)$ for all $(x,y,z) \in V$?
+		\item At what points $(x_0, y_0, z_0)$ does $F$ have a local inverse, i.e., a function $F^{-1}$ defined on an open set $V$ containing $F(x_0, y_o, z_o)$, such that $F(F^{-1}(x,y,z))=(x,y,z)$ for all $(x,y,z) \in V$?
+		
+		\BLUE{The inverse exists wherever the Jacobian is valid.
+		\begin{align*}
+			F'(x,y,z) &= \THREEXTHREE{1}{1}{0}
+			{2xy}{x^2}{0}
+			{2}{0}{1} \\
+			\det F'(x,y,z) &= x^2 - 2xy \\
+			\det F'(x,y,z) &= 0 \implies x=2y
+		\end{align*}Thus, $F^{-1}$ exists everywhere except on the line $x=2y$.
+		}
 		
 		\item What is $D(F^{-1})(2,1,3)$?  (Hint: $F(1,1,1)=(2,1,3)$.)
+		
+		\BLUE{By utilizing the hint, 
+		\begin{align*}
+			D(F^{-1})(2,1,3) &= D(F^{-1})(F(1,1,1))\\
+			&= F'(1,1,1)^{-1} \\
+			&= \THREEXTHREE{1}{1}{0}
+			{2}{1}{0}
+			{2}{0}{1}^{-1} \\
+			&= \THREEXTHREE{-1}{1}{0}
+			{2}{-1}{0}
+			{2}{-2}{1}
+		\end{align*}
+		}
 	\end{enumerate}
 	
-	\item When does the equation $x_1^2+2x_2^3-xd^4+\ln(1+x_4^21)=1$ define a function $x_4=g(x_1,x_2,x_3)$ implicitly? Find $\nabla g(1,0,-1)$.
+	\newpage
+	\item When does the equation $x_1^2+2x_2^3x_3-x^4+\ln(1+x_4^2)=1$ define a function $x_4=g(x_1,x_2,x_3)$ implicitly? Find $\nabla g(1,0,-1)$.
+	
+	\BLUE{\begin{align*}
+		f(x_1,x_2,x_3, x_4) &= x_1^2+2x_2^3x_3-x_4+\ln(1+x_4^2)-1 = 0 \\
+		\partial_{x_4} f &= -1 + \frac{2x_4}{1+x_4^2} \\
+		&= \frac{-1-x_4^2+2x^4}{1+x_4^2} \\
+		&= \frac{(2x_4+1)(x_4-1)}{1+x_4^2} \\
+		\partial_{x_4} f = 0 &\text{ when } x_4 \in \BRACKET{ \frac{-1}{2}, 1}.
+	\end{align*} there is an implicit function for $x_4=g(x_1,x_2,x_3)$ when $x_4 \not \in \BRACKET{ \frac{-1}{2}, 1}$.  Then we have 
+	\begin{align*}
+		\partial_{x_1} g &= \frac{-\partial_{x_1}f}{\partial_{x_4}f} = \frac{2x_1}{\frac{(2x_4+1)(x_4-1)}{1+x_4^2}} = \frac{2x_1(1+x_4^2)}{(2x_4+1)(x_4-1)} \\
+		\partial_{x_2} g &= \frac{-\partial_{x_2}f}{\partial_{x_4}f} = \frac{6x_2^2x_3}{\frac{(2x_4+1)(x_4-1)}{1+x_4^2}} = \frac{6x_2^2x_3(1+x_4^2)}{(2x_4+1)(x_4-1)} \\
+		\partial_{x_3} g &= \frac{-\partial_{x_3}f}{\partial_{x_4}f} = \frac{2x_2^3}{\frac{(2x_4+1)(x_4-1)}{1+x_4^2}} = \frac{2x_2^3(1+x_4^2)}{(2x_4+1)(x_4-1)} \\ \\
+		\nabla g(1,0,-1) &= \ABRACKET{ \frac{2(1+x_4^2)}{(2x_4+1)(x_4-1)}, 0, 0  }
+	\end{align*}
+	}
 \end{enumerate}
 
 \end{document}
