@@ -1,0 +1,153 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#7}
+\newcommand{\DUEDATE}{May 16, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+\newcommand{\NLL}{\mathcal{N}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert}
+%\newcommand{\HAT}[1]{}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+p. 290 \#6, 7 
+\begin{enumerate}
+	\setcounter{enumi}{5}
+	\item Let $X$ and $Y$ be Banach spaces and $T: X \to Y$ an injective bounded linear operator.  Show that $T^{-1}:\mathcal{R}(T) \to X$ is bounded if and only if $\mathcal{R}(T)$ is closed in $Y$.
+	
+	\begin{itemize}
+		\item $(\Rightarrow)$ $T^{-1}:\mathcal{R}(T) \to X$ is bounded. Given any Cauchy sequence $(x_n) \in X$ we know that $\NORM{x_n - x_m} \to 0$ as $n,m \to \infty$.  Further, we know that $\NORM{Tx_n-Tx_m} \le \NORM{T}\NORM{x_n - x_m}$ which implies that $\NORM{Tx_n-Tx_m} \to 0$ as $n,m \to \infty$.  Let $x$ be such that $Tx_n \to x$ as $n \to \infty$.  Clearly, $x \in X$ because $X$ is complete and $Tx \in \mathcal{R}(T)$ and $\NORM{Tx_n-Tx} \le \NORM{T}\NORM{x_n-x} \to 0$ as $n \to \infty$.  Thus, $\mathcal{R}(T)$ is closed.
+		\item $(\Leftarrow)$ $\mathcal{R}(T)$ is closed.  Given any sequence $(y_n) \in \mathcal{R}(T)$ we know that it converges. Let $y $ be such that $y_n \to y$ as $n\to \infty$.  Since $T$ is injective then $T^{-1}: \mathcal{R}(T) \to X$ is a function.  Let $x_i = T^{-1}(y_i)$ for all $i \in \N$ and $x = T^{-1}y$.  $\NORM{y_n - y} \to 0$ thus $\NORM{T^{-1}(y_n -y)} = \NORM{T^{-1}(y_n)-T^{-1}(y)}= \NORM{x_n - x} \le \NORM{T^{-1}}\NORM{y_n - y} \to 0$ as $n \to \infty$.
+		\begin{align*}
+			\NORM{T^{-1}(y_n -y)} &= \NORM{T^{-1}(y_n)-T^{-1}(y)} \\
+			&= \NORM{x_n - x} \\
+			&\le \NORM{T^{-1}}\NORM{y_n - y} \\
+			&\le \NORM{T^{-1}}\NORM{T}\NORM{x_n - x} \to 0 \text{ as } n \to \infty
+		\end{align*}$T$ is bounded.
+	\end{itemize}
+	
+	\item Let $T: X \to Y$ be a bounded linear operator, where $X$ and $Y$ are Banach spaces.  If $T$ is bijective, show that there are positive real numbers $a$ and $b$ such that $a \NORM{x} \le \NORM{Tx}\le b  \NORM{x}$ for all $ x \in X$.
+	
+	$T$ bounded means that there exists $b$ such that $\NORM{Tx} \le b \NORM{x}$ for all $x \in X$.. $T^{-1}$ bounded means that there exists positive number $c$ such that $\NORM{T^{-1}y} \le c \NORM{y}$ for all $y \in Y$.  Let $x$ be such that $Tx = y$.  Then $\NORM{T^{-1}y} = \NORM{x} \le c \NORM{Tx}$.  Let $a = 1/c$ then $a \NORM{x} \le \NORM{Tx} \le b\NORM{x}.$
+	
+\end{enumerate}
+\newpage p. 296 \# 8, 9, 10 
+\begin{enumerate}
+	\setcounter{enumi}{7}
+	\item Let $X$ and $Y$ be normed spaces and let $T: X \to Y$ be a closed linear operator.  
+	\begin{enumerate}
+		\item Show that the image $A$ of a compact subset $C \subset X$ is closed in Y.
+
+		Let $(x_n) \in C$.  Since $C$ is compact, let $\alpha$ be the ordered set of integers such that $(x_i)_{i\in \alpha}$ converges and let $x_{\alpha_i} \to x$ as $i \to \infty$.  Then $T(x_{\alpha_i}) \in A$ for all $i \in \N$.  Since $T$ is a closed linear operator and $C$ is compact (hence closed) the set $\mathcal{G}(T)=\{ (x,y) \,|\, x \in C, y \in A\}$ must also be closed.  Therefore $((x_{\alpha_i}, Tx_{\alpha_i}))\in\mathcal{G}(T)$ as $i \to \infty$ so must $(x, Tx) \in \mathcal{G}(T)$ which means that $Tx \in A$.  Hence $A$ is closed in $Y$. 
+		
+		\item Show that the inverse image $B$ of a compact subset $K \subset Y$ is closed in $X$.  (Cf. Def. 2.5-1)
+		
+		Let $(y_n) \in K$ and let $\alpha\subset \N$ be an ordered set of indices such that $(y_{\alpha_n})$ converges and let $y = (y_{\alpha_n})$. Then $\NORM{(y_{\alpha_n}) - y} \to 0$ as $n \to \infty$.  Thus, $\NORM{T^{-1}y_{\alpha_n} - T^{-1}y} = \NORM{T^{-1}(y_{\alpha_n} - y)} \le \NORM{T^{-1}}\NORM{y_{\alpha_n}-y} \to 0$ as $n \to \infty$.  Sine $T^{-1}$ is closed $T^{-1}y \in B$ and $B$ is closed.
+		
+	\end{enumerate}
+	
+	\item If $T: X \to Y$ is a closed linear opearator, where $X$ and $Y$ are normed spaces and $Y$ is compact, show that $T$ is bounded.
+	
+	Let $(x_n)$ be a sequence in $X$ then since $Y$ is compact $(Tx_n)$ converges and let $y = Tx_n$ as $n \to \infty$ and let $x$ be such that $Tx=y$. Thus $\NORM{Tx_n - y} = \NORM{Tx_n -Tx} \le M\NORM{x_n-x} \to 0$.  Thus, $T$ is bounded.
+	
+	\item Let $X$ and $Y$ be normed spaces and $X$ compact.  If $T: X \to Y$ is a bijective closed linear operator, show that $T^{-1}$ is bounded.
+	
+	Let $A \subset X$ be closed and bounded.  $T$ is bijective implies that $T^{-1}TA = A$  thus $(T^{-1})^{-1}(C) = T(C) \subset Y$ which is compact, that implies that $T^{-1}$ is continuous and hence, bounded.
+
+\end{enumerate}
+\newpage p. 246 \#2, 3, 4 
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Give a simpler proof of Lemma 4.6-7 for the case that $X$ is a Hilbert space.
+	
+	Let $\tilde{f}(x) = \delta\ABRACKET{x, x_0}/\NORM{x_0}$.  When $x \in Y, \tilde{f}(x) = 0$ and when $x = x_0, \tilde{f}(x_0) = \delta$.  
+	
+	\item If a normed space $X$ is reflexive, show that $X'$ is reflexive. 
+	
+	$X$ reflexive implies that $C_X: X \to X''$ defined as $x \mapsto g_x(f)=f(x)$ is isomorphic.  Let $C_{X'}: X' \to X^{(3)}$ where $X^{(3)}$ is the dual-dual of $X'$.  Let $h \in X^{(3)}$	and define $\tilde{h} \in X'$ by $\tilde{h}(f) = h(C_X(f))$ for all $f \in X$.  Then, for all $g \in X''$, we have $C_{X'}(\tilde{h})(g)= g(\tilde{h})= \tilde{h}(C_X^{-1}(g))=h(g)$.  That is, $C_{X'}(\tilde{h}) = h$ which implies that $C_{X'}$ is surjective and hence bijective, thus an isomorphism.
+	
+	\item Show that a Banach space $X$ is reflexive if and only if its dual space $X'$ is reflexive.  (\textit{Hint.}  It can be shown that a closed subspace fo a reflexive Banach space is reflexive.  Use this fact, without proving it.)
+	
+	$(\Rightarrow)$ see exercise 3 
+	
+	$(\Leftarrow)$ $X'$ is reflexive.  Then the cannoncial embedded mapping, $C: X \to X''$, maps all of $X$ onto $X''$, that is $C(X)$ is a subspace of $X''$ ismorphic to $X$.  Hence, $C(X)$ is a Banach Space and closed.  Thus, by the Hint, $C(X)$ is reflexive and, being isomorphic, makes $X$ reflexive.
+\end{enumerate}
+
+\newpage p. 268 \#4, 7
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Show that weak convergence in footnote 6 implies weak$^*$ convergence.  Show that the converse holds if $X$ is reflexive.
+	
+	Let $(f_n)=f$ be a weak$^*$ convergent sequence of functions in $X'$ and let $X$ be reflexive.  Therefore $\NORM{f_n(x)-f(x)} \to 0$ for each $x \in X$.  If we choose $g_x \in X''$ be associated with $x$.  Then we can say $\NORM{g_x(f_n(x) - f(x))} = \NORM{g_x(f_n)(x) - g_x(f)(x)} \to \NORM{g_x(0)(x)}$ which is true for all $x\in X$. Thus $\NORM{g_x(f_n)-g_x(f)} \to 0$ which is strongly convergent.
+	
+	\setcounter{enumi}{6}
+	\item Let $T_n \in B(X,Y)$, where $X$ is a Banach space.  If $(T_n)$ is strongly operator convergent, show that $(\NORM{T_n})$ is bounded.
+	
+	Let $x$ be any fixed member or $X$.  Then, $\NORM{T_nx - Tx} \to 0$ as $n \to \infty$.  
+	\begin{align*}
+		\NORM{T_nx - Tx} &\le \NORM{T_nx} - \NORM{Tx}\\
+		&\le \NORM{T_n}\NORM{x} - \NORM{T}\NORM{x} \\
+		&\le \PAREN{\NORM{T_n} - \NORM{T}} \NORM{x} \\
+		\therefore \NORM{T_n} - \NORM{T} &\to 0
+	\end{align*}hence bounded.
+
+\end{enumerate}
+\end{document}

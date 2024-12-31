@@ -1,0 +1,203 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#4}
+\newcommand{\DUEDATE}{April 4, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent p. 175 \#2, 4, 5, 10. \\
+
+\noindent \textbf{\#2}.  Show that if the orthogonal dimension of Hilbert Space $H$ is finite, it equals the dimension of $H$ regarded as a vector space; conversely, if the latter is finite, show that so is the former.\\
+\\
+Assuming that the Hilbert Dimension of HIlbert space $H$ is finite, $\dim H = n$.  Let the orthonormal family $(e_\alpha)_{\alpha \in A}\in H$ for some set $A$.  Further let there exists a countable subset of $A'$ such $\ABRACKET{e_{\alpha_j},e_{\alpha_k}} = \delta_{jk}$ for all $j,k \in [1..n]$ and that $\SPAN\{e_{\alpha_k}\}$ is dense and equal to $H$.  Further, if $y \perp \SPAN\{e_{\alpha_k}\}$ then $y = 0$. Therefore, given any $x \in H$, $x = \SUM{k=1}{n} \ABRACKET{x,e_{\alpha_k}}e_{\alpha_k}$.  We can see, then, that every $x\in H$ is a linear combination of $\{e_{\alpha_k}\}$.  Hence $\{ e_{\alpha_k}\}$ forms a basis.  There must be $n$ elements in $A'$, hence the vector space dimension is the same as the Hilbert space dimension.\\
+\\
+Assuming that we have a finite dimensional vector space $X$.  Then there exists an orthonormal basis $\{e_k\} \in X$.  Define an Inner Product on $X, \ABRACKET{\cdot,\cdot}$.  Clearly, $\ABRACKET{e_j,e_k} = \delta_{jk}$.  Also, given any $x \in X$ such that $\ABRACKET{x, e_k}=0$ for all $k\in [1,n]$ we can see that $x=0$ as all $e_k$ are linearly independent from each other.  Hence, $\SPAN{e_k}$ is dense in $X$.  $X$ must be a Hilbert space with dimension $n$.\\
+\\
+\noindent \textbf{\#4} Derive from (3) the following formula (which is often called the \textit{Parseval relation}).
+\begin{align*}
+	\ABRACKET{x,y} &= \sum_k \ABRACKET{x,e_k}\CONJ{\ABRACKET{y,e_k}}
+\end{align*}
+Given an orthonormal basis $\{e_k\}_{k=1}^\infty$ on $H$ we can define $x \in H$ as
+\begin{align*}
+	x &= \sum_k \ABRACKET{x, e_k}e_k\\
+	\NORM{x}^2 &= \BARS{ \ABRACKET{x,x} }\\
+	&= \BARS{ \ABRACKET{\sum_k \ABRACKET{x, e_k}e_k,\sum_j \ABRACKET{x, e_j}e_j} } \\
+	&= \sum_k \sum_j \BARS{\ABRACKET{\ABRACKET{x, e_k}e_k, \ABRACKET{x, e_j}e_j}}\\
+	&= \sum_k \sum_j \BARS{\ABRACKET{x, e_k}\CONJ{\ABRACKET{x, e_j}}\ABRACKET{e_k,e_j}}\\
+	&= \sum_k \sum_j \BARS{\ABRACKET{x, e_k}\CONJ{\ABRACKET{x, e_j}}\delta_{jk}}\\
+	 &= \sum_k \BARS{\ABRACKET{x, e_k}\CONJ{\ABRACKET{x, e_j}}}
+\end{align*}replacing the right $x$ in the Inner Product with $y$ and we get
+\begin{align*}
+	\ABRACKET{x,y} &= \sum_k \ABRACKET{x,e_k}\CONJ{\ABRACKET{y,e_k}}
+\end{align*}
+
+
+\noindent \#5 Show that an orthonormal family $(e_\kappa), \kappa \in I$, in a Hilbert Space $H$ is total if and only if the relation in Prob. 4 holds for every $x$ and $y$ in $H$. \\
+\\
+$(\Rightarrow)$ Let an orthonormal family $(e_\kappa), \kappa \in I$, in a Hilbert Space $H$ be total.  Let $x,y \in H$ we know that we can represent them as $x = \SUM{k}{} \ABRACKET{x, e_\kappa}e_\kappa$ and $y = \SUM{\iota}{} \ABRACKET{y, e_\kappa}e_\iota$ where $\kappa, \iota \in I$.  Thus 
+\begin{align*}
+	\ABRACKET{x,y} &= \ABRACKET{\sum_\kappa \ABRACKET{x, e_\kappa}e_\kappa,\, \sum_{\iota} \ABRACKET{y, e_\iota}e_\iota} \\
+	&= \sum_\kappa \sum_\iota \ABRACKET{ \ABRACKET{x, e_\kappa}e_\kappa,\, \ABRACKET{y, e_\iota}e_\iota} \\
+	&= \sum_\kappa \sum_\iota \ABRACKET{x, e_\kappa}\CONJ{\ABRACKET{y, e_\iota}}\ABRACKET{ e_\kappa,\, e_\iota} \\
+	&= \sum_\kappa \sum_\iota \ABRACKET{x, e_\kappa}\CONJ{\ABRACKET{y, e_\iota}}\delta_{\kappa\iota} \\
+	&= \sum_\kappa \ABRACKET{x, e_\kappa}\CONJ{\ABRACKET{y, e_\kappa}}
+\end{align*}$x,y$ are arbitrary therefore true for all elements of $H$.\\
+\\
+$(\Leftarrow)$Assuming that this is true for all $x,y \in H$ and we have an orthonormal set $(e_\kappa) \in H$ where $\kappa \in I$.  We can see that the same steps can be executed in reverse indicating that all $x \in H$ can be represented as $x = \SUM{k}{} \ABRACKET{x, e_\kappa}e_\kappa$.  This indicates that $\SPAN\{e_\kappa\} = H$.  Let $z \in H$ such that $z \in (e_\kappa)^\perp$ then $\ABRACKET{z, e_\kappa} = 0$ for all $\kappa \in I$.  We know that $z = \SUM{\kappa}{} \ABRACKET{z,e_\kappa}e_\kappa$. Therefore $z = 0$ and $(e_\kappa)^\perp = \{0\}$, hence, $\SPAN\{e_\kappa\}$ must be dense.\\
+
+\noindent \textbf{\#10}  Let $M$ be a subset of a Hilbert space $H$, and let $v,w \in H$.  Suppose that $\ABRACKET{v,x}=\ABRACKET{w,x}$ for all $x \in M$ implies $v=w$.  If this holds for all $v,w \in H$ show that $M$ is total in $H$.
+
+\begin{align*}
+	\text{let } z &\in M^\perp, \, \ABRACKET{ z, x} = 0, \,  \forall x \in M\\
+	\ABRACKET{v,x} &= \ABRACKET{w,x} + \ABRACKET{z,x} \\
+	&= \ABRACKET{w+z, x}\\
+	v &= w+z \\
+	v-w &= z
+\end{align*}$v-w = 0$ thus $z=0$.  Since $z$ was arbitrary $M^\perp = \{0\}$ and therefore $\SPAN\{M\}$ is dense in $H$.
+
+\newpage
+\noindent p. 194 \#2, 4, 5, 7.
+
+\noindent \#2 \textbf{(Space $\ell^2$)} Show that every bounded linear functional $f$ on $\ell^2$ can be represented in the form
+\begin{align*}
+	f(x) &= \sum_{j=1}^\infty \xi_j\CONJ{\zeta_j} & [z=(\zeta_j)\in \ell^2].
+\end{align*}
+
+Given $x = (\xi_n) \in \ell^2$. Let $f$ be a bounded linear functional.  Then, by the Reisz Representation Theorem
+\begin{align*}
+	f: \ell^2 &\to K & K = \R \text{ or } \C\\
+	f(x) &= \ABRACKET{x,z} &\text{ for some } z = (\zeta_n) \in \ell^2 \\ 
+	&= \ABRACKET{(\xi_n),(\zeta_m)} \\
+	&= \sum_{k=1}^\infty \xi_k \CONJ{\zeta_k}
+\end{align*}\\
+
+\noindent \#4 Consider Prob. 3.  If the mapping $X \to X'$ given by $z \mapsto f$ is surjective, show that $X$ must be a Hilbert space.\\
+
+Given $z$ then $f$ is a bounded linear functional on $X$ with $\NORM{z}=\NORM{f}$.
+\begin{align*}
+	z &\mapsto f(x)=\ABRACKET{x,z}
+\end{align*}
+
+\noindent \#5 Show that the dual space of the real space $\ell^2$ is $\ell^2$. (Use 3.8-1.)\\
+\\
+Let $f \in \ell^{2'}$.  Then there exists $z = (\zeta_n) \in \ell^2$ such that $f(x) = \ABRACKET{x,z}$ for all $x \in \ell^2$.  Hence, for $x=(\xi_n)$ we have
+\begin{align*}
+	f(x) &= \ABRACKET{x,z} \\
+	&= \ABRACKET{(\xi_n),(\zeta_m)} \\
+	&= \sum_{k=1}^\infty \xi_k \zeta_k 
+\end{align*}which converges due to Cauchy-Schwartz, thus $f \in \ell^2$ for all $f \in \ell^{2'}$.
+\\
+\\
+
+\noindent \#7 Show that the dual space $H'$ of a Hilbert space $H$ is a Hilbert space with inner product $\ABRACKET{\cdot, \cdot}_1$ defined by
+\begin{align*}
+	\ABRACKET{f_z,f_v}_1 &= \CONJ{\ABRACKET{z,v}}= \ABRACKET{v,z},
+\end{align*}where $f_z(x) = \ABRACKET{x,z}$, etc.
+
+\begin{align*}
+	f_z(x) &= \ABRACKET{x, z}\\
+	f_v(x) &= \ABRACKET{x, v}\\
+\end{align*}
+\noindent Show that the inner product has all of the properties.  Let $f_u, f_v, f_w \in H'$ and $u, v, w \in H$ and $f_u(x) = \ABRACKET{x,u}, f_v(x) = \ABRACKET{x, v}$ and $f_w(x) = \ABRACKET{x,w}$ for all $x \in H$.
+\begin{enumerate}[label=(IP\arabic*)]
+	\item $\ABRACKET{x+y,z} = \ABRACKET{x,z}+\ABRACKET{y,z}$
+
+	\begin{align*}
+		(f_u+f_v)(x) &= f_u(x)+f_v(x) =  \ABRACKET{x,u}+\ABRACKET{x, v} = \ABRACKET{x, u+v}\\ \\
+		\therefore\ABRACKET{f_u+f_v,f_w}_1 &= \ABRACKET{w, u+v} \\
+		&= \ABRACKET{w,u}+\ABRACKET{w, v} \\
+		&= \ABRACKET{f_u,f_w}_1 + \ABRACKET{f_v,f_w}_1
+	\end{align*}
+	
+	\item $\ABRACKET{\alpha x,z} = \alpha\ABRACKET{x,z}$
+
+	\begin{align*}
+		\ABRACKET{\alpha f,g} &=
+	\end{align*}		
+	
+	\item $\ABRACKET{x,z} = \CONJ{\ABRACKET{z,x}}$
+	
+	\begin{align*}
+		\text{Since } \ABRACKET{f_u, f_v}_1 &= \ABRACKET{v,u} \text{ and } \ABRACKET{f_v, f_u}_1 = \ABRACKET{u,v}\\
+		\CONJ{\ABRACKET{f_v, f_u}_1} &= \CONJ{\ABRACKET{u,v}} = \ABRACKET{v,u} = \ABRACKET{f_u, f_v}_1
+	\end{align*}
+	
+	\item $\ABRACKET{x,x} \ge 0$ and $\ABRACKET{x,x}=0 \iff x=0$.
+
+	\begin{align*}
+		\ABRACKET{f_v, f_v}_1 &= \ABRACKET{v,v} = \NORM{v} \ge 0 \\
+		\ABRACKET{f_v, f_v}_1 &= 0 \iff v=0  \\
+		\text{thus } f_v(x) &= \ABRACKET{x, 0}=0, \forall x \in H
+	\end{align*}	Hence $f$ is the zero function.
+	
+\end{enumerate}
+Finally, let $(z_k)$ be a convergent sequence in $H$ and $z_n,z_m \in (z_k)$ be any two elements.  The representative elements in $H'$ are $f_{z_n}, f_{z_m}$, respectively.  We know that $\NORM{z_n - z_m} < \epsilon$ for some number $\epsilon > 0$
+\begin{align*}
+	\NORM{z_n - z_m}^2 &= \ABRACKET{z_n - z_m, z_n - z_m}\\
+	&= \NORM{z_n}+\NORM{z_m} -2\ABRACKET{z_n,z_m} \\
+	&= \NORM{f_{z_n}} + \NORM{f_{z_m}} -2\ABRACKET{f_{z_m}, f_{z_n}} \\
+	&= \NORM{f_{z_n}, f_{z_m}}^2\\
+	\therefore \NORM{f_{z_n}- f_{z_m}} &< \epsilon
+\end{align*} and $H'$ is complete.
+
+\end{document}
