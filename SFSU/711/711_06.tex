@@ -1,0 +1,145 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\DeclareMathOperator{\RANGE}{range}
+\DeclareMathOperator{\NULL}{null}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment \#6}
+\newcommand{\DUEDATE}{May 2, 2024}
+\newcommand{\SEMESTER}{Spring 2024}
+\newcommand{\SCHEDULE}{T/Th 9:30 -- 10:45}
+\newcommand{\ROOM}{Remote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{black!30!green}{#1}}
+\newcommand{\ORANGE}[1]{\textcolor{orange}{#1}}
+\newcommand{\F}{\textbf{F}}
+\newcommand{\NLL}{\mathcal{N}}
+
+\title{Advanced Linear Algebra}
+\author{The Unforgetable Someone}
+\date{Summer 2023}
+
+\newcommand{\NORM}[1]{\,\left \Vert #1 \right \Vert}
+%\newcommand{\HAT}[1]{}
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+p. 224 \#4, 7, 8, 9, 
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Let $p$ be defined on a vector space $X$ and satisfy (1) and (2). Show that for any given $x_0 \in X$ there is a linear functional $\tilde{f}$ on $X$ such that $\tilde{f}(x_0)=p(x_0)$ and $|\tilde{f}(x)| \le p(x)$ for all $x \in X$.\\
+	\\
+	Let $f \in X'$ and $f(x_0)=p(x_0)$.  Clearly, $f$ is defined on the subspace spanned by $x_0$, that is, $f$ is linear and $f(\alpha x_0)=\alpha f(x_0)$.  The Hahn-Banach Theorem says that there exists an extension of $f$, namely, $\tilde{f} \in X'$ such that $|\tilde{f}(x)| \le p(x)$ for all $x \in X$.
+	
+	\setcounter{enumi}{6}
+	\item Give another proof of Theorem 4.3-3 in the case of a Hilbert space.
+	
+	\textbf{Theorem 4.3-3a: (Bounded linear functionals, Hilbert).}  Let $X$ be a Hibert space and let $x_0\ne 0$ be any element in $X$.  Then there exists a bounded linear functional $\tilde{f}$ on $X$ such that 
+	\begin{align*}
+	\NORM{\tilde{f}} &= 1, &\tilde{f}(x_0)= \NORM{x_0}
+	\end{align*}
+	
+	Proof: Let $x_0 \in X$, then $Z$ is the subspace spanned by $x_0$. Any Cauchy sequence in $Z$ will converge because that same sequence is in $X$ which is complete.  Hence. $Z$ is also complete.  We know that, for any $f_g \in Z'$ there exists a $g \in Z$ such that $f_g(x) = \ABRACKET{x,g}$ and $\NORM{f_g} = 1$.  By Hahn-Bannach, there exists an extension $\tilde{f} \in X'$ such that $\NORM{\tilde{f}} = 1$ and $|f(x_0)| = \NORM{\tilde{f}} \NORM{x_0} = \NORM{x}$.
+	
+	\item Let $X$ be a normed space and $X'$ its dual space. If $X \ne \{0\}$, show that $X'$ cannot be $\{0\}$.
+	
+	Let $f(x) = \NORM{x}$, this is linear by definition. Therefore, $f \in X'$.  We can see that when $x \ne 0$ that $f(x) \ne 0$. Therefore $f$ is not the zero function and $X' \ne \{ 0 \}$.
+	
+	\item Show that for a separable normed space $X$, theorem 4.3-2 can be proved directly, without the use of Zorn's Lemma (which was used indirectly, namely, in the proof of Theorem 4.2-1).
+	
+	We still need a function $p$ defined over all of $X$.  We can still use the $p$ defined in the proof, that is
+	\begin{align*}
+		p(x) = \NORM{f}_Z \NORM{x}
+	\end{align*}and we know that it satisfies conditiosn (1) and (2) as well by 
+	\begin{align*}
+		p(x+y) &= \NORM{f}_Z \NORM{x+y} \le \NORM{f}_Z \PAREN{\NORM{x}+\NORM{y}} = p(x)+p(y)\\
+		p(\alpha x) &= \NORM{f}_Z \NORM{\alpha x} = |\alpha|\NORM{f}_Z \NORM{x} = \alpha \NORM{x} \\
+	\end{align*}What we need now is an $\tilde{f}$ which is a maximal function such that $\tilde{f} \le  p(x)$ for all $x \in X$.  Let $f_1$ be a linear extension of $f$ over $\mathcal{D}(f_1)$.  That is $f_1(x) = f(x)$ for all $x \in Z$.  We know that $f_1$ exists because at the very least $f_1 = f$ and $\mathcal{D}(f_1) = Z$.  When  $x_1 \in X \backslash Z$ we now have $Z \subset \mathcal{D}(f_1)$.  We can repeat this for $f_2$ giving us $x_2, \mathcal{D}(f_2)$, and so on.  For any number $n$ we have a set $(f_i)$ such that $f(x) \le f_i(x) \le p(x)$ for all $x \in \bigcup_{i=1}^n \mathcal{D}(f_i)$.  Since, $X$ is dense we know that there exists an $f_{n+1}$ and $x_{n+1}$, thus $\bigcup_{i=1}^\infty\mathcal{D}(f_i) = X$.  Let $f_i \to \tilde{f}$.  Thus $\tilde{f}(x) = f(x)$ when $x \in Z$ and $\tilde{f}(x) \le p(x)$ when $x \in X$.  Further, each $f_i$ is an extension of $f$ we know that $\NORM{f}_Z = \NORM{f_i}_{\mathcal{D}(f_i)}$ thus $\NORM{f}_Z = \NORM{\tilde{f}}_X.\QED$
+	
+\end{enumerate}
+\newpage
+p. 255 \#10, 11, 13, 14,
+
+\begin{enumerate}
+	\setcounter{enumi}{9}
+	\item \textbf{(Space $c_0$)}  Let $y=(\eta_j), \eta_j \in \C$, be such that $\sum  \xi_j\eta_j$ converges for every $x=(\xi_j)\in c_0$, where $c_0\in l^\infty$ is the subspace of all complex sequences converge to zero. Show that $\sum |\eta_j|< \infty$.  (Use 4.7-3)
+	
+	Let $T: c_0 \to \C$ such that $T_n(x) = \SUM{i=1}{n} \xi_i \eta_i$.  $(T_n(x))$ is bounded, thus, $(T_n)$ is bounded.  By the Unified Boundedness Theorem there exists $c > 0$ such that $\NORM{T_n}<c$ for all $n \in \N$.  For each $n$ there is a sequence $x_n = (\mu_1, \mu_2, \dots, \mu_n, \dots)$ where $\mu_i$ are on the unit sphere, that is $\NORM{\mu_i}=1$ and $\mu_i\eta_i = \eta_i$.  Since $\NORM{T_n} \le c$ for all $n\in N$, we have $T_n(x_n) = \SUM{i=1}{n}\NORM{\mu_i\eta_i} = \SUM{i=1}{n}\NORM{\eta_i} < c$. Since this is true for all $n$,  $y$ is convergent.
+	
+	\item Let $X$ be a Banach space, $Y$ a normed space and $T_n\in B(X,Y)$ such that $(T_nx)$ is Cauchy in $Y$ for every $x \in X$.  Show that $(\NORM{T_n})$ is bounded.
+	
+	For any $j\in \N$ we know that $T_j$ is Cauchy in $Y$.  Therefore, given any convergent sequence $(x_k) \in X$ we know that $(T_j x_k)$ converges, there must be some number $y_j\in Y$ such $\NORM{T_j x_k} =  \NORM{T_j x_k} \NORM{x_k}\le\NORM{T_j} \NORM{x_k}$ for all $x_k$.  That is, there exists $c_j$ such that $\NORM{T_j} \le c_j$.  By Uniform Boundedness Thoeorem, there exists a $c$ such that $\NORM{T_n}\le c$ for all $n \in \N$, thus $(\NORM{T_n})$ is bounded.
+	
+	\setcounter{enumi}{12}
+	\item  If $(x_n)$ in a Banach space $X$ is such that $(f(x_n))$ is bounded for all $ f\in X'$, show that $(\NORM{x_n})$ is bounded.
+
+	Let $g: X \to X''$ be such that $g(x)f=f(x)$ and $f \in X'$. Then $|g(x)f| \le |f(x)| \le \NORM{f}\NORM{x}$ and hence bounded.  Further, $(g(x_n)f)$ is bounded because $(f(x_n))$ is bounded for all $f \in X'$.  $X$ is complete therefore, $(|g(x_n)f|)$ is bounded implies that $(\NORM{x_n})$ is bounded.
+	
+	\item if $X$ and $Y$ are Banach spaces and $T_n\in B(X,Y), n=1,2,\cdots,$ show that equivalent statements are:
+	\begin{enumerate}
+		\item $(\NORM{T_n})$ is bounded.
+		\item $(\NORM{T_nx})$ is bounded for all $x \in X$.
+		\item $(|g(T_nx)|)$ is bounded for all $x\in X$ and all $g \in Y'$.
+	\end{enumerate}
+	
+	Let's show that $B(X,Y)$ is complete.  Let $T_n \in B(X,Y)$ be a Cauchy sequence.  For each $x \in X$, we have
+	\begin{align*}
+		\NORM{T_nx-T_mx} \le \NORM{T_n-T_m}\NORM{x},
+	\end{align*}which shows that $(T_n x)$ is Cauchy in Y.  Since $Y$ is complete, there is a $y \in Y$ such that $T_nx \to y$.  We can see that $T: X\to Y$ where $T_nx =y$ forms a linear map.  For any $\epsilon >0$, let $N_\epsilon$ be such that $\NORM{T_n-T_m} < \epsilon/2$ for all $n,m \ge N_\epsilon$.  Whenever, $n \ge N_\epsilon$, for each $x \in X$, there is an $m_x \ge N_\epsilon$ such that $\NORM{T_{m_x}x-Tx} \le \epsilon/2$.  If $\NORM{x} = 1$ we have 
+	\begin{align*}
+		\NORM{T_nx-Tx} \le \NORM{T_nx-T_{m_x}x}+\NORM{T_{m_x}x-Tx} \le \epsilon
+	\end{align*}If follows that as $n \ge N_\epsilon$, then 
+	\begin{align*}
+		\NORM{Tx}\le \NORM{T_nx} + \NORM{Tx-T_nx} \le \NORM{T_n} + \epsilon
+	\end{align*}for all $x$ with $\NORM{x}=1$, so $T$ is bounded.  If follows that $\LIM{n\to \infty} \NORM{T_n-T} = 0$.  Therefore, $T_n \to T$ and $B(X,Y)$ is complete.\\
+	\\
+	(a) $Tn \to T$ thus $\NORM{T_n} \to \NORM{T}$ thus $(\NORM{T_n})$ is bounded.\\ \\
+	(b) $\NORM{T_nx} \le \NORM{T_n}\NORM{x}$ for all $x \in X$ and $\NORM{T_n}$ is bounded thus $(\NORM{T_n x})$ is bounded.\\ \\
+	(c) $Y$ is a Banach space $Y'$ is also a Banach space.  Thus, given any $g \in Y'$ and any convergent sequence $x_n \in X$ then $(|g(x_n)|)$ converges.  Let $x_n = T_nx_0$ for some fixed $x_0 \in X$ and we can see that $(|g(T_n x_0)|)$ converges.  Since $x_0$ and $g$ are arbitrary we see that $(|g(T_nx)|)$ converges for all $x \in X$ and $g \in Y'$.
+\end{enumerate}
+\end{document}
