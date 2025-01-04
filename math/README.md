@@ -1,2 +1,0 @@
-# math
-assorted math files
