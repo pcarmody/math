@@ -1,0 +1,6 @@
+To do serious research in modern differential geometry you also need strong background in:
+
+* Algebraic topology (say, to the extent covered in Hatcher's "Algebraic Topology" book).
+* Functional Analysis, Sobolev spaces, etc.
+* Linear and Nonlinear PDEs (primarily elliptic and parabolic), at least if you will be doing geometric analysis. See for instance D. Gilbarg, N. Trudinger, "Elliptic Partial Differential Equations of Second Order".
+* Possibly other fields, depending on the differential geometry subarea: Complex analysis, algebraic geometry, geometric topology, measure theory...

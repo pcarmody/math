@@ -1,0 +1,92 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5301 -- Numerical Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#1 }
+\newcommand{\DUEDATE}{Januar 24, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 330}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\ts}{\textsuperscript}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Question 1 (20 points)
+\vspace{1 em}
+
+Using Newton's Divided Difference Table, construct a quadratic polynomial to interpolate the function $f(x) = \sin x$ at $x+0=0, x_1=\pi/4$ and $x_2=\pi/2$.
+\begin{enumerate}[label=(\alph*)]
+
+	\item Write the polynomial in the form $P_2(x)=ax^2+bx+c$, include the divided difference table you use.
+	\item Estimate the error bound for the interpolation.
+	\item Estimate (graphically) the largest real error by comparing the plots of $y=f(x)$ and $y=P_2(x)$.  Attach computer generated plots.
+	\item Compare the real error with the error bound computed in step (b) and comment on the comparison.
+
+\end{enumerate}
+\vspace{1 em}
+
+Question 2 (20 points)
+\vspace{1 em}
+
+Suppose we do piecewise interpolation over equally-spaced noes with $[1,4]$ for $f(x)=1/x$.  We would like to kep the largest error under $10^{-3}$.
+
+\begin{enumerate}[label=(\alph*]
+
+	\item How many nodes are reqired for piecewise linear interpolation"
+	
+	\item How many nodes are requried for piecewise quadratic interpolation.
+	
+	\item Use Matlab to confimr your calculation in (a).
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,90 @@
+iskeyword home
+
+ans =
+
+  <a href="matlab:helpPopup('logical')" style="font-weight:bold">logical</a>
+
+   0
+
+iskeyword neighbor
+
+ans =
+
+  <a href="matlab:helpPopup('logical')" style="font-weight:bold">logical</a>
+
+   0
+
+iskeyword whos
+
+ans =
+
+  <a href="matlab:helpPopup('logical')" style="font-weight:bold">logical</a>
+
+   0
+
+k=iskeyword
+
+k =
+
+  20×1 <a href="matlab:helpPopup('cell')" style="font-weight:bold">cell</a> array
+
+    {'break'     }
+    {'case'      }
+    {'catch'     }
+    {'classdef'  }
+    {'continue'  }
+    {'else'      }
+    {'elseif'    }
+    {'end'       }
+    {'for'       }
+    {'function'  }
+    {'global'    }
+    {'if'        }
+    {'otherwise' }
+    {'parfor'    }
+    {'persistent'}
+    {'return'    }
+    {'spmd'      }
+    {'switch'    }
+    {'try'       }
+    {'while'     }
+
+K=strcat(k.,'qqq'}
+ K=strcat(k.,'qqq'}
+            ↑
+{Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for
+mismatched delimiters.
+} 
+K=strcat(k.,'qqq')
+ K=strcat(k.,'qqq')
+            ↑
+{Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for
+mismatched delimiters.
+} 
+K=strcat(k,'qqq')
+
+K =
+
+  20×1 <a href="matlab:helpPopup('cell')" style="font-weight:bold">cell</a> array
+
+    {'breakqqq'     }
+    {'caseqqq'      }
+    {'catchqqq'     }
+    {'classdefqqq'  }
+    {'continueqqq'  }
+    {'elseqqq'      }
+    {'elseifqqq'    }
+    {'endqqq'       }
+    {'forqqq'       }
+    {'functionqqq'  }
+    {'globalqqq'    }
+    {'ifqqq'        }
+    {'otherwiseqqq' }
+    {'parforqqq'    }
+    {'persistentqqq'}
+    {'returnqqq'    }
+    {'spmdqqq'      }
+    {'switchqqq'    }
+    {'tryqqq'       }
+    {'whileqqq'     }
+
