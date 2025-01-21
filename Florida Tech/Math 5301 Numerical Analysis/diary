@@ -88,3 +88,9 @@ K =
     {'tryqqq'       }
     {'whileqqq'     }
 
+function div = evalDiv(x,y)
+ function div = evalDiv(x,y)
+ ↑
+{Error: Function definitions are not supported in this context. Functions can only be created as local or nested
+functions in code files.
+} 
