@@ -67,6 +67,19 @@ Using Newton's Divided Difference Table, construct a quadratic polynomial to int
 \begin{enumerate}[label=(\alph*)]
 
 	\item Write the polynomial in the form $P_2(x)=ax^2+bx+c$, include the divided difference table you use.
+	
+	\BLUE{\begin{align*}
+			&\begin{array}{cccc}
+				\hline 
+				i & x_i & f[x_i] & f[x_{i-1},x_i] \\
+				\hline
+				0 & 0 & 0 \\
+				1 & \pi/4 & \frac{0.707}{0.785} = 0.9003\\
+				2 & \pi/2 & \frac{0.2635}{-0.785}& -0.3357
+			\end{array}\\ \\
+			P_2(x) &= -0.3357x^2+0.9003x
+		\end{align*}	
+	}
 	\item Estimate the error bound for the interpolation.
 	\item Estimate (graphically) the largest real error by comparing the plots of $y=f(x)$ and $y=P_2(x)$.  Attach computer generated plots.
 	\item Compare the real error with the error bound computed in step (b) and comment on the comparison.
@@ -83,7 +96,7 @@ Suppose we do piecewise interpolation over equally-spaced nodes with $[1,4]$ for
 
 	\item How many nodes are required for piecewise linear interpolation?
 	
-	\item How many nodes are requried for piecewise quadratic interpolation?
+	\item How many nodes are required for piecewise quadratic interpolation?
 	
 	\item Use Matlab to confirm your calculation in (a).
 

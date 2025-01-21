@@ -1,0 +1,421 @@
+.
+./SIAM
+./SIAM/EmailList_AppliedMath.docx
+./SIAM/EmailList.docx
+./Math 5111 Real Analysis II
+./Math 5111 Real Analysis II/250113.rnote
+./Math 5111 Real Analysis II/rudin.pdf
+./Math 5111 Real Analysis II/Notes.out
+./Math 5111 Real Analysis II/Notes.synctex.gz
+./Math 5111 Real Analysis II/Notes.pdf
+./Math 5111 Real Analysis II/Notes.tex
+./Math 5111 Real Analysis II/Notes.aux
+./Math 5111 Real Analysis II/Notes.log
+./Math 5111 Real Analysis II/250115.rnote
+./ResearchInDifferentialGeometry.txt
+./PhD
+./PhD/PhD_Class_Schedule.log
+./PhD/ProjectedClassSchedule.txt
+./PhD/ActualClassSchedule.txt
+./PhD/ExtraCurricular.txt
+./PhD/PhD_Class_Schedule.pdf
+./PhD/PhD_Class_Schedule.out
+./PhD/XferFunctionalAnalysis_filled.pdf
+./PhD/PhD_Class_Schedule.tex
+./PhD/PhD_Class_Schedule.aux
+./PhD/PhD_Class_Schedule.synctex.gz
+./PhD/PhD_Prog_plan.pdf
+./PhD/XferFunctionalAnalysis.pdf
+./PhD/PhD_Prog_plan_filled.pdf
+./Math 5102 Linear Algebra
+./Math 5102 Linear Algebra/5102_02.aux
+./Math 5102 Linear Algebra/5102_01.synctex.gz
+./Math 5102 Linear Algebra/5201_5.out
+./Math 5102 Linear Algebra/5102_06.out
+./Math 5102 Linear Algebra/5102_07.aux
+./Math 5102 Linear Algebra/5102_07.tex
+./Math 5102 Linear Algebra/5102_PracticeFinal.synctex.gz
+./Math 5102 Linear Algebra/5102_06.tex
+./Math 5102 Linear Algebra/5102_06.aux
+./Math 5102 Linear Algebra/Practice Test 2-7.pdf
+./Math 5102 Linear Algebra/5102_02.synctex.gz
+./Math 5102 Linear Algebra/5102_04.aux
+./Math 5102 Linear Algebra/5102_PracticeFinal.pdf
+./Math 5102 Linear Algebra/5201_5.pdf
+./Math 5102 Linear Algebra/5201_08.tex
+./Math 5102 Linear Algebra/5102_03.log
+./Math 5102 Linear Algebra/5102_03.aux
+./Math 5102 Linear Algebra/5201_08.synctex.gz
+./Math 5102 Linear Algebra/5102_01.out
+./Math 5102 Linear Algebra/5102_PracticeFinal.aux
+./Math 5102 Linear Algebra/5102_04.pdf
+./Math 5102 Linear Algebra/5102_PracticeFinal.out
+./Math 5102 Linear Algebra/5102_03.pdf
+./Math 5102 Linear Algebra/5102_07.log
+./Math 5102 Linear Algebra/5102_06.log
+./Math 5102 Linear Algebra/Practice Test 1-6.pdf
+./Math 5102 Linear Algebra/5201_08.log
+./Math 5102 Linear Algebra/5102_03.synctex.gz
+./Math 5102 Linear Algebra/5102_01.tex
+./Math 5102 Linear Algebra/5102_02.out
+./Math 5102 Linear Algebra/5102_09.pdf
+./Math 5102 Linear Algebra/5102_03.tex
+./Math 5102 Linear Algebra/5201_08.aux
+./Math 5102 Linear Algebra/5102_04.synctex.gz
+./Math 5102 Linear Algebra/Practice Final Exam-3.pdf
+./Math 5102 Linear Algebra/5102_01.pdf
+./Math 5102 Linear Algebra/5201_5.synctex.gz
+./Math 5102 Linear Algebra/5102_06.pdf
+./Math 5102 Linear Algebra/5102_04.out
+./Math 5102 Linear Algebra/5102_09.out
+./Math 5102 Linear Algebra/5102_PracticeFinal.log
+./Math 5102 Linear Algebra/5102_09.aux
+./Math 5102 Linear Algebra/5102_09.log
+./Math 5102 Linear Algebra/5102_09.synctex.gz
+./Math 5102 Linear Algebra/5201_5.log
+./Math 5102 Linear Algebra/5102_PracticeFinal.tex
+./Math 5102 Linear Algebra/5102_07.pdf
+./Math 5102 Linear Algebra/5102_01.log
+./Math 5102 Linear Algebra/5201_08.pdf
+./Math 5102 Linear Algebra/5102_03.out
+./Math 5102 Linear Algebra/friedberg-linear-algebra-4th-ed_compress.pdf
+./Math 5102 Linear Algebra/5102_07.out
+./Math 5102 Linear Algebra/5102_09.tex
+./Math 5102 Linear Algebra/5201_08.out
+./Math 5102 Linear Algebra/5102_02.tex
+./Math 5102 Linear Algebra/5102_01.aux
+./Math 5102 Linear Algebra/5102_02.pdf
+./Math 5102 Linear Algebra/5201_5.aux
+./Math 5102 Linear Algebra/5102_02.log
+./Math 5102 Linear Algebra/5102_04.log
+./Math 5102 Linear Algebra/5201_5.tex
+./Math 5102 Linear Algebra/5102_07.synctex.gz
+./Math 5102 Linear Algebra/5102_06.synctex.gz
+./Math 5102 Linear Algebra/5102_04.tex
+./Math 5050 Manifolds
+./Math 5050 Manifolds/250114.rnote
+./Math 5050 Manifolds/tu.pdf
+./Math 5050 Manifolds/Tu.pdf
+./ResearchMaterial
+./ResearchMaterial/Dummit And Foote.pdf
+./ResearchMaterial/ParitalDifferentialEquations.pdf
+./ResearchMaterial/LieGroups.pdf
+./ResearchMaterial/IntroductionToLieAlgebras.pdf
+./ResearchMaterial/DifferentialGeometry.pdf
+./ResearchMaterial/Abstract Algebra
+./ResearchMaterial/Abstract Algebra/Dummit And Foote.pdf
+./ResearchMaterial/Abstract Algebra/2015_Book_LinearAlgebraDoneRight.pdf
+./ResearchMaterial/Abstract Algebra/Chapter 1.dvi
+./ResearchMaterial/Abstract Algebra/Chapter 1.log
+./ResearchMaterial/Abstract Algebra/Chapter 1.out
+./ResearchMaterial/Abstract Algebra/Chapter 1.ps
+./ResearchMaterial/Abstract Algebra/MyMacros.tex
+./ResearchMaterial/Abstract Algebra/Chapter 1.synctex.gz
+./ResearchMaterial/Abstract Algebra/Chapter 1.aux
+./ResearchMaterial/Abstract Algebra/Chapter 1.toc
+./ResearchMaterial/Abstract Algebra/MyMacros.log
+./ResearchMaterial/Abstract Algebra/Chapter 1.tex
+./ResearchMaterial/Abstract Algebra/Chapter 1.pdf
+./ResearchMaterial/Topology
+./ResearchMaterial/Topology/Topology.tex
+./ResearchMaterial/Topology/Topology.synctex.gz
+./ResearchMaterial/Topology/Topology.out
+./ResearchMaterial/Topology/Topology.aux
+./ResearchMaterial/Topology/Topology.dvi
+./ResearchMaterial/Topology/MyMacros.tex
+./ResearchMaterial/Topology/topbook.pdf
+./ResearchMaterial/Topology/Topology.log
+./ResearchMaterial/Topology/Topology.pdf
+./ResearchMaterial/Topology/Topology.toc
+./ResearchMaterial/Francis_Scheid_Schaums_Outline_of_Numerical_Analysis,_Second_Edition____1989 (1).pdf
+./ResearchMaterial/Complex_Variables.pdf
+./ResearchMaterial/Badiale and Serra - 2011 - Semilinear Elliptic Equations for Beginners Exist.pdf
+./ResearchMaterial/GeneralRelativity.pdf
+./ResearchMaterial/Costa - 2007 - An Invitation to Variational Methods in Differenti.pdf
+./ResearchMaterial/Chipot - 2009 - Elliptic Equations An Introductory Course.pdf
+./ResearchMaterial/QuantumMechanics.pdf
+./ResearchMaterial/Differential Geometery Notes.pdf
+./ResearchMaterial/Algebraic Topology
+./ResearchMaterial/Algebraic Topology/AT.pdf
+./ResearchMaterial/Algebraic Topology/MUNKRES-ETA.pdf
+./ResearchMaterial/Algebraic Topology/ConciseRevised.pdf
+./ResearchMaterial/Introduction_a_Tensor_Analysis.pdf
+./ResearchMaterial/Ambrosetti and Arcoya - 2011 - An Introduction to Nonlinear Functional Analysis a.pdf
+./ResearchMaterial/OrdinaryDifferentialEquations.pdf
+./ResearchMaterial/Linear Algebra - Kenneth Hoffman & Ray Kunze .pdf
+./Math 5411 Statistics
+./Math 5411 Statistics/5441_short03.log
+./Math 5411 Statistics/5411_quiz1.log
+./Math 5411 Statistics/5411_05.synctex.gz
+./Math 5411 Statistics/5441_09.synctex.gz
+./Math 5411 Statistics/5411_03.log
+./Math 5411 Statistics/544_04.pdf
+./Math 5411 Statistics/5441_08.out
+./Math 5411 Statistics/5441_09.tex
+./Math 5411 Statistics/5441_short03.synctex.gz
+./Math 5411 Statistics/5441_short02.pdf
+./Math 5411 Statistics/5441_short03.pdf
+./Math 5411 Statistics/5411_01.pdf
+./Math 5411 Statistics/Project 2-2.R
+./Math 5411 Statistics/5441_06.out
+./Math 5411 Statistics/5411_Midterm.aux
+./Math 5411 Statistics/5411_quiz2.tex
+./Math 5411 Statistics/5411_02.aux
+./Math 5411 Statistics/5411_01a.aux
+./Math 5411 Statistics/5411_05.aux
+./Math 5411 Statistics/5411_05.log
+./Math 5411 Statistics/5411_quiz1.tex
+./Math 5411 Statistics/5411_05.out
+./Math 5411 Statistics/5441_05.out
+./Math 5411 Statistics/5411_ExtraCredit.tex
+./Math 5411 Statistics/5411_quiz2.out
+./Math 5411 Statistics/5441_short03.aux
+./Math 5411 Statistics/5441_short03.tex
+./Math 5411 Statistics/5411_ExtraCredit.synctex.gz
+./Math 5411 Statistics/5441_short02.tex
+./Math 5411 Statistics/5441_11.out
+./Math 5411 Statistics/5441_09.out
+./Math 5411 Statistics/5441_05.pdf
+./Math 5411 Statistics/5441_05.aux
+./Math 5411 Statistics/5411_quiz1.out
+./Math 5411 Statistics/5441_Halloween.synctex.gz
+./Math 5411 Statistics/5441_09.aux
+./Math 5411 Statistics/5441_05.log
+./Math 5411 Statistics/544_04.out
+./Math 5411 Statistics/5411_05.R
+./Math 5411 Statistics/Project 2-1.R
+./Math 5411 Statistics/5441_09.pdf
+./Math 5411 Statistics/5411_01.tex
+./Math 5411 Statistics/5411_quiz2.pdf
+./Math 5411 Statistics/544_04.aux
+./Math 5411 Statistics/5441_CheatSheet.tex
+./Math 5411 Statistics/5441_08.log
+./Math 5411 Statistics/5441_06.aux
+./Math 5411 Statistics/5441_11.synctex.gz
+./Math 5411 Statistics/5441_short03.out
+./Math 5411 Statistics/5411_02.log
+./Math 5411 Statistics/5411_Midterm.tex
+./Math 5411 Statistics/5441_CheatSheet.pdf
+./Math 5411 Statistics/5441_11.log
+./Math 5411 Statistics/544_04.synctex.gz
+./Math 5411 Statistics/5411_01.out
+./Math 5411 Statistics/5411_02.pdf
+./Math 5411 Statistics/Atlas Poll - US Key States - 04-11-2024 (1).pdf
+./Math 5411 Statistics/5441_08.pdf
+./Math 5411 Statistics/5411_05.tex
+./Math 5411 Statistics/Project 2.pdf
+./Math 5411 Statistics/5441_06.synctex.gz
+./Math 5411 Statistics/5441_05.synctex.gz
+./Math 5411 Statistics/5441_08.tex
+./Math 5411 Statistics/5411_01a.log
+./Math 5411 Statistics/5441_09.log
+./Math 5411 Statistics/5411_05.pdf
+./Math 5411 Statistics/5411_07.aux
+./Math 5411 Statistics/5411_ExtraCredit.aux
+./Math 5411 Statistics/5411_quiz1.pdf
+./Math 5411 Statistics/5441_10.aux
+./Math 5411 Statistics/5411_02.synctex.gz
+./Math 5411 Statistics/5411_ExtraCredit.out
+./Math 5411 Statistics/5411_02.tex
+./Math 5411 Statistics/5411_Midterm.log
+./Math 5411 Statistics/5441_08.aux
+./Math 5411 Statistics/5411_03.pdf
+./Math 5411 Statistics/5441_Halloween.pdf
+./Math 5411 Statistics/5411_07.tex
+./Math 5411 Statistics/5411_01.aux
+./Math 5411 Statistics/5441_short02.aux
+./Math 5411 Statistics/5441_10.out
+./Math 5411 Statistics/PXL_20241203_171407733.jpg
+./Math 5411 Statistics/5441_10.synctex.gz
+./Math 5411 Statistics/Bias of an Estimator.pdf
+./Math 5411 Statistics/5441_10.pdf
+./Math 5411 Statistics/5441_08.synctex.gz
+./Math 5411 Statistics/5441_06.tex
+./Math 5411 Statistics/5411_03.tex
+./Math 5411 Statistics/5411_01a.tex
+./Math 5411 Statistics/5441_11.aux
+./Math 5411 Statistics/5441_10.tex
+./Math 5411 Statistics/5441_short02.out
+./Math 5411 Statistics/5441_Halloween.aux
+./Math 5411 Statistics/5441_11.tex
+./Math 5411 Statistics/5441_short02.synctex.gz
+./Math 5411 Statistics/5411_03.aux
+./Math 5411 Statistics/5411_quiz2.aux
+./Math 5411 Statistics/5441_Halloween.out
+./Math 5411 Statistics/5411_07.synctex.gz
+./Math 5411 Statistics/5411_quiz1.aux
+./Math 5411 Statistics/5441_CheatSheet.aux
+./Math 5411 Statistics/5441_CheatSheet.log
+./Math 5411 Statistics/Binomial.Example.R
+./Math 5411 Statistics/5411_ExtraCredit.pdf
+./Math 5411 Statistics/5411_07.log
+./Math 5411 Statistics/5411_Midterm.synctex.gz
+./Math 5411 Statistics/5441_11.pdf
+./Math 5411 Statistics/5441_10.log
+./Math 5411 Statistics/CI.and.Conf.Coef.R
+./Math 5411 Statistics/5411_01a.out
+./Math 5411 Statistics/5411_07.pdf
+./Math 5411 Statistics/5441_short02.log
+./Math 5411 Statistics/5411_Midterm.out
+./Math 5411 Statistics/MathematicalStatisticsandDataAnalysis3ed.pdf
+./Math 5411 Statistics/544_04.log
+./Math 5411 Statistics/5441_06.pdf
+./Math 5411 Statistics/5411_01.synctex.gz
+./Math 5411 Statistics/5411_Midterm.pdf
+./Math 5411 Statistics/5411_03.out
+./Math 5411 Statistics/5441_05.tex
+./Math 5411 Statistics/5411_ExtraCredit.log
+./Math 5411 Statistics/5411_01.log
+./Math 5411 Statistics/5441_CheatSheet.synctex.gz
+./Math 5411 Statistics/5411_07.out
+./Math 5411 Statistics/5411_quiz2.log
+./Math 5411 Statistics/5411_quiz1.synctex.gz
+./Math 5411 Statistics/5411_01a.synctex.gz
+./Math 5411 Statistics/5441_06.log
+./Math 5411 Statistics/5441_06.dvi
+./Math 5411 Statistics/5441_Halloween.tex
+./Math 5411 Statistics/Rgraphs
+./Math 5411 Statistics/5441_CheatSheet.out
+./Math 5411 Statistics/5411_03.synctex.gz
+./Math 5411 Statistics/Hamming Code Project-1.R
+./Math 5411 Statistics/5411_02.out
+./Math 5411 Statistics/5411_quiz2.synctex.gz
+./Math 5411 Statistics/544_04.tex
+./Math 5411 Statistics/5411_01a.pdf
+./Math 5411 Statistics/Project2.ods
+./Math 5411 Statistics/5441_Halloween.log
+./Math 5099 Seminar
+./Math 5099 Seminar/5099_07.log
+./Math 5099 Seminar/250115.odt
+./Math 5099 Seminar/5099_07.aux
+./Math 5099 Seminar/5099_01.out
+./Math 5099 Seminar/5099_03.out
+./Math 5099 Seminar/5099_01.aux
+./Math 5099 Seminar/5099_01.synctex.gz
+./Math 5099 Seminar/5099_07.pdf
+./Math 5099 Seminar/5099_03.synctex.gz
+./Math 5099 Seminar/5099_03.tex
+./Math 5099 Seminar/5099_01.pdf
+./Math 5099 Seminar/5099_03.pdf
+./Math 5099 Seminar/5099_01.tex
+./Math 5099 Seminar/5099_01.log
+./Math 5099 Seminar/5099_07.tex
+./Math 5099 Seminar/5099_07.synctex.gz
+./Math 5099 Seminar/5099_03.log
+./Math 5099 Seminar/5099_07.out
+./Math 5099 Seminar/blank.odt
+./Math 5099 Seminar/5099_03.aux
+./Math 2001 Calculus 3
+./Math 2001 Calculus 3/250113.odt
+./Math 2001 Calculus 3/quiz1.pdf
+./Math 2001 Calculus 3/c1Alg.pdf
+./Math 2001 Calculus 3/.~lock.250113.odt#
+./MyMacros.tex
+./tmp.txt
+./Math 5301 Numerical Analysis
+./Math 5301 Numerical Analysis/Finite_Difference_Methods_for_Ordinary_a.pdf
+./Math 5301 Numerical Analysis/5301_01.out
+./Math 5301 Numerical Analysis/Faires-Burden-Numerical-Analysis-7Ed.pdf
+./Math 5301 Numerical Analysis/5301_01.aux
+./Math 5301 Numerical Analysis/5301_01.synctex.gz
+./Math 5301 Numerical Analysis/5301_01.pdf
+./Math 5301 Numerical Analysis/diary
+./Math 5301 Numerical Analysis/250113.rnote
+./Math 5301 Numerical Analysis/5301_01.tex
+./Math 5301 Numerical Analysis/5301_01.log
+./Math 5301 Numerical Analysis/tutorial.mat
+./Math 5301 Numerical Analysis/250115.rnote
+./Blank.rnote
+./EDS001
+./EDS001/ActiveShoorter_certificate.pdf
+./EDS001/SecViewer_certificate.pdf
+./EDS001/Carmody_Emergency_certificate.pdf
+./EDS001/Certificate of Completion for Cybersecurity Overview (Full Course).html
+./EDS001/FIT_FERPA_Confidentiality_certificate.pdf
+./EDS001/Carmody_SexualHarassment_certificate.pdf
+./EDS001/FIT_TitleXI_certificate.pdf
+./EDS001/ActiveShoorter_certificate.png
+./EDS001/Certificate of Completion for Title IX_ Roles of Employees (2024 Full Course).html
+./EDS001/Carmody_DiscriminationFree_certificate.pdf
+./EDS001/Discrimination_Certrificate.pdf
+./EDS001/Carmody_DrugAlcoholFree_certificate.pdf
+./EDS001/FIT_SecViewer_certificate.pdf
+./EDS001/250107.rnote
+./EDS001/Carmody_HazardCommunication_certificate.pdf
+./EDS001/Certificate of Completion for FERPA_ Confidentiality of Records (Full Course).html
+./EDS001/Certificate of Completion for Cybersecurity Overview (Full Course)_files
+./EDS001/Certificate of Completion for Cybersecurity Overview (Full Course)_files/jquery.min.js
+./EDS001/Certificate of Completion for Cybersecurity Overview (Full Course)_files/TRAIN.png
+./EDS001/Certificate of Completion for Cybersecurity Overview (Full Course)_files/certificate-seal.gif
+./EDS001/certificate.png
+./EDS001/Carmody_ActiveShooter_certificate.pdf
+./EDS001/Certificate of Completion for FERPA_ Confidentiality of Records (Full Course)_files
+./EDS001/Certificate of Completion for FERPA_ Confidentiality of Records (Full Course)_files/jquery.min.js
+./EDS001/Certificate of Completion for FERPA_ Confidentiality of Records (Full Course)_files/TRAIN.png
+./EDS001/Certificate of Completion for FERPA_ Confidentiality of Records (Full Course)_files/certificate-seal.gif
+./EDS001/FireExtinguisher_certificate.pdf
+./EDS001/DrugAndAlcoholFree_certificate.png
+./EDS001/DrugAndAlcoholFree_certificate.pdf
+./EDS001/EmergencyActionPlan_certificate.pdf
+./EDS001/WorkplaceViolence_certificate.pdf
+./EDS001/SexualHarrassment_certificate.pdf
+./EDS001/Carmody_FireExtinguisher_certificate.pdf
+./EDS001/HazardComunication_certificate.pdf
+./EDS001/Carmody_Violence_certificate.pdf
+./EDS001/Lesson_Plan_Template_Fall 2015.doc
+./EDS001/Certificate of Completion for Title IX_ Roles of Employees (2024 Full Course)_files
+./EDS001/Certificate of Completion for Title IX_ Roles of Employees (2024 Full Course)_files/jquery.min.js
+./EDS001/Certificate of Completion for Title IX_ Roles of Employees (2024 Full Course)_files/TRAIN.png
+./EDS001/Certificate of Completion for Title IX_ Roles of Employees (2024 Full Course)_files/certificate-seal.gif
+./Math 5110 Real Analysis I
+./Math 5110 Real Analysis I/5110_04.log
+./Math 5110 Real Analysis I/5110_03.aux
+./Math 5110 Real Analysis I/Analysis_II.pdf
+./Math 5110 Real Analysis I/5110_04.synctex.gz
+./Math 5110 Real Analysis I/5110_03.log
+./Math 5110 Real Analysis I/5110_02.log
+./Math 5110 Real Analysis I/TerenceTao_Analysis.I.Third.Edition.pdf
+./Math 5110 Real Analysis I/5110_04.aux
+./Math 5110 Real Analysis I/an.pdf
+./Math 5110 Real Analysis I/5110_03.synctex.gz
+./Math 5110 Real Analysis I/5110_01.synctex.gz
+./Math 5110 Real Analysis I/5110_04.out
+./Math 5110 Real Analysis I/5110_05.aux
+./Math 5110 Real Analysis I/5110_X1.tex
+./Math 5110 Real Analysis I/5110_01.tex
+./Math 5110 Real Analysis I/5110_03.out
+./Math 5110 Real Analysis I/5110_02.synctex.gz
+./Math 5110 Real Analysis I/5110_03.tex
+./Math 5110 Real Analysis I/5110_05.pdf
+./Math 5110 Real Analysis I/5110_04.pdf
+./Math 5110 Real Analysis I/5110_02.out
+./Math 5110 Real Analysis I/5110_X1.aux
+./Math 5110 Real Analysis I/5110_05.out
+./Math 5110 Real Analysis I/5110_01.pdf
+./Math 5110 Real Analysis I/hw-ans-x.pdf
+./Math 5110 Real Analysis I/5110_05.synctex.gz
+./Math 5110 Real Analysis I/5110_03.pdf
+./Math 5110 Real Analysis I/5110_04.tex
+./Math 5110 Real Analysis I/5110_X1.pdf
+./Math 5110 Real Analysis I/5110_05.log
+./Math 5110 Real Analysis I/5110_02.tex
+./Math 5110 Real Analysis I/Liu, Zhang - 2017 - On the change of variables formula for multiple integrals.pdf
+./Math 5110 Real Analysis I/5110_X1.out
+./Math 5110 Real Analysis I/5110_02.aux
+./Math 5110 Real Analysis I/5110_02.pdf
+./Math 5110 Real Analysis I/hws.pdf
+./Math 5110 Real Analysis I/5110_X1.synctex.gz
+./Math 5110 Real Analysis I/5110_01.log
+./Math 5110 Real Analysis I/5110_01.out
+./Math 5110 Real Analysis I/5110_01.aux
+./Math 5110 Real Analysis I/5110_05.tex
+./Math 5110 Real Analysis I/5110_X1.log
+./Math 1001 Calculus 1
+./Math 1001 Calculus 1/Day1.out
+./Math 1001 Calculus 1/Day1.tex
+./Math 1001 Calculus 1/Day1.aux
+./Math 1001 Calculus 1/Day1.pdf
+./Math 1001 Calculus 1/c1s25cal.pdf
+./Math 1001 Calculus 1/250113.odt
+./Math 1001 Calculus 1/Day1.synctex.gz
+./Math 1001 Calculus 1/Day1.log
