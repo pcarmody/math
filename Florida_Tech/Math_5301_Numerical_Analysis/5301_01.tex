@@ -1,0 +1,138 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5301 -- Numerical Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#1 }
+\newcommand{\DUEDATE}{January 24, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 330}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\ts}{\textsuperscript}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Question 1 (20 points)
+\vspace{1 em}
+
+Using Newton's Divided Difference Table, construct a quadratic polynomial to interpolate the function $f(x) = \sin x$ at $x+0=0, x_1=\pi/4$ and $x_2=\pi/2$.
+\begin{enumerate}[label=(\alph*)]
+
+	\item Write the polynomial in the form $P_2(x)=ax^2+bx+c$, include the divided difference table you use.
+	
+	\BLUE{\begin{align*}
+			&\begin{array}{ccccc}
+				\hline 
+				i & x_i & f[x_i] & f[x_{i-1},x_i] & f[x_i, x_{i-1},x_{i-2}]\\
+				\hline
+				0 & 0 & 0 \\
+				1 & \pi/4 & 0.707 &\frac{0.707}{0.785} = 0.9003\\
+				2 & \pi/2 & 1.0 &\frac{0.2635}{-0.785}& -0.3357
+			\end{array}\\ \\
+			P_2(x) &= -0.3357x^2+0.9003x
+		\end{align*}	
+	}
+	\item Estimate the error bound for the interpolation.
+	
+	\BLUE{Our Error Bound is
+	\begin{align*}
+		\BARS{f(x) - P_2(x)} &\le \frac{1}{(n+1)!}\BARS{f^{'''}}_{\max}(x-x_0)(x-x_1)(x-x_2) \\
+		&\le \frac{1}{6}(x-0)(x-\pi/4)(x-\pi/2) 
+	\end{align*}where $0\le x \le \pi/2$
+	}
+	\item Estimate (graphically) the largest real error by comparing the plots of $y=f(x)$ and $y=P_2(x)$.  Attach computer generated plots.
+	
+	\includegraphics[scale=0.4]{530101.png} 
+	\item Compare the real error with the error bound computed in step (b) and comment on the comparison.
+	
+	\BLUE{the largest real error appears to be at $\pi/2$ atabout 0.4.  outside the error bound}
+
+\end{enumerate}
+\newpage
+\vspace{1 em}
+
+Question 2 (20 points)
+\vspace{1 em}
+
+Suppose we do piecewise interpolation over equally-spaced nodes with $[1,4]$ for $f(x)=1/x$.  We would like to keep the largest error under $10^{-3}$.
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item How many nodes are required for piecewise linear interpolation?
+	
+	\BLUE{From Theorem 3.13
+	\begin{align*}
+		\text{Error Bound} &= \frac{M}{384}\max_{0\le j\le n-1}h^4 \\
+		\text{ where } M&=\max_{a\le x \le b}f^{(4)}(x) =\max_{1\le x \le 4}f^{(4)}(x) = \max_{1\le x \le 4} \frac{4!}{x^5}=4!=24 \\
+		10^{-3} &= 24 h^4 \\
+		h &= \sqrt[4]{\frac{0.001}{24}} \\
+		&=0.803 \\
+		n &= \frac{4-1}{0.0803} \\
+		n &\approx 37
+	\end{align*}
+	}
+	
+	\item How many nodes are required for piecewise quadratic interpolation?
+	
+	\BLUE{\begin{align*}
+		\text{Error Bound} &\le \frac{1}{(n+1)!}\BARS{f^{'''}}_{\max_{a\le x \le b}}h^3  \text{ where } h = (b-a)/n\\
+		&\le \frac{1}{(n+1)!}\BARS{\frac{6}{x^4}}_{\max_{1\le x \le 4}}h^3 \text{ where } h = 3/n\\
+		10^{-3} &\le \frac{162}{n^3(n+1)!} \\
+		n^3(n+1)! &= \frac{0.001}{162} = 0.000006172 \\
+		n \approx 3
+	\end{align*}
+	}
+	
+	\item Use Matlab to confirm your calculation in (a).
+
+\end{enumerate}
+
+\end{document}

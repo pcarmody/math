@@ -1,0 +1,116 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes }
+\newcommand{\DUEDATE}{January -- May, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent \textbf{Definitions}
+
+\begin{enumerate}
+	\item \DEFINE{Diffeomorphism}: If $f \in C^\infty$ and $f^{-1} \in C^\infty$ then $f$ is said to be a \DEFINE{diffeomorphism}.  Similarly, if there exists a mapping between two sets that is a diffeomorphism, the sets are said to be \DEFINE{diffeomorphic} to each other.
+	\item \DEFINE{Tangent Space} at a point $p$.  The set of all vectors rooted at $p$, written as $T_p(\R^n)$.  
+	\item \DEFINE{Derivations}: any operation that supports the Liebniz Rule ($D(fg) = (Df)g+fDg$).
+	\item \DEFINE{Derivation Space}. $\mathcal{D}_p(\R^n)$ is the set of all derivations at $p$.  This constitutes a vector space.  There exists an isomorphism $\phi: T_p(\R^n) \to \mathcal{D}(\R^n)$ defined as
+	\begin{align*}
+		\phi: T_p(\R^n) &\to \mathcal{D}_p(\R^n)\\
+		v &\mapsto D_v=\sum v^i \RBAR{\PART{}{x^i}}_p.
+	\end{align*}
+	\item \DEFINE{Germ}: equivalence class of functions whose derivatives around a point are the same.
+	\item Vector Field vs Vector Space.  
+	\begin{itemize}
+		\item \DEFINE{A Vector Field} a function that assigns a vector to every point in the subset $U$. 
+		\begin{align*}
+			f: (U\subset \R^m) &\to T_p( \R^n) \\
+				X &\mapsto X_p=\sum \RBAR{a^i(p) \PART{}{x^i} }_p.
+		\end{align*}consider $a^i$ as coefficent functions.  We say that $X$ is $C^\infty$ on $U$ if $a^i\in C^\infty, \, \forall i=1,\dots,n$.
+		\item \DEFINE{A Vector Space} is any abstraciton that is closed under addition and scalar multiplication.
+	\end{itemize}
+	\item Left \DEFINE{$R$-Module}: An Abelian group $R$ with a scalar multiplication map:
+	\begin{align*}
+		\mu : R \times A \to A
+	\end{align*}usually written as $\mu(r,a)$, such that $r,s \in \R$ and $a,b \in A$	 a
+	\begin{enumerate}[label=(\roman*)]
+		\item (associative) $(rs)a = r(sa)$.
+		\item (identity) $1a = a$ (1 is a multiplicative identity).
+		\item (distributivity) $(r+s)a = ra+sa$ and $r(a+b) = ra+rb$.	
+	\end{enumerate}	 If $R$ is a field then $R$-module is precisely a vector space over $R$.
+	
+	A \DEFINE{$K$-Algebra over a field $K$} is also a ring $A$ that is also a vector space over $K$ such that the ring multiplication satisfies homogeniety (scalar distributes over vector multipliation to only one of the operators).
+	\item Exterior Algebras
+	\item \DEFINE{Dual Basis and Dual Space}.  The \DEFINE{Dual Basis} is a set of functions $\alpha^i: V \to \R$ 
+	\begin{align*}
+		\alpha^i &: V \to \R \\
+			\alpha^i(e_j) &= \delta_j^i
+	\end{align*}the \DEFINE{Dual Space $V^\vee$} is the space of functions spanned by the Dual Basis. Elements of the Dual Space are called \DEFINE{Functionals (Analysis)/k-Covectors (Differential Geometry)}.
+	\item \DEFINE{Multi-Linear Functions} Let $V$ be a vector space and $V^k$ be $k$-tuples of vectors in $V$. A \DEFINE{$K$-linear map or $k$-tensor} $f: V^k \to \R$ such that each $i$\textsuperscript{th} component is linear.  The vector space of all $k$-tensors on $V$ is denoted $L_k(V)$.
+	\item Permuting Mult-linear Functions
+	\item \DEFINE{Tensor Product} is an operator on $v \in V$ and $u \in U$ where 
+	\begin{align*}
+		v \otimes u &: V \times U \to V \oplus U \\
+		(v \otimes u)_{i\cdot j} &= v_i \cdot u_j,\, \forall i=1,\dots,\dim(V),\, j=1,\dots,\dim(U)
+	\end{align*}
+	\item Wedge Product
+	\item Differential k-Forms
+	\item the Exterior Derivative
+\end{enumerate}
+
+\noindent\textbf{NOTE:}''In a typical school, there would be graduate level courses on Smooth Manifods and anoter  on Remannian Manifolds."
+
+\end{document}

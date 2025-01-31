@@ -1,0 +1,92 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5111 -- Real Analysis II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework (not graded) }
+\newcommand{\DUEDATE}{May 2025}
+\newcommand{\SEMESTER}{Sprint 2025}
+\newcommand{\SCHEDULE}{MW 9:30 - 10:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Liu}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\HLINE
+\noindent Pg 30, 3\\
+
+\noindent Prove that if $f$ is a real function on a measurable space $X$ such that $\{x:f(x) \ge r\}$ is measurable for for every rational $r$, then $f$ is measurable. \\
+
+\HLINE
+\noindent Pg 30, 4\\ \\
+Let $\{a_n\}$ and $\{b_n\}$ be sequencesin $[-\infty,\infty]$, and prove the following assertions:
+\begin{enumerate}[label=(\alph*)]
+	\item $ \LIMSUPN (-a_n) = - \LIMINFN a_n. $
+	
+	\item $ \LIMSUPN (a_n+b_n) \le \LIMSUPN a_n + \LIMSUPN b_n$ provided none of the sums is $\infty - \infty$.
+	
+	\item if $a_n \le b_n$, for all $n$, then 
+	\begin{align*}
+		\LIMINFN a_n \le \LIMINFN b_n
+	\end{align*}
+\end{enumerate}Show by example that strick inequalty can hold in (b).\\ \\
+\HLINE
+\noindent Pg 30, 5\\
+\begin{enumerate}[label=(\alph*)]
+	\item Suppose $f: X \to [-\infty, \infty]$ and $g; X \to [-\infty,\infty ]$ are measurable.  Prove that the sets 
+	\begin{align*}
+		\{x:f(x) < g(x)\}, \{x:f(x)=g(x)|
+	\end{align*}are measurable.
+	
+\end{enumerate}
+
+\end{document}

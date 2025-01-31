@@ -1,0 +1,82 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes }
+\newcommand{\DUEDATE}{Februaray 4, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Section 2: 1, 3, 4\\
+
+\noindent \textbf{2.1. Vector fields}
+
+\noindent Let $X$ be the vector field $x\partial/\partial x + y\partial/\partial y$ and $f(x,y,z)$ the function $x^2+y^2+z^2$ on $\R^3$.  Complute $Xf$.\\
+
+\noindent \textbf{2.3. Vector space structure on derivations at a point}
+
+\noindent Let $D$ and $D'$ be derivatiosn at $p$ in $\R^n$, and $c \in \R$.  Prove that
+\begin{enumerate}[label=(\alph*)]
+	\item the sum $D+D'$ is a derivation at $p$.
+	\item the scalar multiple $cD$ is a derivation at $p$.
+\end{enumerate}
+
+\noindent \textbf{2.4. Product of derivations}
+
+\noindent Let $A$ be an algebra over a field $K$.  If $D_1$ and $D_2$ are derivations of $A$, show that $D_1 \circ D_2$ is not necessarily a derivation (it is if $D_1$ or $D_2=0$), but $D_1\circ D_2 - D_2\circ D_1$ is always a derivation of $A$.
+
+\end{document}

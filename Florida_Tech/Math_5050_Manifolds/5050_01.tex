@@ -1,0 +1,204 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#1 }
+\newcommand{\DUEDATE}{January 28, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 9:30 - 10:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Section 1 problems 1, 3, 4, 5, 8.
+
+\noindent \textbf{1.1.  A function that is $C^2$ but not $C^3$.}
+
+\noindent Let $g: \R \to \R$ be the function in example 1.2(iii).  Show that the function $h(x) = \int_0^x g(t) dt$ is $C^2$ but not $C^3$ at $x=0$.\\
+
+\BLUE{\begin{align*}
+	h(x) &= \int_0^x g(t) dt \\
+	h'(x) &= g(x) = \frac{3}{4}x^\frac{4}{3} \\
+	h''(x) &= g'(x) = x^\frac{1}{3} \\
+	h'''(x) &= \frac{1}{3}x^\frac{-2}{3}
+\end{align*}which is NOT continuous at $x=0$.\\
+}
+
+\noindent \textbf{1.3.  A diffeomorphism of open interval in $\R$}
+
+\noindent Let $U \subset \R^n$ and $V \subset \R$ be open subsets.  A $C^\infty$ map $F:U \to V$ is called a \textit{differomorphism} if it is bijective and has  $C^\infty$ inverse $F^{-1}: V\to U$.
+
+\begin{enumerate}[label=(\alph*)]
+\item Show that the function $f: ] -\pi/2, /pi/2[ \to \R,f(x)=\tan x,$ is a diffeomorphism.
+
+\BLUE{\begin{align*}
+	f(x) &= \tan x \\
+	f^{-1}(x) &= \tan^{-1} x \\
+	f^{-1}(x)' &= \frac{1}{1+x^2} \\
+	f^{-1}(x)'' &= \frac{-2x}{(1+x^2)^2} 
+\end{align*}It is clear that further differentiaion will increase the power of the denominator and the number of terms indefinitely. Thus $f^{-1} \in C^\infty$.
+}
+
+\item Let $a,b$ be real numbers of $a < b$.  Find a linear function $h:(a,b)\to (-1,1)$, thus proving that any two finite open intervals are diffeomorphic.
+
+The composite $f \circ h:(a,b)\to \R$ is then a diffeomorphism of an open interval with $\R$.
+
+\BLUE{We must a function of the form $h(x)=mx+c$ and find both the slope $m$ and the $y$-intercept in terms of $a$ and $b$.
+\begin{align*}
+	h(a) &= -1 \AND h(b) = a \\
+	m &= \frac{b-a}{1-(-1)} = \frac{b-a}{2} \\
+	-1 &= ma + c \\
+	1 &= mb + c \\
+	0 &= m(a+b) + c = \frac{b-a}{2}(b+a) + c\\
+	c &= -\frac{b^2-a^2}{2} \\
+	h(x) &= \frac{b-a}{2}x - \frac{b^2-a^2}{2}
+\end{align*}
+}
+
+\item The exponent function exp$:\R \to ]0,\infty[$ is a differomorphism.  Use it to show that for any real numbers $a$ and $b$, the intervals $\R,]a,\infty[$, and $],-\infty,b[$ are diffeomorphic.
+
+\BLUE{Goal: find a map $f: ]-\infty, b[ \to ]a, \infty[$ which has the form $f(x) = ce ^{-x}$ try
+\begin{align*}
+	f(a) &= b \implies ce^{-a} = b,\, c=be^a\\
+	f(x) &= be^{x-a}
+\end{align*}$f \in C^\infty$ as is $f^{-1}$.  This also maps onto $\R$ quite well.
+}
+
+\end{enumerate}
+
+\noindent \textbf{1.4. A differomorphism of an open cube with $\R^n$}
+
+\noindent Show that the map
+\begin{align*}
+	f:\PAREN{-\frac{\pi}{2}, \frac{\pi}{2}}^n \to \R^n,\, f(x_1,\dots, x_n) = (\tan x_1, \dots, \tan x_n),
+\end{align*}is a differomorphism.
+
+\BLUE{From 1.3. we can see that $f(x^i) = \tan x^i$ and $\PART{f}{x^i} = \frac{d \tan x^i}{d x^i}$.  Thus, each $f(x^i) \in C^\infty$ for all $i=1,\dots,n$ and $f \in C^\infty$.  The same can be said for $f^{-1}$, thus $f$ is a diffeomorphism.\\
+}
+
+\noindent \textbf{1.5. A diffeomorphism of an open ball with $\R^n$}
+
+\noindent Let $\textbf{0} = (0,0)$ be the origin and $B(\textbf{0}, 1)$ the open unit disk in $\R^2$.  To find a diffeomorphism between $B(\textbf{0},1)$ and $\R^2$, we identify $\R^2$ with the $xy$-plane in $R^3$ and introduce the lower open hemisphere
+\begin{align*}
+	S: x^2+y^2+(z-1)^2=1, \, z<1
+\end{align*}in $\R^3$ as an intermediate space (Figure 1.4). First note that the map
+\begin{align*}
+	f: B(\textbf{0}, 1) \to S, \, (a,b) \mapsto(a,b,1-\sqrt{1-a^2-b^2}),
+\end{align*}is a bijection.
+
+\begin{enumerate}[label=(\alph*)]
+	\item The \textit{stereographic projection} $g: S \to \R^2$ from $(0,0,1)$ is the map that sends a point $(a,b,c) \in S$ to the intersection of the line through $(0,0,1)$ and $(a,b,c)$ with the $xy$-plane.
+	
+	Show that it is given by 
+	\begin{align*}
+		(a,b,c)\mapsto (u,v)=\PAREN{\frac{a}{1-c},\frac{b}{1-c}}, \, c=1-\sqrt{1-a^2-b^2},
+	\end{align*}with inverse
+	\begin{align*}
+		(u,v) \mapsto\PAREN{\frac{u}{\sqrt{1+u^2+v^2}}, \frac{v}{\sqrt{1+u^2+v^2}}, 1-\frac{1}{\sqrt{1+u^2+v^2}}}.
+	\end{align*}
+	
+	\BLUE{We have a line in space with two points $(0,0,1)$ and $(a,b,c)$ and we want to find the point where on the $xy$-plane or where $z=0$.  
+	\begin{align*}
+		a^2+b^2+(c-1)^2 &= 1 \implies c = 1-\sqrt{1-a^2-b^2}
+	\end{align*}remembering the symmetric form for the equation of a line
+	\begin{align*}
+%		(x,y,z) &= (0,0,1)+t(a,b,c) \text{ solving for }t\\
+		\frac{x}{a} &= \frac{y}{b} = \frac{z+1}{1-c}
+	\end{align*}When this line intersects with the $xy$-plane at $(u,v,0)$ we have
+	\begin{align*}
+		\frac{u}{a} &= \frac{1}{1-c} \implies u = \frac{a}{1-c} \\
+		\frac{v}{b}  &= \frac{1}{1-c} \implies v = \frac{b}{1-c} \\
+		(a,b,c) &\mapsto\PAREN{\frac{a}{1-c}, \frac{b}{1-c}}
+	\end{align*}the inverse would be a line from $(0,0,1)$ to $(u,v,0)$ through a point on the hemisphere $(p,q,r)$ by using similar triangles and the radius of the sphere $R$
+	\begin{align*}
+		\frac{p}{R} &= \frac{u}{\sqrt{1+u^2+v^2}}, \, \frac{q}{R} = \frac{v}{\sqrt{1+u^2+v^2}} \\
+		\frac{1-r}{R} &= \frac{1}{\sqrt{1+u^2+v^2}} \\
+		R = 1 &\implies (p,q,r) = \PAREN{\frac{u}{\sqrt{1+u^2+v^2}}, \frac{v}{\sqrt{1+u^2+v^2}}, 1-\frac{1}{\sqrt{1+u^2+v^2}}}
+	\end{align*}
+	}
+	
+	\item Composing the two maps $f$ and $g$ gives the map
+	\begin{align*}
+		h=g \circ f: B(\textbf{0}, 1) \to \R^2: \, h(a,b) = \PAREN{\frac{a}{\sqrt{1-a^2-b^2}}, \frac{b}{\sqrt{1-a^2-b^2}}}.
+	\end{align*}Find a formula for $h^{-1}(u,v)=(f^{-1}\circ g^{-1})(u,v)$ and conclude that $h$ is a differomorphism of the open disk $B(\textbf{0},1)$ with $\R^2$.
+	
+	\BLUE{$f^{-1}$ accepts a point on the hemisphere $S$ and projects it down to a point on the disc.  $f^{-1}(x,y,z) = (x,y)$ thus
+	\begin{align*}
+		f^{-1}\circ g^{-1} (u,v) &= f^{-1}\PAREN{\frac{u}{\sqrt{1+u^2+v^2}}, \frac{v}{\sqrt{1+u^2+v^2}}, 1-\frac{1}{\sqrt{1+u^2+v^2}}} \\
+		&= \PAREN{\frac{u}{\sqrt{1+u^2+v^2}}, \frac{v}{\sqrt{1+u^2+v^2}}}
+	\end{align*}	
+	}
+	
+	\item Generalize part (b) to $\R^n$. 
+	
+	\BLUE{Changing $S$ from a hemisphere to a half-hypersphere with radius=1 in $\R^n$ and still moving its center up one axis, $x^i$, by 1, all other parameters will be equally effected as the $x$ and $y$ coordinates where $x^i$ will respond like the $z$.  Thus,
+	\begin{align*}
+		h(x) &= (h^1(x), h^2(x), \dots, h^k(x), \dots, h^n(x)) \\
+		h^k(x) &=  \BINDEF{ \frac{x^k}{1+\sqrt{\sum_{j=1}^n (x^j)^2}} & k \ne i} {1-\frac{1}{1+\sqrt{\sum_{j=1}^n (x^j)^2}}}
+	\end{align*}
+	}
+	
+\end{enumerate}
+
+\noindent \textbf{1.8. Bijective $C^\infty$ maps.}
+
+\noindent Define $f: \R \to \R$ by $f(x)=x^3$.  Show that $f$ is a bijective $C^\infty$ map, but that $f^{-1}$ is not $C^\infty$.  (This example shows that a bijective $C^\infty$ map need not have a $C^\infty$ inverse.  In complex analysis, the situation is quite different: a bijective holomorphic map $f: \C \to \C$ necessarily has a holomorphic inverse.)
+
+\BLUE{\begin{align*}
+	f^{-1}(x) &= x^{1/3} \\
+	(f^{-1}(x))' &= \frac{1}{3}x^{-2/3}
+\end{align*}which is not continuous at zero and therefore $f^{-1} \not \in C^\infty$.
+}
+
+\end{document}
