@@ -47,7 +47,6 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
-\newcommand{\ts}{\textsuperscript}
 
 \begin{document}
 
@@ -103,4 +102,45 @@
 	Borel Measurable & Borel & Boreal measurable & Borel mapping & Borel measurable \\
 \hline
 \end{tabular}
+
+\newpage
+\noindent February 7, 2015\\
+
+\begin{definition}[\textbf{Simple Integration}]
+
+Where $s$ is a simple function, that is, $\exists \{s_i\}, i= 1, \dots, n$ and $E_i$ such that $x \in E_i \implies s(x) = s_i$.
+\begin{align*}
+	\int_X s d\mu &= \sum_{i=1}^n s_i \mu(X \cap E_i)
+\end{align*}
+\end{definition}
+\begin{theorem}
+Given any positive measurable function $f$ there exists a sequence of simple measurable functions $\{s_i\}$ such that $s_i \to f$.
+\end{theorem}
+
+\begin{definition}[\textbf{Integration of Positive Function}] Given $f: X \to [0,\infty]\in \mathfrak{M}, E \in \mathfrak{M}(X)$ 
+\begin{align*}
+	\int_E fd\mu = \sup \int_E s d\mu
+\end{align*}supremum over all simple functions $0\le s< f$.
+\end{definition}
+
+\begin{theorem}
+	Let $E_i$ be a partition on $X$ then
+	\begin{align*}
+		\int_X f d\mu &= \int_X \sum_i f\chi_{E_i} d\mu 
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}[Lebesque Monotone Convergence Theorem] Given an increasing sequence of measurable functions $f_n : X \to [0,\infty] \in \mathfrak{M}$ where $f_n \to f$. Then,
+\begin{align*}
+	\LIMN \int_X f_n d\mu &= \int_X f d\mu 
+\end{align*}
+
+\begin{theorem}[Fatou's Lemma] Given an increasing sequence of measurable functions $f_n : X \to [0,\infty] \in \mathfrak{M}$ where $f_n \to f$. Then,
+\begin{align*}
+	\int_X \LIMINFN f_n d\mu &\le \LIMINFN \int_X f_n d\mu 
+\end{align*}
+
+\end{theorem}
+
+\end{theorem}
 \end{document}

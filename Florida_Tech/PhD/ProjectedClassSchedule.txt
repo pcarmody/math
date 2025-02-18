@@ -22,4 +22,14 @@ Fall 2025
 
 ===========
 
+Spring 2026
+
 6240 Partial Differential Equations II
+XXXX Special Topics: Tensor Calculus (Berchenoko-Kogan)
+
+==========
+
+Classes Desired
+xxxx Differential Geometry
+xxxx General Relativity
+xxxx Quantum Theory

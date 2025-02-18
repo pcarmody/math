@@ -1,0 +1,51 @@
+x = linspace(-3,3,60); 
+y = 1./(1+5*x.^2);
+
+x_spline = -3:0.1:3;
+y_spline = spline(x,y,x_spline);
+
+fh = figure;
+ah = axes(fh);
+hold(ah,'on')
+plot(ah,x,y,'o');
+plot(ah,x_spline,y_spline)
+
+% initialize the working arrays
+alpha = x;
+l = x;
+u = x;
+z = x;
+
+% initialize the return values
+
+a = x;
+b = x;
+c = x;
+d = x;
+
+h = 0.1;
+n = 61;
+for i = 2:1:n-2
+	alpha(i) = 30*(y(i+1)+y(i-1));
+end
+l(1) = 1;
+u(1) = 0;
+z(1) = 0;
+
+for i = 2:1:n-1
+	l(1) = 0.4-30*u(i-1);
+	u(i) = 0.1/l(i);
+	z(i) = (alpha(i)-0.1*z(i-1))/l(i)
+end
+
+l(n)=1;
+z(n)=0;
+c(n)=0;
+
+for j = n-2:-1:1
+	c(j) = z(j)-u(j)*c(j+1);
+	b(j) = (a(j+1)-a(j))/0.1-0.1*(c(j+1)+2*c(j))/3;
+	d(j) = (c(j+1)-c(j))/30;
+end
+
+

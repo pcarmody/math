@@ -47,24 +47,45 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
-\newcommand{\ts}{\textsuperscript}
-\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
 
 \begin{document}
 
 \begin{center}
 	\Large{\CLASSNAME -- \SEMESTER} \\
-	\large{ w/Professor Liu}
+	\large{ w/Professor Perera}
 \end{center}
 \begin{center}
 	\STUDENTNAME \\
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 
+
+\HLINE
+\noindent Pg 30, 1\\
+
+Does there exist an infinite $\sigma$-algebra which has only countably many members?\\
+
+\BLUE{First we establish the smallest possible measurable set containing a point, $B_x$.  Then demonstrate that these are unique and distinct (that is, $x \ne y \implies B_x \cap B_y = \emptyset$).  Then assuming that there are countably many $B_x$ show that there are still some missing points not in the $\bigcup_{\forall x} B_x$.
+}
+
+
+\HLINE
+\noindent Pg 30, 2\\
+
+Prove an analogue of Theorem 1.8 for $n$ functions.
+
 \HLINE
 \noindent Pg 30, 3\\
 
 \noindent Prove that if $f$ is a real function on a measurable space $X$ such that $\{x:f(x) \ge r\}$ is measurable for for every rational $r$, then $f$ is measurable. \\
+
+\BLUE{Let $E_r = \{x:f(x) \ge r\}$ each of which is measurable and $E = \bigcup_{r \in \Q} E_r$.  $E$ is measurable because it is the countable union of measurable sets.  Given any measurable set $I \in \R$ we can clearly see that $f(E) \cap I \ne \emptyset$ because $\Q$ is dense.
+\begin{align*}
+	f(E) &= f\PAREN{\bigcup_{r\in I\cap \Q} E_r}
+\end{align*}We are saying that $I$ is measurable, therefore it can be made up of the union of disjoint measurable sets $A$ and $B$ where $B = I \cap f(E)$ and $A = I\backslash B$.  $f^{-1}(I) = f^{-1}(A\cup B) = f^{-1}(A) \cup f^{-1}(B)$. We can see that $f^{-1}(B)$ is measurable,  How do we show that $f^{-1}(A)$ is?\\
+\\
+Notice, $E_r \in \mathfrak{M} \implies E_r^c \in \mathfrak{M}$.  Now, we can try to connect $f^{-1}(A)$ to these sets. 
+}
 
 \HLINE
 \noindent Pg 30, 4\\ \\
@@ -72,7 +93,23 @@ Let $\{a_n\}$ and $\{b_n\}$ be sequencesin $[-\infty,\infty]$, and prove the fol
 \begin{enumerate}[label=(\alph*)]
 	\item $ \LIMSUPN (-a_n) = - \LIMINFN a_n. $
 	
+	\BLUE{\begin{align*}
+			\sup_{n\to\infty} \{ - a_n \} &= - \inf_{n\to \infty} \{a_n\} \\
+			\LIMSUPN \{ -a_n\} &= \LIMN \sup_{k>n} \{-a_k \} = \LIMN (-\inf_{k>n} \{a_k \}) = -\LIMINFN \{a_n \}
+		\end{align*}	
+	}
+	
 	\item $ \LIMSUPN (a_n+b_n) \le \LIMSUPN a_n + \LIMSUPN b_n$ provided none of the sums is $\infty - \infty$.
+	
+	\BLUE{\begin{align*}
+		\LIMSUPN \{a_n + b_n\} &= \LIMN \sup_{k>n} \{a_k+b_k\}
+	\end{align*}keep mind that $a_k + b_k$ could be zero, but $\sup {a_k} + \sup{b_k}$ could only be zero after evaluating both sequences.  Thus,
+	\begin{align*}
+		\sup_{k > n} \{a_k + b_k\} &\le \sup_{k>n}\{a_k\} + \sup_{k>n}\{b_k\}, \, \forall n \\
+		\LIMN \sup_{k > n} \{a_k + b_k\} &\le \LIMN \sup_{k>n}\{a_k\} + \sup_{k>n}\{b_k\}, \, \forall n \\
+		\LIMSUPN \{a_n + b_n\} &\le \LIMSUPN \{a_n\} + \LIMSUPN\{b_n\} 
+	\end{align*}
+	}
 	
 	\item if $a_n \le b_n$, for all $n$, then 
 	\begin{align*}
@@ -87,6 +124,94 @@ Let $\{a_n\}$ and $\{b_n\}$ be sequencesin $[-\infty,\infty]$, and prove the fol
 		\{x:f(x) < g(x)\}, \{x:f(x)=g(x)|
 	\end{align*}are measurable.
 	
+	\BLUE{Given any $y \in X$ let $s_y = \{x: f(x) < g(y)\}$.  $f$ is measurable implies that $s_y$ is measurable.  Now taking the intersection over all $y \in X$, that is 
+	\begin{align*}
+		\bigcup_{y\in X} s_y = \{x:f(x) < g(x)\} \in \mathfrak{M} 
+	\end{align*}
+	}
+	
+	\item Prove that the set of points at which a sequence of measurable real-value functions converges (to a finite limit) is measurable.
+	
+	\BLUE{Let $f, f_n : X \to [0, \infty] \in \mathfrak{M}$ and let $f_n \to f, \forall x \in X$.  Given any measurable set $p\in X$ the sequence of sets $\{ f_i(p) \}$ are all measurable. Further, since $f_i(x) \to f(x), \forall x\in X$ we can say $f_i(p) \to f(p),\forall x \in p$.  Thus, for any measurable set $P$ and $\exists p \in \mathfrak{M}, n \to f_n(p)=P$.\\
+	\\
+	Given any measurable set $P \subset [-\infty, \infty]$ then $f_n^{-1}(P) \in \mathfrak{M},\forall n$.  Let $p_n \subset X$ such that $p_n = f_n^{-1}(P)$.  Then, $\cap_n f_n(p_n) = \cap_n f(p_n) = P$.  Thus, $f$ is measurable.
+	}
+	
 \end{enumerate}
 
+\HLINE
+\noindent Pg 30, 6\\
+
+Let $X$ be an uncountable set, let $\mathfrak{M}$ be the collection of all sets $E\subset X$ such that either $E$ and $E^c$ is at most countable, and define $\mu(E)=0$ in the first case, $\mu(E)=1$ in the second.  Prove that $\mathfrak{M}$ is a $\sigma$-algebra in $X$ and that $\mu$ is a measure on $\mathfrak{M}$.  Describe the corresponding measurable functions and their integrals.\\
+
+\HLINE
+\noindent Pg 30, 7\\
+
+Suppose $f_n: X \to [0,\infty]$ is measurable fo r$n=1,2,\dots, f_1 \ge f_2\ge
+f_3 \ge \cdots \ge 0, f_n(x)\to f(x)$ as $n\to \infty$, for every $x \in X$, and $f_1 \in L^1(\mu)$.  Prove that then
+\begin{align*}
+	\LIMN \int_X f_n d\mu = \int_X f d \mu
+\end{align*}and show that this conclusion does \textit{not} follow if the condition ``$f_1 \in L^1(\mu)$" is omitted.
+
+\BLUE{\begin{align*}
+	\LIMN \int_X f_n d\mu &= \LIMN \sup \int_X s_n d\mu
+\end{align*}where each $s_n$ are the simple function less than $f_n$ for all $x$.  These are all less than $f$ and whose $\LIMSUPN s_n = \LIMSUPN S_n$ of simple functions less than $f$.   thus
+\begin{align*}
+	\LIMSUPN \int_X s_n d\mu &= \LIMSUPN \int S_n d\mu = \int_x f d\mu
+\end{align*}
+}
+
+\HLINE
+\noindent Pg 30, 8\\
+
+Put $f_n= \chi_E$ if $n$ is odd, $f_n=1-\chi_E$ if $n$ is even.  What is the relevance of this example to Fatou's lemma?\\
+
+\BLUE{\textbf{Fatou's Lemma} given any any $f_n : X \to [0, \infty) \in \mathfrak{M}$ then 
+\begin{align*}
+	\int_X \LIMINFN f_x d\mu \le \LIMINFN \int_X f_n d\mu 
+\end{align*}The sequence of functions does not converge but oscilates.  Thus, LHS goes to zero and the RHS goes to 1.
+}
+
+
+\HLINE
+\noindent Pg 30, 9\\
+
+Suppose $\mu$ is a postiive measure on $X,f:X\to [0,\infty]$ is measurable $\int_X f d\mu=c$, where $0 < c<\infty$, and $\alpha$ is constant.  Prove that 
+\begin{align*}
+	\LIMN \int_X n \log [1+(f/n)^\alpha] d\mu = \LBRACKET{\begin{array}{ll}
+		\infty	& \text{if } 0<\alpha<1,\\
+		c & \text{if }\alpha = 1, \\	
+		0 & \text{if } 1 < \alpha < \infty.
+	\end{array} }
+\end{align*} \textit{Hint:} If $\alpha \ge 1$, the integrands are dominated by $\alpha f$.  If $\alpha < 1$, Fatous lemma can be applied.
+
+
+\HLINE
+\noindent Pg 30, 10\\
+
+Suppose $\mu(X) < \infty, \{f_n\}$ is a sequence of bounded complex measurable functions on $X$, and $f_n \to f$ uniformly on $X$.  Prove that
+\begin{align*}
+	\LIMN \int_X f_n d \mu = \int_X f d \mu.
+\end{align*}and show that the hypothesis``$\mu(X) < \infty$" cannot be omitted.
+
+
+\HLINE
+\noindent Pg 30, 11\\
+
+Show that 
+\begin{align*}
+	A = \bigcap_{nj=1}^\infty \bigcup_{k=n}^\infty E^k
+\end{align*}in Theorem 1.41 and hence prove the theorme without any reference to integration.
+
+
+\HLINE
+\noindent Pg 30, 12\\
+
+Suppose $f \in L^1(\mu)$.  Prove that to each $\epsilon > 0$ there exists a $\delta > 0$ sucht that $\int_E|f| d\mu < \epsilon$ whenever $\mu(E) < \delta$.
+
+
+\HLINE
+\noindent Pg 30, 13\\
+
+Show that proposition 1.24(c) is also true when $c = \infty$.
 \end{document}

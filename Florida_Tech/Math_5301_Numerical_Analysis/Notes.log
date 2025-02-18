@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.15)  14 JAN 2025 06:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.15)  14 FEB 2025 10:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**PhD_Class_Schedule.tex
-(./PhD_Class_Schedule.tex
+**Notes.tex
+(./Notes.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -710,165 +710,53 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@dimlist=\toks44
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 26.
- (./MyMacros.tex
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 I
-     ntxLNK^^A.^^@.^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Unicode character ^^A (U+0001)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 IntxLNK^^A
-              .^^@.^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@
-                  .^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@
-                      /^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@
-                          M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@M^^@
-                              y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@M^^@y^^@
-                                  M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@M^^@y^^@M^^@
-                                      a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@M^^@y^^@M^^@a^^@
-                                          c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@M^^@y^^@M^^@a^^@c^^@
-                                              r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 IntxLNK^^A.^^@.^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@
-                                                  o^^@s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 ...^^A.^^@.^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@
-                                                  s^^@.^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 ...^^@.^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@
-                                                  .^^@t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 ...^^@/^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@
-                                                  t^^@e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 ...^^@M^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@
-                                                  e^^@x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 ...^^@y^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@
-                                                  x^^@
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
-! Text line contains an invalid character.
-l.1 ...^^@M^^@a^^@c^^@r^^@o^^@s^^@.^^@t^^@e^^@x^^@
-                                                  
-A funny symbol that I can't read has just been input.
-Continue, and I'll forget that it ever happened.
-
+ (../MyMacros.tex
+\c@theorem=\count322
+\c@corollary=\count323
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count322
+\l__color_backend_stack_int=\count324
 \l__pdf_internal_box=\box111
 )
-(./PhD_Class_Schedule.aux)
-\openout1 = `PhD_Class_Schedule.aux'.
+(./Notes.aux)
+\openout1 = `Notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-Package hyperref Info: Link coloring ON on input line 51.
- (./PhD_Class_Schedule.out) (./PhD_Class_Schedule.out)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+Package hyperref Info: Link coloring ON on input line 50.
+ (./Notes.out) (./Notes.out)
 \@outlinefile=\write4
-\openout4 = `PhD_Class_Schedule.out'.
+\openout4 = `Notes.out'.
 
- (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count323
+\scratchcounter=\count325
 \scratchdimen=\dimen284
 \scratchbox=\box112
-\nofMPsegments=\count324
-\nofMParguments=\count325
+\nofMPsegments=\count326
+\nofMParguments=\count327
 \everyMPshowfont=\toks45
-\MPscratchCnt=\count326
+\MPscratchCnt=\count328
 \MPscratchDim=\dimen285
-\MPnumerator=\count327
-\makeMPintoPDFobject=\count328
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
 \everyMPtoPDFconversion=\toks46
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -915,26 +803,25 @@ e
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-(./PhD_Class_Schedule.aux)
+] (./Notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `PhD_Class_Schedule.out' has not changed.
+Package rerunfilecheck Info: File `Notes.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22625 strings out of 476139
- 429994 string characters out of 5794453
- 1932975 words of memory out of 5000000
- 44284 multiletter control sequences out of 15000+600000
- 558675 words of font info for 38 fonts, out of 8000000 for 9000
+ 22784 strings out of 476139
+ 430554 string characters out of 5794453
+ 1926975 words of memory out of 5000000
+ 44443 multiletter control sequences out of 15000+600000
+ 558665 words of font info for 38 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 102i,11n,107p,555b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,11n,107p,542b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on PhD_Class_Schedule.pdf (1 page, 34131 bytes).
+Output written on Notes.pdf (1 page, 31102 bytes).
 PDF statistics:
  26 PDF objects out of 1000 (max. 8388607)
  18 compressed objects within 1 object stream

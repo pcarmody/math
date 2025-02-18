@@ -47,8 +47,6 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
-\newcommand{\ts}{\textsuperscript}
-\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
 
 \begin{document}
 
@@ -98,7 +96,7 @@
 	\begin{align*}
 		\alpha^i &: V \to \R \\
 			\alpha^i(e_j) &= \delta_j^i
-	\end{align*}the \DEFINE{Dual Space $V^\vee$} is the space of functions spanned by the Dual Basis. Elements of the Dual Space are called \DEFINE{Functionals (Analysis)/k-Covectors (Differential Geometry)}.
+	\end{align*}the \DEFINE{Dual Space $V^\vee$} is the space of functions spanned by the Dual Basis. Elements of the Dual Space are called \DEFINE{Functionals (Analysis)/1-Covectors (Differential Geometry)}.  
 	\item \DEFINE{Multi-Linear Functions} Let $V$ be a vector space and $V^k$ be $k$-tuples of vectors in $V$. A \DEFINE{$K$-linear map or $k$-tensor} $f: V^k \to \R$ such that each $i$\textsuperscript{th} component is linear.  The vector space of all $k$-tensors on $V$ is denoted $L_k(V)$.
 	\item Permuting Mult-linear Functions
 	\item \DEFINE{Tensor Product} is an operator on $v \in V$ and $u \in U$ where 
@@ -109,8 +107,13 @@
 	\item Wedge Product
 	\item Differential k-Forms
 	\item the Exterior Derivative
+	\item Tensor Product.
+	
+	Given two vector spaces $V, W$ with bases $v_1, \dots, v_n$ and $w_1, \dots, w_m$ then the Tensor Product space $V \otimes W$ has a basis referred to as $v_i \otimes w_j$ such that given any vector $\alpha = \sum \alpha_i v_i \in V$ and $\beta = \sum \beta_j w_j \in W$ the vector $\alpha \otimes \beta$ will have $n\times m$ components and each $(\alpha \otimes \beta)_{i\times j} = \alpha_i \times \beta_j$.\\
+	\\
+	$\alpha_i, \beta_j$ are all scalars.  The real issue is the behavior of unit basis vectors $v_i, w_j$ and how they are effected by the operator and the basis vectors $v_i \otimes w_j$.  Thus, scalar multiplication works on either (but not both) operands and distribution over addition works over both the left and the right.
 \end{enumerate}
 
-\noindent\textbf{NOTE:}''In a typical school, there would be graduate level courses on Smooth Manifods and anoter  on Remannian Manifolds."
+\noindent\textbf{NOTE:}``In a typical school, there would be graduate level courses on Smooth Manifods and anoter  on Remannian Manifolds."
 
 \end{document}

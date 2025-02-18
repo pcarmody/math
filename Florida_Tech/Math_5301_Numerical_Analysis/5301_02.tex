@@ -1,0 +1,175 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5301 -- Numerical Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#2 }
+\newcommand{\DUEDATE}{February 8, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 330}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent \textbf{Question1.} (20 points) \\
+
+Construct a Natual Cubic Spline for $f(x) = \frac{1}{1+5x^2}$ over $[-3,3]$ with 61 equally spaced nodes
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Explicity form the linear systerm (matrix and right hand side vector).
+	
+	\BLUE{$h = 0.1$ and $n=61$ we have
+	\begin{align*}
+		A &= \SQBRACKET{\begin{array}{cccccc}
+			1   & 0 & 0 & 0 & \cdots & 0 \\
+			0.1 & 2(0.1+0.1) & 0.1 & 0 & \cdots & 0\\
+			0 & 0.1 & 2(0.1+0.1) & 0.1 & \cdots & 0\\
+			0 & 0 & 0.1 & 2(0.1+0.1) & \cdots & 0\\
+			\vdots & \vdots & \vdots, & \vdots & \vdots & \vdots \\
+			0 & \cdots & \cdots & 0.1 & 2(0.1+0.1) & 0.1\\
+			0 & \cdots & \cdots & 0 & 0.1 & 2(0.1+0.1) \\			
+		\end{array}
+		} \\
+		&= \SQBRACKET{\begin{array}{cccccc}
+			1   & 0 & 0 & 0 & \cdots & 0 \\
+			0.1 & 0.4 & 0.1 & 0 & \cdots & 0\\
+			0 & 0.1 & 0.4 & 0.1 & \cdots & 0\\
+			0 & 0 & 0.1 & 0.4 & \cdots & 0\\
+			\vdots & \vdots & \vdots, & \vdots & \vdots & \vdots \\
+			0 & \cdots & \cdots & 0.1 & 0.4 & 0.1\\
+			0 & \cdots & \cdots & 0 & 0.1 & 0.4 \\			
+		\end{array}
+		} \\
+		\frac{3}{h} &= \frac{3}{0.1} = 30 \\
+		b &= \SQBRACKET{\begin{array}{c}
+			0 \\
+			30(f(x_2) -f(x_1))-30(f(x_1)-f(x_0))\\
+			\vdots \\
+			30(f(x_n) -f(x_{n-1}))-30(f(x_{n-1})-f(x_{n-2}))\\
+		\end{array}
+		} = \SQBRACKET{\begin{array}{c}
+			0 \\
+			30(f(x_2) -2f(x_1)+f(x_0))\\
+			\vdots \\
+			30(f(x_n) -2f(x_{n-1}) +f(x_{n-2}))\\
+		\end{array}		
+		}
+	\end{align*}
+	}
+	
+	\item Solve the linear system using Thomas Algorithm.  Print out the solutions.
+	
+	\lstinputlisting{530102.m}
+	
+	\item Plot the cubic spline together with $f(x)$ and estimate the largest error.
+
+	\includegraphics[scale=0.5]{530102a.png} 
+	
+\end{enumerate}
+
+\HLINE
+\noindent \textbf{Question 2.} (20 points)
+
+For $f(x) = |x|$ over $[-1.5, 1.5]$, find the best polynomial of order 5 to interpolate the function.
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Identify all nodes used to construct the polynomial.
+	
+	\BLUE{The formula for $n$ nodes on an interval $[a,b]$ is
+	\begin{align*}
+		x_k &= \frac{1}{2}(a+b)+\frac{1}{2}(a-b)\cos\PAREN{\frac{2k-1}{2n}\pi}, \, k=1,\dots,n \\
+		x_k &= \frac{1}{2}(-1.5+1.5)+\frac{1}{2}(-1.5-1.5)\cos\PAREN{\frac{2k-1}{2\cdot 5}\pi}, \, k=1,\dots,5 \\
+		&= -1.5\cdot\cos\PAREN{\frac{2k-1}{2\cdot 5}\pi}, \, k=1,\dots,5 \\
+		\\
+		x_1 &= -1.5\cdot \cos\PAREN{\frac{1}{10}\pi} = -1.4266 \\
+		x_2 &= -1.5\cdot \cos\PAREN{\frac{3}{10}\pi} =   -0.8817  \\
+		x_3 &= -1.5\cdot \cos\PAREN{\frac{5}{10}\pi} = 0.0000   \\
+		x_4 &= -1.5\cdot \cos\PAREN{\frac{7}{10}\pi} =  0.8817  \\
+		x_5 &= -1.5\cdot \cos\PAREN{\frac{9}{10}\pi} =    1.4266
+	\end{align*}
+	}
+	\item Plot the polynomial together with $y=f(x)$ and estimate the largest error.
+	
+	\includegraphics[scale=0.4]{530102b.png} 	
+	
+	\item Compare the largest error with the error bound.
+	
+	\BLUE{The error bound for using Chebyschev points is 
+	\begin{align*}
+		\max_{[-1,1]}|f(x)-P(x)| &\le \frac{1}{2^n(n+1)!}\max_{[-1,1]} |f^{(n)}(x)| \\
+		&\le \frac{1}{2^56!} = 0.000043403
+	\end{align*}
+	}
+
+\end{enumerate}
+
+\end{document}

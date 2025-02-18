@@ -6,7 +6,7 @@ Math 5102 Linear Algebra
 Math 5110 Real Analysis I
 Math 5441 Statistics
 
-Spring 2025 (tentative)
+Spring 2025
 =======================
 
 Math 5050 (30153) Special Topics: Intro to Manifolds. TH 12:30 to 1:45

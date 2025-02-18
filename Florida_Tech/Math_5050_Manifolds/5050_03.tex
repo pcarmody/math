@@ -1,0 +1,173 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment 2 }
+\newcommand{\DUEDATE}{Februaray 20, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\RANGE}{\text{range}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Section 3: 1, 2, 3, 7, 8, 9\\
+
+\begin{enumerate}[label=3.\arabic*.]
+
+	\item \textbf{Tensor Product of covectors}
+	
+	Let $e_1, \dots, e_n$ be a basis for a vector space $V$ and let $\alpha^1, \dots, \alpha^n$ be its dual basis in $V^\vee$.  Suppose $g_{ij}\in \R^{n\times m}$ is an $n \times m$ matrix Define a bilinear function $f: V\times V \to \R$ by 
+	\begin{align*}
+		f(v,w) = \sum_{i\le i,j, n} g_{ij}v^i w^j
+	\end{align*}for $v=\sum v^j e_i$ and $w=\sum w^j e_j$ in $V$.  Describe $f$ in terms of the tensor products of $\alpha^i$ and $\alpha^j, 1 \le i,j \le n$.
+	
+	\BLUE{\begin{align*}
+		\alpha^i(e_j) &= \delta^j_i & (1)\\
+		\alpha^i(v) &= \alpha^i\PAREN{\sum_{j=1}^n v^je_j} \\
+		 & =\sum_{j=1}^n \alpha^i(v^je_j) & \alpha^i \text{ is linear } \\
+		 & =\sum_{j=1}^n v^j\alpha^i(e_j) & v^j \text{ is a scalar }\\
+		 & =\sum_{j=1}^n v^j\delta^i_j=v^i & \text{apply (1)}\\
+		(\alpha^i\otimes\alpha^j)(v,w) &= \alpha^i(v)\alpha^j(w) = v^iw^j\\
+		\therefore \sum_{i\le i,j, n} g_{ij}v^i w^j &= \sum_{i\le i,j, n} g_{ij}\,(\alpha^i\otimes\alpha^j)(v,w) 
+	\end{align*}
+	}
+	
+	\item \textbf{Hyperplanes}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Let $V$ be a vector space of dimension $n$ and $f:V \to \R$ a nonzero linear functional.  Show that $\dim\ker f = n-1$.  A linear subspace of $V$ of dimesnion $n-1$ is called a \textit{hyperplane} in $V$.
+		
+		\BLUE{\begin{align*}
+%			\ker f &= \{x\in X: f(x) = 0\} \\
+			\dim V &= \dim \text{range} (f) + \dim \ker (f) \\
+			\dim \ker (f) &= \dim V - \dim \text{range} (f) \\
+			&= n-1
+		\end{align*}
+		}
+		
+		\item Show that a nonzero linear functional on a vector space $V$ is determined up to a multiplicative constant by its kernel, a hyperplane in $V$.  In other words, if $f$ and $g: V\to \R$ are nonzero linear functionals and $\ker f = \ker g$, then $g=cf$ for some constant $c \in \R$.
+		
+		\BLUE{\begin{align*}
+			\LET v = (y+z) &\in V \AND f(y) \in \RANGE(f), z \in \ker(f) \\
+			 u = (x +w) &\in V \AND g(x) \in \RANGE(g), z \in \ker(g) \\
+			 g(v) &= g(y)+g(z) = g(y) \in \RANGE(f)
+		\end{align*}
+		}
+		
+	\end{enumerate}
+		
+	\item \textbf{A basis for $k$-tensors}
+		
+	Let $V$ be a vector space of dimension $n$ with basis $e_i,\dots,e_n$.  Let $\alpha^1,\dots, \alpha^n$ be the dual basis in $V^\vee$  Show that a basis for the space $L_k(V)$ of $k$-linear functions on $V$ is $\{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}\}$ for all multi-indices $(i_1,\dots, i_k)$ (not just the strictly ascending multi-indices as for $A_k(L)$).  In particular, this show that $\dim L_k(V) = n^k$.  (This problem generalizes Problem 3.1..)
+	
+	\RED{We need to show three things:
+	\begin{enumerate}
+		\item That span$\{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}\} = L_k(V)$.
+		\item that $\{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}\}$ is linearly independent.
+		\item that this is independend of order.
+	\end{enumerate}		
+	\textbf{$\bullet$ Proving the Span} A proof by mathematical induction.  Constructing a bilinear function from functionals is simply done with $(f \otimes g)(v,w)= f(v)g(w)$.  Then
+	}
+		
+	\setcounter{enumi}{6}
+	\item \textbf{Transformation rule for a wedge product of covectors}
+		
+		Suppose two set so of covectors on a vector space $V$.  $\beta^1,\dots, \beta^k$ and $\gamma^i,\dots,\gamma^k$, are related by 
+		\begin{align*}
+			\beta^i=\sum_{j=1}^k a^i_j\gamma^i, \, i=1,\dots,k
+		\end{align*}for a $k \times k$ matrix $A=[a_j^i]$.  Show that
+		\begin{align*}
+			\beta^1 \wedge\cdots\wedge \beta^k = (\det A)\gamma^1\wedge\dots\wedge\gamma^k.
+		\end{align*}
+		
+	\BLUE{\begin{align*}
+		\LET \beta, \gamma &\in \mathcal{M}_{n \times n}(V^\vee) \\
+		\beta &= \SQBRACKET{ \beta^i } \AND \beta(v_1,\dots,v_k) = \SQBRACKET{ \beta^i }(v_1,\dots,v_n) = \SQBRACKET{\beta^i(v_j)}\\
+		\gamma &= \SQBRACKET{ \gamma^i } \AND \gamma(v_1,\dots,v_k) = \SQBRACKET{ \gamma^i }(v_1,\dots,v_n) = \SQBRACKET{\gamma^i(v_j)}\\
+		A &= [ a^i_j ] \\
+		(\beta^1 \wedge \cdots \wedge \beta^k)(v_1, \dots, v_k) &= \det [ \beta^i(v_j) ] = \det \beta(v_1,\dots,v_k) \\
+		(\gamma^1 \wedge \cdots \wedge \gamma^k)(v_1, \dots, v_k) &= \det [ \gamma^i (v_j) ] = \det \gamma(v_1,\dots,v_k)\\
+	\end{align*}we can see that 
+	\begin{align*}
+		\beta^i=\sum_{j=1}^k a^i_j\gamma^i &\implies \beta = A \cdot \gamma \AND \beta(v_1,\dots,v_k) = A \cdot \gamma(v_1,\dots,v_k)\\
+		\det\beta &= \det (A \cdot \gamma) = \det A \cdot \det \gamma \\
+		\det\beta(v_1,\dots,v_k) &=  \det A \cdot \det \gamma(v_1,\dots,v_k) \\
+		(\beta^1 \wedge \cdots \wedge \beta^k)(v_1, \dots, v_k) &=  \det A (\gamma^1 \wedge \cdots \wedge \gamma^k)(v_1, \dots, v_k) \\
+		\beta^1 \wedge \cdots \wedge \beta^k &=  \det A (\gamma^1 \wedge \cdots \wedge \gamma^k)
+	\end{align*}
+	}
+	
+	\item \textbf{Transformation rule for $k$-covectors}
+		
+	Let $f$ be a $k$-covector on a vector space $V$.  Suppose two sets of vectors $u_1, \dots, u_k$ and $v_1, \dots, v_k$ in $V$ are related by 
+		\begin{align*}
+			u_j =\sum_{i=1}^k a_j^iv_i,\, j=1,\dots,k,
+		\end{align*}for $k\times k$ matrix $A=[a_j^i]$.  Show that 
+		\begin{align*}
+			f(u_1,\dots,u_k)=(\det A)f(v_1,\dots, v_k).
+		\end{align*}
+		
+	\BLUE{\begin{align*}
+			f(u_1,\dots,u_k) &= f\PAREN{\sum_{i_1=1}^k a_1^{i_1}v_{i_1}, \sum_{i_2=1}^k a_2^{i_2}v_{i_2}, \dots, \sum_{{i_k}=1}^k a_k^{i_k}v_{i_k}} \\
+			&= \sum_{i_1=1}^k a_1^{i_1} \sum_{i_2=1}^k a_2^{i_2} \cdots \sum_{{i_k}=1}^k a_k^{i_k} f(v_{i_1},v_{i_2}, \dots,v_{i_k})
+		\end{align*}	
+		}
+	
+	\item \textbf{Vanishing of a covector of top degree}
+	
+	Let $V$ be a vector space of dimension $n$.  Prove that if an $n$-covector $\omega$ vanishes on a basis $e_1,\dots,e_n$ for $V$.  then $\omega$ is the zero covector on $V$.
+
+\end{enumerate}
+
+\end{document}

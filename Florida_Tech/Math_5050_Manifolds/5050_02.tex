@@ -29,7 +29,7 @@
 
 \newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
 \newcommand{\STUDENTNAME}{Paul Carmody}
-\newcommand{\ASSIGNMENT}{Notes }
+\newcommand{\ASSIGNMENT}{Assignment 2 }
 \newcommand{\DUEDATE}{Februaray 4, 2025}
 \newcommand{\SEMESTER}{Spring 2025}
 \newcommand{\SCHEDULE}{MW 12:30 - 1:45}
@@ -47,8 +47,6 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
-\newcommand{\ts}{\textsuperscript}
-\newcommand{\HLINE}{\noindent\rule{7in}{1pt}\\}
 
 \begin{document}
 
@@ -67,16 +65,81 @@
 
 \noindent Let $X$ be the vector field $x\partial/\partial x + y\partial/\partial y$ and $f(x,y,z)$ the function $x^2+y^2+z^2$ on $\R^3$.  Complute $Xf$.\\
 
+\BLUE{\begin{align*}
+	Xf &= x\PART{f}{x}+y\PART{f}{y} \\
+	&= x\PAREN{2x}+y\PAREN{2y}\\
+	&= 2x^2+2y^2
+\end{align*}
+\\}
+
 \noindent \textbf{2.3. Vector space structure on derivations at a point}
 
-\noindent Let $D$ and $D'$ be derivatiosn at $p$ in $\R^n$, and $c \in \R$.  Prove that
+\noindent Let $D$ and $D'$ be derivations at $p$ in $\R^n$, and $c \in \R$.  Prove that
 \begin{enumerate}[label=(\alph*)]
 	\item the sum $D+D'$ is a derivation at $p$.
+	\BLUE{
+		\begin{align*}
+			(D+D')(fg) &= D(fg)+D'(fg) \\
+			&= (Df)g+f(Dg) + (D'f)g+f(D'g) \\
+			&= (Df)g + (D'f)g+f(Dg)+f(D'g) \\
+			&= ((D+D')f)g+f((D+D')g) \\
+			D + D' &\in \mathcal{D}_p(\R^n)
+		\end{align*}
+	}
+	
 	\item the scalar multiple $cD$ is a derivation at $p$.
+	
+	\BLUE{Let $c \in \R$.  Then, given any $v \in T_p(\R^n)$ we have
+	\begin{align*}
+		(cD_v)f &= \sum_{i=1}^n \RBAR{cv^i \PART{f}{x^i}}_p \\
+		&=c\sum_{i=1}^n \RBAR{v^i \PART{f}{x^i}}_p \\
+		&= cD_v(f), \, \forall v \in T_p(\R)  \\
+		\therefore cD &\in \mathcal{D}_p(\R)
+	\end{align*}
+	}
 \end{enumerate}
 
+\newpage
 \noindent \textbf{2.4. Product of derivations}
 
 \noindent Let $A$ be an algebra over a field $K$.  If $D_1$ and $D_2$ are derivations of $A$, show that $D_1 \circ D_2$ is not necessarily a derivation (it is if $D_1$ or $D_2=0$), but $D_1\circ D_2 - D_2\circ D_1$ is always a derivation of $A$.
+
+\BLUE{Counter example
+\begin{align*}
+	D_1 &= \alpha^1\PART{}{x^1}+\alpha^2\PART{}{x^2}\\
+	D_2 &= \beta^1\PART{}{x^1}+\beta^2\PART{}{x^2}\\
+	D_1 \circ D_2 &= \alpha^1\PART{}{x^1}\PAREN{\beta^1\PART{}{x^1}+\beta^2\PART{}{x^2}}+\alpha^2\PART{}{x^2}\PAREN{\beta^1\PART{}{x^1}+\beta^2\PART{}{x^2}}\\
+	&= \alpha^1\beta^1 \frac{\partial^2}{\partial^2 x^1}+\alpha^1\beta^2\frac{\partial^2}{\partial x^1 \partial x^2}+\alpha^2\beta^1\frac{\partial^2}{\partial x^2 \partial x^1}+\alpha^2\beta^2\frac{\partial^2}{\partial^2 x^2}\\
+\end{align*}If we simply focus on the first term and apply it to $fg$
+\begin{align*}
+	\frac{\partial^2 (fg)}{\partial^2 x^1} &= \frac{\partial}{\partial x^1}\PAREN{\PART{f}{x^1}g+f\PART{g}{x^1}} \\
+	&= \frac{\partial^2 f}{\partial^2 x^1}g+2\PART{f}{x^1}\PART{g}{x^1} + f\frac{\partial^2 g}{\partial^2 x^1} \\
+	&\ne \frac{\partial^2 f}{\partial^2 x^1}g + f\frac{\partial^2 g}{\partial^2 x^1}
+\end{align*}which means that it doesn't have the Liebniz Property.  Similar arguments are made with the other terms which are all additive (that is there will be no chance of eliminating terms through subtraction) thus $D_1 \circ D_2 \not \in \mathcal{D}_p(\R)$.
+\begin{align*}
+	D_1 &=\sum_{i=1}^n \alpha^i\PART{}{x^i} \\
+	D_2 &= \sum_{i=1}^n \beta^i\PART{}{x^i} \\
+	D_1 \circ D_2 &= \sum_{i=1}^n \alpha^i\PART{}{x^i} \PAREN{\sum_{j=1}^n \beta^j \PART{}{x^j} } \\
+	&= \sum_{i=1}^n\sum_{j=1}^n \alpha^i  \beta^j \frac{\partial ^2}{\partial x^i \partial x^j}  \\
+	 &= \sum_{j=1}^n \beta^j \PART{}{x^j}\PAREN{\sum_{i=1}^n \alpha^i\PART{}{x^i} } \\
+	&= D_2 \circ D_1
+\end{align*}consequently $D_1 \circ D_2 - D_2 \circ D_1 = 0$ and a derivation of $A$.
+\\}
+\RED{non-commutative Algebra
+\begin{align*}
+	D_1 \circ D_2 &= \sum_{i=1}^n \alpha^i\PART{}{x^i} \PAREN{\sum_{j=1}^n \beta^j \PART{}{x^j} } \\
+	&= \sum_{i=1}^n\sum_{j=1}^n \alpha^i  \beta^j \frac{\partial ^2}{\partial x^i \partial x^j}  \\
+	D_2 \circ D_1 &= \sum_{i=1}^n \beta^i\PART{}{x^i} \PAREN{\sum_{j=1}^n \alpha^j \PART{}{x^j} } \\
+	&= \sum_{i=1}^n\sum_{j=1}^n \beta^i  \alpha^j \frac{\partial ^2}{\partial x^i \partial x^j}  \\
+\end{align*}since the algebra A is non-commutative we know that $\alpha^i\beta^j \ne \beta^j\alpha^i$ and these two are not equal.  However, 
+\begin{align*}
+	D(fg) &= (D_1 \circ D_2 - D_2 \circ D_1)(fg) \\
+	&= (D_1 \circ D_2)(fg) - (D_2 \circ D_1)(fg) \\
+	&= D_1((D_2f)g +f(D_2g)) - D_2((D_1f)g + f(D_1g)) \\
+	&= (D_1\circ D_2)(f)g+D_2fD_1g +D_1fD_2g +f(D_1 \circ D_2)g - (D_2\circ D_1)(f)g - D_1fD_2g - D_2f(D_1g)- f(D_2 \circ D_1)g) \\
+	&= (D_1 \circ D_2-D_1 \circ D_2)(f)g +  f(D_1 \circ D_2-D_2 \circ D_1)(g)\\
+	&= (Df)g+f(Dg) 
+\end{align*}Therefore $D = (D_1 \circ D_2 - D_2 \circ D_1$ is a derivation.
+}
 
 \end{document}
