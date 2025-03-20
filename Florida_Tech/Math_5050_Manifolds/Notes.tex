@@ -80,6 +80,18 @@
 		\end{align*}consider $a^i$ as coefficent functions.  We say that $X$ is $C^\infty$ on $U$ if $a^i\in C^\infty, \, \forall i=1,\dots,n$.
 		\item \DEFINE{A Vector Space} is any abstraciton that is closed under addition and scalar multiplication.
 	\end{itemize}
+	\item \DEFINE{Dual Basis and Dual Space}.  The \DEFINE{Dual Basis} is a set of functions $\alpha^i: V \to \R$ 
+	\begin{align*}
+		\alpha^i &: V \to \R \\
+			\alpha^i(e_j) &= \delta_j^i
+	\end{align*}the \DEFINE{Dual Space $V^\vee$} is the space of functions spanned by the Dual Basis. Elements of the Dual Space are called \DEFINE{Functionals (Analysis)/1-Covectors (Differential Geometry)}.  
+	\item \DEFINE{Multi-Linear Functions} Let $V$ be a vector space and $V^k$ be $k$-tuples of vectors in $V$. A \DEFINE{$K$-linear map or $k$-tensor} $f: V^k \to \R$ such that each $i$\textsuperscript{th} component is linear.  The vector space of all $k$-tensors on $V$ is denoted $L_k(V)$.
+	
+	\textbf{Permuting Mult-linear Functions}.  Given any permutation $\sigma \in S_k$
+	\begin{align*}
+		f(v_1, \dots, v_k) &= f(v_{\sigma(1)}, \dots, v_{\sigma(k)})
+	\end{align*}e.g., $f(x,y,z) = xyz \to f(z,x,y) = zxy$.  FYI: if $x,y,z$ are from non-commutative rings (i.e., matrices) then we must be aware of the $\SGN(\sigma)$.
+	
 	\item Left \DEFINE{$R$-Module}: An Abelian group $R$ with a scalar multiplication map:
 	\begin{align*}
 		\mu : R \times A \to A
@@ -91,29 +103,225 @@
 	\end{enumerate}	 If $R$ is a field then $R$-module is precisely a vector space over $R$.
 	
 	A \DEFINE{$K$-Algebra over a field $K$} is also a ring $A$ that is also a vector space over $K$ such that the ring multiplication satisfies homogeniety (scalar distributes over vector multipliation to only one of the operators).
-	\item Exterior Algebras
-	\item \DEFINE{Dual Basis and Dual Space}.  The \DEFINE{Dual Basis} is a set of functions $\alpha^i: V \to \R$ 
+	
+	A \DEFINE{graded Algebra} is an algebra $A$ over a field $K$ if it can be writte as the direct sum $$ A = \bigoplus_{i=0}^\infty A^i$$ of vector spaces over $K$ such that the mupltiplication map sends $A^k \times A^l \to A^{k+l}$
+	
+	\item The set of all $C^\infty$-vector fields on $U$, denoted by $\XXX(U)$, is not only a vector space over $\R$, but also a \textit{module} over the $C^\infty(U)$ ring. \begin{align*}
+		\XXX(U) &= \BRACKET{ X : V \to V \;|\; X \in C^\infty(U)} \text{ where } V = (\R \OR \C)^n
+	\end{align*}
+	\item \DEFINE{Derivation: } A \DEFINE{derivation} on an algebra $A$ is a $K$-multilinear function $D:A \to A$ such that 
 	\begin{align*}
-		\alpha^i &: V \to \R \\
-			\alpha^i(e_j) &= \delta_j^i
-	\end{align*}the \DEFINE{Dual Space $V^\vee$} is the space of functions spanned by the Dual Basis. Elements of the Dual Space are called \DEFINE{Functionals (Analysis)/1-Covectors (Differential Geometry)}.  
-	\item \DEFINE{Multi-Linear Functions} Let $V$ be a vector space and $V^k$ be $k$-tuples of vectors in $V$. A \DEFINE{$K$-linear map or $k$-tensor} $f: V^k \to \R$ such that each $i$\textsuperscript{th} component is linear.  The vector space of all $k$-tensors on $V$ is denoted $L_k(V)$.
-	\item Permuting Mult-linear Functions
-	\item \DEFINE{Tensor Product} is an operator on $v \in V$ and $u \in U$ where 
+		D(ab) &= (Da)b+aDb, \, \forall a,b \in A
+	\end{align*}known as the \DEFINE{Liebniz Rule}.
+	
+	The set of all derivations on $A$ forms a vector space, $\DER(C^\infty(U))$.  Thus a $C^\infty(U)$ vector field gives rise to a derivation of the algebra $C^\infty(U)$.  Thus the mapping
+	\begin{align*}
+		\varphi : \XXX(U) &\to \DER(C^\infty(U)) \\
+		X &\mapsto (f\mapsto Xf)
+	\end{align*}this map is an isomorphism of vector spaces.
+	\item \textbf{Exterior Algebras $\Lambda(V)$.} The exterior algebra $\Lambda(V)$ is obtained by imposing an \textbf{anti-commutative} relation: 
+	\begin{align*}
+		v\otimes w + w\otimes v = 0,\, \forall v,w \in V
+	\end{align*}this means that the quotient algebra is:
+	\begin{align*}
+		\Lambda(V) &= T(V)/\ABRACKET{v\otimes w + w\otimes v}.
+	\end{align*}Where $T(V)$ is the \textbf{tensor algebra}
+	\begin{align*}
+		T(V) &= \bigoplus_{n=1}^\infty V^{\otimes n}
+	\end{align*}
+	\item \textbf{Symmetric Algebras $S(V)$.} The symmetric algebra $S(V)$ is obtained by imposing an \textbf{commutative} relation: 
+	\begin{align*}
+		v\otimes w - w\otimes v = 0,\, \forall v,w \in V
+	\end{align*}this means that the quotient algebra is:
+	\begin{align*}
+		S(V) &= T(V)/\ABRACKET{v\otimes w - w\otimes v}.
+	\end{align*}
+	\item \DEFINE{Tensor Product} The tensor product between two 1-covectors, $f,g: V \to \R$ is the 2-covector $f\otimes g$.
+	\begin{align*}
+		(f \otimes g)(u,v) &= f(u)g(v)
+	\end{align*}.  In general, the tensor product of a $k$-covector $p:V^k \to \R$ with a $l$-covector $q:v^l \to \R$ is the $(k+l)$-covector $p\otimes q: V^{k+l}\to \R$.
+	\begin{align*}
+		(p\otimes q)(u,v) = p(u)q(v),\,\forall u\in V^k,\, v\in V^l
+	\end{align*}
+	\item \DEFINE{Tensor Product(?)} is an operator on $v \in V$ and $u \in U$ where 
 	\begin{align*}
 		v \otimes u &: V \times U \to V \oplus U \\
 		(v \otimes u)_{i\cdot j} &= v_i \cdot u_j,\, \forall i=1,\dots,\dim(V),\, j=1,\dots,\dim(U)
 	\end{align*}
-	\item Wedge Product
-	\item Differential k-Forms
-	\item the Exterior Derivative
-	\item Tensor Product.
 	
 	Given two vector spaces $V, W$ with bases $v_1, \dots, v_n$ and $w_1, \dots, w_m$ then the Tensor Product space $V \otimes W$ has a basis referred to as $v_i \otimes w_j$ such that given any vector $\alpha = \sum \alpha_i v_i \in V$ and $\beta = \sum \beta_j w_j \in W$ the vector $\alpha \otimes \beta$ will have $n\times m$ components and each $(\alpha \otimes \beta)_{i\times j} = \alpha_i \times \beta_j$.\\
 	\\
 	$\alpha_i, \beta_j$ are all scalars.  The real issue is the behavior of unit basis vectors $v_i, w_j$ and how they are effected by the operator and the basis vectors $v_i \otimes w_j$.  Thus, scalar multiplication works on either (but not both) operands and distribution over addition works over both the left and the right.
+	\item \DEFINE{Wedge Product }
+	\begin{description}
+		\item \textbf{Between two covectors} Let $f,g \in L_1(V)$ then for all $u,v \in V$
+		\begin{align*}
+			(f\wedge g)(u,v) &= (f\otimes g)(u,v) - (g \otimes f)(u,v) = f(u)g(v) - f(v)g(u)
+		\end{align*}
+	\item \textbf{Between mulitple 1-covectors. }
+	\begin{align*}
+		(\alpha^1\otimes\cdots\otimes\alpha^k)(v_1,\dots,v_k) &= \det[\alpha^1(v_j)] \\
+		&= \sum_{\sigma \in S_k} (\SGN \sigma)\alpha_1(v_{\sigma(1)})\cdots\alpha_k(v_{\sigma(k)})
+	\end{align*}
+	\item \textbf{Between $k$-covector and $l$-covector}.  Let $f \in A_k(V)$, $g \in A_l(V)$ then
+	\begin{align*}
+		f \wedge g &= \frac{1}{k!l!}A(f \otimes g) \in A_{k+l}(V)
+	\end{align*} or explicitly
+	\begin{align*}
+		(f\wedge g)(v_1, \dots, v_{k+l}) &= \frac{1}{k!l!}\sum_{\sigma \in S_{k+l}} f\PAREN{v_{\sigma{1}},\dots, v_{\sigma_{k}}}\, g\PAREN{v_{\sigma_{k+1}},\dots,v_{\sigma{k+l}}}
+	\end{align*}
+	\item \textbf{Anticommutative.}  Let $f \in A_k(V)$, $g \in A_l(V)$ then
+	\begin{align*}
+		(f \wedge g) = (-1)^{kl} g \wedge f
+	\end{align*}
+
+	\end{description}
+	\item \textbf{Differential k-Forms} 
+	
+	\textbf{1-forms, covectors } 
+	\begin{align*}
+		(dx^i)\PAREN{\RBAR{\PART{}{x^j}}_p} &= \RBAR{\PART{}{x^j}}_p x^i = \delta_j^i\\
+		(df)_p(X_p) &= X_p f = \sum \RBAR{a^i(p) \PART{f}{x^i} }_p =\sum \PART{}{x^i} dx^i
+	\end{align*}
+	\item \textbf{$\Omega^k(U)$, Vector space of $C^\infty\, k$-forms on U}.
+	\begin{description}
+		\item $\Omega^0 = A_0(T_p(\R^n)) = C^\infty(U)$, e.g., $f\in \Omega^0$ then $f: V \to \R$ is a functional/covector/1-tensor.
+		\item Elements of 1-form $\Omega^1 = A_1(T_p(\R^n))$.  For example, when $n=3$
+		\begin{align*}
+			fdx+gdy+hdz,\text{ where }f,g,h \in C^\infty(\R^3)
+		\end{align*}
+		\item Elements of 2-form $\Omega^2 = A_2(T_p(\R^n))$.  For example, when $n=3$\footnote{NOTE the cyclic order of the indices $x,y,z$.  Switching any one of these will flip the sign.}
+		\begin{align*}
+			fdy\wedge dz+gdx\wedge dz+hdx\wedge dy,\text{ where }f,g,h \in C^\infty(\R^3)
+		\end{align*}
+		\item if $n=4$, that is coordinates for $u,v,w,x$. Each form is derived from these bases 
+		
+		0-form $\Omega^0(\R^4)\in \R$ 
+		
+		1-forms $\Omega^1(\R^4)$ summing $du, dv, dw, dx$, 
+		
+		2-forms $\Omega^2(\R^4)$ summing  $du\wedge dv,\, du \wedge dw,\, du \wedge dx,\, dv \wedge dw,\, dv \wedge dx,\, dw \wedge dx$, 
+		
+		3-forms $\Omega^3(\R^4)$ summing $du\wedge dv \wedge dw\;|\; du \wedge dw \wedge dx\;| \; du\wedge dv \wedge dx\;|\; dv \wedge dw \wedge dx$
+		
+		4-form $\Omega^4(\R^4)$ $du\wedge dv\wedge dw\wedge dx$.
+		\item Also, \textbf{$U\subseteq\R^n$ then $k<n$}.  $k$-forms for $k>n$ are zero.  Further $|\Omega^k(\R^n)|=\binom{k}{n}$ and $\BARS{\bigcup_k \Omega^k(\R^n)}=2^n$	 and think of $\Omega^*(U)= \bigcup_k \Omega^k(\R^n)$
+		\item \textbf{Direct Sum. } $\Omega^*(U) = \bigoplus_k \Omega^k(U)$ is an anti-commutative graded algebra over $\R$.
+		
+		Since one can multiply $C^\infty$ $k$-forms by $C^\infty$ functions, the set $\Omega^k(U)$ of $C^\infty$ $k$-forms is both a vector space over $\R$ and a module over $C^\infty(U)$ and $\Omega^*(U)$ is also a module over $C^\infty$ of $C^\infty$ functions.
+	\end{description}
+		
+	\item \textbf{Wedge Product of $k$-form.} Recall: $dx^i\wedge dx^i =0$ for all $i=1,\dots,n$.  Therefore, $\wedge$ only makes sense to be defined on \textit{disjoint indice-lists}, that is, $I=\{i_1, \dots, i_k\}$ and $J=\{j_1, \dots, j_l\}$ such that $I\cap J =\emptyset$.  Then,
+		\begin{align*}
+			\wedge : \Omega^k(U) \times \Omega^l(U) &\to \Omega^{k+l}(U)\\
+			(\omega, \tau) &\mapsto (\omega\wedge\tau)=\sum_{I,J} a_Ib_J dx^I\wedge dx^J.
+		\end{align*}where $\omega = \sum_I a_Idx^I, \tau=\sum_J b_J,dx^J$.
+	\item \textbf{the Exterior Derivative}.  If $k\ge 1$ and if $\omega=\sum_Ia_idx^I\,\in \Omega^k(U)$, then $d\omega \; \in \Omega^{k+1}(U)$ and 
+	\begin{align*}
+		d\omega = \sum_Ida_I\wedge dx^I = \sum_I\PAREN{\sum_J\PART{a_I}{x_J}dx^J}\wedge dx^I
+	\end{align*}\textit{Example: }Let $\omega \in \Omega^1(\R^2)$ and $\omega = fdx+gdy$, $f,g \in C^\infty(\R^2)$.
+	\begin{align*}
+		d\omega &= df\wedge dx + dg\wedge dy \\
+		&= \PAREN{\PART{f}{x}dx+\PART{f}{y}dy}\wedge dx +\PAREN{\PART{g}{x}dx+\PART{g}{y}dy}\wedge dy\\
+		&= \PAREN{\PART{g}{x}-\PART{f}{y}}\,dx\wedge dy\\
+		&= (g_x-f_y)\,dx\wedge dy
+	\end{align*}
+	
+	\textbf{Definition: } Let $\bigoplus_{k=0}^\infty A^k$ be a graded algebra over a field $K$. An \DEFINE{anti-derivation} of the graded algebra $A$ is a $K$-linear map $D: A \to A$ such that $a\in A^k$ and $b\in A^l$,
+	\begin{align*}
+		D(ab) &= (Da)b + (-1)^kaDb
+	\end{align*}
+	
+	\textbf{Proposition 4.7: Three Criterion for an Exterior Derivation} 
+	\begin{enumerate}[label=\roman*)]
+		\item The \DEFINE{exterior derivation} $d: \Omega^*(U)\to\Omega^*(U)$ is an antiderivation of degree 1:
+		\begin{align*}
+			d(\omega\wedge\tau)=(d\omega)\wedge\tau + (-1)^{\deg\omega}\omega\wedge d\tau
+	\end{align*}			
+	\item $d^2=0$.
+	\item If $f\in\C^\infty$ and $X \in \XXX(U)$, then $(df)(X)=Xf$.
+	\end{enumerate}
 \end{enumerate}
 
-\noindent\textbf{NOTE:}``In a typical school, there would be graduate level courses on Smooth Manifods and anoter  on Remannian Manifolds."
+\noindent\textbf{NOTE:}``In a typical school, there would be graduate level courses on Smooth Manifods and another  on Remannian Manifolds."
 
+\newpage
+Q: What is the difference between $\XXX(U)$ and $C^\infty(U)$?\\
+
+
+The difference between \( \mathfrak{X}(U) \) and \( C^\infty(U) \) lies in the types of objects they contain:
+
+1. **\( C^\infty(U) \): The Space of Smooth Functions**
+   - \( C^\infty(U) \) consists of all smooth (infinitely differentiable) real-valued functions defined on an open subset \( U \) of a manifold \( M \).
+   - Elements of \( C^\infty(U) \) are scalar functions \( f: U \to \mathbb{R} \).
+   - These functions can be added and multiplied pointwise, forming an algebra over \( \mathbb{R} \).\\
+
+2. **\( \mathfrak{X}(U) \): The Space of Smooth Vector Fields**
+   - \( \mathfrak{X}(U) \) consists of all smooth vector fields on \( U \).
+   - A vector field \( X \) assigns to each point \( p \in U \) a tangent vector \( X_p \in T_pM \), smoothly varying with \( p \).
+   - Vector fields act as derivations on smooth functions, meaning they satisfy the Leibniz rule:
+     \[
+     X(fg) = X(f) g + f X(g), \quad \forall f,g \in C^\infty(U).
+     \]
+   - The space \( \mathfrak{X}(U) \) forms a module over \( C^\infty(U) \), meaning smooth functions can scale vector fields: if \( f \in C^\infty(U) \) and \( X \in \mathfrak{X}(U) \), then \( fX \) is also a vector field.\\
+
+**Key Differences**\\
+
+\begin{tabular}{|l|l|p{6cm}|}
+	\hline
+	Feature & \( C^\infty(U) \) & \( \mathfrak{X}(U) \) \\
+	\hline
+	Elements & Smooth scalar functions \( f: U \to \mathbb{R} \) & Smooth vector fields \( X: U \to TM \) \\
+	\hline
+	Algebraic Structure & Commutative algebra (pointwise multiplication) & Module over \( C^\infty(U) \), noncommutative under Lie bracket \\
+	\hline
+	Operations & Addition, multiplication & Addition, scalar multiplication by \( C^\infty(U) \), Lie bracket \([X, Y]\) \\
+	\hline
+\end{tabular}\\
+
+In summary, \( C^\infty(U) \) consists of smooth functions, while \( \mathfrak{X}(U) \) consists of smooth vector fields, which act as differential operators on \( C^\infty(U) \).
+
+\newpage
+Compare and contrast.\\
+
+\begin{tabular}{|c|c|c|c|c|}
+	\hline
+	Set & Dim & index & basis & Delta \\
+	\hline
+	$L_1(U)$ &$n$& $i = 1,\dots, n$ & $\alpha^i$ & $\delta_i^j = \BINDEF{1 & i=j}{0& i \ne j}$\\
+	$L_k(U)$& $n^k$& $I,J \in \{ \underbrace{ i_i, \dots, i_k}_{k\text{ times}}\}, \, i_k\in[1,\dots, n]$ & $\alpha^I = \alpha^{i_1}\otimes\alpha^{i_2}\otimes\cdots\otimes\alpha^{k}$ & \\
+	$A_k(U)$ &$\binom{n}{k}$& $I,J \in \{ \underbrace{ i_i, \dots, i_k}_{k\text{ times}}\}, \, i_1<i_2<\dots i_k \in [1, n]$ & $\alpha^I = \alpha^{i_1}\wedge\cdots\wedge\alpha^k$ & $\delta_I^J =\BINDEF{1 & I=J}{0& I \ne J}$ \\	\hline 
+\end{tabular}\\
+
+Supersets \\
+
+\begin{tabular}{|c|l|l|}
+	\hline
+	Symbol & Name (set of) & Definition \\
+	\hline
+	$\Omega^0(U)$ & $0$-forms & $\{ $ scalar fields  $\}$\\
+	\hline
+	$\Omega^1(U)$ & $1$-forms & $\{$ $ 1$-forms, vector fields $\}$\\
+	\hline
+	$\Omega^k(U)$ & $k$-forms & $\{$ $ k$-forms $\}$\\
+	\hline
+	$\Omega^*(U)$ & sum of $k$-forms & $\{\;x=\sum y\,|\, y\in \oplus_k \Omega^k(U) \;\}$ \\
+	\hline
+	$\XXX(U)$ & vector fields on $U$ & $\{ X \to \exists f:U\to U\}$\\
+	\hline
+	$C^\infty(U)$ & smooth functions on $U$ & \\
+	\hline
+	$X_p = T_p(U)$ & a vector field at $p$ & $\{ v \in U \,|\, v = p + x$ for some $x \in U\}$\\
+	\hline
+\end{tabular}\\
+
+Shorthand
+\begin{align*}
+	\sum_{i,j} a_ib_j &= \sum_i a_i\sum_j b_j\\
+	\sum_{i,j} a_ib_j &= \sum_i a_i\sum_j b_j\\
+	\sum_I a_I &= \sum_{n=1}^k a_{i_n}\\
+	\sum_{I,J} a_I b_J &= \sum_{n=1}^k a_{i_n}\sum_{m=1}^k b_{j_m} \\
+	\delta_i^j &= \BINDEF{1 & i=j}{0 & i \ne j}\\
+	\delta_I^J &= \delta_{i_1}^{j_1}\delta_{i_2}^{j_2}\cdots\delta_{i_k}^{j_k} = \BINDEF{1 & i_n = j_n, \forall n}{0 & \text{otherwise}} = \BINDEF{1 & I=J}{0 & I \ne J}
+\end{align*}
 \end{document}

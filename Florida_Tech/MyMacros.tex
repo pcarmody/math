@@ -17,6 +17,14 @@
 \newcommand{\TRD}{\textsuperscript{rd} }
 \newcommand{\INV}{\textsuperscript{-1} }
 
+\newcommand{\XXX}{\mathfrak{X}}
+\newcommand{\MMM}{\mathfrak{M}}
+%\newcommand{\????}{\textfrak{A}}
+%\newcommand{\????}{\textgoth{A}}
+%\newcommand{\????}{\textswab{A}}
+
+\DeclareMathOperator{\DER}{Der}
+\DeclareMathOperator{\SGN}{sgn}
 
 %%%%%%%
 % derivatives
@@ -216,7 +224,9 @@
 #1
 \end{array} }}
 \newcommand{\TWOXTWO}[4]{\PAREN{ \begin{array}{c c} #1&#2 \\ #3 & #4 \end{array} }}
+\newcommand{\DTWOXTWO}[4]{\BARS{ \begin{array}{c c} #1&#2 \\ #3 & #4 \end{array} }}
 \newcommand{\THREEXTHREE}[9]{\PAREN{ \begin{array}{c c c} #1&#2&#3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array} }}
+\newcommand{\DTHREEXTHREE}[9]{\BARS{ \begin{array}{c c c} #1&#2&#3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array} }}
 \newcommand{\NXN}{\PAREN{ \begin{array}{c c c c} 
 			a_{11} & a_{12} & \cdots & a_{1n} \\
 			a_{21} & a_{22} & \cdots & a_{2n} \\

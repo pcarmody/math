@@ -70,6 +70,14 @@
     \begin{enumerate}
     		\item A \textbf{topology} is defined as the collection where at least the set and the empty set as members, as well as subsets where all intersections (countable) and all unions (even uncountable) are also members.  "Open sets" are simply the members of the topology.
     		\item A $\sigma$-algebra is defined as having the set itself, all compliments of its members (which are subsets), and countable unions of its members.\footnote{$\sigma$ signifies infinite unions and $\delta$ (Not shown) would signify infinite intersectios} The set and $\sigma$-algebra combine to make a \textbf{Measurable Space} and its members are called \textbf{Measurable Sets} (analogous to "open sets"). 
+    		\begin{definition}[Defining properties of a $\sigma$-algebra].
+    		
+    		\begin{enumerate}
+    			\item $X \in \MMM$ which implies $\emptyset \in \MMM$.
+    			\item $E \in \MMM \implies E^c \in \MMM$.
+    			\item Countably Additive: if $E_i$ is a partition (or at least disjoint) then $\mu(\cup E_i) = \sum \mu(E_i)$. 
+    		\end{enumerate}
+    		\end{definition}
     		\item If $f$ maps from a measurable space to a topological space and each open set in the range comes from a measurable set in the domain (i.e., $f^{-1}(V)$ maps open set $V$ from a measurable set through $f$) then $f$ is said to be \textbf{Measurable Function}.
     		\item These two, $\sigma$-algebra and topology, appear to me to be logically equivalent.
     		
@@ -104,7 +112,7 @@
 \end{tabular}
 
 \newpage
-\noindent February 7, 2015\\
+\noindent February 7, 2025\\
 
 \begin{definition}[\textbf{Simple Integration}]
 
@@ -135,6 +143,8 @@ Given any positive measurable function $f$ there exists a sequence of simple mea
 	\LIMN \int_X f_n d\mu &= \int_X f d\mu 
 \end{align*}
 
+\end{theorem}
+
 \begin{theorem}[Fatou's Lemma] Given an increasing sequence of measurable functions $f_n : X \to [0,\infty] \in \mathfrak{M}$ where $f_n \to f$. Then,
 \begin{align*}
 	\int_X \LIMINFN f_n d\mu &\le \LIMINFN \int_X f_n d\mu 
@@ -142,5 +152,113 @@ Given any positive measurable function $f$ there exists a sequence of simple mea
 
 \end{theorem}
 
+\begin{theorem}[Lebesque Dominated Convergence Theorem]  Suppose $\{f_n\}$ is a sequence of complex measurable functions on $X$ such that 
+\begin{align}
+	f(x) &= \lim_{n\to\infty} f^n(x)
+\end{align}exists for evey $x \in X$.  If there is a function $g\in L^1(X)$ (Lebesque Measurable) such that
+\begin{align}
+	|f_n(x)| \le g(x) \; (n=1,2,\dots,; x\in X)
+\end{align}then $f \in L^1(X)$ (Lebesque Measurable),
+\begin{align}
+	\lim_{n\to \infty} = \int_X \BARS{f_n-f}d\mu = 0,
+\end{align}and
+\begin{align}
+	\lim_{n\to \infty} \int_x f_n(x)d\mu \int_x fd\mu. 
+\end{align}
+
+\end{theorem}
+
+\large{\textbf{Understanding 'almost everywhere', a.e. $[\mu]$}
+
+\begin{remark}[Measure Zero].
+
+This term is almost euphemistically used and might be thought of as 'countably infinite set of distinct points'.  For example, the set of rational numbers has a measure zero, is countably infinite and even dense, as are many other sets (Cantor, set of algebraic numbers).  Thus giving rise to the real value of \textit{measure} as indicating sets that actually contain real numbers (that is distiinct from rationals, integers and so on) and their neighborhoods.  I have come to think of a 'measurable set' as 'not a point'.
+\end{remark}
+
+\begin{definition}[almost everywhere].
+
+If $\mu$ is a measure on a $\sigma$-algebra $\MMM$ and if $E \in \MMM$, the statement 'property $P$ holds \textit{almost everywhere} on $E$' means that $\exists N\in \MMM \to N \subset E, \mu(N)=0$ and $P$ holds for every $x \in E\backslash N$.
+
+\end{definition}
+
+\begin{theorem}
+	Suppose $\{f_n\}$ is a sequence of complex measuable functions defined \DEFINE{a.e. on $X$} such that
+	\begin{align*}
+		\sum_{n=1}^\infty \int_X |f_n|d\mu < \infty
+	\end{align*}Then the series
+	\begin{align*}
+		f(x) = \sum_{n=1}^\infty f_n(x)
+	\end{align*}converges for \DEFINE{almost all} $x,f \in L^1(\mu)$, and 
+	\begin{align*}
+		\int_X fd\mu = \sum_{n=1}^\infty\int_X f_n d\mu 
+	\end{align*}
+\end{theorem}
+
+\begin{remark}[Local Compact Hausdorff Space].
+
+See page 35.  The primary property that allows for  $\Lambda$ to be a measure on $\R^n$ is independent of measure and independent of geometry (i.e., inner product, orientation, etc.).  In fact, the primary property is \DEFINE{local compactnesss} which is that every open set contains a neighborhood whose closer is compact (think, closed and bounded, finite subcover).
+
+A \DEFINE{Hausdorff Space, (T-4 spaces),} means that given any two points, $A$ and $B$, there exists neighborhoods around each that are disjoint.  That is there exists $r,s \in \R$ such that $B_r(A) \cap B_s(B) = \emptyset$.  (Incidentally, you could just choose $t = \min\{r,s\}$ and have $n$-balls of the same size).
+
+All metric spaces are Hausdorff Spaces.  Thus, the primary property for Lebesque Measure Theory is the separation of points and that they are surround by compact sets.
+
+Properties of compactness.
+\begin{itemize}
+	\item Closed sets within compact sets are compact.
+	\item $A \subset B$ and $B$ has a compact closure than so does $A$.
+	\item Compact subsets of Hausdorff spaces are closed.
+	\item If $F$ is closed and $K$ is compact in a Hausdorff space then $F \cap K$ is compact.
+	\item If $\{K_\alpha\}$ is a collection of disjoint compact subsets in a Hausdorff space, the some finite subcollection of $\{K_\alpha\}$ are disjoint.
+	\item $U$ is an open set in a locally compact Hausdorff Space. $K\subset U$ is compact.  Then there exists $V$ ``between" $K$ and $U$ (that is, $K \subset V \subset \CONJ{V} \subset U$).
+	\item Compactness is invariant through continuity.
+	\item range$(f)$ is compact (for $f\in C_c(X)$).
+	\item \textbf{Notation} $K \prec f$ means $K$ is a compact set of $X$, $f \in C_c(X)$ and $0\le f \le 1, \forall x\in X$ and $f(x)=1, \forall x\in K$.  Further,
+	\begin{align*}
+		 f \prec V
+	\end{align*}$V$ is open $0\le f(x) \le 1, \forall x\in X$ and spt$(f)\subset V$.
+\end{itemize}
+\end{remark}
+
+\begin{definition}[Support of a function].
+
+The \DEFINE{support} of a complex function on a topological space $X$ is the closure of set 
+\begin{align*}
+	\text{spt}(f) = \CONJ{\{ x: f(x) \ne 0 \}}.
+\end{align*} \footnote{Consider this in contrast to the kernel of a linear function and in contrast to the domain.}
+The collection of all continuous, complex functions with compact supports is denoted $C_c(X)$ (a vector space).
+\end{definition}
+
+\newpage
+\textbf{The Riesz Representation Theorem}.  
+
+\begin{theorem}
+	Let $X$ be a locally compact Hausdorff space, and let $\Lambda$ be a positive linear function on $C_c(X)$.  Then there exists a $\sigma$-algebra $\MMM$ in $X$ which contains \textbf{\textit{all}} Borel Sets in $X$, and there exists a \textbf{\textit{positive unique measure}} $\mu$ in $\MMM$ which represents $\Lambda$ in the sense that
+	\begin{enumerate}[label=(\alph*)]
+		\item $\Lambda f = \int_x f d\mu$ for every $f\in C_c(X)$.
+		
+		and which has the following additional properties;
+		
+		\item Compact implies finite: $\mu(K)<\infty$ for every compact set $K \subset X$.
+		\item Outer Regular: For every $E \in \MMM$, we have
+		\begin{align*}
+			\mu(E) = \inf \BRACKET{\mu(V): E \subset V \text{ open}}
+		\end{align*}
+		
+		\item Inner Regular: The relation
+		\begin{align*}
+			\mu(E) = \sup \BRACKET{\mu(K): K \subset E, K \text{ compact}}
+		\end{align*}holds for every open set $E$ and every $E \in \MMM$ with $\mu(E) < \infty$.
+		
+		\item If $E \in \MMM, A \subset E$, and $\mu(E)=0$, then $A \in \MMM$.
+		
+		
+	For the sake of clarity, let us be more explicit about the meaning of the word
+``positive" in the hypothesis: $\Lambda$ is assumed to be a linear functional on the complex vector space with the additional property that $\Lambda f$ is a nonnegative real number for every $f$ whose range consists of nonnegative real numbers.
+
+\textbf{Extensions}
+	\item If $E \in \MMM$ and $\epsilon > 0$ then there is a closed set $F$ and an open set $V$ such that $F \subset E\subset V$ and $\mu(V-F)<\epsilon$.
+	\item $\mu$ is a regular Borel Measure on $X$.
+	\item and $\exists A \in F_\sigma$ and $B\in G_\delta$ such that $A \subset E \subset B$, and $\mu(B-A) =0$.
+	\end{enumerate}
 \end{theorem}
 \end{document}

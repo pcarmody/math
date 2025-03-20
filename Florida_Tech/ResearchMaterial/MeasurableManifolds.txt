@@ -1,0 +1,1234 @@
+IOSR Journal of Mathematics (IOSR-JM)
+e-ISSN: 2278-5728, p-ISSN: 2319-765X. Volume 12, Issue 3 Ver. VI (May. - Jun. 2016), PP 21-31
+www.iosrjournals.org
+
+Introducing the Concept of Measure Manifold 𝑴, 𝓣𝟏 , 𝚺𝟏 , 𝝁𝟏
+Dr. S. C. P. Halakatti 1 and Shri H. G. Haloli2
+1
+
+Associate Professor Karnatak University Dharwad, Karnataka, India.
+Research Student, Karnatak University, Dharwad, Karnataka, India.
+
+2
+
+Abstract: The object of this paper is to study a measure 𝜇 on 𝑅𝑛 , 𝒯, Σ and to introduce the concepts of
+measurable manifold 𝑀, 𝒯1 , Σ1 and measure manifold 𝑀, 𝒯1 , Σ1 , 𝜇1 . Here we introduce the concepts of
+measurable chart and measurable atlas and define measure 𝜇1 restricted to them respectively, we extend the
+study of Heine Borel property on 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+Keywords: 𝜎-algebra, Heine Borel property, Measurable chart, Measurable Atlas, Measurable Manifold,
+Measure 𝜇, Measure chart, Measure Atlas, Measure Manifold.
+
+I.
+
+Introduction
+
+Let 𝑅𝑛 be an Euclidean space of dimension n. Generally, manifolds are defined as an n-dimensional
+topological manifold which is second countable, Hausdorff space that is locally Euclidean of dimension n
+[7],[15],[10]. On such topological manifold a differential structure was also developed to study differentiable
+manifolds [7], [9], [4], [15].
+Let us consider some basic definitions:
+Definition 1.1 Chart
+Let M be a non empty set. A pair (𝑈, 𝜙), were 𝑈 is open subset of M and 𝜙 is a bijective map of 𝑈 onto open
+subset of 𝑅𝑛 , is called an n-dimensional chart on M.
+Definition 1.2 Atlas
+By an 𝑅𝑛 – Atlas of a class 𝐶 𝑘 on M, we mean a collection 𝔸 of an n-dimensional chart (𝑈𝑖 , 𝜙𝑖 ) where 𝑖 ∈ N on
+M subject to following conditions,
+(i) ∞
+𝑖=1 𝑈𝑖 = M, i.e. the domain of the chart in 𝔸 cover M.
+(ii) For any pair of charts (𝑈𝑖 , 𝜙𝑖 ) and (𝑈𝑗 , 𝜙𝑗 ) in 𝔸, the sets 𝜙𝑖 (𝑈𝑖 ∩ 𝑈𝑗 ) and 𝜙𝑗 (𝑈𝑖 ∩ 𝑈𝑗 ) are open subsets of
+𝑅𝑛 , and
+(iii) maps, i.e., 𝜙𝑖 ∘ 𝜙𝑗−1 : 𝜙𝑗−1 (𝑈𝑖 ∩ 𝑈𝑗 ) → 𝜙𝑖 (𝑈𝑖 ∩ 𝑈𝑗 )
+𝜙𝑗 ∘ 𝜙𝑖−1 : 𝜙𝑖 (𝑈𝑖 ∩ 𝑈𝑗 ) → 𝜙𝑗 (𝑈𝑖 ∩ 𝑈𝑗 )
+are differentiable maps of class 𝐶 𝑘 (k ≥ 1). The maps 𝜙i o 𝜙𝑗−1 and 𝜙j o 𝜙𝑖 -1 for 𝑖, 𝑗 ∈ N, are called transition
+maps, where the transition map 𝜙𝑖 o 𝜙𝑗−1 is inverse of 𝜙𝑗 o 𝜙𝑖 -1 are of class 𝐶 𝑘 . In an 𝑅𝑛 – Atlas of a class 𝐶 𝑘 on
+M, every transition map is diffeomorphism of class 𝐶 𝑘 . An 𝑅𝑛 – Atlas is said to be of class 𝐶 ∞ if it is of class
+𝐶 𝑘 for every positive integer k.
+Definition 1.3 Equivalence Relation
+Let 𝔸k (M) denotes the set of all 𝑅𝑛 – Atlas of a class 𝐶 𝑘 on M. Two atlases 𝔸1 and 𝔸2 in 𝔸k (M) are said to be
+equivalent if 𝔸1 ∪ 𝔸2 is also in 𝔸k (M). In order that 𝔸1 ∪ 𝔸2 be a member of 𝔸k (M) for any chart (𝑈𝑖 , 𝜙𝑖 ) ∈ 𝔸1
+and (𝑉𝑗 , 𝛹j) ∈ 𝔸2, the sets 𝜙𝑖 (𝑈𝑖 ∩ 𝑉𝑗 ) and 𝜓𝑗 (𝑈𝑖 ∩ 𝑉𝑗 ) be open in 𝑅𝑛 and maps 𝜙𝑖 o 𝜓𝑗−1 , 𝜓𝑗 o 𝜙𝑖−1 be of class
+𝐶 𝑘 .This relation introduces an equivalence relation on 𝔸k (M) and partitions 𝔸k (M) into disjoint equivalence
+classes. Each of this equivalence class is called as the differentiable structure of class 𝐶 𝑘 on M.
+Definition 1.4 Differentiable n-Manifold
+A set M together with a differentiable structure of class 𝐶 𝑘 is called differentiable n-manifold of class
+𝑘
+𝐶 . Thus a non- empty set M equipped with differentiable structure and topological structures exhibits many
+interesting geometrical and topological properties.
+Now, in this paper, we introduce one more structure called 𝜎- algebra which is algebraic structure on
+such differentiable n-manifold M, that is locally homeomorphic to an open subset of a measurable space
+𝑅𝑛 , 𝒯, Σ . The M along with 𝜎-algebra is a measurable space 𝑀, 𝒯1 , Σ1 and a measure 𝜇1 on 𝑀, 𝒯1 , Σ1 is
+a measure space 𝑀, 𝒯1 , Σ1 , 𝜇1 . Our aim is to study Heine Borel property on a measure space 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+In this section, we introduce some basic definitions and theorems on algebraic structures on 𝑅𝑛 and define a
+measure 𝜇 on 𝑅𝑛 . [8],[6],[9],[10],[11],[12],[14].
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+21 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+Definition 1.5 𝜎-algebra on 𝑹𝒏
+A 𝜎-algebra on a set 𝑅𝑛 is a collection Σ of subsets of 𝑅𝑛 such that
+(i) ∅, 𝑅𝑛 ∈ Σ
+(ii) If 𝑉 ∈ Σ, then 𝑉 c ∈ Σ
+(iii) If 𝑉𝑗 ∈ Σ for 𝑖 ∈ N, then
+∞
+∞
+𝑖=1 𝑉𝑖 ∈ Σ and 𝑖=1 𝑉𝑖 ∈ 𝛴
+From De-Morgan‟s laws, a collection Σ of subsets of 𝑅𝑛 is called a 𝜎-algebra, if it contains empty set ∅
+and is closed under the operation of taking complements, countable unions and countable intersections
+Definition 1.6 Measurable Space
+The space (𝑅𝑛 , 𝒯, Σ) is called measurable topological space if the space 𝑅𝑛 is a non-empty space equipped with
+𝜎-algebra Σ, where 𝑅𝑛 is closed with respect to countable union, intersection and complements of its subsets on
+measurable space (𝑅𝑛 , 𝒯, Σ).
+Definition 1.7
+A collection ε of an arbitrary subset of a non-empty topological place 𝑅𝑛 is said to generate 𝜎-algebra Σ(ε), if
+the intersection of all of subsets of 𝑅𝑛 including ε, namely
+Σ(ε) = ∩ { Σ : Σ is a subsets of 𝑅𝑛 and ε ⊆ Σ }, is the smallest 𝜎-algebra.
+Note that, there is at least one 𝜎-algebra of subsets of 𝑅𝑛 , which includes ε and this is ℙ(𝑅𝑛 )
+Definition 1.8 Borel 𝜎-algebra
+Let 𝑅𝑛 be a topological space and 𝒯 -the collection of all open subsets of 𝑅𝑛 be a topology on 𝑅𝑛 . Then 𝜎algebra Σ generated by 𝒯 containing all open subsets of 𝑅𝑛 , is called the Borel 𝜎-algebra of 𝑅𝑛 , denoted by
+𝔅𝑅 𝑛 , i.e 𝔅𝑅 𝑛 = Σ (𝒯).
+The elements of 𝔅𝑅 𝑛 are Borel subsets in 𝑅𝑛 .
+Proposition 1.9 [12]
+Let Σ be a 𝜎-algebra of subsets of 𝑅𝑛 and 𝑉 ⊆ 𝑅𝑛 be non-empty open subset of 𝑅𝑛 and 𝐴 ∈ Σ, if we denote
+𝛴 = { 𝐴 ∩ 𝑉: 𝐴 ∈ Σ}, then 𝛴 is a restricted 𝜎-algebra of subset of V.
+∎
+𝑉
+𝑉
+Definition 1.10 Restriction of Σ on V
+If Σ is 𝜎-algebra of subsets of 𝑅𝑛 and 𝑉 is a non-empty open subsets of 𝑅𝑛 , 𝑉 ⊆ 𝑅𝑛 and 𝐴 ∈ Σ. Then 𝜎-algebra
+restricted to 𝑉 is 𝛴 𝑉 = { 𝐴 ∩ 𝑉: 𝐴 ∈ Σ}.
+Definition 1.11 Restriction of 𝓣 on V
+If 𝓣-the collection of all open subsets of 𝑅𝑛 be a topology on 𝑅𝑛 and 𝑉 is a non-empty open subsets of 𝑅𝑛 ,
+then restriction of 𝒯 on 𝑉 is 𝒯 𝑉={ 𝑉 ∩ G : 𝑉 ⊆ 𝑅𝑛 , G ∈ 𝒯 }
+In general, if ε is any collection of subset of 𝑅𝑛 and 𝑉 ⊆ 𝑅𝑛 , we define the restriction of Σ(ε) on 𝑉 is denoted by
+𝛴(𝜀)
+𝛴(𝜀)
+𝑉 and expressed as
+𝑉 = { 𝐴 ∩ 𝑉 : 𝐴 ∈ Σ(ε) }
+Definition 1.12 Measurable Subspace
+The space V, 𝒯 𝑉 , 𝛴 𝑉 is called a measurable subspace, if 𝑉 is non-empty open subset of (𝑅𝑛 , 𝒯, Σ)
+equipped with restricted 𝜎-algebra 𝛴 𝑉.
+Definition 1.13 Push forward of a 𝜎-algebra
+If Σ is a 𝜎-algebra of subsets of 𝑅𝑛 and Σ ′ is a 𝜎-algebra of subsets of 𝑅𝑚 , and f: 𝑅𝑛  𝑅𝑚 is a map then the
+collection {B ⊆ 𝑅𝑚 : f −1 (B) ∈ Σ} is called the push forward of Σ of 𝑅𝑛 to Σ ′ to 𝑅𝑚 by the function f.
+Proposition 1.14
+The collection {B ⊆ 𝑅𝑚 : f −1 (B) ∈ Σ} is a 𝜎-algebra of subsets of 𝑅𝑚 .
+Proof: As f is map from measurable space 𝑅𝑛 , 𝒯, Σ to measurable space (𝑅𝑚 , 𝒯 ′ , Σ ′ ) by definition of
+measurable function, also inverse map f(f −1 (B)) = B ∈ 𝑅𝑚 for f −1 (B) ∈ Σ , the collection of such sets are sub
+space of 𝑅𝑚 , which is also 𝜎-algebra.
+∎
+Proposition 1.15 If 𝑅𝑛 , 𝒯, Σ and (𝑅𝑚 , 𝒯 ′ , Σ ′ ) are two topological spaces and f: 𝑅𝑛  𝑅𝑚 is continuous then
+f −1 (B) is a Borel subset in 𝑅𝑛 for every Borel subset B in 𝑅𝑚 .
+Proof: Let 𝑅𝑛 , 𝒯, Σ and (𝑅𝑚 , 𝒯 ′ , Σ ′ ) be two topological spaces and f: 𝑅𝑛  𝑅𝑚 be continuous function. If B
+is Borel subset in 𝑅𝑚 and f, f −1 are continuous, by open mapping theorem f −1 (B) is a Borel subset in 𝑅𝑛 for
+every Borel subset B in 𝑅𝑚 .
+∎
+Definition 1.16 The pull back of a 𝜎-algebra
+The Σ ′ is a 𝜎-algebra of subsets of 𝑅𝑚 and f : 𝑅𝑛  𝑅𝑚 is a map, then the collection
+{f −1 (B): B ∈ Σ ′ }, is called the pull back Σ by f on 𝑅𝑛 .
+We now consider the specific role of the measure called as Lebesgue measure not on any non-empty set 𝑅𝑛 but
+on Real space 𝑅𝑛 .
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+22 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+The main theme of Lebesgue measure on the general subsets of 𝑅𝑛 is to construct the notion of abstract
+volume with abstract measure that reduces to the usual volume of elementary geometrical sets, such as cubes or
+rectangles of 𝑅3 and 𝑅2 . If ℒ(𝑅𝑛 ) is the collection of Lebesgue measurable sets and if 𝜇 : ℒ(𝑅𝑛 )  [0, ∞] is
+Lebesgue measure, then ℒ(𝑅𝑛 ) contains all n-dimensional rectangles. The required condition on, is that, 𝜇 be
+countably additive [8], [11], [14]
+i.e. if {𝐴𝑖 ∈ ℒ(𝑅𝑛 ): 𝑖 ∈ ℕ} is a countable collection of disjoint measurable sets, then their union should be
+∞
+measurable and 𝜇 ∞
+=
+𝑖=1 𝐴𝑖
+𝑖=1 𝜇(𝐴𝑖 )
+The countable additive requirement is an appropriate balanced condition between finite additive and
+uncountable additivity.
+Looking at the abstract nature of 𝑅𝑛 , is not possible to define Lebesgue measure of all subsets of 𝑅𝑛 in
+a geometrically reasonable way. Hausdorff (1914) showed that, for any dimension n ≥ 1, there is no countable
+additive measure defined on all subsets of 𝑅𝑛 that is invariant under isometries and assigns measure one to the
+unit cube. Further, for n ≥ 3, there does not exists finitely additive measure. Banach and Tarski (1924) in their
+paradox showed that, there are finitely additive, isometrically invariant extensions of Lebesgue measure on 𝑅𝑛
+on all subsets of 𝑅𝑛 , but these extensions are not countablly additive.
+It means, some subsets of abstract space 𝑅𝑛 are too irregular to have Lebesgue measure that preserves
+countable additivity, in n ≥ 3 together with invariance of measure under isometries. This situation can be
+handled by inducing 𝜎-algebra structure on 𝑅𝑛 and ℒ(𝑅𝑛 ) is a 𝜎-algebra of Lebesgue measurable sets that
+includes all possible sets also it is possible to define as isometrically invariant, countablly additive outer
+measure on all subsets of 𝑅𝑛 . If 𝑅𝑛 carries the topological structure along with 𝜎 - algebra such a space 𝑅𝑛 , 𝒯,
+Σ, is a measureable topological space, where all subsets of 𝑅𝑛 are isometically invariant and have countablly
+additive outer measure. Motivated by this approach, Lebesgue introduced some basic definitions on 𝑅𝑛 , 𝒯, Σ .
+Section - II, is preliminary in nature. The main results are introduced in section –III are due to S. C. P.
+Halakatti. We define new concepts like measurable chart, measurable atlas and measurable manifold also
+measure chart, measure atlas and measure manifold. In this section we show that if Heine-Borel property holds
+on topological Euclidean space 𝑅𝑛 , 𝒯 then it also holds on measure space 𝑅𝑛 , 𝒯, Σ, 𝜇 . We extend the
+study of the Heine-Borel property on a measure space 𝑅𝑛 , 𝒯, Σ, 𝜇 and show that measure manifold
+𝑀, 𝒯1 , Σ1 , 𝜇1 also admits Heine-Borel property.
+
+II.
+
+Preliminaries
+
+We consider the measure 𝜇 that assigns a measure on each Borel subset that generates 𝜎-algebra on
+𝑅𝑛 , 𝒯, Σ to introduce Measure Manifold 𝑀, 𝒯1 , Σ1 , 𝜇1 . The measure 𝜇 on measurable space 𝑅𝑛 , 𝒯, Σ
+([7], [8], [11], [12], [14]) is defined as follows:
+Definition 2.1 Measure 𝜇 on 𝑹𝒏
+A measure 𝜇 on a measurable topological space 𝑅𝑛 , 𝒯, Σ is a function 𝜇: Σ  [0,∞], such that
+(i) 𝜇 (∅) = 0
+∞
+(ii) If { 𝑉𝑛 ∈ Σ, 𝑛 ∈ ℕ} is a countable disjoint collection of subsets in Σ, then 𝜇 ∞
+𝑖=1 𝑉𝑖 =
+𝑖=1 𝜇(𝑉𝑖 ), ∀ 𝑉𝑖 ∈
+𝑛
+𝑅 , 𝒯, Σ .
+Definition 2.2 Measure Space
+A measure 𝜇 on a measurable space (𝑅𝑛 , 𝒯, Σ) is called a measure space and denoted by (𝑅𝑛 , 𝒯, Σ, 𝜇)
+Proposition 2.3
+𝜇
+Let (𝑅𝑛 , 𝒯, Σ, 𝜇) be a measure space and 𝑉 ⊂ 𝑅𝑛 , 𝐴 ∈ Σ(ε). If we define
+𝑉 : Σ [0, ∞] by
+𝜇
+𝑉 (𝐴) = 𝜇 (𝐴 ∩ 𝑉), 𝐴 ∈ Σ(ε)
+𝜇
+Then 𝑉 is a measure on 𝑅𝑛 , 𝒯, Σ with the following properties
+𝜇
+i)
+𝑉(𝐴) = 𝜇 (𝐴) for every 𝐴 ∈ Σ, 𝐴 ⊆ 𝑉
+𝜇
+ii)
+𝑉(𝐴) = 0 for every 𝐴 ∈ Σ, 𝐴 ∩ 𝑉 = ∅
+𝜇
+Proof:-We have 𝑉(∅) = 𝜇 (∅ ∩ 𝑉) = 𝜇 (∅) = 0.
+𝜇
+If 𝐴1 , 𝐴2 , …∈ 𝛴 are pairwise disjoint, 𝑉 ( ∞𝑖=1 𝐴𝑖 ) = 𝜇 (( ∞𝑖=1 𝐴𝑖 ) ∩ 𝑉) = 𝜇 ( ∞𝑖=1(𝐴𝑖 ∩ 𝑉))
+𝜇
+i.e., ∞𝑖=1 𝜇 (𝐴𝑖 ∩ 𝑉) = ∞𝑖=1 𝑉(𝐴𝑖 ).
+𝜇
+Therefore, 𝑉 is a measure on 𝑅𝑛 , 𝒯, Σ and its properties are trivial to prove.
+∎
+Definition 2.4 Restriction of 𝜇 on V.
+Let (𝑅𝑛 , 𝒯, Σ, 𝜇) be a measure space and 𝑉 ∈ 𝑅𝑛 , 𝒯, Σ be any non-empty open subset of 𝑅𝑛 , then the
+𝜇
+measure 𝑉 on 𝑅𝑛 , 𝒯, Σ is called the restriction of 𝜇 on V.
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+23 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+Proposition 2.5
+Let (𝑅𝑛 , 𝒯, Σ, 𝜇) be a measure space and 𝑉 ⊆ 𝑅𝑛 , then,
+(i) 𝛴 𝑉 = {𝐴 ∩ 𝑉: 𝐴 ⊆ 𝑉 ∈ 𝑅𝑛 }
+𝜇
+𝜇
+𝛴
+𝛴
+(ii)
+𝑉:
+𝑉  [0, ∞] defined as, 𝑉(𝐴) = 𝜇 (𝐴), where 𝐴 ∈ 𝑉 ,
+𝑛
+𝒯
+(iii)
+𝑉 = { 𝑉 ∩G: 𝑉 ⊆ 𝑅 , G ∈ 𝓣},
+is called a measure on (𝑉, 𝒯 𝑉, 𝛴 𝑉 ).
+𝜇
+The structure (𝑉, 𝒯 𝑉, 𝛴 𝑉 , 𝑉) is called measure subspace.
+Definition 2.6 Restriction of 𝜇 on (𝑉, 𝒯 𝑉, 𝛴 𝑉 )
+
+𝜇
+Let (𝑅𝑛 , 𝓣, Σ, 𝜇) be a measure space and 𝑉 ∈ Σ be any non-empty open subset of 𝑅𝑛 , then the measure 𝑉 on
+(𝑉, 𝒯 𝑉, 𝛴 𝑉 ) is called the restriction of 𝜇 on 𝛴 𝑉 .
+Definition 2.7 The push forward of a measure
+Let (𝑅𝑛 , 𝒯, Σ, 𝜇) and (𝑅𝑚 , 𝒯 ′ , Σ ′ , 𝜇 ′ ) are measure spaces and f: 𝑅𝑛  𝑅𝑚 be a map from 𝑅𝑛 to 𝑅𝑚 and let Σ ′
+defined by Σ ′ = { B ⊆ 𝑅𝑚 : f −1 (B) ∈ Σ } be a 𝜎-algebra on 𝑅𝑚 , then the push forward of Σ by f on 𝑅𝑚 is
+f(f −1 (B)) = B such that 𝜇 ′ (B) = 𝜇(f −1 (B)), where B ∈ Σ ′ .
+If 𝜇 ′ is a measure on (𝑅𝑚 , 𝓣′ , Σ ′ , 𝜇 ′ ) it is called the push forward of 𝜇 by f on 𝑅𝑛 .
+Definition 2.8 The pull back of a measure
+Let (𝑅𝑛 𝒯, Σ, 𝜇) and (𝑅𝑚 , 𝒯 ′ , Σ ′ , 𝜇 ′ ) are measure spaces and let f: 𝑅𝑛  𝑅𝑚 be a one to one and onto map from
+𝑅𝑛 onto 𝑅𝑚 and Σ – be a 𝜎-algebra on 𝑅𝑛 defined by Σ = { f −1 (B) : B ∈ Σ ′ }, is a pull back of Σ ′ by f on 𝑅𝑛 is
+𝜇 ′ (B) = 𝜇(f −1 (B)).
+If 𝜇 is a measure on (𝑅𝑛 , 𝒯, Σ) it is called as the pull back of 𝝁′ by f on 𝑹𝒏 .
+Definition 2.9 Outer Lebesgue measure
+The outer Lebesgue measure 𝜇*(E) of a subset E ⊂ 𝑅𝑛 is 𝜇*(E) = inf { ∞𝑗 =1 𝜇(ℜ𝑗 ) ; 𝐸 ⊂ ∞
+𝑗 =1 ℜ𝑗 , ℜ𝑗 ⊂
+ℜ(𝑅𝑛 )}, where the infimum is taken over all countable collection of rectangles ℜ, whose union contains E. The
+map 𝜇*:P(𝑅𝑛 )[0,∞], 𝜇* : E  𝜇*(E) is called outer Lebesgue measure.
+Theorem 2.10
+Lebesgue outer measure 𝜇* has the following properties.
+(i) 𝜇* (∅) = 0
+(ii) if 𝐴 ⊂ B then 𝜇*( 𝐴) ≤ 𝜇* (B)
+∞
+∗
+(iii) if { 𝐴𝑖 ⊂ 𝑅𝑛 : 𝑖 ∈ ℕ } is a countable collection of subsets of 𝑅𝑛 ,then 𝜇 ∗ ( ∞
+𝑖=1 𝐴𝑖 ) ≤ 𝑖=1 𝜇 (𝐴𝑖 )
+Let us define Carathoedory measurability,
+Definition 2.11
+Let 𝜇* be an outer measure on a set X. A subset 𝐴 ⊂ X is Caratheodory measurable with respect to 𝜇*,
+or measurable for short if 𝜇*(E) = 𝜇*(E ∩ 𝐴) + 𝜇* (E ∩ 𝐴 c), for every subset E ⊂ X.
+
+III.
+
+Construction of Measure Manifold
+
+Let M be a topological Manifold which is second countable and Hausdorff space. On Such topological
+Manifold a differential structure can be induced, transforming M into differentiable Manifold of dimension n.
+M carries Topological and differential structures smoothly .In this paper we induce the algebraic structure 𝜎algebra on a topological differentiable manifold that transforms M into a measurable Manifold denoted by
+𝑀, 𝒯1 , Σ1 . The 𝜎-algebraic structure on M admits a measure µ on a measurable Manifold transforming
+measurable Manifold 𝑀, 𝒯1 , Σ1 into a measure Manifold denoted by 𝑀, 𝒯1 , Σ1 , 𝜇1 . In this paper S. C. P.
+Halakatti introduces the concepts of measurable charts and measurable atlases hence measurable manifold on
+which a measure µ1 has been introduced to study the measure of some topological characteristics on a
+measurable Manifold. The first author has introduced these conceptual framework in order to study any organic
+system, for example, the anatomy of a human brain, its structural and functional patterns in terms of structures
+of measurable Manifold and measure the behavioral patterns of human brain in term of measure Manifold.
+In this paper we introduce the basics and necessary concepts and prepare a ground for evolving a
+mathematical model that represents any organic system in general and the structure of the brain in particular.
+Keeping such a larger picture in the mind the present paper is developed, where only some topological
+characteristics are studied on a measurable Manifold amongst many topological properties to be studied in
+future. In this paper we extend the Heine-Borel property on a measure manifold 𝑀, 𝒯1 , Σ1 , 𝜇1 . The
+geometrical and algebraic structures on 𝑀, 𝒯1 , Σ1 , 𝜇1 will be studied in future work.
+A countable collection of measure atlases that cover the M and satisfying the equivalence relation,
+induces a differentiable structure on M, converting any non-empty set M into a differentiable manifold which
+represents a measure space and denoted by 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+24 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+3.1 Introducing the concepts of measurable charts and measure charts
+For every 𝑉 ∈ 𝑅𝑛 , 𝒯, Σ , if there exists homeomorphisms 𝜙 and 𝜙-1 defined as 𝜙: 𝜙-1(𝑉) 𝑅𝑛 , 𝒯,
+Σ such that 𝜙 (𝜙-1(𝑉) = 𝑈) = 𝑉 ⊂ (𝑅𝑛, 𝒯, Σ), then the pair (𝑈, 𝜙) is called as the chart.
+
+Fig.1
+Definition 3.1.1 Measurable Manifold
+A non-empty set M modeled on the measurable space 𝑅𝑛 , 𝒯, Σ is called as a measurable manifold denoted
+by 𝑀, 𝒯1 , Σ1 .
+Definition 3.1.2 Measure Manifold
+The non-empty set M modeled on the measure space (𝑅𝑛 , 𝒯, Σ, 𝜇) is called the Measure Manifold.
+Definition 3.1.3 Measurable subspace.
+𝛴
+If (𝑈, 𝒯 1 , Σ1) ⊆ 𝑀, 𝒯1 , Σ1 and if 1 𝑈 is the restriction of a 𝜎-algebra on 𝑈, then the space denoted by
+𝒯
+𝛴
+(U, 1 U , 1 𝑈) is called as the measurable subspace.
+𝜮
+Definition 3.1.4 Measure subspace and Restriction of 𝜇1 on 𝟏 𝑼
+Let 𝑀, 𝒯1 , Σ1 be a measurable space and 𝑈 ∈ Σ1 be non-empty Borel subset of 𝑀, 𝒯1 , Σ1 . The measure
+𝜇1
+𝒯1
+𝛴1
+𝜮𝟏
+𝑈 on (𝑈, U ,
+𝑈) is called the restriction of 𝜇1 on
+𝑼
+𝒯
+𝛴
+𝒯
+𝛴
+𝜇
+The pair (𝑈, 1 U , 1 𝑈) is the measurable subspace and the structure (𝑈, 1 U , 1 𝑈, 1 𝑈) is called a
+measure subspace.
+Definition 3.1.5 Measurable function
+Let 𝑀, 𝒯1 , Σ1 and 𝑅𝑛 , 𝒯, Σ be measurable spaces. A function 𝜙: M  𝑅𝑛 is measurable if 𝜙-1 (𝑉) ∈
+𝑀, 𝒯1 , Σ1 , for any 𝑉 ⊆ 𝑅𝑛 , 𝒯, Σ .
+Note 3.1.6
+(1) (𝑅𝑛 , 𝒯, Σ, 𝜇) - where Σ - collection of Borel subsets V of (𝑅𝑛 , 𝒯, Σ, 𝜇), and 𝒯 - collections of open sets of G
+of 𝑅𝑛 ,
+(2) (M, 𝒯 1, Σ1, 𝜇1) - where Σ1 - collection of Borel subsets U = 𝜙-1 (𝑉) on M, and 𝒯 1-collections
+of Borel subsets of 𝜙-1 (G) of M,
+Definition 3.1.7 Measurable chart
+𝒯
+𝛴
+Let U, 1 U , 1 𝑈 ⊆ (M, Σ1, 𝒯 1, 𝜇1) be a non empty measurable subspace of (M, 𝒯 1, Σ1) if there exists a map,
+𝒯
+𝛴
+𝒯
+𝛴
+𝜙: U, 1 U , 1 𝑈  𝜙 U, 1 U , 1 𝑈 ⊆ 𝑅𝑛 , 𝒯, Σ , satisfying the following conditions,
+(i) 𝜙 if homeomorphism
+𝒯
+𝛴
+(ii) 𝜙 is measurable i.e. 𝜙-1 (𝑉) = U ∈ (M, 𝒯 1, Σ1), for every 𝑉 ∈ 𝑅𝑛 , 𝒯, Σ and (U, 1 U , 1 𝑈, ) ⊆ (M, 𝒯 1,
+𝒯
+𝛴
+Σ1), then the structure U, 1 U , 1 𝑈 , ϕ is called a measurable chart.
+Definition 3.1.8 Measure Function
+Let 𝑀, 𝒯1 , Σ1 , 𝜇1 and 𝑅𝑛 , 𝒯, Σ, 𝜇 be measure spaces .We say that a mapping 𝜙: 𝑀, 𝒯1 , Σ1 , 𝜇1  𝑅𝑛 , 𝒯,
+Σ, 𝜇 is measurable if, 𝜙-1(E) is measure subset of 𝑀, 𝒯1, Σ1, 𝜇1 for every measure subset E ⊂ 𝑅𝑛, 𝒯, Σ, 𝜇.
+Definition 3.1.9 Measure Preserving Map/ Invariant Measure
+(i) Let 𝑀, 𝒯1 , Σ1 , 𝜇1 and 𝑅𝑛 , 𝒯, Σ, 𝜇 be measure spaces and mapping is 𝜙: 𝑀, 𝒯1 , Σ1 , 𝜇1  𝑅𝑛 , 𝒯, Σ,
+𝜇measurable function .The mapping is measure preserving if 𝜇1(𝜙-1(E)) = 𝜇(E) for every measurable subset
+E ⊂ 𝑅𝑛 , 𝒯, Σ, 𝜇 .When M = 𝑅𝑛 and 𝜇1 = 𝜇, then we call 𝜙 is a transformation.
+
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+25 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+(ii) If a measurable transformation 𝜙: M  M preserves a measure, then we say that 𝜙 is 𝜇 –invariant. If 𝜙 is
+invertible and if both 𝜙 and 𝜙-1 are measurable and measure preserving, then we call 𝜙 and 𝜙-1 are invertible
+measure preserving transformations [12].
+Definition 3.1.10 Measure Chart
+𝒯
+𝛴
+The measurable chart
+U, 1 U , 1 𝑈 , ϕ
+
+is called a measure chart, if
+
+𝜇1
+
+𝑈 is defined on
+
+U,
+
+𝒯1U, 𝛴1𝑈, ϕ satisfying the following conditions,
+(i) 𝜙 if homeomorphism,
+(ii) 𝜙 is measurable function i.e., 𝜙-1 (𝑉) = U ∈ (U, 𝒯 1, Σ1), 𝑉 ∈ (𝑅𝑛 , 𝒯, Σ) and U,
+Σ1),
+(iii) 𝜙 is measure invariant,
+𝒯
+𝛴
+𝜇
+Then, the structure U, 1 U , 1 𝑈 , 1 𝑈 , ϕ is called as a measure chart.
+
+𝒯1
+
+U,
+
+𝛴1
+
+𝑈 ⊆ (M, 𝓣1,
+
+Now S. C. P. Halakatti introduces the concepts of the measurable atlas and measure atlas.
+
+3.2 Measurable Atlas and Measure Atlas
+Let Σ1 be a 𝜎-algebra of measure charts on 𝑀, 𝒯1 , Σ1 , 𝜇1 . Let
+charts
+
+𝛴1
+
+𝔸 be a non-empty collection of measurable
+
+𝒯
+𝛴
+U, 1 U , 1 𝑈 , ϕ . Let 𝔸, 𝔹 ∈ 𝔸𝑘 (𝑀), then we say that 𝔸∼𝔹 if 𝔸∪𝔹 ∈ 𝔸𝑘 (𝑀) ⊆ (M, 𝒯 1, Σ1).
+
+Definition 3.2.1 𝜎-algebra restricted to 𝔸
+Σ1
+𝔸 = {𝑈𝑖 ∩ 𝑈𝑗 : for all 𝑈𝑗 ∈ 𝔸 or𝔹 ∈ 𝑀, 𝒯1 , Σ1 if 𝔸∼𝔹 }, where 𝔸 and 𝔹 are measurable Atlases.
+Definition 3.2.2 Measurable Atlas
+𝒯
+𝛴
+By an 𝑅𝑛 measurable atlas of class 𝐶 𝑘 on M we mean a countable collection 𝔸, 1 𝔸 , 1 𝔸 of n-dimensional
+measurable charts
+(a1)
+
+∞
+𝑖=1
+
+𝒯
+𝛴
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , ϕ𝑖 for all 𝑖 ∈ N on 𝑀, 𝒯1 , Σ1 subject to the following conditions:
+𝑖
+
+𝑖
+
+𝒯
+𝛴
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , ϕ𝑖 = 𝑀
+𝑖
+
+𝑖
+
+𝒯
+𝛴
+i.e. the countable union of the measurable charts in 𝔸, 1 𝔸 , 1 𝔸 cover 𝑀, 𝒯1 , Σ1 .
+(a2) For any pair of measurable charts
+
+𝒯
+𝛴
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , ϕ𝑖
+𝑖
+
+𝑖
+
+and
+
+𝒯
+𝛴
+𝑈𝑗 , 1 𝑈 , 1 𝑈
+𝑗
+
+𝑗
+
+, ϕ𝑗
+
+in
+
+𝒯
+𝛴
+𝔸, 1 𝔸 , 1 𝔸 , the transition maps 𝜙𝑖 ∘ 𝜙𝑗−1 and 𝜙𝑗 ∘ 𝜙𝑖−1 are
+
+(1) differentiable maps of class 𝐶 𝑘 (K ≥ 1),
+i.e., 𝜙𝑖 ∘ 𝜙𝑗−1 : 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) → 𝜙i (𝑈𝑖 ∩ 𝑈𝑗 ) ⊆ 𝑅𝑛 , 𝒯, Σ
+𝜙𝑗 ∘ 𝜙𝑖−1 : 𝜙i (𝑈𝑖 ∩ 𝑈𝑗 ) → 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) ⊆ 𝑅𝑛 , 𝒯, Σ
+are differentiable maps of class 𝐶 𝑘 (K ≥ 1)
+(2) Measurable,
+i.e., these two transition maps 𝜙𝑖 ∘ 𝜙𝑗−1 and 𝜙𝑗 ∘ 𝜙𝑖−1 are measurable functions if
+(a) For any open subset K ⊆ 𝜙𝑗 (𝑈𝑖 ∩ 𝑈𝑗 ) is measurable in 𝑅𝑛 , 𝒯, Σ then
+(𝜙𝑖 ∘ 𝜙𝑗−1 )−1 (K) ∈ 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) is also measurable,
+(b) 𝜙𝑗 ∘ 𝜙𝑖−1 is measurable if S ⊆ 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) is measurable in 𝑅𝑛 , 𝒯, Σ , then
+(𝜙𝑗 ∘ 𝜙𝑖−1 )−1 (S) ∈ 𝜙i (𝑈𝑖 ∩ 𝑈𝑗 ) is measurable.
+
+Proposition 3.2.3
+𝛴
+Let (M, 𝓣1, Σ1, 𝜇1) be a measure space and 𝔸 ∈ 1 𝔸 be non-empty measurable Atlas, we consider
+𝛴1
+𝔸 = {𝔹 ∈ (M, 𝓣1, Σ1, 𝜇1):𝔹∼𝔸} and define,
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+26 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+𝜇1
+
+𝛴1
+𝔸:
+𝔸  [0, ∞] by
+𝜇1
+𝒯1
+𝛴1
+𝔸(𝔹) = 𝜇1(𝔹), where 𝔹 ∈ 𝔸, 𝔸 ,
+𝔸 .
+𝜇1
+𝒯1
+𝛴1
+Then
+𝔸 is a measure on 𝔸, 𝔸 ,
+𝔸 .
+Proof:
+𝜇
+We have 1 𝔸(∅) = 𝜇1 (∅ ∩ 𝔸) = 𝜇1 (∅) =0
+If 𝔹1, 𝔹2 ,…,∈ 𝛴1 are pair wise disjoint Atlases,
+𝜇1
+∞
+∞
+∞
+∞
+𝔸 ( 𝑖=1 𝔹𝑖 )= 𝜇1 ( ( 𝑖=1 𝔹𝑖 ) ∩ 𝔸) = 𝜇1 ( 𝑖=1(𝔹𝑖 ∩ 𝔸))= 𝑖=1 𝜇1 ( 𝔹𝑖 ∩ 𝔸)
+𝜇1
+= ∞
+𝑖=1
+𝔸 ( 𝔹𝑖 )
+𝜇
+𝒯
+𝛴
+Therefore 1 𝔸 is a measure on 𝔸, 1 𝔸 , 1 𝔸 ⊆ 𝑀, 𝒯1 , Σ1 , 𝜇1
+
+∎
+
+𝜮𝟏
+𝔸,
+𝔸
+𝒯
+𝛴
+Let (M, 𝓣1, Σ1, 𝜇1) be a measure space and let 𝔸, 1 𝔸 , 1 𝔸 ∈ 𝑀, 𝒯1 , Σ1 , 𝜇1 be a non-empty measurable
+𝜇
+𝒯
+𝛴
+𝒯
+𝛴
+Atlas. The measure 1 𝔸 on 𝔸, 1 𝔸 , 1 𝔸 is called the restriction of measure 𝜇1 on 𝔸, 1 𝔸 , 1 𝔸 .
+Definition 3.2.5:- Measure atlas
+𝒯
+𝛴
+𝜇
+𝒯
+𝛴
+The structure 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 is called measure Atlas if 𝔸, 1 𝔸 , 1 𝔸 is a measurable Atlas equipped
+𝜇
+with the restricted measure 1 𝔸 .
+Definition 3.2.4 Restriction of Measure 𝜇1 on 𝔸,
+
+𝓣𝟏
+
+Conditions to be satisfied for measure atlas:
+Definition 3.2.6: Measure Atlas
+𝒯
+𝛴
+𝜇
+By an 𝑅𝑛 measure atlas of class 𝐶 𝑘 on M, we mean a countable collection 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 of n𝑈𝑖 ,
+
+dimensional measure charts
+
+𝒯1
+
+𝑈𝑖 ,
+
+𝛴1
+
+following conditions:
+𝒯
+𝛴
+𝜇
+∞
+(a1)
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , 1 𝑈 , ϕ𝑖
+𝑖=1
+𝑖
+
+𝑖
+
+𝑖
+
+𝑈𝑖 ,
+
+𝜇1
+
+𝑈𝑖 , ϕ𝑖
+
+for all 𝑖 ∈ N on 𝑀, 𝒯1 , Σ1 , 𝜇1 satisfying the
+
+=𝑀
+
+𝒯
+𝛴
+𝜇
+i.e. the countable union of the measure charts in ( 𝔸, 1 𝔸, 1 𝔸, 1 𝔸) cover (M, 𝓣1 , Σ1, 𝜇1).
+(a2)
+
+For
+
+any
+
+𝒯
+𝛴
+𝜇
+𝑈𝑗 , 1 𝑈 , 1 𝑈 , 1 𝑈
+𝑗
+
+𝑗
+
+𝑗
+
+pair
+
+, ϕ𝑗
+
+of
+
+measure
+
+charts
+
+𝑈𝑖 ,
+
+𝒯1
+
+𝑈𝑖 ,
+
+𝛴1
+
+𝑈𝑖 ,
+
+𝜇1
+
+𝑈𝑖 , ϕ𝑖 and
+
+𝒯
+𝛴
+𝜇
+in 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 , the transition maps 𝜙i o ϕj-1 and 𝜙j o 𝜙i-1 are
+
+(1) differentiable maps of class 𝐶 𝑘 (𝑘 ≥ 1),
+i.e., 𝜙𝑖 ∘ 𝜙𝑗−1 : 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) → 𝜙i (𝑈𝑖 ∩ 𝑈𝑗 ) ⊆ 𝑅𝑛 , 𝒯, Σ
+𝜙𝑗 ∘ 𝜙𝑖−1 : 𝜙i (𝑈𝑖 ∩ 𝑈𝑗 ) → 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) ⊆ 𝑅𝑛 , 𝒯, Σ
+are differentiable maps of class 𝐶 𝑘 (𝑘 ≥ 1)
+(2) measurable,
+i.e., these two transition maps 𝜙𝑖 ∘ 𝜙𝑗−1 and 𝜙𝑗 ∘ 𝜙𝑖−1 are measurable functions if
+(a) for any open subset K ⊆ 𝜙𝑗 (𝑈𝑖 ∩ Uj) is measurable in 𝑅𝑛 , 𝒯, Σ then
+(𝜙𝑖 ∘ 𝜙𝑗−1 )−1 (K) ∈ 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) is also measurable,
+(b) 𝜙𝑗 ∘ 𝜙𝑖−1 is measurable if S ⊆ 𝜙j (𝑈𝑖 ∩ 𝑈𝑗 ) is measurable in 𝑅𝑛 , 𝒯, Σ then
+(𝜙𝑗 ∘ 𝜙𝑖−1 )−1 (S) ∈ 𝜙i (𝑈𝑖 ∩ 𝑈𝑗 ) is measurable.
+𝒯
+𝛴
+𝜇
+𝒯
+𝛴
+𝜇
+(a3) For any two measure atlases 𝔸1 , 1 𝔸 , 1 𝔸 , 1 𝔸 and 𝔸2 , 1 𝔸 , 1 𝔸 , 1 𝔸 , we say that a
+1
+1
+1
+2
+2
+2
+𝒯
+mapping, T : 𝔸1 → 𝔸2 is measurable if T-1(E) is measurable for every measurable subset E ⊂ 𝔸2 , 1 𝔸 ,
+2
+
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+27 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+𝛴1
+=
+
+𝔸2 ,
+
+𝜇1
+
+𝜇1
+
+𝔸2 and the mapping is measure preserving if
+
+𝜇1
+
+-1
+
+𝔸1 (T (E)) =
+
+𝜇1
+
+𝔸2 (E),where 𝔸1 ∼ 𝔸2 and
+
+𝜇1
+
+𝔸1
+
+𝔸2 .
+Then we call T a transformation.
+(a4) If a measurable transformation T: 𝔸 → 𝔸 preserves a measure 𝜇1 , then we say that 𝜇1 is T-invariant (or
+invariant under T). If T is invertible and if both T and T -1 are measurable and measure preserving then we call
+T an invertible measure preserving transformation.
+An 𝑅𝑛 , measure atlas is said to be of class 𝐶 ∞ if it is of class 𝐶 𝑘 for every integer k.
+Let 𝔸k(M) denotes the set of all 𝑅𝑛 measure atlases of class 𝐶 𝑘 on 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+Now we introduce a differential structure by defining an equivalence relation in 𝔸k(M).
+Definition 3.2.7 Equivalence Relation in 𝔸𝑘 (𝑀)
+Two measure atlases 𝔸1 and 𝔸2 in 𝔸𝑘 (𝑀) are said to be equivalent if (𝔸1∪𝔸2) ∈ 𝔸𝑘 (𝑀). In order that
+𝒯
+𝛴
+𝜇
+𝔸1∪𝔸2 be a member of 𝔸𝑘 (𝑀) we require that for any measure chart
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , 1 𝑈 , ϕ𝑖 ∈ 𝔸1
+𝑖
+𝑖
+𝑖
+
+and
+
+𝑉𝑗 ,
+
+𝒯1
+
+𝑉𝑗 ,
+
+𝛴1
+
+𝑉𝑗 ,
+
+𝜇1
+
+𝑉𝑗
+
+, 𝜓𝑗
+
+∈ 𝔸2 the set of ϕ𝑖 (𝑈𝑖 ∩ 𝑉𝑗 ) and 𝜓𝑗 (𝑈𝑖 ∩ 𝑉𝑗 ) be open measurable
+
+subsets in (𝑅𝑛 , 𝓣, Σ, 𝜇) and maps 𝜙𝑖 ∘ 𝜓𝑗−1 and 𝜓𝑖 ∘ 𝜙𝑗−1 be of class 𝐶 𝑘 and are measurable . The relation
+introduced is an equivalence relation in 𝔸𝑘 (𝑀) and hence it partitions 𝔸𝑘 (𝑀) into disjoint equivalence classes.
+Each of these equivalence classes is called a differentiable structure of class 𝐶 𝑘 on 𝑀, 𝒯1 , Σ1 , 𝜇1 . A measure
+space 𝑀, 𝒯1 , Σ1 , 𝜇1 together with a differentiable structure of class 𝐶 𝑘 is called a differentiable measure nmanifold of class 𝐶 𝑘 or simply a 𝐶 𝑘 –measure n-manifold.
+A non empty set M equipped with differentiable structure, topological structure and algebraic structure
+𝜎- algebra is called Measurable Manifold. A measure 𝜇1 defined on 𝑀, 𝒯1 , Σ1 and the quadruple
+𝑀, 𝒯1 , Σ1 , 𝜇1 is called Measure Manifold.
+Now we study a topological property on 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+3.3 Topological property on 𝑴, 𝓣𝟏 , 𝚺𝟏 , 𝝁𝟏
+Heine-Borel property is well-defined property on Euclidean space 𝑅𝑛 . Now, we extend the study of
+this property on measure space 𝑅𝑛 , 𝒯, Σ, 𝜇 . Further we study the extended property of Heine-Borel property
+on a measure manifold (M, 𝓣1, Σ1, 𝜇1).
+The present aim of this study is to quantity measure charts, measure Atlases as the union of which
+gives a measurable differential structure on a measure-manifold 𝑀, 𝒯1 , Σ1 , 𝜇1 and to study the Heine-Borel
+property, re-defined in-terms of measure charts and measure Atlases and examine the measure invariant
+properties on 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+3.3.1 Heine-Borel property (HBP) on 𝑹𝒏
+For a subset A of the Euclidean space 𝑅𝑛 . A has the Heine-Borel property if every open covering of A
+admits a finite sub covering.
+Now we extend the Heine-Borel property on measure space (𝑅𝑛 , 𝒯, Σ, 𝜇), where elements of 𝜎-algebra
+are generated by members of 𝒯 -open sets of 𝑅𝑛 . The elements of 𝜎-algebra are addressed as Borel sets.
+𝜇
+For a subset A ⊆ 𝑅𝑛 , let A, 𝒯 A , Σ 𝐴 , 𝐴 be a sub measure space of a measure space (𝑅𝑛 , 𝒯, Σ, 𝜇). If
+𝑛
+Euclidean space 𝑅 admits Heine-Borel property then, to prove that the measure space (𝑅𝑛 , 𝒯, Σ, 𝜇) also admits
+Heine-Borel property, it is suffices to prove that every countable open measure cover has finite measure sub
+cover.
+Definition 3.3.2 Borel Cover
+By a Borel cover viz { ∞
+𝑖=1 𝑉 i : 𝑉𝑖 „s are Borel sets}, we mean accountable union of all Borel sets belonging to
+(𝑅𝑛 , 𝒯, Σ, 𝜇).
+Theorem 3.3.3
+If Heine-Borel property (HBP) holds on Euclidean space 𝑅𝑛 then a measure space (𝑅𝑛 , 𝒯, Σ, 𝜇) also admits
+HBP. i.e. every Borel cover for sub-measure space of (𝑅𝑛 , 𝒯, Σ, 𝜇) has a finite Borel sub-cover.
+
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+28 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+Proof:Suppose 𝑅𝑛 admits Heine-Borel property then every open covering of a subset 𝐴 ⊂ 𝑅𝑛 admits a finite
+sub cover. To show that, a measure space 𝑅𝑛 , 𝒯, Σ, 𝜇 admits Heine-Borel property, it is suffices to prove
+𝜇
+that every measure open covering of a measure subspace A, 𝒯 A , Σ 𝐴 , 𝐴 of (𝑅𝑛 , 𝒯, Σ, 𝜇) has a finite
+measure sub covering.
+𝜇
+Let A, 𝒯 A , Σ 𝐴 , 𝐴 ⊆ 𝑅𝑛 , 𝒯, Σ, 𝜇 is a sub measure space of (𝑅𝑛 , 𝒯, Σ, 𝜇) and
+𝜇
+𝜇
+𝒯
+𝛴 ,𝒯
+Σ
+let { ∞
+𝑖=1(𝑉𝑖 ,
+𝑉𝑖
+𝑉𝑖 , 𝑉𝑖 ) } be a countable measure open covering/Borel covering for A, A , 𝐴 , 𝐴
+𝜇
+𝒯 ,𝛴 ,𝜇
+i.e., A, 𝒯 A , Σ 𝐴 , 𝐴 ⊆ ∞
+𝑖=1 𝑉𝑖 ,
+𝑉
+𝑉
+𝑉 …………………… (1)
+𝑖
+
+𝑖
+
+𝑖
+
+Satisfying the following condition on measure,
+𝜇
+𝒯 ,𝛴 ,𝜇
+𝜇 A, 𝒯 A , Σ 𝐴 , 𝐴 ≤ 𝜇 ∞
+𝑖=1 𝑉𝑖 ,
+𝑉𝑖
+𝑉𝑖
+𝑉𝑖
+𝜇
+∞
+𝒯
+𝛴
+= 𝑖=1 𝜇 𝑉𝑖 , 𝑉 , 𝑉 , 𝑉
+𝑖
+
+𝑛
+
+𝑖
+
+𝑖
+
+𝑛
+
+...…………………… (2)
+
+Since 𝐴 ⊂ 𝑅 , by Heine-Borel property on𝑅 it implies that every open covering has finite sub cover.viz
+{ 𝑛𝑗=1 𝑉𝑖𝑗 }, such that A⊂ 𝑛𝑗=1 𝑉𝑖𝑗
+………………………… (3)
+𝜇
+𝑛
+Since {Vi} are open sub sets in 𝑅 , correspondingly a
+𝑉𝑖 , 𝒯 𝑉 , 𝛴 𝑉 , 𝑉
+is a open measure
+𝑖
+𝑖
+𝑖
+𝑛
+covering/Borel covering for 𝐴 ⊂ (𝑅 , 𝒯, Σ, 𝜇) HBP implies, every open cover has finite sub-cover,
+correspondingly, every measure subspace
+𝜇
+𝜇
+(𝐴,𝛴 𝐴,𝒯 𝐴 , 𝐴) ⊆ ∞
+𝑉𝑖 , 𝒯 𝑉 , 𝛴 𝑉 , 𝑉 …………………..(4)
+𝑖=1
+𝑖
+𝑖
+𝑖
+which is open measure covering/Borel covering, satisfying the following condition on measure,
+𝜇
+𝒯 ,𝛴 ,𝜇
+𝜇 A, 𝒯 A , Σ 𝐴 , 𝐴 ≤ 𝜇 ∞
+𝑖=1 𝑉𝑖 ,
+𝑉𝑖
+𝑉𝑖
+𝑉𝑖
+𝜇
+∞
+𝒯
+𝛴
+= 𝑖=1 𝜇 𝑉𝑖 , 𝑉 , 𝑉 , 𝑉
+……………………(5)
+𝑖
+𝑖
+𝑖
+has finite sub cover, such that,
+𝜇
+𝜇
+A, 𝒯 A , Σ 𝐴 , 𝐴 ⊂ 𝑛𝑗=1(𝑉𝑖𝑗 , 𝒯 𝑉 , 𝛴 𝑉 , 𝑉 )
+………………..(6)
+𝑖𝑗
+
+𝑖𝑗
+
+𝑖𝑗
+
+satisfying the following condition on measure,
+𝜇
+𝜇
+𝜇 A, 𝒯 A , Σ 𝐴 , 𝐴 ≤ 𝜇 𝑛𝑗=1 𝑉𝑖𝑗 , 𝛴 𝑉 , 𝒯 𝑉 , 𝑉
+𝑖𝑗
+𝑖𝑗
+𝑖𝑗
+𝑉𝑖𝑗 , 𝛴 𝑉 , 𝒯 𝑉 ,
+
+𝑛
+𝑗 =1 𝜇
+
+𝜇
+
+𝑉𝑖𝑗 , (for finite j=1,2,…n) ………….(7)
+This implies that, every countable measure open cover/Borel cover has a measure sub cover/Borel sub
+cover. Hence HBP is true on (𝑅𝑛 , 𝒯, Σ, 𝜇).
+∎
+=
+
+𝑖𝑗
+
+𝑖𝑗
+
+Remarks 3.3.4
+(i) The significances of the extension of HBP on 𝑅𝑛 , 𝒯, Σ, 𝜇 is that the Borel subsets which forms a Borel
+𝜇
+cover for A, 𝒯 A , Σ 𝐴 , 𝐴 ⊂ 𝑅𝑛 , 𝒯, Σ, 𝜇 are measurable and has a measure 𝜇.
+(ii) The open cover constructed by Borel subsets { ∞
+𝑖=1 𝑉 i} is also measurable and have a measure 𝜇 since
+∞
+𝜇 ∞
+≤
+𝑖=1 𝑉𝑖
+𝑖=1 𝜇(𝑉𝑖 )
+(iii) The sub cover { 𝑛𝑗=1 𝑉𝑖𝑗 } of {( ∞
+𝑖=1 𝑉𝑖 )} is also measurable and has a measure 𝜇.
+Theorem 3.3.5 If Heine-Borel property (HBP) holds on the measure space 𝑅𝑛 , 𝒯, Σ, 𝜇 then a measure
+manifold (M, 𝓣1, Σ1, 𝜇1) also admits HBP.
+Proof:
+Suppose (𝑅𝑛 , 𝒯, Σ, 𝜇) admits Heine-Borel property.
+To extend Heine-Borel property on 𝑀, 𝒯1 , Σ1 , 𝜇1 it is suffices to show that for every countable union of
+measure chart for measure atlas 𝔸 ⊂ M there exist a finite sub collection of measure charts. Let Vi„s are measure
+subsets of (𝑅𝑛 , 𝒯, Σ, 𝜇) and let 𝜙-1(𝑉𝑖 ) = Ui are measure subsets of 𝑀, 𝒯1 , Σ1 , 𝜇1 .
+𝒯
+𝛴
+𝜇
+Let ( 𝑈𝑖 , 1 𝑈 , 1 𝑈 , 1 𝑈 , 𝜙𝑖 ) are a measure charts.
+𝑖
+𝑖
+𝑖
+𝒯
+𝛴
+𝜇
+Let, (𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸) ⊆
+
+∞
+𝑖=1
+
+𝒯
+𝜙𝑖−1 (𝑉𝑖 ), 1
+
+𝜙𝑖−1 (𝑉𝑖 )
+
+,
+
+𝛴1
+
+𝜙𝑖−1 (𝑉𝑖 )
+
+𝜇
+, 1
+
+𝜙𝑖−1 (𝑉𝑖 )
+
+, 𝜙𝑖 , for every Vi ∈
+
+(𝑅𝑛 , 𝒯, Σ, 𝜇), there exists, 𝜙-1 (𝑉𝑖 ) = 𝑈𝑖 ∈ 𝑀, 𝒯1 , Σ1 , 𝜇1 , and equation (1) implies
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+29 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+𝒯
+𝛴
+𝜇
+i.e. (𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸) ⊆
+
+𝒯
+𝛴
+𝜇
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , 1 𝑈 , 𝜙𝑖
+
+∞
+𝑖=1
+
+𝑖
+
+𝑖
+
+………………….
+
+𝑖
+
+(8)
+
+satisfying the following condition on measure, and equation (2) implies
+𝒯
+𝛴
+𝜇
+𝒯
+𝛴
+𝜇
+∞
+𝜇1 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ≤ 𝜇1
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , 1 𝑈 , 𝜙𝑖
+𝑖=1
+𝑖
+𝑖
+𝑖
+∞
+𝑖=1
+
+≤
+
+𝒯
+𝛴
+𝜇
+𝑈𝑖 , 1 𝑈 , 1 𝑈 , 1 𝑈 , 𝜙𝑖
+
+∞
+𝑖=1
+
+𝜇1
+
+𝑖
+
+𝑖
+
+𝑖
+
+…………….. (9)
+
+has finite sub cover, such that, and equation (3) implies
+𝒯
+𝛴
+𝜇
+𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ⊂
+
+𝒯
+𝜙𝑖−1 (𝑉𝑖 )𝑗 , 1
+
+𝑛
+𝑗 =1
+
+𝒯
+𝛴
+𝜇
+i.e., 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ⊂
+
+𝜙𝑖−1 (𝑉𝑖 )𝑗
+
+,
+
+𝛴1
+
+𝜙𝑖−1 (𝑉𝑖 )𝑗
+
+𝒯
+𝛴
+𝜇
+𝑈𝑖𝑗 , 1 𝑈 , 1 𝑈 , 1 𝑈
+
+𝑛
+𝑗 =1
+
+𝑖𝑗
+
+𝑖𝑗
+
+𝜇
+, 1
+
+, 𝜙𝑖 𝑗
+
+…………………….. (10)
+
+, ϕi
+
+𝑖𝑗
+
+𝜙𝑖−1 (𝑉𝑖 )𝑗
+
+satisfying the following condition on measure, and equation (4) implies
+𝒯
+𝛴
+𝜇
+𝜇1 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ≤ 𝜇1
+
+=
+
+𝑛
+𝑗 =1
+
+𝑛
+𝑗 =1
+
+𝜇1
+
+𝒯
+𝛴
+𝜇
+𝑈𝑖𝑗 , 1 𝑈 , 1 𝑈 , 1 𝑈
+𝑖𝑗
+
+𝑛
+𝑗 =1
+
+𝑖𝑗
+
+𝑖𝑗
+
+, ϕi
+
+𝒯
+𝛴
+𝜇
+𝑈𝑖𝑗 , 1 𝑈 , 1 𝑈 , 1 𝑈
+𝑖𝑗
+
+𝑖𝑗
+
+𝑖𝑗
+
+, ϕi
+
+, for j = 1,2,..n …..(11)
+
+This implies that, for every open countable measure chart for measure atlas 𝔸 ⊂ M there exist a finite sub
+collection of measure charts. Hence HBP holds on measure manifold (M, 𝓣1, Σ1, 𝜇1 ).
+∎
+Remarks 3.3.6
+(i) The significances of HBP on measure manifold 𝑀, 𝒯1 , Σ1 , 𝜇1 is that, every countable open measure cover
+𝒯
+𝛴
+𝜇
+for an atlas 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ⊆ 𝑀, 𝒯1 , Σ1 , 𝜇1 has a finite subcover which is also countable, this implies
+𝒯
+𝛴
+𝜇
+𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ⊆ 𝑀, 𝒯1 , Σ1 , 𝜇1 satisfies Lindelof property.
+𝒯
+𝛴
+𝜇
+𝒯
+𝛴
+𝜇
+(ii) Since 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 ⊆ 𝑀, 𝒯1 , Σ1 , 𝜇1 satisfies HBP, which implies 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 is
+𝒯
+𝛴
+𝜇
+closed and bounded hence compact this implies, every infinite chart of 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 has a limit point
+𝒯
+𝛴
+𝜇
+𝒯
+𝛴
+𝜇
+in 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 . Hence 𝔸, 1 𝔸 , 1 𝔸 , 1 𝔸 admits Bolzano-Weierstrass property (BWP).
+
+IV.
+
+Conclusion
+
+Any organic system is a topological manifold having finite measure. The structural and functional
+properties of a organic system, brain in particular, are determined by the intrinsic geometrical and topological
+structure of the manifold. In order to study such systems, the first author has introduced measure manifolds and
+extended the HBP and BWP on measure manifold. This paper is base for our future work.
+
+References
+[1]
+[2]
+[3]
+[4]
+[5]
+
+Jonathan Weitsman, “Measure on Banach Manifold, Random Surfaces, And Non Perturbative String Field Theory with CutOffs”.arXiv:0807.2069v1[math- ph] (2008) (pp-1 - 27)
+Joaquim Ortega-Cerda and Bharthi Pridhnani, “Carleson Measures and Logivinenko-Sereda Sets On Compact
+Manifolds”.arXiv:1004.2456v1[math.CA ] (2010) (pp-1 - 19)
+T . Samuel , “A simple proof of vitali theorem for signed measure” The Mathematical Association of America, V-120-07, (2013)
+(PP-654 – 659).
+Antoni A Kosinski ,Differential Manifolds (Academic Press, Har court Brace, Jovanorich Publisher Bostonsan Diego, New York,
+London)(1993).
+C.Wayne Patty, Foundations of Topology ( Second Edition, Jones and Bartlett India. PVT.LTD New Delhi, Canada, London)
+(2012).
+
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+30 | Page
+
+Introducing the Concept of Measure Manifold (M, Σ1, 𝓣1, 𝜇1)
+[6]
+[7]
+[8]
+[9]
+[10]
+[11]
+[12]
+[13]
+[14]
+[15]
+
+Elliott H.Lieb and Michael Loss, Analysis (second Edition,Graduate studies in Mathematics V-14 American Mathematical Society ,
+Providence, Rhode Island) (2013) .
+John M .Lee , Introduction to topological Manifold (Graduate texts in Mathematics Springer Publication (USA)) (2004).
+John .K. Hunter, Measure Theory ( Department of Mathematics, University of California at Paris) (2011).
+K . S. Amur , D.J. Shetty , C.S. Bagewadi , An Introduction to Differential Geometry ( Narosa Publishing House, New Delhi)
+(2010).
+Lawrence Conlon, Differentiable Manifolds (Second Edition Birkhauser advanced texts, Basler –Cesrbuncher –Berlin )(2001).
+M.M Rao, Measure Theory and integration, (Second Edition, Revised and Expanded. Marcel Dekker .Inc. New York Basel) (2004).
+M.Papadimitrakis, Notes on measure theory, (Department of Mathematics, University Of Crete Autum of 2004) (2004).
+Marc . R . Roussel, Invariant Manifold (Lecture Note) (2005).
+Terence Tao, An Introduction to measure theory ( American Mathematical Society , Providence RI) (2012).
+William M. Boothby, An Introduction to Differential Manifold and Riemannian Geometry (Academic Press, Amsterdam) (2008).
+
+DOI: 10.9790/5728-1203062131
+
+www.iosrjournals.org
+
+31 | Page
+
+

@@ -1,0 +1,706 @@
+Topology without Tears
+Sidney A. Morris
+June 2020
+
+Contents
+1 Topology Spaces
+1.1 Topology – Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Open Sets - Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Finite Closed Topology – Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+2
+4
+6
+
+2 The Euclidean Topology
+2.1 Euclidian Space – Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Basis for a Topology – Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.3 Basis for a Given Topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8
+8
+10
+11
+
+50 Important Definitions
+50.1 Basic and T-spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50.2 Homeomorphisms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50.3 Countability and Topologies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50.4 Miscellaneous . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+12
+12
+12
+13
+13
+
+1
+
+Chapter 1
+
+Topology Spaces
+1.1
+
+Topology – Exercises
+
+1. Let x = {a, b, c, d, e, f }. Determine whether or not each of the following collections of subsets of X is a topology on
+X:
+(a) T1 = {X, ∅, {a}, {a, f }, {b, f }, {a, b, f }};
+No, {a, f } ∩ {b, f } = {f } 6∈ T .
+(b) T2 = {X, ∅, {a, b, f }, {a, b, d}, {a, b, d, f }};
+No, {a, b, f } ∩ {a, b, d} 6∈ T .
+(c) T3 = {X, ∅, {f }, {e, f }, {a, f }};
+No, {e, f } ∪ {a, f } = {a, e, f } 6∈ T .
+2. Let X = {a, b, c, d, e, f }. Which of the following collections of subsets of X is a topology on X? (Justify your
+answer.)
+(a) T1 = {X, ∅, {c}, {b, d, e}, {b, c, d, e}, {b}};
+(b) T2 = {X, ∅, {a}, {b, d, e}, {a, b, d}, {a, b, d, e}};
+(c) T3 = {X, ∅, {b}, {a, b, c}, {d, e, f }, {b, d, e, f }}; }
+3. If X = {a, b, c, d, e, f }, and T is the discrete topology on X, which of hte following statements are true?
+(a) X ∈ T ; YES (b) {X} ∈ T ; NO (c) {∅} ∈ T ; NO (d) ∅ ∈ T ; YES
+(e) ∅ ∈ X; N O (f) {∅} ∈ X; N O (g) {a} ∈ T ; YES (h) a ∈ T ; NO
+(i) ∅ ⊆ X; YES (j) {a} ∈ X; NO (k) {∅} ⊆ X; YES (l) a ∈ X; YES
+(m) X ⊆ T ; YES (n) X ⊆ T ; YES (o) {X} ⊆ T ; NO (p) a ⊆ T ; NO
+4. Let (X, T ) be any topological space. Verify that the intersection of any finite number of members of T is
+a member of T .
+5. Let R be the set of all real numbers. Prove that each of the following collections of subsets of R is a topology
+(i) T1 consists of R, ∅, and every interval (−n, n), for n any positive integer, where (−n, n) denotes the set
+{x ∈ R : −n < x < n};
+(ii) T2 consists of R, ∅, and every interval [−n, n], for n any positive integer, where [−n, n] denotes the set {x ∈
+R : −n ≤ x ≤ n};
+(iii) T3 consists of R, ∅, and every interval [n, ∞), for n any positive integer, where [n, ∞) denotes the set {x ∈ R :
+n ≤ x};
+6.
+
+(i) T1 consists of N, ∅, and every set {1, 2, . . . , n}, for n any positive integer. (This is called initial segment
+topology ).
+(ii) T2 consists of N, ∅, and every {n, n + 1, . . . }, for n any positive integer. (This is called the final segment
+topology .)
+
+7. List all possible topologies on the following sets:
+(a) X = {a, b};
+(b) Y = {a, b, c};
+8. Let X be an infinite set and T a topology on X. If every infinte subset of X is in T , prove that T is the discrete
+topology.
+2
+
+Topology without Tears
+
+3
+
+9. Let R be the set of all real numbers Precisely three of the followin ten collections are subsets of R are topologies.
+Identify these and justifey your answer.
+(i) T1 consists of R, ∅, and every interval (a, b), for a and b any real numbers where a < b.
+(ii) T2 consists of R, ∅ and every interval (−r, r), for r any positive real number.
+(iii) T3 consists of R, ∅, and every interval (−r, r), for r any positive rational number;
+(iv) T4 consists of R, ∅, and every interval [−r, r], for r any positive rational number;
+(v) T5 consists of R, ∅, and every interval (−r, r), for r any positive irrational number;
+(vi) T6 consists of R, ∅, and every interval [−r, r], for r any positive irrational number;
+(vii) T7 consists of R, ∅, and every interval [−r, r), for r any positive real number;
+(viii) T8 consists of R, ∅, and every interval (−r, r], for r any positive real number;
+(ix) T9 consists of R, ∅, and every interval [−r, r], and every interval (−1, r), for r any positive real number;
+(x) T10 consists of R, ∅, every internval [−n, n], and every interval (−r, r), for n any positive intger and r any
+positive real number.
+
+Topology without Tears
+
+1.2
+
+4
+
+Open Sets - Exercises
+
+1. List all 64 subsets of the set X in Example 1.1.2. Write down, next to each set, whether it is (i) clopen, (ii) neither
+open nor closed; (iii) open but not closed; (iv) closed but not open.
+Example 1.1.2 : Let X = {a, b, c, d, e, f } and
+T1 = {X, ∅, {a}, {c, d}, {a, c, d}, {b, c, d, e, f }}.
+ size one
+
+{a},clopen {b},neither {c},neither
+
+{d},neither {e},neither
+
+ size two
+
+{a, b},neither
+{b, c}
+{c, d},open
+{d, e}
+{e, f }
+
+{a, c}
+{b, d}
+{c, e}
+{d, f }
+
+{a, d} {a, e} {a, f }
+{b, e} {b, f }
+{d, f }
+
+ size three
+
+{a, b, c}
+{a, b, d}
+{a, c, d},open {a, c, e}
+{a, d, e}
+{a, d, f }
+{a, e, f }
+{b, c, d}
+{b, c, e}
+{b, d, e}
+{b, d, f }
+{b, e, f }
+{c, d, e}
+{c, d, f }
+{c, e, f }
+{d, e, f }
+
+{a, b, e}
+{a, c, f }
+
+{a, b, f }
+
+{b, c, f }
+
+ size four
+
+{a, b, c, d} {a, b, c, e}
+{a, b, d, e} {a, b, d, f }
+{a, b, e, f }
+{b, c, d, e} {b, c, d, f }
+{c, d, e, f }
+
+{a, b, c, f }
+
+ size five
+
+{a, b, c, d, e}
+{a, b, c, d, f }
+{a, b, c, e, f }
+{a, b, d, e, f }
+{a, c, d, e, f }
+{b, c, d, e, f },clopen
+ size six
+{a, b, c, d, e, f },open
+
+{f },neither
+
+Topology without Tears
+
+5
+
+2. Let (X, T ) be a topological space with the property that every subset is closed. Prove that it is a discrete space.
+
+S ⊆ X =⇒ X\S is open =⇒ X\S ∈ T
+T ∈ T =⇒ X\T is closed =⇒ T ⊆ X
+
+3. Observe that if (X, T ) is a discrete space or an indiscrete space, then every open set is a clopen set. Find a topology
+T on the set X = {a, b, c, d} which is not discrete and is not indiscrete but has the property that every open set is
+clopen.
+Let T = {X, ∅, {a}, {b, c, d}}
+4. Let X be an infinite set. If T is a topology on X such that every infinite subset of X is closed, prove that T is the
+discrete topology.
+
+S ⊆ X and |S| = ∞
+|X\S| < ∞ =⇒ X\S is open
+there are an infinite number of finite subsets whose compliment is infinite and closed. These are precisely what
+make up a discrete topology.
+5. Let X be an infinite set and T a topology on X with the property that the only infinite subset of X which is open
+is X itself. Is (X, T ) necessarily an indiscrete space?
+6.
+
+(i) Let T be a topology on a set X such that T consists of precisely for sets; that is, T = {X, ∅, A, B}, where
+A and B are non-empty distinct proper subsets of X. [A is a proper subset of X means that A ⊆ X and
+A 6= X. This si denoted by A ⊂ X.] Prove that A and B must satisfy exactly one of the following conditions.
+(a) B = X\A; (b) A ⊂ B; (c) B ⊂ A;
+[Hint. Firstly show that A and B must satisfy at least one of the conditions and then show that they cannot
+satisfy more than one of the conditions.]
+(ii) Using (i) list all topologies on X = {1, 2, 3, 4} which consist of exactly four sets.
+
+7.
+
+(i) A recorded in http://en.wikipedia.org/wiki/Finite_topological_space, the number of distinct topologies on a set with n ∈ N points can be very large even for small n; namely when n = 2, there are 4 topologies;
+when n = 3, there are 29 topologies: when n = 4, there are 355 topologies; when n = 5, there are 6942
+topologies etc. Using mathematical induction, prove that as n increases the number of topologies increases.
+(ii) Using mathematical induction prove that if the finite set X has n ∈ N then it has at least (n − 1)! distinct
+topolgies.
+(iii) If X is any infintie set of cardinality N, prove that there are at least 2N distinct topologies on X. Deduce that
+every infinite set has an uncountable number of distinct topolgies on it.
+
+Topology without Tears
+
+1.3
+
+6
+
+Finite Closed Topology – Exercises
+
+1. Let f be a function from a set X into a set Y . Then we stated in Example 1.3.9 that
+
+
+[
+[
+f −1 
+Bj  =
+f −1 (Bj )
+j∈J
+
+(1.1)
+
+j∈J
+
+and
+ \ 
+f −1 B1 B2 = f −1 (B1 ) ∩ f −1 (B2 )
+
+(1.2)
+
+for any subsets Bj of Y and any index set J.
+(a) Prove that (1.1) is true
+
+Let y ∈
+
+[
+
+Bj
+
+j∈J
+
+∃k ∈ J → y ∈ Bk
+
+
+[
+f −1 (y) ∈ f −1 
+Bj  and f −1 (y) ∈ f −1 (Bk )
+j∈J
+
+
+f −1 (Bk ) ⊆ f −1 
+
+
+[
+
+Bj 
+
+j∈J
+
+since there MUST be a k for each y then it must be that all ∪j∈J f −1 (Bj ) ⊆ f −1
+
+S
+
+j∈J Bj
+
+
+
+(b) Prove that (1.2) is true.
+(c) Find (concrete) sets A1 , A2 , X, and Y and a function f :X→ Y such that f (A1 ∩ A2 ) 6= f (A1 ) ∩ f (A2 ), where
+A1 ⊆ X and A2 ⊆ X.
+2. Is the topology T described in Exercises 1.1 #6 (ii) the finite-closed topology?
+T2 consists of N, ∅, and every {n, n+1, . . . }, for n any positive integer. (This is called the final segment topology .)
+
+T1 -spaces
+3. A topological space (X, T ) is said to be a T1 -space if every singleton set {x} is closed in (X, T ). Show that precisely
+two of the following nine topological spaces are T1 -spaces. (Justify your answer).
+(i) a discrete space.
+(ii) an indiscrete space with at least two points.
+(iii) an infinite set with the finite-closed topology.
+(iv) Exampe 1.1.2;
+(v) Exercise 1.1 #5 (i)
+T1 consists of R, ∅, and every interval (−n, n), for n any positive integer, where (−n, n) denotes the set
+{x ∈ R : −n < x < n};
+(vi) Exercise 1.1 #5 (ii)
+T2 consists of R, ∅, and every interval [−n, n], for n any positive integer, where [−n, n] denotes the set {x ∈
+R : −n ≤ x ≤ n};
+(vii) Exercise 1.1 #5 (iii)
+T3 consists of R, ∅, and every interval [n, ∞), for n any positive integer, where [n, ∞) denotes the set {x ∈ R :
+n ≤ x};
+(viii) Exercise 1.1 #6 (i)
+T1 consists of N, ∅, and every set {1, 2, . . . , n}, for n any positive integer. (This is called initial segment
+topology ).
+(ix) Exercise 1.1 #6 (ii)
+T2 consists of N, ∅, and every {n, n + 1, . . . }, for n any positive integer. (This is called the final segment
+topology .)
+
+Topology without Tears
+
+7
+
+4. Let T be the finite-closed topology on a set X. If T is also the discrete topology, prove that the set X is finite.
+
+T0 -space and the Sierpinsi Space
+5. A topological space (X, T ) is said to be a T0 -space if for each pair of distinct points a, b in X, either there exist
+an open seet containing a and not b, or there exists an open set containing b and not a.
+(i) Prove that every T1 -space is a T0 -space.
+(ii) Which of (i) − (iv) in Exercise 3 above are T0 -spaces?
+(iii) Put a topology T on the set X = {0, 1} so that (X, T ) will be a T0 -space but not a T1 -space. [known as the
+Sierpinski space.]
+(iv) Prove that each of the topological spaces described in Exercise 1.1 #6 is a T0 -space.
+
+Countable-Closed Topology
+6. Let X be any infinite set. The countable-closed topology is defined to be the topology having as its closed sets
+X and all countable subsets of X. Prove that this is indeed a topology on X.
+7. Let T1 and T2 be two topologies on a set X. Prove each of the following statements.
+(i) T3 is definted by T3 = T1 ∪ T2 , then T3 is not necessarily a topology on X.
+(ii) If T4 is defined by T4 = T1 ∩ T2 , then T4 is a topology on X.
+(iii) If (X, T1 ) and (X, T2 ) are T1 -spaces, then (X, T4 ) is a T1 -space.
+(iv) If (X, T1 ) and (X, T2 ) are T0 -spaces, then (X, T4 ) is not necessarily a T0 -space.
+Tn
+(v) If T1 , T2 , . . . , Tn are topologies on a set X, the T = i=1 Ti is a toplogy on X.
+(vi) If for each i ∈ I, for some index set I, each Ti is a topology on the set X, then T =
+X.
+
+T
+
+i∈I Ti is a topology on
+
+Distinct T1 -topologies on a Finite Set
+8. In Wikipedia //enwikipedia.org/wiki/Finite_topological_space, as we noted in Exercise 1.2 #7, it says that
+the number of topologies on a finite set with n ∈ N points can be quite large, even for small n. This is also true
+even for T0 -spaces; for n = 5, ther are 4231 distinct T0 -spaces. Prove, using mathemtaical induction, that as n
+increases, the number of T0 -spaces increases.
+9. A topological space (X, T ) is said to be a door space if every subset of X is either an open set or a closed set (or
+both).
+(i) Is a discrete space a door space?
+(ii) Is an indiscrete space a door space?
+(iii) If X is an infintie set and T is the finite-closed topology, is (X, T ) a door space?
+(iv) Let X be the set {a, b, c, d}. Identify those topologies T on X which make it into a door space.
+
+Saturated Sets
+10. A subset S of a topological space (X, T ) is said to be saturated if it is an intersection of open sets in (X, T ).
+(i) Verify that every open set is a saturated set.
+(ii) Verify that in a T1 -space every set is saturated set.
+(iii) Give an example of a topological space which has atleast one subset which is not saturated.
+(iv) Is it true that if the topological sapce (X, T ) is such that every subset is saturated, then (X, T ) is a T1 -space?
+
+Chapter 2
+
+The Euclidean Topology
+2.1
+
+Euclidian Space – Exercises
+
+1. Prove that if a, b ∈ R with a < b then neither [a, b) nor (a, b] is an open subset of R. Also show that neither is a
+closed subset of R.
+In the case of [a, b) there is no set a ∈ (x, y) because x < a implies that x + |x−a|
+would have to be a member of
+2
+[a, b) which it cannot. Similarly for (a, b].
+2. Prove that the sets [a, ∞) and (−∞, a] are closed subsets of R.
+The complement of [a, ∞) is (−∞, a) which is open and similarly for (−∞, a].
+3. Show, by example, that the union of an infinite number of closed subsets of R is not necessarily a closed subset of
+R.
+Define Si = [1/i, 1] then S = ∪∞
+i=1 Si . Obviously, given any n ∈ N there is a closed set Sn = [1/n, 1] and there exists
+(1/(n + 1), 1) ⊆ S such that 1/n ∈ (1/(n + 1), 1) hence S must be open.
+4. Prove each of the following statements.
+(i) The set Z of all integers is not an open set of R.
+(ii) The set P of all prime numbers is a closed subset of R but not an open subset of R.
+(iii) The set I of all irrational numbers is neither a closed subset nor an open subset of R.
+5. If F is a non-empty finite subset of R, show that F is closed in R but that F is not open in R.
+6. If F is non-empty countable subset of R, prove that F is not an open set, but that F may or may not be a closed
+set depending on the choice of F .
+7.
+
+(i) Let S = {0, 1, 1/2, 1/3, 1/4, 1/5, . . . , 1/n, . . . }. Prove that the set S is closed in the euclidean topology on R.
+(ii) Is the set T = {1, 1/2, 1/3, 1/4, 1/5, . . . , 1/n, . . . } closed in R?
+√
+√ √ √
+(iii) Is the set { 2, 2 2, 3 2, . . . , n 2, . . . } closed in R?
+
+Fσ -Sets and Gδ -sets.
+8.
+
+(i) Let (X, T ) be a topological space.
+A subset S of X is said to be an Fσ set if it is the union of a countable number of closed sets.
+Prove that all open intervals (a, b) and all closed intervals [a, b] are Fσ -sets in R.
+All open intervals: Define n ∈ N then we can see that
+(a, b) =
+
+∞ 
+[
+n=2
+
+
+1
+1
+a + ,b −
+.
+n
+n
+
+The left side is made up of countable number of closed sets.
+All closed intervals are a countable union of closed intervals.
+(ii) Let (X, T ) be topological space.
+8
+
+Topology without Tears
+
+9
+
+A subset T of X is said to be a Gδ -set if it is the intersection of a countable number of open sets.
+Prove that all open intervals (a, b) and all closed intervals [a, b] are Gδ -sets in R.
+All open intervals: every (a, b) = (a, b) ∩ ∅ both of which are open.
+All closed intervals: Define n ∈ N then
+[a, b] =
+
+∞ 
+\
+n=1
+
+1
+1
+a − ,b +
+n
+n
+
+
+
+(iii) Prove that the set Q of rationals is an Fσ -set in R.
+For every q ∈ Q there exists a, b ∈ Z such that a = ab . There are countable number of elements for a and
+countable number of elements for b, the union of which leads to countable number of elements for Q. Each of
+these elements is closed, hence Fσ .
+(iv) Verify that the complement of an Fσ -set is a Gδ -set and the complement of a Gδ -set is an Fσ -set.
+Given any (a, b) ∈ Fσ then
+(a, b)C = (−∞, a] ∪ [b, ∞)
+
+
+![ [
+
+∞ 
+∞ 
+[
+1
+1
+
+
++
+=
+∞, a −
+i
+¯j
+j=1
+i+1
+
+Topology without Tears
+
+2.2
+
+10
+
+Basis for a Topology – Exercises
+
+1. In this exercise you will prove that disc {h x, y i , : x2 + y 2 < 1} is an open set of R2 , and then that every open disc
+in the plane is an open set.
+√
+(i) Let h a, b i be any point in the disc D = {h x, y i : x2 + y 2 < 1}. Put r = a2 + b2 . Let Rh a,b i be the open
+1−r
+rectangle with vertices at the points a ± 1−r
+. Verify that Rh a,b i ⊂ D.
+8 ,b ± 8
+(ii) Using (i) show that
+[
+D=
+Rh a,b i .
+h a,b i∈D
+
+(iii) Deduce from (ii) that D is an open set in R2 .
+(iv) Show that every disc {h x, y i : (x − a)2 + (y − b)2 < c2 , a, b, c ∈ R} is open in R2 .
+2. In this exercise you will show that the collection of all open discs in R2 is a basis for a topology on R2 . [Later we
+shall see that this is the euclidean topology.]
+(i) Let D1 and D2 be any open discs in R2 wtih D1 ∩ D2 6= ∅. If h a, b i is any point in D1 ∩ D2 , show that there
+exists an open disc Dh a,b i with center h a, b i such that Dh A,B i ⊂ D1 ∩ D2 . [Hint: draw a picture and use a
+method similar to that of Exercsie 1 (i).]
+(ii) Show that
+[
+D1 ∩ D2 =
+Dh a,b i
+h a,b i∈D1 ∩D2
+
+(iii) Using (ii) and Proposition 2.2.8, prove that the collection of all open discs in R2 is a basis for a topology on
+R2 .
+3. Let B be a collection of all open intervals (a, b) in R with a < b and a and b rational numbers. Prove that B is a
+basis for euclidean topology on R.[Compare this with Proposition 2.2.1 and Example 2.2.3 where a and b where not
+necessarily rational.]
+
+Second Axiom of Countability
+4. A topological space (X, T ) is said to satisfy the second axiom of countability or to be second countable if
+there exists a basis B for T , where B consists of only a countable number of sets.
+(i) Using Exercise 3 above show that R satisfies the second axiom of countability.
+(ii) Prove that the discrete topology on an uncountable set does not satisfy the second axiom of countability.
+[Hint: It is not enough to show that one particular basis is uncountable. You must prove that every basis for
+this topology is uncountable.]
+(iii) Prove that Rn satisfies the second axiom of countability, for each positive integer n.
+(iv) Let (X, T ) be the set of all integers with the finite-closed topology. Does the space (X, T ) satisfy the second
+axiom of countability?
+5. Prove the following statements:
+(i) Let m and c be real numbers. Then the line L = {h x, y i : y = mx + c} is a closed subset of R2
+(ii) Let S1 be the unit circle given by S1 = {h x, y i ∈ R2 : X 2 + y 2 = 1}. Then S1 is a closed subset of R2 .
+(iii) Let Sn be the unit n-sphere give by
+Sn = {h x1 , x2 , . . . , xn i ∈ Rn : x21 + x22 + · · · + x2n = 1}.
+Then Sn is closed subset of Rn+1 .
+(iv) Let B n be the closed unit n-ball give by
+B n = {h x1 , x2 , . . . , xn i ∈ Rn : x21 + x22 + · · · + x2n ≤ 1}.
+Then B n is a closed subset of Rn .
+(v) the curve C = {h x, y i ∈ R2 : xy = 1} is a closed subset of R2
+
+Product Topology
+6. Let B1 be a basis for a topology T1 on a set X and B2 a basis for a topology T2 on a set Y . the set X × Y consists
+of all ordered pairs h x, y i ,X∈ X and y ∈ Y . Let B be the collection of subsets of X × Y consisting of all the sets
+B1 × B2 where B1 ∈ B1 and B2 ∈ B2 . Prove that B is a basis for a topology on X × Y . the topology so defined is
+called the product topology on X × Y .
+7. Using Exercise 3 above and Exercise 2.1 #8, prove that every open subset of R is an Fσ -set and a Gδ -set.
+
+Topology without Tears
+
+2.3
+
+11
+
+Basis for a Given Topology
+
+1. Determine whether or not aeach of the following collections is a basis for the euclidean topology on R2 .
+(i) the collection of all ”open” squares with sides parallel to the axes;
+(ii) the collection of all ”open” discs;
+(iii) the collection of all ”open” squares;
+(iv) the collection of all ”open” rectangles;
+(v) the collection of all ”open” triangles”;
+2.
+
+(i) Let B be a basis for a topology T on a non-0empty set X. If B1 is a collection of subsets of X sucht that
+T ⊆ B1 ⊆ B, prove that B1 is also a basis for T .
+(ii) Deduce from (i) that there exist an uncountable number of distinct bases for the euclidean topology on R.
+
+3. Let B = {(a, b] : a, b ∈ R, a < b}. As seen in Example 2.3.1, B is a basis for a topology T on R and T is not the
+eucliden topology on R. nevfertheless, show that each interval (a, b) is open in (R, T ).
+4. Let C[0, 1] be the set of all continuous real-valued functions on [0, 1].
+(i) Show that the collection M, where M = {M (f, ) : f ∈ C[0, 1] and  is a positive real number} and
+Z 1
+
+
+M (f, ) =
+
+g : g ∈ C[0, 1] and
+
+
+|f − g| < 
+
+,
+
+0
+
+is a basis for a topology T1 on C[0, 1]
+(ii) Show that the collection U, where U = { U (f, ) : f ∈ C[0, 1] and  ∈ R+ } and
+(
+M (f, ) =
+
+g : g ∈ C[0, 1] and sup |f (x) − g(x)| < 
+
+)
+,
+
+x∈[0,1]
+
+is a basis for a topology T2 on C[0, 1]
+(iii) Prove that T1 6= T2 .
+
+Subbasis for a Topology
+5. Let (X, T ) be a topological space. A non-empty collection S of open subsets of X is said to be subbasis of T if
+the collection of all finite intersections fo members of S forms a basis for T .
+(i) Prove that the collection of all open intervals of the form (a, ∞) or (−∞, b) is a subbasis for the euclidean
+topology on R.
+(ii) Prove the S = {{a}, {a, c, d}, {b, c, d, e, f }} is a subbasis for the topology T1 of Example 1.1.2.
+6. Let S be a subbasis for a topology T on the set R. (See Exercise 5 above.) If all of the closed intervals [a, b], with
+a < b, are in S, prove that T is the discrete topology.
+7. Let X be a set with at least two elements and S the colections of all X\{x},X∈ X. Prove that S is a subbasis for
+the finite-closed topology on X.
+8. Let X be any infinite set and T the discrete topology on X. Find a subbasis S for T such that S does not contain
+any singleton sets.
+9. Let S be a collection of all straight lines in the plane R2 . If S is a subbasis for a topology T on the set R2 , what is
+the topology?
+10. Let S be a collection of all straight lines in the plane which are parallel to the X-axis. If S is a subbasis for4 a
+topology T on R2 , describe the open set in (R2 , T ).
+11. Let S be a collection of all circles in the plane. If S is a subbasis for a topology T on R2 , describe the open sets in
+(R2 , T ).
+12. Let S be the collection of all circles in the plane which have their centres on the X-axis. If S is a subbasis for a
+topology T on R2 , describe the open sets in (R2 , T ).
+
+Chapter 50
+
+Important Definitions
+50.1
+
+Basic and T-spaces
+
+Definition 50.1.1 (Discrete/Indiscrete Topologies). Let X be any non-empty set and let T be the collection of all
+subsets of X . Then topological space (X, T ) is called the discrete topology on the set X.
+Let X be any non-empty set and is called the indiscrete topology and (X, T ) → T = {X, ∅}.
+Definition 50.1.2 (Finite-Closed Topologies). Let X be any non-empty set. A topology T on X is called the finiteclosed topology or the cofinite topology if the closed subsets of X are X and all finite subsets of X ; that is, the
+open sets are ∅ and all subsets of X which have finite complements.
+Definition 50.1.3 (Countable-Closed Topologies).
+Definition 50.1.4 (T0 Spaces). A topological space (X, T ) is said to be a T0 -space if for each pair of distinct points
+a, b in X, either there exist an open set containing a and not b, or there exists an open set containing b and not a.
+Definition 50.1.5 (T1 Spaces). A topological space (X, T ) is said to be a T1 -space if every singleton set {x} is closed
+in (X, T ).
+Definition 50.1.6 (T2 Space or Hausdorf). A topological space (X, T ) is said to be Hausdorff (or a T2 -space) if given
+any pair of distinct points a, b in X there exist open sets U and V such that a ∈ U, b ∈ V, and U ∩ V = ∅ .
+Definition 50.1.7 (T3 Spaces, Regular Space). A topological space (X, T ) is said to be a regular space if for any closed
+subset A of X and any point x ∈ X\A, there exist open sets U and V such that x ∈ U, A ⊆ V , and U ∩ V = ∅ . If (X, T )
+is regular and a T1 -space, then it is said to be a T3 -space
+Definition 50.1.8 (Dense). Let A be a subset of a topological space (X, T ). Then, A is said to be dense in X or
+everywhere dense in X if A = X.
+
+50.2
+
+Homeomorphisms
+
+Remark 50.2.1. Preserved by Homeomorphisms
+1. T0 -space;
+2. T1 -space;
+3. T2 -space;
+4. Regular space;
+5. T3 -space;
+6. Second Axiom of Countability.
+7. Separable Space;
+8. Discrete Space;
+9. Indiscrete Space;
+10. Finite-closed topology;
+11. Countable-closed topology;
+Remark 50.2.2. two spaces (X, T ) and (Y, T1 ) cannot be homeomorphic if X and Y have different cardinalities (e.g. X
+is countable and Y is uncountable) or if T and T1 have different cardinalities.
+12
+
+Topology without Tears
+
+50.3
+
+13
+
+Countability and Topologies
+
+Definition 50.3.1 (Countable-closed topology). Let X be any infinite set. The countable-closed topology is defined
+to be the topology having as its closed sets X and all countable subsets of X.
+Definition 50.3.2 (Second Axiom of Countability). A topological space (X, T ) is said to satisfy the second axiom of
+countability or to be second countable if there exists a basis B for T , where B consists of only a countable number of
+sets.
+Definition 50.3.3 (Fσ set). Let (X, T ) be a topological space.
+A subset S of X is said to be an Fσ set if it is the union of a countable number of closed sets.
+Definition 50.3.4 (Gδ -set). Let (X, T ) be topological space.
+A subset T of X is said to be a Gδ -set if it is the intersection of a countable number of open sets.
+Definition 50.3.5 (Product Topology). Let B1 be a basis for a topology T1 on a set X and B2 a basis for a topology
+T2 on a set Y . the set X × Y consists of all ordered pairs h x, y i , x ∈ X and y ∈ Y . Let B be the collection of subsets of
+X × Y consisting of all the sets B1 × B2 where B1 ∈ B1 and B2 ∈ B2 . Prove that B is a basis for a topology on X × Y .
+the topology so defined is called the product topology on X × Y .
+Definition 50.3.6 (Subbasis). Let (X, T ) be a topological space. A non-empty collection S of open subsets of X is said
+to be subbasis of T if the collection of all finite intersections of members of S forms a basis for T .
+
+50.4
+
+Miscellaneous
+
+Definition 50.4.1 (Door Space). A topological space (X, T ) is said to be a door space if every subset of X is either
+an open set or a closed set (or both)
+Definition 50.4.2 (Saturated Topological Space). A subset S of a topological space (X, T ) is said to be saturated if
+it is an intersection of open sets in (X, T ).
+
+

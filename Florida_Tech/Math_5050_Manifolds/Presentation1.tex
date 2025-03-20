@@ -1,0 +1,288 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Presentation 1 }
+\newcommand{\DUEDATE}{March 11, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\RANGE}{\text{range}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Section 3: 1, 2, 3, 7, 8, 9\\
+
+\begin{enumerate}[label=3.\arabic*.]
+
+	\item \textbf{Tensor Product of covectors}
+	
+	Let $e_1, \dots, e_n$ be a basis for a vector space $V$ and let $\alpha^1, \dots, \alpha^n$ be its dual basis in $V^\vee$.  Suppose $g_{ij}\in \R^{n\times m}$ is an $n \times m$ matrix define a bilinear function $f: V\times V \to \R$ by 
+	\begin{align*}
+		f(v,w) = \sum_{i\le i,j, n} g_{ij}v^i w^j
+	\end{align*}for $v=\sum v^j e_i$ and $w=\sum w^j e_j$ in $V$.  Describe $f$ in terms of the tensor products of $\alpha^i$ and $\alpha^j, 1 \le i,j \le n$.
+	
+	\BLUE{\begin{align*}
+		\alpha^i(e_j) &= \delta^j_i & (1)\\
+		\alpha^i(v) &= \alpha^i\PAREN{\sum_{j=1}^n v^je_j} \\
+		 & =\sum_{j=1}^n \alpha^i(v^je_j) & \alpha^i \text{ is linear } \\
+		 & =\sum_{j=1}^n v^j\alpha^i(e_j) & v^j \text{ is a scalar }\\
+		 & =\sum_{j=1}^n v^j\delta^i_j=v^i & \text{apply (1)}\\
+		(\alpha^i\otimes\alpha^j)(v,w) &= \alpha^i(v)\alpha^j(w) = v^iw^j\\
+		\therefore \sum_{i\le i,j, n} g_{ij}v^i w^j &= \sum_{i\le i,j, n} g_{ij}\,(\alpha^i\otimes\alpha^j)(v,w) 
+	\end{align*}
+	}
+	
+	\item \textbf{Hyperplanes}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Let $V$ be a vector space of dimension $n$ and $f:V \to \R$ a nonzero linear functional.  Show that $\dim\ker f = n-1$.  A linear subspace of $V$ of dimesnion $n-1$ is called a \textit{hyperplane} in $V$.
+		
+		\BLUE{\begin{align*}
+%			\ker f &= \{x\in X: f(x) = 0\} \\
+			\dim V &= \dim \text{range} (f) + \dim \ker (f) \\
+			\dim \ker (f) &= \dim V - \dim \text{range} (f) \\
+			&= n-1
+		\end{align*}
+		}
+		
+		\item Show that a nonzero linear functional on a vector space $V$ is determined up to a multiplicative constant by its kernel, a hyperplane in $V$.  In other words, if $f$ and $g: V\to \R$ are nonzero linear functionals and $\ker f = \ker g$, then $g=cf$ for some constant $c \in \R$.
+		
+		\BLUE{\begin{align*}
+			\LET v = (y+z) &\in V \AND f(y) \in \RANGE(f), z \in \ker(f) \\
+			 u = (x +w) &\in V \AND g(x) \in \RANGE(g), z \in \ker(g) \\
+			 \dim \ker(f) &= \dim \ker(g) = n-1\\
+			 \dim \RANGE(f) &= \dim \RANGE(g) = 1 \text{ a scalar function} \\
+			 \therefore g &= cf \text{ for some constant }c.
+		\end{align*}One dimension is a single vector and either $g$ and $f$ contract or expand that vector and being linear they do so by a constant.
+		}
+		
+	\end{enumerate}
+		
+	\item \textbf{A basis for $k$-tensors}
+		
+	Let $V$ be a vector space of dimension $n$ with basis $e_i,\dots,e_n$.  Let $\alpha^1,\dots, \alpha^n$ be the dual basis in $V^\vee$  Show that a basis for the space $L_k(V)$ of $k$-linear functions on $V$ is $\{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}\}$ for all multi-indices $(i_1,\dots, i_k)$ (not just the strictly ascending multi-indices as for $A_k(L)$).  In particular, this show that $\dim L_k(V) = n^k$.  (This problem generalizes Problem 3.1..)
+	
+	\BLUE{Let $\Phi = \{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}\}$ where $i_1, \dots, i_k = 1, \dots, n$.  We want to show
+	\begin{itemize}
+		\item WTS $\Phi$ is a linearly independent set.
+		\begin{align*}
+			\LET x &= \alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}, \text{ for some set } \{i_k\},\, i_k\in [1,n] \\
+			\AND y &= \alpha^{j_1}\otimes \cdots \otimes \alpha^{j_k}, \text{ for some set } \{j_k\},\, j_k\in [1,n] \\
+			\WHERE \{i_k\} &\ne \{j_k\}
+		\end{align*}then for any non-zero vectors $v_1, \dots, v_n \in V$ where $v_i=(v_i^1,\dots, v_i^n)$ and any $A, B \in \R$ where $Ax +By = 0$
+		\begin{align*}
+			(Ax+By)(v_1,\dots,v_k) &= A\PAREN{(\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k})(v_1,\dots,v_k)} + B\PAREN{(\alpha^{j_1}\otimes \cdots \otimes \alpha^{j_k}(v_1,\dots,v_k)} \\
+			&= A\PAREN{\prod_{m=1}^k\alpha^{i_m}(v_m)}+B\PAREN{\prod_{p=1}^k\alpha^{j_p}(v_p)}\\
+			&= A\underbrace{\PAREN{\prod_{m=1}^kv_m^{i_m}}}_{\ne 0}+B\underbrace{\PAREN{\prod_{p=1}^k(v_p)^{j_p}}}_{\ne 0}
+		\end{align*}thus $A = B = 0$ and the elements of $\Phi$ are linearly independent.\\ 
+		\item WTS $\Phi$ is surjective over $L_k(V)$. Given any $f \in L_k(v)$ we can factor out k 1-covectors whose tensor product is $f$.  \\
+	\textbf{Step One: Given an element of $L_2(V)$ show that it can be factored into two elements of $L_1(V)$} 
+	Let $f \in L_2(V)$ and $v=\SUM{i-1}{n} v^ie_i, w=\SUM{i=1}{n} w^ie_i \, \in V$ then
+	\begin{align*}
+		f(v, w) &= f\PAREN{\SUM{i-1}{n} v^ie_i, w} \\
+		&= \sum_{i=1}^n v^i f(e_i, w) \\
+		&= \sum_{i=1}^n \alpha^i(v) f(e_i, w) \\
+		&= \sum_{i=1}^n \alpha^i(v) f\PAREN{e_i, \SUM{n=1}{n} w^je_j} \\
+		&= \sum_{i=1}^n \alpha^i(v)\, \SUM{j=1}{n} w^j f\PAREN{e_i, e_j} \\
+		&= \sum_{i=1}^n \alpha^i(v)\, \SUM{j=1}{n} \alpha^j(w) f\PAREN{e_i, e_j}
+	\end{align*}Let $g,h \in L_1(V)$ such that 
+	\begin{align*}
+		\LET g(v)&=\SUM{i=1}{n} g^i\alpha^i(v), \text{ for commpents } g^i \\
+		\AND h(v)&= \SUM{i=1}{n} h^j\alpha^j(v), \, h^j = \frac{f(e_i, e_j)}{g^i}
+	\end{align*}\textbf{Claim: } $h^j = \frac{f(e_i, e_j)}{g^i}$ has the same value regardless of $e_i$.  (Note: we can choose $g^i$ to counter the sign of $f(e_i, e_j)$ making $h^j$ positive.)\\
+	\textbf{Proof: }let $f_{ij} = f(e_i, e_j)$ this can be represented as a matrix $\{ f_{ij} \}$ which we will build using $g \otimes h$.
+	\begin{align*}
+		\PAREN{\begin{array}{cccc}
+			f_{11} & f_{12} & \cdots & f_{1n} \\
+			f_{21} & f_{22} & \cdots & f_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			f_{n1} & f_{n2} & \cdots & f_{nn} \\
+		\end{array}
+		} &= \PAREN{\begin{array}{c}
+			g^1\\
+			g^2\\
+			\vdots\\
+			g^n
+		\end{array}
+		}\CYCLE{ h^1 & h^2 & \cdots & h^n }\\
+		&=		\PAREN{\begin{array}{cccc}
+			g^1h^1 & g^1h^2 & \cdots & g^1h^n \\
+			g^2h^1 & g^2h^2 & \cdots & g^2h^n \\
+			\vdots & \vdots & \ddots & \vdots \\
+			g^nh^1 & g^nh^2 & \cdots & g^nh^n \\		\end{array} }\\
+			\text{Notice that } h^1 = \frac{f_{11}}{g^1} = \frac{f_{21}}{g^2} = \cdots = \frac{f_{n1}}{g^n}
+	\end{align*}which is also true for $h^2, \dots, h^n$.  end of proof. \qed
+	\begin{align*}
+		\text{Since } f(v,w) &= \sum_{i=1}^n \alpha^i(v)\, \SUM{j=1}{n} \alpha^j(w) f\PAREN{e_i, e_j}\\
+		&= \sum_{i=1}^n g^i \alpha^i(v)\, \SUM{j=1}{n} \alpha^j(w) \frac{f\PAREN{e_i, e_j}}{g^i}\\
+		&= \sum_{i=1}^n g^i \alpha^i(v)\, \SUM{j=1}{n} h^j \alpha^j(w)\\
+		&= g(v)h(w) \\
+		\therefore f(v,w) &= (g \otimes h)(v,w)
+	\end{align*}Since $g,h$ are both 1-covectors, that is, they are linear combinations of $\{ \alpha^i \}$ thus 
+	\begin{align*}
+		(g \otimes h)(v,w) &= \PAREN{ \sum_{i=1}^n g^i \alpha^i \otimes \sum_{j=1}^n h^j \alpha^j} (v,w) 
+	\end{align*}thus any $f \in L_2(V)$ can be written as a linear combination of $\Phi$ for $k=2$.\\ \\
+	\textbf{Step Two: extend this to elements of $L_3(V)$, 3-covectors.}  The difficulty here is replacing the 1-covector, $h$, from Step One with a 2-covector and realizing the same proof.\\
+	Let $f \in L_3(V)$.  As above, follow the same steps to expand the first element revealing
+	\begin{align*}
+		f(v, w, u) &= \sum_{i=1}^n \alpha^i(v) \sum_{j=1}^n \alpha^j(w)f(e_i, e_j, u)
+	\end{align*}Let $g \in L_1(V)$ and $h \in L_2(v)$ and $g$ be defined as above and $h$ defined by the $h^l$ 1-covectors for $l = 1, \dots, n$
+	\begin{align*}
+		h(w, u) &= \sum_{l=1}^n h^l(u)\alpha^l(w), \text{ where } h^l(u) = \frac{f(e_i, e_j, u)}{g^i} \\
+	\end{align*}In precisely the same manner as the Claim from above, where the elements of $f$ were an $n \times n$ matrix, the elements of $f$ are now the $n\times n \times n$ structure each containing a $g^i$ which can be factored out.  These are indepenendent of the value of $e_j$.  Thus,
+	\begin{align*}
+		f(v, w, u) &= \sum_{i=1}^n \alpha^i(v) \sum_{j=1}^n \alpha^j(w)f(e_i, e_j, u)\\
+		&= \sum_{i=1}^n g^i \alpha^i(v) \sum_{j=1}^n \alpha^j(w) \frac{f(e_i, e_j, u)}{g^i} \\
+		&= g(v)h(w,u) \\
+		&= (g \otimes h)(u,w,u)
+	\end{align*}
+	\\
+	\textbf{Step Three: extend this to $k$-covectors } 
+		Let $f \in L_k(V)$ and $v=\SUM{i-1}{n} v^ie_i, w=\SUM{i=1}{n} w^ie_i \, \in V$ then, similar to above, expand the first and second vectors
+	\begin{align*}
+		f(v, w, v_3, \dots, v_k) &= f\PAREN{\SUM{i-1}{n} v^ie_i, w, v_3, \dots, v_k} \\
+		&= \sum_{i=1}^n v^i f(e_i, w, v_3, \dots, v_k) \\
+		&= \sum_{i=1}^n \alpha^i(v) f(e_i, w, v_3, \dots, v_k) \\
+		&= \sum_{i=1}^n \alpha^i(v) f\PAREN{e_i, \SUM{n=1}{n} w^je_j, v_3, \dots, v_k} \\
+		&= \sum_{i=1}^n \alpha^i(v)\, \SUM{j=1}{n} w^j f\PAREN{e_i, e_j, v_3, \dots, v_k} \\
+		&= \sum_{i=1}^n \alpha^i(v)\, \SUM{j=1}{n} \alpha^j(w) f\PAREN{e_i, e_j, v_3, \dots, v_k}
+	\end{align*}once again, let $g \in L_1(V)$ and $g(v)=\SUM{i=1}{n} g^i \alpha^i(v)$  and this time $h \in L_{k-1}(V)$ and 
+	\begin{align*}
+		h(w, v_3, \cdots, v_k) &= \SUM{j=1}{n} h^j \alpha^j(w) f(e_i, e_j, v_3, \dots, v_k)\\h^j &= \frac{f(e_i, e_j, v_3, \dots, v_k)}{g^i}
+	\end{align*}	 then
+	\begin{align*}
+		f(v, w, v_3, \dots, v_k) &= g(v)h(w,v_3,\dots,v_k) \\
+		&= (g\otimes h)(v, w, v_3, \dots, v_k)
+	\end{align*}
+	\textbf{Step Four: }Steps One, Two and Three demonstrate that we can factor out a 1-covector and $k$-1-covector from any $k$-covector $f$ into a tensor product \textit{from the first parameter}.  By repeating this process \textbf{in sequence}, that is with identity permutation $\sigma = \{1, 2, \dots, k\}$, we can see that any $k$-covector can be factored into the tensor product of $k$ 1-covectors.\\ \\
+	This proves that $\Phi$ is surjective over $L_k(V)$.\\
+	\item \textbf{WTS: Show independence of order. CLAIM: } Replace $\sigma$ with a different permutation of $k$ and it will have the same effect.  That is, we can still factor out the $\sigma_{1\FST}$ parameter into a 1-covector, $\gamma^1$,\footnote{We use $\gamma$ here because using $g^i$ for covectors would confuse the $g^i$ used in Step One} as defined by $g$ above, on the left of the tensor product and a $k$-1-covector on the right, $h^1 \in L_{k-1}(V)$. Keep in mind that the components of these $\gamma^i$ 1-covectors are chosen to make $h^i$ positive. Define $h^1$ as
+	\begin{align*}
+		h^1(v_1, v_2, \dots,\underbrace{w}_{\sigma_{2\SND}}, \dots, v_k) &= \sum_{j=1}^n h^1_j(v_1, v_2, \dots,w, \dots, v_k) & \sigma_{2\SND}\text{ parameter is used}\\
+		h^1_j(v_1, v_2, \dots,w, \dots, v_k) &= 
+		\sum_{i=1}^n \alpha^i{w}f(v_1, v_2, \dots, e_{\sigma_1}, \dots, e_{\sigma_2} \dots, v_k) \\
+		&\AND \\
+		f(v_1, \dots, v_{\sigma_1},\dots, v_k) &= (\gamma^1 \otimes h^1)(v_{\sigma_1},v_1, \dots, v_{\sigma_1-1},v_{\sigma_1+1}, \dots, v_k)
+	\end{align*}repeating the process reducing each  $h^1, \dots, h^{k-1}$ (each one lower level covector than previous one) with a progression of left hand operands, $\gamma^1, \gamma^2, \dots, \gamma^{k-1}$, to the product tensor following the sequence in $\sigma$.  Thus, 
+	\begin{align*}
+		f(v_1, \dots, v_k) &= (\gamma^1\otimes \gamma^2 \otimes \cdots \otimes \gamma^{k-1} \otimes h^{k-1})(v_{\sigma_1}, v_{\sigma_2}, \cdots, v_{\sigma_k})
+	\end{align*}Therefore, any $k$-covector $f \in L_k(V)$ is the tensor product of $k$ 1-covectors in any order, each of which is a linear combination of elements from $\Phi$.
+	\end{itemize}
+	}
+\newpage		
+	\setcounter{enumi}{6}
+	\item \textbf{Transformation rule for a wedge product of covectors}
+		
+		Suppose two set so of covectors on a vector space $V$.  $\beta^1,\dots, \beta^k$ and $\gamma^i,\dots,\gamma^k$, are related by 
+		\begin{align*}
+			\beta^i=\sum_{j=1}^k a^i_j\gamma^i, \, i=1,\dots,k
+		\end{align*}for a $k \times k$ matrix $A=[a_j^i]$.  Show that
+		\begin{align*}
+			\beta^1 \wedge\cdots\wedge \beta^k = (\det A)\gamma^1\wedge\dots\wedge\gamma^k.
+		\end{align*}
+		
+	\BLUE{\begin{align*}
+		\LET \beta, \gamma &\in \mathcal{M}_{n \times n}(V^\vee) \\
+		\beta &= \SQBRACKET{ \beta^i } \AND \beta(v_1,\dots,v_k) = \SQBRACKET{ \beta^i }(v_1,\dots,v_n) = \SQBRACKET{\beta^i(v_j)}\\
+		\gamma &= \SQBRACKET{ \gamma^i } \AND \gamma(v_1,\dots,v_k) = \SQBRACKET{ \gamma^i }(v_1,\dots,v_n) = \SQBRACKET{\gamma^i(v_j)}\\
+		A &= [ a^i_j ] \\
+		(\beta^1 \wedge \cdots \wedge \beta^k)(v_1, \dots, v_k) &= \det [ \beta^i(v_j) ] = \det \beta(v_1,\dots,v_k) \\
+		(\gamma^1 \wedge \cdots \wedge \gamma^k)(v_1, \dots, v_k) &= \det [ \gamma^i (v_j) ] = \det \gamma(v_1,\dots,v_k)\\
+	\end{align*}we can see that 
+	\begin{align*}
+		\beta^i=\sum_{j=1}^k a^i_j\gamma^i &\implies \beta = A \cdot \gamma \AND \beta(v_1,\dots,v_k) = A \cdot \gamma(v_1,\dots,v_k)\\
+		\det\beta &= \det (A \cdot \gamma) = \det A \cdot \det \gamma \\
+		\det\beta(v_1,\dots,v_k) &=  \det A \cdot \det \gamma(v_1,\dots,v_k) \\
+		(\beta^1 \wedge \cdots \wedge \beta^k)(v_1, \dots, v_k) &=  \det A (\gamma^1 \wedge \cdots \wedge \gamma^k)(v_1, \dots, v_k) \\
+		\beta^1 \wedge \cdots \wedge \beta^k &=  \det A (\gamma^1 \wedge \cdots \wedge \gamma^k)
+	\end{align*}
+	}
+	
+	\item \textbf{Transformation rule for $k$-covectors}
+		
+	Let $f$ be a $k$-covector on a vector space $V$.  Suppose two sets of vectors $u_1, \dots, u_k$ and $v_1, \dots, v_k$ in $V$ are related by 
+		\begin{align*}
+			u_j =\sum_{i=1}^k a_j^iv_i,\, j=1,\dots,k,
+		\end{align*}for $k\times k$ matrix $A=[a_j^i]$.  Show that 
+		\begin{align*}
+			f(u_1,\dots,u_k)=(\det A)f(v_1,\dots, v_k).
+		\end{align*}
+		
+	\BLUE{\begin{align*}
+			f(u_1,\dots,u_k) &= f\PAREN{\sum_{i_1=1}^k a_1^{i_1}v_{i_1}, \sum_{i_2=1}^k a_2^{i_2}v_{i_2}, \dots, \sum_{{i_k}=1}^k a_k^{i_k}v_{i_k}} \\
+			&= \sum_{i_1=1}^k a_1^{i_1} \sum_{i_2=1}^k a_2^{i_2} \cdots \sum_{{i_k}=1}^k a_k^{i_k} f(v_{i_1},v_{i_2}, \dots,v_{i_k})\\
+			&= \sum_{\sigma \in S_k} a_1^{\sigma_1}  \cdots a_k^{\sigma_k} f(v_{i_1},v_{i_2}, \dots,v_{i_k}) \\
+			&= (\det A) f(v_{i_1},v_{i_2}, \dots,v_{i_k})
+		\end{align*}	
+		}
+
+\newpage	
+	\item \textbf{Vanishing of a covector of top degree}
+	
+	Let $V$ be a vector space of dimension $n$.  Prove that if an $n$-covector $\omega$ vanishes on a basis $e_1,\dots,e_n$ for $V$.  then $\omega$ is the zero covector on $V$.
+	
+	\BLUE{\begin{align*}
+		0 &= \omega(v_1, \dots, v_n) \\
+		\exists \omega_i &\in L_1(V), \, i = 1, \dots, n \\
+		\text{such that } \omega(v_1, \dots, v_n) &= \PAREN{\bigotimes_{i=1}^n \omega_i}(v_1, \dots, v_n) \\
+		&= \prod_{i=1}^n \omega_i(v_i) \\
+	\end{align*}which means that there exists an element $j$ such that $\omega_j(v_j) = 0$ and 
+	\begin{align*}
+		\omega_j(v_j) &= \sum_{i=1}^n c^i\alpha^i(v_j) = 0
+	\end{align*}the $\alpha^i$ are linearly independent thus either the components of $v_j$ must be zero or the components $c^i$ of $\omega_j$ must be zero.  Since $v_j$ is arbitrary, all of the $c^i=0$ and $\omega_j = 0$.  Since, this is true for all $v_j$ then $\omega = 0$ always.
+	}
+
+\end{enumerate}
+
+\end{document}

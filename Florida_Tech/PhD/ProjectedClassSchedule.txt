@@ -17,8 +17,9 @@ Math 6099 (29500) Colloquium W 4-5
 Fall 2025
 ===========
 
-5315 Numerical Methods for Partial Differential Equations
-6230 Partial Differential Equations I
+Math 5315 (86475) Numerical Methods for Partial Differential Equations
+Math 6230 (88527) Partial Differential Equations I
+Math 6099 () Colloquium W 4-5
 
 ===========
 

@@ -1,0 +1,78 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5111 -- Real Analysis II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Extra Credit }
+\newcommand{\DUEDATE}{February 24, 2025}
+\newcommand{\SEMESTER}{Sprint 2025}
+\newcommand{\SCHEDULE}{MW 9:30 - 10:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Perera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Let $(X, \mathcal{M}, \mu)$ be a measure space. Show that if $f: X \to [0,\infty]$ is measurable then 
+\begin{align*}
+	\lim_{n \to \infty} \int_X n \log\PAREN{1+\frac{f}{n}} d\mu = \int_X f d\mu 
+\end{align*}\textit{(Hint: use the Dominated Convergence Theorem)}
+
+\BLUE{\begin{align*}
+	\text{recall } \log(1+y)  &= y \text{ as } y \to 0\\
+	\LET h_n(x) &= n \log(1+f(x)/n) \\
+	n \log(1+f(x)/n) &\to n\frac{f(x)}{n} = f(x) \text{ as } n\to \infty \\
+	\lim_{n \to \infty} h_n(x) &=  f(x)
+\end{align*}further $h_n(x) \le f(x)$ for all $n=1, \dots, \infty$.  Thus, by the Dominate Convergence Theorem 
+\begin{align*}
+	\lim_{n \to \infty} \int_X n \log\PAREN{1+\frac{f}{n}} d\mu = \int_X f d\mu 
+\end{align*}
+}
+
+\end{document}

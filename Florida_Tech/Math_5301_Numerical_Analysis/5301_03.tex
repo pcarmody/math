@@ -1,0 +1,156 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5301 -- Numerical Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#3 }
+\newcommand{\DUEDATE}{February 27, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 330}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{Question 1.} (20 points) \\
+
+Consider the function $f(x) = \cos(x)$ with the domain of $[-1,1]$:
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Approximate $f(x)$ with the 4\ITH order polynomial $P_4(x)$ obtained from Taylor Expansion.  Estimate the error bound for $|f(x)-P_4(x)|$ and compare the actual largest error with the error bound.
+	
+	\BLUE{\begin{align*}
+			P_4(x) &= 1 - \frac{x^2}{2}+\frac{x^4}{24} \\
+			|f(x)-P_4(x)|_{\max} &\le \BARS{ \frac{f^{(5)}(\zeta(x))}{5!} } \le \BARS{ \frac{-\cos x }{120} }_{\max [-1,1]} = \frac{1}{120}\\
+			&= 0.008333333 &\text{error bound}\\
+		|f(1)-P_4(1)| &= |0.54869 - 0.54166|\\
+			&= 0.00703 &\text{actual error}
+		\end{align*}	
+	}
+	
+	\item Construct the 3\TRD order polynomial $P_3(x)$ that is the closest for $P_4(x)$, compute the error bound for $|P_4(x)-P_3(x)|$.
+	
+	\BLUE{\begin{align*}
+		P_3(x) &= 1 - \frac{x^2}{2} \\
+		|P_3(x) - P_4(x)| &= \frac{x^4}{24} \\
+		|P_3(1) - P_4(1)| &= \frac{1}{24} = 0.041667
+	\end{align*}
+	}
+	
+	\item Based on (a) and (b), compute the error bound for $|f(x)-P_4(x)|$.  Compare the real error with this error bound.
+\end{enumerate}
+
+\newpage
+\textbf{Question 2.} (20 points) \\
+
+Consider 1D Poisson's equation $-u_{xx}=1+x$ with boundary conditions $u(0)=0$ and $u(1)=0$:
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Find the solution analytically over the doman $[0,1]$.
+	
+	\BLUE{\begin{align*}
+			\int u_xx dx &= -\int 1+x dx \\
+			u_x+C &= -(x+\frac{1}{2}x^2) \\
+			\int u_x+C dx &= -\int (x+\frac{1}{2}x^2) dx \\
+			u(x) +Cx + D &= -\PAREN{\frac{x^2}{x} + \frac{x^3}{6}} \\
+			u(x) &= -\frac{1}{6}x^3-\frac{1}{2}x^2 - Cx - D \\
+			u(0) &= D = 0 \\
+			U(1) &= 0 \\
+			&= -\PAREN{\frac{1}{2} + \frac{1}{6} + C}\\
+			C &= -\frac{1}{3} \\ \\
+			u(x) &= -\frac{1}{6}x^3-\frac{1}{2}x^2 - \frac{1}{3}x
+		\end{align*}	
+	}
+	
+	\item Solve the equation numerically by centered difference discretization, with $h=0.1,0.01,$ and $0.001$.
+	
+	The Source Code:
+	\lstinputlisting{530103.m}
+	
+	The output \\
+	\includegraphics[scale=0.5]{530103a.png} 
+
+	\item Plot the error distributions over space, as well as 2-norms of the error vs. $h$.  Analyze the order of accuracy of your discretization.
+	
+	\BLUE{\begin{align*}
+		\DBARS{A}_2 &= \max_{|| x ||_2=1}\DBARS{Ax}_2 \\
+		&= \sqrt{ \PAREN{\sum_{i=1}^N A_{ii}^2 }}
+	\end{align*}
+	}
+	
+	\lstinputlisting{530103b.m}
+	
+	\includegraphics[scale=0.5]{530103b.png} 
+
+\end{enumerate}
+
+
+\end{document}

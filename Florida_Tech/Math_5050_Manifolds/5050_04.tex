@@ -1,0 +1,216 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment 4 }
+\newcommand{\DUEDATE}{March 27, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\RANGE}{\text{range}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Section 4 problems:
+
+\begin{description}
+	\item Within the section: 4.3 (p.37): \textbf{(A basis for 3-covectors).}  Let $x^1, x^2,x^3, x^4$ be the coordinates in $\R^4$ and $p$ a point in $\R^4$.  Write down a basis for the vector space $A_3(T_p(\R^4))$.
+	
+	\BLUE{\begin{align*}
+		\Phi =\{\; &dx_p^i\wedge dx_p^j \wedge dx_p^k\;: i<j<k \le 4\;\}\\ 
+		 \{\; &dx_p^1\wedge dx_p^2 \wedge dx_p^3, \\
+		   &dx_p^1\wedge dx_p^2 \wedge dx_p^4,\\
+		   &dx_p^1\wedge dx_p^3 \wedge dx_p^4,\\
+		   &dx_p^2\wedge dx_p^3 \wedge dx_p^4 \;\} \\
+		   \BARS{\Phi} = &\binom{4}{3} = 4
+	\end{align*}
+	}
+	
+	\item Within the section: 4.4 (p.38), \textbf{Wedge product of a 2-form with a 1-form.}  Let $\omega$ be a 2-form and $\tau$ be a 1-form on on $\R^3$.  If $X,Y,Z$ are vector fields on $M$, find an explicit formula for $(\omega\wedge\tau)(X,Y,Z)$ in terms of the values of $\omega$ and $\tau$ on the vector fields $X,Y,Z$
+	
+	\BLUE{
+	\begin{align*}
+		(\omega \wedge \tau)(X,Y,Z) &= (\omega\otimes\tau)(X,Y,Z) - (\tau\otimes\omega)(X,Y,Z) \\
+		&= \omega(X)\tau(Y,Z) - \tau(X,Y)\omega(Z)\\
+		(\omega \wedge \tau)(X,Y,Z) &= \frac{1}{1!2!}A(\omega \otimes\tau)(X,Y,Z)) \\
+		&= \frac{1}{2}\PAREN{ \omega(X,Y)\tau(Z) +
+		\omega(Y,Z)\tau(X) +
+		\omega(Z,X)\tau(Y) -
+		\omega(Z,Y)\tau(X) -
+		\omega(Y,X)\tau(Z) -
+		\omega(X,Z)\tau(Y) }\\
+		&= \omega(X,Y)\tau(Z) +
+		\omega(Y,Z)\tau(X) +
+		\omega(Z,X)\tau(Y)
+	\end{align*}
+	}
+	
+	\item Within the section: 4.9 (p.40) \textbf{A closed 1-form on the punctured plane.}  Define a 1-form on $\omega$ on $\R^2-\{0\}$ by 
+	\begin{align*}
+		\omega = \frac{1}{x^2+y^2}
+(-ydx-xdy).	
+\end{align*}Show that $\omega$ is closed.
+
+\BLUE{\begin{align*}
+	d\omega = &\PART{\omega}{x}dx+\PART{\omega}{y}dy \\
+	= &\PAREN{\frac{-2x}{(x^2+y^2)^2}(-ydx-xdy)+\frac{1}{x^2+y^2}(-yd^2x-dydx)}dx+ \\
+	&\; \PAREN{\frac{-2y}{(x^2+y^2)^2}(-ydx-xdy)+\frac{1}{x^2+y^2}(-dxdy-xd^2y)}dy x`x	
+\end{align*}
+}
+\end{description}
+
+End of the section: 1 through 6.
+
+\begin{enumerate}[label=4.\arabic*]
+\item \textbf{A 1-form on $\R^3$}.
+
+Let $\omega$ be the 1-form $zdx-dz$ and let $X$ be the vector $y\partial/\partial x +  x\partial/\partial y$ on $\R^3$.  Computer $\omega(X)$ and $d(\omega)$.
+
+\BLUE{\begin{align*}
+	\omega(X) &= (zdx-dz)\PAREN{y\partial/\partial x +  x\partial/\partial y} \\
+	&= (zdx-dz)\PAREN{y\partial/\partial x} + (zdx-dz)\PAREN{ x\partial/\partial y} \\
+	&= zy \PART{}{x}dx - y\PART{}{x}dz + zx\PART{}{y}dx -x\PART{}{y}dz &\text{recall } \PART{}{x^i}dx^j = \delta_i^j \\
+	&= zy \\ \\
+	d(\omega) &= d(zdx-dz) = d(zdx)-d^2z = dz\wedge dx + z\wedge d^2x = dz \wedge dx
+\end{align*}
+}
+
+\item \textbf{A 2-form on $\R^3$}
+\newcommand{\AAA}{\textbf{a}}
+\newcommand{\BBB}{\textbf{b}}
+At each point $p \in \R^3$, define a bilinear function $\omega_p$ on $T_p(\R^3)$ by
+\begin{align*}
+	\omega_p(\AAA,\BBB) &= \omega_p\PAREN{\COLVECTOR{a^1\\a^2\\a^3},\COLVECTOR{b^1\\b^2\\b^3}} = p^3 \det\TWOXTWO{a^1}{b^1}{a^2}{b^2},
+\end{align*}for tangent vectors $\AAA,\BBB \in T_p(\R^3)$, where $p^3$ is the third component of $p=(p^1,p^2,p^3)$.  Since $\omega_p$ is an alternaing bilinear function on $T_p(\R^3)$, $\omega$ is a 2-form on $\R^3$.  Write $\omega$ in terms of the standard basis $dx^i\wedge dx^j$ at each point.
+
+\BLUE{\begin{align*}
+	\omega(p) &= c_{xy}(p)(dx\wedge dy)+c_{yz}(p)(dy\wedge dz)+c_xz(p)(dx\wedge dz) \\
+	c_{xy}(p) &= \omega_p(e_x,e_y) = p^3 \TWOXTWO{\PART{}{x}}{0}{0}{\PART{}{y}} = p^3\PAREN{\PART{}{x}\PART{}{y}-0} \\
+	c_{yz}(p) &= \omega_p(e_y,e_z) = p^3 \TWOXTWO{0}{\PART{}{y}}{0}{0} = 0  \\
+	c_{xz}(p) &= \omega_p(e_x,e_z) = p^3 \TWOXTWO{\PART{}{x}}{0}{0}{0} = 0 
+\end{align*}notice that $(dx\wedge dy)(a,b) = dx(a)dy(b)-dy(a)dx(b)= a^1b^2-a^2b^1 = \det\TWOXTWO{a^1}{b^1}{a^2}{b^2}$ Thus.
+\begin{align*}
+	\omega &= p^3\, dx\wedge dy
+\end{align*}
+}
+
+\item \textbf{Exterior Calculus}.
+
+Suppose the standard coordinates on $\R^2$ are called $r$ and $\theta$ (this $\R^2$ is the $(r,\theta)$-plane, not the $(x,y)$-plane).  If $x=r\cos\theta$ and $y=r\sin\theta$, calculate $dx,dy,$ and $dx\wedge dy$ in of $dr$ and $d\theta$.
+
+\BLUE{\begin{align*}
+	dx &=  \cos \theta dr -r\sin \theta d\theta\\
+	dy &=  \sin \theta dr + r\cos \theta d\theta\\
+	dx \wedge dy &= 	(\cos \theta dr -r\sin \theta d\theta)\wedge(\sin \theta dr + r\cos \theta d\theta) \\
+	&= (\cos \theta dr)\wedge(\sin \theta dr + r\cos \theta d\theta) -(r\sin \theta d\theta)\wedge(\sin \theta dr + r\cos \theta d\theta)\\
+	&= (\cos \theta dr)\wedge(\sin \theta dr) +(\cos \theta dr)\wedge( r\cos \theta d\theta) -(r\sin \theta d\theta)\wedge(\sin \theta dr) + (r\sin \theta d\theta)\wedge(r\cos \theta d\theta)\\
+	&= 0 +(\cos \theta dr)\wedge( r\cos \theta d\theta) -(r\sin \theta d\theta)\wedge(\sin \theta dr) + 0 \\
+	&= (\cos \theta dr)\wedge( r\cos \theta d\theta) +(\sin \theta dr)\wedge(r\sin \theta d\theta) \\
+	&= (r\cos^2 \theta) (dr\wedge d\theta) +(r\sin^2 \theta) (dr\wedge d\theta) \\
+	&= r(dr\wedge d\theta)
+\end{align*}
+}
+
+\item \textbf{Exterior Calculus}.
+
+Suppose the standard coordiantes on $\R^3$ are called $\rho, \phi,$ and $\theta$.  If $x=\rho\sin\phi\cos\theta$, $y=\rho\sin\phi\sin\theta$, and $z=\rho\cos\phi$, calculate $dx,dy,dz$, and $dx\wedge dy\wedge dz$ in terms of $d\rho, d\phi$, and $d\theta$.
+
+\BLUE{\begin{align*}
+	dx &= \sin\phi \cos \theta \,d\rho + \rho \cos \phi \cos \theta \,d\phi - \rho \sin\phi \sin \theta\,  d\theta \\
+	dy &= \sin\phi\sin\theta\,d\rho + \rho\cos\phi\sin\theta\,d\phi + \rho\sin\phi\cos\theta\,d\theta \\
+	dz &= \cos\theta\, d\rho-\rho\sin\phi\, d\phi
+%	dx \wedge dy \wedge dz &= (\sin\phi \cos \theta \,d\rho + \rho \cos \phi \cos \theta \,d\phi - \rho \sin\phi \sin \theta\,  d\theta)\wedge(\sin\phi\sin\theta\,d\rho + \rho\cos\phi\sin\theta\,d\phi + \rho\sin\phi\cos\theta\,d\theta)\wedge(\cos\theta\, d\rho-\rho\sin\theta\, d\theta 
+\end{align*}We will attempt to cancel out any terms which have a $dx^i\wedge d^\wedge$ by simplifying $dx, dy$, and $dz$ in the following manner
+\begin{align*}
+	dx \wedge dy \wedge dz &= (x_1\,d\rho + x_2\,d\phi+x_3\,d\theta)\wedge(y_1\,d\rho + y_2\,d\phi+y_3\,d\theta)\wedge(z_1\,d\rho + z_2\,d\phi+z_3\,d\theta) \\ 
+	&= (x_1\,d\rho\wedge y_2\,d\phi\wedge z_3\,d\theta)+(x_1\,d\rho\wedge y_3\,d\theta\wedge z_2\,d\phi) \\
+	&+ (x_2\,d\phi\wedge y_1\,d\rho \wedge z_3\,d\theta) + (x_2\,d\phi\wedge y_3\,d\theta\wedge z_2\,d\phi) \\
+	&+ (x_3\,d\theta\wedge y_1\,d\rho \wedge z_2\,d\phi) + (x_3\,d\theta\wedge y_2\,d\phi\wedge z_1\,d\rho) \\
+	&= (x_1y_2z_3+x_1y_3z_2 + x_2y_1z_3 + x_2y_3z_2 + x_3y_1z_2 + x_3y_2z_1)(d\rho\wedge d\phi\wedge d\theta) \\
+	&= \DTHREEXTHREE{x_1}{y_1}{z_1}{x_2}{y_2}{z_2}{x_3}{y_3}{z_3}(d\rho\wedge d\phi\wedge d\theta)
+\end{align*}Solving for the determinant by expanding the bottom row
+\begin{align*}
+	\DTHREEXTHREE{\sin\phi \cos \theta}{\rho \cos \phi \cos \theta }{- \rho \sin\phi \sin \theta}{\sin\phi\sin\theta}{ \rho\cos\phi\sin\theta} {\rho\sin\phi\cos\theta}{\cos\phi}{-\rho\sin\phi}{} &= \rho^2\DTHREEXTHREE{\sin\phi \cos \theta}{ \cos \phi \cos \theta }{-  \sin\phi \sin \theta}{\sin\phi\sin\theta}{\cos\phi\sin\theta} {\sin\phi\cos\theta}{\cos\phi}{-\sin\phi}{} \\
+	&= \rho^2\sin\phi\DTHREEXTHREE{\sin\phi \cos \theta}{ \cos \phi \cos \theta }{- \sin \theta}{\sin\phi\sin\theta}{\cos\phi\sin\theta} {\cos\theta}{\cos\phi}{-\sin\phi}{}\\
+	&= \rho^2\sin\phi \PAREN{\cos\phi\DTWOXTWO{\cos\phi\cos\theta}{-\sin\theta}{\cos\phi\sin\theta}{\cos\theta} +\sin\phi\DTWOXTWO{\sin\phi\cos\theta}{-\sin\theta}{\sin\phi\sin\theta}{\cos\theta} }\\
+	&= \rho^2\sin\phi \PAREN{\cos^2\phi\DTWOXTWO{\cos\theta}{-\sin\theta}{\sin\theta}{\cos\theta} +\sin^2\phi\DTWOXTWO{\cos\theta}{-\sin\theta}{\sin\theta}{\cos\theta} }\\
+	&= \rho^2\sin\phi \PAREN{\cos^2\phi +\sin^2\phi} \\
+	&= \rho^2\sin\phi
+\end{align*}That is
+\begin{align*}
+	dx\wedge dy\wedge dx &= (\rho^2\sin\phi) \,dr\wedge d\phi \wedge d\theta
+\end{align*}
+}
+
+\item \textbf{Wedge Product}. Let $\alpha$ be a 1-form and $\beta$ a 2-form on $\R^3$.  Then 
+\begin{align*}
+	\alpha &= a_1dx^1+a_2dx^2+a_3dx^3 \\
+	\beta &= b_1 dx^2\wedge dx^3 + b_2 dx^3 \wedge dx^1 + b_3dx^1\wedge dx^2
+\end{align*}Simplify the expression $\alpha \wedge \beta$ as much as possible.
+
+\BLUE{The resulting expression $\alpha\wedge\beta\in \Omega^3(\R^3)$.  The $\dim(\Omega^3(\R^3)) = 1$.  Thus, there will be one term of the form $dx^1\wedge dx^2\wedge dx^3$.  Further by distributing the terms of $\alpha$ across the terms of $\beta$ and ignoring any terms where any two elements are equal, i.e., $dx^i\wedge dx^i =0$.  We will then have
+\begin{align*}
+	\alpha \wedge \beta &= a_1\,dx^1\wedge(b_1\,dx^2\wedge dx^3)+a_2\,dx^2\wedge(b_2\,dx^3\wedge dx^1)+a_3\,dx^3(b_3\,dx^1\wedge dx^2) \\
+	&= (a_1b_1+a_2b_2+a_3b_3)\, dx^1\wedge dx^2\wedge dx^3
+\end{align*}
+}
+
+\item \textbf{Wedge product and cross product}
+
+The correspondence between differential forms and vector fields on an open subset of $\R^3$ in Subsection 4.6 also makes sense pointwise.  let $V$ be a vector space of dimension 3 with basis $e_1, e_2, e_3$,  and dual basis $\alpha^1, \alpha^2, \alpha^3$.  To a 1-covector $\alpha=a_1\alpha^1+a_2\alpha^2+a_3\alpha^3$ on $V$, we associate the vector $v_\alpha = \ABRACKET{a_1,a_2,a_3} \in \R^3$.  To the 2-covector
+\begin{align*}
+	\gamma = c_1 \alpha^2\wedge \alpha^3 + c_2\alpha^3\wedge\alpha^1 + c_3\alpha^1\wedge\alpha^2
+\end{align*}on $V$, we associate the vector $v_\gamma=\ABRACKET{c_1,c_2,c_3}\in \R^3$.  Show that under the correspodence, the wedge product of 1-covectors correponds to the cross product of vectors $\R^3$:  if $\alpha = a_1\alpha^1+a_2\alpha^2+a_3\alpha^3$ and $\beta = b_1\alpha^1+b_2\alpha^2+b_3\alpha^3$, then $v_{\alpha\wedge\beta}= v_\alpha \times v_\beta$.
+
+\end{enumerate}
+
+\end{document}
