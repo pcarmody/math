@@ -1,7 +1,5 @@
 clc; clear; close all;
 
-h_values = [0.1, 0.01, 0.001];
-
 figure; hold on;
 
 function dsc = centered_difference_scheme(mesh)
@@ -21,12 +19,12 @@ function dsc = centered_difference_scheme(mesh)
     dsc = [0; u; 0];
 
 end
-
 u_full= centered_difference_scheme(128);
 % Plot the solution
-plot(x, u_full, '-b', 'DisplayName', sprintf('h = %.3f', h))
+plot(x, u_full, '-b', 'DisplayName', 'Central Difference');
 xlabel('x');
 ylabel('u(x)');
-title(sprintf('Poisons Equation [0,1]: Solution using h = 0.1, 0.01, 0.001'));
+title(sprintf('Poisons Equation: Solution using mesh=128'));
 legend;
+grid on;
 

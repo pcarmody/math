@@ -13,6 +13,7 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{calc}
 \usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{xcolor}
 
@@ -295,26 +296,52 @@ Compare and contrast.\\
 
 Supersets \\
 
-\begin{tabular}{|c|l|l|}
+\begin{tabular}{|c|l|l|p{6cm}|}
 	\hline
-	Symbol & Name (set of) & Definition \\
+	Symbol & Name (set of) & Definition & Example \\
 	\hline
-	$\Omega^0(U)$ & $0$-forms & $\{ $ scalar fields  $\}$\\
+	$\Omega^0(U)$ & $0$-forms & $\{ $ scalar fields  $\}$ & $f: V \to \R$ $f(x,y,z)$\\
 	\hline
-	$\Omega^1(U)$ & $1$-forms & $\{$ $ 1$-forms, vector fields $\}$\\
+	$\Omega^1(U)$ & $1$-forms & $\{$ $ 1$-forms, vector fields $\}$ & $d\omega(v) = A(v)dx+B(v)dy+C(v)dx$ $A,B,C: V \to \R$\\
 	\hline
-	$\Omega^k(U)$ & $k$-forms & $\{$ $ k$-forms $\}$\\
+	$\Omega^k(U)$ & $k$-forms & $\{$ $ k$-forms $\}$ & $\cdots + dx^1 \wedge \cdots \wedge dx^k + \cdots$ \\
 	\hline
-	$\Omega^*(U)$ & sum of $k$-forms & $\{\;x=\sum y\,|\, y\in \oplus_k \Omega^k(U) \;\}$ \\
+	$\Omega^*(U)$ & sum of $k$-forms & $\{\;x=\sum y\,|\, y\in \oplus_k \Omega^k(U) \;\}$ & $ Adx + Bdx \wedge dy + Cdx \wedge dy \wedge dz,\; A,B,C : V \to \R$\\
 	\hline
-	$\XXX(U)$ & vector fields on $U$ & $\{ X \to \exists f:U\to U\}$\\
+	$\XXX(U)$ & vector fields on $U$ & $\{ X \to \exists f:U\to U\}$&\\
 	\hline
-	$C^\infty(U)$ & smooth functions on $U$ & \\
+	$C^\infty(U)$ & smooth functions on $U$ & &\\
 	\hline
-	$X_p = T_p(U)$ & a vector field at $p$ & $\{ v \in U \,|\, v = p + x$ for some $x \in U\}$\\
+	$X_p = T_p(U)$ & a vector field at $p$ & $\{ v \in U \,|\, v = p + x$ for some $x \in U\}$&\\
 	\hline
 \end{tabular}\\
 
+\begin{center}
+
+\LARGE{Map of $\Omega^k(\R^3)$}
+
+\begin{tikzpicture}
+\node (omega0) {$\Omega^0(U)$};
+\node (omega1) [right =of omega0] {$\Omega^1(U)$};
+\node (omega2) [right =of omega1] {$\Omega^2(U)$};
+\node (omega3) [right =of omega2] {$\Omega^3(U)$};
+\node (cinfty) [below =of omega0] {$C^\infty(U)$};
+\node (bigX) [below =of omega1] {$\XXX(U)$};
+\node (bigx2) [below =of omega2] {$\XXX(U)$};
+\node (cinfty2) [below =of omega3] {$C^\infty(U)$.};
+\draw[->] (omega0) -- node[above] {d} (omega1);
+\draw[->] (omega1) -- node[above] {d} (omega2);
+\draw[->] (omega2) -- node[above] {d} (omega3);
+\draw[->] (omega0) -- node[left] {$\cong$} (cinfty);
+\draw[->] (omega1) -- node[left] {$\cong$} (bigX);
+\draw[->] (omega2) -- node[left] {$\cong$} (bigx2);
+\draw[->] (omega3) -- node[left] {$\cong$} (cinfty2);
+\draw[->] (cinfty) -- node[below] {grad} (bigX);
+\draw[->] (bigX) -- node[below] {curl} (bigx2);
+\draw[->] (bigx2) -- node[below] {div} (cinfty2);
+\end{tikzpicture}\\
+
+\end{center}
 Shorthand
 \begin{align*}
 	\sum_{i,j} a_ib_j &= \sum_i a_i\sum_j b_j\\
@@ -324,4 +351,5 @@ Shorthand
 	\delta_i^j &= \BINDEF{1 & i=j}{0 & i \ne j}\\
 	\delta_I^J &= \delta_{i_1}^{j_1}\delta_{i_2}^{j_2}\cdots\delta_{i_k}^{j_k} = \BINDEF{1 & i_n = j_n, \forall n}{0 & \text{otherwise}} = \BINDEF{1 & I=J}{0 & I \ne J}
 \end{align*}
+
 \end{document}

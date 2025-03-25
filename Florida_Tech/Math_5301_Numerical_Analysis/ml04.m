@@ -17,18 +17,19 @@ function [x, dsc] = centered_difference_scheme(mesh)
     % Solve the linear system A*u = b
     u = A \ reshape(b, [], 1);
 
-    % Include boundary values (assuming Dirichlet B. C. u(0) = u(1) = 0)
-    dsc = [0; u; 0];
+    % Include boundary values u(0) = 0, u(pi/2) = 1)
+    dsc = [0; u; 1];
 
 end
 
 [x, u_full]= centered_difference_scheme(128);
-analytic = (-1/pi^2)*sin(pi*x);
+%analytic = (-1/pi^2)*sin(pi*x);
+analytic = (-1/pi^2)*sin(pi*x)+2*x;
 % Plot the solution
 plot(x, u_full, '-b', 'DisplayName', sprintf('h = %.3f', 1/128))
 plot(x, analytic, '-r', 'DisplayName', 'analytic')
 xlabel('x');
 ylabel('u(x)');
-title(sprintf('Poisons Equation [0,1]: Solution using h = 0.1, 0.01, 0.001'));
+title('Poisons Equation on [0,pi/2]: Solution using 128');
 legend;
 

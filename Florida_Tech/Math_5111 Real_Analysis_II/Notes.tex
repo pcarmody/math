@@ -119,12 +119,32 @@
 Where $s$ is a simple function, that is, $\exists \{s_i\}, i= 1, \dots, n$ and $E_i$ such that $x \in E_i \implies s(x) = s_i$.
 \begin{align*}
 	\int_X s d\mu &= \sum_{i=1}^n s_i \mu(X \cap E_i)
-\end{align*}
+\end{align*}(think $E_i$ forms a partition on $X$.)
 \end{definition}
 \begin{theorem}
 Given any positive measurable function $f$ there exists a sequence of simple measurable functions $\{s_i\}$ such that $s_i \to f$.
 \end{theorem}
 
+\begin{definition}[Upper/Lower Semicontinuous].
+
+A function $f: X \to \R$ is said to be 
+\begin{tabular}{c}
+	\DEFINE{lower semicontinuous, lsc,} if $\{x \in X\,|\, f(x) > \alpha\}$ is \underline{open}\\
+	\DEFINE{upper semicontinuous, usc,} if $\{x \in X\,|\, f(x) < \alpha\}$ is \underline{open}
+\end{tabular}\textbf{for all $\alpha \in \R$.}
+
+A function $f: X \to \R$ is said to be f \begin{tabular}{cc}
+	\\
+	\DEFINE{lower semicontinous at $x_0 \iff$} & $\underset{x \to x_0}\liminf \,f(x) \ge f(x_0)$ \\
+	\DEFINE{upper semicontinuous at $x_0 \iff$} & $\underset{x \to x_0}\limsup \,f(x) \le f(x_0)$
+\end{tabular}
+
+Note: \begin{tabular}{c}
+	"l.s.c. can jump down not up" \\
+	"u.s.c. can jump up not down"
+\end{tabular}
+
+\end{definition}
 \begin{definition}[\textbf{Integration of Positive Function}] Given $f: X \to [0,\infty]\in \mathfrak{M}, E \in \mathfrak{M}(X)$ 
 \begin{align*}
 	\int_E fd\mu = \sup \int_E s d\mu
@@ -154,16 +174,16 @@ Given any positive measurable function $f$ there exists a sequence of simple mea
 
 \begin{theorem}[Lebesque Dominated Convergence Theorem]  Suppose $\{f_n\}$ is a sequence of complex measurable functions on $X$ such that 
 \begin{align}
-	f(x) &= \lim_{n\to\infty} f^n(x)
+	f(x) &= \lim_{n\to\infty} f_n(x)
 \end{align}exists for evey $x \in X$.  If there is a function $g\in L^1(X)$ (Lebesque Measurable) such that
 \begin{align}
 	|f_n(x)| \le g(x) \; (n=1,2,\dots,; x\in X)
 \end{align}then $f \in L^1(X)$ (Lebesque Measurable),
 \begin{align}
-	\lim_{n\to \infty} = \int_X \BARS{f_n-f}d\mu = 0,
+	\lim_{n\to \infty} \int_X \BARS{f_n-f}d\mu = 0,
 \end{align}and
 \begin{align}
-	\lim_{n\to \infty} \int_x f_n(x)d\mu \int_x fd\mu. 
+	\lim_{n\to \infty} \int_x f_n(x)d\mu = \int_x fd\mu. 
 \end{align}
 
 \end{theorem}

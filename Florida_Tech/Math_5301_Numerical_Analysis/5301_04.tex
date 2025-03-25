@@ -1,0 +1,179 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5301 -- Numerical Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#4 }
+\newcommand{\DUEDATE}{March 26, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 330}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+ 	\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+\HLINE
+
+\textbf{Assignment:} Consider 1D Poisson Equation $-\Delta x = \sin (\pi x)$, over the region $(0, \pi/2)$ with boundary conditions $u(0)=0$ and $u(\pi/2)=1$.  Using central difference scheme and a mesh of 128, obtain a linear system of $Au = f$ for the problem, then the solve the system using the following methods until a relative residual of $10^{-4}$ is reached. For all methods below, plot the analytical solution, the numerical solution and the error distribution.  Use zero vectors as your initial guess.
+
+\begin{enumerate}[label=(\alph*)]
+\item Jacobis's Method.  Plot the rate of convergence and compareit with analysis.
+\item Steepest Descent Method. Compare the rate of convergence with that obtained in (a).
+
+\end{enumerate}
+\HLINE
+%
+%
+%In the report, please include basic introduction of the methods, all related computer code and plots, as well as all the necessary analysis
+%
+%
+\begin{center}
+	\Large{Analytical and Numerical Solutions to Poisson's Equation}
+\end{center}
+
+\noindent\textbf{Introduction:}\\
+
+	We will begin by describing the equation and providing an analytical solution.  Then solve this equation using Jacobi's Method and the Steepest Descent Method.  Comparisons will be made as to accurancy and rate of convergence.\\
+	
+\noindent\textbf{Poison's Equation and an Analytical Solution:}\\
+
+As described in the assignment we will focus our attenion on this Poisson equation and initial conditions.
+\begin{align*}
+	-\Delta x &= \sin(\pi x)\\
+	u(0) = 0 &\AND u(\pi/2)=1.
+\end{align*}When we solve this problem analtyically we get
+\begin{align*}
+	u'(x) &= \int -\sin(\pi x) dx \\
+	&= \frac{1}{\pi}\cos(\pi x)+C \\
+	u(x) &= \int \PAREN{\frac{1}{\pi}\cos(\pi x)+C} dx \\
+	&= \frac{1}{\pi^2}sin(\pi x) + Cx + D \\
+	u(0) = 0 &= \frac{1}{\pi^2}sin(\pi 0) + Cx + D \\
+	D &= 0 \\
+	u(\pi/2) =1 &= \frac{1}{\pi^2}sin(\pi^2/2) + C(\pi/2) \\
+	C &= \frac{2\PAREN{1-\frac{1}{\pi^2}}sin(\pi^2/2)}{\pi^2}=\frac{2\PAREN{1-\frac{1}{9.869604064}}0.086022097}{9.869604064} = 1.998233797 \approx 2 \\
+%	u(\pi/2) =1 &= \frac{1}{\pi^2}sin(\pi/2) + C(\pi/2) \\
+%	C &= \frac{2}{\pi}\PAREN{1-\frac{1}{\pi^2}}\\
+%	u(x) &= \frac{1}{\pi^2}sin(\pi x) + \frac{2}{\pi}\PAREN{1-\frac{1}{\pi^2}}x \\
+	u(x) &\approx \frac{1}{\pi^2}sin(\pi x) + 2x \\
+%	\frac{2\PAREN{1-\frac{1}{\pi^2}}sin(\pi^2/2)}{\pi^2} &= \frac{2\PAREN{1-\frac{1}{9.869604064}}0.086022097}{9.869604064} = 1.998233797 \approx 2
+\end{align*}
+
+\noindent\textbf{Centered Different Scheme}\\
+
+We will attempt to approximate the curve of  the solution at particular points $u_i$ by calculating a slope at a point by using the preceeding point $u_{i-1}$ and succeeding point $u_{i+1}$.  
+\begin{align*}
+	\frac{u_{i+1}-2u_i+u_{i-1}}{h^2} \approx -\sin (\pi x)
+\end{align*}where $h=(\pi/2)/129=\pi/258$ (we use $N+1$ as we start with the left boundary 0).  This can be reduced to 
+\begin{align*}
+	-u_{i+1}+2u_i-u_{i-1} = h^2\sin (\pi x).
+\end{align*}This expands to a linear function over the a matrix $A$ and vector $u=\{ u_i \}$ reflecting the left hand side and the value to our function on the right with $f=\{ f_i \}, f_i=\sin(\pi x_i)$ or
+\begin{align*}
+	Au &= h^2 f\\
+	\PAREN{\begin{array}{cccccc}
+		2 & -1 & 0 & 0 &\cdots & 0\\
+		-1 & 2 & -1 & 0 &\cdots & 0\\
+		0 & -1 & 2 & -1 &\cdots & 0\\
+		0 & 0 &-1 & 2 & \cdots & 0\\
+		\vdots & \vdots & \vdots & \vdots &\ddots & \vdots\\
+		0 & 0 & 0 & 0 & \cdots & 2
+	\end{array} } \COLVECTOR{ u_1 \\ u_2 \\ u_3 \\ u_4 \\ \vdots \\ u_i } &= h^2 \COLVECTOR{ f_1 \\ f_2 \\ f_3 \\ f_4 \\ \vdots \\ f_i } \\
+	u &= h^2 A^{-1} f
+\end{align*}remembering the boundary conditions.  Since $A$ is tri-diagonal we can use several methods and compare the cost and efficiency.  The MatLab code for the Central Difference Method is
+	\lstinputlisting{ml04.m}
+
+\noindent\textbf{Jacobi's Iteration Method}\\
+
+Since $A$ is a tri-diagonal matrix it can be divided into three separate matrices that add up.  Let $D$ be zero everywhere except the diagonal where it will hold the values of $A_{ii}$ (namely all 2s).  Let $L$ be the same except that it will hold values of the diagonla lower $A_{i-1,i}$ (all -1) and let $U$ be the same except that it will hold the values of the diagonal above $A_{i,i+1}$ (also all -1).  Then, applying this iteratively we get
+\begin{align*}
+	u_i^{[k+1]} &= \frac{1}{2}(u_{i-1}^{[k]}+u_{i+1}^{[k]} - h^2 f_i)
+\end{align*}Here is the MatLab code used to generate the graphs that follow:
+	\lstinputlisting{ml04c.m}
+	
+From this we generate the following graphs.%4452
+
+\includegraphics[scale=0.5]{ml04c.png} 
+
+\noindent\textbf{Steepest Descent Method}\\
+
+This technique for approximating our solution to the Poisson equation is to make each iteration in the direction of greatest change.  That is, 
+\begin{align*}
+	\nabla \phi(u_{k-1}) = Au_{k-1}-f \equiv -r_{k-1}
+\end{align*}where $\phi: \R^m \to \R$ of the form
+\begin{align*}
+	\phi(u) &= \frac{1}{2}u^TAu-u^Tf
+\end{align*}which is a quadratic function in $u$ and can be mapped with local extrema either as a top, a bowl or a saddle point, all based on the eigenvalues of $A$ (negative, positive, or neither, respectively).  Thus, when $A$ is SPD we can expect $r_{k}$ to progress ever closer towards the extremum.
+
+This is the source code
+	\lstinputlisting{ml04d.m}
+
+From this we generate the following graphs.
+
+\includegraphics[scale=0.5]{ml04d.png} 
+
+
+\end{document}

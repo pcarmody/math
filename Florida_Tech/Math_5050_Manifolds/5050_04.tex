@@ -211,6 +211,18 @@ The correspondence between differential forms and vector fields on an open subse
 	\gamma = c_1 \alpha^2\wedge \alpha^3 + c_2\alpha^3\wedge\alpha^1 + c_3\alpha^1\wedge\alpha^2
 \end{align*}on $V$, we associate the vector $v_\gamma=\ABRACKET{c_1,c_2,c_3}\in \R^3$.  Show that under the correspodence, the wedge product of 1-covectors correponds to the cross product of vectors $\R^3$:  if $\alpha = a_1\alpha^1+a_2\alpha^2+a_3\alpha^3$ and $\beta = b_1\alpha^1+b_2\alpha^2+b_3\alpha^3$, then $v_{\alpha\wedge\beta}= v_\alpha \times v_\beta$.
 
+\BLUE{First the cross product\begin{align*}
+	v_\alpha \times v_\beta &= \DTHREEXTHREE{i}{j}{k}{a_1}{a_2}{a_3}{b_1}{b_2}{b_3}\\
+	&= i\DTWOXTWO{a_2}{a_3}{b_2}{b_3} - j\DTWOXTWO{a_1}{a_3}{b_1}{b_3} + k\DTWOXTWO{a_1}{a_2}{b_1}{b_2} \\
+	&=i(a_2b_3-a_3b_2)+j(a_3b_1-a_1b_3)+k(a_1b_2-a_2b_1)
+\end{align*}then the tensor product and ignoring any $a^i\wedge a^i$ terms when we expand them
+\begin{align*}
+	\alpha \wedge \beta &= (a_1\alpha^1 + a_2\alpha^2 + a_3\alpha^3)\wedge(b_1\alpha^1 + b_2\alpha^2 + b_3\alpha^3) \\
+	&= a_1\alpha^1\wedge b_2\alpha^2 + a_1\alpha_1\wedge b_3\alpha_3 + a_2\alpha^2\wedge b_1\alpha^1 + a_2\alpha^2\wedge b_3\alpha^3 + a_3\alpha^3\wedge b_1\alpha^1 + a_3\alpha^3\wedge b_2\alpha^2 \\
+	&= \underbrace{(a_1b_2-a_2b_1)}_{k\ITH \text{ of }v_\alpha\times v_\beta}\alpha^1\wedge\alpha^2 + \underbrace{(a_2b_3-a_2b_3)}_{i\ITH \text{ of }v_\alpha\times v_\beta}\alpha^2\wedge\alpha^3 + \underbrace{(a_1b_3-a_3b_1)}_{j\ITH \text{ of }v_\alpha\times v_\beta}\alpha^1\wedge\alpha^3
+\end{align*}
+}
+
 \end{enumerate}
 
 \end{document}

@@ -1,0 +1,90 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5111 -- Real Analysis II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Practice Test 2 }
+\newcommand{\DUEDATE}{March 26, 2025}
+\newcommand{\SEMESTER}{Sprint 2025}
+\newcommand{\SCHEDULE}{MW 9:30 - 10:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Perera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}
+	\item Show that if $f \in L^1(X)$ and $E_1\subset E_2\subset \cdots$ is a sequence of mesaurable sets such that $\bigcup_{n} E_n=X$, then 
+	\begin{align*}
+		\LIMN \int_{E_n} f d\mu = \int_X f d\mu 
+	\end{align*}
+	
+	\BLUE{Let $g_i = f\chi_{E_i}$ then 
+	\begin{align*}
+		\LIMN g_i &= \LIMN f\chi_{E_i}= f\LIMN \chi_{E_i} = f, \text{ over all }X\\
+		\int_X g_i d\mu &= \int_X f\chi_{E_i} d\mu = \int_{E_i} f d\\
+		\LIMN \int_X g_i d\mu &= \LIMN \int_X f\chi_{E_i} d\mu = \LIMN \int_{E_i} f d\mu  \\
+	\end{align*}
+	}
+	
+	\item Show that if $f: \R \to \R$ and $g: \R \to \R$ are lower semicontinuous functions, then $f+g$ is lower semicontinuous.
+
+	\BLUE{$f,g$ are lower semi-continuous means that $\liminf_{x\to x_0} f(x) \ge f(x_0)$ for all $x_0 \in X$.  Then 
+	\begin{align*}
+		\liminf_{x\to x_0} f(x)+g(x) &= \liminf_{x\to x_0} f(x)+ \liminf_{x\to x_0} g(x) \\
+		&\ge f(x_0) + g(x_0)
+	\end{align*}for all $x_0 \in X$.  Therefore $f+g$ is lower semicontinuous.
+	}	
+	
+	\item Show that if $f \in L^1(X)$, then for each $\epsilon > 0, \exists \delta > 0$ such that $\int_E|f|d\mu < \epsilon$ whenever $\mu(E)<\delta$.
+	\item Show that if $X$ is locally compact Hausdorff space and $\lambda$ and $\mu$ are outer regular Borel measures on $X$ such that $\lambda(V)=\mu(V)$ for all $V\subset X$, then $\lambda = \mu$.
+	
+\end{enumerate}
+
+\end{document}
