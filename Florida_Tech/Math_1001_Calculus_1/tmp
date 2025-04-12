@@ -1,0 +1,5 @@
+& \( \mathbb{R}^n \) & \( \mathbb{R} \) & 0 & 0 \\
+& \( S^1 \) & \( \mathbb{R} \) & \( \mathbb{R} \) & 0 \\
+& \( S^2 \) & \( \mathbb{R} \) & 0 & \( \mathbb{R} \) \\
+& \( T^2 \) & \( \mathbb{R} \) & \( \mathbb{R} \oplus \mathbb{R} \) & \( \mathbb{R} \) 
+

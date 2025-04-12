@@ -102,8 +102,17 @@
 
 \BLUE{\begin{align*}
 	d\omega = &\PART{\omega}{x}dx+\PART{\omega}{y}dy \\
-	= &\PAREN{\frac{-2x}{(x^2+y^2)^2}(-ydx-xdy)+\frac{1}{x^2+y^2}(-yd^2x-dydx)}dx+ \\
-	&\; \PAREN{\frac{-2y}{(x^2+y^2)^2}(-ydx-xdy)+\frac{1}{x^2+y^2}(-dxdy-xd^2y)}dy x`x	
+	= &\PAREN{\frac{-2x}{(x^2+y^2)^2}(-ydx-xdy)+\frac{1}{x^2+y^2}(-yd^2x-dy)}dx+ \\
+	&\; \PAREN{\frac{-2y}{(x^2+y^2)^2}(-ydx-xdy)+\frac{1}{x^2+y^2}(-dx-xd^2y)}dy\\
+%	= &\frac{2x^2}{(x^2+y^2)^2}dy +\frac{2y^2}{(x^2+y^2)^2}dx 	\\
+	= &\PAREN{\frac{-2x}{(x^2+y^2)^2}(-xdydx)+\frac{1}{x^2+y^2}(-dydx)}+ \\
+	&\; \PAREN{\frac{-2y}{(x^2+y^2)^2}(-ydxdy)+\frac{1}{x^2+y^2}(-dxdy)}\\
+%	= &\frac{2x^2}{(x^2+y^2)^2}dy +\frac{2y^2}{(x^2+y^2)^2}dx \\
+	= &\PAREN{\frac{2x^2}{(x^2+y^2)^2}(dydx)+\frac{1}{x^2+y^2}(-dydx)}+ \\
+	&\; \PAREN{\frac{2y^2}{(x^2+y^2)^2}(dxdy)+\frac{1}{x^2+y^2}(-dxdy)} \\
+	= &\frac{2x^2-x^2-y^2}{(x^2+y^2)^2}(dydx)+ \frac{2y^2-x^2-y^2}{(x^2+y^2)^2}(dxdy) \\
+	&= \frac{2x^2-x^2-y^2+2y^2-x^2-y^2}{(x^2+y^2)^2} dxdy\\
+	&=0
 \end{align*}
 }
 \end{description}
@@ -169,7 +178,7 @@ Suppose the standard coordiantes on $\R^3$ are called $\rho, \phi,$ and $\theta$
 	dy &= \sin\phi\sin\theta\,d\rho + \rho\cos\phi\sin\theta\,d\phi + \rho\sin\phi\cos\theta\,d\theta \\
 	dz &= \cos\theta\, d\rho-\rho\sin\phi\, d\phi
 %	dx \wedge dy \wedge dz &= (\sin\phi \cos \theta \,d\rho + \rho \cos \phi \cos \theta \,d\phi - \rho \sin\phi \sin \theta\,  d\theta)\wedge(\sin\phi\sin\theta\,d\rho + \rho\cos\phi\sin\theta\,d\phi + \rho\sin\phi\cos\theta\,d\theta)\wedge(\cos\theta\, d\rho-\rho\sin\theta\, d\theta 
-\end{align*}We will attempt to cancel out any terms which have a $dx^i\wedge d^\wedge$ by simplifying $dx, dy$, and $dz$ in the following manner
+\end{align*}We will attempt to cancel out any terms which have a $dx^i\wedge dx^i$ by simplifying $dx, dy$, and $dz$ in the following manner
 \begin{align*}
 	dx \wedge dy \wedge dz &= (x_1\,d\rho + x_2\,d\phi+x_3\,d\theta)\wedge(y_1\,d\rho + y_2\,d\phi+y_3\,d\theta)\wedge(z_1\,d\rho + z_2\,d\phi+z_3\,d\theta) \\ 
 	&= (x_1\,d\rho\wedge y_2\,d\phi\wedge z_3\,d\theta)+(x_1\,d\rho\wedge y_3\,d\theta\wedge z_2\,d\phi) \\
@@ -218,7 +227,7 @@ The correspondence between differential forms and vector fields on an open subse
 \end{align*}then the tensor product and ignoring any $a^i\wedge a^i$ terms when we expand them
 \begin{align*}
 	\alpha \wedge \beta &= (a_1\alpha^1 + a_2\alpha^2 + a_3\alpha^3)\wedge(b_1\alpha^1 + b_2\alpha^2 + b_3\alpha^3) \\
-	&= a_1\alpha^1\wedge b_2\alpha^2 + a_1\alpha_1\wedge b_3\alpha_3 + a_2\alpha^2\wedge b_1\alpha^1 + a_2\alpha^2\wedge b_3\alpha^3 + a_3\alpha^3\wedge b_1\alpha^1 + a_3\alpha^3\wedge b_2\alpha^2 \\
+	&= a_1\alpha^1\wedge b_2\alpha^2 + a_1\alpha^1\wedge b_3\alpha^3 + a_2\alpha^2\wedge b_1\alpha^1 + a_2\alpha^2\wedge b_3\alpha^3 + a_3\alpha^3\wedge b_1\alpha^1 + a_3\alpha^3\wedge b_2\alpha^2 \\
 	&= \underbrace{(a_1b_2-a_2b_1)}_{k\ITH \text{ of }v_\alpha\times v_\beta}\alpha^1\wedge\alpha^2 + \underbrace{(a_2b_3-a_2b_3)}_{i\ITH \text{ of }v_\alpha\times v_\beta}\alpha^2\wedge\alpha^3 + \underbrace{(a_1b_3-a_3b_1)}_{j\ITH \text{ of }v_\alpha\times v_\beta}\alpha^1\wedge\alpha^3
 \end{align*}
 }

@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{report}
+\documentclass[12pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -123,7 +123,7 @@ As described in the assignment we will focus our attenion on this Poisson equati
 %	\frac{2\PAREN{1-\frac{1}{\pi^2}}sin(\pi^2/2)}{\pi^2} &= \frac{2\PAREN{1-\frac{1}{9.869604064}}0.086022097}{9.869604064} = 1.998233797 \approx 2
 \end{align*}
 
-\noindent\textbf{Centered Different Scheme}\\
+\noindent\textbf{Centered Difference Scheme}\\
 
 We will attempt to approximate the curve of  the solution at particular points $u_i$ by calculating a slope at a point by using the preceeding point $u_{i-1}$ and succeeding point $u_{i+1}$.  
 \begin{align*}
@@ -148,11 +148,11 @@ We will attempt to approximate the curve of  the solution at particular points $
 
 \noindent\textbf{Jacobi's Iteration Method}\\
 
-Since $A$ is a tri-diagonal matrix it can be divided into three separate matrices that add up.  Let $D$ be zero everywhere except the diagonal where it will hold the values of $A_{ii}$ (namely all 2s).  Let $L$ be the same except that it will hold values of the diagonla lower $A_{i-1,i}$ (all -1) and let $U$ be the same except that it will hold the values of the diagonal above $A_{i,i+1}$ (also all -1).  Then, applying this iteratively we get
+Since $A$ is a tri-diagonal matrix it can be divided into three separate matrices that add up.  Let $D$ be zero everywhere except the diagonal where it will hold the values of $A_{ii}$ (namely all 2s).  By applying this iteratively we get
 \begin{align*}
 	u_i^{[k+1]} &= \frac{1}{2}(u_{i-1}^{[k]}+u_{i+1}^{[k]} - h^2 f_i)
 \end{align*}Here is the MatLab code used to generate the graphs that follow:
-	\lstinputlisting{ml04c.m}
+	\lstinputlisting{ml04c_1.m}
 	
 From this we generate the following graphs.%4452
 
@@ -169,11 +169,16 @@ This technique for approximating our solution to the Poisson equation is to make
 \end{align*}which is a quadratic function in $u$ and can be mapped with local extrema either as a top, a bowl or a saddle point, all based on the eigenvalues of $A$ (negative, positive, or neither, respectively).  Thus, when $A$ is SPD we can expect $r_{k}$ to progress ever closer towards the extremum.
 
 This is the source code
-	\lstinputlisting{ml04d.m}
+	\lstinputlisting{ml04d_1.m}
 
 From this we generate the following graphs.
 
 \includegraphics[scale=0.5]{ml04d.png} 
 
+\noindent\textbf{Analyzing the various solutions}.\\
+
+It should be noted that the Jacobi method took 4,452 iterations before being completed and the Steepest Descent Method took 13,454.\\  
+
+The two plots use a logorithmic scale.  A standard scale didn't emphasize the decay rate effectively as the initial iterations showed the great change, so much so that the following improved accuracy couldn't be seen.  The logarithmic scale more effictively shows the improvement.  Each iteration provides very little but necessary improvement.
 
 \end{document}

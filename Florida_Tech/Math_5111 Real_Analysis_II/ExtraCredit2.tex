@@ -1,0 +1,96 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5111 -- Real Analysis II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Extra Credit \#2}
+\newcommand{\DUEDATE}{April 11, 2025}
+\newcommand{\SEMESTER}{Sprint 2025}
+\newcommand{\SCHEDULE}{MW 9:30 - 10:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Perera}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Let $(X, \mathcal{M}, \mu)$ be a measure space. Show that if $f: X \to [0,\infty]$ is a measurable function.  Calculate, justify all of the steps, the limit
+\begin{align*}
+	\LIMN \int_X \BARS{\sin(f(x))}^n d\mu.
+\end{align*}Show that, in general, this result is false if $\mu(X) = \infty$.\\
+
+\BLUE{Let $g(x) = 1$ and $h_n(x) = \BARS{sin(f(x))}^n$.  Clearly, $h_n(x) \le g(x)$ for all $x \in X$ and measurable, i.e., composition of a continuous function with a measurable function is measurable.  
+\begin{align*}
+	\LET N &= \inf_{k \in \N}\BRACKET{k\pi/2 > |f(x)|, \forall x\in X)}\\
+	\AND E &= \{x \in X: |f(x)| = \frac{k\pi}{2},\text{ for all }k = 1, 2, \dots, N \}\\
+	\LIMN h_n(x) &= \LIMN \BARS{\sin(f(x))}^n = \BINDEF{0 & \text{if } x \not\in E}{1 & \text{if } x \in E} \\
+	\LET h(x) &= \BINDEF{0 & \text{if } x \not\in E}{1 & \text{if } x \in E} = \chi_E
+\end{align*}By Lebesque Dominated Convergence Theorem, $h \in L^1(X)$ and 
+\begin{align*}
+	\LIMN \int_X \BARS{\sin(f(x))}^n d\mu &= \int_X h(x) d\mu = \int_X \chi_E d\mu = \mu(E)
+\end{align*}Notice first that $E \subset X$ therefore $\mu(E) < \mu(X) < \infty$.  Thus,
+\begin{align*}
+	E &= \bigcup_{k=1}^N \BRACKET{ x : |f(x)|= \frac{(2k-1)\pi}{2}} \\
+	\mu(E) &= \mu\PAREN{\bigcup_{k=1}^N \BRACKET{ x : |f(x)|= \frac{(2k-1)\pi}{2}}}\\
+	 &= \sum_{k=1}^N \mu\PAREN{\BRACKET{ x : |f(x)|= \frac{(2k-1)\pi}{2}}}\\
+	 &= \sum_{k=1}^N 0\\
+	 &= 0
+\end{align*}For $\mu(X) = \infty$ no such $N$ exists.  However, we can still test for convergence.
+\begin{align*}
+	S_n &= \int_X \BARS{\sin(f(x))}^n d\mu \\
+	S_n &= \infty, \, \forall n=1, 2, \dots 
+\end{align*}using the Ratio Test to determine convergence we have 
+\begin{align*}
+	S_{n+1}/S_n &= \frac{\int_X \BARS{\sin(f(x))}^{n+1} d\mu}{\int_X \BARS{\sin(f(x))}^n d\mu} \\
+	&= \int_X \frac{\BARS{\sin(f(x))}^{n+1}}{\BARS{\sin(f(x))}^n} d\mu \\
+	&= \int_X \BARS{\sin(f(x))} d\mu \\
+	&\to \infty
+\end{align*}
+}
+
+\end{document}

@@ -2,9 +2,9 @@ Fall 2024
 =========
 
 Math 5099 Colloquium
-Math 5102 Linear Algebra
-Math 5110 Real Analysis I
-Math 5441 Statistics
+Math 5102 Linear Algebra - B
+Math 5110 Real Analysis I - A
+Math 5441 Statistics - C
 
 Spring 2025
 =======================

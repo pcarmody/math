@@ -352,4 +352,208 @@ Shorthand
 	\delta_I^J &= \delta_{i_1}^{j_1}\delta_{i_2}^{j_2}\cdots\delta_{i_k}^{j_k} = \BINDEF{1 & i_n = j_n, \forall n}{0 & \text{otherwise}} = \BINDEF{1 & I=J}{0 & I \ne J}
 \end{align*}
 
+\begin{definition}[Exact and Closed $k$-forms]
+
+A $k$-form $\omega$ on $U$ is \DEFINE{closed} if $d\omega=0$; it is \DEFINE{exact} if there is a $(k-1)$-form $\tau$ such that $\omega = d\tau$ on $U$.  Since $d(d\tau)=0$, every exact form is closed.  
+
+\end{definition}
+
+\begin{definition}[de Rham Cohomology].
+
+The \DEFINE{$k\ITH$-cohomology of $U$} is defined as the quotient vector space
+\begin{align*}
+	H^k(U) = \frac{\{\text{closed k-forms}\}}{\{\text{exact k-forms}\}}
+\end{align*}That is, each element is a vector space forming an equivalence class of $k$-forms.
+
+\end{definition}
+
+\textbf{Examples of de Rham Cohomology}\\
+
+De Rham cohomology provides a way to study the topology of smooth manifolds using differential forms. Below are some key examples illustrating how to compute and interpret de Rham cohomology groups.
+
+---
+\begin{description}
+
+\item \textbf{**Example 1: Euclidean Space \( \mathbb{R}^n \)** } \\
+For \( M = \mathbb{R}^n \), we claim that the de Rham cohomology is:
+
+\[
+H^k_{\text{dR}}(\mathbb{R}^n) =
+\begin{cases}
+\mathbb{R}, & k = 0, \\
+0, & k > 0.
+\end{cases}
+\]
+
+**Computation**\\
+\begin{enumerate}
+
+\item **\( H^0_{\text{dR}}(\mathbb{R}^n) \):** 
+\begin{itemize}
+ 
+   \item  The 0-forms are just smooth functions \( f \).  \\
+   \item A function is closed if \( df = 0 \), meaning \( f \) is constant.  \\
+   \item Every constant function is not only closed but also exact since \( f = d(fx) \).  \\
+   \item The space of closed 0-forms is \( \mathbb{R} \) (constant functions), and there are no exact forms to quotient out.  \\
+   \item So, \( H^0_{\text{dR}}(\mathbb{R}^n) = \mathbb{R} \).\\
+
+\end{itemize}
+\item **\( H^k_{\text{dR}}(\mathbb{R}^n) \) for \( k > 0 \):**  \\
+\begin{itemize}
+
+   \item  Any closed \( k \)-form \( \omega \) is locally exact due to **Poincaré’s lemma**.  \\
+   \item  That is, every closed form is of the form \( \omega = d\eta \), meaning it contributes nothing to cohomology.\\
+   \item Thus, \( H^k_{\text{dR}}(\mathbb{R}^n) = 0 \) for \( k > 0 \).
+
+This result reflects the fact that \( \mathbb{R}^n \) is **contractible**, so it has trivial topology.
+
+\end{itemize}
+\end{enumerate}
+
+---\\
+
+\item \textbf{ **Example 2: The Circle \( S^1 \)** }\\
+ 
+For \( M = S^1 \), we find:
+
+\[
+H^k_{\text{dR}}(S^1) =
+\begin{cases}
+\mathbb{R}, & k = 0, 1, \\
+0, & k > 1.
+\end{cases}
+\]
+
+**Computation**\\
+\begin{enumerate}
+
+\item  **\( H^0_{\text{dR}}(S^1) = \mathbb{R} \)**  
+
+\begin{itemize}
+
+   \item  Smooth functions \( f \) that satisfy \( df = 0 \) are constant.
+   \item  Thus, \( H^0_{\text{dR}}(S^1) = \mathbb{R} \).
+
+\end{itemize}
+\item  **\( H^1_{\text{dR}}(S^1) = \mathbb{R} \)**  \\
+\begin{itemize}
+
+   \item  Consider the 1-form \( \omega = d\theta \), where \( \theta \) is the angular coordinate.  
+   \item  \( d\omega = 0 \), so \( \omega \) is closed.  \\
+   \item  Is \( \omega \) exact? If \( \omega = d\eta \) for some \( \eta \), then \( d\eta = d\theta \), but no globally defined function \( \eta \) exists on \( S^1 \) satisfying this. \\ 
+   \item  So \( \omega \) represents a **nontrivial cohomology class**, giving \( H^1_{\text{dR}}(S^1) = \mathbb{R} \).
+
+\end{itemize}
+\item  **\( H^k_{\text{dR}}(S^1) = 0 \) for \( k \geq 2 \)**  \\
+   - There are no nontrivial 2-forms on a 1-dimensional manifold.
+
+ **Interpretation**\\
+ \begin{itemize}
+\item  The nontrivial \( H^1_{\text{dR}}(S^1) \) reflects the existence of a **loop** in \( S^1 \).\\
+\item  This cohomology detects the ability to define a **non-exact closed form**, related to the winding number.
+
+\end{itemize}
+\end{enumerate}
+---
+
+\item \textbf{ **Example 3: The 2-Sphere \( S^2 \)**  
+For \( M = S^2 \):
+}
+\[
+H^k_{\text{dR}}(S^2) =
+\begin{cases}
+\mathbb{R}, & k = 0, 2, \\
+0, & k = 1.
+\end{cases}
+\]
+
+ **Computation**\\
+ 
+ \begin{enumerate}
+ 
+\item  **\( H^0_{\text{dR}}(S^2) = \mathbb{R} \)**  \\
+\begin{itemize}
+   \item  As always, closed 0-forms are constant functions, so \( H^0_{\text{dR}}(S^2) = \mathbb{R} \)\\
+
+\end{itemize}
+
+\item  **\( H^1_{\text{dR}}(S^2) = 0 \)**  
+\begin{itemize}
+   \item  Any closed 1-form is exact by a higher-dimensional **Poincaré lemma**, so \( H^1_{\text{dR}}(S^2) = 0 \).\\
+
+\end{itemize}
+
+\item  **\( H^2_{\text{dR}}(S^2) = \mathbb{R} \)**  \\
+\begin{itemize}
+   \item  The standard volume form \( \omega = \sin\theta \, d\theta \wedge d\phi \) is closed.  \\
+   \item  It is not exact, because there is no 1-form \( \eta \) such that \( d\eta = \omega \) (this follows from **Stokes’ theorem**).\\  
+   \item  So \( \omega \) represents a generator of \( H^2_{\text{dR}}(S^2) \).
+
+\end{itemize}
+   
+ \end{enumerate}
+
+ **Interpretation**
+\begin{itemize}
+\item  \( H^1_{\text{dR}}(S^2) = 0 \) reflects that there are no **nontrivial loops** (all loops contract).
+\item  \( H^2_{\text{dR}}(S^2) = \mathbb{R} \) corresponds to the existence of a volume form, a global topological feature.
+
+\end{itemize}
+
+---
+
+\item \textbf{**Example 4: The Torus \( T^2 = S^1 \times S^1 \)**}  \\
+For \( T^2 \), the de Rham cohomology groups are:
+
+\[
+H^k_{\text{dR}}(T^2) =
+\begin{cases}
+\mathbb{R}, & k = 0,2, \\
+\mathbb{R} \oplus \mathbb{R}, & k = 1, \\
+0, & k > 2.
+\end{cases}
+\]
+
+ **Computation**\\
+ 
+ \begin{enumerate}
+ 
+\item  **\( H^0_{\text{dR}}(T^2) = \mathbb{R} \)** (constant functions).  \\
+\item  **\( H^1_{\text{dR}}(T^2) = \mathbb{R} \oplus \mathbb{R} \)**  
+\begin{itemize}
+   \item  The torus has two independent 1-forms: \( d\theta_1 \) and \( d\theta_2 \), corresponding to the two loops in \( T^2 \).\\
+
+\end{itemize}
+\item  **\( H^2_{\text{dR}}(T^2) = \mathbb{R} \)**  
+   \item The volume form \( d\theta_1 \wedge d\theta_2 \) represents a nontrivial 2-class.\\
+
+ \end{enumerate}
+
+
+ **Interpretation**\\
+ \begin{itemize}
+ 
+\item The rank of \( H^1_{\text{dR}}(T^2) \) reflects the **two independent loops** in the torus.\\
+\item  The nontrivial \( H^2_{\text{dR}}(T^2) \) corresponds to the existence of a **volume form**.\\
+
+ \end{itemize}
+
+\end{description}
+ ---
+
+ **Summary Table**\\ \\
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+  Manifold M & $H^0_{dR}(M)$ & $H^2_{dR}(M)$& $H^1_{dR}(M)$ \\
+ \hline
+  \( \mathbb{R}^n \) & \( \mathbb{R} \) & 0 & 0 \\
+ \hline
+ \( S^1 \) & \( \mathbb{R} \) & \( \mathbb{R} \) & 0 \\
+ \hline
+  \( S^2 \) & \( \mathbb{R} \) & 0 & \( \mathbb{R} \) \\
+ \hline
+ \( T^2 \) & \( \mathbb{R} \) & \( \mathbb{R} \oplus \mathbb{R} \) & \( \mathbb{R} \)\\
+ \hline
+ \end{tabular}\\
+
 \end{document}

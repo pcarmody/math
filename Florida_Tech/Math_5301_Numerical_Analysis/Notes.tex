@@ -58,4 +58,33 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 
+April 1, 2025
+
+\textbf{A-Conjugage Gradient Method}
+
+\begin{description}
+	\item By Theorem 4.1  of \textit{Finite Difference Methods for Ordinary Differential Equations} page 88.  We have that ... The vectors generated in the CG Algorithm have properties provided $r_k \ne 0$ (if $r_k=0$ then we have converged).
+	\begin{enumerate}
+		\item $p_k$ is $A$-conjugate to all previous search directions, i.e., $p_k^T Ap_j =0$ for all $j=1,\dots,k-1$.
+		\item The residual $r_k$ is orthogonal to all previous residuals $r_k^Tr_j=0$ for $j=0,\dots, k-1$.
+		\item The following three subspaces are identical
+		\begin{description}
+			\item $\SPAN(p_0,p_1,p_2, \dots, p_{k-1})$,
+			\item $\SPAN(r_0, Ar_0, A^2r_0, \dots, A^{k-1}r_0)$.
+			\item $\SPAN(Ae_0, A^2e_0, \dots, A^ke_0)$.
+		\end{description}
+	\end{enumerate}
+	
+	\item Vectors from this/these subspaces take on the linear combination of basis vectors that extrapolates to a polynomial.
+	\begin{align*}
+		\mathcal{K}_k &=  \SPAN(r_0, Ar_0, A^2r_0, \dots, A^{k-1}r_0)
+	\end{align*}and is referred to as the \DEFINE{Krylov Space.}  These take the form of a polynomiald
+	\begin{align*}
+		P_k(A) &= a_0r_0+a_1Ar_0+a_2A^2r_0+\cdots+a_{k-1}A^{k-1}r_0 \\
+		P_k(\lambda_{\max}) &= a_0r_0+a_1\lambda_{\max}r_0+a_2\lambda_{\max}^2r_0+\cdots+a_{k-1}\lambda_{\max}^{k-1}r_0 
+	\end{align*}Where $\lambda_{\max}$ is the largest eigenvalue of $A$.
+	
+	\item the CG algorithm converges to at most $n$ iterations.  Keep in mind that $n$ can be very large ($>> 1000$).
+	
+\end{description}
 \end{document}

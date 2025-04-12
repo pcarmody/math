@@ -19,6 +19,7 @@ Fall 2025
 
 Math 5315 (86475) Numerical Methods for Partial Differential Equations
 Math 6230 (88527) Partial Differential Equations I
+Math ???? (?????) Self-study in Differential Geometry (Berchenko-Kogan)
 Math 6099 () Colloquium W 4-5
 
 ===========
@@ -27,10 +28,20 @@ Spring 2026
 
 6240 Partial Differential Equations II
 XXXX Special Topics: Tensor Calculus (Berchenoko-Kogan)
+XXXX Special Topics: Algebraic Topology (Shibo Liu)
+6899 Dissertation???
+
+==========
+
+Fall 2026
+
+6899 Dissertation
 
 ==========
 
 Classes Desired
-xxxx Differential Geometry
+xxxx Differential Geometry (self study, Berchenko-Kogan)
+xxxx Riemannian Geometry (self study, Berchenko-Kogan)
+xxxx Algebraic Topology (self study, Liu)
 xxxx General Relativity
 xxxx Quantum Theory

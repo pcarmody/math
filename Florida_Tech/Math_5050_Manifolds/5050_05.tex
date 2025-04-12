@@ -1,0 +1,157 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\usepackage{pgfplots}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment 5 }
+\newcommand{\DUEDATE}{April 8, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\RANGE}{\text{range}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Section 5 problems 3 and 5 \\
+
+\noindent\textbf{5.3 Charts on a Sphere.}
+
+Let $S^2$ be the unit sphere 
+\begin{align*}
+	x^2+y^2+z^2=1
+\end{align*}in $\R^3$.  	In $S^2$ the six charts corresponding to the siz hemspheres -- the front, rear, right, let, upper and lower hemisphere (Figure 5.11):
+\begin{align*}
+	U_1 &= \{(x,y,z) \in S^2\,|\, x > 0\}, \; \phi_1(x,y,z) = (y,z) \\
+	U_2 &= \{(x,y,z) \in S^2\,|\, x < 0\}, \; \phi_2(x,y,z) = (y,z) \\
+	U_3 &= \{(x,y,z) \in S^2\,|\, y > 0\}, \; \phi_3(x,y,z) = (x,z) \\
+	U_4 &= \{(x,y,z) \in S^2\,|\, y < 0\}, \; \phi_4(x,y,z) = (x,y) \\
+	U_5 &= \{(x,y,z) \in S^2\,|\, z > 0\}, \; \phi_5(x,y,z) = (y,z) \\
+	U_6 &= \{(x,y,z) \in S^2\,|\, z < 0\}, \; \phi_6(x,y,z) = (y,z) 
+\end{align*}Describe the domain of $\phi_4(U_{14})$ of $\phi_1\circ \phi_4^{-1}$ and show that $\phi_1\circ\phi_4^{-1}$ is $ C^\infty$ on $\phi_4(U_{14})$.  Do the same for $\phi_6\circ \phi_1^{-1}$.
+
+\BLUE{
+\begin{align*}
+	U_{14} &= U_1 \cap U_4 \\
+	&= \{(x,y,z) \in S^2\,|\, x > 0\} \cap \{(x,y,z) \in S^2\,|\, y < 0\} \\
+	&= \{(x,y,z) \in S^2\,|\, x > 0 \AND y<0\}
+\end{align*}This is the half hemisphere typically thought of as to the right and above and below the the plane of the equator.
+\begin{tikzpicture}
+  \begin{axis}[width=\textwidth,
+      samples=50,domain=90:180,y domain=90:270,
+      xmin=-1.2,xmax=1.2,ymin=-1.2,ymax=1.2,zmin=-1.2,zmax=1.2,
+      xlabel={$x$},ylabel={$y$},zlabel={$z$},
+    axis lines=center]
+    \addplot3[surf,opacity=0.5]
+    ({cos(x)*cos(y)}, {sin(x)*cos(y)}, {sin(y)});
+%    ({cos(x)*cos(y)}, {sin(x)*cos(y)}, {sin(y)});
+	\addplot3[surf, opacity=0.5]
+    ({cos(x)*cos(y)}, {sin(x)*cos(y)}, 0);
+  \end{axis}
+\end{tikzpicture}\\
+Show that $\phi_1 \circ \phi_4^{-1}$ is $C^\infty$.  We start by given any $(x,y)$ we can can see that $\phi_4^{-1} \mapsto (x,y,z) \subset \R^3$ and $\phi_1 \circ \phi_4^{-1}(x,y) \in (y,z)$ for any arbitrary third coordinate $z$.  The first coordinate maps open sets in $y$ to theirself and the second coordinate is open as it maps to all of $z$.  Thus, $\phi_1 \circ \phi_4^{-1}$ is $C^\infty$.\\
+\\
+Show the same for $\phi_6 \circ \phi_1^{-1}$.  First we describe $U_{61}$.
+\begin{align*}
+	U_{61} &= U_6 \cap U_1 \\
+	&= \{(x,y,z) \in S^2\,|\, z < 0\} \cap \{(x,y,z) \in S^2\,|\, x > 0\} \\
+	&= \{(x,y,z) \in S^2\,|\, x > 0 \AND z<0\}
+\end{align*}This is the half hemisphere typically thought of as below the plane passing through the equator and to the right.  (Note that this picture shows some parts of the surface as $x<0$ which is an error.)\\
+\begin{tikzpicture}
+  \begin{axis}[width=\textwidth,
+      samples=50,domain=0:180,y domain=180:360,
+      xmin=0,xmax=1.2,ymin=-1.2,ymax=1.2,zmin=-1.2,zmax=0,
+      xlabel={$x$},ylabel={$y$},zlabel={$z$},
+    axis lines=center]
+%	\addplot3[surf, opacity=0.5]
+%    (0, {sin(x)*cos(y)}, {sin(y)});
+    \addplot3[surf,opacity=0.5]
+    ({cos(x)*cos(y)}, {sin(x)*cos(y)}, {sin(y)});
+  \end{axis}
+\end{tikzpicture}\\
+Show that $\phi_6 \circ \phi_1^{-1}$ is $C^\infty$.  We start by given any $(y,z)$ we can can see that $\phi_1^{-1} \mapsto (x,y,z) \subset \R^3$ and $\phi_6 \circ \phi_1^{-1}(y,z) \in (y,z)$.  Thus any open set in $y$ or $z$ will be mapped to opened to themselves through $\phi_6 \circ \phi_1^{-1}$.  Both coordinates map open sets to semi-circles on planes parallel to the $y-z$ plane and $x>0$.  Thus, $\phi_6 \circ \phi_1^{-1}$ is $C^\infty$.
+}
+
+\newpage
+\noindent\textbf{5.5 An Atlas for a Product Manifold.}
+
+\textbf{Propostion 5.18 (an Atlas for a Product Manifold).}  If $\{(U_\alpha, \phi_\alpha)\}$ and $\{(V_i,\psi_i)\}$ are $C^\infty$ atlases for the manifold $M$ and $N$ with dimension $m$ and $n$, respectively, then the collection 
+\begin{align*}
+	\Phi=\BRACKET{\PAREN{U_\alpha\times V_i,\;\  \phi_\alpha\times \psi_i\,:\,U_\alpha\times V_i \to \R^m\times \R^n }}
+\end{align*}of charts is a $C^\infty$ atlas $M\times N$.  Therefore, $M\times N$ is a $C^\infty$ smooth manifold of dimension $m+n$.\\
+
+% Need to show:
+% 	1) $M$ is Hausdorff and Second Countable
+%   2) $M$ has a $C^\infty$ atlas.
+
+\BLUE{\noindent Need to show, for some $\alpha, i$
+\begin{enumerate}
+	\item $x \in M \times N \implies x \in U_\alpha \times V_i$.
+	\begin{align*}
+		x \in M \times N &\implies \exists u \in M, v \in N \to x = (u,v) \\
+		\AND \exists\, \alpha, i &\to u \in U_\alpha, v \in V_i \\
+		\therefore x &= (u,v) \in U_\alpha \times V_i \in \Phi
+	\end{align*}
+	\item $x \in  U_\alpha \times V_i \implies x \in M \times N$. 
+	\begin{align*}
+		x \in  U_\alpha \times V_i &\implies \exists\, u\in U_\alpha, v \in V_i \to x = (u,v)\\
+		u \in U_\alpha &\implies u \in M \AND v \in V_i \implies v \in N\\
+		\therefore (u,v) \in M\times N &\implies x \in M \times N
+	\end{align*}
+	\item Furthmore, any two functions of the form $\phi_\alpha \times \psi_i$ are compatible.
+	\begin{align*}
+	\LET (x,y) &\in U_\alpha \times V_i \AND (u,v) \in U_\beta \times V_j  \\
+	\text{define } \Theta_1 &: \phi_\alpha\times \psi_i(x,y)\to \R^m\times \R^n  \AND \Theta_2 : \phi_\beta\times \psi_j(u,v)\to \R^m\times \R^n  
+\end{align*}for some $\alpha, \beta$ and $i, j$.  Since, $\phi_\alpha$ is compatible with $\phi_\beta$ and $\psi_i$ is compatible with $\psi_j$ so is $\Theta_1$ compatible with $\Theta_2$.  Since $\phi_\alpha, \phi_\beta, \psi_i, \psi_j \in C^\infty$ so is $\Theta_1, \Theta_2 \in C^\infty$.  Further, for any $x \in M\times N$ there will be $\dim(M)+\dim(N)=m+n$ coordinates regardless of any $U_\alpha$ or $V_i$.  Thus, $\dim(M \times N) = m+n$.
+\end{enumerate}
+}
+
+\end{document}
