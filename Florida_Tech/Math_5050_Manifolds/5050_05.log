@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.15)  10 APR 2025 14:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.15)  17 APR 2025 08:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -971,7 +971,7 @@ Package rerunfilecheck Info: File `5050_05.out' has not changed.
 Here is how much of TeX's memory you used:
  33380 strings out of 476139
  785997 string characters out of 5794453
- 3530132 words of memory out of 5000000
+ 3530131 words of memory out of 5000000
  54884 multiletter control sequences out of 15000+600000
  560672 words of font info for 47 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -986,7 +986,7 @@ pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/symbols/msbm10.pfb>
-Output written on 5050_05.pdf (3 pages, 265241 bytes).
+Output written on 5050_05.pdf (3 pages, 265240 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream

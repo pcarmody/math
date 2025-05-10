@@ -1,8 +1,4 @@
-clc; clear; close all;
-
-figure; hold on;
-
-function x = gause_segal(A, b, h, tol, max_iter)
+function x = gauss_seidel(A, b, N, h, tol, max_iter)
     % Solves Ax = b using Gause Segal's iterative method
     % Inputs:
     %   A        - Coefficient matrix (NxN)
@@ -12,7 +8,7 @@ function x = gause_segal(A, b, h, tol, max_iter)
     % Output:
     %   x - Solution vector (Nx1)
     
-    N = length(b);              % Number of equations
+%    N = length(b);              % Number of equations
     x = b;%zeros(N, 1);            % Initial guess (zero vector)
     x_old = x;                  % Store previous iteration
     h2=h^2;
@@ -42,31 +38,3 @@ function x = gause_segal(A, b, h, tol, max_iter)
     fprintf('Max iterations reached without convergence.\n');
     conv = conv_loc;
 end
-% Define problem parameters
-N = 128;                  % Number of internal grid points
-h = (pi/2) / (N+1);       % Grid spacing
-x = linspace(h, pi/2-h, N)';  % Grid points
-f = h^2* sin(pi * x);    % Right-hand side vector
-
-% Construct tridiagonal matrix A
-A = 2 * eye(N) - diag(ones(N-1,1),1) - diag(ones(N-1,1),-1);
-
-% Modify last element of f to include boundary condition u(pi/2) = 1
-f(1) = 0; f(N) = 1;
-
-% Solve using Gause-Segal method
-tol = 1e-4;  % Convergence tolerance
-max_iter = 1000;  % Maximum iterations
-
-u = gause_segal(A, f, h, tol, max_iter);
-
-output = u;%u(1:cnt);
-grid on;
-%yscale log;
-horizontal = 1:length(output);%linspace(1, cnt, 1);
-plot(horizontal, output, '-k', 'DisplayName', 'Gause-Segal');
-xlabel('x'); ylabel('u(x)');
-title('Convergenace of Poisson Equation using Gause-Segal Method');
-legend;
-grid on;
-

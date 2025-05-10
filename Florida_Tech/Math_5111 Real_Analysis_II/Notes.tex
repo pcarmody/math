@@ -281,4 +281,39 @@ The collection of all continuous, complex functions with compact supports is den
 	\item and $\exists A \in F_\sigma$ and $B\in G_\delta$ such that $A \subset E \subset B$, and $\mu(B-A) =0$.
 	\end{enumerate}
 \end{theorem}
+\newpage
+\begin{theorem}[Lusin's Theorem].\\ Suppose that $X$ is a complex measureable function on $X, \mu(A)< \infty, f(x) =0$ if $x \not \in A$, and $\epsilon > 0$.  Then there exists $g \in C_c(X)$ such that 
+\begin{align*}
+	\mu\PAREN{\{x \in X: f(x) \ne g(x) \} } < \epsilon
+\end{align*}(i.e., those $x$ that define how $f$ and $g$ are different is miniscule or form an infinitely small set). Furthermore, we may arrange it so that 
+\begin{align*}
+	\sup_{x\in X} |g(x) |\le \sup_{x\in X}|f(x)|.
+\end{align*}
+
+\end{theorem}
+\begin{proof}.
+
+	\begin{description}
+	\item Step 1: First consider the case where $X$ is compact and $0< f< 1$.
+	\item Step 2: Next consider the case where $X$ is compact and $f: X \to [0,\infty)$ is a bounded measurable function.
+	\item Step 3: Next consider the case where $X$ is compact and $f: X\to (-\infty, \infty)$ is a bounded measurable function.
+	\end{description}
+\end{proof}
+
+\newpage
+\begin{center}
+\Large{The abuse of terminology.}
+\end{center}
+
+What I have found most frustrating is understanding fundamental concepts in Measure Theory.  What I've come to realize is the misuse or abuse of terms that mathematicians have, up until now, have all accepted but are now being pushed to their limits.  Typically, when you are talking about sets in the context of functions we think of them as domain, most of them are considered to be open, smooth, continuous or connected.  They don't have to be but there is an assumed behavior that isn't assumed in Measure Theory.  In truth, they should make that very clear and specify what they mean from the start but they never do.  I've listed the terms whose meaning in context in Measure Theory has broader and more specific implications.\\
+
+\begin{description}
+\item \textbf{Set:}  What is meant here should be termed 'collections' which really is the same thing as the definition of 'set' but meant to regard each of its elements as either sigletons or collections of some kind be they open, closed or neither or both.  Topologies are collections of sets and so are $\sigma$-algebras, further they they don't somehow connect these two elements seems remarkable strange. 
+
+\item \textbf{Function:}  Up unto this point, functions have been regarded mostly as expressions that are operated on and some emphasis has been on domain and range.  However, what is really considered here is not how a function operates on a single value but how it operates on sets of values.  Thus, they define a function $f: X \to \R$ but constantly improperly refer to $f(A)$ where $A \subseteq X$.  Now I refer  to something that I call a "punction". A \DEFINE{punction, $p_f$} is defined as, given a function $f: X \to \R$, $p_f: D \subseteq 2^X \to R \subseteq 2^\R$.  Further, $p_f^{-1}: R \to D$ and we'll see that if $f$ is continuous/meaqsurable then $p_f$ is 1-to-1 and onto.  I believe that this is the more natural way to interpret much of Measure Theory.
+
+\item \textbf{Measurable Sets > 0.}  These are best thought of as 'not a points'.  Further, open sets are 'not a points' as they have this cloud-like feel about them.
+
+\end{description}
+
 \end{document}

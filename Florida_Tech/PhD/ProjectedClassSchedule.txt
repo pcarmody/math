@@ -28,7 +28,7 @@ Spring 2026
 
 6240 Partial Differential Equations II
 XXXX Special Topics: Tensor Calculus (Berchenoko-Kogan)
-XXXX Special Topics: Algebraic Topology (Shibo Liu)
+XXXX Self-Study: Algebraic Topology (Shibo Liu)
 6899 Dissertation???
 
 ==========

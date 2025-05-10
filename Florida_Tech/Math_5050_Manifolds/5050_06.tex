@@ -1,0 +1,125 @@
+ \documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\usepackage{pgfplots}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment 6 }
+\newcommand{\DUEDATE}{April 24, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\RANGE}{\text{range}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{6.1 Differential Structure on $\R$}.\\
+
+Let $\R$ be the real line with the differentiable structure given by the maximal atlas of the chart $(\R,\, \phi = \mathbb{I}\,:\, \R \to \R)$, and let $\R'$ be the real line with the differentiable structure give by the maximal atlas of the chart $(\R,\, \psi \,:\, \R \to \R)$, where $\psi(x) = x^{1/3}$.
+\begin{enumerate}
+	\item Show that these two differentiable structures are distinct.
+	
+	\BLUE{WTS that there is a chart in $\R$ that is incompatible with a chart in $\R'$.  Let $\phi = \mathbb{I}$ and $\psi = x^{1/3}$ then
+	\begin{align*}
+		\psi \circ \phi^{-1} = x^{1/3}\AND \phi \circ \psi^{-1} = x^3
+	\end{align*}these are compatible if they are diffeomorphic to each other.  However, 
+	\begin{align*}
+		\LET g(x) &= \phi \circ \psi^{-1} = x^3 \in C^\infty \\
+		\LET h(x) &= \psi \circ \phi^{-1} = x^{1/3} \\
+		h'(x) &= \frac{1}{3x^{1/3}} \\
+		h'(0) &\text{ does not exist} \\
+		\therefore h \not \in C^\infty
+	\end{align*}and $\R$ is incompatible with $\R'$.
+	}
+	
+	\item Show that there is a diffeomorphism between $\R$ and $\R'$, (\textit{Hint:} The identity map $\R \to \R$ is not the desired differomorphism: in fact, this map is not smooth).
+	
+	\BLUE{Let $f: \R \to \R'$ and set
+	\begin{align*}
+		f(x) &= x^3 \\
+		\PAREN{\psi \circ f \circ \phi^{-1}}(x) &= \PAREN{\psi \circ f \circ \mathbb{I}}(x) = \PAREN{\psi \circ f}(x) \\
+		&= \psi(x^3) = \PAREN{x^3}^{1/3} = x \\
+		\AND \PAREN{\phi \circ f^{-1} \circ \psi^{-1}}(x) &= \PAREN{\phi \circ f^{-1}}(x^3) \\
+		&= \phi (f^{-1}(x^3)) =  \mathbb{I}((x^3)^{1/3}) = x
+	\end{align*}therefore $f$ is a diffeomorphism.
+	}
+\end{enumerate}
+
+\HLINE
+\textbf{6.2 The smoothness of inclusion map}.\\
+
+
+Let $M$ and $N$ be manifolds and let $q_o$ be a point in $N$.  Prove that the inclusion map $i_{q_o}\,:\, M\to M \times N, i_{q_0}(p) =(p, q_0)$, is $C^\infty$. \\
+
+\BLUE{Let $(U, \phi)$ be a chart on $M$ and $(V, \psi)$ be a chart on $N$. Then $(U \times V, \phi \times \psi)$ is a chart on $M \times N$. Observe
+\begin{align*}
+	(\phi \times \psi) \circ i_{q_0} \circ \phi^{-1} &: \phi(U) \to M \times N \\
+	(\phi \times \psi) \circ i_{q_0} \circ \phi^{-1}(u) &= (\phi \times \psi) \circ i_{q_0}( \phi^{-1}(u) )\\
+	&= (\phi \times \psi) ( \phi^{-1}(u), q_0) \\
+	&= \PAREN{ \phi(\phi^{-1}(x)),\; \psi(q_0)} \\
+	&= \PAREN{ u,\; \psi(q_0)}
+\end{align*}which is a smooth map.
+}
+
+\newpage
+\HLINE
+\textbf{6.4 Local coordinate systems}.\\
+
+Find all points in $\R^3$ in a neighborhood of which the funciton $x, x^2+y^2+z^2-1, z$ can serve as a local coordinate system.
+
+\BLUE{This can only happen where the Jacobian is not zero. 
+\begin{align*}
+	J(F) &= \DTHREEXTHREE{\PART{x}{x}}{\PART{}{x}(x^2+y^2+z^2-1)}{\PART{z}{x}}{\PART{x}{y}}{\PART{|}{y}(x^2+y^2+z^2-1)}{\PART{z}{y}}{\PART{x}{z}}{\PART{}{z}(x^2+y^2+z^2-1)}{\PART{z}{z}} \\
+	&= \DTHREEXTHREE{1}{2x}{0}{0}{2y}{0}{0}{2z}{1} \\ 
+	&= 2y
+\end{align*}Thus, as long as $y\ne0$ we have a local coordinate system.
+}
+\end{document}

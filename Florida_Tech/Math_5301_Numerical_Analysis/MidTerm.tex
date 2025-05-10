@@ -82,7 +82,7 @@
 \textbf{Assignment:} Consider 1D Poisson Equation $-\Delta x = \sin (\pi x)$, over the region $(0, \pi/2)$ with boundary conditions $u(0)=0$ and $u(\pi/2)=1$.  Using central difference scheme and a mesh of 128, obtain a linear system of $Au = f$ for the problem, then the solve the system using the following methods until a relative residual of $10^{-4}$ is reached. For all methods below, plot the analytical solution, the numerical solution and the error distribution.  Use zero vectors as your initial guess.
 
 \begin{enumerate}[label=(\alph*)]
-\item Gause-Segal Method.  Plot the rate of convergence and compare it with analysis.
+\item Gauss-Seidel Method.  Plot the rate of convergence and compare it with analysis.
 \item Conjugate Gradient Method. Compare the rate of convergence with that obtained in (a).  Do not use the CG solver provided by MatLab.
 \item Conjugage Gradient Method Preconditioned by Cholesky Decomposition.  Compare the rate of convergence with that obtained by (b).
 
@@ -94,7 +94,7 @@
 %
 %
 \begin{center}
-	\Large{Analytical and several Numerical Solutions to Poisson's Equation}
+	\Large{Analytical and several Numerical Solutions to Poisson's Equation}\\
 \end{center}
 
 \noindent\textbf{Introduction:}\\
@@ -116,12 +116,7 @@ As described in the assignment we will focus our attenion on this Poisson equati
 	u(0) = 0 &= \frac{1}{\pi^2}sin(\pi 0) + Cx + D \\
 	D &= 0 \\
 	u(\pi/2) =1 &= \frac{1}{\pi^2}sin(\pi^2/2) + C(\pi/2) \\
-	C &= \frac{2\PAREN{1-\frac{1}{\pi^2}}sin(\pi^2/2)}{\pi^2}=\frac{2\PAREN{1-\frac{1}{9.869604064}}0.086022097}{9.869604064} = 1.998233797 \approx 2 \\
-%	u(\pi/2) =1 &= \frac{1}{\pi^2}sin(\pi/2) + C(\pi/2) \\
-%	C &= \frac{2}{\pi}\PAREN{1-\frac{1}{\pi^2}}\\
-%	u(x) &= \frac{1}{\pi^2}sin(\pi x) + \frac{2}{\pi}\PAREN{1-\frac{1}{\pi^2}}x \\
-	u(x) &\approx \frac{1}{\pi^2}sin(\pi x) + 2x \\
-%	\frac{2\PAREN{1-\frac{1}{\pi^2}}sin(\pi^2/2)}{\pi^2} &= \frac{2\PAREN{1-\frac{1}{9.869604064}}0.086022097}{9.869604064} = 1.998233797 \approx 2
+	C &= \frac{2}{\pi}\PAREN{1-\frac{1}{•\pi^2}}
 \end{align*}
 
 \noindent\textbf{Centered Difference Scheme}\\
@@ -144,20 +139,19 @@ We will attempt to approximate the curve of  the solution at particular points $
 		0 & 0 & 0 & 0 & \cdots & 2
 	\end{array} } \COLVECTOR{ u_1 \\ u_2 \\ u_3 \\ u_4 \\ \vdots \\ u_i } &= h^2 \COLVECTOR{ f_1 \\ f_2 \\ f_3 \\ f_4 \\ \vdots \\ f_i } \\
 	u &= h^2 A^{-1} f
-\end{align*}remembering the boundary conditions.  Since $A$ is tri-diagonal we can use several methods and compare the cost and efficiency.  The MatLab code for the Central Difference Method is
-	\lstinputlisting{ml04.m}
+\end{align*}remembering the boundary conditions.  Since $A$ is tri-diagonal we can use several methods and compare the cost and efficiency.  From here we use several methods meant to study the efficiecny and optimization of this method.\\
 
-\noindent\textbf{Gause-Segal Method.}\\
+\noindent\textbf{Gauss-Seidel Method.}\\
 
 Since $A$ is a tri-diagonal matrix it can be divided into three separate matrices that add up.  Let $D$ be zero everywhere except the diagonal where it will hold the values of $A_{ii}$ (namely all 2s).  By applying this iteratively we get
 \begin{align*}
 	u_i^{[k+1]} &= \frac{1}{2}(u_{i-1}^{[k]}+u_{i+1}^{[k]} - h^2 f_i)
 \end{align*}Here is the MatLab code used to generate the graphs that follow:
-	\lstinputlisting{ml04c_1.m}
+	\lstinputlisting{midterm_GS.m}
 	
-From this we generate the following graphs.%4452
+%From this we generate the following graphs.%4452
 
-\includegraphics[scale=0.5]{ml04c.png} 
+%\includegraphics[scale=0.5]{midterm_1.png} 
 
 \noindent\textbf{Conjugate Gradient Method}\\
 
@@ -167,37 +161,45 @@ This technique for approximating our solution to the Poisson equation is to make
 \end{align*}where $\phi: \R^m \to \R$ of the form
 \begin{align*}
 	\phi(u) &= \frac{1}{2}u^TAu-u^Tf
-\end{align*}which is a quadratic function in $u$ and can be mapped with local extrema either as a top, a bowl or a saddle point, all based on the eigenvalues of $A$ (negative, positive, or neither, respectively).  Thus, when $A$ is SPD we can expect $r_{k}$ to progress ever closer towards the extremum.
+\end{align*}which is a quadratic function in $u$ and can be mapped with local extrema either as a top, a bowl or a saddle point, all based on the eigenvalues of $A$ (negative, positive, or neither, respectively).  Thus, when $A$ is SPD we can expect $r_{k}$ to progress ever closer towards the extremum. \\
+\\The source code for the Conjugage Gradient Method differsX from that of the Conjugate Gradient Method Preconditioned by Cholesky Decomposition by only a few lines of code.  The MatLab source code for both will be found in the next section. \\
 
-This is the source code
-	\lstinputlisting{ml04d_1.m}
+%This is the source code
+%	\lstinputlisting{ml04d_1.m}
 
-From this we generate the following graphs.
+%From this we generate the following graphs.
 
-\includegraphics[scale=0.5]{ml04d.png} 
+%\includegraphics[scale=0.5]{midterm_1.png} 
 
 
 \noindent\textbf{Conjugage Gradient Method Preconditioned by Cholesky Decomposition}\\
 
-This technique for approximating our solution to the Poisson equation is to make each iteration in the direction of greatest change.  That is, 
+The primary differences with the Cholesky Decomposition is the use of modified version of the $A$ matrix.  This factorized matrix, $M$, to simplify the $M^{-1}$ process as
 \begin{align*}
-	\nabla \phi(u_{k-1}) = Au_{k-1}-f \equiv -r_{k-1}
-\end{align*}where $\phi: \R^m \to \R$ of the form
+	Au =f \iff M^{-1}Au = M^{-1}Au= M^{-1}f
+\end{align*}which improves the efficiency of the process.  It can be shown that this has the same Condition Number as $A$. Some initialization is necessary to start with the preconditioning settting (found in lines 8 through 12). Then, when the new resolution is calculated, we utilze the preconditioning to recalculate our adjustment variable $\beta$ (found in lines 36 through 40).
 \begin{align*}
-	\phi(u) &= \frac{1}{2}u^TAu-u^Tf
-\end{align*}which is a quadratic function in $u$ and can be mapped with local extrema either as a top, a bowl or a saddle point, all based on the eigenvalues of $A$ (negative, positive, or neither, respectively).  Thus, when $A$ is SPD we can expect $r_{k}$ to progress ever closer towards the extremum.
+	r_{k+1} &= r_k^T M^{-1}r \\
+	\beta &= r_{k+1}/r_k \\
+	p &= r_k^TM^{-1}r _+ \beta p
+\end{align*}
 
 This is the source code
-	\lstinputlisting{ml04d_1.m}
+	\lstinputlisting{midterm_PCG.m}
 
 From this we generate the following graphs.
 
-\includegraphics[scale=0.5]{ml04d.png} 
+\includegraphics[scale=0.5]{midterm_1.png} 
+\\
+We can see from this graph that the Conjugate Gradient Method (the blue circles and no lines) and the Conjugate Gradient Method w/Preconditioning (the black lines between) follow the same path.  The resulting error distribution indicates the greater accuracy of the Conjugate Gradient Method over the Gauss-Seidel method as well as greater efficiency. \\
 
+\newpage
 \noindent\textbf{Analyzing the various solutions}.\\
 
-It should be noted that the Jacobi method took 4,452 iterations before being completed and the Steepest Descent Method took 13,454.\\  
+The following graph shows the rate of convergence of the Conjugate Gradient Method.  The Congjugate Gradient Methdo w/Preconditioning used a single iteration before converging.  It should be noted that the Gauss-Seidel method maximized its interation count before achieving the tolerance level of $10^{-4}$.\\  
 
-The two plots use a logorithmic scale.  A standard scale didn't emphasize the decay rate effectively as the initial iterations showed the great change, so much so that the following improved accuracy couldn't be seen.  The logarithmic scale more effictively shows the improvement.  Each iteration provides very little but necessary improvement.
+\includegraphics[scale=0.5]{midterm_2.png} 
+
+
 
 \end{document}

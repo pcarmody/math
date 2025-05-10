@@ -1,0 +1,158 @@
+ \documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\usepackage{pgfplots}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Assignment 7 }
+\newcommand{\DUEDATE}{April 30, 2025}
+\newcommand{\SEMESTER}{Spring 2025}
+\newcommand{\SCHEDULE}{MW 12:30 - 1:45}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\RANGE}{\text{range}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Berchenko-Kogan}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent\textbf{Exercise 8.3: (The Differential of a Map)}.  Check that $F_*(X_p)$ is a derivation at $F(p)$ and that $F_*:T_pN\to T_{F(p)}M$ is a linear map.
+
+\BLUE{Let $f$ be a germ at $F(p)$. Then
+\begin{align*}
+	(F_*(X_p))f = X_p(f \circ F)\in \R, \text{ for } f \in C^\infty_{F(p)}(M)
+\end{align*}Need to show that $F_*$ has the Liebniz Condition that is, given $f,g$ of the same germ at $F(p)$ then
+\begin{align*}
+	(F_*(X_p))fg &= X_p(fg \circ F) \\
+	&= X_p((f \circ F)(g\circ F)) \\
+	&= (g \circ F)X_p(f \circ F) + (f\circ F)X_p(g\circ F) \\
+	&= (g \circ F)(F_*(X_p))f + (f\circ F)(F_*(X_p))g 
+\end{align*}
+}
+
+\begin{enumerate}[label=8.\arabic*.]
+\setcounter{enumi}{1}
+	\item \textbf{Differential of a linear map}.  Let $L : \R^n \to \R^m$ be a linear map.  For any $p\in \R^n$ there is a canonical identification $T_p(\R^n) \overset{\sim}\to\R^n$ given by 
+	\begin{align*}
+		\sum a^i \RBAR{\PART{}{x^i}}_p \mapsto \textbf{a} = \ABRACKET{a^1, \dots, a^n}
+	\end{align*}Show that the differential $L_{*,p}: T_p(\R^n) \to T_{L(p)}(\R^m)$ is the map $L: \R^n \to \R^m$ itself, with the identification of the tangent spaces as above.
+	
+	\BLUE{Let $[L_k^j]$ be the Jacobian of $L$.  From equation 8.2 of the test \begin{align*}
+		L_{*,p}\PAREN{\RBAR{\PART{}{x^j}}_p} &= \sum_{k} L_k^j\RBAR{\PART{}{x^k}}_{F(p)}  = \PART{F^i}{x^j}(p)		
+	\end{align*}applying any vector $v = \SUM{i=1}{n} a_i \PART{}{x^i}$ we have
+	\begin{align*}
+	 	L_{*,p}(v) &= \sum_{i=1}^n a_i L_{*.p}\PAREN{\RBAR{ \PART{}{x^i}}_p} \\
+	 	&= \sum_{i=1}^n a_i \sum_{k=1}^m L_k^i\RBAR{\PART{}{x^k}}_{F(p)}  \\
+	 	&= \sum_{k=1}^m \PAREN{ \sum_{i=1}^n a_i L_k^i\RBAR{\PART{}{x^k}}_{F(p)}}  \\
+	 	&= \sum_{k=1}^m L^k(v) \\
+	 	&= L(v)
+	\end{align*}
+	}
+	
+	\item \textbf{Differental on a map}
+	
+	Fix a real number $\alpha$ and define $F: \R^2\to \R^2$ by 
+	\begin{align*}
+		\SQBRACKET{\begin{array}{c}
+		u \\v
+		\end{array}
+		} = (u,v) = F(x,y) = \SQBRACKET{\begin{array}{cc}
+		\cos \alpha & -\sin \alpha \\
+		\sin \alpha & \cos \alpha		
+		\end{array}
+		}\SQBRACKET{\begin{array}{c}
+		x \\y		
+		\end{array}
+		}
+	\end{align*}Let $X = -y\PART{}{x}+x\PART{}{y}$ be a vector field on $\R^2$.  If $p = (x,y) \in \R^2$ and $F_*(X_p)=\RBAR{\PAREN{a\PART{}{u}+ b\PART{}{v}}}_{F(p)}$, find $a$ and $b$ in terms of $x,y$, and $\alpha$.
+	
+	\BLUE{Since $F$ is linear its Jacobian is constant and at $p$ we have 
+	\begin{align*}
+		p &= (x,y) = \SQBRACKET{\begin{array}{c}
+			-y\\x
+		\end{array} }\\
+		F_*(X_p) &= \SQBRACKET{\begin{array}{cc}
+		\cos \alpha & -\sin \alpha \\
+		\sin \alpha & \cos \alpha		
+		\end{array}
+		}\SQBRACKET{\begin{array}{c}
+		-y \\x		
+		\end{array}
+		} \\
+		&= \SQBRACKET{\begin{array}{c}
+		 -y\cos \alpha -x\sin\alpha \\
+		 -y\sin \alpha + x\cos \alpha
+		\end{array}
+		} \\
+		&= (-y\cos \alpha -x\sin\alpha)\PART{}{u} + (-y\sin \alpha + x\cos \alpha)\PART{}{V}
+\end{align*}	therefore $a = -y\cos \alpha -x\sin\alpha$ and $b=-y\sin \alpha + x\cos \alpha$
+	}
+	
+	\item \textbf{Transition matrix for coordinate vectors}
+	
+	Let $x,y$ be the standared coordinates on $\R^2$, and let $U$ be the open set
+	\begin{align*}
+		U = \R^2-\{(x,0)|x \ge 0\}.
+	\end{align*}On $U$ the polar coordinates $r,\theta$ are uniquely defined by
+	\begin{align*}
+		x &= r\cos \theta \\
+		y &= r\sin \theta, r >0, 0<\theta< 2\pi
+	\end{align*}find $\PART{}{r}$ and $\PART{}{\theta}$ in terms of $\PART{}{x}$ and $\PART{}{y}.$
+	
+	\BLUE{Given any $f: U \to \R$  We have 
+	\begin{align*}
+		\PART{f}{r} &= \PART{f}{x}\PART{x}{r} + \PART{f}{y}\PART{y}{r} = \cos \theta \PART{f}{x} + \sin \theta \PART{f}{y} \\
+		\PART{f}{\theta} &= \PART{f}{x}\PART{x}{\theta} + \PART{f}{y}\PART{y}{\theta} = -r\sin \theta \PART{f}{x} + r\cos \theta \PART{f}{y} 
+\end{align*}	that is the expression may be expressed as 
+\begin{align*}
+		\PART{}{r} &= \cos \theta \PART{}{x} + \sin \theta \PART{}{y} \\
+		\PART{}{\theta} &= -r\sin \theta \PART{}{x} + r\cos \theta \PART{}{y} 
+\end{align*}
+	}
+\end{enumerate}
+\end{document}
