@@ -1,0 +1,181 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 7: Quotients }
+\newcommand{\DUEDATE}{May 17, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent\textbf{Pg. 77: Exercise 7.11 (Real projective space as a quotient of a sphere).*}  For $x=(x^1,\dots,x^n)\in \R^n$, let $||x|| = \sqrt{\sum_i(x^i)^2}$ be the modulus of $x$.  Prove that the map $f: \R^{n+1} - \{0\} \to S^n$ given by 
+\begin{align*}
+	f(x) = \frac{x}{||x||}
+\end{align*}induces a homeomorphism $\bar{f}: \R P^n\to S^n/\sim$.  Where
+\begin{align*}
+	x \sim y &\iff x=\pm y, \, x,y \in S^n
+\end{align*} (\textit{Hint: } Find an inverse map 
+\begin{align*}
+	\bar{g}: S^n/\sim \,\to \R P^n
+\end{align*}and show that both $\bar{f}$ and $\bar{g}$ are continuous.)\\
+
+\BLUE{Given the relation above $x \sim y \iff x=\pm y,\, x,y \in S^n$.  Define
+	\begin{align*}
+		\bar{g}([x]) &= [x] 
+	\end{align*}Note that on the left $[x] \in S^n/\sim$ and $[x] \in \R P^n$.  For clarity,\footnote{$\R P^n \equiv \R^{n+1}/r(x,y)$ where $r(x,y)$ is the relation that is true when $x,y,p$ are colinear.} 
+	\begin{align*}
+		[a] \in S^n/\sim &\implies [a] = \{ a, -a\} \WHERE a \in S^n\\
+		[b] \in \R P^n &\implies [b] = \{x \in \R^{n+1}|\, x=\alpha b,\, \forall \alpha \in \R\} \WHERE b \in \R^{n+1} 
+	\end{align*}Notice that
+	\begin{align*}
+		\bar{f}([b]) &= [f(b)] = \SQBRACKET{\frac{b}{||b||}} \in S^n/\sim \\
+		\bar{g}\PAREN{\SQBRACKET{\frac{b}{||b||}}} &= [b] \\
+		\therefore \bar{g}\circ\bar{f} = \mathbb{I}\\
+		\AND \bar{g}([a]) &= [a] \in \R P^n \\
+		\bar{f}\PAREN{\bar{g}([a])} &= \SQBRACKET{\frac{[a]}{|| [a]||}} = [f(a)] = [a] \in S^n/\sim\\
+		\therefore \bar{f}\circ\bar{g} = \mathbb{I}
+	\end{align*} $\bar{f}$ is continuous because $f$ is continuous.  $\bar{g}$ is continuous because it is a mapping of one identity to another.  Therefore, $\bar{f}$ is a homeomorphism.
+	}
+	
+\HLINE
+\begin{tikzpicture}
+	\node (S) {$S$};
+	\node (Y)  [right=of S] {$Y$};
+	\node (Q)  [below= of S] {$S/\sim$};
+	\draw (S) -> node[above] {$f$} (Y) 
+		(S) ->  node[left] {$\pi$} (Q)
+		(Q) -> node[right] {$\hat{f}$} (Y);
+\end{tikzpicture}\\
+\textbf{Problems}
+
+\begin{enumerate}[label=7.\arabic*.]
+	\item \textbf{Image of the inverse image of a map}
+	
+	Let $f:X\to Y$ be a map of sets, and let $B \subset Y$.  Prove that $f(f^{-1}(B)) = B \cap f(X)$.  Therefore, if $f$ is surjective, then $f(f^{-1}(B)) = B$.
+	
+	\BLUE{\textbf{$\subseteq$:  }Let $b \in B$ and $a \in X$ such that $f(a) = b$.  Then, $a \in f^{-1}(b)$, thus $a$ is an arbitrary point in $f^{-1}(B)$.  We know that $f(a) \in f(X)$ and $f(a) \in B$, therefore $f(a) \in B \cap f(X)$ and $f(f^{-1}(B)) \subseteq B \cap f(X)$.\\ \\
+	\textbf{$\supseteq$:  }Let $b \in B \cap  f(X)$.  Since $b \in f(X)$, there exists $a \in X$ such that $f(a) = b$ and since $b \in B$ then $b = f(a) \in f(f^{-1}(b)) \subseteq f^{-1}(B)$.  Therefore $b \in f(f^{-1}(B))$\\
+	}
+	
+	\item \textbf{Real projective plane}
+	
+	Let $H^2$ be the closed upper hemisphere in the unit sphere $S^2$, and let $i: H^2 \to S^2$ be the inclusion map.  In the notation of example 7.13, prove that the induced map $f: H^2/\sim \,\to S^2/\sim$ is a homeomorphism. (\textit{Hint:} Imitate Propostion 7.3.)
+\newcommand{\HOMEO}{\overset{\sim}\to}	
+	\BLUE{Let $H^2$ be the upper hemisphere and $S^2$ be the unit sphere
+	\begin{align*}
+		H^2 &= \{(x,y,z) \in \R^3\,|\, x^2+y^2+z^2=1, z \ge 0\} \\
+		S^2 &= \{(x,y,z) \in \R^3\,|\, x^2+y^2+z^2=1\}
+	\end{align*}These two are homeomorphic to each via 
+	\begin{align*}
+		\varphi : S^2 &\mapsto H^2 \\
+		\varphi(x,y,z) &= (x,y, |z|)
+	\end{align*} and its inverse
+	\begin{align*}
+		\psi : H^2 &\mapsto S^2 \\
+		\psi(x,y,z) &= (x,y,z)
+	\end{align*}Define the relations
+	\begin{align*}
+		(x,y,z) \sim (-x,-y,-z) &\to x^2+y^2=z^2, \, \forall (x,y,z) \in S^2 \\
+		(x,y,z) \sim (x,y, z) &\to \sqrt{x^2+y^2}=z, \, \forall (x,y,z) \in H^2
+	\end{align*}Then we induce $f:H^2/\sim\, \to S^2/\sim$ as
+	\begin{align*}
+		f([(x,y,z)]) &= [(x,y,z)]
+	\end{align*}
+	}
+	
+	\item \textbf{Closedness of the diagonal of a Hausdorff Space}
+	
+	Deduce Theorem 7.7 from Corollary 7.8 (\textit{Hint:} To prove that if $S/\sim$ is Hausdorff, then the graph $R$ of $\sim$ is closed in $S \times S$, use the continuity of the projection map $\pi:S \to S/\sim$.  To prove the reverse implication, use the openness of $\pi$.)
+	
+	\item \textbf{Quotient of a sphere with antipodal points indentified}
+	
+	Let $S^n$ be the unit sphere centered at the oringin $\R^{n+1}$.  Define an equivalence relation $\sim$ on $S^n$ by indentifying antipodal points:
+	\begin{align*}
+		x \sim y \iff x=\pm y, \, x,y, \in S^n
+	\end{align*}\begin{enumerate}[label=(\alph*)]
+		\item Show that $\sim$ is an open equivalence relation.
+		\item Apply Theorem 7.7 and Corallary 7.8 to prove that the quotient space $S^n/\sim$ is Hausdorff, without making use of the homeomorphism $\R P^n \cong S^n/\sim$.
+	\end{enumerate}
+	
+	\item \textbf{Orbit space of a continuous group action}
+	
+	Suppose a right action of a topological group $G$ on a topological space $S$ is continuous, this simply imeans that the map $S \times G \to S$ describing teh action is continuous.  Define two points $x,y$ of $S$ to bequivalent if they are in teh same orbit; i.e., there is an element $g \in G$ such that $y=xg$.  Let $S/G$ be teh quotient space; it is called the \textit{orbit space} of the action.  Prove that the projection map $\pi: S \to S/G$ is an open map.  (This problem generlaizes Proposition 7.14, in which $G=R^\times = \R-\{0\}$ and $S = \R^{n+1}-\{0\}$.  Because $\R^\times$ is commutative, a left $\R^\times$-action becomes a right $\R^\times$-action if scalar multiplicatin is written on teh right.)
+	
+	\item \textbf{Quotient of $\R$ by $2\pi\Z$.}
+	
+	Let the addtivei group $2\Z$ act on $\R$ on the right by $x\cdot 2\pi n=x+2\pi n$, where $n$ is an integer.  Show that eh orbit space $\R/2\pi\Z$ is a smooth manifold.
+	
+	\item \textbf{The circle asa quotient space}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Let $\{(U_\alpha, \phi_\alpha)\{_{\alpha=1}^2$ be the atlas of circles $S^1$ in Example 5.7, and let $\bar{\phi}_\alpha$ be the map $\phi_\alpha$ followed by the projection $\R \to \R/2\pi\Z$.  On $U_1\cap U_2 = A \coprod B$, since $\phi_1$ and $\phi_2$ differ by an integer multiple of $2\pi$, $\bar{\phi}_1 = \bar{phi}_2$.  Therefore, $\bar{\phi}_1$ and $\bar{\phi}_2$ piece together to give a well-defined map $\bar{\phi}: S^1\to \R/2\pi\Z$.  Prove that $\bar{\phi}$ is $C^\infty$.
+		
+		\item The complex exponetial $\R \to S^1, t\mapsto e^{it}$, is constant on each orbit of the action of $2\pi\Z$ on $\R$.  Therefore, there is an induced map $F: \R/2\pi\Z \to S^1, F([t])=e^{it}$.  Prove that $F$ is $C^\infty$.
+		
+		\item Prove that $F: \R/2\pi/Z \to S^1$ is a diffeomorphism.
+	
+	\end{enumerate}
+	
+	\item \textbf{The Grassmanian $G(k,n)$}
+	
+	\item \textbf{Compactness of real projective space}
+	
+	Show that the real projective space $\R P^n$ is compact. (\textit{Hint:} Use Exercise 7.11.)
+	
+
+\end{enumerate}
+\end{document}
