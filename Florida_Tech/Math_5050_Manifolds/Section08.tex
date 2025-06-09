@@ -1,0 +1,254 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 8: The Tangent Space }
+\newcommand{\DUEDATE}{May 30, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent\textbf{Pg. 88: Exercise 8.3 (The Differential of a mpa).}  Check that $F_*(X_p)$ is a derivation at $F(p)$ and that $F_*: T_p N\to T_{F(p)} M$ is a linear map.\\
+
+\BLUE{Let $[f] \in C^\infty_{F(p)}(M)$  and  $f, g \in [f]$. Then,
+\begin{align*}
+	(F_*(X_p))f\cdot g &=  X_p(f\cdot g \circ F)\\
+	&=  X_p\PAREN{(f\circ F)\cdot(g \circ F) }\\
+	&= f\cdot X_p(g \circ F) + g\cdot X_p(f\circ F)\\
+	&= f\cdot (F_*(X_p))g+g\cdot(F_*(X_p))f
+\end{align*}hence $F_*$ obeys the Liebniz Rule.
+\begin{align*}
+	F_*(aX_p +b)f &= (aX_p+b)(f \circ F)\\
+	&= a(X_p)(f\circ F)+b(f \circ F)\\
+	&= a(F_*(X_p))f+(F_*(b))f
+\end{align*}
+}
+
+\HLINE
+\noindent\textbf{Pg. 92: Exercise 8.14 (The Velocity Vector vs the Calculus Derivative).}  Let $c:(a,b) \to \R$ be a curve with target space $\R$.  Verify that $c'(t) = \dot{c}(t)d/dx|_{c(t)}$.
+
+\HLINE
+\noindent \textbf{\\\large{Problems}}
+
+\begin{enumerate}[label=8.\arabic*.]
+
+\item \textbf{Differential of a map.}
+
+Let $F: \R^2 \to \R^3$ be the map
+\begin{align*}
+	(u,v,w) = F(x,y) = (x,y,xy).
+\end{align*}Let $p =(x,y)\in \R^2$.  Compute $F_*\PAREN{\RBAR{\PART{}{x}}_p}$ as a linear combination of $\PART{}{u}, \PART{}{v}$, and $\PART{}{w}$ at $F(p)$.
+
+\BLUE{Let $F(x,y) = (F^1(x,y), F^2(x,y), F^3(x,y))$ then
+\begin{align*}
+	J_F &= \SQBRACKET{\begin{array}{cc}
+		\PART{F^1}{x} & \PART{F^1}{y} \\
+		\PART{F^2}{x} & \PART{F^2}{y} \\
+		\PART{F^3}{x} & \PART{F^3}{y}
+	\end{array}
+	} = \SQBRACKET{\begin{array}{cc}
+		1 & 0 \\
+		0 & 1 \\
+		y & x
+	\end{array}
+	}\\
+	F_*\PAREN{\RBAR{\PART{}{x}}_p} &= F_*(1,0) \\
+	&= \SQBRACKET{\begin{array}{cc}
+		1 & 0 \\
+		0 & 1 \\
+		y & x
+	\end{array}
+	} \SQCOLVECTOR{1 \\ 0}\\
+	&= \CYCLE{ 1 & 0 & y} \\
+	&= \PART{}{u} + v\PART{}{w}
+\end{align*}
+}
+
+\item \textbf{Differential of a linear map}
+
+Let $L: \R^n\to \R^m$ be a linear map.  For any $p \in \R^n$, there is a canonical identification $T_p(\R^n)\ISO \R^n$ given by 
+\begin{align*}
+	\sum a^i \RBAR{\PART{}{x^i}}_p \mapsto \textbf{a}=\ABRACKET{a^1,\cdots a^n}.
+\end{align*}Show that the differential $L_{*,p}:T_p(\R^n)\to T_{L(p)}(\R^m)$ is the map $L: \R^n\to\R^m$ itself, with the identificaton of the tangent spaces as above.
+
+\BLUE{Given $p=(a^1, \dots, a^n)$ and $L: N \to M$ and $L(p) = \ABRACKET{a^1, \dots, a^n}$. Given any $f: M \to \R$ then
+\begin{align*}
+	(L_{*,p}(X_p))f(p) &= X_p(f \circ L)(p) \\
+	&= \sum_{i=1}^n \RBAR{\PART{f(L(p))}{x^i}}_p \\
+	&= \sum_{i=1}^n \RBAR{\PART{f(\ABRACKET{a^1,\dots,a^n})}{x^i}}_p \\
+	&= \sum_{i=1}^n \RBAR{\PART{f(p)}{x^i}}_p \\
+	&= \sum_{i=1}^n \RBAR{\PART{}{x^i}}_p f(p)\\
+	&= L_p f(p)
+\end{align*}
+}
+
+\item \textbf{Differential of a map}
+
+Fix a real number $\alpha$ and define $F: \R^2 \to \R^2$ by 
+\begin{align*}
+	\SQCOLVECTOR{
+		u \\ v	
+	} = (u,v) = F(x,y) = \SQTWOXTWO{\cos \alpha}{-\sin \alpha }{ \sin \alpha }{ \cos \alpha} \SQCOLVECTOR{x\\y}
+\end{align*}Let $X = -y\PART{}{x}+x\PART{}{y}$ be a vector field on $\R^2$. If $p=(x,y)\in\R^2$ and $F_*(X_p) = \RBAR{\PAREN{ a\PART{}{u}+b\PART{}{v}}}_{F(p)}$, find $a$ and $b$ in terms of $x,y, $ and $\alpha$.
+
+\BLUE{Remember that $F_*$ is linear then\begin{align}
+	(F_*(X_p))f &= -yF_*\PAREN{\PART{}{x}}+xF_*\PAREN{\PART{}{y}}
+\end{align}The Jacobian is 
+\begin{align*}
+	J_{F_*} &= \SQTWOXTWO{\cos \alpha}{-\sin \alpha }{ \sin \alpha }{ \cos \alpha} \\
+	F_*\PAREN{\PART{}{x}} &= J_{F_*} \SQCOLVECTOR{ 1 \\ 0 } = \SQCOLVECTOR{\cos \alpha \\ \sin\alpha}= \cos \alpha \PART{}{u} + \sin\alpha\PART{}{v}\\
+	F_*\PAREN{\PART{}{y}} &= J_{F_*} \SQCOLVECTOR{ 0 \\ 1 } = \SQCOLVECTOR{-\sin \alpha \\ \cos\alpha}= -\sin \alpha \PART{}{u} + \cos\alpha\PART{}{v}
+\end{align*}From (1) we have
+\begin{align*}
+	(F_*(X_p))f &= -yF_*\PAREN{\PART{}{x}}+xF_*\PAREN{\PART{}{y}} \\
+	&= -y \PAREN{\cos \alpha \PART{}{u} + \sin\alpha\PART{}{v}} +x \PAREN{-\sin \alpha \PART{}{u} + \cos\alpha\PART{}{v}} \\
+	&= -(y\cos \alpha + \sin \alpha)\PART{}{u} + (-y\sin\alpha+x\cos\alpha)\PART{}{v}
+\end{align*}
+}
+
+\item \textbf{Transition matrix for coordinate vectors}
+
+Let $x,y$ be the standard coordinates on $\R^2$, and let $U$ be the ope set
+\begin{align*}
+	U = \R^2-\BRACKET{(x,0)\,|\, x \ge 0}.
+\end{align*}On $U$ the polar coordinates $r,\theta$ are uniquley defined by 
+\begin{align*}
+	x &= r\cos \theta\\
+	y &= r \sin, r > 0, 0 < \theta < 2 \pi
+\end{align*}Find $\PART{}{r}$ and $\PART{}{\theta}$ in terms of $\PART{}{x}$ and $\PART{}{y}$.
+
+\BLUE{\begin{align*}
+	F: U &\to \R^2 \\
+	F(r,\theta) &= (r\cos \theta, r\sin \theta) \\
+	J_F &= \SQTWOXTWO{\PART{x}{r}}{\PART{x}{\theta}}{\PART{y}{r}}{\PART{y}{\theta}} = \SQTWOXTWO{ \cos \theta}{-r\sin\theta}{\sin\theta}{r\cos \theta} \\
+	F\PAREN{\PART{}{r}} &= J_F\SQCOLVECTOR{1 \\ 0} = \SQCOLVECTOR{\cos\theta \\ \sin \theta}\\
+	&= \cos\theta \PART{}{x} + \sin\theta \PART{}{y}\\
+	F\PAREN{\PART{}{\theta}} &= J_F\SQCOLVECTOR{0 \\ 1} = \SQCOLVECTOR{-r\sin\theta \\ r\cos \theta}\\
+	&= -r\sin\theta \PART{}{x} + r\cos\theta \PART{}{y}
+\end{align*}$F$ is bijective, hence, $J_F^{-1}$ exists and is 
+\begin{align*}
+	J_F^{-1} &= \SQTWOXTWO{\PART{r}{x}}{\PART{r}{y}}{\PART{\theta}{x}}{\PART{\theta}{y}} = \frac{1}{\det J_F }\SQTWOXTWO{r\cos\theta}{\sin\theta}{-r\sin\theta}{\cos\theta} \\
+	\det J_F &= r\cos^2\theta +r\sin^\theta = r\\
+	J_F^{-1} &= \SQTWOXTWO{\cos\theta}{\frac{\sin\theta}{r}}{-\sin\theta}{\frac{\cos\theta}{r}} 
+\end{align*}Then we can write $F^{-1}(x,y)$ in terms of $J_F^{-1}$.
+}
+
+\item \textbf{Velocity of a curve in local coordinates}
+
+Prove Proposition 8.15.
+
+\item \textbf{Velocity vector}
+
+Let $p=(x,y)$ be a point in $\R^2$.  Then
+\begin{align*}
+	c_p(t) = \SQTWOXTWO{\cos 2t}{-\sin 2t}{\sin 2t}{\cos 2t} \SQCOLVECTOR{x\\y}, t \in \R
+\end{align*}is a curve with initail point $p$ in $\R^2$.  compute the veolocity vector $c_p'(0)$.
+
+\BLUE{\begin{align*}
+	c_p(t) &= \SQTWOXTWO{\cos 2t}{-\sin 2t}{\sin 2t}{\cos 2t} \SQCOLVECTOR{x\\y} \\
+	&= \SQCOLVECTOR{x\cos 2t-y\sin 2t\\x\sin 2t+y\cos 2t} \\
+	\dot{c}^1(t) &= -2x\sin 2t-2y\cos 2t\\
+	\dot{c}^2(t) &= 2x\cos 2t -2y\sin 2t \\
+	c'(0) &= \SQCOLVECTOR{-2x\cos 0-2y\sin 0\\2x\cos 0-2y \sin 0} = \SQCOLVECTOR{-2y\\2x}
+\end{align*}
+}
+
+\item \textbf{Tangent space to a product}
+
+If $M$ and $N$ are manifolds, let $\pi_1 : M \times N \to M$ and $\pi_2 : M \times N \to N$ be the two projections.  Prove that for $(p,q) \in M \times N$,
+\begin{align*}
+	(\pi_1, \pi_2) : T_{(p,q)}(M \times N)\to T_pM \times T_qN
+\end{align*}is an isomorphism.
+
+\item \textbf{Differentials of multiplication and inverse}
+
+Let $G$ be a Lie group with multiplication map $\mu:G \times G \to G$, inverse map $\iota : G \to G$, and identity element $e$.
+\begin{enumerate}[label=(\alph*)]
+
+\item Show that the differential at the identity of the multiplication map $\mu$ is addition:
+\begin{align*}
+	\mu_{*,(e,e)} : T_eG \times T_e G &\to T_e G,\\
+	\mu_{*,(e,e)}(X_e, Y_e) &= X_e + Y_e.
+\end{align*}(\textit{Hint:}  First, computer $\mu_{*,(e,e)}(X_e, 0)$ and $\mu_{*,(e,e)}(0,Y_e)$ using Proposition 8.18)
+
+\BLUE{Want to show that if $F=\mu$ and $p=(e,e)$.  Thus when we write $F_*(X_p)f = X_p(f\circ F)$ we mean $\mu_{*,(e,e)}(X_{(e,e)})f = X_{(e,e)}(f\circ \mu)$
+}
+
+\item Show that the differential at the identity of $\iota$ is the negative:
+\begin{align*}
+	\iota_{*,(e,e)}: T_e G &\to T_e G,\\
+	\iota_{*,(e,e)}(X_e) = -X_e.
+\end{align*}(\textit{Hint:} Take the differential of $\mu(c(t), (t\circ c)(t)) = e.$).
+
+\end{enumerate}
+
+\item \textbf{Transforming vectors to coordinate vectors}
+
+Let $X_1, \dots, X_n$ be $n$ vector fields on an open subset $U$ of a manifold of dimensions $n$.  Suppose that at $p\in U$, the vectors $(X_1)_p, \dots, (X_n)_p$ are linearly independent.  Show that there is a chart $(V, x^1, \dots, x^n)$ about $p$ such that $(X_i)_p = \PAREN{\PART{}{x^i}}_p$ for $i = 1, \dots, n$.
+
+\item \textbf{Local maxima}
+
+A real-valued function $f: M \to \R$ on a manifold is said to have \textit{local maximum} at $p \in M$ if there is a neighborhood $U$ of $p$ such that $f(p) \ge f(q)$ for all $q \in U$.
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Prove that if a differentiable functions $f: I \to \R$ defined on an open interval $I$ has a local maximum at $p \in I$, then $f'(p)=0$.
+\item Prove that a local maximum of a $C^\infty$ fucntion $f: M \to \R$ is a critical pint of $f$.  (\textit{Hint: }Let $X_p$ be a tangent vector in $T_pM$ and let $c(t)$ be a curve in $M$ starting at $p$ with initial vector $X_p$.  Then $f \circ c$ is a real-valued functions with a local maximum at 0. Apply (a).)
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

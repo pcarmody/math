@@ -65,6 +65,12 @@
 \begin{enumerate}
 	\item \DEFINE{Diffeomorphism}: If $f \in C^\infty$ and $f^{-1} \in C^\infty$ then $f$ is said to be a \DEFINE{diffeomorphism}.  Similarly, if there exists a mapping between two sets that is a diffeomorphism, the sets are said to be \DEFINE{diffeomorphic} to each other.
 	\item \DEFINE{Tangent Space} at a point $p$.  The set of all vectors rooted at $p$, written as $T_p(\R^n)$.  
+	
+	Let $p=(x^1, \dots, x^n)$.  The directional deriviative for each component would be described as
+	\begin{align*}
+		\RBAR{\PART{}{x^1}}_p& \\
+		\text{notice } \ABRACKET{\PART{}{x^i}, \PART{}{x^j}} &= \delta_j^i, \forall p.
+	\end{align*}that is perpendicular and form a orthogonal basis.  Thus, a Tangent Vector is also called a "Derivation".
 	\item \DEFINE{Derivations}: any operation that supports the Liebniz Rule $D(fg) = (Df)g+fDg$.
 	\item \DEFINE{Derivation Space}. $\mathcal{D}_p(\R^n)$ is the set of all derivations at $p$.  This constitutes a vector space.  There exists an isomorphism $\phi: T_p(\R^n) \to \mathcal{D}(\R^n)$ defined as
 	\begin{align*}
@@ -555,5 +561,24 @@ H^k_{\text{dR}}(T^2) =
  \( T^2 \) & \( \mathbb{R} \) & \( \mathbb{R} \oplus \mathbb{R} \) & \( \mathbb{R} \)\\
  \hline
  \end{tabular}\\
+ 
+ \newpage
+ \Large{\S 8 Tangent Space.}
+ 
+ \setcounter{chapter}{8}
+ \setcounter{section}{1}
+ 
+ \begin{definition}[Tangent vector]  A \DEFINE{tangent vector} at a point $p$ is a derivation at $p$.
+ \end{definition}
+ 
+ \begin{remark}
+ 
+ In general, $x^i, y^j$ are coordinates for manifolds $N,M$ and $r^i$ are coordinates associated with charts.  Thus $p=(x^1, \dots, x^n)$ and $\phi(p)=(r^1, \dots, r^k)$ where $k \le n$.
+ \end{remark}
+ 
+ \begin{definition}[Differential of a Map]
+ 
+ 
+ \end{definition}
 
 \end{document}

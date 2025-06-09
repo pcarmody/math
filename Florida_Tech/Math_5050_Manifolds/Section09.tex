@@ -1,0 +1,119 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 8: The Tangent Space }
+\newcommand{\DUEDATE}{May 30, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\noindent \textbf{\\\large{Problems}}
+
+\begin{enumerate}[label=9.\arabic*.]
+
+\item \textbf{Regular values}
+
+Define $f:\R^2\to \R$ by
+\begin{align*}
+	f(x,y) = x^3-6xy+y^2.
+\end{align*}Fine all values $c \in \R$ for whcih the level $f^{-1}(c)$ is a regular submanifold of $\R^2$.
+
+\item \textbf{Solution set of one equation.}
+
+Let $x,y,z,w$ be the standard coordinates on $\R^4$.  Is teh solution set of $x^5+y^5+z^5+w^5=1$ in $\R^4$ a smooth manifold?  Explain why or why not.  (Assume that the subset is given the subspace topology).
+
+\item \textbf{Solution set of two equations.}
+
+Is teh solution set of thesysemt of equations 
+\begin{align*}
+	x^3+y^3+z^3=1,\, z=xy
+\end{align*}in $\R^3$ a smooth manifold?  Prove your answer.
+
+\item \textbf{Regular submanifolds}
+
+Suppose that a subset $S$ of $\R^2$ hat eh property that locally on $S$ one of the coordinates is $C^\infty$ function of the other coordinate.  Show that $S$ is qa regular submanifold of $\R^2$. (Note that the unit circle defined by $x^2+y^2=1$ has this property. AT every point of the circle, there is a neighborhood in whic h$y$ is a $C^\infty$ function of $x$ or $x$ is a $C^\infty$ function of $y$.)
+
+\item \textbf{Graph of a smooth function}
+
+Show that the graph $\Gamma(f)$ of a smooth function $f: \R^2\to \R$.
+\begin{align*}
+	\Gamma(f) &= \BRACKET{\PAREN{x,y,f(x,y)} \in \R^3}
+\end{align*}is a regular submanifold of $\R^3$.
+
+\item \textbf{Euler's formula}
+A polynomial $F(x_0,\dots,x_n) \in \R[x_0,\dots,x_n]$ is \textit{homogenous of degree $k$} if it is a linear combination of monomials $x_9^{i_o}\cdots x_n^{i_n}$ of degree $\SUM{j=0}{n}i+j = k$.  Let $F(x_0,\dots,x_n)$ be a homogenous polynomial of degree $k$.  Clearly, for any $t \in \R$,
+\begin{align*}
+	F(tx_o,\dots,tx_n) &= t^kF(x_0,\dots, x_n).
+\end{align*}Show that
+\begin{align*}
+	\sum+{i=0}^n x_i\PART{F}{x_i} = kF.
+\end{align*}
+
+\item \textit{Smooth projectve hypersurface}
+
+On the projective space $\R P^n$ a hmogenous polynomial $F(x_0,\dots,x_n)$ of degree $k$ is not a function , since its value at a point $[a_0,\dots,a_n]$ is not unique.  However, the zer set in $\R P^n$ of a homogenous polynomial $F(x_0,\dots,x_n)$ is well defined, since $F(a_0,\dots,a_n)=0$ if and only if 
+\begin{align*}
+	F(ta_0,\dots,ta_n) &= t^kF(a_0,\dots,a_n)=0,\, \forall t \in R^\times: \R-\{0\}
+\end{align*}The zero set of finitely many homogenous polynomials in $\R P^q$ is called a \textit{real projective variety}.  A projectvie variety defined bya single homogeneous polynomial of degree $k$ is called a \textit{hypersurface} of degree $k$.  Show that the hypersurface $Z(F)$ defined by $F(x_0,x_1,x_2)=0$ is smoot if $\partial F/\partial x_0, \partial F/\partial x_1$ and $\partial F/\partial x_2$ are simultaneously zero on $Z(F)$.  (\textit{Hint:} The standard coordinates on $U_0$ which is homeomorpic to $\R^2$, are $x=x_1/x_0, y=x_2/x_0$ (see Subsection 7.7).  In $U_0, F(x_0,x_1,x_2) = x_0^tF(1,x_1/x_0, x_2/x_0)= x_0^kF(1,x,y)$.  Defein $f(x,y)= F(1,x,y)$.  Then $f$ and $F$ ahve the same zero set in $U_0$.)
+
+\item \textbf{Product of regular submanifolds}
+
+If $S_1$ is a regular submanifold of the manifold $M_i$ for $i=1,2$, prove that $S_1 \times S_2$ is a regular submanifold of $M_1 \times M_2$.
+
+\end{enumerate}
+\end{document}

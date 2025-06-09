@@ -1,0 +1,625 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math XXXX -- Independent Study: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{\textit{An Introduction to Lie Algebras}}
+\newcommand{\DUEDATE}{August, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Summer 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GL}{\operatorname{gl}}
+\newcommand{\SL}{\operatorname{sl}}
+%\newcommand{\TR}{\operatorname{tr}}
+\newcommand{\AD}{\operatorname{ad}}
+\newcommand{\LB}[2]{\left [ #1,#2 \right ]}
+\newcommand{\IMG}{\operatorname{im}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\chapter{Introduction}
+
+\begin{definition}[Lie Bracket]
+
+We define the Lie Bracket, $[\cdot, \cdot]$ as a bilinear operation
+\begin{align*}
+	[\cdot,\cdot] : L &\times L \to L
+\end{align*}with the following properties
+\begin{align*}
+	&[x,x] =0 & (L1)\\
+	&[x, [y,z]] + [y, [z,x]] + [z, [x,y]] =0 & (L2)
+\end{align*}
+\end{definition}
+\section{Exercises}
+
+\begin{enumerate}[label=\textit{1.\arabic*}]
+
+\item (Pg 2.)  \begin{enumerate}
+	\item Show that $[v,0] = 0 = [0,v]$ for all $ v \in L$.
+	
+	\BLUE{\begin{align*}
+		[v, v] &= 0 \\
+		[v, v] - [v, 0] &= 0 - [v, 0] \\
+		[v-v, v-0] &= [0,v] \\
+		[0,v] &= [v, 0]
+	\end{align*}	but $[0,v] = -[v, 0]$ for all $v$ therefore $[0,v] = 0$.
+	}
+	
+	\item Suppose that $x,y \in L$ satisfy $[x,y] \ne 0$.  Show that $x$ and $y$ are linearly independent on $F$.
+	
+	\BLUE{Want to show that $ax + by=0$ implies that $a, b = 0$.
+	\begin{align*}
+		\LET ax + by &= 0 \\
+		by &= -ax \implies y = cx, \text{ for some } c\\
+		[x,y] &= [x,cx] = c[x,x] = 0
+	\end{align*}but $[x,y]\ne 0$ therefore $c = 0$ and $x,y$ are linearly independent.
+	}
+\end{enumerate}
+
+\item (Pg 2.) Convince yourself that $\wedge$ is bilinear. Then check that the Jacobi Identity holds. \textit{Hint: } if $x \cdot y$ denotes the dot product  of $x,y \in \R^3$, then 
+\begin{align*}
+	x\wedge(y\wedge z) = (x\cdot{z})y-(x\cdot y)z,\, \forall x,y,z \in \R^3.
+\end{align*}
+
+\BLUE{\textbf{$wedge$ is bilinear.}\\
+Given $x=(x_1,x_2, x_3)$ and $y=(y_1, y_2, y_3)$ we have 
+\begin{align*}
+	x \wedge y &= ( x_2y_3-x_3y_2, x_3y_1-x_1y_3, x_1y_2-x_2y_1) \\
+	(x+(0,b,0)) \wedge y &= ( (x_2+b)y_3-(x_3+0)y_2, (x_3+0)y_1-(x_1+0)y_3, (x_1+0)y_2-(x_2+b)y_1) \\
+	&= ( x_2y_3-x_3y_2, x_3y_1-x_1y_3, x_1y_2-x_2y_1) + ( by_3, 0 , -by_1) \\
+	&= x \wedge y + (0,b,0)\wedge y
+\end{align*}Therefore additive on the left for the middle coordinate.  Each argument is independent of coordinate so is true for $(a, 0,0)$ and $(0,0,c)$ and can be easily seen when used on the write (e.g., $x \wedge (y+(0,b,0)$).\\
+\textbf{The Jacobi Identity}\\
+Want to show 
+\begin{align}
+	x\wedge(y\wedge z)+y\wedge (z \wedge x) + z\wedge(y \wedge x) &= 0
+\end{align} from the hint
+\newcommand{\ABC}[3]{ (#1 \cdot #3)#2-(#1 \cdot #2)#3}
+\begin{align*}
+	x\wedge(y\wedge z) &= \ABC{x}{y}{z} 
+\end{align*}and from (1)
+\begin{align*}
+	x\wedge(y\wedge z)+y\wedge (z \wedge x) + z\wedge(y \wedge x) &= \ABC{x}{y}{z} \\&+\ABC{y}{z}{x} \\&+ \ABC{z}{x}{y} \\
+	&= \PAREN{(x\cdot z)-(z\cdot x)}y\\&+\PAREN{-(x\cdot y)+(y\cdot x)}z \\&+ \PAREN{-(y\cdot z)+(z\cdot y)}x  \\
+	&= 0
+\end{align*}
+}
+
+\item (Pg 2.) Supoose that $V$ is a finite-dimensional vector space over $F$.  Write $\GL(V)$ for the set of all linear maps from $V$ to $V$.  This is again a vector space over $F$, and it becomes a Lie algebra, known as the \textit{general linear algebra}, if we define the Lie bracket $[--,--]$ by
+\begin{align*}
+	[x,y] := x \circ y -y \circ x,\, \forall x,y \in \GL(V),
+\end{align*}where $\circ$ deontes the composition of maps. Check that the Jacobi Identity holds.
+
+\newcommand{\GLLB}[2]{(#1\circ #2-#2\circ #1)}
+
+\BLUE{Given $R,S,T \in \GL(V)$ there exists matrix $A,B,C \in \mathcal{M}_{n\times n}(F)$ where $n = \dim V$ and $Rx = Ax,\, Sx = Bx, \, Tx = Cx, \, \forall x \in V$.  Further remember that $R \circ S = AB$ (similar for the other two transormations) for all $x \in v$.  Then
+\begin{align*}
+	\LB{R}{\LB{S}{T}} + \LB{S}{\LB{T}{R}}+\LB{T}{\LB{R}{S}} &= \GLLB{R}{\GLLB{S}{T}} \\&+ \GLLB{S}{\GLLB{T}{R}}\\&+\GLLB{T}{\GLLB{R}{S}} \\
+	&= (A(BC-CB)-(BC-CB)A)\\&+(B(CA-AC)-(CA-AC)B)\\&+(C(AB-BC)-(AB-BA)C)
+\end{align*}by rearranging the terms we can see that they all cancel out.  Most notably this is done \textit{without commuting}.  It is important to remember that, in general, $R\circ S \ne S \circ R$.
+}
+
+\item Let $b(n,F)$ be the upper triangular matrices in $\GL(n, F)$.  (A matrix $x$ is said to be upper triangular if $x_{ij}=0$ whnever $i> j$.)  This is a Lie algebra with the same Lie bracket as $\GL(n,F)$.\\
+
+Similarly, let $n(n,F)$ be the strictly upper triangular matrices in $\GL(n,F)$.  (A matrix $x$ i said to be strictly upper triangular if $x_{ij}=0$ whenever $i \ge j$.)  Again this is a Lie algebra with teh same Lie bracket as $\GL(n,F)$.\\
+
+Verify these assertions.
+
+\BLUE{Let $b(n,F) = \{A \in \GL(n,F)\,|\, A=[x_{ij}],\,i>j \to x_{ij}=0\}$. Define \begin{align*}
+	[x,y] := x \circ y -y \circ x,\, \forall x,y \in b(n,F),
+\end{align*}\\
+The only question that needs to be answered is ... Given $S, T \in \b(n,F)$ is $S\circ T \in b(n,F)$.  Let $A,B \in \mathcal{M}_{n\times n}(F)$ and $T(x) = Ax, S(x)=Bx, \forall x \in F$.  Then $(T\circ S)(x) = ABx$.  Is $AB \in b(n,F)$.
+\begin{align*}
+	\LET A &= [a_{ij}]\AND B= [b_ij]\\
+	AB &= \SQBRACKET{x_{ij} = \sum_{k=1}^n  a_{ik}b_{k_j}}
+\end{align*}If $i>j$ then $x_{ij}$
+}
+
+\item (Pg 4) Find $Z(L)$ when $L=\SL(2,F)$.  You should find the answer depends on the characteristic of $F$.
+
+\RED{Let $\SL(n,F)$ be the subspace of $GL(n,F)$ consisting of all matrices whose trace is zero, i.e., $\SL(n,F) = \BRACKET{A \in \mathcal{M}_{n\times n}(F)\,\LBAR{ \SUM{i=1}{n} a_{ii} = 0}}$.  This is known as \textit{Special Linear Algebra} on square matrices.\\
+\textbf{When is $\SUM{i=1}{n} a_{ii} = 0$ for all $a_{ii} \in F$? OR $a_{11}+a_{22}=0$?}. \\
+Notice, for example, that on the discrete field $
+F=\Z/\Z5$, $2+3=0$. Thus, when $L=\SL(2,\Z/\Z p)$ where $p$ is prime, $Z(L)$ will have elements where $a_{11}+a_{22} = p$.  
+}
+
+\item (Pg 5.) Show that if $\varphi : L_1\to L_2$ is a homormorphism, then the kernel of $\varphi, \ker \varphi$, is an ideal of $L_1$, and the image of $\varphi, \IMG \varphi$, is a Lie subalgebra of $L_2$.
+
+\BLUE{\textbf{Show that the kernel is an ideal.}  Let $h,k \in \ker\varphi$ such that $h\ne k$.  Then $\varphi(k) =\varphi(h) = 0$.  \begin{align*}
+	\varphi(a-b) &= \varphi(a)-\varphi(b) = 0\\
+	\therefore a-b &\in \ker \varphi
+\end{align*}which makes it a group under addition.  Now we need to show that it is closed under multiplication, that is, $ra \in \ker \varphi$ for all $r \in L$.  Let $r\in L$ then 
+\begin{align*}
+	\varphi(ra) &= \varphi(r)\varphi(a) = 0\\
+	\therefore ra &\in \ker \varphi
+\end{align*}\\
+\textbf{Show that the image is a subalgebra.}  We need to show three things:
+\begin{description}
+	\item \textbf{Closed under addition (group condition).}\\
+	Let $u,v \in \IMG \varphi$ then there exists $x,y\in L_1$ such that $\varphi(x)=u, \varphi(y)=v$.  \\Then $\varphi(x+y)= \varphi(x)+\varphi(y)=u+v \in \IMG \varphi$.\\
+	Therefore closed under addition.
+	\item \textbf{closed under scalar multipication (ring condition).}\\
+	Let $r,a \in \IMG \varphi$.  Then there exists $x,y \in L_1$ such that $\varphi(x)=r, \varphi(y)=x$.\\
+	Then $\varphi(xy)=\varphi(x)\varphi(y)=ra \in \IMG \varphi$\\
+	Therefore closed under scalar multiplication.
+	\item \textbf{closed under Lie bracket (subalgebra condition).}\\
+	Let $u,v \in \IMG \varphi$ then there exists $x,y\in L_1$ such that $\varphi(x)=u, \varphi(y)=v$.  \\Then 
+	\begin{align*}
+		\varphi(\LB{x+y}{x+y}) &= \varphi\PAREN{ \LB{x}{x} + \LB{x}{y} + \LB{y}{x}+\LB{y}{y} }\\
+		&= \varphi\PAREN{ \LB{x}{y} + \LB{y}{x} } \\
+		&= \varphi\PAREN{ \LB{x}{y} } + \varphi\PAREN{\LB{y}{x} } \\
+		\varphi\PAREN{ \LB{x}{y} } &= - \varphi\PAREN{\LB{y}{x} } \\
+		[ \varphi(x+y), \varphi(x+y) ] &= [\varphi(x)+\varphi(y), \varphi(x)+\varphi(y)] \\
+		&= [u+v, u+v]\\
+		&= \LB{u}{u} + \LB{u}{v} + \LB{v}{u}+\LB{v}{v} \\
+		&= \LB{u}{v} + \LB{v}{u} \\
+		\LB{u}{v} &= - \LB{v}{u}
+	\end{align*}therefore closed under Lie Bracket.
+\end{description}
+}
+
+\item (Pg 6.) Let $L$ be a Lie algebra.  Show that the Lie bracket is associative, this is $\LB{x}{\LB{y}{z}} = \LB{\LB{x}{y}}{z}$ for all $x,y,z \in L$, if and only if for all $a,b \in L$ the commutator $[a,b]$ lies in $Z(L)$.
+
+\item (Pg 6) Let $D$ and $E$ be derivations on algebra $A$.
+\begin{enumerate}[label=(\roman*)]
+	\item Show that $\LB{D}{E}=D \circ E-E\circ D$ is also a derivation.
+	
+	\BLUE{\begin{align*}
+		(D \circ E)(ab) &= D\PAREN{aE(b)-E(a)b} \\
+		&=D(aE(b))-D(E(a)b)\\
+		&= aD(E(b))-D(a)E(b)-E(a)D(b)+D(E(a))b \\
+		&= aD(E(b))+D(E(a))b-D(a)E(b)-E(a)D(b) 
+	\end{align*}We can switch $D$ and $E$ to computer $E \circ D$
+	\begin{align*}
+		(E\circ D)(ab) &= aE(D(b))+E(D(a))b-E(a)D(b)-D(a)E(b) 
+	\end{align*}taking the difference
+	\begin{align*}
+		(D \circ E)(ab)-(E\circ D)(ab) &= aD(E(b))+D(E(a))b-D(a)E(b)-E(a)D(b) \\&-\PAREN{aE(D(b))+E(D(a))b-E(a)D(b)-D(a)E(b)}
+	\end{align*}
+	\begin{align*}
+		\LB{D}{E}(ab) &=a\LB{D}{E}(b)-\LB{D}{E}(a)b \\
+		&= a(D \circ E)(b)-((D\circ E)(a))b -\PAREN{a(E\circ D)(b)-(E\circ D)(a)b}\\
+		\LB{D}{E}(ab) &= (D \circ E)(ab)-(E\circ D)(ab) \\
+		&= D(E(ab))-E(D(ab))\\
+		&= D\PAREN{aE(b)-E(a)b}-E\PAREN{aD(b)-D(a)b} \\
+		&= D(aE(b))-D(E(a)b)-E(aD(b))+E(D(a)b) \\
+		&= aD(E(b))-E(b)D(a)\\&-E(a)D(b)+D(E(a))b\\&-aE(D(b))+E(a)D(b)\\&+D(a)E(b)-E(D(a))b\\
+		&= a(D(E(b))-E(D(b))-(E(b))D(a)
+	\end{align*}
+	}
+	
+	\item Show that $D\circ E$ need not be a derivation.  (see example).
+
+\end{enumerate}
+
+\item (Pg 7.)  Let $L_1$ and $L_2$ be Lie algebras.  Show that $L_1$ is isomorphic to $L_2$ if and only if there is a basis $B_1$ of $L_1$ and a basis $B_2$ of $L_2$ such that the structure constants of $L_1$ with respect to $B_1$ are equal to the structure constants of $L_2$ with respect to $B_2$.
+
+\BLUE{\IF Assuming that $L_1 \ISO L_2$.  Define $f:L_1 \to L_2$ to be that isomorphism. Let $B_1=(x_1,\dots,x_n)$ be the basis vectors for $L_1$.  Then, 
+\begin{align*}
+	f(\LB{x_i}{x_j}) 
+	&= f\PAREN{\sum_{k=1}^na_{ij}^k x_k} \\
+	&= \sum_{k=1}^na_{ij}^k f(x_k) & (1.6)
+\end{align*}since $f$ is isomorphic, it is also injective and surjective.  Thus, each $f(x_k)$ is unique.  Further, given any $i,j \in [1,\dots,n]$ we know that $x_i,x_j$ are linearly independent.  Thus, 
+\begin{align*}
+	0&= Ax_i+Bx_j \implies A=B=0 \AND \\
+	f(0) = 0 &= f(Ax_i+Bx_j)= Af(x_i)+Bf(x_j)
+\end{align*}therefore, $f(x_i), f(x_j)$ are linearly independent and thus, form a basis.  From (1.6) we see that it has the same Structure Constants.
+}
+
+\item (Pg 7.)  Let $L$ be a Lie algebra with basis $(x_1, \dots, x_n)$.  What condition does the Jacobi identity impose on the structure constants $a_{ij}^k$?
+
+\BLUE{We have three brackets for the Jacobi Identity that start with 
+\begin{align*}
+	\LB{x_i}{x_j} &= \sum_{k=1}^n a_{ij}^k x_k\\
+	\LB{x_e}{x_f} &= \sum_{k=1}^n a_{ef}^k x_k\\
+	\LB{x_b}{x_c} &= \sum_{k=1}^n a_{bc}^k x_k\\
+	\LB{x_i}{\LB{x_e}{x_f}} &= \LB{x_i}{\sum_{k=1}^n a_{ef}^k x_k}\\
+	&= \sum_{k=1}^n a_{ef}^k\LB{x_i}{ x_k}\\
+	&= \sum_{k=1}^n a_{ef}^k\sum_{l=1}^n a_{ik}^l x_l
+\end{align*}Since, the $x_i$ are linearly independeent we can examining each element $l$ independently that is 
+\begin{align*}
+	\LB{x_i}{\LB{x_e}{x_f}}_l &= \sum_{k=1}^n a_{ef}^ka_{ik}^l x_l
+\end{align*}cycling through the other terms of the Jacobi identity we get
+\begin{align*}
+	\LB{x_e}{\LB{x_f}{x_i}}_l &= \sum_{k=1}^n a_{fi}^ka_{ek}^l x_l\\
+	\LB{x_f}{\LB{x_i}{x_e}}_l &= \sum_{k=1}^n a_{ei}^ka_{fk}^l x_l
+\end{align*}The Jacobi Identity means that the sum of the coefficiints of these terms must be zero that is
+\begin{align*}
+	0 &= \sum_{k=1}^n a_{ef}^ka_{ik}^l + \sum_{k=1}^n a_{fi}^ka_{ek}^lg+\sum_{k=1}^n a_{ei}^ka_{fk}^l
+\end{align*}
+}
+
+\item (Pg 8.) Let $L_1$ and $L_2$ be two abelian Lie algebras.  Show that $L_1$ and $L_2$ are isomorphic if and only if they have the same dimension.
+
+\BLUE{If $L_1$ and $L_2$ are abelian then since $[x,y] = -[y,x]$ then $[x,y]=0$ for all $x,y, \in L_1$ or $L_2$.  Consequently, these are vector spaces that are isomorphic to the each other and, hence, have the same dimension.
+}
+
+\item Find the structure constants of $\SL(2,F)$ with respect to the basis given by the matrices
+\begin{align*}
+	e=\TWOXTWO{0}{1}{0}{0},f=\TWOXTWO{0}{0}{1}{0}, h=\TWOXTWO{1}{0}{0}{-1}.
+\end{align*}
+
+\BLUE{The Lie Bracket for $\SL(2,F)$ is $\LB{X}{Y} = XY-YX$.  Thus,
+\begin{align*}
+	[e,f] &= \TWOXTWO{0}{1}{0}{0}\TWOXTWO{0}{0}{1}{0} - \TWOXTWO{0}{0}{1}{0} \TWOXTWO{0}{1}{0}{0}\\
+	&= \TWOXTWO{1}{0}{0}{0}-\TWOXTWO{0}{0}{0}{1} \\
+	&= \TWOXTWO{1}{0}{0}{-1} \\
+	&= h\\
+	[f,h] &= \TWOXTWO{0}{0}{1}{0}\TWOXTWO{1}{0}{0}{-1} - \TWOXTWO{1}{0}{0}{-1}\TWOXTWO{0}{0}{1}{0} \\
+	&= \TWOXTWO{0}{0}{1}{0}-\TWOXTWO{0}{0}{-1}{0}\\
+	&= \TWOXTWO{0}{0}{2}{0} \\
+	&= 2f \\
+	[h,e] &= \TWOXTWO{0}{1}{0}{0}\TWOXTWO{1}{0}{0}{-1}-\TWOXTWO{1}{0}{0}{-1} \TWOXTWO{0}{1}{0}{0}\\
+	&= \TWOXTWO{0}{-1}{0}{0}-\TWOXTWO{0}{1}{0}{0}\\
+	&= \TWOXTWO{0}{-2}{0}{0} \\
+	&= -2e
+\end{align*}Thus, 
+\begin{align*}
+	a_{ii}^k &= 0, \forall k=1,2,3\\
+	[e,f] &= a_{12}^1e + a_{12}^2f+a_{12}^3h = h \to a_{12}^3=1 \\
+	[f,h] &= a_{23}^1e + a_{23}^2f+a_{23}^3h = 2f \to a_{23}^2 = 2\\
+	[h,e] &= a_{31}^1e + a_{31}^2f+a_{31}^3h = -2e \to  a_{31}^1=-2
+\end{align*}all else are zero.
+}
+
+\item Prove $\SL(2,\C)$ has no non-trivial ideals.
+\newcommand{\ASYM}[3]{\THREEXTHREE{0}{#1}{#2}{-#1}{0}{#3}{-#2}{-#3}{0}}
+
+\item Let $L$ by the 3-dimensional \textit{complex} Lie algebra with basis $(x,y,z)$ and Lie bracket defined by 
+\begin{align*}
+	\LB{x}{y} =z,\, \LB{y}{z} = x,\, \LB{z}{x}=y
+\end{align*}(Here $L$ is the``complexification" of the 3-dimensional real Lie algebra $\R_\wedge^3$.)
+\begin{enumerate}[label=(\roman*)]
+	\item Show that $L$ is isomorphic to the Lie subalgebra of $\GL(3,\C)$ consistent for all $3 \times 3$ antisymmetric matrices with entries in $\C$.
+	
+	\BLUE{Let $U = \{A = \GL(3,N): A$ is an anti-symmetric matrix $\}$.  Thus for any $A \in U$ there exists $a,b,c \in \C$ such that
+	\begin{align*}
+		X &= \ASYM{a}{b}{c} 
+\end{align*}	which have three linearly independent elements
+\begin{align*}
+	x &= \THREEXTHREE{0}{1}{0}{-1}{0}{0}{0}{0}{0} \\
+	y &= \THREEXTHREE{0}{0}{1}{0}{0}{0}{-1}{0}{0} \\
+	z &= \THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{1}{0} \\
+\end{align*}Verify
+\begin{align*}
+		[x,y] &= xy-yx\\
+		&= \THREEXTHREE{0}{1}{0}{-1}{0}{0}{0}{0}{0}\THREEXTHREE{0}{0}{1}{0}{0}{0}{-1}{0}{0}-\THREEXTHREE{0}{0}{1}{0}{0}{0}{-1}{0}{0}\THREEXTHREE{0}{1}{0}{-1}{0}{0}{0}{0}{0} \\
+		&= \THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{0}{0}-\THREEXTHREE{0}{0}{0}{0}{0}{0}{0}{-1}{0} \\
+		&= \THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{1}{0}\\
+		&= z\\
+\end{align*}
+\begin{align*} 
+		[y,z] &= yz-zy \\
+		&= \THREEXTHREE{0}{0}{1}{0}{0}{0}{-1}{0}{0} \THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{1}{0}- \THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{1}{0}\THREEXTHREE{0}{0}{1}{0}{0}{0}{-1}{0}{0} \\
+	&= \THREEXTHREE{0}{1}{0}{0}{0}{0}{0}{0}{0}-\THREEXTHREE{0}{0}{0}{1}{0}{0}{0}{0}{0}\\
+	&= \THREEXTHREE{0}{1}{0}{-1}{0}{0}{0}{0}{0}\\
+	&= x
+\end{align*}
+\begin{align*} 
+	[z,x] &= \THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{1}{0}\THREEXTHREE{0}{1}{0}{-1}{0}{0}{0}{0}{0}-\THREEXTHREE{0}{1}{0}{-1}{0}{0}{0}{0}{0}\THREEXTHREE{0}{0}{0}{0}{0}{-1}{0}{1}{0}\\
+	&= \THREEXTHREE{0}{0}{0}{0}{0}{0}{-1}{0}{0}-\THREEXTHREE{0}{0}{-1}{0}{0}{0}{0}{0}{0}\\
+	&= \THREEXTHREE{0}{0}{1}{0}{0}{0}{-1}{0}{0}\\
+	&= y
+\end{align*}
+	}
+	
+	\item Find an explicit isomorphism $\SL(2,\C) \ISO L$.
+\end{enumerate}
+
+\item Let $S$ be an $n \times n$ matrix with entries in a field $F$.  Define
+\begin{align*}
+	\GL_S(n,F) = \{x \in \GL(n,F)\,:\, x^tS=-Sx\}.
+\end{align*}
+\begin{enumerate}[label=(\roman*)]
+	\item Show that $\GL_S(n,F)$ is a Lie subalgebra of $\mathfrak{gl}(n,F)$.
+	
+	\BLUE{\begin{description}
+		\item Additive Group\\
+			Let $x,y \in \GL_S(n,F)$, then
+			\begin{align*}
+				(x+y)^tS &= x^tS+y^tS = -Sx-Sy = -S(x+y)
+			\end{align*}
+		\item Multicative property. \\
+		Let $x \in \GL_S(n,F)$ then $x^tS=-Sx$ and $rx^tS=-Sxr$ for all $r, \in F$
+		\item Lie Bracket\\
+		Let $x,y \in \GL_S(n,F)$ then
+		\begin{align*}
+			[x,y] &= xy-yx \\
+			[x,y]^tS &= (xy-yx)^tS \\
+			&= (xy)^tS-(yx^t)S \\
+			&= y^tx^tS-x^ty^tS \\
+			&= -y^tSx+x^tSy\\
+			&= Syx-Sxy \\
+			&= S(yx-xy)\\
+			&= -S[x,y]
+		\end{align*}
+	\end{description}
+	}
+	
+	\item Find $\GL_S(2,\R)$ if $S = \TWOXTWO{0}{1}{0}{0}$.
+	
+	\BLUE{Let $x \in \GL_S(2,\R)$ and
+	\begin{align*}
+		x &= \TWOXTWO{a}{b}{c}{d}\\
+		x^tS &= \TWOXTWO{a}{c}{b}{d}\TWOXTWO{0}{1}{0}{0} = \TWOXTWO{0}{a}{0}{b} \\
+		Sx &= \TWOXTWO{0}{1}{0}{0}\TWOXTWO{a}{c}{b}{d} = \TWOXTWO{b}{d}{0}{0} \\
+		0 = x^tS+Sx &= \TWOXTWO{0}{a}{0}{b}+\TWOXTWO{b}{d}{0}{0}=\TWOXTWO{b}{a+d}{0}{b} \\
+		x &= \TWOXTWO{a}{0}{c}{-a}
+	\end{align*}
+	}
+	
+	\item Does there exist a matrix $S$ such that $\GL_S(2,\R)$ is equal to the set of all diagonal matrices in $\GL(2,\R)$.
+	
+	\BLUE{Let $A \in \GL(2,\R)$ be a diagonal matrix.  
+	\begin{align*}
+		\LET A &= \TWOXTWO{a}{0}{0}{b} \\
+		\LET S &= \TWOXTWO{u}{v}{w}{z} \\
+		A^tS + SA &= AS+SA \to AS = -SA\\
+		au &= -ua \AND bz = -zb
+	\end{align*}No, no such $S$ exists.
+	}
+	
+	\item Find a matrix $S$ such that $\GL_S(3,\R)$ is isomorphic to the Lie algebra $\R_\wedge^3$ defined in $\S1.2$, Example 1.
+	
+	\textit{Hint:} Part (i) of Exercise 1.14 is relevant.
+	
+	\BLUE{Let $x,y,z$ be a basis of $\R^3$.  We want to find $\phi: \R^3 \to \R_\wedge^3$.
+	}
+	
+	\BLUE{Let $X,Y \in \GL_S(3,\R)$ and $\phi: \GL_S(3,\R) \to \R_\wedge^3$ such that 
+	\begin{align*}
+		\phi([X,Y]) &= [\phi(X),\phi(Y)] = \phi(X) \wedge \phi(Y) \\
+		\phi(XY-YX) &= \phi(X) \wedge \phi(Y)
+	\end{align*} Notice that 
+	\begin{align*}
+		(XY)^tS &= Y^tX^tS= -Y^tSX=SYX \\
+		\AND [X,Y]^tS &= (XY - YS)^tS \\
+		&= (XY)^tS-(YX)^tS \\
+		&= SYX-SXY\\
+		&=S(YX-XY) \\
+		&= -S[X,Y]
+	\end{align*}
+	\begin{align*}
+		\phi(X^tS) &= \phi(-SX) = -\phi(S)\phi(X)
+	\end{align*}
+	}
+\end{enumerate}
+
+\item Show, by giving an example, that if $F$ is a field of characteristic 2, there are algebras over $F$ which statisfy (L1') and (L2) but are not Lie algebras.
+
+\item Let $V$ be an $n$-dimensional complex vector space and let $L=\GL(V)$.  Suppose that $x \in L$ is diagonalisable, with eigenvalues $\lambda_1, \dots, \lambda_n$.  Show that $\operatorname{ad} x \in \GL(L)$ is also diagonalisable and that its eigenvalues are $\lambda_i-\lambda_j$ for $1\le i,j\le n$.
+
+\item Let $L$ be a Lie algebra.  We saw in $\S1.6$, Example 1.2(2) that the maps $\operatorname{ad} x: L \to L$ for $x \in L$ are derivations of $L$; these are known as \textit{inner derivations}.  Show that if $\operatorname{IDER} L$ is the set of inner derivations of $L$, then $\operatorname{IDER} L$ is an ideal of $\operatorname{DER} L$.
+
+\item Let $A$ be an algebra and let $\delta : A \to A$ be a derivation.  Prove that $\delta$ satisfies the Leibniz rule
+\begin{align*}
+	\delta^n(xy) = \sum_{r=0}^n\binom{n}{r}\delta^r(x)\delta^{n-r}(y),\, \forall x,y \in A.
+\end{align*}
+
+\BLUE{This resembles the binomial theorem
+\begin{align*}
+	(a+b)^n &= \sum_{r=0}^n \binom{n}{r}a^rb^{n-r}
+\end{align*}Consider an inductive proof and consider $\delta^0(x) = x$\\
+\textbf{Show true for $n=1$.}
+\begin{align*}
+	\delta(xy) &= \binom{1}{0} \delta^0(x)\delta(y)+\binom{1}{1}\delta(x)\delta^0(y) \\
+	&= x\delta(y)+\delta(x)y
+\end{align*}which is the Liebniz rule.  \\
+\textbf{Show true for $n+1$}.  Now, assuming that this is true for some number $n$, we must show that it is also true for $n+1$.  Thus, starting with $n$ we'll calculate $\delta(\delta^n(xy)) = \delta^{n+1}(xy)$.
+\begin{align*}
+	\delta^n(xy) &= \sum_{r=0}^n\binom{n}{r}\delta^r(x)\delta^{n-r}(y),\, \forall x,y \in A. \\
+	\delta(\delta^n(xy)) &= \delta\PAREN{\sum_{r=0}^n\binom{n}{r}\delta^r(x)\delta^{n-r}(y)} \\
+	&= \sum_{r=0}^n\binom{n}{r}\delta\PAREN{\delta^r(x)\delta^{n-r}(y) } &(*)
+\end{align*}Let us focus on the term in the summation
+\begin{align*}
+	\delta\PAREN{\delta^r(x)\delta^{n-r}(y) } &= \delta^r(x)\delta(\delta^{n-r}(y))+\delta(\delta^r(x))\delta^{n-r}(y) \\
+	&= \delta^r(x)\delta^{n-r+1}(y) + \delta^{r+1}(x)\delta^{n-r}(y).
+\end{align*}Thus, 
+\begin{align*}
+	\sum_{r=0}^n\binom{n}{r}\delta\PAREN{\delta^r(x)\delta^{n-r}(y) } &= \sum_{r=0}^n\binom{n}{r}\PAREN{\delta^r(x)\delta^{n-r+1}(y) + \delta^{r+1}(x)\delta^{n-r}(y) } \\
+	&= \sum_{r=0}^n\PAREN{\binom{n}{r}+\binom{n}{r-1}}\delta^r(x)\delta^{n-r+1}(y) 
+\end{align*}
+when $r=0$ we have
+\begin{align*}
+	r=0 & \to x\delta^{n+1}(y) + \delta(x)\delta^{n}(y) \\
+	r=n & \to \delta^n(x)\delta(y) + \delta^{n+1}(x)y
+\end{align*}From combinatorics we have the identity
+\begin{align*}
+	\binom{n+1}{k} = \binom{n}{k}+\binom{n}{k-1}
+\end{align*}and we have 
+\begin{align*}
+	\delta^{n+1}(xy) &= x\delta^{n+1}(y) + \delta(x)\delta^{n}(y)\\&+ \sum_{r=0}^n\binom{n+1}{r}\delta^r(x)\delta^{n-r+1}(y) \\&+\delta^n(x)\delta(y) + \delta^{n+1}(x)y \\
+	&= \sum_{r=0}^{n+1}\binom{n+1}{r}\delta^r(x)\delta^{n-r+1}(y)
+\end{align*}Thus, by Mathematical Induction, our assertion is true \qed
+}
+
+\end{enumerate}
+
+\chapter{Ideals and Homomorphisms}
+
+\textbf{Operations that work on Ideals}
+
+\begin{description}
+\item Addition: $I+J=\{x+y\,:\, x\in I, y\in J\}$ is an ideal.
+\item Lie Bracket: $[I,J]=\SPAN\{[x,y]\,|\,x\in I, y\in J\}$ is an ideal.
+\item Quotient: $L/I = \{z+I\,:\, z\in L\}$ is a quotient algebra.
+\end{description}
+
+\section{Exercises}
+
+\begin{enumerate}[label=2.\arabic*]
+
+\item (Pg. 11) Show that $I+J$ is an ideal of $L$ where
+\begin{align*}
+	I+J &=\{x+y\,:\, x \in I, y\in J\}.
+\end{align*}
+
+\BLUE{Let $z \in L$ and $x, y \in I+J$ then there exists $x_I, y_I \in I$ and $x_J, y_J \in J$ such that $x=x_I+x_J$ and $y=y_I+y_J$  then from (L2) we have
+\begin{align*}
+	[\underbrace{[y,x]}_{\in I+J}, z] &= \underbrace{[x, [y,z]]}_{\in I} + \underbrace{[y,[z,x]]}_{\in J}  \in I+J
+\end{align*}
+}
+
+\item (Pg. 12) Show that $\SL(2, \C)' = \SL(2, \C)$.
+
+\BLUE{Let $L = \SL(2, \C)$ and $X \in [L, L]$.  Then, there exist $A,B \in L$ such that $[A,B] = X$ thus
+\begin{align*}
+	X = [A,B] &= AB - BA
+\end{align*}$AB \in L$ and $BA \in L$ therefore $X \in L$.
+}
+
+\item (Pg. 13) \begin{enumerate}[label=(\roman*)]
+	\item Show that the Lie Bracket defined in $L/I$ is bilinear and satisfies the axioms (L1) and (L2).
+	\item Show that the linear transformation $\pi : L \to L/I$ which takes an element $z \in L$ to its coset $z+I$ is a homomorphism of a Lie Algebras.
+
+\end{enumerate}
+
+\item (Pg. 14) Show that if $L$ is a Lie Algebra then $L/Z(L)$ is isomorphic to a subalgebra of $\GL(L)$.
+
+\item Show that if $z \in L'$ then $\TR \AD z = 0$.
+
+\item Suppose $L_1$ and $L_2$ are Lie algebras.  let $L := \{(x_1,x_2)\,:\, x_i \in L_i\}$ be the direct sum of their underlying vector spaces, e.g., $L = L_1 \oplus L_2$.  Shwo that if we define
+\begin{align*}
+	\LB{(x_1,x_2)}{(y_1,y_2)} := \PAREN{\LB{x_1}{y_1},\LB{x_2,y_2}}
+\end{align*}then $L$ becomes a Lie algebra, the \textit{direct sum} of $L_1$ and $L_2$, $L = L_1 \oplus L_2$.  
+\begin{enumerate}[label=(\roman*)]
+
+	\item Prove that $\GL(2,\C)$ is isomorphic to the direct sum of $\SL(2,\C) \oplus \C$, the 1-dimensional complex abelien Lie algebra.
+	
+	\item Show that if $L=L_1 \oplus L_2$ then $Z(L)=Z(L_1)\oplus Z(L_2)$ and $L'=L_1'\oplus L_2'$.  Formulate a geneeral version for a direct sum $L_1\oplus \cdots \oplus L_k$.'
+	
+	\item Are the summands in teh driect sum decomposition of a Lie Algebra uniquely determined?  \textit{Hint: } If you think that the answer is yes, now might be a good time to read $\S 16.4$ in Appendix A on the ``diagonal fallacy".  The next quesiton looks at thsi poitn in more detail.
+
+\end{enumerate}
+
+\item Suppose $L=L_1 \oplus L_2$ is the direct sum of two Lie algebras.
+\begin{enumerate}[label=(\roman*)]
+
+	\item Show that $\{(x_1,0):x_1 \in L_1\}$ is an ideal of $L$ isomorphic to $L_1$ and that $\{(0,x_2):x_2\in L_2\}$ is an ideal of $L$ isomorphic to $L_2$.  Show that the projections $p_1(x_1,x_2) = x_1$ and $p_2(x_1,x_2)=x_2$ are Lie algebra homomorphisms.
+	
+	Now suppose that $L_1$ and $L_2$ do not have any non-trivial proper ideals.
+	
+	\item Let $J$ be a  proper ideal of $L$. Show that $J \cap L_1 =0$ and $J\cap L_2= 0$, then the projection $p_1:J \to L_1$ and $p_2: J\to L_2$ are isomorphisms.
+	
+	\item Deduce that if $L_1$ and $L_2$ are not isomorphic as Lie algebras, then $L_1\oplus L_2$ has only two non-trivial proper ideals.
+	
+	\item Assume that the ground field is infintie.  Show that if $L_1 \cong L_2$ and  $L_1$ is 1-dimensional, then $L_1\oplus L_2$ has infintiely many different ideals.
+
+\end{enumerate}
+
+\item Let $L_1$ and $L_2$ be Lie algebras, and let $\varphi : L_1\to L_2$ be a surjective Lie algebra homomorphism.  True or False:
+\begin{enumerate}[label=(\alph*)]
+
+	\item $\varphi(L_1') = L2'$;
+	
+	\item $\varphi(Z(L_1))=Z(L_2)$;
+	
+	\item $h \in L_2$ and $\AD h$ is diagonalisable then $\AD \varphi(h)$ is diagonalisable.
+
+\end{enumerate}
+
+\item For each pair of the following Lie algebras over $\R$, decide whether or not they are isomorphic:
+\begin{enumerate}[label=(\roman*)]
+
+	\item the Lie algebra $R_\wedge^3$ where the Lie bracket is given by the vector product;
+	
+	\item the upper triangular $2 \times 2$ matices over $\R$;
+	
+	\item the strict upper triangular $3 \times 3$ matrices over $\R$;
+	
+	\item $L=\{ x \in \GL(3,\R):x^t=-x\}$.
+	
+	\textit{Hint:} Use Exercises 1.15 and 2.8.
+
+\end{enumerate}
+
+\item Let $F$ be a field.  Show that the derive algebra $\GL(n,F)$ is $\SL(n,F)$
+
+\item In Exercise 1.15, we defined the Lie Algebra $\GL_S(n,F)$ over a field $F$ where $S$ is an $n\times n$ matrix with entries in $F$.
+
+Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ for some invertible $n\times n$ matrix $P\in \GL(n,F)$  (Equivalently, the bilinear forms defined by $S$ and $T$ are congruent.)  Show that the Lie algebras $\GL_S(n,F)$ and $\GL_T(n,F)$ are isomorphic.
+
+\item Let $S$ be an $n \times n$ invertible matrix with entreis in $\C$.  Show that if $x \in \GL_S(n,\C)$, then $\TR x=0$
+
+\item Let $I$ be an ideal of a Lie Algebra $L$.  Let $B$ be teh centraliser of $I$ in $L$; that is 
+\begin{align*}
+	B = C_L(I) = \{x \in L : [x,a]=0, \, \forall a \in I\}
+\end{align*}Showt hat $B$ is an ideal of $L$.  Now suppose that
+\begin{enumerate}
+	\item $Z(I)=0$, and
+	\item if $D:I\to I$ is aderivation, then $D=\AD x$ for some $x \in I$.
+	
+	Show that $L=I\oplus B$.
+	
+	\item Recall that if $L$ is  Lie algebra, we defined $L'$ to be teh subspace spanned by the commutators $[x,y]$ for $x,y\in L$.  The purpose of this execise, which may safely be skipped on first reading, is to show that the \textit{set} of commutators may not eve be a vector space (and so certainly not an ideal of $L$.).
+	
+	Let $\R[x,y]$ denote teh ring of all real polynomials in two variables.  Let $L$ be tehs et of all matrices of the form 
+	\begin{align*}
+		A\PAREN{(f(x), g(y), h(x,y)} = \THREEXTHREE{0}{f(x)}{h(x,y)}{0}{0}{g(y)}{0}{0}{0}.
+	\end{align*}\begin{enumerate}[label=(\roman*)]
+		\item Prove $L$ is a Lie algebra with usual commutator bracket. (In contrast to all the Lie algebras seen so fro, $L$ is infinite-dimensionial.)
+		\item Prove that
+		\begin{align*}
+			\SQBRACKET{A\PAREN{(f_1(x), g_1(y), h_1(x,y)}, A\PAREN{(f_2(x), g_2(y), h_2(x,y)}} = A(0,0,f_1(x)g_2(x)-f_2(x)g_1(y)).
+		\end{align*}Hence describe $L'$.
+		
+		\item Show taht if $h(x,y)=s^2+xy+y^2$, then $A(0,m0,h(x,y))$ is not a commutator.
+	
+	\end{enumerate}
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+\end{document}
