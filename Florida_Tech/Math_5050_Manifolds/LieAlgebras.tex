@@ -495,6 +495,14 @@ when $r=0$ we have
 \item Quotient: $L/I = \{z+I\,:\, z\in L\}$ is a quotient algebra.
 \end{description}
 
+\textbf{Notes:}
+
+\begin{description}
+	\item Correspondence: $L \supset J \supset I$, where $I,J$ are ideals of $L$.  Then, $J/I$ is an ideal of $L/I$.  
+	
+	Also, if $K$ is an ideal of $L/I$ and $J=\{z \in L : z+I\in K\}$ (i.e., $J$ is the set of cosets of $K$ in $I$) then $J$ is an ideal of $L$ and $J \supset I$.
+\end{description}
+
 \section{Exercises}
 
 \begin{enumerate}[label=2.\arabic*]
@@ -520,25 +528,92 @@ when $r=0$ we have
 
 \item (Pg. 13) \begin{enumerate}[label=(\roman*)]
 	\item Show that the Lie Bracket defined in $L/I$ is bilinear and satisfies the axioms (L1) and (L2).
+	
+	\BLUE{Define the Lie Bracket of two cosets as \begin{align*}
+		[w+I, z+I] &= [w,z]+I,, \forall w,z \in L
+	\end{align*}where the bracket on the right side is the Lie Bracket defined for $L$.  Thus, let $a,b \in L$ then we have 
+	\begin{align*}
+		[a+w+I, b+z+I] &= [a+w,b+z]+I \\
+		&= [a,b]+[a,z]+[w,b]+[w,z]+I
+	\end{align*}the four Lie Brackets add up to a single element in $L$ and is therefore true.  Thus, this Lie Bracket is bilinear.
+	}	
+	
 	\item Show that the linear transformation $\pi : L \to L/I$ which takes an element $z \in L$ to its coset $z+I$ is a homomorphism of a Lie Algebras.
+	
+	\BLUE{Need to show that 
+	\begin{align*}
+		\pi([x,y]) &= [\pi(x),\pi(y)]
+	\end{align*}	I prefer to call elements of $L/I$ equivalence classes.  That is $L/I$ is partitioned into equivalence classes (cosets) and its elements are these subsets.  The proper notation for sucn and element would be $[x] \in L/I$ where $x$ is a representative element of the equivalence class containing $x$.  Thus $\pi(x) = [x] = \{x+I\}$.
+	\begin{align*}
+		\pi(x) &= [x] = \{x+I\}\\
+		[\pi(x),\pi(y)] &= \SQBRACKET{[x],[y]} \\
+		&= \SQBRACKET{\BRACKET{x+I}, \BRACKET{y+I}} \\
+		&= [x,y] +I \\
+		&= \SQBRACKET{[x,y]}
+\end{align*}	or the equivalence class of the Lie Bracket of the left hand side.
+	}
 
 \end{enumerate}
 
 \item (Pg. 14) Show that if $L$ is a Lie Algebra then $L/Z(L)$ is isomorphic to a subalgebra of $\GL(L)$.
 
+\BLUE{$Z(L) = \{x \in L: [x,y]=0$ for all $y\in L\}$.  Therefore, $[x]\in L/Z(L) = \{y\in L : y=x+z, z \in Z(L) \}$.  $Z(L)$ is an ideal.  Thus, $[x] = x +Z(L)$.  Let $\varphi : L/Z(L) \to \GL(L)$ be a homomorphism.  Then $x,y \in Z(L)$ implies that $\varphi([x,y]) = \ker \varphi$.  From the first isomorphism theorem, $L/\ker \varphi = L/Z(L) \cong \IM \varphi$. 
+}
+
 \item Show that if $z \in L'$ then $\TR \AD z = 0$.
 
-\item Suppose $L_1$ and $L_2$ are Lie algebras.  let $L := \{(x_1,x_2)\,:\, x_i \in L_i\}$ be the direct sum of their underlying vector spaces, e.g., $L = L_1 \oplus L_2$.  Shwo that if we define
+\BLUE{The thing to remember is that every $z \in L'$ is a linear combination of Lie Brackets.  Thus
 \begin{align*}
-	\LB{(x_1,x_2)}{(y_1,y_2)} := \PAREN{\LB{x_1}{y_1},\LB{x_2,y_2}}
+	z &= \sum_k [x_k, y_k] \\
+	\TR \AD z &= \sum_k \TR \AD ([x_k, y_k]) \\
+	\text{or each } \TR \AD ([x_k, y_k])&=0, \forall k
+\end{align*}That is, 
+\begin{align*}
+	\AD ([x_k,y_k]) &= \AD x_k\circ \AD y_k - \AD y_k\circ \AD x_k = 0 \\
+	\therefore \TR \AD z &= 0
+\end{align*}
+}
+
+\item Suppose $L_1$ and $L_2$ are Lie algebras.  let $L := \{(x_1,x_2)\,:\, x_i \in L_i\}$ be the direct sum of their underlying vector spaces, e.g., $L = L_1 \oplus L_2$.  Show that if we define
+\begin{align*}
+	\LB{(x_1,x_2)}{(y_1,y_2)} := \PAREN{\LB{x_1}{y_1},\LB{x_2}{y_2}}
 \end{align*}then $L$ becomes a Lie algebra, the \textit{direct sum} of $L_1$ and $L_2$, $L = L_1 \oplus L_2$.  
 \begin{enumerate}[label=(\roman*)]
 
 	\item Prove that $\GL(2,\C)$ is isomorphic to the direct sum of $\SL(2,\C) \oplus \C$, the 1-dimensional complex abelien Lie algebra.
 	
-	\item Show that if $L=L_1 \oplus L_2$ then $Z(L)=Z(L_1)\oplus Z(L_2)$ and $L'=L_1'\oplus L_2'$.  Formulate a geneeral version for a direct sum $L_1\oplus \cdots \oplus L_k$.'
+	\BLUE{Let $\varphi : \GL(2,\C) \to \SL(2,\C)\oplus \C$ be a surjective transformation.  Then
+	\begin{align*}
+		\dim \GL(2,\C) &= \dim \ker \varphi + \dim \operatorname{range} \varphi \\		
+		\dim \ker \varphi &= \dim \GL(2,\C) -\dim (\SL(2,\C)\oplus \C) \\
+		&= n^2 - n^2 = 0
+\end{align*}	The dimension of the kernel of $\varphi$ is 0 therefore $\varphi$ is a bijection implying an isomorphsim.
+	}
 	
-	\item Are the summands in teh driect sum decomposition of a Lie Algebra uniquely determined?  \textit{Hint: } If you think that the answer is yes, now might be a good time to read $\S 16.4$ in Appendix A on the ``diagonal fallacy".  The next quesiton looks at thsi poitn in more detail.
+	\item Show that if $L=L_1 \oplus L_2$ then $Z(L)=Z(L_1)\oplus Z(L_2)$ and $L'=L_1'\oplus L_2'$.  Formulate a general version for a direct sum $L_1\oplus \cdots \oplus L_k$.
+	
+	\BLUE{\textbf{1: Show $Z(L)=Z(L_1)\oplus Z(L_2)$.} \\For any $u \in L$ there exists $u_1 \in L_1$ and $u_2\in L_2$ such that $u=(u_1, u_2)$.  If $z \in Z(L)$ then $[z,u]=0$.
+	\begin{align*}
+		[z, u] &= [(z_1,z_2), (u_1,u_2)] \\
+		&= \PAREN{[z_1,u_1], [z_2,u_2]} \\
+		\therefore [z_1,u_1] &=0 \AND [z_2,u_2]=0
+	\end{align*}for any $u$. Thus, $z_1 \in Z(L_1)$ and $z_2 \in Z(L_2)$.\\
+	\textbf{2: Show $L'=L_1'\oplus L_2'$}.  \\Let $z \in L$ then there exists a linear combination of commutators $[x_k,y_k]$ equal to zero
+	\begin{align*}
+		z &= \sum_k [x_k,y_k]
+	\end{align*}There exist $a_k,b_k \in L_1$ and $c_k,d_k \in L_2$ such that $x_k = (a_k, c_k)$ and $y_k=(b_k, d_k)$. then 
+	\begin{align*}
+		z &= \sum_k [(a_k, c_k),(b_k, d_k)] \\
+		&= \sum_k ([a_k,b_k],[c_k,d_k]) \\
+		&= \PAREN{\sum_k [a_k,b_k], \sum_k [c_k,d_k]} \\
+		&\in L_1 \oplus L_2
+	\end{align*}Thus
+	\begin{align*}
+		L &= \bigoplus_k L_k \implies Z(L) = \bigoplus_k Z(L_k) \AND L' = \bigoplus_k L_k'
+\end{align*}		
+	}
+	
+	\item Are the summands in the direct sum decomposition of a Lie Algebra uniquely determined?  \textit{Hint: } If you think that the answer is yes, now might be a good time to read $\S 16.4$ in Appendix A on the ``diagonal fallacy".  The next question looks at this point in more detail.
 
 \end{enumerate}
 
@@ -547,20 +622,30 @@ when $r=0$ we have
 
 	\item Show that $\{(x_1,0):x_1 \in L_1\}$ is an ideal of $L$ isomorphic to $L_1$ and that $\{(0,x_2):x_2\in L_2\}$ is an ideal of $L$ isomorphic to $L_2$.  Show that the projections $p_1(x_1,x_2) = x_1$ and $p_2(x_1,x_2)=x_2$ are Lie algebra homomorphisms.
 	
+	\BLUE{\textbf{Show the $L_1$ isomorphism.}\\Let $u=(u_1, u_2) \in L$.  Then $N_1 = \{(x_1,0):x_1 \in L_1\}$ and $ x=(x_1, x_2)\in N_1$ then $[u,x] = [(u_1, u_2), (x_1, 0)] = ([u_1, x_1],[u_2,0]) =([u_1, x_1],0) \in N_1$ and therefore an ideal.  Also, allow $\varphi : N_1 \to L_1$.  Let $a,b \in \ker \varphi$.  Then $\varphi(a+b)= \varphi(a)+\varphi(b) = (0,0)$ implies that $a_1 =b_1$ or $a=b$.  Thus, $\varphi$ is an isomorphism. \\
+	\textbf{A similar argument for the $L_2$ isomorphism.}\\
+	\textbf{Proejctions:}\\
+	Given any $x,y \in L$
+	\begin{align*}
+		p_1([x,y]) &= p_1([x_1,y_1],[x_2,y_2]) \\
+		&= [x_1,y_1] 
+	\end{align*}thus $p_1([x,y]) \in L_1$.  A similar argument for $L_2$.
+	}
+	
 	Now suppose that $L_1$ and $L_2$ do not have any non-trivial proper ideals.
 	
-	\item Let $J$ be a  proper ideal of $L$. Show that $J \cap L_1 =0$ and $J\cap L_2= 0$, then the projection $p_1:J \to L_1$ and $p_2: J\to L_2$ are isomorphisms.
+	\item Let $J$ be a proper ideal of $L$. Show that $J \cap L_1 =0$ and $J\cap L_2= 0$, then the projection $p_1:J \to L_1$ and $p_2: J\to L_2$ are isomorphisms.
 	
 	\item Deduce that if $L_1$ and $L_2$ are not isomorphic as Lie algebras, then $L_1\oplus L_2$ has only two non-trivial proper ideals.
 	
-	\item Assume that the ground field is infintie.  Show that if $L_1 \cong L_2$ and  $L_1$ is 1-dimensional, then $L_1\oplus L_2$ has infintiely many different ideals.
+	\item Assume that the ground field is infintie.  Show that if $L_1 \cong L_2$ and  $L_1$ is 1-dimensional, then $L_1\oplus L_2$ has infinitely many different ideals.
 
 \end{enumerate}
 
 \item Let $L_1$ and $L_2$ be Lie algebras, and let $\varphi : L_1\to L_2$ be a surjective Lie algebra homomorphism.  True or False:
 \begin{enumerate}[label=(\alph*)]
 
-	\item $\varphi(L_1') = L2'$;
+	\item $\varphi(L_1') = L_2'$;
 	
 	\item $\varphi(Z(L_1))=Z(L_2)$;
 	
@@ -583,37 +668,37 @@ when $r=0$ we have
 
 \end{enumerate}
 
-\item Let $F$ be a field.  Show that the derive algebra $\GL(n,F)$ is $\SL(n,F)$
+\item Let $F$ be a field.  Show that the derived algebra of $\GL(n,F)$ is $\SL(n,F)$
 
 \item In Exercise 1.15, we defined the Lie Algebra $\GL_S(n,F)$ over a field $F$ where $S$ is an $n\times n$ matrix with entries in $F$.
 
 Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ for some invertible $n\times n$ matrix $P\in \GL(n,F)$  (Equivalently, the bilinear forms defined by $S$ and $T$ are congruent.)  Show that the Lie algebras $\GL_S(n,F)$ and $\GL_T(n,F)$ are isomorphic.
 
-\item Let $S$ be an $n \times n$ invertible matrix with entreis in $\C$.  Show that if $x \in \GL_S(n,\C)$, then $\TR x=0$
+\item Let $S$ be an $n \times n$ invertible matrix with entries in $\C$.  Show that if $x \in \GL_S(n,\C)$, then $\TR x=0$
 
-\item Let $I$ be an ideal of a Lie Algebra $L$.  Let $B$ be teh centraliser of $I$ in $L$; that is 
+\item Let $I$ be an ideal of a Lie Algebra $L$.  Let $B$ be the centraliser of $I$ in $L$; that is 
 \begin{align*}
 	B = C_L(I) = \{x \in L : [x,a]=0, \, \forall a \in I\}
-\end{align*}Showt hat $B$ is an ideal of $L$.  Now suppose that
+\end{align*}Show that $B$ is an ideal of $L$.  Now suppose that
 \begin{enumerate}
 	\item $Z(I)=0$, and
-	\item if $D:I\to I$ is aderivation, then $D=\AD x$ for some $x \in I$.
+	\item if $D:I\to I$ is a derivation, then $D=\AD x$ for some $x \in I$.
 	
 	Show that $L=I\oplus B$.
 	
-	\item Recall that if $L$ is  Lie algebra, we defined $L'$ to be teh subspace spanned by the commutators $[x,y]$ for $x,y\in L$.  The purpose of this execise, which may safely be skipped on first reading, is to show that the \textit{set} of commutators may not eve be a vector space (and so certainly not an ideal of $L$.).
+	\item Recall that if $L$ is  Lie algebra, we defined $L'$ to be the subspace spanned by the commutators $[x,y]$ for $x,y\in L$.  The purpose of this execise, which may safely be skipped on first reading, is to show that the \textit{set} of commutators may not even be a vector space (and so certainly not an ideal of $L$.).
 	
-	Let $\R[x,y]$ denote teh ring of all real polynomials in two variables.  Let $L$ be tehs et of all matrices of the form 
+	Let $\R[x,y]$ denote the ring of all real polynomials in two variables.  Let $L$ be the set of all matrices of the form 
 	\begin{align*}
 		A\PAREN{(f(x), g(y), h(x,y)} = \THREEXTHREE{0}{f(x)}{h(x,y)}{0}{0}{g(y)}{0}{0}{0}.
 	\end{align*}\begin{enumerate}[label=(\roman*)]
-		\item Prove $L$ is a Lie algebra with usual commutator bracket. (In contrast to all the Lie algebras seen so fro, $L$ is infinite-dimensionial.)
+		\item Prove $L$ is a Lie algebra with usual commutator bracket. (In contrast to all the Lie algebras seen so fro, $L$ is infinite-dimensional.)
 		\item Prove that
 		\begin{align*}
 			\SQBRACKET{A\PAREN{(f_1(x), g_1(y), h_1(x,y)}, A\PAREN{(f_2(x), g_2(y), h_2(x,y)}} = A(0,0,f_1(x)g_2(x)-f_2(x)g_1(y)).
 		\end{align*}Hence describe $L'$.
 		
-		\item Show taht if $h(x,y)=s^2+xy+y^2$, then $A(0,m0,h(x,y))$ is not a commutator.
+		\item Show that if $h(x,y)=s^2+xy+y^2$, then $A(0,m0,h(x,y))$ is not a commutator.
 	
 	\end{enumerate}
 \end{enumerate}

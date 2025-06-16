@@ -30,8 +30,8 @@
 
 \newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
 \newcommand{\STUDENTNAME}{Paul Carmody}
-\newcommand{\ASSIGNMENT}{Section 8: The Tangent Space }
-\newcommand{\DUEDATE}{May 30, 2025}
+\newcommand{\ASSIGNMENT}{Section 9: Submanifolds }
+\newcommand{\DUEDATE}{June 11, 2025}
 \newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
 \newcommand{\SEMESTER}{Fall 2025}
 \newcommand{\SCHEDULE}{TBD}
@@ -71,22 +71,61 @@
 Define $f:\R^2\to \R$ by
 \begin{align*}
 	f(x,y) = x^3-6xy+y^2.
-\end{align*}Fine all values $c \in \R$ for whcih the level $f^{-1}(c)$ is a regular submanifold of $\R^2$.
+\end{align*}Find all values $c \in \R$ for which the level $f^{-1}(c)$ is a regular submanifold of $\R^2$.
+
+\BLUE{Stated another way: find all of the $p \in \R^2$ such that $f(p)=c$ and $p$ is regular (i.e., not a critical point).  Regular points are points that have a non-zero Jacobian.  Thus,
+\begin{align*}
+	J(f) &= \PAREN{\PART{f}{x},\PART{f}{y}} = \PAREN{3x^2-6y, -6x+2y} \\
+	J(f) &= 0 \\
+	x^2-3y &= 0 \AND y= 3x \\
+	3x &= \frac{x^2}{3} \\
+	\frac{x^2}{3} -3x &= 0 \implies x=0,6 \\
+	y &= 0, 18
+\end{align*}thus, these points $(0,0), (6,18)$ are the critical points which will NOT be in a smooth manifold (non-regular points).  Therefore, the values of $c$ are which do not work are
+\begin{align*}
+	f(0,0) &= 0 \\
+	f(6,18) &= 6^3-6(6)(18)+18^2 = -108 \\
+\end{align*}Thus $c \in \R \backslash \{0, -108\}$
+}
 
 \item \textbf{Solution set of one equation.}
 
-Let $x,y,z,w$ be the standard coordinates on $\R^4$.  Is teh solution set of $x^5+y^5+z^5+w^5=1$ in $\R^4$ a smooth manifold?  Explain why or why not.  (Assume that the subset is given the subspace topology).
+Let $x,y,z,w$ be the standard coordinates on $\R^4$.  Is the solution set of $x^5+y^5+z^5+w^5=1$ in $\R^4$ a smooth manifold?  Explain why or why not.  (Assume that the subset is given the subspace topology).
+
+\BLUE{The Jacobian is essentially the gradient.
+\begin{align*}
+	\LET f(x,y,z,w) &= x^5+y^5+z^5+w^5-1 \\
+	\nabla f(x,y,z,w) &= (5x^4, 5y^4, 5z^4, 5w^4)\\
+	\nabla f &= 0 \implies (0,0,0,0)
+\end{align*}but $(0,0,0,0)$ is not a solution of $f$.  Therefore the solution space is smooth.
+}
 
 \item \textbf{Solution set of two equations.}
 
-Is teh solution set of thesysemt of equations 
+Is the solution set of the system of equations 
 \begin{align*}
 	x^3+y^3+z^3=1,\, z=xy
 \end{align*}in $\R^3$ a smooth manifold?  Prove your answer.
 
+\BLUE{Let $F: \R^3 \to \R^2$ and $F(x,y,z) = (x^3+y^3+z^3-1,\, z-xy)$.  Then
+\begin{align*}
+	J(F) &= \SQBRACKET{\begin{array}{ccc}
+		3x^2 & 3y^2 & 3z^2 \\
+		-y & -x & 1
+	\end{array}
+	}
+\end{align*}are these two linearly independent?  Is there a $\lambda$ such that 
+\begin{align*}
+	3x^2 &= \lambda(-y), \, 3y^2 = \lambda(-x), \, 3z^2 = \lambda \\
+	-3x^2/y &= -3y^2/x \to x^3 = y^3 \to x=y\\
+	3x^2 &= \lambda(-x) \to \lambda = -3x \\
+	-3x &= 3z^2 \to -x=z^2 \AND z=xy=x^2 \implies x = 0, 1
+\end{align*}Thus, $(0,0,0)$ is a critical point but doesn't exist in the range of $F_x$ therefore the solution set is a submanifold.
+}
+
 \item \textbf{Regular submanifolds}
 
-Suppose that a subset $S$ of $\R^2$ hat eh property that locally on $S$ one of the coordinates is $C^\infty$ function of the other coordinate.  Show that $S$ is qa regular submanifold of $\R^2$. (Note that the unit circle defined by $x^2+y^2=1$ has this property. AT every point of the circle, there is a neighborhood in whic h$y$ is a $C^\infty$ function of $x$ or $x$ is a $C^\infty$ function of $y$.)
+Suppose that a subset $S$ of $\R^2$ that the property that locally on $S$ one of the coordinates is $C^\infty$ function of the other coordinate.  Show that $S$ is a regular submanifold of $\R^2$. (Note that the unit circle defined by $x^2+y^2=1$ has this property at every point of the circle, there is a neighborhood in which $y$ is a $C^\infty$ function of $x$ or $x$ is a $C^\infty$ function of $y$.)
 
 \item \textbf{Graph of a smooth function}
 
@@ -94,6 +133,16 @@ Show that the graph $\Gamma(f)$ of a smooth function $f: \R^2\to \R$.
 \begin{align*}
 	\Gamma(f) &= \BRACKET{\PAREN{x,y,f(x,y)} \in \R^3}
 \end{align*}is a regular submanifold of $\R^3$.
+
+\BLUE{Redefine $\Gamma$ as \begin{align*}
+	\Gamma(x,y,z) &= z-f(x,y) = 0\\
+	J(\Gamma) &= \SQBRACKET{\begin{array}{ccc}
+		\PART{\Gamma}{x} & \PART{\Gamma}{y} & \PART{\Gamma}{z}
+	\end{array}
+	} \\
+		&= \SQBRACKET{\PART{f}{x},\PART{f}{y},1}
+\end{align*}which is never zero.  Therefore, there are no critical points.
+}
 
 \item \textbf{Euler's formula}
 A polynomial $F(x_0,\dots,x_n) \in \R[x_0,\dots,x_n]$ is \textit{homogenous of degree $k$} if it is a linear combination of monomials $x_9^{i_o}\cdots x_n^{i_n}$ of degree $\SUM{j=0}{n}i+j = k$.  Let $F(x_0,\dots,x_n)$ be a homogenous polynomial of degree $k$.  Clearly, for any $t \in \R$,
@@ -114,6 +163,35 @@ On the projective space $\R P^n$ a hmogenous polynomial $F(x_0,\dots,x_n)$ of de
 \item \textbf{Product of regular submanifolds}
 
 If $S_1$ is a regular submanifold of the manifold $M_i$ for $i=1,2$, prove that $S_1 \times S_2$ is a regular submanifold of $M_1 \times M_2$.
+
+\item \textbf{Complex special linear group}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\GL}{\operatorname{GL}}
+
+The complex special linear group $\SL(n,\C)$ is the subgroup of $\GL(n,\C)$ consisting of $n\times n$ complex matrices of determinant 1.  Show that $\SL(n, \C)$ is a regular submanifold of $\GL(n,\C)$ and determine its dimension. (This problem requries a rudimentary knowledge of complex analysis.)
+
+\includegraphics[scale=1]{Tu_9.5.png} 
+\item \textbf{The transversality theorem}
+
+A $C^\infty$ map $f: N \to M$ is said to be \textit{transversal} to a submanifold $S \subset M$ (Figure 9.5) if for every $p\in f^{-1}(S)$.
+\begin{align*}
+	f_*(T_pN)+T_{f(p)}S=T_{f(p)}M.
+\end{align*}(If $A$ and $B$ are subspaces of a vector space, their sum $A+B$ is the subspace consisting all $a+b$ with $a \in A$ and $b \in B$.  Teh sum need not be a diret sum.)  The goal of this exercise is to prove that the \textit{transversality theorem:} if a $C^\infty$ map $f:n \to M$ is transveral to a regular submanifold $S$ of codeimension $k$ in $M$, then $f^{-1}(S)$ is a regular submanifold of codimension $k$ in $N$.
+
+When $S$ consists of a single point $c$, transversality of $f$ to $S$ simply means that $f^{-1}(c)$ is a regular level set.  Thus the transversality theorem is a generalization of the regular level set theorem.  It is especially useful in giving conditions under which the intersection of two submanifolds is a submanifold.
+
+Let $p \in f^{-1}(S)$ and $(Y,x^1,\dots,x^m)$ be an adapted chart centered at $f(p)$ for $M$ relative to $S$ such that $U\cap S=Z(x^{m-l+1}, \dots, x^m)$, the zero set of the functions $x^{_m-k+1},\dots,x^m$.  Define $g:U \to \R^k$ to be the map
+\begin{align*}
+	g = (x^{_m-k+1},\dots,x^m).
+\end{align*}
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Show that $f^{-1}(U)\cap f^{-1}(S)=g\circ f^{-1}(0)$.
+	\item Show that $f^{-1}(U)\cap =^{-1}(S)$ is a regular level set of teh function $g\circ f:f^{-1}(U) \to \R^k$.
+	\item Prove the transverality theorem.
+
+\end{enumerate}
 
 \end{enumerate}
 \end{document}

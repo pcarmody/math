@@ -1,0 +1,93 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math XXXX -- Independent Study: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{\textit{Basic Category Theory -- Tom Leinster}}
+\newcommand{\DUEDATE}{August, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Summer 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Edinburgh}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GL}{\operatorname{gl}}
+\newcommand{\SL}{\operatorname{sl}}
+%\newcommand{\TR}{\operatorname{tr}}
+\newcommand{\AD}{\operatorname{ad}}
+\newcommand{\LB}[2]{\left [ #1,#2 \right ]}
+\newcommand{\IMG}{\operatorname{im}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\CAT}[1]{\mathscr{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\chapter{Categories, Functors, and Natural Transformations}
+
+\section{Categories}
+
+\subsection{Exercises}
+
+\begin{enumerate}[label=1.1.\arabic*]
+\setcounter{enumi}{11}
+\item Find three examples of categories not mentioned above.
+
+\item Show that a map in a category can have at most one inverse.  That is, given a map $f: A \to B$ there is at most one map $g: B \to A$ such that $gf=\II_A$ and $fg=\II_B$.
+
+\item Let $\CAT{A}$ and $\CAT{B}$ be categories.  Construct 1.1.11 defined by the product category $\CAT{A}\times\CAT{B}$, except that the definitions of composition and identities in $\CAT{A}\times\CAT{B}$ are not given.  There is only one sensible way to define the: write it down.
+
+\item There is a category call \textbf{Toph} whose objects are topological spaces and whose maps $X\to Y$ are homotopy classes of continuous maps $X$ to $Y$.  What do we need to know about homotopy in order to prove that \textbf{Toph} is a category?  What does it mean in pure topological terms for two objects of \textbf{Toph} to be isomorphic?
+
+\end{enumerate}
+
+
+
+\end{document}
