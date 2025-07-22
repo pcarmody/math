@@ -1,0 +1,151 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 10: Categories and Functors }
+\newcommand{\DUEDATE}{June 18, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\noindent \textbf{\\\large{Problems}}
+
+\begin{enumerate}[label=10.\arabic*.]
+\item \textbf{Differential of the inverse map}
+
+If $F: N\to M$ is a differomorphism of manifolds and $p \in N$, prove that $(F^{-1})_{*,F(p)}=(F_{*,p})^{-1}$.
+
+\BLUE{If we define our category of objects as manifolds \textbf{Man} with morphisms as smooth maps.  Then we can define a functor $T: $\textbf{Man}$\to$\textbf{Vect}, i.e., the category of vectors.  $T$ sends the smooth map $F$ into a Tangent Bundle via the push forward.   That is, $F_{*,p}: T_p(N)\to T_{f(p)}(M)$.  Thus, concatenation is the operator of functors and 
+\begin{align*}
+	(F \circ F^{-1})_* &= F_* \circ F^{-1}_* \\
+	(F_*)^{-1} &= (F^{-1})_*
+\end{align*}
+}
+
+\item  \textbf{Isomorphism under a functor}
+
+\newcommand{\CAT}[1]{\mathscr{#1}}
+\newcommand{\II}{\mathbb{I}}
+Prove proposition 10.3
+
+\BLUE{\textbf{Proposition 10.3.} Let $\CAT{F}: \CAT{C}\to \CAT{D}$ be a functor from category $\CAT{C}$ to category $\CAT{D}$. If $f: A \to B$ is an isomorphism in $\CAT{C}$ then $\CAT{F}(f): \CAT{F}(A)\to \CAT{F}(B)$ is an isomorphism in $\CAT{D}$.\\
+\textbf{Proof:} Since $f$ is isomorphic, there exists a $g \in \CAT{C}$ such that $f \circ g = \II_A$ then
+\begin{align*}
+	\CAT{F}(\II_A) &= \II_\CAT{F} \\
+	\CAT{F}(f \circ g) &= \CAT{F}(f) \circ \CAT{F}(g) \\
+	\CAT{F}(g) &= \CAT{F}(f)^{-1} &\qed
+\end{align*}
+}
+
+\item \textbf{Functorial properties of the dual}
+
+Prove Proposition 10.5.
+
+\BLUE{\textbf{Proposition 10.5 (Functorial properies of the dual).}  Suppose $V, W$ and $S$ are real vector spaces.
+\begin{enumerate}[label=(\roman*)]
+	\item $\II_V: V \to V$ is the identity map on $V$, then $\II_V^\vee: V^\vee \to V^\vee$ is the identity map on $V^\vee$.\\
+	Let $f,g:V \to V$ such that $f\circ g = \II_V$
+	\item If $f: V \to W$ and $g: W \to S$ are linear maps, then $(g\circ f)^\vee = f^\vee \circ g^\vee$.
+	\begin{align*}
+	 (g\circ f)^\vee &\overset{?}= f^\vee \circ g^\vee \\
+	 \LET \phi &\in S^\vee \\
+	(g\circ f)^\vee (\phi) &= \phi \circ (g \circ f) & \text{(LHS)} \\
+	 f^\vee \circ g^\vee &= f^\vee(g^\vee(\phi))& \text{(RHS)}\\
+	  &= f^\vee(\phi\circ g) \\
+	 &= \phi\circ (g \circ f)
+\end{align*}	  
+\end{enumerate}
+}
+
+\item \textbf{Matrix of the dual map}
+
+Suppose a linear transformation $L: V \to \bar{V}$ is represted by the martrix $A=[a_j^i]$ relative to the basis $e_1,\dots, e_n$ for $V$ and $\bar{e}_1,\dots,\bar{e}_m$ for $\bar{V}$:
+\begin{align*}
+	L(e_j) = \sum_i a_j^i\bar{e}_i.
+\end{align*}Let $\alpha^1,\dots,\alpha^n$ and $\alpha^1,\dots,\alpha^m$ be the dual bases for $V^\vee$ and $\bar{V}^\vee$, respectively.  Prove that if $L^\vee(\bar{\alpha}^i)=\sum_jb_j^i\alpha^j$, then $b_j^i=a_j^i$.
+
+\item \textbf{Injectivity of the dual map}
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Suppose $V$ and $W$ are vector spaces of prossibly infinite dimension over a field $K$.  Show that if a linear map $L:V \to W$ is surjective, then its dual $L^\vee:W^\vee\to V^\vee$ is injective.
+	
+	\BLUE{For any $v,w \in V$, where $L(v) = L(w)$
+	\begin{align*}
+		L^\vee(\alpha(v-w))&=\alpha(L(v-w)) \\
+		&= \alpha(L(v) - L(w))\\
+		&= \alpha(L(v))-\alpha(L(w))\\
+		&= L^\vee(\alpha(v))-L^\vee(\alpha(w)) \\
+		&= 0
+	\end{align*}therefore $L^\vee$ is injective.
+	}
+	
+	\item Suppose $V$ and $W$ are finite-dimensional vector spaces over a field $K$.  Prove the converse of the implication in (a).
+\end{enumerate}
+
+\item \textbf{Functorial properties of the pullback}
+
+Prove Proposition 10.6.
+
+\item \textbf{Pullback in the top dimension}
+
+Show that if $L: V \to V$ is a linear opeartor on a vector space $V$ of dimension $n$, then the pullback $L^*:A_n(V) \to A_n(V)$ is mulitiplication by the determinant of $L$.
+
+\end{enumerate}
+\end{document}

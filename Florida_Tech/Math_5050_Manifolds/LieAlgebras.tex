@@ -55,6 +55,9 @@
 \newcommand{\AD}{\operatorname{ad}}
 \newcommand{\LB}[2]{\left [ #1,#2 \right ]}
 \newcommand{\IMG}{\operatorname{im}}
+\newcommand{\IDER}{\operatorname{IDer}}
+%\newcommand{\SPAN}{\operatorname{span}}
+\newcommand{\RANK}{\operatorname{rank}}
 
 \begin{document}
 
@@ -80,6 +83,18 @@ We define the Lie Bracket, $[\cdot, \cdot]$ as a bilinear operation
 	&[x, [y,z]] + [y, [z,x]] + [z, [x,y]] =0 & (L2)
 \end{align*}
 \end{definition}
+
+\begin{definition}[Derivation of $A$]
+
+Given an algebra $A$ over a field $F$, a \DEFINE{derivation} $D: A \to A$ is defined by 
+\begin{align*}
+	D(ab) = aD(b)+D(A)b, \forall a,b, \in A
+\end{align*}We denote $\DER A$ as the set of all derivations of $A$.\\ \\
+
+We definte the \DEFINE{inner derivation} of the Lie Algebra $L$, denoted as $\IDER L$ as the set of all $\AD x: L \to L$ which are derivations.
+\end{definition}
+
+
 \section{Exercises}
 
 \begin{enumerate}[label=\textit{1.\arabic*}]
@@ -394,7 +409,8 @@ F=\Z/\Z5$, $2+3=0$. Thus, when $L=\SL(2,\Z/\Z p)$ where $p$ is prime, $Z(L)$ wil
 		x^tS &= \TWOXTWO{a}{c}{b}{d}\TWOXTWO{0}{1}{0}{0} = \TWOXTWO{0}{a}{0}{b} \\
 		Sx &= \TWOXTWO{0}{1}{0}{0}\TWOXTWO{a}{c}{b}{d} = \TWOXTWO{b}{d}{0}{0} \\
 		0 = x^tS+Sx &= \TWOXTWO{0}{a}{0}{b}+\TWOXTWO{b}{d}{0}{0}=\TWOXTWO{b}{a+d}{0}{b} \\
-		x &= \TWOXTWO{a}{0}{c}{-a}
+		x &= \TWOXTWO{a}{0}{c}{-a} \\
+		&= a\TWOXTWO{1}{0}{0}{-1} + c\TWOXTWO{0}{0}{1}{0}
 	\end{align*}
 	}
 	
@@ -647,9 +663,27 @@ when $r=0$ we have
 
 	\item $\varphi(L_1') = L_2'$;
 	
+	\BLUE{Let $x,y \in L_1$ then $[x,y] \in L_1'$.  Then $\varphi([x,y]) = [\varphi(x),\varphi(y)] \in L_2'$.  Therefore $\varphi(L_1') \subseteq L_2'$.\\
+	Then, we know that given any $u,v \in L_2$ there is $[u,v]\in \L_2'$ and there exist $x,y \in L_1$ such that $\varphi(x) = u, \varphi(y)=v$.  Thus, $[u,v]=[\varphi(x),\varphi(y)]=\varphi([x,y]$ and $L_2' \subseteq \varphi(L_1')$.\\
+	\textbf{TRUE}
+	}
+	
 	\item $\varphi(Z(L_1))=Z(L_2)$;
 	
-	\item $h \in L_2$ and $\AD h$ is diagonalisable then $\AD \varphi(h)$ is diagonalisable.
+	\BLUE{Let $u \in Z(L_1)$.  Then for any $x\in L_1$ we have $\varphi(0)=0$ or $\varphi(u)=0$ therefore $\varphi(Z(L_1)) \subseteq Z(L_2)$\\
+	Given any $v \in Z(L_2)$ then any $y\in L_2$ implies that $[v,y]=0$ and there exist $w,z \in L_1$ such that $\varphi(w)=v$ and $\varphi(z)=y$.  Then $[v,y]=[\varphi(w),\varphi(z)]=\varphi([w,z]) \in Z(L_1)$ because $w \in Z(L_1)$.  Therefore, $Z(L_2) \subseteq \varphi(Z(L_1))$.
+	}
+	
+	\item $h \in L_1$ and $\AD_h$ is diagonalisable then $\AD_{\varphi(h)}$ is diagonalisable.
+	
+	\BLUE{Notice that
+	\begin{align*}
+		\AD_h(x) &= [h,x] \\
+		\varphi(\AD_h(x)) &= \varphi([h,x]) \\
+		&= [\varphi(h), \varphi(x)] \\
+		&= \AD_{\varphi(h)}(\varphi(x))
+\end{align*}	
+	}
 
 \end{enumerate}
 
@@ -657,6 +691,13 @@ when $r=0$ we have
 \begin{enumerate}[label=(\roman*)]
 
 	\item the Lie algebra $R_\wedge^3$ where the Lie bracket is given by the vector product;
+	
+	\BLUE{In other words, compare the wedge with the cross product.  Define a Lie Algebra $\R^3_\times = \R^3$ with $[x,y] = x \times y$ for all $x,y\in \R^3_\times$.  Let $\varphi: \R^3_\vee \to \R^3_\times$.  Then, $u,v \in \R^3_\vee$ and $x,y \in \R^3_\times$ such that $\varphi(u)=x, \varphi(v)=y$.
+	\begin{align*}
+		\varphi([u,v]) &= [\varphi(u),\varphi(v)] =[x,y] \\
+		\varphi(u_2v_3-u_3v_2, u_3v_1-u_1v_3, u_2v_1-v_1u_2) &= \PAREN{x_2y_3-x_3y_2, x_3y_1-x_1y_3, x_2y_1-x_1y_2 }
+\end{align*}	which is true if $\varphi$ is the identity
+	}
 	
 	\item the upper triangular $2 \times 2$ matices over $\R$;
 	
@@ -669,6 +710,16 @@ when $r=0$ we have
 \end{enumerate}
 
 \item Let $F$ be a field.  Show that the derived algebra of $\GL(n,F)$ is $\SL(n,F)$
+
+\BLUE{\textbf{Show that $\GL(n,F)' \subseteq \SL(n,F)$} Let $u \in \GL(n,F)'$ then there exist $x,y \in \GL(n,F)$ such that $u =[x,y]$ \begin{align*}
+	\TR u &= \TR [x,y] \\
+	&= \TR(xy - yx) \\
+	&= \TR(xy)-\TR(yx) \\
+	&= 0 \\
+	\therefore u \in \SL(n,F)
+\end{align*}\\
+\textbf{Show that $\GL(n,F)'\supseteq\SL(n,F)$} Let $u \in \SL(n, F)$ then $\TR u=0$
+}
 
 \item In Exercise 1.15, we defined the Lie Algebra $\GL_S(n,F)$ over a field $F$ where $S$ is an $n\times n$ matrix with entries in $F$.
 
@@ -690,12 +741,12 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 	
 	Let $\R[x,y]$ denote the ring of all real polynomials in two variables.  Let $L$ be the set of all matrices of the form 
 	\begin{align*}
-		A\PAREN{(f(x), g(y), h(x,y)} = \THREEXTHREE{0}{f(x)}{h(x,y)}{0}{0}{g(y)}{0}{0}{0}.
+		A\PAREN{f(x), g(y), h(x,y)} = \THREEXTHREE{0}{f(x)}{h(x,y)}{0}{0}{g(y)}{0}{0}{0}.
 	\end{align*}\begin{enumerate}[label=(\roman*)]
 		\item Prove $L$ is a Lie algebra with usual commutator bracket. (In contrast to all the Lie algebras seen so fro, $L$ is infinite-dimensional.)
 		\item Prove that
 		\begin{align*}
-			\SQBRACKET{A\PAREN{(f_1(x), g_1(y), h_1(x,y)}, A\PAREN{(f_2(x), g_2(y), h_2(x,y)}} = A(0,0,f_1(x)g_2(x)-f_2(x)g_1(y)).
+			\SQBRACKET{A\PAREN{f_1(x), g_1(y), h_1(x,y)}, A\PAREN{(f_2(x), g_2(y), h_2(x,y)}} = A(0,0,f_1(x)g_2(x)-f_2(x)g_1(y)).
 		\end{align*}Hence describe $L'$.
 		
 		\item Show that if $h(x,y)=s^2+xy+y^2$, then $A(0,m0,h(x,y))$ is not a commutator.
@@ -706,5 +757,285 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 
 \end{enumerate}
 
+\chapter{Low Dimensional Lie Aglebras}
 
+\begin{description}
+	\item \textbf{Dimension 1}
+
+	Given a single basis vector $e$ then by definition the Lie bracket must be $[e,e]=0$	making the entire 1-dimensional vector space Abelian.
+	\begin{align*}
+		\mathfrak{g} \cong \R
+	\end{align*}
+	
+	\item \textbf{Dimension 2}
+	
+	Given a basis $e_1, e_2$ .
+	\begin{enumerate}
+		\item \textbf{Abelian}
+		
+			The Lie Breacket must be $[e_1, e_2]=0$ for all elements of the vector space (plane).
+		
+		\item \textbf{Non-Abelian (solvable)}
+		
+			The Lie Bracket must be $[e_1,e_2] = e_2$.  This algebra is solvable but not nilpotent (i.e., $A^n=0$ for some $n$).
+			
+	\end{enumerate}
+	\item \textbf{Dimension 3}
+	
+	Given a basis $e_1, e_2, e_3$.
+	
+	\begin{enumerate}
+		\item \textbf{Abelian}
+		
+		All Lie brackets are zero.
+		
+		\item \textbf{Heisenberg Algebra}	
+		
+		The Lie bracket is $[e_1, e_2] = e_3$.  This becomes nilpotent.
+		
+		\item \textbf{Solvable (non-nilpotent)}	
+	
+		\begin{description}
+			\item \textbf{Type 1:}
+				\begin{align*}
+					[e_1, e_2] = e_3 \AND [e_1, e_3] = e_2
+				\end{align*}
+			\item \textbf{Type 2:}
+				\begin{align*}
+					[e_1, e_2] = -e_3 \AND [e_1, e_3] = e_2
+				\end{align*}
+		\end{description}			
+	
+		\item \textbf{Simple Lie Algebras}
+		
+		\begin{enumerate}
+			\item $\mathfrak{so}(3)$
+				\begin{align*}
+					[e_1, e_2] = e_3, \; [e_2, e_3] = e_1 \AND [e_3, e_1]=e_2
+				\end{align*}
+			\item $\mathfrak{sl}(2, \R)$
+			
+			Consider the basis $h, e, f$
+			\begin{align*}
+				[h,e] = 2e,\;[h,f]=-2f \AND [e,f]=h
+			\end{align*}
+		\end{enumerate}
+		
+		
+	\end{enumerate}
+\end{description}
+
+\section{Exercises}
+
+
+\begin{enumerate}[label=3.\arabic*.]
+
+\item Let $V$ be a vector space and let $\varphi$ be an endomorpism of $V$.  Let $L$ have underlying vector space $V \oplus \operatorname{span}\{x\}$.  Show that if we define the Lie bracket on $L$ by $[y,z]=0$ and $[x,y]=\varphi(y)$ for $y,z\in V$, then $L$ is a Lie algebra and $\dim L' = \operatorname{rank} \varphi$.  (For a more general construction, see Exercise 3.9 below.)
+
+\BLUE{If $u_1, u_2 \in L$ then there exist $y_1, y_2 \in V$ and $x_1, x_1 \in \operatorname{Span}({x})$ such that $u_1 = (y_1, x_1)$ and $u_2 = (y_2, x_2)$ then
+\begin{align*}
+	[u_1, u_2] &= [(y_1, x_1), (y_2, x_2)] \\ &= [y_1, x_1]+[y_1, x_2] + [y_2, x_1] + [y_2, x_2] \\
+	&= 2\varphi(y_1)+2\varphi(y_2)
+\end{align*}The only elements of $L$ that are non-zero are the ones indicated by $x$ and hence $\varphi$.  Therefore, $\dim L' = \operatorname{rank}\varphi$, i.e., the number of linearly independent rows of its matrix of transformation.
+}
+
+\item With the notation of $\S 3.2.3$, show that the Lie algebra $L_\mu$ is isomorphic to $L_\nu$ if and only if either $\mu =\nu$ or $\mu=\nu^{-1}$.
+
+\BLUE{From 3.1, let $V_\mu, V_\ne$ be spanned by $[y_\mu, z_\mu], [y_\nu, z_\nu]$ and $x_\mu, x\nu$ be the such that $L_\mu = V_\mu\oplus \SPAN\{x\},L_\nu = V_\nu\oplus \SPAN\{x\}$.  We can see that the Lie bracket for each $L_\mu$ is $[x_\mu,y_\nu] = y$ (from the text) and $[y_mu, z_\mu] = 0$, from the lemma.  This Lie Bracket is precisely the Lie bracket from 3.1 for both $\mu, \nu$.  There rank must each be 2, therefore an isomorphisms exists $\varphi: L_\mu \to L_\nu$.
+}
+
+\BLUE{Let $\varphi: L_\mu \to L_\nu$ be this isomorphism.  Thus, given any $u \in L_\mu$, $v \in L_\nu$
+\begin{align*}
+	\varphi(u) &= A_\mu u \AND \varphi^{-1}(v) = A^{-1}v \\
+	A_\mu &= \TWOXTWO{1}{0}{0}{\mu}\\
+	I &= \TWOXTWO{a}{b}{c}{d}\TWOXTWO{1}{0}{0}{\mu} \\
+	&= \TWOXTWO{a}{b\mu}{c}{d\mu}\\
+	&= \TWOXTWO{1}{0}{0}{d\mu} \\
+	\therefore d &= \mu^{-1}
+\end{align*}$A^{-1}$ is the $\AD x_\nu$.
+}
+
+\item Find out where each of the following 3-dimensional complex Lie algebras appears in our classification:
+\begin{enumerate}[label=(\roman*)]
+
+	\item $\GL_S(3,\C)$, where $S=\THREEXTHREE{1}{0}{0}{0}{1}{0}{0}{0}{-1}$;
+	
+	\BLUE{Remember that 
+	\begin{align*}
+	\GL_S(n,F) = \{u \in \GL(n,F)\,:\, u^tS=-Su\}.
+	\end{align*}Let's determine a basis for $\GL_S(3,\C)$.  Let $u \in \GL_S(3,\C)$  then 
+	\begin{align*}
+		u^tS &= -Su \\
+		\LET u &= \THREEXTHREE{a}{b}{c}{d}{e}{f}{g}{h}{k} \\
+		-Su &= \THREEXTHREE{-1}{0}{0}{0}{1}{0}{0}{0}{1}\THREEXTHREE{a}{b}{c}{d}{e}{f}{g}{h}{k} \\
+		&= \THREEXTHREE{-a}{-b}{-c}{d}{e}{f}{g}{h}{k} \\
+		u^tS &= \THREEXTHREE{a}{d}{g}{b}{e}{h}{c}{f}{k}\THREEXTHREE{1}{0}{0}{0}{1}{0}{0}{0}{-1} \\
+		&= \THREEXTHREE{a}{d}{-g}{b}{e}{-h}{c}{f}{-k}
+	\end{align*}Which leads us to the following conclusions:
+	\begin{align*}
+		a &= k = 0\\
+		-b &= d \AND b=d \to b=d=0 \\
+		g &= c \\
+		e &= e \\
+		f &= -h \AND f=h \to f=h=0
+	\end{align*}Thus, 
+	\begin{align*}
+		u &= \THREEXTHREE{0}{0}{c}{0}{e}{0}{c}{0}{0} \\
+		&= c\THREEXTHREE{0}{0}{1}{0}{0}{0}{1}{0}{0}+e\THREEXTHREE{0}{0}{0}{0}{1}{0}{0}{0}{0}
+	\end{align*}$\GL_S(3,\C)$ is 2 dimensional. This is not Abelian therefore it is non-abelian solvable.
+	}
+	
+	\item the Lie subalgebra of $\GL(3,\C)$ spanned by the matrices
+	\begin{align*}
+		\mu &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}, v= \THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0}, w=\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0}
+	\end{align*}where $\lambda, \mu, \nu$ are fixed complex numbers;
+	
+	\BLUE{\begin{align*}
+		\mu v &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}\THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0} \\
+		&= \THREEXTHREE {0}{0}{\lambda}{0}{0}{0}{0}{0}{0} = \lambda v \\
+		v w &= \THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0}\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0} = 0\\
+	\mu w &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0} \\
+	&= \THREEXTHREE{0}{0}{0}{0}{0}{\nu}{0}{0}{0} = \nu w
+\end{align*}	
+	}
+	
+	\item $\BRACKET{\PAREN{\begin{array}{cccc}
+		0&a&b&0 \\
+		0&0&c&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}: a,b,c \in \C}$;
+	
+	\item $\BRACKET{\PAREN{\begin{array}{cccc}
+		0&0&a&b \\
+		0&0&0&c\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}: a,b,c \in \C}$.
+\end{enumerate}
+
+\item Suppose $L$ is a vector space with basis $x,y$ and that a bilinear operation $[-,-]$ on $L$ is defined such that $[u,u]=0$ for aqll $u \in L$.  Show that the Jacobi Identity holds and hence $L$ is a Lie algebra.
+
+\item Show that over $\R$ the Lie algebras $\SL(2,\R)$ and $\R^3_\wedge$ are not isomorphic.  \textit{Hint}: Prove tht there is no non-zero $x\in \R^3_\wedge$ such that the map $\AD x$ is diagonalisable.
+
+\item Show that over $\R$ there are exactly two non-isomophic 3-dimensional Lie algrebras with $L'=L$.
+
+\item Let $L$ be a non-abelian Lie algebra.  Show that $\dim Z(L) \le \dim L -2$.
+
+\item let $L$ be the 3-dimensional Heisenberg Lie algebra defined over field $F$.  Show that $\DER L$ is 6-dimensional.  Identify the inner derivations (as defined in Exercise 1.18) and show that he quotient $\DER L/\IDER L$ is isomorphic to $\GL(2,F)$.
+
+\item Suppose that $I$ is an ideal of a Lie algebra $L$ and that there is a subalgebra $S$ of $L$ such that $L=S\oplus I$.
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Show that the map $\theta : S \to \GL(I)$ defined by $\theta(s)x=[s,x]$ is a Lie algebra homomorphism from $S$ into $\DER I$.
+	
+	We say that $L$ is \textit{semidirect product} of $I$ by $S$.  (the reader may have seen the analogous construction for groups.)
+	
+	\item Show conversely that given Lie aglebras $S$ and $I$ and a Lie algebra homomorphism $\theta : S \to \DER I$, the vector space $S \oplus I$ may be made into a Lie algebra by defining
+	\begin{align*}
+		[(s_1,x_1),(s_2,x_2)] = ([s_1,s_2],[x_1,x_2]+\theta(s_1)x_2-\theta(x_2)x_1)
+	\end{align*}for $s_1,s_2 \in S$, and $x_1,x_2 \in I$, and that this Lie algebra is a semidirect product of $I$ by $S$.  (The direct sum construction introduced in Exercise 2.6 is teh special case where $\theta(s)=0$ for all $s \in S$.)
+	
+	\item Show that the Lie algebras in Exercise 3.1 may be constructed as semidirect products.
+	
+	\item Investigate necessary and sufficient condtiions for two semidirect products to be isomorphic.
+
+\end{enumerate}
+
+\item Find, up to isomorphism, all Lie algebras with a 1-dimensional derived algebra.
+
+\end{enumerate}
+
+\chapter{Solvable Lie Algebras}
+
+\begin{remark}[\textbf{MathGPT: Describe the difference between an Ideal and a derived Lie algebra.}].
+
+\noindent
+Solution:
+\begin{enumerate}[label=Step \arabic*:]
+	\item \textbf{Define an ideal of a Lie Algebra.}
+	
+	An ideal of a Lie algebra is a subalgebra that interacts with the Lie bracket in a specific way.  For a Lie algebra $\mathfrak{g}$ over a field $F$, a subsapce $\mathfrak{i} \subset \mathfrak{g}$ is an ideal if and only $x \in \mathfrak{g}$ and $y \in \mathfrak{i}$, the Lie bracket $[x,y]$ is in $i$.  This condition is expressed as $[\mathfrak{g}, \mathfrak{i}]$.  Ideals are analogous to normal subgroups in group theory and are essential for construcitng quotient Lie algebras.
+	
+	\item \textbf{Define a Derived Lie Algebra}
+	
+	The derived Lie algebra, also known as the commutator subalgebra, of a Lie algebra $\mathfrak{g}$ is denoted $\mathfrak{g}'$ or $[\mathfrak{g}, \mathfrak{g}]$.  It is the subspace spanned by all Lie brackets of elements in $\mathfrak{g}$, as shown using the Jacobi identity.
+	
+	\item \textbf{Difference in Generality.}
+	
+	An ideal is a type of subspace with a specific property related to the Lie bracket, while the derived Lie algebra is a specific construction that results in an ideal.  Every derived Lie algebra is an ideal, but not every ideal is a derived algebra.
+	
+	\item An ideal $\mathfrak{i}$ is defined by the property $[\mathfrak{g},\mathfrak{i}] \subseteq \mathfrak{i}$ and can be any subspace satisfying this condition.  The derived Lie algebra $\mathfrak{g}'$ is defined as the set of all possible Lie brackets of elements within $\mathfrak{g}$ and is uniquely determined by $\mathfrak{g}$.
+	
+	\item \textbf{Difference in Purpose/Role}
+	
+	Ideals are used to define quotient Lie algebras and help understand the structure of Lie algebras,  similar to normal subgroups in group theory.  The derived Lie algebra $\mathfrak{g}'$ measures how "non-abelian" a Lie algebra is.  If $\mathfrak{g}'=\{0\}$, then $\mathfrak{g}$ is abelian.  The derrived series of all Lie algebra is used to defien solvable and nilpotent Lie algebras.
+	
+	\item \textbf{Examples}
+	
+	Consider the Lie algebra $\mathfrak{gl}(n,F)$ of all $n \times n$ matrices over a field $F$, with the Lie bracket $[A,B]=AB-BA$.
+	\begin{itemize}
+		\item \textbf{Ideal: }The set of scalar matrices, $\mathfrak{s}=\{cI\,|\, c\in F\}$, forms an ideal of $\mathfrak{gl}(n,F)$.  This ideal is not the derived Lie algebras.
+		\item \textbf{Derived Lie Algebra:} Teh derived Lie algebra $\mathfrak{gl}(n,F)$ is $\mathfrak{sl}(n,F)$, the Lie algebra of $n\times n$ matrices with trace zero.  This is because the trace of a commutator is always zero, and any matricx with trace zero can be written as a commutator.  $\mathfrak{sl}(n,F)$ is an ideal of $\mathfrak{gl}(n,F)$.
+	\end{itemize}
+	
+	\textbf{Final Answer}  In summary, while the derived Lie algebra is always an ideal, an ideal is a more general concept. The derived Lie algebra is a specific ideal that captures the "commutativity" properties of the Lie algebra itself.
+
+\end{enumerate}
+
+\end{remark}
+\section{Exercises}
+
+\newcommand{\PPP}[1]{^{(#1)}}
+\begin{enumerate}[label=4.\arabic*]
+
+\item  Suppose that $\varphi:L_1 \to L_2$ is a surjective homomorphism of Lie algebras.  Show that 
+\begin{align*}
+	\varphi\PAREN{L_1\PPP{k}}=(L_2)\PPP{k}.
+\end{align*}
+
+\item Let $X \in \mathfrak{gl}(2\ell, \C)$.  Shwo that $x$ belongs to $\mathfrak{sp}(2,\ell),\C)$ if and only if it is of the form 
+\begin{align*}
+	x = \TWOXTWO{m}{p}{q}{-m}
+\end{align*}where $p$ and $q$ are symmetric.  Hence find the dimension of $\mathfrak{sp}(2\ell, \C)$.  (See Exercise 12.1 for the other families)
+
+\item Use lemma 4.4 to show that if $L$ is a Lie algebra then $L$ is solvable if and only if $\AD L$ is a solvable subalgebra of $\GL(L)$.  Show that this result also holds if we replace "solvable" with "nilpotent".
+
+\item Let $L=\mathfrak{n}(n,F)$, the Lie algebra of strictly upper triangular $n \times n$ matrices over a field $F$.  Show that $L^k$ has a basis consisting of all the matrix units $e_{ij}$ with $j-i>k$. Hence show that $L$ is nilpotent.  What is the smallest $m$ such that $L^m = 0$?
+
+\item Let $L=\mathfrak{b}(n,F)$ be the Lie algebra of upper triangular $n\times n$ matrices over a field $F$.
+\begin{enumerate}[label=(\roman*)]
+
+	\item Show that $L'=\mathfrak{n}(n,F)$.
+	
+	\item More generally, show that $L\PPP{k}$ has a basis consisting of all the matrix units $e_{ij}$ with $j-i\ge 2^{k-1}$.  (the commutator formula for the $e_{ij}$ given in $\S1.2$ will be helpful.)
+	
+	\item Hence show that $L$ is solvable.  What is the smallest $m$ such that $L\PPP{m}=0$?
+	
+	\item Show that if $n\ge 2$ then $L$ is not nilpotent.
+
+\end{enumerate}
+
+\item Show that a Lie algebra is semisimple if and only if it has no non-zero abelian ideals.  (this was the original definition of semisimplicity given Wilhelm Killing.)
+
+\item Prove directly that $\SL(n,\C)$ is a simple Lie algebra $n \ge 2$.
+
+\item Let $L$ be a Lie algebra over a field $F$ sucht aht $[[a,b],b]=0$ for all $a,b \in L$, (or equivalently, $(\AD b)^2=0$ for all $b \in L$).
+
+\begin{enumerate}[label=(\roman*)]
+
+	\item Suppose the characteristic of $F$ is not 3.  Show that then $L^4 = 0$.  \textit{Hint:}  Show first that eh Lie brackets $[[x,y],z]$ are alterenating; that is, 
+	\begin{align*}
+		[[x,y],z]=-[[y,x],z],\; [[x,y],z]=-[[x,z],y]
+	\end{align*}for all $x,y,z \in L$.
+
+\end{enumerate}
+
+\item The purpose of this exercise is to give some idea why the families of Lie algebra are given the names that we have used.  We shall not need to refer to this exercise later;  some basic group theory is needed $\dots$
+
+\item Let $F$ be a field.  Exercise 2.11 shows that if $S,T \in \GL(n,F)$ are congruent matrices (that is, there exists an invertible matrix $P$ such that $T=P^tSP$), then $\GL_s(n,F) \cong \GL_T(n,F)$.  Does the converse hold when $F = \C$?  For a challenge, think about other fields.
+\end{enumerate}
 \end{document}

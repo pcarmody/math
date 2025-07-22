@@ -153,12 +153,12 @@ A polynomial $F(x_0,\dots,x_n) \in \R[x_0,\dots,x_n]$ is \textit{homogenous of d
 	\sum+{i=0}^n x_i\PART{F}{x_i} = kF.
 \end{align*}
 
-\item \textit{Smooth projectve hypersurface}
+\item \textbf{Smooth projectve hypersurface}
 
-On the projective space $\R P^n$ a hmogenous polynomial $F(x_0,\dots,x_n)$ of degree $k$ is not a function , since its value at a point $[a_0,\dots,a_n]$ is not unique.  However, the zer set in $\R P^n$ of a homogenous polynomial $F(x_0,\dots,x_n)$ is well defined, since $F(a_0,\dots,a_n)=0$ if and only if 
+On the projective space $\R P^n$ a hmogenous polynomial $F(x_0,\dots,x_n)$ of degree $k$ is not a function, since its value at a point $[a_0,\dots,a_n]$ is not unique.  However, the zero set in $\R P^n$ of a homogenous polynomial $F(x_0,\dots,x_n)$ is well defined, since $F(a_0,\dots,a_n)=0$ if and only if 
 \begin{align*}
 	F(ta_0,\dots,ta_n) &= t^kF(a_0,\dots,a_n)=0,\, \forall t \in R^\times: \R-\{0\}
-\end{align*}The zero set of finitely many homogenous polynomials in $\R P^q$ is called a \textit{real projective variety}.  A projectvie variety defined bya single homogeneous polynomial of degree $k$ is called a \textit{hypersurface} of degree $k$.  Show that the hypersurface $Z(F)$ defined by $F(x_0,x_1,x_2)=0$ is smoot if $\partial F/\partial x_0, \partial F/\partial x_1$ and $\partial F/\partial x_2$ are simultaneously zero on $Z(F)$.  (\textit{Hint:} The standard coordinates on $U_0$ which is homeomorpic to $\R^2$, are $x=x_1/x_0, y=x_2/x_0$ (see Subsection 7.7).  In $U_0, F(x_0,x_1,x_2) = x_0^tF(1,x_1/x_0, x_2/x_0)= x_0^kF(1,x,y)$.  Defein $f(x,y)= F(1,x,y)$.  Then $f$ and $F$ ahve the same zero set in $U_0$.)
+\end{align*}The zero set of finitely many homogenous polynomials in $\R P^q$ is called a \textit{real projective variety}.  A projective variety defined by a single homogeneous polynomial of degree $k$ is called a \textit{hypersurface} of degree $k$.  Show that the hypersurface $Z(F)$ defined by $F(x_0,x_1,x_2)=0$ is smooth if $\partial F/\partial x_0, \partial F/\partial x_1$ and $\partial F/\partial x_2$ are simultaneously zero on $Z(F)$.  (\textit{Hint:} The standard coordinates on $U_0$ which is homeomorpic to $\R^2$, are $x=x_1/x_0, y=x_2/x_0$ (see Subsection 7.7).  In $U_0, F(x_0,x_1,x_2) = x_0^tF(1,x_1/x_0, x_2/x_0)= x_0^kF(1,x,y)$.  Define $f(x,y)= F(1,x,y)$.  Then $f$ and $F$ have the same zero set in $U_0$.)
 
 \item \textbf{Product of regular submanifolds}
 
@@ -176,11 +176,11 @@ The complex special linear group $\SL(n,\C)$ is the subgroup of $\GL(n,\C)$ cons
 A $C^\infty$ map $f: N \to M$ is said to be \textit{transversal} to a submanifold $S \subset M$ (Figure 9.5) if for every $p\in f^{-1}(S)$.
 \begin{align*}
 	f_*(T_pN)+T_{f(p)}S=T_{f(p)}M.
-\end{align*}(If $A$ and $B$ are subspaces of a vector space, their sum $A+B$ is the subspace consisting all $a+b$ with $a \in A$ and $b \in B$.  Teh sum need not be a diret sum.)  The goal of this exercise is to prove that the \textit{transversality theorem:} if a $C^\infty$ map $f:n \to M$ is transveral to a regular submanifold $S$ of codeimension $k$ in $M$, then $f^{-1}(S)$ is a regular submanifold of codimension $k$ in $N$.
+\end{align*}(If $A$ and $B$ are subspaces of a vector space, their sum $A+B$ is the subspace consisting all $a+b$ with $a \in A$ and $b \in B$.  The sum need not be a diret sum.)  The goal of this exercise is to prove that the \textit{\textbf{transversality theorem:}} if a $C^\infty$ map $f:N \to M$ is transveral to a regular submanifold $S$ of codimension $k$ in $M$, then $f^{-1}(S)$ is a regular submanifold of codimension $k$ in $N$.
 
 When $S$ consists of a single point $c$, transversality of $f$ to $S$ simply means that $f^{-1}(c)$ is a regular level set.  Thus the transversality theorem is a generalization of the regular level set theorem.  It is especially useful in giving conditions under which the intersection of two submanifolds is a submanifold.
 
-Let $p \in f^{-1}(S)$ and $(Y,x^1,\dots,x^m)$ be an adapted chart centered at $f(p)$ for $M$ relative to $S$ such that $U\cap S=Z(x^{m-l+1}, \dots, x^m)$, the zero set of the functions $x^{_m-k+1},\dots,x^m$.  Define $g:U \to \R^k$ to be the map
+Let $p \in f^{-1}(S)$ and $(U,x^1,\dots,x^m)$ be an adapted chart centered at $f(p)$ for $M$ relative to $S$ such that $U\cap S=Z(x^{m-l+1}, \dots, x^m)$, the zero set of the functions $x^{m-k+1},\dots,x^m$.  Define $g:U \to \R^k$ to be the map
 \begin{align*}
 	g = (x^{_m-k+1},\dots,x^m).
 \end{align*}
@@ -188,8 +188,12 @@ Let $p \in f^{-1}(S)$ and $(Y,x^1,\dots,x^m)$ be an adapted chart centered at $f
 \begin{enumerate}[label=(\alph*)]
 
 	\item Show that $f^{-1}(U)\cap f^{-1}(S)=g\circ f^{-1}(0)$.
-	\item Show that $f^{-1}(U)\cap =^{-1}(S)$ is a regular level set of teh function $g\circ f:f^{-1}(U) \to \R^k$.
-	\item Prove the transverality theorem.
+	
+	\BLUE{
+	}
+	
+	\item Show that $f^{-1}(U)\cap f^{-1}(S)$ is a regular level set of teh function $g\circ f:f^{-1}(U) \to \R^k$.
+	\item Prove the transversality theorem.
 
 \end{enumerate}
 

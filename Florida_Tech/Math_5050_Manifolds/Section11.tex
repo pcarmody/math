@@ -1,0 +1,160 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 11: The Rank of a Smooth Map }
+\newcommand{\DUEDATE}{July 2, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\noindent \textbf{\\\large{Problems}}
+
+\begin{enumerate}[label=11.\arabic*.]
+\item \textbf{Tangent vectors to a sphere}
+
+The unit sphere $S^n$ in $\R^{n+1}$ is defined by the equation $\SUM{n=1}{n+1} (x^i)^2=1$.  For $p=(p^1,\dots,p^{n+1}) \in S^n$, show that a necessary and sufficient condition for 
+\begin{align*}
+	X_p=\sum a^i\RBAR{\PART{}{x^i}}_p \in T_p(\R^{n+1})
+\end{align*}to be tangent to $S^n$ at $p$ is $\sum a^ip^i=0$.
+
+\BLUE{All $X_p$ are in the tangent plane and therefore perpendicular to the Normal of that plane.  Let $f(x) = \SUM{n=1}{n+1} (x^i)^2-1$, then the tangent to the unit sphere $S^n = f^{-1}(0)$ in $\R^{n+1}$ at $(x^1,\dots,x^{n+1}) \in S^{n+1}$ we compute 
+\begin{align*}
+	\PART{f}{x^i} &= 2x^i
+\end{align*}at $p=(p^i,\dots, p^n)$,
+\begin{align*}
+	\PART{f}{x^i}(p) &= 2p^i
+\end{align*}The equation of a tangent space at a point $p$ is 
+\begin{align*}
+	\sum_{k=1}^{n+1} \PART{f}{x^i}(p)(x^i-p^i)&=0 
+\end{align*}With the $n+1$-dimensional norm being 
+\begin{align*}
+	N &= \ABRACKET{2p^1, \dots, 2p^{n+1}}
+\end{align*}any $X$ in the tangent space will be 
+\begin{align*}
+	X \cdot N &= 0 \\
+	 &= \ABRACKET{a^1,\dots, a^{n+1}}\cdot\ABRACKET{2p^1, \dots, 2p^{n+1}} \\
+	 &= \sum_{k=1}^{n+1} 2a^ip^{n+1}
+\end{align*}
+}
+
+\newpage
+\item \textbf{Tangent vectors to a plane curve}
+
+\begin{enumerate}
+
+	\item Let $i: S^1 \hookrightarrow \R^2$ be the inclusion map of the unit circle.  In this problem, we denote by $x,y$ the standard coordinates of $\R^2$ and by $\hat{x}, \hat{y}$ their restrictions to $S^1$.  Thus, $\hat{x}=i^*x$ and $\hat{y}=i^*y$.  On the upper semicircle $U=\BRACKET{(a,b) \in S^1\;|\; b>0}, \hat{x}$ is a local coordinate, so that $\PART{}{\hat{x}}$ is defined.  Prove that for $p \in U$,
+	\begin{align*}
+		i_*\PAREN{\RBAR{\PART{}{\hat{x}}}_p} = \RBAR{\PAREN{\PART
+		{}{x}+\PART{\hat{y}}{\hat{x}}\PART{}{y}}}_p
+	\end{align*}Thus, although $i_*:T_pS^1 \to T_p\R^2$ is injective, $\RBAR{\PART{}{\hat{x}}}_p$ cannot be identified with $\RBAR{\PART{}{x}}_p$ (Figure 11.9).
+
+\includegraphics[scale=1]{Section11Fig11.9.png} 
+
+\BLUE{As a reminder, the pullback is defined as
+\begin{align*}
+	i^*f &= f \circ i \\
+	\hat{x}(p) &= (i^*x)(p) = x(i(p))= x(p) 
+\end{align*}that is the $x$-coordinate of $p$
+\begin{align*}
+	X &= \sum \RBAR{\PART{}{\hat{x}}}_p \\
+	(i_*X)(g) &= X(g\circ i) \\
+	&= \sum \RBAR{\PART{g(i(x))}{\hat{x}}}_p \\
+	&= \PART{g}{\hat{x}}(p)+\PART{g}{\hat{y}}(p) 
+\end{align*}
+}
+
+\item Generalize (a) to a smooth curve $C$ in $\R^2$, letting $U$ be a chart in $C$ on which $\hat{x}$, the restriction of $x$ to $C$, is a local coordinate.
+
+\end{enumerate}
+
+\item \textbf{Critical points of a smooth map on a compact manifold}
+
+Show that a smooth map $f$ from a compact manifold $N$ to $\R^m$ has critical point.  (\textit{Hint}: Let $\pi:\R^m \to \R$ be the projection to the first factor.  Consider the composite map $\pi \circ f: N \to \R$.  A second proof uses Corollary 11.6 adn the connectedness of $\R^m$.)
+
+\item \textbf{Differential of an inclusion map}
+
+On the upper hemisphere of the unit sphere $S^2$, we have the coordinate map $\phi =(u,v)$, where
+\begin{align*}
+	u(a,b,c)=a \AND v(a,b,c)=b.
+\end{align*}So the derivations $\RBAR{\partial/\partial u}_p, \RBAR{\partial/\partial v}_p$ are tangent vectors of $S^2$ at any point $p=(a,b,c)$ on the upper hemisphere.  Let $i: S^2\to \R^3$ be the inclusion and $x,y,z$ the standard coordinates on $\R^3$.  The differential $i_*:T_pS^2\to T_p\R^3$ maps $\RBAR{\partial/\partial u}_p, \RBAR{\partial/\partial v}_p$ into $T_p\R^3$.  Thus,
+\begin{align*}
+	i_*\PAREN{\RBAR{\PART{}{u}}_p} &= \alpha^1\RBAR{\PART{}{x}}_p+\beta^1\RBAR{\PART{}{y}}_p+\gamma^1\RBAR{\PART{}{z}}_p,\\
+	i_*\PAREN{\RBAR{\PART{}{v}}_p} &= \alpha^2\RBAR{\PART{}{x}}_p+\beta^2\RBAR{\PART{}{y}}_p+\gamma^2\RBAR{\PART{}{z}}_p,
+\end{align*}for some constants $\alpha^i,\beta^i, \gamma^i$.  Find $(\alpha^i,\beta^i, \gamma^i)$ for $i=1,2$.
+
+\item \textbf{One-to-one immersion of a compact manifold}
+
+Prove that if $N$ is a compact manifold, then a one-to-one immersion $f:N\to M$ is an embedding.
+
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\GL}{\operatorname{GL}}
+\item \textbf{Multiplication map in $\SL(n\R)$}
+
+Let $f: \GL(n,\R)$ be the determinant map $f(A)=\det A=\det[a_{ij}]$.  For $A \in \SL(n,\R)$, there is at least one $(k,\ell)$ such that the partial derivative $\partial f/\partial a_{k\ell}(A)$ is nonzero (Example 9.13).  Use Lemma 9.10 and the implicit function theorem to prove that
+\begin{enumerate}
+	\item there is a neighborhood of $A$ in $\SL(n,\R)$ in which $a_{ij}, (i,j) \ne (k,\ell)$, form a coordinate system, and $a_{k\ell}$ is a $C^\infty$ function of the other entries $a_{ij},(i,j \ne (k,\ell);$
+	\item the multiplication map
+	\begin{align*}
+		\hat{\mu}: \SL(n,\R)\times \SL(n,\R) \to \SL(n,\R)
+	\end{align*}is $C^\infty$.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
