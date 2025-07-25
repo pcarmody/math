@@ -166,7 +166,7 @@ Want to show
 
 \item Let $b(n,F)$ be the upper triangular matrices in $\GL(n, F)$.  (A matrix $x$ is said to be upper triangular if $x_{ij}=0$ whnever $i> j$.)  This is a Lie algebra with the same Lie bracket as $\GL(n,F)$.\\
 
-Similarly, let $n(n,F)$ be the strictly upper triangular matrices in $\GL(n,F)$.  (A matrix $x$ i said to be strictly upper triangular if $x_{ij}=0$ whenever $i \ge j$.)  Again this is a Lie algebra with teh same Lie bracket as $\GL(n,F)$.\\
+Similarly, let $n(n,F)$ be the strictly upper triangular matrices in $\GL(n,F)$.  (A matrix $x$ i said to be strictly upper triangular if $x_{ij}=0$ whenever $i \ge j$.)  Again this is a Lie algebra with the same Lie bracket as $\GL(n,F)$.\\
 
 Verify these assertions.
 
@@ -937,7 +937,7 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 	\item Show conversely that given Lie aglebras $S$ and $I$ and a Lie algebra homomorphism $\theta : S \to \DER I$, the vector space $S \oplus I$ may be made into a Lie algebra by defining
 	\begin{align*}
 		[(s_1,x_1),(s_2,x_2)] = ([s_1,s_2],[x_1,x_2]+\theta(s_1)x_2-\theta(x_2)x_1)
-	\end{align*}for $s_1,s_2 \in S$, and $x_1,x_2 \in I$, and that this Lie algebra is a semidirect product of $I$ by $S$.  (The direct sum construction introduced in Exercise 2.6 is teh special case where $\theta(s)=0$ for all $s \in S$.)
+	\end{align*}for $s_1,s_2 \in S$, and $x_1,x_2 \in I$, and that this Lie algebra is a semidirect product of $I$ by $S$.  (The direct sum construction introduced in Exercise 2.6 is the special case where $\theta(s)=0$ for all $s \in S$.)
 	
 	\item Show that the Lie algebras in Exercise 3.1 may be constructed as semidirect products.
 	
@@ -979,13 +979,77 @@ Solution:
 	Consider the Lie algebra $\mathfrak{gl}(n,F)$ of all $n \times n$ matrices over a field $F$, with the Lie bracket $[A,B]=AB-BA$.
 	\begin{itemize}
 		\item \textbf{Ideal: }The set of scalar matrices, $\mathfrak{s}=\{cI\,|\, c\in F\}$, forms an ideal of $\mathfrak{gl}(n,F)$.  This ideal is not the derived Lie algebras.
-		\item \textbf{Derived Lie Algebra:} Teh derived Lie algebra $\mathfrak{gl}(n,F)$ is $\mathfrak{sl}(n,F)$, the Lie algebra of $n\times n$ matrices with trace zero.  This is because the trace of a commutator is always zero, and any matricx with trace zero can be written as a commutator.  $\mathfrak{sl}(n,F)$ is an ideal of $\mathfrak{gl}(n,F)$.
+		\item \textbf{Derived Lie Algebra:} the derived Lie algebra $\mathfrak{gl}(n,F)$ is $\mathfrak{sl}(n,F)$, the Lie algebra of $n\times n$ matrices with trace zero.  This is because the trace of a commutator is always zero, and any matricx with trace zero can be written as a commutator.  $\mathfrak{sl}(n,F)$ is an ideal of $\mathfrak{gl}(n,F)$.
 	\end{itemize}
 	
 	\textbf{Final Answer}  In summary, while the derived Lie algebra is always an ideal, an ideal is a more general concept. The derived Lie algebra is a specific ideal that captures the "commutativity" properties of the Lie algebra itself.
 
 \end{enumerate}
 
+\end{remark}
+
+\HLINE
+\newcommand{\SLC}{\mathfrak{sl}(n,\C)}
+\newcommand{\SOC}{\mathfrak{so}(n,\C)}
+\newcommand{\SPC}{\mathfrak{sp}(2n,\C)}
+\begin{remark}{\textbf{Simple Algebras:} Special Linear, Special Orthogonal and Symplectic Lie Algebras}
+\begin{description}
+	\item \textbf{Special Linear, $\mathfrak{sl}(n,\C)$}
+	
+	Description:
+	
+	Teh Lie algebra $\SLC$ consists of all $n \times n$ complex matrices with trace zero, $\TR A = 0$.  The Lie bracket is defined by the commutator $[A,B]=AB-BA$.
+	
+	Dimensions:
+	
+	The dimensions of $\SLC$ is $n^2-1$, as the trace condition imposes one linear constraint on the $n^2$ entries of a matrix.
+	
+	Importance:
+	\begin{itemize}
+		\item If $L = \mathfrak{gl}(n,\C)$ then $L'= \SLC$.
+		\item Fundamental Representation: It is the Lie algebra of the specal linear group $SL(n,\C)$ which acts on $\C^n$.
+		\item Simple Lie Algebra: For $n \ge 2$, it is a simple Lie algebar, correspoidng ot the $A$-series of the Carten classification.
+		\item Physics: It appears in quantum mechanics and quantum field theory,  describing symmetries.
+	\end{itemize}
+	
+	\item \textbf{The Special Orthogonal Lie Algebra, $\SOC$}
+	
+	Description:
+	
+	The Lie Algebra $\SOC$ consists of $n \times n$ complex skew-symmetric matrices.  The Lie bracket is the commutator $[A,B]=AB-BA$.
+	
+	Dimension:
+	
+	The dimesion is $\frac{n(n-1)}{2}$, as skew-symmetric matrices have z ero diagonal entries and $A_{aj}=-A_{ji}$ for $i \ne j$.
+	
+	Impotrance:
+	
+	\begin{itemize}
+		\item Orthogonal Group:  It si the Lie algebra of the special orthogoanl gorup $SO(n,\C)$, preserving a symmetric bilinear form.
+		
+		\item Simple Lie Algebra: For $n\ge 3$ and $n \ne 4$, it is simple, corresponging to the $B$-series  and $D$-series in the Cartan classification.
+		
+		\item Geometry and Physics:  It is crucial in geometery and physics, related to rotattions and Lorentz transformations.
+	\end{itemize}
+	
+	\item \textbf{The Symplectic Lie Algebra, $\SPC$.}
+	
+	Description:
+	
+	The Lie algebra $\SPC$ consists $2n\times 2n$ complex matrices $A$ staisfying $A^TJ+JA = 0$ where $J$ is a standard skew-symmetric matrix.
+	
+	Dimension:
+	
+	The dimension is $n(2n+1)$, derived fromt the conditiosn on the matrix blocks $P,Q,R,S$.
+	
+	Importance:
+	\begin{itemize}
+		\item Symplectic Group:  It is the Lie algebra of the symplectic group $Sp(2n,\C)$, preserving skew-symmetric bilinear form.
+		\item Simple Lie Algebra: For $n\ge 1$, it is simple, corresponding to the $C$-series in the Cartan classification.
+		
+		\item Hamiltonian Mechanics and Quantum Mechancis:  It is fundamental in Hamiltonian mechanics and quantum mechancis, realted to symplectic manifolds and canonical transformations.
+	\end{itemize}
+\end{description}
 \end{remark}
 \section{Exercises}
 
@@ -997,7 +1061,23 @@ Solution:
 	\varphi\PAREN{L_1\PPP{k}}=(L_2)\PPP{k}.
 \end{align*}
 
-\item Let $X \in \mathfrak{gl}(2\ell, \C)$.  Shwo that $x$ belongs to $\mathfrak{sp}(2,\ell),\C)$ if and only if it is of the form 
+\BLUE{A proof by induction.  The initial case\begin{align*}
+	\varphi(L_1') &= \varphi([L_1,L_1]) \\
+	&= [\varphi(L_1),\varphi(L_1)]
+\end{align*}Since $\varphi$ is surjective $\varphi(L_1)=L_2$ hence
+\begin{align*}
+	\varphi(L_1') &= [L_2,L_2] = L_2'
+\end{align*}The inductive case.
+\begin{align*}
+	\text{assume } \varphi(L_1\PPP{k}) &= (L_2)\PPP{k} \\
+	\varphi(L_1\PPP{k+1}) &= \varphi([L_1\PPP{k},L_1\PPP{k}]) \\
+	&= \SQBRACKET{\varphi(L_1\PPP{k}),\varphi(L_1\PPP{k})} \\
+	&= [ (L_2)\PPP{k}, (L_2)\PPP{k}] \\
+	&= (L_2)\PPP{k+1}
+\end{align*}
+}
+
+\item Let $x \in \mathfrak{gl}(2\ell, \C)$.  Show that $x$ belongs to $\mathfrak{sp}(2\ell,\C)$ if and only if it is of the form 
 \begin{align*}
 	x = \TWOXTWO{m}{p}{q}{-m}
 \end{align*}where $p$ and $q$ are symmetric.  Hence find the dimension of $\mathfrak{sp}(2\ell, \C)$.  (See Exercise 12.1 for the other families)
@@ -1006,10 +1086,26 @@ Solution:
 
 \item Let $L=\mathfrak{n}(n,F)$, the Lie algebra of strictly upper triangular $n \times n$ matrices over a field $F$.  Show that $L^k$ has a basis consisting of all the matrix units $e_{ij}$ with $j-i>k$. Hence show that $L$ is nilpotent.  What is the smallest $m$ such that $L^m = 0$?
 
+\BLUE{Let $L \in \mathfrak{n}(n,F)$.\begin{align*}
+	L^1 = L' &= [L,L]
+\end{align*}given any $A,B \in L$, $[A,B] = AB-BA$.  Given any $i,j < n$, first we can see that $A_{ij}=0$ whenever $i\ge j$ (the diagonal and lower triangle of the matrix).  Further, 
+\begin{align*}
+	AB &= \SQBRACKET{ \sum_{k=1}^n A_{ik}B_{kj} } \\
+	&= \SQBRACKET{\sum_{k=j}^n A_{ik}B_{kj}} \\
+	\text{or } i<j+1 &\implies AB_{ij} = BA_{ij} = 0 
+\end{align*}that is, the elements along the diagonal one row up (or one column to the right) are all zero.  Similarly, let $C=AB$ then for some $D \in L$ we get a similar argument, that is $i<j+2$ implies that $DC_{ij}=CD_{ij}=0$.  $C \in [L,L]$ and $D\in [L, L']=L^2$, this process can be repeated as long as $j-i<k$, that is $k=n-1$.  When $k=n-1$ we have a zero indicating that $L$ is nilpotent at $m=n-1$
+}
 \item Let $L=\mathfrak{b}(n,F)$ be the Lie algebra of upper triangular $n\times n$ matrices over a field $F$.
 \begin{enumerate}[label=(\roman*)]
 
 	\item Show that $L'=\mathfrak{n}(n,F)$.
+	
+	\BLUE{Let $A,B \in \mathfrak{b}(n,F)$.  Looking only at the elements on the diagonal, we can see that, 
+	\begin{align*}
+		(AB)_{ii} &= \sum_{k=1}^n A_{ik}B_{ki} = \sum_{k=1}^n B_{ik}A_{ki} = (BA)_{ii} \\
+		\therefore (AB)_{ii}-(BA)_{ii} &= 0 \implies [A,B] \in \mathfrak{n}(n, F)
+	\end{align*}
+	}
 	
 	\item More generally, show that $L\PPP{k}$ has a basis consisting of all the matrix units $e_{ij}$ with $j-i\ge 2^{k-1}$.  (the commutator formula for the $e_{ij}$ given in $\S1.2$ will be helpful.)
 	
@@ -1021,13 +1117,13 @@ Solution:
 
 \item Show that a Lie algebra is semisimple if and only if it has no non-zero abelian ideals.  (this was the original definition of semisimplicity given Wilhelm Killing.)
 
-\item Prove directly that $\SL(n,\C)$ is a simple Lie algebra $n \ge 2$.
+\item Prove directly that $\SLC$ is a simple Lie algebra $n \ge 2$.
 
-\item Let $L$ be a Lie algebra over a field $F$ sucht aht $[[a,b],b]=0$ for all $a,b \in L$, (or equivalently, $(\AD b)^2=0$ for all $b \in L$).
+\item Let $L$ be a Lie algebra over a field $F$ such that $[[a,b],b]=0$ for all $a,b \in L$, (or equivalently, $(\AD b)^2=0$ for all $b \in L$).
 
 \begin{enumerate}[label=(\roman*)]
 
-	\item Suppose the characteristic of $F$ is not 3.  Show that then $L^4 = 0$.  \textit{Hint:}  Show first that eh Lie brackets $[[x,y],z]$ are alterenating; that is, 
+	\item Suppose the characteristic of $F$ is not 3.  Show that then $L^4 = 0$.  \textit{Hint:}  Show first that the Lie brackets $[[x,y],z]$ are alterenating; that is, 
 	\begin{align*}
 		[[x,y],z]=-[[y,x],z],\; [[x,y],z]=-[[x,z],y]
 	\end{align*}for all $x,y,z \in L$.
