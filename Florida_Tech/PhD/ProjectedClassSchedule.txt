@@ -18,9 +18,9 @@ Fall 2025
 ===========
 
 Math 5315 (86475) Numerical Methods for Partial Differential Equations
-Math 6230 (88527) Partial Differential Equations I
-Math ???? (?????) Self-study in Differential Geometry (Berchenko-Kogan)
-Math 6099 () Colloquium W 4-5
+Math 6230 (89220) Partial Differential Equations I
+Math 5050 (89223) Self-study in Differential Geometry (Berchenko-Kogan)
+Math 6099 (88197) Colloquium W 4-5
 
 ===========
 

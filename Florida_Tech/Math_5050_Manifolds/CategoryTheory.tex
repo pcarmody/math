@@ -40,6 +40,8 @@
 
 \newcommand{\MMN}{M_{m\times n}}
 \newcommand{\FF}{\mathcal{F}}
+\newcommand{\ADJOINT}[2]{\underset{\underset{#2}\longleftarrow}{\overset{\overset{#1}\longrightarrow}\bot }}
+
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -456,9 +458,6 @@ Intuitively speaking:
 	\CONJ{\PAREN{A'\MORPHISM{p}A\MORPHISM{f}G(B)\MORPHISM{G(q)}G(B')}} = \PAREN{F(A')\MORPHISM{F(p)}F(A)\MORPHISM{\bar{f}}B\MORPHISM{q}B'}
 \end{align*}for all $p,f,$ and $q$.
 
-\newcommand{\ADJOINT}[2]{\underset{\underset{#2}\longleftarrow}{\overset{\overset{#1}\longrightarrow}\bot }}
-
-
 \item Show that the left adjoints preserve intitial objects: that is, $\CAT{A}\ADJOINT{F}{G}\CAT{B}$ and $I$ is the initial object of $\CAT{A}$, then $F(I)$ is the initial object of $\CAT{B}$.  Dually show that right adjoints preserve terminal objects.
 
 \item Let $G$ be a group
@@ -477,8 +476,72 @@ Intuitively speaking:
 	\Lambda \dashv \Pi \dashv \Delta \dashv \Gamma \dashv \nabla.
 \end{align*}
 
+\end{enumerate}
+
 \section{adjunction via units and counits}
+\newcommand{\FUNCTOR}[2]{\underset{\underset{#2}\longleftarrow}{\overset{#1}\longrightarrow}}
+\begin{enumerate}[label=\textbf{2.2.\arabic*}]
+\setcounter{enumi}{9}
+	\item Let $A\FUNCTOR{B}{T}B$ be ordered-preserving maps between ordered sets. Prove \textit{directly} that the folloiwng conditions are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item for all $a \in A$ and $b \in B$.
+		\begin{align*}
+			f(a) \le b \iff a \le g(b);
+		\end{align*}
+		
+		\item $a \le g(f(a))$ for all $a \in A$ and $f(g(b))\le b$ for all $b \in B$.
+		
+		(Both conditions state that $f \dashv g$; see Example 2.2.7.)
+	\end{enumerate}
+	
+	\item \begin{enumerate}[label=(\alph*)]
+	
+		\item Let $\CAT{A}\ADJOINT{F}{G}\CAT{B}$ be an adjunction with unit $\eta$ and counit $\varepsilon$.  Write $\CATSET{Fix}(GF)$ for the full subcaegory of $\CAT{A}$ whose objects are those $A \in \CAT{A}$ such that $\eta_A$ is an isomorphsim, and duality $\CATSET{Fix}(FG)\subseteq \CAT{B}$.  Prove that the adjunction $(F,G,\eta, \varepsilon)$ resticts to an equivalence $(F', G', \eta', \varepsilon')$ between $\CATSET{Fix}(GF)$ and $\CATSET(FG)$.
+		
+		\item Part (a) shows taht every adjuction restricts to an equivalence between full subcategories in a canonical way.  Take some examples fo adjunctions and work out what this equivalence is.
+	
+	\end{enumerate}
+	
+	\item \begin{enumerate}[label=(\alph*)]
+	
+		\item Show that for any adjuction, the right adjoint is full and faithful if and only if the counit is an isomorphism
+		
+		\item An adjuction satisfying teh quivalent condtiions of part (a) is called \textbf{reflection}.  (Campare Example 2.3(d).)  Of teh examples of adjunctions given in this chapter, which are reflections?
+	\end{enumerate}
+	
+	\item \begin{enumerate}[label=(\alph*)]
+	
+		\item Let $f: K \to L$ be a map of sets, and enote by $f^*: \CAT{P}(L) \to \CAT{P}(K)$ the map sending a subseet $S$ to $L$ to its inverse image $f^{-1}S\subseteq K$.  Then $f^*$ is order-preserving with respect to the inclusion orderings on $\CAT{P}(K)$ and $\CAT{P}(L)$, and so can be seen as a functor.  Find left adn right adjoints to $f^*$.
+		
+		\item Now let $X$ and $Y$ be sets, and write $p : X\times Y \to X$ for first projection.  REgard a subset $S$ of $X$ as predicate $S(x)$ in one variable $x \in X$, and similarly a subset $R$ of $X\times Y$ as predicate $R(x,y)$ in two variables.  What, in terms of predicats, are the left and right adjoints to $p^*$?  For each of the adjuctions, interpret the unit and counit as logical implications.  (Hint:  The left adjoint to $p^*$ is often writen $\exists_Y$, adn the right adjoint as $\forall_Y$.)
+		
+	\end{enumerate}
+	
+	\item Given a functor $F:\CAT{A} \to \CAT{B}$ and a category $\CAT{S}$, there is a functor $F^*:[\CAT{B}<\CAT{S}]\to [\CAT{A},\CAT{S}]$ defined on objects $Y \in [\CAT{B}, \CAT{S}]$ by $F^((Y)=Y\circ F$ adn on maps $\alpha$ by $F^*(\alpha)=\alpha F$.  Show that any adjuction $\CAT{A}\ADJOINT{F}{G}\CAT{B}$ and category $\CAT{S}$ give rise to an adjunction
+	\begin{align*}
+		[\CAT{A},\CAT{S}]\ADJOINT{G'}{F'}[\CAT{B}, \CAT{S}].
+	\end{align*}
+
 
 \end{enumerate}
 
+\section{Adjuctions via intial objects}
+
+\subsection{Exercises}
+
+\begin{enumerate}[label=\textbf{2.3.\arabic*}]
+\setcounter{enumi}{7}
+	\item What can be said about adjunctions between groups (regarded as one-object categories)?
+	
+	\item State the dual Corollay 2.3.7.  How would you prove your dual statement?
+	
+	\item let $(F,G,\eta,\varepsilon)$ be an equivalence of categoris, as in Definition1.3.15.  Prove taht $F$ is left adjoint to $G$ (heeding thewaring in Rempark 2.2.8).
+	
+	\item Let $\CAT{A}\ADJOINT{U}{F}\CATSET{Set}$ be an adjunction.  Suppose that for at least one $A\in \CAT{A}$, the set $U(A)$ has at least two elements. Prove that for each set $S$, the unit map $\eta_S:S\to UF(S)$ is injective.  What does this mean in the case the usual adjunction between $\CATSET{Grp}$ and $\CATSET{Set}$?
+	
+	\item Given sets $A$ and $B$ in \textbf{partial function} from $A$ to $B$ is a pair $(S,f)$ consisint of a subset $S \subseteq A$ adn a function $S \to B$.  (Think of it as like a function from $A$ to $B$, but undefined at certain elements of $A$.)  Let $\CATSET{Par}$ be teh category of sets adn partial functions. 
+	
+	Show that $\CATSET{Par}$ is equivalent to $Set_*$, the category of sets equipped with distinguished element adn functions preserving distinguished elements.  Show also that $\CATSET{Set}_*$ can be described as a coslice category in a simple way.
+
+\end{enumerate}
 \end{document}

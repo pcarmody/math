@@ -13,3 +13,11 @@ Math 5050 (30153) Special Topics: Intro to Manifolds. TH 12:30 to 1:45
 Math 5111 (28953) Real Analysis II MW 12:30 to 1:45
 Math 5301 (28061) Numerical Anlaysis MW 2:00 to 3:15
 Math 6099 (29500) Colloquium W 4-5
+
+Fall 2025
+===========
+
+Math 5315 (86475) Numerical Methods for Partial Differential Equations
+Math 6230 (89220) Partial Differential Equations I
+Math 5050 (89223) Self-study in Differential Geometry (Berchenko-Kogan)
+Math 6099 (88197) Colloquium W 4-5

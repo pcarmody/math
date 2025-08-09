@@ -576,8 +576,19 @@ H^k_{\text{dR}}(T^2) =
  In general, $x^i, y^j$ are coordinates for manifolds $N,M$ and $r^i$ are coordinates associated with charts.  Thus $p=(x^1, \dots, x^n)$ and $\phi(p)=(r^1, \dots, r^k)$ where $k \le n$.
  \end{remark}
  
- \begin{definition}[Differential of a Map]
+ \begin{definition}[Push-back and Push-forward].
  
+ Given the mapping between manifolds $N,M$ as $\varphi: N \to M$ with charts $\phi: N \to \R$ and $f': M \to \R$.  We define the \DEFINE{push-back} $\varphi^*f'(p)$ as \footnote{beware the f-prime, f', is NOT the derivative}
+ \begin{align*}
+ 	\varphi^*f'(p): N &\to \R \\
+ 	\varphi^*f'(p) &= f'\circ \varphi(p)
+ \end{align*}Note: this is a functional from the original manifold $N$ to the reals.  Let's think of it as a short-cut from $N \to \R$ through $M$ via $\varphi$.  Note that the push-back operates on a chart.
+ 
+ The \DEFINE{push-forward} is NOT the inverse of the push-back.  $\varphi^{-1}$ may be undefined.  Further, the push-forward does NOT operate on a chart $\psi(\varphi(p))$.  The push-foward operates on the push-back $f^*\psi$ and the tangent space $T_p(N)$. The vectors in the tangent space at $p$, i.e., $T_p(N)$.\footnote{Here we observe the behavior of functions in $N$ by the effect from their vector changes in the tangent space.}  We define the push-forward $f_*$ as
+ \begin{align*}
+ 	f_*(p):T_p(N) &\to T_{\varphi(p)}(M) \\
+ 		(f_*V)_{\varphi(p)}(\psi) &= V|_p(f^*\psi)
+ \end{align*}
  
  \end{definition}
 

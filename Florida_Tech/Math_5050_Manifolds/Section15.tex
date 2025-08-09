@@ -1,0 +1,480 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Manifolds}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 15: Lie Groups }
+\newcommand{\DUEDATE}{July 31, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent \textbf{\\\large{Notes:}}
+\begin{definition}[Lie Group] A \DEFINE{Lie Group} is a smooth manifold where the group operations (multiplication and inverse) are smooth between manifolds.\\
+
+\noindent More precisely, the group operations of multiplication $\mu: G\times G \to G$ and inverse $\iota: G \to G$ such that 
+\begin{align*}
+	\mu(g,h) &= gh \\
+	\iota(g) &= g^{-1}
+\end{align*}and both $\mu, \iota \in C^\infty$.\\
+
+\BLUE{Perhaps a more accurate description is that we have a group, therefore it has an operator and inverse, and it is a Lie Group when they are smooth.
+}
+\end{definition}
+
+\begin{definition}[Lie subGroup].
+
+A \DEFINE{Lie subgroup} of a Lie group $G$ is 
+\begin{enumerate}[label=(\roman*)]
+
+	\item an abstract group $H$ that is,
+	\item an \textit{immersed} submanifold via the inclusion map such that
+	\item the group operations on $H$ are $C^\infty$
+
+\end{enumerate}
+\end{definition}
+
+\HLINE
+\begin{remark}[Miscellaneous Concepts]
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SO}{\operatorname{SO}}
+\begin{align*}
+	\pi_0(\GL_2(\R)) &\cong \Z/2\Z \\
+	\pi_1(\GL_2(\R)) &\cong \pi(\SO_2(\R)) \cong \pi_1(S^1) \cong \Z
+\end{align*}
+\end{remark}
+
+\HLINE
+\begin{remark}[Group Homomorphism and Left-Multiplication].
+
+A map $F:H \to G$ between two Lie groups $H$ and $G$ is a \DEFINE{Lie Group Homomorphism} if it is a $C^\infty$ map (smooth) and a group homomorphism.  The group homomorphism condition means that for all $h,x \in H$,\footnote{keep in mind that the group need not be commutative, hence the definition of a left-multiplication function.}
+\begin{align*}
+	F(hx) = F(h)F(x).
+\end{align*}This may be rewritten in the functional notation as 
+\begin{align*}
+	F\circ \ell_h= \ell_{F(h)} \circ F, \, \forall h \in H.
+\end{align*}
+\end{remark}
+
+\HLINE
+\begin{remark}[Intuitive ideas regarding Push-back and Pull-forward].
+\begin{quote}[From StackExchante\footnote{\url{https://math.stackexchange.com/questions/2445738/intuitive-explanation-for-the-relation-between-push-forward-and-pullback}}]
+The fundamental intuition is that it doesn't matter which manifold you do your calculations in, you get the same result either way.
+
+This was already clear in the case of coordinate charts; calculus on a manifold is often defined in terms of what you get using coordinates to map the problem over to Euclidean space. The point is that the idea extends to more general manifolds than just Euclidean space.
+
+Given a vector on M1
+ and a scalar field on M2
+, there are two ways you might combine them to get a directional derivative: either pull the problem back to M1
+ or push it forward to M2
+. The identity you cite is the one that asserts you get the same answer both ways.
+\HLINE
+Anyways, I think there is an extremely compelling algebraic rationale for this.
+
+Suppose you are doing calculus in one variable $x$, then later you decide you need a second independent variable $y$. This changes absolutely nothing about the calculations you've done — if $y$ doesn't appear in any of your calculations, everything is as if it didn't exist at all.
+
+I.e. $d\sin(x)=\cos(x)dx$  is always true; it doesn't matter whether or not you have any other variables and whether or not $x$ is dependent with any of them.
+
+Consider the case where $\phi$ is the projection onto the first component map $\R^2\to \R$, using standard coordinates on both.
+
+The pullback $\phi_*$ on scalar fields is precisely the "add in the variable $y$" operation. The push forward $\phi^*$ on vectors expresses the fact only the $x$-direction matters. It's clear that if we have $v \in T\R^2$ and $f \in C^1(\R)$, then we expect
+\begin{align*}
+	(\phi_*)(f) &= v(\phi^*f)
+\end{align*}because both formulas are expressing exactly the same operation.
+\end{quote}
+\end{remark}
+
+%================================
+\noindent \textbf{\\\large{Examples}}\footnote{Video from YouTube \url{https://www.youtube.com/watch?v=pAuRWd8dpvE&t=1875s}}
+
+\begin{description}
+	\item \textbf{Dimension Zero}
+	
+	Lie Groups $\cong$ Discrete groups $\implies$ classification: hopeless.  However, given
+\[
+	\begin{tikzcd}[row sep=huge]
+		G_0 \arrow[r] & G  \arrow[r] & G/G_0
+	\end{tikzcd}
+\]where $G_0$ is the \textbf{connected component} (i.e., a Lie subgroup and a normal group containing the identity) and $G/G_0$ is discrete (that is $G$ is separated into two parts).  $G/G_0$ being discrete offers no new informations.  $G_0$ being connected can be classified.  For example, \[
+	\begin{tikzcd}[row sep=huge]
+		\R_{> 0} \arrow[r] & \R^\times  \arrow[r] & \{+,-\}
+	\end{tikzcd}
+\]$R_{> 0}$ is a connected component, $\R^\times$ a group, $\{+,-\}$ a discrete subgroup.
+
+The theory on Lie Groups focuses on 'connected' Lie Groups, thus, for this example $G_0\,\dots$ 
+
+
+\item \textbf{One Dimensional Examples}
+
+	\begin{itemize}
+		\item $\R$ with addition.
+		\item $\R^\times$ with multiplication.
+		\item $S^1 \subseteq \C$, i.e., $|z|=1$
+	\end{itemize}There exists isomorphisms
+	\begin{align*}
+		\operatorname{exp}:\R_{>0} &\to \R^\times\\
+		x \mapsto e^{2\pi i x}:\R_{>0} &\to S^1 &\text{local isomorphism}
+	\end{align*}Any connected Lie group is isomorphic to $\R_{> 0}$ under addition or $S^1$.  In general, $\R^1/$(discrete subgroup), e.g., $\R_{>0}=\R^1/0$ and $S_1=\R^1/\Z$, respectively.
+	
+	\item \textbf{Two Dimensional Examples}
+	
+	Simply take all of the possible examples from One Dimension and mix and match them to two dimensions.   	Each is abelian and has the form $\R^2/$(discrete group)
+	\begin{itemize}
+		\item $\R^1 \times \R^1 \implies $ plane.  Equal to $\R^2/0$.
+		\item $\R^1 \times S^1 \implies $ cylinder.  Equal to $\R^2/\Z$.
+		\item $S^1 \times S^1 \implies $ torus.  Equal to $\R^2/\Z^2$.
+ 	\end{itemize}Any connected abelian subgroup can be written in this form, i.e.,  is isomorphic to, $\R^m\times (S^1)^n \cong \R^{m+n}/$(discrete group).
+ 
+ 	\textbf{Non-abelian connected Lie subgroups of dimension two}
+ 	\begin{itemize}
+ 		\item \textbf{Afine transformation of the Reals, $ax+b$}
+ 		
+ 		$\R \to \R$, as in 
+ 		\begin{align*}
+ 			x &\mapsto ax+b \implies \TWOXTWO{a}{b}{0}{1} & a \ne 0
+ 		\end{align*}This is not abelian (?) but is a "solvable Lie Group".  By \DEFINE{solvable} we mean that given a chain of normal subgroups, $G_i$.
+ 		\begin{align*}
+ 			G_0\subseteq G_1 \subseteq \cdots \subseteq G_n \subseteq G
+ 		\end{align*}where $G_{i}/G_{i-1}$ are all abelian.  Then, $G_1$ is the group of elements over $b$ with $a=1$ and $G_2$ being the whole group.  In this particular case, the length of the chain is one.
+ 	\end{itemize}
+ 		
+ 	\item \textbf{Three Dimensional Examples}
+ 	
+ 	\begin{itemize}
+
+ 	\item \textbf{Special Linear and Projected Special Linear Lie groups}
+ 	
+ 	The single most useful Lie Group of them all $\SL_2(\R)=\SL(2,\R)$, Special Linear Group (the set of two by two matrices with determinant 1).  Also, $\PSL_2(\R) = \SL_2(\R)/\{\pm \mathbb{I}_2\}$, known as the projective space on $\R^2$, the group of automorphisms of the upper half plan in complex analysis.
+ 	
+ 	\item \textbf{The sphere $S^3$}
+ 	
+ 	Also known as \textit{the group of unit quaternions}.
+ 	\begin{align*}
+ 		S^3 = \{(x_1,x_2,x_3,x_4)\in \R^4\,|,x_1^2+x_2^2+x_3^2+x^4=1 \}
+ 	\end{align*}Notice that $S^2$ is NOT a Lie group, further, $S_0, S_1, S_3$ are the \textbf{only} spheres that are Lie groups. These correspond to the dimensions of the identity of $S_0\to \dim(\mathbb{I}_\R = 0)=0$, $S_1 \to \dim(\mathbb{I}_\C = i)=1$, $S_1 \to \dim(\mathbb{I}_\mathbb{H})=3$
+ 	
+ 	\item \textbf{Heisenberg Group}
+ 	
+ 	Taking the upper triangule 3$\times$3 matrices quotiented with the discrete group of the center.
+ 	\begin{align*}
+ 		&\left. \THREEXTHREE{1}{a}{b}{}{1}{c}{}{}{1}  \middle/ \THREEXTHREE{1}{0}{n}{0}{1}{0}{0}{0}{1} \right. & n \in \Z \\
+ 		\text{ or } &H/H_\Z
+ 	\end{align*}This is an example of a "common way of constructing Lie groups by taking the quotient of one Lie Group by the discrete center of another."  Notice that $H \cong \R^3$ is simply connected (think $G_0$) and $H_\Z$ is NOT simply connected, known as \textit{the fundamental group given by $\Z$} (to be discussed later).
+ 	
+ 	"The idea of this is that you can simplify the classification of Lie groups to the classification of Simply Connected Lie Groups quotiented with the discrete subgroup of the center."
+ 	
+ 	"The Heisenberg Group is an example of a nilpotent group."  We define \textbf{\textit{nilpotent}} as follows.  Let $G_{i+1}=G_i/Z(G_i)$, that is, each $G_i$ is the quotient of the previous $G_i$ with its own center.  If at the end of this progression, $G_n=I$ then $G$ is said to be nilpotent."  Simply connected nilpotent Lie subgroups are isormorphic to closed upper triangular subgroup of matrices.
+ 	
+ 	\end{itemize}
+ 	
+ 	\item \textbf{6: the Lorentz Group}
+ 	
+ 	The group of rotations of spacetime
+ 	
+ 	\item \textbf{Dimension 8}
+ 	
+ 	SU$_3$ of 3$\times$3 unitary matrices.  That is, determinant 1.  "The Eightfold Way" a simple Lie Group.
+ 	
+ 	\item \textbf{Dimension 10}
+ 	
+ 	Poincare Group set of all translations and rotations of spacetime.  More or less a product of simple groups that is abelian and solvable.
+ 	
+ 	\item \textbf{Complex Simple Lie Groups}
+ 	
+ 	The ``classical groups"
+ 	\begin{itemize}
+ 		\item Special Linear $\SL_n(\C), n\ge 1$
+ 		\item Orthogonal $O_n(\C), n\ge 3$
+ 		\item Simplectic $\operatorname{Sp}_n(\C),n\ge 1$
+ 	\end{itemize}Killing found five more: $G_2, F_4, \varepsilon_6, \varepsilon_7, \varepsilon_8$ whose dimensions are 14, 52, 78, 133, 248, respectively.
+ 	
+ 	\item \textbf{Lastly}
+ 	
+ 	``We can simplify a lot of material on a Lie Group by studying the tangent space.  This takes us into our next subject, a Lie Algebra."
+
+\end{description}
+
+%=====================================
+\noindent \textbf{\\\large{Exercises\\}}
+
+\noindent \textbf{Exercise 15.2, Pg. 164 (Left Multiplicaton)}
+
+For an element $a$ in a Lie Group $G$, prove that the left multiplication $\ell_a: G \to G$ is a diffeomorphism.
+
+\BLUE{Rewording the problem: Prove that $\ell_a^{-1} = \ell_{a^{-1}}$.\\\indent
+Since $a \in G, \exists a^{-1}\in G$ and
+\begin{align*}
+	\ell_a(x) &= \mu(a,x) \AND \ell_{a^{-1}} = \mu(a^{-1},x)\\
+	(\ell_a\circ\ell_{a^{-1}})(x) &= \mu(a, \mu(a^{-1}, x)) \\
+	&= \mu(\mu(a,a^{-1}),x) & \text{associativity} \\
+	&= \mu(e, x) \\
+	&= x
+\end{align*}\indent Thus. $\ell_a^{-1} = \ell_{a^{-1}}$.  Every step in the above progression is smooth, therefore a diffeomorphism.
+}
+
+%===========================
+\noindent \textbf{\\\large{Problems}}
+
+\begin{enumerate}[label=\textbf{15.\arabic*.}]
+
+	\item \textbf{Matrix exponential}
+	
+	For $X \in \R^{n\times n}$, defined the partial sum $s_m=\SUM{k=0}{m} X^k/k!$.
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Show that for $\ell \ge m$,
+		\begin{align*}
+			\DBARS{s_\ell - s_m} &\le \sum_{k=m+1}^{\ell} \DBARS{X}^k/k!.
+		\end{align*}
+
+		\BLUE{\begin{align*}
+			\DBARS{s_\ell - s_m} &= \DBARS{\SUM{k=0}{\ell} X^k/k! - \SUM{k=0}{m} X^k/k!} \\
+			&= \DBARS{\SUM{k=m+1}{\ell} X^k/k!}\\
+			&\le \SUM{k=m+1}{\ell} \DBARS{X^k}/k!
+		\end{align*}
+		}
+		
+		\item Conclude that $s_m$ is a Cauchy sequence in $\R^{n\times n}$ and therefore converges to a matrix, which we denote by $e^X$.  This gives another way of showing that $\SUM{k=0}{\infty} X^k/k!$ is convergent, without using the comparison test or the theorem that absolute convergence implies convergence in a complete normed vector space.
+	
+	\end{enumerate}
+	
+	\item \textbf{Identity component of a Lie group}
+	
+	The \textit{identity component} $G_0$ of a Lie group $G$ is the connected component of the identity element $e$ in $G$.  Let $\mu$ and $t$ be the multiplication map and the inverse map of $G$.
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item For any $x\in G_0$, show that $\mu(\{x\}\times G_0) \subset G_0$.  (\textit{Hint: }Apply Proposition A.43.)
+		
+		\BLUE{In other words, demonstrate that $G_0$ is a subgroup.
+		}
+		
+		\item Show that $i(G_0)\subset G_0$.
+		
+		\BLUE{Let $g \in G_0$ then $i(g)=g^{-1}$ and $\mu(g, i(g))=\mu(g,g^{-1})=e$, thus $g^{-1} \in G_0$.
+		}
+		
+		\item Show that $G_0$ is an open subset of $G$. (\textit{Hint: }Apply Problem A.16.)
+		
+		\item Prove that $G_0$ is itself a Lie group.
+		
+	\end{enumerate}
+	
+	\item \textbf{Product rule for matrix-valued functions}
+	
+	Let $(a,b)$ be an open interval in $\R$.  Suppose $A : (a,b)\to\R^{m\times n}$ and $B:(a,b)\to\R^{n\times p}$ are $m\times n$ and $n\times p$ matrices respectively whose entries are differentiable functions of $t \in (a,b)$.  Prove that for $t\in(a,b)$,
+	\begin{align*}
+		\frac{d}{dt}A(t)B(t)=A'(t)B(t)+A(t)B'(t)
+	\end{align*}where $A'(t) = (dA/dt)(t)$ and $B'(t) = (dB/dt)(t)$.
+	
+	\BLUE{\begin{align*}
+		AB &= \SQBRACKET{\sum_{k=1}^n a_{ik}b_{jk}} \\
+		\frac{d}{dt}AB &= \frac{d}{dt}\SQBRACKET{\sum_{k=1}^n a_{ik}b_{jk}} \\
+		&= \SQBRACKET{\sum_{k=1}^n \frac{d}{dt}(a_{ik}b_{jk})} \\
+		&= \SQBRACKET{\sum_{k=1}^n \frac{d}{dt}(a_{ik})b_{jk} + \sum_{k=1}^n + a_{ik} \frac{d}{dt}(b_{jk})} \\
+		&= \SQBRACKET{\sum_{k=1}^n \frac{d}{dt}(a_{ik})b_{jk}} + \SQBRACKET{\sum_{k=1}^n + a_{ik} \frac{d}{dt}(b_{jk})} \\
+		&= A'B + AB'
+	\end{align*}
+	}
+	
+	\item \textbf{Open subgroup of a connected Lie group}
+	
+	Prove that an open subgroup $H$ of a connected Lie group $G$ is equal to $G$.
+	
+	\BLUE{IMHO, this is an abuse of terminology.  It might be better to say ``Prove that an open \textit{with respect to $G$} subgroup $H$ of a connected Lie group $G$ is equal to $G$".  For example, let $G = \R^2$ and $H = (-1,1)$.  Clearly, $H$ is open and connected and $G \ne H$.  However, $H$ is open in $\R$ but \textit{with respect to $G$}, every point in $H$ is a boundary point.  That is, let $h\in H$ then there exists an open set about $h$ \textbf{\textit{in $G$}} which has elements in $H$ and elements in $G$. Consquently, $H$ is open  \textit{with respect $\R$ but not to $G$}, the set that it appears to be defined by. \\ \\
+	In order for $H$ to be an open subgroup \textit{with respect to $G$} it cannot have a dimension less than $G$.  It must also be immersive, therefore, it must be $G$.\\
+	\\
+	This 'problem' is deceptive in that 'open' on a 'subgroup' must be in referrence to the ambient space and not in its definition.  Its kind of like saying ``Starry Starry night by Vincent van Gogh is beautiful now prove that it isn't real."
+	}
+	
+	\item \textbf{Differential of the multiplicative map}
+	
+	Let $G$ be a Lie group with multiplication map $\mu:G \times G \to G$, and let $\ell_a:G \to G$ and $r_b: G \to G$ be left and right multiplication by $a$ and $b \in G$, respectively.  Show that the differential of $\mu$ at $(a,b)\in G \times G$ is 
+	\begin{align*}
+		\mu_{*,(a,b)}(X_a, Y_b) = (r_b)_{*}(X_a)+(\ell_a)_*(Y_b)\, \text{ for }X_a\in T_a(G),\, Y_b\in T_b(G)
+	\end{align*}
+	
+	\item \textbf{Differential of the inverse map}
+	
+	let $G$ be a Lie group with mulitplication map $\mu:G\times G\to G$, inveerse map $i:G \to G$, and identity $e$.  Show that the differential of the inverse map at $a \in G$,
+	\begin{align*}
+		i_{*,a}:T_aG\to T_{a^{-1}}G,
+	\end{align*}is given by 
+	\begin{align*}
+		i_{*,a}(Y_a) = -(r_{a^{-1}})_*(\ell_{a^{-1}})_*Y_a,
+	\end{align*}where $(r_{a^{-1}})_*=(r_{a^{-1}})_{*,e}$ and $(\ell_{a^{-1}})_*=(\ell_{a^{-1}})_{*,a}$. (The differential of the inverse at the identity was calculated in Problem 8.8(b).)
+	
+	\item \textbf{Differential of the determinant map at $A$}
+	
+	Show that the differential of the determinant map $\det: \operatorname{GL}(n,\R)\to\R$ at $A\in \operatorname{GL}(n,\R)$ is given by 
+	\begin{align*}
+		\operatorname{det}_{*,A}(AX) &= (\det A)\TR X, \text{ for }X \in \R^{n\times n}. &  (15.7)
+	\end{align*}
+	
+	\RED{\begin{align*}
+		\operatorname{det}_{*,A}(AX) &= \RBAR{\frac{d}{dt}\det(e^{tAX})}_{t=0} \\
+		&= \RBAR{\frac{d}{dt} e^{t\TR(AX)}}_{t=0} \\
+		&= \RBAR{\TR(AX)e^{t\TR(AX)}}_{t=0}
+	\end{align*}
+	}
+
+	\BLUE{Once again, some abuse of terminology for the unawares.  This is $\operatorname{det}_{*,A}$ which is specifically at $A$ then we evaluate it at $AX$.
+	}
+	\item \textbf{Special linear group}
+	
+	Use Problem 15.7 to show that 1 is a regular value of the determinant map.  This gives a quick proof that the special linear group $\operatorname{SL}(n,\R)$ is a regular submanifold of $\operatorname{GL}(n,\R)$.
+	
+	\item \textbf{Structure of a General Linear Group}
+	
+	\begin{enumerate}[label=(\arabic*)]
+	
+		\item $r \in \R^\times: \R-\{0\}$, let $M_r$ be the $n\times n$ matrix
+		\begin{align*}
+			M_r &= \SQBRACKET{\begin{array}{cccc}
+				r &   &  &  \\
+				  & 1 &  &  \\
+				  &   & \ddots & \\
+				  &   &  & 1
+			\end{array}} = \CYCLE{re_1 & e_2 & \dots & e_n}
+		\end{align*}where $e_1,\dots, e_n$ is the standard basis for $\R^n$.  Prove that the map 
+		\begin{align*}
+			f: \operatorname{GL}(n,\R) &\to \operatorname{SL}(n,\R)\times \R^\times, \\
+			A &\mapsto \PAREN{AM_{a/\det A}, \det A}.
+		\end{align*}is a diffeomorphism.
+		
+		\item The \textit{center} $Z(G)$ of a group $G$ is the subgroup of elements $g \in G$ that commute with all elements of $G$:
+		\begin{align*}
+			Z(G) &= \{g\in G\,|\, gx=xg, \forall x \in G\}.
+		\end{align*}Show that the center of $\operatorname{GL}(2,\R)$ is isomorphic to $\R^\times$, corresponding to the subgroup of scalar matrices, and that the center of $\operatorname{S}(2,\R)\times\R^\times$ is isomorphic to $\{\pm 1\}\times\R^\times$.  The group $\R^\times$ has two elements of order 2, while the group $\{\pm 1\}\times\R^\times$ has four elements of order 2.  Since their center are not isomorphic, $\operatorname{G}(2,\R)$ and $\operatorname{SL}(2,\R) \times \R^\times$ are not isomorphic groups.
+		
+		\item Show that
+		\begin{align*}
+			h: \operatorname{GL}(3,\R) &\to \operatorname{SL}(3,\R) \times \R^\times \\
+			A &\mapsto \PAREN{(\det A)^{1/3}, \det A}
+		\end{align*}is a Lie group isomorphism.
+	
+	\end{enumerate}
+	
+	The same arguments in (b) and (c) prove that the $n$ even, the two Lie groups $\operatorname{GL}(n,\R)$ and $\operatorname{SL}(n,\R)\times \R^\times$ are not isomorphic as groups, while for $n$ odd, tey are isomorphic as Lie Groups.
+	
+	\item \textbf{Orthogonal Group}
+	
+	Show that the orthogonal group $O(n)$ is compact by proving the following two statements
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item $O(n)$ is a closed subset of $\R^{n \times n}$.
+		\item $O(n)$ is a bounded subset of $\R^{n\times n}$
+	
+	\end{enumerate}
+	
+	\item \textbf{Special orthogonal group $\operatorname{SO}(2)$}
+	
+	The \textit{special orthogonal group $\operatorname{SO}(2)$} is defined to be the subgroup of $O(n)$ consisting of matrices of determinant 1.  Show that every matrix $A \in \operatorname{SO}(2)$ can be written in the form
+	\begin{align*}
+		A = \SQTWOXTWO{a}{c}{b}{d}=\SQTWOXTWO{\cos \theta}{-\sin\theta}{\sin\theta}{\cos\theta}
+	\end{align*}for some real number $\theta$.  Then prove that $\operatorname{SO}(2)$ is diffeomorphic to the cirlce $S^1$.
+	
+	\item \textbf{Unitary group}
+	
+	The \textit{unitary group $U(n)$} is defined to be 
+	\begin{align*}
+		U(n) = \{A \in \operatorname{GL}(n,\C)\,|\, \CONJ{A}^TA=I \}
+	\end{align*}where $\CONJ{A}$ denotes the complex conjugate of $A$, the matrix obtained from $A$ by conjugatin every entry of $A: (\CONJ{A})_{ij}=\CONJ{a_{ij}}$.  Show that $U(n)$ is a regular submanifold of $\operatorname{GL}(n,\C)$ and that $\dim U(n)=n^2$.
+	
+	\item \textbf{Special unitary group $\operatorname{SU}(2)$}
+	
+	The \textit{special unitary group $\operatorname{SU}(n)$} is defined by the subgroup $U(n)$ consisting of matrics of determinant 1.
+	\begin{enumerate}[label=(\alph*)]
+		\item Show that $\operatorname{SU}(2)$ can also be described as a the set
+		\begin{align*}
+			\operatorname{SU}(n) &= \BRACKET{\RBAR{\SQTWOXTWO{a}{-\bar{b}}{b}{\bar{a}}\in \C^{2\times 2}}a\bar{a}+b\bar{b}=1}
+		\end{align*}(\textit{Hint:} Write out the condition $A^{-1}=\bar{A}^T$ in terms of the entries of $A$.)
+		
+		\item Show that $\operatorname{SU}(2)$ is diffeomorphic to the three-dimensional sphere
+		\begin{align*}
+			S^3=\BRACKET{(x_1,x_2,x_3,x_4)\in \R^4 \,|\, x_1^2+x_2^2+x_3^2+x_4^2=1}
+		\end{align*}
+	\end{enumerate}
+	
+	\item \textbf{A matrix exponential}
+	
+	Compute $\operatorname{exp}\SQTWOXTWO{1}{0}{0}{1}$.
+	
+	\item \textbf{Symplectic group}
+	
+	\newcommand{\HH}{\mathbb{H}}
+	This problem requires a knowledge of quaternions as in Appendix E.  Let $\HH$ be the skew field of quaternions. the \textit{symplectic group $\operatorname{Sp}(n)$} is defined to be 
+	\begin{align*}
+		\operatorname{Sp}(n) = \{A \in \operatorname{GL}(n,\HH)\,|\,\bar{A}^TA=I\}
+	\end{align*}where $\bar{A}$ denotes the quaternionic conjugate of $A$.  Show that $\operatorname{Sp}(n)$ is a regular submanifold of $\operatorname{GL}(n,\HH)$ and compute its dimension.
+	
+	\item \textbf{Complex Symplectic Group}
+	
+	Let $J$ be the $2n\times 2n$ matrix
+	\begin{align*}
+		J=\SQTWOXTWO{0}{I_n}{-I_n}{0},
+	\end{align*}where $I_n$ denotes the $n\times n$ identity matrix.  The \textit{complex symplectic group $\operatorname{Sp}(2n,\C)$} is defined to be
+	\begin{align*}
+		\operatorname{Sp}(2n,\C)=\{A \in \operatorname{GL}(2n,\C)\,|\, A^TJA=J\}.
+	\end{align*}Show that $\operatorname{Sp}(2n,\C)$ is a regular submanifold of $\operatorname{GL}(2n,\C)$ and compute its dimension.  (\textit{Hint:} Mimic Example 15.6.  It si crucial to choose the correct trarget space for the map $f(A)=A^TJA$.)
+	
+\end{enumerate}
+
+\end{document}

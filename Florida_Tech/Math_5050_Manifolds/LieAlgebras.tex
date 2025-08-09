@@ -887,16 +887,16 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 	
 	\item the Lie subalgebra of $\GL(3,\C)$ spanned by the matrices
 	\begin{align*}
-		\mu &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}, v= \THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0}, w=\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0}
+		u &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}, v= \THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0}, w=\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0}
 	\end{align*}where $\lambda, \mu, \nu$ are fixed complex numbers;
 	
 	\BLUE{\begin{align*}
-		\mu v &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}\THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0} \\
+		u v &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}\THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0} \\
 		&= \THREEXTHREE {0}{0}{\lambda}{0}{0}{0}{0}{0}{0} = \lambda v \\
 		v w &= \THREEXTHREE{0}{0}{1}{0}{0}{0}{0}{0}{0}\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0} = 0\\
-	\mu w &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0} \\
+	u w &= \THREEXTHREE{\lambda}{0}{0}{0}{\mu}{0}{0}{0}{\nu}\THREEXTHREE{0}{0}{0}{0}{0}{1}{0}{0}{0} \\
 	&= \THREEXTHREE{0}{0}{0}{0}{0}{\nu}{0}{0}{0} = \nu w
-\end{align*}	
+\end{align*}	Heisenberg?
 	}
 	
 	\item $\BRACKET{\PAREN{\begin{array}{cccc}
@@ -907,6 +907,70 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 	\end{array}
 	}: a,b,c \in \C}$;
 	
+	\BLUE{\begin{align*}
+	\LET A &= \PAREN{\begin{array}{cccc}
+		0&a&b&0 \\
+		0&0&c&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}\\
+	\AND B &= \PAREN{\begin{array}{cccc}
+		0&d&e&0 \\
+		0&0&f&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}\\
+	AB &=	\PAREN{\begin{array}{cccc}
+		0&a&b&0 \\
+		0&0&c&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}\PAREN{\begin{array}{cccc}
+		0&d&e&0 \\
+		0&0&f&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	} = \PAREN{\begin{array}{cccc}
+		0&0&bf&0 \\
+		0&0&0&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	} \\
+	BA &= \PAREN{\begin{array}{cccc}
+		0&d&e&0 \\
+		0&0&f&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}\PAREN{\begin{array}{cccc}
+		0&a&b&0 \\
+		0&0&c&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	} = \PAREN{\begin{array}{cccc}
+		0&0&ec&0 \\
+		0&0&0&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	}\\
+	AB-BA &= \PAREN{\begin{array}{cccc}
+		0&0&bf-ed&0 \\
+		0&0&0&0\\
+		0&0&0&0\\
+		0&0&0&0\\	
+	\end{array}
+	} \\
+	L' &= \{e_{13}\}
+\end{align*}	one dimensional
+	}
+	
 	\item $\BRACKET{\PAREN{\begin{array}{cccc}
 		0&0&a&b \\
 		0&0&0&c\\
@@ -914,17 +978,41 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 		0&0&0&0\\	
 	\end{array}
 	}: a,b,c \in \C}$.
+	
+	\BLUE{$L' = \{e_{14}\}$
+	}
 \end{enumerate}
 
-\item Suppose $L$ is a vector space with basis $x,y$ and that a bilinear operation $[-,-]$ on $L$ is defined such that $[u,u]=0$ for aqll $u \in L$.  Show that the Jacobi Identity holds and hence $L$ is a Lie algebra.
+\item Suppose $L$ is a vector space with basis $x,y$ and that a bilinear operation $[-,-]$ on $L$ is defined such that $[u,u]=0$ for all $u \in L$.  Show that the Jacobi Identity holds and hence $L$ is a Lie algebra.
 
-\item Show that over $\R$ the Lie algebras $\SL(2,\R)$ and $\R^3_\wedge$ are not isomorphic.  \textit{Hint}: Prove tht there is no non-zero $x\in \R^3_\wedge$ such that the map $\AD x$ is diagonalisable.
+\BLUE{\begin{align*}
+	[u+a,u+a] &= [u,u]+[u,a]+[a,u]+[a,a] \\
+	&=[u,a]+[a,u] \\
+	[u,a] &= -[a,u]
+\end{align*}to show that the Jacobi Identity
+\begin{align*}
+	[x, [y,z]] + [y, [z,x]]+[z,[y,x]] = &[x, yz-zy]+[y,zx-xz]+[z,yx-xy] \\
+	= &xyz-xzy-yzx+zyx+yzx-yxz-zxy+\\
+	&xzy+zyx-zxy+yxz-xyz\\
+	= &0
+\end{align*}
+}
 
-\item Show that over $\R$ there are exactly two non-isomophic 3-dimensional Lie algrebras with $L'=L$.
+\item Show that over $\R$ the Lie algebras $\mathfrak{sl}(2,\R)$ and $\R^3_\wedge$ are not isomorphic.  \textit{Hint}: Prove that there is no non-zero $x\in \R^3_\wedge$ such that the map $\AD x$ is diagonalisable.
+
+\BLUE{Let $x,y,z \in \R^3_\wedge$ then
+\begin{align*}
+	z=[x,y] &= x \times y
+\end{align*}and $z \perp x$ and $y$.  Thus, $\AD z(u) = [z, u]$ then $\AD z(x)\, ||\, y$ and $\AD z(y) \,||\, x$ and $\AD z(z) = 0$.  Hence, $\AD x$
+}
+
+\item Show that over $\R$ there are exactly two non-isomorphic 3-dimensional Lie algebras with $L'=L$.
+
+\BLUE{From 3.5 we have two Lie Algebras both whose dimension is 3 and are non-isomorphic.}
 
 \item Let $L$ be a non-abelian Lie algebra.  Show that $\dim Z(L) \le \dim L -2$.
 
-\item let $L$ be the 3-dimensional Heisenberg Lie algebra defined over field $F$.  Show that $\DER L$ is 6-dimensional.  Identify the inner derivations (as defined in Exercise 1.18) and show that he quotient $\DER L/\IDER L$ is isomorphic to $\GL(2,F)$.
+\item Let $L$ be the 3-dimensional Heisenberg Lie algebra defined over field $F$.  Show that $\DER L$ is 6-dimensional.  Identify the inner derivations (as defined in Exercise 1.18) and show that the quotient $\DER L/\IDER L$ is isomorphic to $\GL(2,F)$.
 
 \item Suppose that $I$ is an ideal of a Lie algebra $L$ and that there is a subalgebra $S$ of $L$ such that $L=S\oplus I$.
 
@@ -934,7 +1022,7 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 	
 	We say that $L$ is \textit{semidirect product} of $I$ by $S$.  (the reader may have seen the analogous construction for groups.)
 	
-	\item Show conversely that given Lie aglebras $S$ and $I$ and a Lie algebra homomorphism $\theta : S \to \DER I$, the vector space $S \oplus I$ may be made into a Lie algebra by defining
+	\item Show conversely that given Lie algebras $S$ and $I$ and a Lie algebra homomorphism $\theta : S \to \DER I$, the vector space $S \oplus I$ may be made into a Lie algebra by defining
 	\begin{align*}
 		[(s_1,x_1),(s_2,x_2)] = ([s_1,s_2],[x_1,x_2]+\theta(s_1)x_2-\theta(x_2)x_1)
 	\end{align*}for $s_1,s_2 \in S$, and $x_1,x_2 \in I$, and that this Lie algebra is a semidirect product of $I$ by $S$.  (The direct sum construction introduced in Exercise 2.6 is the special case where $\theta(s)=0$ for all $s \in S$.)
@@ -998,7 +1086,7 @@ Solution:
 	
 	Description:
 	
-	Teh Lie algebra $\SLC$ consists of all $n \times n$ complex matrices with trace zero, $\TR A = 0$.  The Lie bracket is defined by the commutator $[A,B]=AB-BA$.
+	The Lie algebra $\SLC$ consists of all $n \times n$ complex matrices with trace zero, $\TR A = 0$.  The Lie bracket is defined by the commutator $[A,B]=AB-BA$.
 	
 	Dimensions:
 	
@@ -1007,8 +1095,8 @@ Solution:
 	Importance:
 	\begin{itemize}
 		\item If $L = \mathfrak{gl}(n,\C)$ then $L'= \SLC$.
-		\item Fundamental Representation: It is the Lie algebra of the specal linear group $SL(n,\C)$ which acts on $\C^n$.
-		\item Simple Lie Algebra: For $n \ge 2$, it is a simple Lie algebar, correspoidng ot the $A$-series of the Carten classification.
+		\item Fundamental Representation: It is the Lie algebra of the specal linear group $\operatorname{SL}(n,\C)$ which acts on $\C^n$.
+		\item Simple Lie Algebra: For $n \ge 2$, it is a simple Lie algebra, correspoding to the $A$-series of the Carten classification.
 		\item Physics: It appears in quantum mechanics and quantum field theory,  describing symmetries.
 	\end{itemize}
 	
@@ -1020,16 +1108,16 @@ Solution:
 	
 	Dimension:
 	
-	The dimesion is $\frac{n(n-1)}{2}$, as skew-symmetric matrices have z ero diagonal entries and $A_{aj}=-A_{ji}$ for $i \ne j$.
+	The dimesion is $\frac{n(n-1)}{2}$, as skew-symmetric matrices have zero diagonal entries and $A_{aj}=-A_{ji}$ for $i \ne j$.
 	
-	Impotrance:
+	Importance:
 	
 	\begin{itemize}
-		\item Orthogonal Group:  It si the Lie algebra of the special orthogoanl gorup $SO(n,\C)$, preserving a symmetric bilinear form.
+		\item Orthogonal Group:  It is the Lie algebra of the special orthogonal gorup $SO(n,\C)$, preserving a symmetric bilinear form.
 		
-		\item Simple Lie Algebra: For $n\ge 3$ and $n \ne 4$, it is simple, corresponging to the $B$-series  and $D$-series in the Cartan classification.
+		\item Simple Lie Algebra: For $n\ge 3$ and $n \ne 4$, it is simple, corresponding to the $B$-series  and $D$-series in the Cartan classification.
 		
-		\item Geometry and Physics:  It is crucial in geometery and physics, related to rotattions and Lorentz transformations.
+		\item Geometry and Physics:  It is crucial in geometry and physics, related to \DEFINE{rotations} and Lorentz transformations.
 	\end{itemize}
 	
 	\item \textbf{The Symplectic Lie Algebra, $\SPC$.}
@@ -1040,7 +1128,7 @@ Solution:
 	
 	Dimension:
 	
-	The dimension is $n(2n+1)$, derived fromt the conditiosn on the matrix blocks $P,Q,R,S$.
+	The dimension is $n(2n+1)$, derived from the conditions on the matrix blocks $P,Q,R,S$.
 	
 	Importance:
 	\begin{itemize}
@@ -1117,13 +1205,30 @@ Solution:
 
 \item Show that a Lie algebra is semisimple if and only if it has no non-zero abelian ideals.  (this was the original definition of semisimplicity given Wilhelm Killing.)
 
-\item Prove directly that $\SLC$ is a simple Lie algebra $n \ge 2$.
+\item Prove directly that $\mathfrak{sl}(n,\C)$ is a simple Lie algebra $n \ge 2$.
+
+\RED{Let $I$ be an ideal of the $\SLC$.  If $\SLC$ is not simple then there exists $x \in \SLC$ such $x \not \in I$.  Further, $x$ will be a linear combination of basis vectors of $e_i \in \SLC$ that is 
+\begin{align*}
+	x &= \sum_{i=1}^n a_ie_i
+\end{align*}If a basis vector $e_i \in I$ then all linear combinations of $e_i$ are in $I$.  Let $f_i, i=1,\dots,k$ be the basis vectors NOT in $I$.  Thus, for all $e_i\in I$, $a_i = 0$.  If $y = \SUM{i=1}{n} b_ie_i$ then
+\begin{align*}
+	[x,y] &= \SQBRACKET{\sum_{i=1}^k a_if_i, \sum_{j=1}^n b_je_j} \\
+	&= \sum_{i=1}^k\sum_{j=1}^na_ib_j[f_i, e_j] \\
+	[f_i, e_j] & \in I \\
+	[f_i,e_j] &= f_ie_j-e_jf_i \\
+	\det ([f_i,e_j]) &= \det(f_ie_j -e_jf_i)\\
+	\\
+	\det(f_i+e_j)(f_i-e_j) &= \det(f_i^2-f_ie_j+e_jf_i-e_j^2)
+\end{align*}
+}
 
 \item Let $L$ be a Lie algebra over a field $F$ such that $[[a,b],b]=0$ for all $a,b \in L$, (or equivalently, $(\AD b)^2=0$ for all $b \in L$).
 
 \begin{enumerate}[label=(\roman*)]
 
-	\item Suppose the characteristic of $F$ is not 3.  Show that then $L^4 = 0$.  \textit{Hint:}  Show first that the Lie brackets $[[x,y],z]$ are alterenating; that is, 
+	\item Suppose the characteristic of $F$ is not 3.  Show that then $L^3 = 0$.
+	
+	\item Suppose the characteristic of $F$ is 3 then $L^4 = 0$.  \textit{Hint:}  Show first that the Lie brackets $[[x,y],z]$ are alterenating; that is, 
 	\begin{align*}
 		[[x,y],z]=-[[y,x],z],\; [[x,y],z]=-[[x,z],y]
 	\end{align*}for all $x,y,z \in L$.
@@ -1133,5 +1238,59 @@ Solution:
 \item The purpose of this exercise is to give some idea why the families of Lie algebra are given the names that we have used.  We shall not need to refer to this exercise later;  some basic group theory is needed $\dots$
 
 \item Let $F$ be a field.  Exercise 2.11 shows that if $S,T \in \GL(n,F)$ are congruent matrices (that is, there exists an invertible matrix $P$ such that $T=P^tSP$), then $\GL_s(n,F) \cong \GL_T(n,F)$.  Does the converse hold when $F = \C$?  For a challenge, think about other fields.
+\end{enumerate}
+
+\chapter{Subalgebras of $\mathfrak{gl}(V)$}
+
+\section{Exercises}
+
+\begin{enumerate}[label=5.\arabic*]
+
+	\item \begin{enumerate}[label=(\roman*)]
+	
+		\item Check that the eigenspaces $V_\lambda$ defined above are vector subspaces of $V$.
+		
+		\item Using the notation above, define $\varepsilon_i : A \to F$ by $\varepsilon_i(a)=\alpha_i$.  Show that $V_{\varepsilon_i} = \SPAN\{e_i\}$ and $V$ decomposes as a direct sum of the $V_{\varepsilon_i}$ for $1 \le i \le n$.
+	
+	\end{enumerate}
+	
+	\item Let $A = \mathfrak{b}(n, F)$ be the Lie subalgebra of $\mathfrak{gl}(n, F)$ consisting of upper triangular matrices.  Show that $e_1$ is an eigenvector for $A$.  Find the corresponding weight and determine its weight space.
+	
+	\item Show that Lemma 5.4 really does generalise the result mentioned in the first paragraph of this section.
+	
+	\item \begin{enumerate}[label=(\roman*)]
+		\item Let $L$ be a Lie subalgebra of $\mathfrak{gl}(V)$.  Suppose that there is a basis of $VF$ such that, with respect to this basis, every $x \in L$ is represented by a strictly upper triangular matrix. Show that $L$ is isomorphic to a Llie subalgebra of $\mathfrak{n}(n,F)$ and hence that $L$ is nilpotent.
+		
+		\item Prove a result analogous to (i) in the case where there is a a basis of $V$ such that with respect to this basis every $x$ in $L$ is represeted by an upper triangular matrix.
+	
+	\end{enumerate}
+	
+	\item This exercise gives an alternative approach to Proposition 5.7.  Recall that $V$ is a complex vector space and $x,y \in \mathfrak{gl}(V)$ are linear maps such that $[x,y]$ commutes with both $x$ and $y$.
+	\begin{enumerate}[label=(\roman*)]
+		\item Let $z=[x,y]$.  Show that $\TR z^m =0$ for all 
+	$m \ge 1$.
+		
+		\item Let $\lambda_1,\dots, \lambda_n$ be the eigenvalues of $[x,y]$.  Show that $\lambda_i=0$ for all $i$, and deduce that $[x,y]$ is nilpotent.  \textit{Hint:} Use the Vandermonde determinant.
+	\end{enumerate}
+	
+	\item Let $L$ be a Lie algebra and let $A$ be a subalgebra of $L$.  The \textit{normaliser} of $A$, denoted $N_L(A)$, is defined by 
+	\begin{align*}
+		N_L(A) = \{x \in L : [x,a]\in A\text{ for all }a \in A\}.
+	\end{align*}
+	
+	\begin{enumerate}[label=(\roman*)]
+		\item Prove that $N_L(A)$ is a subalgebra of $L$ and that $N_L(A)$ contains $A$.  Show moreover that $N_L(A)$ is the largest subalgebra of $L$ in which $A$ is an ideal.
+		
+		\item Let $L=\mathfrak{gl}(n,C)$ and let $A$ be the subalgebra of $L$ consisting of all diagonal matrices.  Show that $N_L(A)=A$.
+	
+	\end{enumerate}
+	
+	\item Show that if $a,y\in \mathfrak{gl}(V)$ are linear maps, then for any $m \ge 1$
+	\begin{align*}
+		ay^m &= y^ma \sum_{k=1}^m\binom{m}{k}y^{m-k}a_k
+	\end{align*}where $a_1=[a,y],a_2=[a_1,y]=[[a,y],y]$, and generally $a_k=[a_{k-1},y]$.  Deduce that In this formula, the power $y^{m-k}$ acts on $\mathfrak{gl}(V)$ as the linear map which sense $x \in \mathfrak{gl}(V)$ to $y^{m-k}x$.
+	\begin{align*}
+		\AD y^m = \sum_{k=1}^m (-1)^{k+1}\binom{m}{k} y^{m-k}(\AD y)^k
+	\end{align*}In this formula, the power $y^{m-k}$ acts on $\mathfrak{gl}(V)$ as the linear map which sense $x \in \mathfrak{gl}(V)$ to $y^{m-k}x$.
 \end{enumerate}
 \end{document}

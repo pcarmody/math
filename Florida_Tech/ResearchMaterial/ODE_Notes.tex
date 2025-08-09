@@ -1,0 +1,193 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Notes on Ordinary Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{\textit{Ordinary Differential Equations -- Adkins, Davidson}}
+\newcommand{\DUEDATE}{August, 2025}
+\newcommand{\PROFESSOR}{Self}
+\newcommand{\SEMESTER}{Summer 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Nostromo}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\ADJOINT}[2]{\underset{\underset{#2}\longleftarrow}{\overset{\overset{#1}\longrightarrow}\bot }}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GL}{\operatorname{gl}}
+\newcommand{\SL}{\operatorname{sl}}
+%\newcommand{\TR}{\operatorname{tr}}
+\newcommand{\AD}{\operatorname{ad}}
+\newcommand{\LB}[2]{\left [ #1,#2 \right ]}
+\newcommand{\IMG}{\operatorname{im}}
+\newcommand{\OP}{{\operatorname{op}}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\CAT}[1]{\mathscr{#1}}
+\newcommand{\CATSET}[1]{\operatorname{\textbf{#1}}}
+\newcommand{\MORPHISM}[1]{\overset{#1}\longrightarrow}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\chapter{First Order Differential Equations}
+
+\section{An Introduction to Differential Equations}
+
+In this chapter we will study:
+\begin{itemize}
+\item Separable
+\item Linear
+\item Homogeneous
+\item Bernoulli
+\item Exact
+\end{itemize}
+
+\subsection{Separable}
+
+\begin{center}
+	\large{ Solution Method for Separable Differential Equations}
+\end{center}
+
+\begin{enumerate}
+	\item \textit{Determine the equilibrium solutions.}  Thsear ea ll of teh constan solutions $y=y_0$ adn are determined by solving eh equation $g(y)=0$ for $y_0$.
+	\item \textit{Separate the variables in a form convenient for integration.}  That is, we formally write
+	\begin{align*}
+		\frac{1}{g(y)}dy &= h(t)dt
+	\end{align*}and refere to this equation as teh \textbf{\textit{differential form}} of the separable differential equation.
+	\item \textit{Integrate both sides, the left-hand side with respect to $y$ and the right-hand side with respect to $t$.}  This yields
+	\begin{align*}
+		\int \frac{1}{g(y)}dy = \int h(t) dt,
+	\end{align*}which produces the implict solution
+	\begin{align*}
+		Q(y) = H(t)+c,
+	\end{align*}where $Q(y)$ is an antidierivative of $1/g(y)$ and $H(t)$ is an antiderivative of $h(t)$.  Such antiderivatives differe by a constant $c$.
+	\item (\textit{If possible, solve the implicit relation explicitly for y.})\qed
+\end{enumerate}
+
+\section{Direction Fields}
+
+\section{Separable Differential Equations}
+
+When we have a first order differential equation of the form 
+\begin{align*}
+	y' &= F(t,y)
+\end{align*}it is \DEFINE{separable} if there exists $h(t)$ and $g(y)$ such that
+\begin{align*}
+	y' &= h(t)g(y)
+\end{align*}
+
+\begin{center}
+\large\textbf{Solution Method for Separable Differentiable Equations}
+\end{center}
+
+\begin{enumerate}
+	\item \textit{Determine the Equilibrium Solutions}
+	
+	These are all of the constant solutions $y=y_0$, determined by solving the equation $g(y)=0$.
+	
+	\item \textit{Separate the functions in a form convenient for Integration}.
+	
+	That is, we formally write
+	\begin{align*}
+		\frac{1}{g(y)} dy &= h(t) dt
+	\end{align*}and refer to this equation as the \DEFINE{differential form} of teh separable differential equation.
+	
+	\item \textit{Integrate both sides, the left-hand side with respect to $y$ adn the right-hand side with respect to $t$}.  This yields
+	\begin{align*}
+		\int \frac{1}{g(y)} dy = \int h(t) dt.
+	\end{align*}which produces the implicit solution
+	\begin{align*}
+		Q(y) = H(t) + c.
+	\end{align*}where $Q(y)$ is an antiderivatives of $1/g(y)$ and $H(t)$ is an antidierivative of $h(t)$.  Such antiderivatives differe by a constant $c$.
+	\item \textit{(if possible, solve the implicit relation explicitly for $y$.)}
+\end{enumerate}
+
+\section{Linear First Order Equations}
+
+\begin{theorem}Let $p$ and $f$ be continuous functions on an interval $I$.   a function $y$ is a solution of the first order linear differntial equation $y'+py=f$ on $I$ if and only if 
+\begin{align*}
+	y=\frac{1}{\mu}\int \mu f dt + \frac{c}{\mu}
+\end{align*}
+
+\end{theorem}
+
+\begin{center}
+\large\textbf{Solution Method for First Order Linear Equations}
+\end{center}
+
+\begin{enumerate}
+	\item Put the given linear equation in standard form: $y'+py=f$.
+	\item Find an inegratin factor, $\mu:$ To do this, compute an anitderivative $P=\int p dt$ and set $\mu=e^P$.
+	\item Multiply the equation (in standard form) by $\mu$: This yields
+	\begin{align*}
+		\mu y'+\mu'y = \mu f.
+	\end{align*}
+	
+	\item Simplify the left-hadn side:  Since $(\mu y)'=\mu y'+\mu'y$, we get
+	\begin{align*}
+		(\mu y)'=\mu f.
+	\end{align*}
+	\item Integrate both sides of the resulign equation: This yields
+	\begin{align*}
+		\mu y=\int \mu f dt+c.
+	\end{align*}
+	
+	\item Divide by $\mu$ to get the solution $y$:
+	\begin{align*}
+		y = \frac{1}{\mu}\int \mu f dt+\frac{c}{\mu}
+	\end{align*}
+\end{enumerate}
+
+\section{Subsitutions}
+
+\section{Exact Equations}
+
+\section{Existence and Uniqueness Theorem}
+
+\end{document}
