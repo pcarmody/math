@@ -28,7 +28,7 @@
 
 %\urlstyle{same}
 
-\newcommand{\CLASSNAME}{Math XXXX -- Independent Study: Manifolds}
+\newcommand{\CLASSNAME}{Math 5050 -- Independent Study: Manifolds and Differential Geometry}
 \newcommand{\STUDENTNAME}{Paul Carmody}
 \newcommand{\ASSIGNMENT}{\textit{An Introduction to Lie Algebras}}
 \newcommand{\DUEDATE}{August, 2025}
@@ -571,7 +571,7 @@ when $r=0$ we have
 
 \end{enumerate}
 
-\item (Pg. 14) Show that if $L$ is a Lie Algebra then $L/Z(L)$ is isomorphic to a subalgebra of $\GL(L)$.
+\item (Pg. 14) Show that if $L$ is a Lie Algebra then $L/Z(L)$ is isomorphic to a subalgebra of $\mathfrak{gl}-(L)$.
 
 \BLUE{$Z(L) = \{x \in L: [x,y]=0$ for all $y\in L\}$.  Therefore, $[x]\in L/Z(L) = \{y\in L : y=x+z, z \in Z(L) \}$.  $Z(L)$ is an ideal.  Thus, $[x] = x +Z(L)$.  Let $\varphi : L/Z(L) \to \GL(L)$ be a homomorphism.  Then $x,y \in Z(L)$ implies that $\varphi([x,y]) = \ker \varphi$.  From the first isomorphism theorem, $L/\ker \varphi = L/Z(L) \cong \IM \varphi$. 
 }
@@ -767,6 +767,8 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 		\mathfrak{g} \cong \R
 	\end{align*}
 	
+	\BLUE{Note: an Abelian Lie Algebra implies that it is just a vector space.  Vector spaces of the same dimension are isomorphic to each other, so, too, with Abelian Lie algebras.}
+	
 	\item \textbf{Dimension 2}
 	
 	Given a basis $e_1, e_2$ .
@@ -778,6 +780,9 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 		\item \textbf{Non-Abelian (solvable)}
 		
 			The Lie Bracket must be $[e_1,e_2] = e_2$.  This algebra is solvable but not nilpotent (i.e., $A^n=0$ for some $n$).
+			
+			\BLUE{It "must be" because $\dots$, consider a basis $e_1, e_2$ and since it is non-abelian, $[e_1,e_2] \ne 0$ and $\SPAN\{[e_1,e_2]\}$ is the entire 1-dimensional subalgebra. Let, $x = [e_1,e_2]$ and extend this as a basis by adding a linearly independent vector $y$ (this exists because the dimension is 2).  Thus, $[x,y]=ax$ for some scalar $a$.
+			}
 			
 	\end{enumerate}
 	\item \textbf{Dimension 3}
@@ -792,6 +797,9 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 		\item \textbf{Heisenberg Algebra}	
 		
 		The Lie bracket is $[e_1, e_2] = e_3$.  This becomes nilpotent.
+		
+		\BLUE{Thus, we can say that there are elements $\{a_{-1}, a_0, a_1\}$, where $\SPAN\{a_0\} \subset Z(L)$, that form a basis for a three dimensionl Heisenberg Algebra.  In general, a multi-dimensional Heirsenberg Algebra will have a basis $\{a_{-n},a_{-n+1}, \dots, a_{-1},a_0, a_1, \dots, a_{n-1}, a_n\}$\footnote{$n$ may go to infinity} and $\SPAN\{a_0\} \subset Z(L)$, and $[a_k, a_l] = k\delta_{k+l,0}a_0$
+		}
 		
 		\item \textbf{Solvable (non-nilpotent)}	
 	
@@ -824,6 +832,22 @@ Suppose that $T \in \GL(n,F)$ is another $n\times n$ matrix such that $T=P^tSP$ 
 		
 	\end{enumerate}
 \end{description}
+
+\HLINE
+\textbf{From video ``Lie Algebra: Class 4, Classifying Lie Algebras of Low Dimensions"}
+
+\textbf{Dimension 3, $L'=[L,L]$}
+
+\begin{itemize}
+	\item $\dim L' = 0$ implies that $L$ is Abelian.
+	\item $\dim L' = 1$
+	\begin{itemize}
+		\item $L' \subseteq Z(L)$ then we have $[x,y]=z$.
+		\item $L' \not \subseteq Z(L)$ then we have $L = N\oplus L'$ where $N$ is a two dimensional Abelian Lie Subalgebra and $L'$ is one-dimensional Lie Subalgebra.
+	\end{itemize}
+	
+	\item $\dim L' = 2$
+\end{itemize}
 
 \section{Exercises}
 
@@ -1046,11 +1070,11 @@ Solution:
 \begin{enumerate}[label=Step \arabic*:]
 	\item \textbf{Define an ideal of a Lie Algebra.}
 	
-	An ideal of a Lie algebra is a subalgebra that interacts with the Lie bracket in a specific way.  For a Lie algebra $\mathfrak{g}$ over a field $F$, a subsapce $\mathfrak{i} \subset \mathfrak{g}$ is an ideal if and only $x \in \mathfrak{g}$ and $y \in \mathfrak{i}$, the Lie bracket $[x,y]$ is in $i$.  This condition is expressed as $[\mathfrak{g}, \mathfrak{i}]$.  Ideals are analogous to normal subgroups in group theory and are essential for construcitng quotient Lie algebras.
+	An ideal of a Lie algebra is a subalgebra that interacts with the Lie bracket in a specific way.  For a Lie algebra $\mathfrak{g}$ over a field $F$, a subsapce $\mathfrak{i} \subset \frak{g}$ is an ideal if and only $x \in \mathfrak{g}$ and $y \in \mathfrak{i}$, the Lie bracket $[x,y]$ is in $i$.  This condition is expressed as $[\mathfrak{g}, \mathfrak{i}]$.  Ideals are analogous to normal subgroups in group theory and are essential for constructing quotient Lie algebras.
 	
 	\item \textbf{Define a Derived Lie Algebra}
 	
-	The derived Lie algebra, also known as the commutator subalgebra, of a Lie algebra $\mathfrak{g}$ is denoted $\mathfrak{g}'$ or $[\mathfrak{g}, \mathfrak{g}]$.  It is the subspace spanned by all Lie brackets of elements in $\mathfrak{g}$, as shown using the Jacobi identity.
+	The derived Lie algebra, also known as the commutator subalgebra, of a Lie algebra $\mathfrak{g}$ is denoted $\mathfrak{•}{g}'$ or $[\mathfrak{g}, \mathfrak{g}]$.  It is the subspace spanned by all Lie brackets of elements in $\mathfrak{g}$, as shown using the Jacobi identity.
 	
 	\item \textbf{Difference in Generality.}
 	
@@ -1241,6 +1265,16 @@ Solution:
 \end{enumerate}
 
 \chapter{Subalgebras of $\mathfrak{gl}(V)$}
+
+\section{Notes}
+
+\begin{remark}[\textbf{From video: \footnote{\url{https://www.youtube.com/watch?v=4D8ko6Uz_M8&list=PLVMgvCDIRy1zJ6iJHLC_lWgIwY4AhviZ-&index=3}}}]
+
+\begin{align*}
+	\mathfrak{gl}_2(\C) &\cong \mathfrak{sl}_2(\C)\oplus \C \\
+	(b_1,b_2,b_3,b_4) &= \{e,f,h\}\oplus\{z\},\, z\in \C &\text{i.e., the basis vectors}
+\end{align*}
+\end{remark}
 
 \section{Exercises}
 

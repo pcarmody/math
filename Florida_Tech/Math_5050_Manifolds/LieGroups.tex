@@ -1,0 +1,186 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math XXXX -- Independent Study: Differential Geometry, Lie Groups}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{\textit{Basic Category Theory -- Tom Leinster}}
+\newcommand{\DUEDATE}{August, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Summer 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Edinburgh}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\ADJOINT}[2]{\underset{\underset{#2}\longleftarrow}{\overset{\overset{#1}\longrightarrow}\bot }}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GLG}{\operatorname{GL}}
+\newcommand{\GLA}{\mathfrak{gl}}
+\newcommand{\SLG}{\operatorname{SL}}
+\newcommand{\SLA}{\mathfrak{sl}}
+\newcommand{\SOG}{\operatorname{SO}}
+\newcommand{\SOA}{\mathfrak{so}}
+\newcommand{\SUG}{\operatorname{SU}}
+\newcommand{\SUA}{\mathfrak{su}}
+\newcommand{\OG}{\operatorname{O}}
+\newcommand{\OA}{\mathfrak{o}}
+\newcommand{\UG}{\operatorname{U}}
+\newcommand{\UA}{\mathfrak{u}}
+%\newcommand{\TR}{\operatorname{tr}}
+\newcommand{\AD}{\operatorname{ad}}
+\newcommand{\IMG}{\operatorname{im}}
+\newcommand{\OP}{{\operatorname{op}}}
+\newcommand{\II}{\mathbb{I}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\chapter{Foundations}
+
+Although Lie Theory is written in the abstract and most general terms, the most common examples that I've seen are with the general linear group and its associated subgroups.  That is $\GLG, \SLG, \SOG, \SUG, \OG, \UG$.  Understanding these groups as examples for illustratingthe fundamentals of Lie groups and Lie algebras.\\
+
+\section{Rotation Matrices}
+
+The following notes are taken from the video ``How to rotate in higher dimensions? Complex dimensions?"\footnote{\url{https://www.youtube.com/watch?v=erA0jb9dSm0}}\\
+
+Helpful notation: As you may know, the transpose of a \textit{real} vector/matrix is denoted $v^T$.  The transpose of a \textit{complex} vector/matrix is denoted $v^\dagger$.
+\begin{align*}
+	v^\dagger = \CONJ{v}^T
+\end{align*}or the complex conjugate of the transpose.
+
+	$\SOG(n)$, Special Orthogonal Matrices -- Properties of Rotation:  ($R$ is a square matrix of degree $n$, $U$ is the complex version of $R$).  Also $\SUG(n)$ Special Orthogonal Unitary(complex) matrices.
+\begin{enumerate}
+	\item Rotation is linear 
+	\begin{description}
+		\item \textbf{Real} Rotate$(v) = Rv$.
+		\item \textbf{Complex}  Rotate$(v) = Uv$. (no significant difference)
+	\end{description}
+	\item Preserves lengths and angles, that is, preserving the Inner Product\footnote{in Abstract Algebra terminology, ``the Inner Product is invariant under rotation"}
+	\begin{description}
+		\item \textbf{Real}  $v\cdot v = (Rv)^T(Rv) = v^TR^TRv$.  Hence, $R^TR = I$ or $R \in O(n)$.
+		\item \textbf{Complex} $v\cdot v = (Uv)^\dagger(Uv) = v^\dagger U^\dagger Uv$.  Hence, $U^\dagger U = I$ or $U \in U(n)$, or unitary matrices.
+	\end{description}
+	\item Preserves orientation (no flipping)
+	\begin{description}
+		\item \textbf{Real} $\det R = 1$
+		\item \textbf{Complex} $\det U = 1$ implies $\SUG(n)$ as the complex version of $\SOG(n)$
+	\end{description}
+\end{enumerate}
+
+Note: that $R^TR$ and $U^\dagger U$ constitute quadratic matrix forms that are difficult to generalize. These four, however, form a Lie Group (or is it that each of these IS a Lie group?).
+\begin{center}
+\fbox{
+\begin{tabular}{cc}
+	$\OG(n)$ & $\SOG(n)$\\
+	$\UG(n)$ & $\SUG(n)$
+\end{tabular}
+}
+\end{center}
+
+\includegraphics[scale=.4]{LieGroupVsLieBracket.png} 
+
+\begin{remark}.
+
+Many sources have pointed out that Lie Algebras are easier to manage/manipulate than Lie Groups, which makes them the focus of study.  One particular analogy was that the Lie Group is like a globe of the Earth while the Lie Algebra is the flat map that we use to represent it.
+
+\end{remark}
+\HLINE
+\begin{remark}[\textbf{MathGTP}: What are the left-invariant vector spaces of $\R^2$?].
+
+\begin{itemize}
+\item Step 1: Understand the concept of left-invariant vector fields  
+A left-invariant vector field on a Lie group \( G \) is a vector field \( X \) such that for every \( g, h \in G \), the following holds:  
+\[ (L_g)_* X_h = X_{gh} \]  
+where \( L_g \) is the left translation by \( g \) and \( (L_g)_* \) is its differential.  
+
+\item Step 2: Identify the Lie group and its Lie algebra  
+Here, \( G = \mathbb{R}^2 \), which is an abelian Lie group under addition. The Lie algebra \( \mathfrak{g} \) of \( \mathbb{R}^2 \) is also \( \mathbb{R}^2 \), with the trivial Lie bracket \([X, Y] = 0\) for all \( X, Y \in \mathfrak{g} \).  
+
+\item Step 3: Determine the left-invariant vector fields  
+For \( \mathbb{R}^2 \), left translation \( L_g \) is simply addition: \( L_g(h) = g + h \). The differential \( (L_g)_* \) is the identity map. Thus, a vector field \( X \) is left-invariant if:  
+\[ X_{g + h} = X_h \]  
+This implies \( X \) is constant, i.e., \( X = (a, b) \) for some \( a, b \in \mathbb{R} \). Therefore, the left-invariant vector fields on \( \mathbb{R}^2 \) are the constant vector fields.  
+
+\item Step 4: Describe the space of left-invariant vector fields  
+The space of left-invariant vector fields on \( \mathbb{R}^2 \) is isomorphic to \( \mathbb{R}^2 \) itself, spanned by the constant basis vector fields \( \partial_x \) and \( \partial_y \).
+\item Final Answer
+The left-invariant vector fields on \(\mathbb{R}^2\) are the constant vector fields, and the space of left-invariant vector fields is isomorphic to \(\mathbb{R}^2\).
+
+\end{itemize}
+
+\end{remark}
+
+\HLINE
+\begin{remark}[\textbf{MathGPT: }What are the left-invariant vector fields of $\GLG(n,\R)$?].
+
+\begin{itemize}
+\item \textbf{Step 1: Understanding GL(n,R) and Left-Invariant Vector Fields}
+GL(n,R) is the general linear group of n x n invertible matrices with real entries, and it is a Lie group. A vector field \(X\) on a Lie group \(G\) is left-invariant if for every \(g \in G\), the pushforward of \(X\) by the left translation \(L_g\) is equal to \(X\). This means \((L_g)_* X = X\).
+
+\item \textbf{Step 2: Identifying the Lie Algebra}
+The space of left-invariant vector fields on a Lie group \(G\) is isomorphic to its Lie algebra \(\mathfrak{g}\), which is the tangent space at the identity element, \(T_e G\). For GL(n,R), the Lie algebra, denoted as \(\mathfrak{gl}(n,R)\), is the space of all n x n real matrices, \(M(n,R)\).
+
+\item \textbf{Step 3: Associating Left-Invariant Vector Fields}
+For any matrix \(A \in \mathfrak{gl}(n,R)\), we can associate a left-invariant vector field \(X_A\). For any \(g \in GL(n,R)\), the value of the vector field \(X_A\) at \(g\) is given by \(X_A(g) = (L_g)_* (A)\).
+
+\item \textbf{Step 4: Calculating the Pushforward}
+To understand \((L_g)_* (A)\), consider a curve \(\gamma(t)\) in GL(n,R) such that \(\gamma(0) = e\) and \(\gamma'(0) = A\). The pushforward \((L_g)_* (A)\) is the tangent vector to the curve \(L_g(\gamma(t)) = g\gamma(t)\) at \(t=0\). By computing the derivative, we find that the derivative at \(t=0\) is \(gA\).
+
+\item \textbf{Step 5: Form of Left-Invariant Vector Fields}
+Therefore, the left-invariant vector field \(X_A\) associated with \(A \in \mathfrak{gl}(n,R)\) is given by \(X_A(g) = gA\). The set of all left-invariant vector fields on GL(n,R) is \(\{X_A \mid A \in M(n,R)\}\), where \(X_A(g) = gA\).
+
+\item \textbf{Step 6: Lie Algebra Structure}
+These vector fields form a Lie algebra under the Lie bracket operation. If \(X_A\) and \(X_B\) are two left-invariant vector fields, then their Lie bracket \([X_A, X_B]\) is also a left-invariant vector field, corresponding to the matrix \([A, B] = AB - BA\). Thus, \([X_A, X_B] = X_{[A,B]}\).
+
+\item \textbf{Final Answer}
+The left-invariant vector fields of GL(n,R) are of the form \(X_A\), where \(A\) is an n x n real matrix, and \(X_A(g) = gA\) for any \(g \in GL(n,R)\). These vector fields span the Lie algebra of GL(n,R), which is the space of all n x n real matrices.
+\end{itemize}
+\end{remark}
+
+\end{document}

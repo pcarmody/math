@@ -1,0 +1,119 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 17: Differential Forms}
+\newcommand{\DUEDATE}{August 20, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{CWF111}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}[label=\textbf{17.\arabic*.}]
+
+\item \textbf{A 1-form on $\R^2-\{(0,0)\}$}
+
+Denote the standard coordinates on $\R^2$ by $x,y$, and let
+\begin{align*}
+	X = -y\PART{}{x}+x\PART{}{y} \AND Y=x\PART{}{x}+y\PART{}{y}
+\end{align*}be vector files on $\R^2$.  Find a 1-form $\omega$ on $\R^2-\{(0,0)\}$ such that $\omega(X)=1$ and $\omega(Y)=0$.
+
+\item \textbf{Transition formula for 1-form}
+
+Suppose $(U, x^1,\dots, X^n)$ and $(V, y^1, \dots, y^n)$ are two charts on $M$ with nonempty overlap $U\cap V$.  Then a $C^\infty$ 1-form $\omega$ on $U\cap V$ has two different local expressions:
+\begin{align*}
+	\omega = \sum a_jdx^j=\sum b_idy^i.
+\end{align*}Finda formula for $a_j$ in terms of $b_i$.
+
+\item \textbf{Pullback of a 1-form on $S^1$}
+
+Multiplication in the unit circle $S^1$, viewed as a subset of the complex plane, is given by 
+\begin{align*}
+	e^{it}\cdot e^{i(t+u)}, \, t,u \in \R
+\end{align*}In terms of real imaginary parts, 
+\begin{align*}
+	(\cos t+i\sin t)(x+iy)= ((\cos t)x-(\sin t)y)+i((\sin t)x+(\cos t)y).
+\end{align*}Hence, if $g=(\cos t, \sin t) \in S^1 \subset \R^2$, then the left multiplication $\ell_g:S^1\to S^1$ is given by 
+\begin{align*}
+	\ell_g(x,y) = ((\cos t)x-(\sin t)y, (\sin t)x + (\cos t)y).
+\end{align*}Let $\omega = -ydx+xdy$ be the 1-form found in Example 17.15.  Prove that $\ell_g^*\omega = \omega$ for all $g \in S^1$.
+
+\item \textbf{Liouville form on the cotrangent bundle}
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Leet $(U, \phi)=(U, x^1,\dots, x^n)$ be a chart on a manifold $M$, and let 
+	\begin{align*}
+		(\pi^{-1}U, \tilde{\phi}) = (\pi^{-1}U, \tilde{x}^1,\dots,\tilde{x}^n, c_1,\dots,c_n)
+	\end{align*}be the induced chart of the cotangent bundle $T^*M$.  Find a formula for Liouville form $\lambda$ on $\pi^{-1}U$ in terms of the coordinates $\tilde{x}^1,\dots,\tilde{x}^n,c_1,\dots,c_n$.
+	
+	\item Prove that the Liouville form $\lambda$ on $T*M$ is $C^\infty$. (\textit{Hint}: Use (a) and Proposition 17.6)
+
+\end{enumerate}
+
+\item \textbf{Pullback of a sum and a product}
+
+Prove Proposition 17.11 by verifying both sides of each equality on a trangent vector $X_p$ at a point $p$.
+
+\item \textbf{Construction of the cotangent bundle}
+
+let $M$ be a manifold of dimension $n$.  Mimicking the construction of the tangent bundle in Section 12, write out a detailed proof that $\pi:T^*M\to M$ is a $C\infty$ vector bundle of rank $n$
+
+\end{enumerate}
+
+
+\end{document}

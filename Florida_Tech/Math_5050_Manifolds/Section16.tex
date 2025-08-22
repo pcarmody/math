@@ -71,6 +71,73 @@
 
 \noindent \textbf{\\\large{Notes:}}
 
+\begin{remark}[\textbf{Clarification on top page 183}].
+
+\noindent This quote from the text.
+	\begin{quote}
+		We begin with the Lie Bracket on $T_eG$.  Given $A,B \in T_eG$, we first map them via $\varphi$ to the left-invariant fields $\tilde{A}, \tilde{B}$, take the Lie bracket $[\tilde{A},\tilde{B}]= \tilde{A}\tilde{B}-\tilde{B}\tilde{A}$, and then map it to $T_eG$ via $\varphi^{-1}$.  Thus, the definition of the Lie bracket $[A,B] \in T_eG$ should be 
+		\begin{align*}
+			[A,B] &= [\tilde{A},\tilde{B}]_e. &(16.6)
+		\end{align*}\textbf{Proposition 16.10.}  if $A,B \in T_eG$ and $\tilde{A},\tilde{B}$ are the left-invariant vector fields they generate, then  
+		\begin{align*}
+			[\tilde{A},\tilde{B}] = [A,B]^\sim
+		\end{align*}\textit{Proof.}  Apply $()^\sim$ to both sides of (16.6) gives
+		\begin{align*}
+			[A,B]^\sim &= ([\tilde{A},\tilde{B}]_e)^\sim = [\tilde{A},\tilde{B}]
+\end{align*}since $()^\sim$ and $()_e$ are inverse of each other.
+	\end{quote}end of quote.
+	
+I found the notation to be deceptive, paritcularly the last line.  If $\varphi(A) = \tilde{A}$ then what is $\varphi(\tilde{A})$?  $A$ is a vector from the tangent space and $\tilde{A}$ is a left-invariant vector field.  The difference in these two elements is frustratingly misleading.  So, we should have $\varphi^{-1}(\tilde{A}))=A$.  Where did $()_e$ magically appear? $()_e$ appears to be defined as $()_e: \XXX(G) \to T_e(G)$ and equivalent to $\varphi^{-1}$.  I feel that I have missed a concept here.\\
+
+Translating this proposition into words: the Lie bracket of left-invariant vector fields is the left-invarient vector field of the Lie Bracket of base vectors (i.e., from the tangent space).
+\end{remark}
+\HLINE
+\begin{remark}[\textbf{(Example 16.7) Left-invariant vector fields on $\GL(n,\R)$}].
+
+\noindent At the bottom of this example, the text goes directly into a propostion and doesn't appear to give the final answer.  I couldn't see how the last step could be considered "obvious".  Here is how MathGPT responded:
+
+\begin{itemize}
+\item \textbf{Step 1: Understanding GL(n,R) and Left-Invariant Vector Fields}
+GL(n,R) is the general linear group of n x n invertible matrices with real entries, and it is a Lie group. A vector field \(X\) on a Lie group \(G\) is left-invariant if for every \(g \in G\), the pushforward of \(X\) by the left translation \(L_g\) is equal to \(X\). This means \((L_g)_* X = X\).
+
+\item \textbf{Step 2: Identifying the Lie Algebra}
+The space of left-invariant vector fields on a Lie group \(G\) is isomorphic to its Lie algebra \(\mathfrak{g}\), which is the tangent space at the identity element, \(T_e G\). For GL(n,R), the Lie algebra, denoted as \(\mathfrak{gl}(n,R)\), is the space of all n x n real matrices, \(M(n,R)\).
+
+\item \textbf{Step 3: Associating Left-Invariant Vector Fields}
+For any matrix \(A \in \mathfrak{gl}(n,R)\), we can associate a left-invariant vector field \(X_A\). For any \(g \in GL(n,R)\), the value of the vector field \(X_A\) at \(g\) is given by \(X_A(g) = (L_g)_* (A)\).
+
+\item \textbf{Step 4: Calculating the Pushforward}
+To understand \((L_g)_* (A)\), consider a curve \(\gamma(t)\) in GL(n,R) such that \(\gamma(0) = e\) and \(\gamma'(0) = A\). The pushforward \((L_g)_* (A)\) is the tangent vector to the curve \(L_g(\gamma(t)) = g\gamma(t)\) at \(t=0\). By computing the derivative, we find that the derivative at \(t=0\) is \(gA\).
+
+\item \textbf{Step 5: Form of Left-Invariant Vector Fields}
+Therefore, the left-invariant vector field \(X_A\) associated with \(A \in \mathfrak{gl}(n,R)\) is given by \(X_A(g) = gA\). The set of all left-invariant vector fields on GL(n,R) is \(\{X_A \mid A \in M(n,R)\}\), where \(X_A(g) = gA\).
+
+\item \textbf{Step 6: Lie Algebra Structure}
+These vector fields form a Lie algebra under the Lie bracket operation. If \(X_A\) and \(X_B\) are two left-invariant vector fields, then their Lie bracket \([X_A, X_B]\) is also a left-invariant vector field, corresponding to the matrix \([A, B] = AB - BA\). Thus, \([X_A, X_B] = X_{[A,B]}\).
+
+\item \textbf{Final Answer}
+The left-invariant vector fields of GL(n,R) are of the form \(X_A\), where \(A\) is an n x n real matrix, and \(X_A(g) = gA\) for any \(g \in GL(n,R)\). These vector fields span the Lie algebra of GL(n,R), which is the space of all n x n real matrices.
+\end{itemize}Step 4 appears to be example  8.19 quoted in the text. There appears to be no 'delicacy' in use of terms and examples throughout the text.  That is, once introduced by the author it is assumed that the reader has reached full comprehension and assimilated the material.  So, here he merely says ``we have a left-invariant vector field from $\tilde{B}$".  In this case, we have left-translation, push-forward, isormorphisms between tangent spaces, Lie groups vs Lie Algebras. It is hard to prioritize which information is important.
+\end{remark}
+
+\HLINE
+\begin{remark}[\textbf{Example of use of push-forward}].
+
+We begin by finding a condition that a tangent vector $X$ in $T_\mathbb{I}(\SL(n,\R))$ must satisfy.  By Proposition 8.16 there is a curve $c:]-\varepsilon,\varepsilon[\to \SL(n, \R)$ with $c(0)=\mathbb{I}$ and $c'(0)=X$.  Being in $\SL(n,\R)$, this curve satisfies
+\begin{align*}
+	\det c(t) =1
+\end{align*}for all $t$ in the domain $]-\varepsilon,\varepsilon[$.  We now diffierentiate both sides with respect to $t$ and evaluate at $t=0$. On the left-hand side, we have
+\begin{align*}
+	\RBAR{\frac{d}{dt}\det(c(t))}_{t=0} &= (\det \circ \,c)_*\PAREN{\RBAR{\frac{d}{dt}}_0} \\
+	&= \operatorname{det}_{*,\mathbb{I}}\PAREN{c_*\RBAR{\frac{d}{dt}}_0} & \text{by chain rule} \\
+	&= \operatorname{det}_{*,\mathbb{I}}(c'(0)) \\
+	&= \TR(X) & \text{by Proposition 15.21}
+\end{align*}\DEFINE{continues}
+
+We see that by differentiating the curve we end up with a push-forward (if you are astute enough to recognize it) which is equivalent to a push-forward invoving the identity (a more general case).  
+\end{remark}
+\HLINE
+
 %================================
 \noindent \textbf{\\\large{Examples}}
 
@@ -82,21 +149,38 @@
 
 	\item \textbf{Skew-Hermitian Matrices}
 	
-	A complex matrix $X \in \C^{n\times n}$ is said to be \DEFINE{skew-Hermitian} if its conugat transpose $\hat{X}^T$ is equal $-X$.  Let $V$ be the vector space of $n \times n$ skew-Hermitian matrices.  Show that $\dim V = n^2$.
+	A complex matrix $X \in \C^{n\times n}$ is said to be \DEFINE{skew-Hermitian} if its conugat transpose $\bar{X}^T$ is equal $-X$.  Let $V$ be the vector space of $n \times n$ skew-Hermitian matrices.  Show that $\dim V = n^2$.
+	
+	\BLUE{Let $A$ be an $n \times n$ Hermitian matrix.  
+	\begin{enumerate}
+		\item The elements on the diagonal, $a_{ii}=\CONJ{a_ii}$ which means that the complex part is zero. This gives us $n$ elements to start with. 
+		\item The remaining elements form an upper triangular matrix that is 'reflected' (so to speak) in the lower triangular portion.  That is $a_{ij} = \CONJ{a_{ji}}$ for all $i > j$.  There are $\SUM{i=1}{n-1}(n-i) = n(n-1)/2$ entries.  Each of these has two dimensions, a real part and an imaginary part.  or $n(n-1)=n^2-1$.
+		\item Add these together and we get $n+n^2-n=n^2$.
+	\end{enumerate} 
+	}
 	
 	\item \textbf{Lie algebra of a unitary group}
 	
 	Show that the tangent space at the identity $I$ of the unitary group $U(n)$ is the vector space of $n \times n$ skew-Hermitian matrices.
 	
+	\BLUE{The unitary group $U(n)=\{A\in \mathcal{M}_{n\times n}(\C) : \det A = 1\}$.  Let $A(t)$ be a path in $U(n)$.  Then $\CONJ{A(t)}^TA(t) = I$ for all $t$ and $A(0)=I$.  Then 
+	\begin{align*}
+		\frac{d}{dt}\CONJ{A(t)}^TA(t) &= 0\\
+		&= \CONJ{A}'^T(t)A(t) + \CONJ{A(t)}^T A'(t) \\
+		&= \CONJ{A}'^T(0) +  A'(0) \\
+		\therefore \CONJ{A}'^T(0) &= - A'(0)
+	\end{align*}which are Hermetian.
+	}
+	
 	\item \textbf{Lie algebra of a symplectic group}
 	
-	Refer to Problem 15.15 for the definition and notation concerning the symp[lectic group $\SP(n)$.  Show that the tangent space at teh identity $I$ of the symplectic group $\SP(n) \subset \GL(n,\mathbb{H})$ is the vector space of all $n \times n$  quaternionic matrices $X$ such that $\hat{X}^T=-X$.
+	Refer to Problem 15.15 for the definition and notation concerning the symplectic group $\SP(n)$.  Show that the tangent space at teh identity $I$ of the symplectic group $\SP(n) \subset \GL(n,\mathbb{H})$ is the vector space of all $n \times n$  quaternionic matrices $X$ such that $\hat{X}^T=-X$.
 	
 	\item \textbf{Lie algebra of a complex symplectic group}
 	
 	\begin{enumerate}[label=(\alph*)]
 	
-		\item Show that the tangent space at the identity $I$ of $\SP(2n,\C) \subset \GL(wn,\C)$ is the vector space of all $2n \times 2n$ complex matrices $X$ such that $JX$ is symmetric.
+		\item Show that the tangent space at the identity $I$ of $\SP(2n,\C) \subset \GL(2n,\C)$ is the vector space of all $2n \times 2n$ complex matrices $X$ such that $JX$ is symmetric.
 		
 		\item Calculate the dimension of $\SP(2n,\C)$.
 	
@@ -105,6 +189,15 @@
 	\item \textbf{left-invariant vector fields on $\R^n$}
 	
 	Find the left-invariant vector fields on $\R^n$.
+	\BLUE{\begin{itemize}
+		\item Define the left invariant vector field from the left-translation.  That is $l_g(x)=gx$ for all $g,x \in L$ and $(l_g)_*(x) = gx$ for all $x \in X$ where $X$ is the invariant vector field.\\
+		\\
+		The Lie Group is $\R^n$, the group operator is addition (given any $h \in \R^n$, $l_g(h)=g+h$) and Lie Bracket is abelian, thus $[x,y] = 0$ for all $x,y \in \R^n$.   Consquently, $(l_g)_*(h) = [\PART{(g+h)}{x_{ij}}]=\mathbb{I}$.  (This is just the derivative of a monomial). A vector field $X_g = (l_g)_*X$ and $(l_g)_*X_h = X_{gh}$.  Thus, all elements of $X_g$ are constant vectors in $\R^n$.
+		\item Describe the space of left-invariant vector fields.\\
+		\\
+		Thus, the space of left-invariant vector fields is isomorphic to $\R^n$, spanned by $\PART{}{x^i}$.
+\end{itemize}	
+	}
 	
 	\item \textbf{Left-invariant vector fileds on a circle}
 	
@@ -112,7 +205,7 @@
 	
 	\item \textbf{Integral curves of a left-invariant vector field}
 	
-	Let $A \in \GLA(n,\R)$ and let $\tilde{A}$ be the left-invariant vector field on $\GL(n, \R)$ generated by $A$.  Show that $c(t)=e^{tA}$ is the integral curve of $\tilde{A}$ starting at the identity matrix $I$.  Find the integral curve of $\tilde{A}$ starting at $g \in \GL(n,\R)$.
+	Let $A \in \GLA(n,\R)$ and let $\bar{A}$ be the left-invariant vector field on $\GL(n, \R)$ generated by $A$.  Show that $c(t)=e^{tA}$ is the integral curve of $\bar{A}$ starting at the identity matrix $I$.  Find the integral curve of $\bar{A}$ starting at $g \in \GL(n,\R)$.
 	
 	\item \textbf{Parallelizable manifolds}
 	
@@ -124,7 +217,28 @@
 	
 	\item \textbf{The pushforward of left-invariant vector fields}
 	
-	Let $F: H \to G$ be a Lie group homomorphism and let $X$ and $Y$ be left-invariant vector fields on $H$.  Prove that $F_x[X,Y]=f_*X, F_*Y]$.
+	Let $F: H \to G$ be a Lie group homomorphism and let $X$ and $Y$ be left-invariant vector fields on $H$.  Prove that $F_*[X,Y]=[F_*X, F_*Y]$.
+	\BLUE{\begin{align*}
+		\LET f&: H \to \R \\
+		LHS &= (F_*[X,Y])f \\
+		&= [X,Y]_p(f \circ F) \\
+		&= X_p(Y(f\circ F))-Y_p(X(f\circ F)) \\
+		RHS &= [F_*X, F_*Y]f \\
+		&= (F_*X)_{F(p)}((F_*Y)(f))-(F_*Y)_{f(p)}((F_*X)(f))
+\end{align*}	
+	}\RED{What MathGPT did was to undo a push-forward.  That is ``consider the first term of RHS, $(F_*X)_{F(p)}((F_*Y)(f))$, let $g_Y$ be the parameter $(F_*Y)(f)$.  Then 
+\begin{align*}
+	(F_*X)_{F(p)}((F_*Y)(f)) &= (F_*X)_{F(p)}(g_Y) \\
+		&= X_p(g_y \circ F) \\
+	(g_Y \circ F)(p) &= g_Y(F(p)) \\
+	&= ((F_*Y)(f))(F(p)) \\
+	&= Y_p(f \circ F) \\
+	\therefore (F_*X)_{F(p)}((F_*Y)(f)) &= X_p(Y(f\circ F)) & \text{first term of RHS}
+\end{align*}similarly
+\begin{align*}
+	(F_*Y)_{f(p)}((F_*X)(f)) &= Y_p(X(f\circ F)) & \text{second term of RHS}
+\end{align*}Hence the two are equal.  \textbf{Conclusion: I need to think in terms of push-forwards more.}
+}
 	
 	\item \textbf{The adjoint representation}
 	
@@ -132,7 +246,7 @@
 	
 	\begin{enumerate}[label=(\alph*)]
 	
-		\item For each $a \in G$, the differential at the identity of the conjugation map $c_a := \ell_a \circ r_{a^{-1}} : G \to G$ is a linear isomorphism $c_{a*}:\mathfrak{g} \to \mathfrak{g}$.  Hence, $c_{a*} \in \GL(\mathfrak{g})$.  Show that the map $\AD:G \GL(\mathfrak{g})$ define by $\AD(a)= c_{a*}$ is a group homomorphism.  It is called the \DEFINE{adjoint representation} of the Lie group $G$.
+		\item For each $a \in G$, the differential at the identity of the conjugation map $c_a := \ell_a \circ r_{a^{-1}} : G \to G$ is a linear isomorphism $c_{a*}:\mathfrak{g} \to \mathfrak{g}$.  Hence, $c_{a*} \in \GL(\mathfrak{g})$.  Show that the map $\AD:G\to \GL(\mathfrak{g})$ define by $\AD(a)= c_{a*}$ is a group homomorphism.  It is called the \DEFINE{adjoint representation} of the Lie group $G$.
 		
 		\item Show that $\AD: G \to \GL(\mathfrak{g})$ is $C^\infty$.
 	
@@ -140,7 +254,7 @@
 	
 	\item \textbf{A Lie algebra structure on $\R^3$}
 	
-	The Lie algebra $\mathfrak{o}(n)$ of the orthogonal group $O(n)$ is the Lie algebra fo $n \times n$ skew-symmetric real matrices, with Lie bracket $[A,b]=AB-BA$.  When $n = 3$, there is a vector space isomorphism $\varphi : \mathfrak{o}(3) \to \R^3$,
+	The Lie algebra $\mathfrak{o}(n)$ of the orthogonal group $O(n)$ is the Lie algebra fo $n \times n$ skew-symmetric real matrices, with Lie bracket $[A,B]=AB-BA$.  When $n = 3$, there is a vector space isomorphism $\varphi : \mathfrak{o}(3) \to \R^3$,
 	\begin{align*}
 		\varphi(A) &= \varphi \THREEXTHREE{0}{a_1}{a_2}{-a_1}{0}{a_3}{-a_2}{-a_3}{0} = \COLVECTOR{a_1\\-a_2\\a_3} = a.
 	\end{align*}Prove that $\varphi([a,b])=\varphi(A) \times \varphi(B)$.  Thus $\R^3$ with the cross product is a Lie algebra.
