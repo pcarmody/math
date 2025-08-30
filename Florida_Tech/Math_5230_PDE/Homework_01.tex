@@ -1,0 +1,219 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5230 -- Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#1 }
+\newcommand{\DUEDATE}{September 4, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{MW 2:00 -- 3:15}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor XXXX}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{description}
+	\item \textbf{Part I.}
+	\begin{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Consider an initial value problem for th elinear tranport equation wiht a bounded, one-dimensional spatial domain:
+			\begin{align*}
+				\LBRACKET{\begin{array}{ll}
+					u_t+3u_x=0, &0<x<1, t>0,\\
+					u(x,0)=g(x),&\\
+					u(0,t)=0.&
+				\end{array}}
+			\end{align*}
+		We assume that $g(0)=0$, so that the initial condition and boundary condition agree at the corner $(x,t)=(0,0)$.\\
+		Find a formula for $u(x,t)$ using the same method as was seen in classe, ile., use the fact that a certian direction derivative of $u$ is zero.  What do you notice about your solution for large times?
+		
+		\BLUE{\textbf{From the Lecture:}
+		\begin{align*}
+			u_t+bu_x &= \ABRACKET{b,1}\cdot\ABRACKET{u_x, u_t}. 
+		\end{align*}Define $\hat{b}$ as the vector that satisfies $b\cdot\hat{b}=1$.  Then this can also be written as 
+		\begin{align*}
+			\hat{b}u_t+u_x &= \ABRACKET{1,\hat{b}}\cdot\ABRACKET{u_x, u_t} 
+		\end{align*}and, from the description of the PDE
+		\begin{align*}
+			\hat{b}u_t+u_x &= \ABRACKET{1,\hat{b}}\cdot\ABRACKET{u_x, u_t} =0
+		\end{align*}Thus, as in the lecture which emphasized the $(x,t)$-plane we can see a similar solution in the $(t,x)$-plane.\\
+		Recall that we have a function $z(s)$
+		\begin{align*}
+			z(s) = u(x+sb, t+s)
+		\end{align*}Let's reparameterize $z$ with $r = sb$ as
+		\begin{align*}
+			z(r)=u(x+r,t+r\hat{b})
+		\end{align*}Now, we differentiate with respect to $r$.
+		\begin{align*}
+			\frac{dz(r)}{dr} &= \frac{d}{dr}u(x+r,t+r\hat{b}) \\
+			&= \PART{u}{x}\PART{x}{r}(x+r)+\PART{u}{t}\PART{t}{r}(t+r\hat{b}) \\
+			&= \PART{u}{x}+\hat{b}\PART{u}{t} \\
+			&= u_x+\hat{b}u_t = 0
+		\end{align*}As expected $z$ is still constant.  Then,
+		\begin{align*}
+			z(0) &= z(-x)\\
+			u(x,t) &= u(0, t-x\hat{b}) \\
+			&= h(t-x\hat{b}).
+		\end{align*}Now we have two solutions for $u(x,t)$
+		\begin{align*}
+			u(x,t) &= g(x-bt) & \text{(from the lecture)}\\
+			u(x,t) &= h(t-x\hat{b}) \\
+			\therefore g(x-bt) &= h(t-x\hat{b})
+		\end{align*}is our only solution.
+		}
+		
+		\item Next, derive a solution formula for the same problem with a more general boundary condition and source term:
+		\begin{align*}
+			\LBRACKET{\begin{array}{ll}
+					u_t+3u_x=f(x,t), &0<x<1, t>0,\\
+					u(x,0)=g(x),&\\
+					u(0,t)=h(t).&
+			\end{array}}
+		\end{align*}We assume that $g(0)=h(0)$, so that the initial condition and boundary condition agree at the corner $(x,t)=(0,0)$.
+		
+		\item Why did we only specify the boundary condition at he left-hand boundary $(x=0)$, not the right-hand boundary $(x=1)$?  In other words, what woudl go wrong if we specified boudnary conditions on both sides, as in 
+		\begin{align*}
+			\LBRACKET{\begin{array}{ll}
+				u_t+3u_x=f(x,t), &0<x<1, t>0,\\
+				u(x,0)=g(x),&\\
+				u(0,t)=h_0(t),&\\
+				u(1,t)=h_1(t),
+			\end{array}
+			}
+		\end{align*}for some give functions $h_0(t)$ and $h_1(t)$?  (We can assume $g(0)=h_0(0)$ and $g(10=h_1(0)$, so that the intial and boundary conditions agree at the corners.)
+		
+		\end{enumerate}
+		
+		\item In one space dimensio, Laplace's equation $\Delta u=0$ becomes an ODE
+		\begin{align*}
+			u''(x)=0
+		\end{align*}Describe all solutions to this ODE posed on the real line $(-\infty, \infty)$.  Next, for given constants $c_1,c_2$, find the uniqe solution to $u''(x)=0$ on the interval $[0,1]$ with $u(0)=c_1$ and $u(1)=c_2$.\\
+		Do these one-dimensional harmonic functions satisfy the mean value property $u(x)=\fint_{B(x,y)}u(y)dy$?  Why or why not?
+
+		\BLUE{\begin{align*}
+			\int u''(x)dx &= u'(x) + c \\
+			\int (u'(x) + c)dx &= u(x)+cx+d \\
+			\therefore u(x)+cx+d &= 0
+		\end{align*}When $u(0)=c_1$ and $u(1) = c_2$ we have
+		\begin{align*}
+			u(0)+c(0)+d = 0 &\implies c_1+d=0, d=-c_1 \\
+			u(1)+c(1)+d = 0 &\implies c_2+c+d=0 \\
+			c_1 = c_2+c &\implies c=c_1-c_2
+		\end{align*}That is
+		\begin{align*}
+			u(x) +(c_1-c_2)x-c_1 &=0 \\
+			u(x) &= c_1-(c_1-c_2)x
+		\end{align*}is our solution.  Do these one-dimensional harmonic functions satisfy the mean value property $u(x)=\fint_{B(x,y)}u(y)dy$?
+		\begin{align*}
+			B(x,y) &= [a,b]\\
+			\fint_{B(x,y)}u(y)dy &= \frac{1}{b-a}\int_a^b u(y)dy \\
+			&= \frac{1}{b-a}\int_a^b(c_1-(c_1-c_2)y) dy	\\
+			&= \frac{1}{b-a}\SQBRACKET{c_1y - \frac{c_1-c_2}{2}y^2}_a^b \\
+			&=\frac{1}{b-a}\SQBRACKET{c_1(b-a) - \frac{c_1-c_2}{2}(b-a)^2} \\
+			&= c_1 - \frac{c_1-c_2}{2}(b-a) \\
+			&= \frac{2c_1-c_1+c_2}{2} & \text{when }[a,b] = [0,1] \\
+			&= \frac{c_1+c_2}{2}
+		\end{align*}which is the average.		}
+				
+		\item Let $z=x+iy$ be a complex variable ($x$ and $y$ are real numbers).  Recall that a complex function $f(z)=u(x,y)+iv(x,y)$ is \textit{complex-differentiable} if $u$ and $v$ are continuously differentibable (as functiosn of $x$ and $y$) and Cauchy-Reimann eqations are satisfied:
+		\begin{align*}
+			\PART{u}{x}&=\PART{v}{y}\\
+			\PART{u}{y}&=-\PART{v}{x}
+		\end{align*}If $f$ is complex-differentiable, and in addition the real and imaginary parts $u(x,y)$ and $v(x,y)$ are $C^2$ (twice continuously differentiable) functions, then show that $u$ and $v$ are harmonic.
+		
+		\BLUE{
+		\begin{align*}
+			\Delta u &= \frac{\partial^2 u}{\partial x^2}+ \frac{\partial^2 u}{\partial y^2} \\
+			&= \PART{}{x}\PAREN{\PART{u}{x}}+\PART{}{y}\PAREN{\PART{u}{y}} \\
+			&= \PART{}{x}\PAREN{\PART{v}{y}}-\PART{}{y}\PAREN{\PART{v}{x}}\\
+			&= 0 \\
+			\Delta v &= \frac{\partial^2 v}{\partial x^2}+ \frac{\partial^2 v}{\partial y^2} \\
+			&= \PART{}{x}\PAREN{\PART{v}{x}}+\PART{}{y}\PAREN{\PART{v}{y}} \\
+			&= -\PART{}{x}\PAREN{\PART{u}{y}}+\PART{}{y}\PAREN{\PART{u}{x}}\\
+			&= 0 
+		\end{align*}
+		}
+		
+	\end{enumerate}
+	
+	\item \textbf{Part II}
+	\begin{enumerate}
+		\item Write down an explicit formula for a function $u$ solving the initial-value problem
+		\begin{align*}
+			\LBRACKET{\begin{array}{rl}
+				u_t+b\cdot Du+c=0 & \text{in } \R^n\times (0,\infty)\\
+				u=g & \text{on } \R^n\times \{t=0\}.
+			\end{array}
+			}
+		\end{align*}Here $c \in \R$ and $b\in\R^n$ are constants.
+		\item Prove that Laplace's equation $\Delta u=0$ is rotation invariant; that is, if $O$ is an orthogonal $n \times n$ matrix and we definte
+		\begin{align*}
+			v(x) := u(Ox) \, (x \in \R^n)
+		\end{align*}then $\Delta v=0$.
+		\setcounter{enumi}{4}
+		\item We say $v \in C^2(\bar{U})$ is \textit{subharmonic} if
+		\begin{align*}
+			-\Delta u \le 0\, \text{in } U.
+		\end{align*}
+		\begin{enumerate}[label=(\alph*)]
+			\item Prove for subharmonic $v$ that
+			\begin{align*}
+				v(x) \le \fint_{B(x,r)} v dy \, \text{ for all } B(x,y) \subset U.
+			\end{align*}
+			\item Prove that therefore $\max_{\bar{U}} v = \max_{\partial U} v$.
+			\item[(d)] Prove $v := \BARS{Du}^2$ is subharmonic, wherever $u$ is harmonic.
+		
+		\end{enumerate}
+	\end{enumerate}
+\end{description}
+
+\end{document}

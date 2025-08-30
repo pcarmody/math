@@ -1,0 +1,1 @@
+grep -rain --include '$2' '$1'
