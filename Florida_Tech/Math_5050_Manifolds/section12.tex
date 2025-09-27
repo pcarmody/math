@@ -1,0 +1,121 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 12: Tangent Bundles }
+\newcommand{\DUEDATE}{September 24, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\begin{enumerate}[label=12.\arabic*]
+
+\item \textbf{Hausdorff condition on the tangent bundle}
+
+Prove Proposition 12.4
+
+\BLUE{Let $U, V$ be disjoint open sets in $M$. Then, $\pi^{-1}(U)$ and $\pi^{-1}(V)$ are open sets in $TM$ as $\pi$ is diffeomorphic.  Since $M$ is Hausdorff, choose $p \in M$ be such that $p \not \in U$ and $p \not \in V$.   Then $T_p(M) \in TM$ and disjoint from all other elements of $TM$ including the sections $\pi^{-1}(U)$ and $\pi^{-1}(V)$.  Thus, $TM$ is Hausdorff.
+}
+
+\item \textbf{Transition functions for the total space fo the tangent bundle}
+
+Let $(U,\phi)= (U, x^1, \dots, x^n)$ and $(V, \psi) = (V, y^i, \dots, y^n)$ be overlapping coordinate charts on a manifold $M$.  They induce coordinate charts $(TU, \tilde{\phi})$ and $(TV, \tilde{\psi})$ on the total space $TM$ of the tangent bundle (see equation (12.1)), with transition function $\tilde{\psi}\circ\tilde{\phi}^{-1}$:
+\begin{align*}
+	(x^1,\dots, x^n, a^1,\dots, a^n)\mapsto(y^1,\dots, y^n, b^1, \dots, b^n).
+\end{align*}\begin{enumerate}[label=(\alph*)]
+	\item Compute the Jacobian matrix of the transition function $\tilde{\psi}\circ\tilde{\phi}^{-1}$ at $\phi(p)$.
+	
+	\item Show that the Jacobian determinant of the transition function $\tilde{\psi}\circ\tilde{\phi}^{-1}$ at $\phi(p)$ is $(\det[\partial y^i/\partial x^j])^2$.
+	
+	\BLUE{The Jacobian is the differential/pushfoward of the diffeomorphism $F: TU \to TV$ and let $T=\tilde{\psi}\circ\tilde{\phi}^{-1}$ and  
+	\begin{align*}
+		\tilde{x}^i &= \BINDEF{x^i & i \le n}{a^{i-n} & i > n} \\
+		dT &= \sum_{i=1}^{2n}  \RBAR{\PART{T^j}{\tilde{x}^i}}_{\phi(p)} \\
+		&= \sum_{i=1}^{2n}  \RBAR{\PART{\tilde{y}^j}{\tilde{x}^i}}_{\phi(p)} 
+	\end{align*}We get a four quadrant matrix of the form
+	\begin{align*}
+		J(T) &= \PAREN{\begin{array}{cc}
+			J(x,y) & J(a,y) \\
+			J(x,b) & J(a,b) 
+		\end{array}
+		} \\
+		\det J(T) &= J(x,y)J(a,b) - J(a,y)J(x,b)
+	\end{align*}$J(a,y)$ and $J(x,b)$ are both zero because the vectors $a$ and $b$ are from different vector spaces than $x$ and $y$, respectively. And $J(a,b)$ is precisely $J(x,y)_{\phi(p)}$, thus
+	\begin{align*}
+		\det J(T(\phi(p))) &= J(x,y)_{\phi(p)}^2
+	\end{align*}
+	}
+\end{enumerate}
+	
+	\item \textbf{Smoothness of scalar multiplication}
+	
+	Prove Proposition 12.9(ii).
+	
+	\item \textbf{Coefficients relative to a smoothframe}
+	
+	Let $\pi: E \to M$ be a $C^\infty$ vector bunlde and $s_1,\dots, s_r$ a $C^\infty$ frame for $E$ over an open set $U$ in $M$.  Then every $e \in \pi^{-1}(U)$ can be written uniquely as a linear combination
+	\begin{align*}
+		e = \sum_{j=1}^r c^j(e)s_j(p), \, p = \pi(e) \in U.
+	\end{align*}Prove that $c^j: \phi^{-1} U \to \R$ is $C^\infty$ for $j=1,\dots, r$.  (\textit{Hint:} First show that the coefficients of $e$ relative to the frame $t_1, \dots, t_r$ of a trivialization are $C^\infty$.)
+
+
+\end{enumerate}
+
+\end{document}

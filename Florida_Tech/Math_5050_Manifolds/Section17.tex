@@ -72,31 +72,105 @@ Denote the standard coordinates on $\R^2$ by $x,y$, and let
 	X = -y\PART{}{x}+x\PART{}{y} \AND Y=x\PART{}{x}+y\PART{}{y}
 \end{align*}be vector files on $\R^2$.  Find a 1-form $\omega$ on $\R^2-\{(0,0)\}$ such that $\omega(X)=1$ and $\omega(Y)=0$.
 
+\BLUE{\begin{align*}
+	\omega(X) &= a_1(x,y)\PAREN{-y\PART{}{x}+x\PART{}{y}}dx + a_2(x,y)\PAREN{-y\PART{}{x}+x\PART{}{y}}dx \\
+	&= -ya_1+xa_2 = 1\\
+	\omega(Y) &= a_1(x,y)\PAREN{x\PART{}{x}+y\PART{}{y}}dx+a_2(x,y)\PAREN{x\PART{}{x}+y\PART{}{y}}dy \\
+	&= xa_1+ya_2 = 0 
+\end{align*}solving for $a_1(x,y)$ and $a_2(x,y)$
+\begin{align*}
+	0 &= xa_1+ya_2 \implies a_1(x,y) = \frac{-ya_2(x,y)}{x} \\
+	1 &= -ya_1+xa_2  \\
+	&= -y\frac{-ya_2(x,y)}{x}+xa_2(x,y) \\
+	&= a_2(x,y)\PAREN{-y\frac{y^2}{x}+x} \\
+	a_2(x,y) &= \frac{x}{x^2+y^2} \\
+	a_1(x,y) &= \frac{-y}{x}\PAREN{\frac{x}{x^2+y^2}} = \frac{-y}{x^2+y^2}
+\end{align*}
+}\RED{Here, again, I'm going to cry foul with abuse of terminology.  The text specifcally 'says' that ``coefficeints $a_i$ are functions on $U$" but \textit{never} uses the notation $a_i(x_1,\dots, x_n)$ which is precisely what it means.  I'm certain that the author sees $a_i$ as a covector and uses this term in much the same sense as a vector, thus it is assumed.  Knowing this, much of the resulting expressions make more sense.  IMHO, this is poor writing.  Covectors should, at first, be written as functions.
+}
+
 \item \textbf{Transition formula for 1-form}
 
-Suppose $(U, x^1,\dots, X^n)$ and $(V, y^1, \dots, y^n)$ are two charts on $M$ with nonempty overlap $U\cap V$.  Then a $C^\infty$ 1-form $\omega$ on $U\cap V$ has two different local expressions:
+Suppose $(U, x^1,\dots, x^n)$ and $(V, y^1, \dots, y^n)$ are two charts on $M$ with nonempty overlap $U\cap V$.  Then a $C^\infty$ 1-form $\omega$ on $U\cap V$ has two different local expressions:
 \begin{align*}
 	\omega = \sum a_jdx^j=\sum b_idy^i.
-\end{align*}Finda formula for $a_j$ in terms of $b_i$.
+\end{align*}Find a formula for $a_j$ in terms of $b_i$.
 
+\RED{In reference to the above note, I will reword this to "Find a formula for $a_j(x^1,\dots,x^n)$ and $b_i(y^1, \dots, y^n)$".  Further, it is a lot clearer when we also write $\omega(x_1,\dots,x_n)$.\\
+}
+\BLUE{First note that $dx^j$ and $dy^i$ are directional derivatives on the tangent space.  Thus, for each $dx^j$ there exists a $dy^i$ such that $dx^j=dy^i$, i.e., parallel.  All others combinations will be zero. Let, $k(j)$ be such that $dx^j=dy^{k(j)}$ Then
+\begin{align*}
+	\sum_j a_jdx^j &= \sum_j b_{k(j)} dy^{k(j)} \\
+	0 &= \sum_j a_jdx^j - \sum_j b_{k(j)} dy^{k(j)} \\	
+	&= \sum_j (a_jdx^j - b_{k(j)} dy^{k(j)}) \\
+	&= \sum_j (a_j -  b_{k(j)})dx^j
+\end{align*}Each term of $dx^j$ is linearly independent therefore $a_j -  b_{k(j)} =0$ for all $j=1,\dots,n$.  \\
+}
+\BLUE{
+\textbf{From Math GPT:}
+\begin{itemize}
+\item Step 2: Use the Chain Rule for Differentials
+Since the coordinates \(y^i\) are functions of \(x^j\) on the overlap \(U \cap V\), we apply the chain rule to express \(dy^i\) in terms of \(dx^j\):
+\[
+dy^i = \sum_j \frac{\partial y^i}{\partial x^j} dx^j
+\]
+\item Step 3: Substitute the Expression for \(dy^i\)
+Substitute the expression for \(dy^i\) into the second expression for \(\omega\):
+\[
+\omega = \sum_i b_i \left( \sum_j \frac{\partial y^i}{\partial x^j} dx^j \right)
+\]
+This simplifies to:
+\[
+\omega = \sum_i \sum_j b_i \frac{\partial y^i}{\partial x^j} dx^j
+\]
+Rearranging terms, we have:
+\[
+\omega = \sum_j \left( \sum_i b_i \frac{\partial y^i}{\partial x^j} \right) dx^j
+\]
+\item Step 4: Compare Coefficients
+Compare this expression with the first expression for \(\omega\):
+\[
+\omega = \sum_j a_j dx^j
+\]
+By comparing the coefficients of \(dx^j\), we find:
+\[
+a_j = \sum_i b_i \frac{\partial y^i}{\partial x^j}
+\]
+\end{itemize}
+\HLINE
+What I seemed to not notice was that $y$ coordinates would be a function of $x$ (and visa versa) and therefore $dy^i$ would be in terms of $\PART{y^i}{x^j}dx^j$.  I believe that his simply saying the same thing as the $k$ function (afterall, $\PART{y^i}{x^j}dx^j=\delta^{ij}$).  However, we are working in the space of covectors/functionals which requires a slight paradigm shift.
+}
 \item \textbf{Pullback of a 1-form on $S^1$}
 
 Multiplication in the unit circle $S^1$, viewed as a subset of the complex plane, is given by 
 \begin{align*}
-	e^{it}\cdot e^{i(t+u)}, \, t,u \in \R
+	e^{it}\cdot e^{iu} = e^{i(t+u)}, \, t,u \in \R
 \end{align*}In terms of real imaginary parts, 
 \begin{align*}
 	(\cos t+i\sin t)(x+iy)= ((\cos t)x-(\sin t)y)+i((\sin t)x+(\cos t)y).
 \end{align*}Hence, if $g=(\cos t, \sin t) \in S^1 \subset \R^2$, then the left multiplication $\ell_g:S^1\to S^1$ is given by 
+\BLUE{\begin{align*}
+	\ell_g(x,y) &= (\cos t + i\sin t)(x + iy) \\
+	&= ((\cos t)x-(\sin t)y, (\sin t)x + (\cos t)y).
+\end{align*}
+}
+Let $\omega = -ydx+xdy$ be the 1-form found in Example 17.15.  Prove that $\ell_g^*\omega = \omega$ for all $g \in S^1$.
+
+\RED{By the definition page 136 of Lee
 \begin{align*}
-	\ell_g(x,y) = ((\cos t)x-(\sin t)y, (\sin t)x + (\cos t)y).
-\end{align*}Let $\omega = -ydx+xdy$ be the 1-form found in Example 17.15.  Prove that $\ell_g^*\omega = \omega$ for all $g \in S^1$.
+	(F^*\omega)(X) &= \omega(F_*X) \\
+	(F_*X_p)f &= X_p(f\circ F)
+\end{align*}then
+\begin{align*}
+	(\ell_g^*\omega)(X) &= X(\omega\circ \ell^*_g)
+\end{align*}
+}
 
 \item \textbf{Liouville form on the cotrangent bundle}
 
 \begin{enumerate}[label=(\alph*)]
 
-	\item Leet $(U, \phi)=(U, x^1,\dots, x^n)$ be a chart on a manifold $M$, and let 
+	\item Let $(U, \phi)=(U, x^1,\dots, x^n)$ be a chart on a manifold $M$, and let 
 	\begin{align*}
 		(\pi^{-1}U, \tilde{\phi}) = (\pi^{-1}U, \tilde{x}^1,\dots,\tilde{x}^n, c_1,\dots,c_n)
 	\end{align*}be the induced chart of the cotangent bundle $T^*M$.  Find a formula for Liouville form $\lambda$ on $\pi^{-1}U$ in terms of the coordinates $\tilde{x}^1,\dots,\tilde{x}^n,c_1,\dots,c_n$.

@@ -53,7 +53,7 @@
 
 \begin{center}
 	\Large{\CLASSNAME -- \SEMESTER} \\
-	\large{ w/Professor XXXX}
+	\large{ w/Professor Snelson}
 \end{center}
 \begin{center}
 	\STUDENTNAME \\
@@ -74,7 +74,7 @@
 				\end{array}}
 			\end{align*}
 		We assume that $g(0)=0$, so that the initial condition and boundary condition agree at the corner $(x,t)=(0,0)$.\\
-		Find a formula for $u(x,t)$ using the same method as was seen in classe, ile., use the fact that a certian direction derivative of $u$ is zero.  What do you notice about your solution for large times?
+		Find a formula for $u(x,t)$ using the same method as was seen in class, i.e., use the fact that a certian direction derivative of $u$ is zero.  What do you notice about your solution for large times?
 		
 		\BLUE{\textbf{From the Lecture:}
 		\begin{align*}
@@ -120,7 +120,17 @@
 			\end{array}}
 		\end{align*}We assume that $g(0)=h(0)$, so that the initial condition and boundary condition agree at the corner $(x,t)=(0,0)$.
 		
-		\item Why did we only specify the boundary condition at he left-hand boundary $(x=0)$, not the right-hand boundary $(x=1)$?  In other words, what woudl go wrong if we specified boudnary conditions on both sides, as in 
+		\BLUE{Unlike above, our $z$ function is not a constant.  Rather,
+		\begin{align*}
+			\frac{dz}{dr} &= u_x+\hat{b}u_t = f(x+r, t+rb)
+		\end{align*}then integrating 
+		\begin{align*}
+			\int_0^{x} \frac{dz(r)}{dr}dr &= u(x,t)-h(t-x\hat{b}) = \int_0^{x} f(x+r, t+rb)dr \\
+			u(x,t) &= h(t-x\hat{b}) + \int_0^{x} f(x+r, t+rb)dr
+		\end{align*}
+		}
+		
+		\item Why did we only specify the boundary condition at the left-hand boundary $(x=0)$, not the right-hand boundary $(x=1)$?  In other words, what would go wrong if we specified boundary conditions on both sides, as in 
 		\begin{align*}
 			\LBRACKET{\begin{array}{ll}
 				u_t+3u_x=f(x,t), &0<x<1, t>0,\\
@@ -129,11 +139,13 @@
 				u(1,t)=h_1(t),
 			\end{array}
 			}
-		\end{align*}for some give functions $h_0(t)$ and $h_1(t)$?  (We can assume $g(0)=h_0(0)$ and $g(10=h_1(0)$, so that the intial and boundary conditions agree at the corners.)
+		\end{align*}for some give functions $h_0(t)$ and $h_1(t)$?  (We can assume $g(0)=h_0(0)$ and $g(1)=h_1(0)$, so that the intial and boundary conditions agree at the corners.)
+		
+		\BLUE{The additional information would be redundant.}
 		
 		\end{enumerate}
 		
-		\item In one space dimensio, Laplace's equation $\Delta u=0$ becomes an ODE
+		\item In one space dimension, Laplace's equation $\Delta u=0$ becomes an ODE
 		\begin{align*}
 			u''(x)=0
 		\end{align*}Describe all solutions to this ODE posed on the real line $(-\infty, \infty)$.  Next, for given constants $c_1,c_2$, find the uniqe solution to $u''(x)=0$ on the interval $[0,1]$ with $u(0)=c_1$ and $u(1)=c_2$.\\
@@ -186,6 +198,7 @@
 	\end{enumerate}
 	
 	\item \textbf{Part II}
+\newcommand{\SECPART}[2]{\frac{\partial^2 #1}{\partial^2 #2}}
 	\begin{enumerate}
 		\item Write down an explicit formula for a function $u$ solving the initial-value problem
 		\begin{align*}
@@ -195,22 +208,73 @@
 			\end{array}
 			}
 		\end{align*}Here $c \in \R$ and $b\in\R^n$ are constants.
-		\item Prove that Laplace's equation $\Delta u=0$ is rotation invariant; that is, if $O$ is an orthogonal $n \times n$ matrix and we definte
+		
+		\BLUE{From above, we define $f(x,t) = c$ we have
+		\begin{align*}
+			u(x,t) &= g(x-bt)+\int_{0}^t f(x+ut, t+u) du \\
+			&= g(x-bt)+\int_{0}^t c du \\
+			&= g(x-bt)+ ct
+\end{align*}		
+		}
+		
+		\item Prove that Laplace's equation $\Delta u=0$ is rotation invariant; that is, if $O$ is an orthogonal $n \times n$ matrix and we define
 		\begin{align*}
 			v(x) := u(Ox) \, (x \in \R^n)
 		\end{align*}then $\Delta v=0$.
+		
+		\BLUE{\begin{align*}
+			\Delta v &= \Delta u(Ox) \\
+			Ox_j &= \sum_{k=1}^n a_{kj}x_j\\
+			\PART{u(Ox_j)}{x_j} &= \sum_{k=1}^n \PART{u}{x_k}\PART{a_{kj}x_j}{x_j}\\
+			&= \sum_{k=1}^n \PART{u}{x_k}a_{kj}\\
+			\frac{\partial^2 u(Ox_j)}{\partial^2x_j}  &= \PART{}{x_j}\PAREN{\sum_{k=1}^n \PART{u}{x_k}a_{kj}} \\
+			&= \sum_{k=1}^n \PART{}{x_j}\PAREN{\PART{u}{x_k}a_{kj}} \\
+			&= \sum_{k=1}^n a_{kj}\PART{}{x_j}\PART{u}{x_k} \\
+			&= \sum_{k=1}^n a_{kj} 
+		\end{align*}
+		}
+		
 		\setcounter{enumi}{4}
 		\item We say $v \in C^2(\bar{U})$ is \textit{subharmonic} if
 		\begin{align*}
-			-\Delta u \le 0\, \text{in } U.
+			-\Delta v \le 0\, \text{in } U.
 		\end{align*}
 		\begin{enumerate}[label=(\alph*)]
 			\item Prove for subharmonic $v$ that
 			\begin{align*}
 				v(x) \le \fint_{B(x,r)} v dy \, \text{ for all } B(x,y) \subset U.
 			\end{align*}
-			\item Prove that therefore $\max_{\bar{U}} v = \max_{\partial U} v$.
+			
+			\BLUE{Remember $\Delta v = \nabla \cdot \nabla v$ and from the Divergence Theorem we have
+			\begin{align*}
+				\int_{B(x,r)} \nabla \cdot \nabla v\, dV &= \int_{\partial B(x,r)} \nabla v\cdot dS 
+			\end{align*}by the Strong maximum principle let $b = \underset{\partial B(x,r)}\max  v$.  Then
+			\begin{align*}
+				\int_{\partial B(x,r)} \nabla v\cdot dS  &= \int_{\partial B(x,r)} v \,dr\\
+				&\ge b|{\partial B(x,r)}| \\
+				\max_{\partial B(x,r)} v &\le \frac{1}{|{\partial B(x,r)}|}\int_{\partial B(x,r)} v \,dr \\
+				v(x) &\le \fint_{B(x,r)} v\, dy
+			\end{align*}
+			}
+			\item Prove that therefore $\underset{\bar{U}}\max \,v = \underset{\partial U}\max\, v$.
+			
+			\BLUE{Because of the Strong Maximum Principle, the maximum cannot exist on the interior of $U$ unless $v$ is a constant.  Therefore the $\underset{\bar{U}}\max \,v = \underset{\partial U}\max\, v$
+			}
+			
 			\item[(d)] Prove $v := \BARS{Du}^2$ is subharmonic, wherever $u$ is harmonic.
+			
+			\BLUE{\begin{align*}
+				|Du| &= \sum_{1=1}^n (u_{x_i})^2 \\
+				|Du|^2 &= \PAREN{\sum_{1=1}^n (u_{x_i})^2}^2 \\
+				\PART{v}{u_{x_j}} &= \sum_{i=1}^n 2u_{x_i}u_{x_ix_j} \\
+				\frac{\partial^2 }{\partial u_{x_j}^2} &= \sum_{i=1}^n 2(u_{x_ix_j}u_{x_ix_j}+u_{x_i}u_{x_ix_jx_j}) \\
+				\Delta v &= \sum_{j=1}^n \sum_{i=1}^n 2(u_{x_ix_j}u_{x_ix_j}+u_{x_i}u_{x_ix_jx_j}) \\
+				&= \sum_{j=1}^n \sum_{i=1}^n 2(u_{x_ix_j}^2+u_{x_i}u_{x_ix_jx_j})
+			\end{align*}Since $\Delta u=0$ then all derivatives of $\Delta u$ are zero. Thus, we have
+			\begin{align*}
+				\Delta v &= \sum_{j=1}^n \sum_{i=1}^n 2(u_{x_ix_j})^2
+			\end{align*}which is greater than zero and hence subharmonic.
+			}
 		
 		\end{enumerate}
 	\end{enumerate}

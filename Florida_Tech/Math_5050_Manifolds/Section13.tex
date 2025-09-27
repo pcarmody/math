@@ -1,0 +1,133 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 13: The Bump Function }
+\newcommand{\DUEDATE}{October 1, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\begin{enumerate}[label=13.\arabic*]
+
+\item \textbf{Support of a finite sum}
+
+	Prove Lemma 13.5
+	
+	\textbf{Lemma 13.5} Let $M$ be a compact manifold and $\{U_\alpha\}_{\alpha\in A}$ an open cover of $M$.  There exists a $C^\infty$ partition of unity $\{\rho_\alpha\}_{\alpha \in A}$ subordinate to $\{U_\alpha\}_{\alpha\in A}$.
+	
+\item \textbf{Locally finite family and compact set}
+
+Let $\{A_\alpha\}$ be a locally finite family of subsets of a toplogical space $S$.  Show that every compact set $K$ is $S$ has a neighborhood $W$ that intersects only finitely many of the $A_\alpha$
+
+\item \textbf{Smooth Urysohn Lemma}
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Let $A$ and $B$ be two disjoint closed sets in a manifold $M$.  Find a $C^\infty$ function $f$ on $M$ such that $r$ is identically 1 on $A$ and identically 0 on $B$.  (\textit{Hint:} Consider $C^\infty$ partition of unity $\{\rho_{M-A}, \rho_{M-B}\}$ subordinate to the open cover $\{M-A, M-b\}$.  This lemma is needed  in Subsection 29.3.)
+	
+	\item Let $A$ be a closed subset and $U$ an open subset of a manifold $M$.  Show that there is a $C^\infty$ function $F$ on $M$ such that $f$ is identically 1 on $A$ and $\SUPP f \subset U$.
+	\end{enumerate}
+	
+	\item \textbf{Support of the pullback of a function}
+	
+	Let $F: N \to M$ be a $C^\infty$ map of manifolds and $h: M \to \R$ a $C^\infty$ real-valued function.  Prove that $\SUPP F^*h \subset F^{-1}(\SUPP h)$. (\textit{Hint:} First show that $(F*h)^{-1}(\R^\times)\subset F^{-1}(\SUPP h)$.)
+	
+	\item \textbf{Support of the pullback by projection}
+	
+	Let $f: M \to \R$ be a $C^\infty$ function on a manifold $M$.  If $N$ is another manifold and $\pi: M \times N \to M$ is the projection onto the first factor, prove that 
+	\begin{align*}
+		\SUPP(\pi^*f)=(\SUPP f)\times N
+	\end{align*}
+	
+	\item \textbf{Pullback of a partition of unity}
+	
+	Suppose $\{\rho_\alpha\}$ is a partition of unity on a manifold $M$ subordinate to an open cover $\{U_\alpha\}$ of $M$ and $F :N \to M$ is a $C^\infty$ map. Prove that 
+	\begin{enumerate}[label=(\alph*)]
+		
+		\item the collection of supports $\{\SUPP F^* \rho_\alpha\}$ is locally finite.
+		
+		\item the collection of functions $\{F^*\rho_\alpha\}$ is a partition of unity on $N$ subordinate to the open cover $\{F^{-1}(U_\alpha)\}$ of $N$
+		
+	\end{enumerate}
+		
+		\item \textbf{Closure of a locally finite union}
+		
+		If $\{A_\alpha\}$ is locally finite collection of subsets ina  topological space, then 
+		\begin{align*}
+			\CONJ{\bigcup A_\alpha} = \bigcup \CONJ{A_\alpha}.
+		\end{align*}where $\CONJ{A}$ denotes the closure of the subset $A$.
+		
+		\textit{Remark.}  For any colection of subsets $A_\alpha$, one always has 
+		\begin{align*}
+			\bigcup \CONJ{A_\alpha} \subset \CONJ{\bigcup A_\alpha}.
+		\end{align*}However, the reverse inclusion is, in general, not true.  For example, Suppose $A_n$ is the closed interval $[0,1-(1/n)]$ in $\R$.  Then 
+		\begin{align*}
+			\CONJ{\bigcup_{n=1}^\infty A_n} = \CONJ{[0,1]} = [0,1],
+		\end{align*}but
+		\begin{align*}
+			\bigcup_{n=1}^\infty\CONJ{A_n}
+=\bigcup_{n=1}^\infty\SQBRACKET{0,1-\frac{1}{•n}} = [0,1)
+		\end{align*}If $\{A_\alpha\}$ is a finite collection, the equality (13.4) is easily shown to be true.
+
+
+\end{enumerate}
+
+\end{document}

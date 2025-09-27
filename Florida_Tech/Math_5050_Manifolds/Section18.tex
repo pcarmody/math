@@ -1,0 +1,219 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 18: Differential K-forms }
+\newcommand{\DUEDATE}{September 10, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\begin{enumerate}[label=18.\arabic*]
+
+\item \textbf{Characterization of a smooth $k$-form}
+
+	Write out a proof of Proposition 18.7(i)$\iff$(iv)
+	\newtheorem*{propp}{\textbf{Proposition}}
+
+\begin{propp}	\textbf{18.7 (Characterization of a smooth $k$-form)}.  Let $\omega$ be a $k$ -form on a manifold $M$.  The following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+
+	\item The $k$-form $\omega$ is $C^\infty$ on $M$.
+	
+	\BLUE{Let $\omega$ be a 1-form.  Then $\omega = \sum \PART{}{x^i}dx^i$.  Each $dx^i \in C^\infty$ therefore $\omega \in C^\infty$.\\
+	Inductive Step: Let $omega \in \Omega^k$ and assume $\omega \in C^\infty$. Then let $\tau$ be a 1-form.  $\omega(x)\wedge\tau(y) = \omega(x)\tau(y)$ which is in $C^\infty$.
+	}
+	
+	\item The manifold $M$ has an atlas such that every chart $(U,\phi) = (U, x^1,\dots, x^n)$ in the atlas, the coefficients $a_1$ of $\omega=\sum a_Idx^I$ relative to the coordinate frame $\{dx^I\}_{I\in \mathcal{J}}$ are all $C^\infty$.
+	
+	\item On every chart $(U,\phi) = (U,x^1,\dots,x^n)$ on $M$, the coefficients $a_1$ of $\omega=\sum a_Idx^I$ relative to the coordinate frame $\{dx^I\}_{I\in \mathcal{J}}$ are all $C^\infty$.
+	
+	\item For any $k$ smooth vector fields $X_1,\dots, X_k$ on $M$ , the function $\omega(X_1,\dots, X_k)$ is $C^\infty$ on $M$.
+
+\end{enumerate}\HLINE
+
+\end{propp}
+	
+\item \textbf{Linearity of the pullback}
+
+	Prove Proposition 18.9
+	
+	\begin{propp}\textbf{18.9 (Linearity of the pullback)}. Let $F:N \to M$ be a $C^\infty$ map. If $\omega,\tau$ are $k$-forms on $M$ and a real number, then
+	\begin{enumerate}[label=(\roman*)]
+		\item $F^*(\omega+\tau) = F^*\omega + F^*\tau$;
+		
+		\BLUE{\begin{align*}
+			F^*(\omega)_p &= F^*(\omega_{F(p)}) \\
+			F^*(\omega+\tau)_p &= F^*((\omega+\tau)_{F(p)}) \\
+			&= F^*(\omega_{F(p)}+\tau_{F(p)}) \\
+			&= F^*(\omega_{F(p)})+F^*(\tau_{F(p)})
+		\end{align*} or the other way
+		\begin{align*}
+			F^*(\omega+\tau) &= ((\omega+\tau)_j\circ F)dF^j \\
+			 &= (\omega_j\circ F)dF^j+(\tau_j\circ F)dF^j \\
+			 &= F^*\omega + F^*\tau
+		\end{align*}
+		}
+		
+		\item $F^*(a\omega)=aF^*\omega$.
+		
+		\BLUE{
+			\begin{align*}
+				F^*(a\omega) &= (a\omega_j\circ F)dF^j \\
+				&= a(\omega_j\circ F)dF^j \\
+				&= aF^*\omega
+			\end{align*}			
+		}
+	\end{enumerate}
+	\end{propp}\HLINE
+	
+\item \textbf{Pullback of a wedge product}
+
+	Prove Proposition 18.11
+		
+	\begin{propp}\textbf{18.11(Pullback of a wedge product).}If $F:N\to M$ is a $C^\infty$ map of manifolds and $\omega$ and $\tau$ are differential forms on $M$, then 
+	\begin{align*}
+		F^*(\omega\wedge\tau) = F^*\omega\wedge F^*\tau.
+	\end{align*}
+	\end{propp}\HLINE
+	
+	\BLUE{The definition of pullback and wedge product are
+	\begin{align*}
+		(F^*\omega)_p(v_1,\dots,v_k) &= \omega_{F(p)}(dF_p(v_1),\dots, dF_p(v_k))\\		(\omega\wedge\tau)_p(u,v) &= \frac{1}{k!l!}\sum_{\sigma\in S_{k+l}} (\operatorname{sgn}(\sigma) \omega_p(u_{\sigma_1}, \dot, u_{\sigma_k})\tau_p(v_{\sigma_{k+1}},\dots,v_{\sigma_{k+l}})
+	\end{align*}Thus starting with the left hand side, 
+	\begin{align*}
+		F^*(\omega\wedge\tau)(u,v) &= \PAREN{\omega\wedge\tau}_{F(p)}(dF_p(u_1),\dots,dF_p(u_k), dF_p(v_1),\dots, dF_p(v_k)) \\
+		&= \frac{1}{k!l!}\sum_{\sigma \in S_{k+l}} \operatorname{sgn}(\sigma) \omega_{F(p)}(dF_p(u_{\sigma_1}),\dots,dF_p(u_{\sigma_k}))\tau_{F(p)}(dF_p(v_{\sigma_{k+1}}),\dots, dF_p(v_{\sigma_{k+l}})) 
+	\end{align*}Now the right hand side
+	\begin{align*}
+		(F^*\omega)_p\wedge (F^*\tau)_p(u,v) &= \PAREN{ \omega_{F(p)}(dF_p(u_1),\dots, dF_p(u_k))}\wedge\PAREN{ \tau_{F(p)}(dF_p(v_1),\dots, dF_p(v_k))} \\
+		&= \frac{1}{k!l!}\sum_{\sigma \in S_{k+l}} \operatorname{sgn}(\sigma) \omega_{F(p)}(dF_p(u_{\sigma_1}),\dots,dF_p(u_{\sigma_k}))\tau_{F(p)}(dF_p(v_{\sigma_{k+1}}),\dots, dF_p(v_{\sigma_{k+l}})) 
+	\end{align*}
+	}
+	
+	\item \textbf{Support of a sum or product}
+
+	Generalizing the support of a function, we define \textit{support of a $k$-form} $\omega \in \Omega^k(M)$ to be
+	\begin{align*}
+		\SUPP \omega = \CLOSURE \{p\in M | \omega_p \ne 0\} = \CONJ{Z(\omega)^c}.
+	\end{align*}where $Z(\omega)^c$ is the complement of the zero set $Z(\Omega)$ of $\omega$ in $M$.  Let $\omega$ and $\tau$ be different forms on a manifold $M$.  Prove that
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item $\SUPP(\omega+\tau) \subset \SUPP\omega \cup \SUPP \tau$.
+		\item $\SUPP(\omega \wedge \tau) \subset \SUPP \omega \cap \SUPP \tau$.
+	
+	\end{enumerate}
+	
+	\item \textbf{Support of a linear combination}
+	
+	Prove that the $k$-forms $\omega^1,\dots, \omega^r \in \Omega^k(M)$ are linerly independent at every point of a manifold $M$ and $a_1,\dots, a_r$ are $C^\infty$ functions on $M$, then
+	\begin{align*}
+		\SUPP \sum_{i=1}^r a_i\omega^i = \bigcup_{i=1}^r \SUPP a_i.
+	\end{align*}
+	
+	\RED{\textbf{Parti I.}  Each $\omega^i$ is linearly independent from every other $\omega^j$ where $i\ne j$. \\
+	\textbf{Part II}  We need to show that $S_L \subseteq \bigcup_{i=1}^r \SUPP a_i$ and $S_L \supseteq \bigcup_{i=1}^r \SUPP a_i$
+	\begin{itemize}
+		\item \textbf{$S_L \subseteq \bigcup_{i=1}^r \SUPP a_i$}
+		\item \textbf{$S_L \supseteq \bigcup_{i=1}^r \SUPP a_i$}
+	\end{itemize}
+	}
+	
+	\item \textbf{Locally finite collection of supports}
+	
+	Let $\{p_\alpha\}_{\alpha\in A}$ be a collection of functions on $M$ and $\omega$ a $C^\infty$ $k$-form with compact support on $M$.  If the collection $\{\SUPP \rho_\alpha\}_{\alpha\in A}$ of supports locally finite,  prove that $\rho_\alpha\omega \cong 0$ for all but finitely many $\alpha$.
+	
+	\item \textbf{Locally finite sums}
+	
+	We say that a sum $\sum \omega_\alpha$ of differential $k$-forms on a manifold $M$ is \textit{locally finite} if the colleciont $\{\SUPP \omega_\alpha\}$ of supoorts is locally finite.  Suppose $\sum \omega_\alpha$ and $\sum \tau_\alpha$ are locally finite sums and is a $C^\infty$ function on $M$.
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Show that every point $p \in M$ has a neighborhood $U$ on which $\sum \omega_\alpha$ is a finite sum.
+		\item Show that $\sum \omega_\alpha + \tau_\alpha$ is a locally finite sum and 
+		\begin{align*}
+			\sum \omega_\alpha + \tau_\alpha = \sum \omega_\alpha + \sum\tau_\alpha.
+		\end{align*}
+		\item Show that $\sum f\omega_\alpha$ is locally finite sum and 
+		\begin{align*}
+			\sum f\cdot \omega_\alpha = f\cdot\PAREN{\sum \omega_\alpha}
+		\end{align*}
+		
+		\item \textbf{Pullback by a surjective submersion}
+		
+		In Subsection 19.5, we will show that the pullback of a $C\infty$ form is $C\infty$.  Assuming this fact now, prove that if $\pi:\tilde{M} \to M$is a surjective submersion, then the pullback map $\pi^*: \Omega^*(M)\to\Omega^*(\tilde{M})$ is an injective algebra homomorphism.
+		
+		\item \textbf{Bi-invariant top forms on a compact, connected Lie group}
+		
+		Suppose $G$ is a compact, connected Lie group of dimension $n$ with Lie agebra $\mathfrak{g}$.  this exercise proves that every left-invariant $n$-form on $G$ is right-invariant.
+		\begin{enumerate}[label=(\alph*)]
+		
+			\item Let $\omega$ be a left-invariant $n$-form on $G$.  For any $a \in G$, show that $r_a^*\omega$ is also left-invariant where $r_a : G \to G$ is rightmultiplication by $a$.
+			\item Since $\dim \Omega^n(G)^G = \dim \wedge^n(\mathfrak{g}^\wedge) = 1, r_a^*(\omega=f(a)\omega$ for some nonzer real number $f(a)$ depending on $a \in G$.  Show taht $f: G \to \R^\times$ is a greap homomorphism.
+			\item Show that $f: G \to \R^\times$ is $\infty$. (\textit{Hint:} Note that $f(a)\omega_e = (r_a^*\omega)_e = r_a^*(\omega_a)=r_a^*\ell^*_{a^{-1}}(\omega_e)$.  Thus, $f(a)$ is the pullback of themap $\operatorname{Ad}(a^{-1}): \mathfrak{g}\to \mathfrak{g}$. SEe Problem 16.11.)
+			
+			\item As the coninuous image of a compact connected set $G$, the set $f(G) \subset \R^\times$ is compact adn connected.  Prove that $f(G) =1$. hence, $r_a^*\omega=\omega$ for all $ a \in G$.
+		
+		\end{enumerate}
+	
+	\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

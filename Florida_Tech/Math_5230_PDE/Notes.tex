@@ -1,0 +1,165 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5230 -- Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{December 17, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{MW 2:00 -- 3:15}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Snelson}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{description}
+	\item \textbf{Transportation Problem and Method Characteristics}
+	
+	Because the Transportation Equation is
+	\begin{align*}
+		u_t+b\cdot Du=0
+	\end{align*}resembles a linear equation we can use that as inspiration.  Use
+	\begin{align*}
+		z(s) = u(x+sb, t+s)
+	\end{align*}we'll see that $z' = 0$ which is a constant.  Thus, when $s=-t$, intial conditions, we get $z(s) = u(x-tb, 0)$ which is our intial contioins on $u$, namely $g(x)$.  Thus, $u(x,t) = g(x-tb)$
+	
+	\textbf{Non-Homogenous case}: We find that $z'(s) \ne 0$ and actually is equal to $z'(s) = f(x+sb, t+s$
+	\begin{align*}
+		u(x,t)-g(x-bt) &= z(0)-z(-t)\\
+		&= \int_{-t}^1 z'(s)\, ds \\
+		&= \int_0^t f(x+(s-tb,s)\,ds
+	\end{align*}thus
+	\begin{align*}
+		u(x,t) &= g(x-bt) +\int_0^t f(x+(s-tb,s)\,ds
+	\end{align*}
+	
+	\item \textbf{General Laplace solution.}
+\begin{remark}[\textbf{Properties of $\Phi$}].
+
+\begin{align*}
+	\Phi(x) &= \BINDEF{-\frac{1}{2\pi}\log |x| & (n=2)}{\frac{1}{n(n-2)\alpha(n)}\frac{1}{|x|^{n-2}} & (n\ge 3)} 
+\end{align*}
+\begin{align}
+	D\Phi(y) &= \frac{-1}{n\alpha(n)}\frac{y}{|y|^n},\, (y\ne 0)\\
+	\PART{\Phi}{\nu} &= \nu\cdot D\Phi(y)= \frac{-1}{n\alpha(n)\varepsilon^{n-1}},\, y \in \partial B(0,\varepsilon)  \\
+	-\Delta\Phi &= \delta_0 \implies \Delta\Phi(x-y)=0,\, y \in U \AND y \ne x
+\end{align}implying that there is a point source at 0 or $x$. In (2) $n\alpha(n)\varepsilon^{n-1}$ is the area of the surface of $\partial B(0,\epsilon)$
+
+\end{remark}
+
+	
+	\item \textbf{General Poisson solution.}
+	
+	\begin{align*}
+		&\BINDEF{-\Delta u =f, & x \in U}{u=g, & x \in \partial U}\\
+		u(x,t) &= \Phi(x) - \phi^x(x) 
+	\end{align*}where $\phi^x$ is a Dirichlet Delta function.
+	
+	\item \textbf{Green's Functions and Dirac Delta functions.}
+	
+	A Green's Function must satisfy the following:
+	\begin{align*}
+		G(x,y) &= \BINDEF{ \Delta G(x) = 0, & x \in U}{G(x,y) = \Phi(x-y) + \phi^x(x), & x,y \in \partial U}
+	\end{align*}where $\phi^x$ is a Dirichlet Delta function determined by the geometry of $U$.  Then,
+	\begin{align*}
+		u(x) &= \int_U f(x)G(x,y)\, dy +\int_{\partial U} g(x)\PART{G}{\nu}(x,y) dS
+	\end{align*}
+	
+	\item \textbf{Green's identities.}
+\begin{remark}[Green's Identities].
+\begin{align*}
+\int_U \Delta u\; dx &= \int_{\partial U} \PART{u}{\nu} dS\\
+	\int_U Dv\cdot Du\;  dx &= -\int_U u\Delta v \; dx + \int_{\partial U} \PART{v}{\nu}u\;  dS\\
+	\int_U u\Delta v - v \Delta u\;  dx &= \int_{\partial U} u\PART{u}{\nu}-v\PART{u}{\nu}\;  dS
+\end{align*}
+\end{remark}
+	
+	\item \textbf{Neuman conditions.}
+	
+	Example from Practice Test 2:
+	
+	\item \textbf{Energy methods}
+	
+	Use the functional 
+	\begin{align*}
+		I[w] &= \int_U \frac{1}{2}|Dw|^2-wf\, dx \\
+		w \in \mathcal{A} &= \{ w \in C^2\,|\, w=g \text{ on } \partial U\}
+	\end{align*}Dirichlet's Principle then states that
+	\begin{align*}
+		I[u] &= \min_{w \in \mathcal{A}} I[w] \iff u \text{ is a solution}
+	\end{align*}
+	
+	\item \textbf{Maximum Theorem}
+	
+	\begin{align*}
+		\max_{\bar U} u &= \max_{\partial U} u
+	\end{align*}
+	
+	\item \textbf{Mean Value Theorem}
+	
+	\begin{align*}
+		u(x) &= \fint_U u\, dx = \fint_{\partial U} u \,dS
+	\end{align*}
+\end{description}
+
+\HLINE
+\begin{remark}[Integration by Parts\footnote{see page 9, 9\_17.pdf}].
+\begin{align*}
+	\int_U f\Delta g\, dx = -\int_U \nabla f \cdot \nabla g \, dx + \int_{\partial U} f \PART{g}{\nu}\, dS
+\end{align*}
+\begin{align*}
+	-\Delta w &= 0 \implies w\Delta w = 0\\
+	\int_U w\Delta w\; dx &= -\int_U |Dw|^2\;  dx+\int_{\partial U}wDw\cdot \nu\;  dx = 0\\
+	\int_{\partial U} wDw\cdot \nu\;  dx &= \int_U |Dw|^2\;  dx + \int_U w\Delta w\;  \not dx
+\end{align*}
+\end{remark}
+
+\end{document}

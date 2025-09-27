@@ -1,0 +1,184 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5230 -- Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#2 }
+\newcommand{\DUEDATE}{September 17, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{MW 2:00 -- 3:15}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Snelson}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{description}
+	\item \textbf{Part I.}
+	
+	\begin{enumerate}[label=\arabic*]
+	
+		\item Use the Harnack inequality to give an alternative proof of the Strong Maximum Principle: If $u$ is harmonic in $U, u\ge 0$, and $u(x_0)=0$ at some interior point $x_0\in U$, then $u=0$ everywhere in $U$.
+		
+		\BLUE{Let $u \in C^2(U)\cap C(\bar U)$ and suppose that there exists $x_0$ such that $u(x_0)= 0$.  The Harnack Inequality states that over every $V \subset\subset U$, there exists $C$, depending on $V$, such that
+		\begin{align*}
+			u(x) \le Cu(y), \forall x,y\in V
+		\end{align*}Let $V \subset\subset U$ and evaluate at $x_0 \in V$ then
+		\begin{align*}
+			u(y) &\le Cu(x_0), \forall y \in V \\
+			y(y)  &\le 0.
+		\end{align*}$V$ is closed and compact and its boundary is arbitrarily close to $U$.  Thus, there is always a finite open cover $\{W_i\}_{i=1}^n$ over $V$ such that $V \subset \cup_{i=1}^n W_i$ and $U \subseteq \cup_{i=1}^n W$.
+		}
+		
+		\item So far, we have mostly studied Laplaces' or Poisson's equation with \textit{Dirichlet boundary conditions}, i.e., $u=g$ on $\partial U$.  The other most common boundary condition is the \textit{Neumann boundary condition} $\PART{u}{\nu} = h$ along $\partial U$, for some given function $h$.
+		\begin{enumerate}[label=(\alph*)]
+		
+			\item If $u$ solves the Neumann problem for Laplace's equation, i.e., 
+			\begin{align*}
+				&\BINDEF{\Delta u=0, & x \in U}{\PART{u}{\nu}=h, & x \in \partial U} & (*)
+			\end{align*}show that $h$ must satisfy the compatibility condition $\int_{\partial U} h\, dS = 0$.  In other words, the problem cannot have a solution if this condition on $h$ does not hold.
+			
+			Interpret the condtion $\int _{\partial U} h\, dS = 0$ physically.
+			
+			\BLUE{\begin{align*}
+				\int_U \Delta u\; dV &= \int_U \nabla \cdot Du dV \\
+				&= \int_{\partial U} \; Du dS \\
+				&= \int_{\partial U} \PART{u}{\nu} dS \\
+				&= \int_{\partial U} h dS \\
+				&= 0
+			\end{align*}The intergral over a closed boundary is zero implies that $h$ represents a conservative vector field.
+			}
+			
+		\item Consider the same question for Poisson's equation with Neumann boundary condition:
+		\begin{align*}
+			&\BINDEF{-\Delta u = f, & x \in U}{\PART{u}{\nu}=h, & x \in \partial U} & (**)
+		\end{align*}What compatibility  condition must $h$ satisfy, if $u$ solves this problem?
+		
+		Interpret this condition physically.
+		
+		\BLUE{From (a) instead of zero 
+		\begin{align*}
+			 \int_{\partial U} h dS &=  \int_U -f(x) dV \\
+			 \int_U \nabla \cdot h dV &= \int_U -f(x) dV \\
+			 \therefore \operatorname{div} h &= -f(x)
+		\end{align*}The boundary indicates flows into and out of the set $U$.
+		}
+		
+		\item Are solutions to the Neumann problem (*) unique?  Why or why not?
+		
+		\BLUE{Since $h$ is a condition on $u$ and $u$ describes some conservation law, $h$ must be unique reflecting the is conservation.  That doesn't mean that there couldn't be other conservative fields, they just don't pertain to $u$.
+		}
+		
+		\item Find a Green's function $G_N(x,y)$ for the Neumann problem (**) describe in exercise 2(b).  This Green's function shoud have the property that 
+		\begin{align*}
+			u(x) = \int_{\partial U} G_N(x,y)h(y)dS_y + \int_U G_N(x,y)f(y)dy
+		\end{align*} for a solution $u$ of (**).
+		(Hint: Start with the identity
+		\begin{align*}
+			u(x) =\int_{\partial U} \PAREN{\Phi(y-x)\PART{u}{\nu}(y) - u(y)\PART{\Phi}{\nu}(y-x)} dS_y - \int_U \Phi(y-x)\Delta u(y) dy,
+		\end{align*}which we derived in class.  Imitate the strategy used in class (or in Section 2.2.4(a) of Evans), but replace the corrector function $\phi^x(y)$ with a different corrector $\psi^x(y)$. You can assume $n\ge 3$ so that $\Phi(y-x)=c_n|y-x|^{2-n}$
+		
+		\BLUE{\begin{align*}
+			u(x) &=\int_{\partial U} \PAREN{\Phi(y-x)\PART{u}{\nu}(y) - u(y)\PART{\Phi}{\nu}(y-x)} dS_y - \int_U \Phi(y-x)\Delta u(y) dy \\
+			 &= \int_{\partial U} \PAREN{\Phi(y-x)h(y) - u(y)h(y-x)} dS_y - \int_U \Phi(y-x)\Delta u(y) dy
+		\end{align*}The text says "Observe that the term $\partial u/\partial \nu$ doesn't appear in (28): we introduced $\phi^x$ precisely to achieve this".  So, I do not at all understand this "strategy".\\
+		}
+		
+		\item Use the Poisson formula for the ball of radius $r$ (formula (45) on page 41 of Evans) to give an alternative proof for the mean-value property of harmonic functions.
+		
+		\BLUE{Formula (45) on Page 41 is \begin{align*}
+			u(x) = \frac{r^2-|x|^2}{n\alpha(n)r} \int_{\partial B(0,r)} \frac{g(y)}{|x-y|^n} dS(y)
+		\end{align*}the Mean Value Principle says that $u(0)$ should be the average over the boundary or
+		\begin{align*}
+			u(0) &= \frac{r^2}{n\alpha(n)r} \int_{\partial B(0,r)} \frac{g(y)}{|y|^n} dS(y) .
+		\end{align*}Recall that $y\in  \partial B(0,r)$ thus $|y|=r^n$.
+		\begin{align*}
+			u(0) &= \frac{r^2}{n\alpha(n)r} \int_{\partial B(0,r)} \frac{g(y)}{r^n} dS(y)\\
+			&= \frac{1}{n\alpha(n)r^{n-1}} \int_{\partial B(0,r)} g(y) dS(y)
+		\end{align*}The surface area of an $n$-ball is $\partial B(1,r) = n\alpha(n)r^{n-1}$.  Thus,
+		\begin{align*}
+			u(0) &= \frac{1}{\partial B(0,r)} \int_{\partial B(0,r)} g(y) dS(y)
+		\end{align*}Lastly, $g(y) = u(y)$ for all $y \in \partial B(0,r)$ therefore
+		\begin{align*}
+			u(0) &= \frac{1}{\partial B(0,r)} \int_{\partial B(0,r)} u(y) dS(y)
+		\end{align*}which is precisely the average over the boundary.  This doesn't offer proof, rather a demonstration of the Mean Value Principle.
+		}
+		
+		\end{enumerate}
+	
+	\end{enumerate}
+	
+	\item \textbf{Part II:}
+	
+	\textbf{Evans, Chapter 2. problem 6.}  Let $U$ be a bounded, open subset of $\R^n$.  Prove that there exists a constant $C$, depending only on $U$, such that
+	\begin{align*}
+		\max_{\bar{U}} |u| \le C(\max_{\partial U} |g|+\max_{\bar U}|f|)
+	\end{align*}whenever $u$ is a smooth solution of 
+	\begin{align*}
+		\BINDEF{-\Delta u = f & \text{in } U}{u=g & \text{on } \partial U}
+	\end{align*}(Hint: $\Delta \PAREN{u+\frac{|x|^2}{2n}\lambda} \le 0$, for $\lambda := \max_{\bar U} |f|$.)
+	
+	\BLUE{Limiting $u$ to nonnegative elements, i.e, $|u|$, from the Strong Maximum Principle we have 
+	\begin{align*}
+		\max_{\bar U} |u| &= \max_{\partial U} |u| \\
+		&= \max_{\partial U} |g|
+	\end{align*}Then, let $R$ be such that $U \in B(R)$ and choose $\phi(x) = \max_{\bar U} f/2n (R^2-|x|)$.  Then from the weak maximum principlse
+	\begin{align*}
+		\max_{\bar U} |u| &\le \phi(x) \\
+		&\le \frac{R^2}{2n} \max_{\bar U} f
+	\end{align*}We can assign $C = \frac{R^2}{2n}$.  By the triangular inequality we have
+	\begin{align*}
+		\max_{\bar U} |u| \le C(\max_{U}|g|+\max_{\bar U} |f|)
+	\end{align*}
+	}
+
+\end{description}
+
+\end{document}

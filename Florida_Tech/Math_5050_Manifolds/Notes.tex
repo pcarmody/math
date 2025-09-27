@@ -213,20 +213,53 @@
 		
 		4-form $\Omega^4(\R^4)$ $du\wedge dv\wedge dw\wedge dx$.
 		\item Also, \textbf{$U\subseteq\R^n$ then $k<n$}.  $k$-forms for $k>n$ are zero.  Further $|\Omega^k(\R^n)|=\binom{k}{n}$ and $\BARS{\bigcup_k \Omega^k(\R^n)}=2^n$	 and think of $\Omega^*(U)= \bigcup_k \Omega^k(\R^n)$
+		
+		\BLUE{For clarity, if $\omega \in \Omega^k(\R^n)$ then
+		\begin{align*}
+			\omega(u) &= \sum_{I\in S_k} a_I(u) \bigwedge_{i \in I} dx^i
+		\end{align*}where $a_I$ is functional associated with each $I$ and $\{\bigwedge_{i \in I} dx^i\}_{I \in S_k}$ are the basis vectors for $\Omega^k{\R^n}$.
+		}
+		
 		\item \textbf{Direct Sum. } $\Omega^*(U) = \bigoplus_k \Omega^k(U)$ is an anti-commutative graded algebra over $\R$.
 		
 		Since one can multiply $C^\infty$ $k$-forms by $C^\infty$ functions, the set $\Omega^k(U)$ of $C^\infty$ $k$-forms is both a vector space over $\R$ and a module over $C^\infty(U)$ and $\Omega^*(U)$ is also a module over $C^\infty$ of $C^\infty$ functions.
+		
+		\BLUE{Continuing the notion, if $\omega_k \in \Omega^k(\R^n)$ then when $\alpha \in \Omega^*(\R^n)$
+		\begin{align*}
+			\omega_k(u) &= \sum_{I\in S_k} a_I(u) \bigwedge_{i \in I} dx^i \\
+			\alpha(u) &= \sum_{k=1}^{n} \beta_k \omega_k(u) \\
+			&= \sum_{k=1}^{n} \beta_k \sum_{I\in S_k} a_I(u) \bigwedge_{i \in I} dx^i
+		\end{align*}where $\beta_k$ are coefficients for each $k$-form.  Our basis vectors for $\Omega^*(\R^n)$ are
+		\begin{align*}
+			\left \{ \bigwedge_{i \in I} dx^i\, \middle |\, I \in S_k, \, \forall k=1,\dots, n \right\} 
+		\end{align*}Another way to put it is that the set of basis vectors for $\Omega^*$ is the union of the basis vectors of each $\Omega^k$.
+		}
 	\end{description}
 		
 	\item \textbf{Wedge Product of $k$-form.} Recall: $dx^i\wedge dx^i =0$ for all $i=1,\dots,n$.  Therefore, $\wedge$ only makes sense to be defined on \textit{disjoint indice-lists}, that is, $I=\{i_1, \dots, i_k\}$ and $J=\{j_1, \dots, j_l\}$ such that $I\cap J =\emptyset$.  Then,
 		\begin{align*}
 			\wedge : \Omega^k(U) \times \Omega^l(U) &\to \Omega^{k+l}(U)\\
 			(\omega, \tau) &\mapsto (\omega\wedge\tau)=\sum_{I,J} a_Ib_J dx^I\wedge dx^J.
-		\end{align*}where $\omega = \sum_I a_Idx^I, \tau=\sum_J b_J,dx^J$.
+		\end{align*}where $\omega = \sum_I a_Idx^I, \tau=\sum_J b_J,dx^J$.\\
+		\BLUE{I believe that the above notation obfuscates the actual expression. The following is true when you think of $dx^I= dx^{I_1}\wedge dx^{I_2}\wedge\cdots\wedge dx^{I_k} = \bigwedge_{i \in I} dx^i$ for each $I \in S_k$. Also, $a_I:\R^n \to \R$ is a single coefficient function associated with each $I$. So for clarity
+		\begin{align*}
+			\omega(u) &= \sum_{I\in S_k} a_I(u) \bigwedge_{i\in I} dx^i & \text{where each } \bigwedge_{i\in I} dx^i \text{ is  basis vector for } \Omega^k\\
+			\tau(v) &= \sum_{J\in S_l} b_I(v) \bigwedge_{j\in J} dx^j & \text{where each } \bigwedge_{j\in J} dx^j \text{ is  basis vector for } \Omega^l \\
+			(\omega \wedge \tau)(u,v) &= \PAREN{\sum_{I\in S_k} a_I(u) \bigwedge_{i\in I} dx^i}\wedge\PAREN{\sum_{J\in S_l} b_I(v) \bigwedge_{j\in J} dx^j} \\
+			&= \sum_{I\in S_k,\,J\in S_l} a_I(u)b_I(v)\underbrace{\PAREN{ \bigwedge_{i\in I} dx^i \, \wedge \, \bigwedge_{j\in J} dx^j }}_{\text{basis vector of $(k+l)$-form}}
+		\end{align*}
+		}
 	\item \textbf{the Exterior Derivative}.  If $k\ge 1$ and if $\omega=\sum_Ia_idx^I\,\in \Omega^k(U)$, then $d\omega \; \in \Omega^{k+1}(U)$ and 
 	\begin{align*}
 		d\omega = \sum_Ida_I\wedge dx^I = \sum_I\PAREN{\sum_J\PART{a_I}{x_J}dx^J}\wedge dx^I
-	\end{align*}\textit{Example: }Let $\omega \in \Omega^1(\R^2)$ and $\omega = fdx+gdy$, $f,g \in C^\infty(\R^2)$.
+	\end{align*}
+	\BLUE{Adopting the more detailed notation from above we get
+	\begin{align*}
+		d\omega(u) &= \sum_Ida_I(u)\wedge dx^I = \sum_I \bigwedge_{i\in I}\PAREN{\sum_J\bigwedge_{j\in J}\PART{a_I(u)}{x_j} dx^j}\wedge dx^i
+	\end{align*}clearly giving us a new basis vector.  One might even consider a new combined symbol for $\sum\bigwedge$.
+	}
+	
+	\textit{Example: }Let $\omega \in \Omega^1(\R^2)$ and $\omega = fdx+gdy$, $f,g \in C^\infty(\R^2)$.
 	\begin{align*}
 		d\omega &= df\wedge dx + dg\wedge dy \\
 		&= \PAREN{\PART{f}{x}dx+\PART{f}{y}dy}\wedge dx +\PAREN{\PART{g}{x}dx+\PART{g}{y}dy}\wedge dy\\
