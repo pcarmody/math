@@ -1,4 +1,5 @@
 Differential Geometry
+Tensor Calculus
 Algebraic Topology
 Ordinary Differential Equations
 Geometric/Clifford Algebra

@@ -1,0 +1,210 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5315 -- Numerical Methods for PDE}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#1 }
+\newcommand{\DUEDATE}{Octoer 1, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TTh 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 111}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+ 	\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+\HLINE
+
+\textbf{Assignment:} Use Taylor Expansion, analyze the Local Truncation Error of the following numerical schemes for the wave
+equation $u_t + au_x = 0$:
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item $\frac{U_J^{k+1}-U_j^{k-1}}{2\Delta t}+a\frac{U_{j+1}^k-U_{j-1}^k}{2\Delta x} =0$
+	
+	\BLUE{We proceed in stages
+	\begin{description}
+		\item \textbf{Taylor Expansion for Time}\\
+		$U_j^{k+1} = u(x_j,t_k) + \Delta t u_t(x_j.t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k)+O((\Delta t)^3)$\\
+		$U_j^{k-1} = u(x_j,t_k) - \Delta t u_t(x_j.t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k)-O((\Delta t)^3)$
+		\item \textbf{Taylor Expansion for Space}\\
+		$U_{j+1}^k = u(x_j,t_k) + \Delta u_x(x_j.t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)+O((\Delta x)^3)$\\
+		$U_{j-1}^k = u(x_j,t_k) - \Delta x u_x(x_j.t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)-O((\Delta x)^3)$
+		\item \textbf{Combine and Simplify}\\
+		From the given equation
+		\begin{align*}
+			\frac{U_J^{k+1}-U_j^{k-1}}{2\Delta t}+a\frac{U_{j+1}^k-U_{j-1}^k}{2\Delta x} &= T + S	= 0
+		\end{align*}Where
+		\begin{align*}
+			T &= \frac{u(x_j,t_k) + \Delta t u_t(x_j.t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k)+(u(x_j,t_k) - \Delta t u_t(x_j.t_k) - \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k))}{2\Delta t} \\
+			S &= a\PAREN{\frac{u(x_j,t_k) + \Delta u_x(x_j.t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)-(u(x_j,t_k) - \Delta x u_x(x_j.t_k) - \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k))}{2\Delta x}}
+		\end{align*}	Simplifying, we see that the second derivative terms disappear along with the base terms leaving
+		\begin{align*}
+			T &= \frac{2\Delta t u_t(x_j.t_k)}{2\Delta t} = u_t(x_j,t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k)\\
+						S &= a\PAREN{\frac{2 \Delta x u_x(x_j.t_k)}{2\Delta x}} = au_x(x_j.t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)
+		\end{align*}
+		\item \textbf{LTE for the PDE}
+		\begin{align*}
+			\operatorname{LTE} &= u_t + au_x  + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k) \\
+			&= \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)
+		\end{align*}
+	\end{description}with $O((\Delta t)^3)+O((\Delta x)^3)$
+	}
+
+\newpage	
+	\item $\frac{U_j^{k+1}-0.5(U_{j+1}^k+U_{j-1}^k)}{\Delta t}+a\frac{U_{j+1}^k-U_{j-1}^k}{2\Delta x} =0$
+	
+	\BLUE{We proceed in the same manner as in (a) and find the same Time and Space Expansions.  However, when we Combine and Simplify we get
+	\begin{description}
+		\item \textbf{Combine and Simplify}\\
+		From the given equation
+		\begin{align*}
+			\frac{U_j^{k+1}-0.5(U_{j+1}^k+U_{j-1}^k)}{\Delta t}+a\frac{U_{j+1}^k-U_{j-1}^k}{2\Delta x} = \frac{T_b}{\Delta t}+S = 0
+		\end{align*}Notice that this $S$ is the same from (a).  Then
+		\begin{align*}
+			T_b &= u(x_j,t_k) + \Delta t u_t(x_j.t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k)-\\
+			&\text{   }0.5\PAREN{u(x_j,t_k) + \Delta u_x(x_j,t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)+u(x_j,t_k) - \Delta x u_x(x_j,t_k) + \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k)}\\
+			&= \Delta t u_t(x_j.t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k) - 0.5\PAREN{ \frac{(\Delta x)^2}{2}u_{xx}(x_j,t_k) } \\
+			&= \Delta t u_t(x_j.t_k) + \frac{(\Delta t)^2}{2}u_{tt}(x_j,t_k) -  \frac{(\Delta x)^2}{4}u_{xx}(x_j,t_k)
+		\end{align*}and 
+		\begin{align*}
+			\frac{T_b}{\Delta t} &= u_t(x_j,t_k)+\frac{\Delta t}{2}u_{tt}(x_j,t_k) -  \frac{(\Delta x)^2}{4\Delta t}u_{xx}(x_j,t_k)
+		\end{align*}Combining with $S$ from (a) and remember that $u_t + au_x = 0$
+		\begin{align*}
+			\operatorname{LTE} &= \frac{\Delta t}{2}u(x_j,t_k)-\frac{(\Delta x)^2}{4\Delta t}u_{xx}(x_j,t_k)-a\frac{(\Delta x)^2}{6}u_{xxx}(x_j,t_k)
+		\end{align*}with $O((\Delta t)^3)+O((\Delta x)^3)$
+	\end{description}	
+	}
+
+\end{enumerate}
+
+\newpage
+\textbf{Question 2:} Use Fourier Analysis, analyze the Stability Property of the following numerical schemes for the wave equation $u_t + au_x = 0$.  Here $R=a\frac{\Delta t}{\Delta x}$.
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item $U_j^{k+1}+\frac{R}{4}\PAREN{U_{j+1}^{k+1}-U_{j-1}^{k+1}} = U_j^k-\frac{R}{4}\PAREN{U_{j+1}^k-U_{j-1}^k}.$
+	
+	\BLUE{\begin{description}
+		\item \textbf{Assumptions:} assume that the solution is periodic and can benefit from Fourier Transrorms.  Thus, 
+		\begin{align*}
+			U_j^k &= g^ke^{ij\xi}
+		\end{align*}where $g$ is the amplification factor depending on $\xi$ and $\Delta x$.
+		\item \textbf{Substitute and Simplify}\\
+		Substitute the above expression into the given scheme.
+		\begin{align*}
+			U_j^{k+1}+\frac{R}{4}\PAREN{U_{j+1}^{k+1}-U_{j-1}^{k+1}} &= U_j^k-\frac{R}{4}\PAREN{U_{j+1}^k-U_{j-1}^k} \\
+			g^{k+1}e^{ij\xi}+\frac{R}{4}\PAREN{g^{k+1}e^{i(j+1)\xi}-g^{k+1}e^{i(j-1)\xi}} &= g^ke^{ij\xi}-\frac{R}{4}\PAREN{g^ke^{i(j+1)\xi}-g^ke^{i(j-1)\xi}}
+		\end{align*}diving both sides by $g^ke^{ij\xi}$ we get
+		\begin{align*}
+			g+g \frac{Ri}{4}(ge^{i\xi}-ge^{-i\xi}) &= 1 - \frac{R}{4}(ge^{i\xi}-ge^{-i\xi})
+		\end{align*}Note that $(ge^{i\xi}-ge^{-i\xi})=2i\sin(\xi)$, therefore 
+		\begin{align*}
+			g+g\frac{Ri}{4}\sin(\xi) = 1-\frac{Ri}{2}\sin(\xi)
+		\end{align*}
+	\item \textbf{Solving for the aplification factor.}
+	\begin{align*}
+		g &= \frac{1-\frac{Ri}{2}\sin(\xi)}{1-\frac{Ri}{2}\sin(\xi)}
+	\end{align*}
+	\item \textbf{Use the application factor to determine the stability condition}\\
+	Stablity requires that $|g|\le 1$
+	\begin{align*}
+		|g| &= \BARS{\frac{1-\frac{Ri}{2}\sin(\xi)}{1+\frac{Ri}{2}\sin(\xi)}}\\
+		&=\frac{\BARS{1-\frac{Ri}{2}\sin(\xi)}}{\BARS{1+\frac{Ri}{2}\sin(\xi)}}
+	\end{align*}We want to know the magnitude of two complex numbers that are conjugate of each other.  Remember that $|z| = |\CONJ{z}|$ for all $z \in \C$.  Therefore, $g = 1$.
+\end{description}
+	}
+	
+	\newpage
+	\item $U_j^{k+1} = U_j^k-\frac{R}{2}\PAREN{3U_j^k-4U_{j-1}^k+U_{j-2}^k} + \frac{R^2}{2}\PAREN{U_j^k-2U_{j-1}^k+U_{j-2}^k}$
+	
+	\BLUE{
+	\begin{description}
+		\item \textbf{Assumptions:} assume that the solution is periodic and can benefit from Fourier Transrorms.  In this case, we have constant coefficiencts therefore we choose
+		\begin{align*}
+			U_j^k &= \hat{U}^ke^{ij\xi\Delta x}
+		\end{align*}where $\hat{U}^k$ is the amplification factor at each iteration.
+		\item \textbf{Substitute and Simplify}\\
+		Substitute the above expression into the given scheme.  Substitute $U_j^k = \hat{U}^ke^{ij\xi\Delta x}$.
+		\begin{align*}
+			U_j^{k+1} &= U_j^k-\frac{R}{2}\PAREN{3U_j^k-4U_{j-1}^k+U_{j-2}^k} + \frac{R^2}{2}\PAREN{U_j^k-2U_{j-1}^k+U_{j-2}^k} \\
+			\hat{U}^{k+1}e^{ij\xi\Delta x} &= \hat{U}^ke^{ij\xi\Delta x}-\frac{R}{2}\PAREN{3\hat{U}^ke^{ij\xi\Delta x}-4\hat{U}^ke^{i(j-1)\xi\Delta x}+\hat{U}^ke^{i(j-2)\xi\Delta x}} \\
+			&+ \frac{R^2}{2}\PAREN{\hat{U}^ke^{ij\xi\Delta x}-2\hat{U}^ke^{i(j-1)\xi\Delta x}+\hat{U}^ke^{i(j-2)\xi\Delta x}} \\
+			\hat{U}^{k+1} &= \hat{U}^k\SQBRACKET{1-\frac{R}{2}\PAREN{3-4e^{-i\xi\Delta x}+e^{-i2\xi\Delta x}} + \frac{R^2}{2}\PAREN{1-2e^{-i\xi\Delta x}+e^{-2i\xi\Delta x}}} 
+		\end{align*}The amplification factore $G(\xi)$ is what we use to determince stability.
+		\begin{align*}
+			G(\xi) &= 1-\frac{R}{2}\PAREN{3-4\underbrace{e^{-i\xi\Delta x}}_{EQ_1}+\underbrace{e^{-i2\xi\Delta x}}_{EQ_2}} + \frac{R^2}{2}\PAREN{1-2\underbrace{e^{-i\xi\Delta x}}_{EQ_3}+\underbrace{e^{-2i\xi\Delta x}}_{EQ_4}}
+		\end{align*}For, $EQ_1$ and $EQ_3$ both equal 1 when $\xi = 0$ and $\xi = \pi/\Delta x$.  For $EQ_2$ and $EQ_4$ both equal 1 when $\xi=0$ and $\xi=\pi/2\Delta x$.  At any other value, the real number less than one.  Therefore, 
+		\begin{align*}
+			G|(\xi)| &\le \BARS{1-\frac{R}{2}\PAREN{3-4+1} + \frac{R^2}{2}\PAREN{1-2+1}} \\
+			&\le  1
+		\end{align*}
+	\end{description}	
+	}
+	
+\end{enumerate}
+\end{document}

@@ -1,0 +1,179 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5315 -- Numerical Methods: Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{December 17, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TTh 2:00 -- 3:15}
+\newcommand{\ROOM}{Crawford 110}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{\Large{Basic objectives and vocabulary}}
+
+\begin{description}
+	\item \textbf{Convergence}
+	\item \textbf{Consistency}
+	\item \textbf{Stability}
+	
+	\textbf{The CFL Condition} A numerical method can be convergent only if its numerical domain of dependence containst eh true domain of dependence of the PDE, at least in the limit as $k$ and $g$ go to zero. $\dots$ But it is important to note that in general the CFL is only a \textbf{\textit{necessary}} condition. If it works then it \textbf{\textit{might}} be convergent. (must include consistency and proof)
+	
+	\item \textbf{Numerical Stencil}
+	
+	In one dimensions it is the $\Delta x$ between iterations.  In 2 dimensions it is the `vertical` iteration $(j,k) \to (j,k+1)$ with the 'space' iteration $(j,k) \to (j+1,k)$
+
+	\item \textbf{Iteration}\footnote{Lecture 4, 43:48}
+
+	FTFS: Forward Time Forward Space
+
+	FTFS: Forward Time Backward Space
+
+	FTFS: Forward Time Centered Space
+	
+	``To quantify the error from the Numerical Discretization, we introduct two errors."
+	\begin{enumerate}
+		\item The real error: $e_j^k = Q_j^k-q_j^k$
+		\item The Local Truncation Error: (LTE) measurement of the deviation from the numerical scheme from the PDE.  The process for this follows:
+		\begin{description}
+			\item \textbf{Step One: }Write the Numerical Scheme in the form divertly mimic the PDE.
+			\begin{align*}
+				\frac{Q_j^{k+1}-Q_j^k}{\Delta t} - a\frac{Q_{j+1}^k-Q_j^k}{\Delta x} = 0
+			\end{align*}
+			\item \textbf{Step Two:} Replace all $Q$ with $q$
+			\begin{align*}
+				\operatorname{LTE} &= \frac{q_j^{k+1}-q_j^k}{\Delta t} - a\frac{q_{j+1}^k-q_j^k}{\Delta x}
+			\end{align*}
+			\item \textbf{Step Three:\footnote{Lecture 4, 55:50} }Use Taylor Expansion and PDE to simplify LTE.
+			\begin{align*}
+				q_j^{k+1} &= q_j^k+(q_t)_j^k\Delta t+q_{tt}\frac{(\Delta t)^2}{2}+O((\Delta t)^3) \\
+				q_j^{k+1} &= q_j^k+q_x\Delta x+q_{xx}\frac{(\Delta x)^2}{2}+O((\Delta x)^3) \\
+			\end{align*}Since $q_t = -aq_x$ the first order derivatives disappear and we are left with 2\SND deriviatives and $(\Delta t, \Delta x)$ as the determining factors and an $O(\epsilon ^3)$ truncation error.
+			\item \textbf{Conclusion:\footnote{Lecture 4, 1:05} }			
+			
+			\begin{tabular}{l|l}
+				LTE $\sim (\Delta t, \Delta x)$ & $((\Delta t)^2, (\Delta x)^2)$\\
+				\hline
+				FTFS : $(\Delta t, \Delta x)$ & FTBS $\sim( \Delta t, \Delta x)$ \\
+				FTCS : $(\Delta t, (\Delta x)^2)$ & LW $\sim ((\Delta t)^2, (\Delta x)^2)$
+			\end{tabular}
+		\end{description}
+	\end{enumerate}
+	
+	\textbf{Finite Difference Discratization}
+	
+	From (Iteration 1. above) change $q$ to $u$ we solve for $u$ and get
+	\begin{align*}
+		u_j^{k+1} &= u_j^k - \lambda(u_{j+1}^ku_j^k) + O(\Delta t^2, \Delta t \Delta u) \\
+		\AND e_j^{k+1} &= e_j^k - \lambda(e_{j+1}^ke_j^k) + O(\Delta t^2, \Delta t \Delta u) \\
+		&= (1+\lambda)e_j^k - \lambda u_{j+1}^k+ O(\Delta t^2, \Delta t \Delta u) \\
+		|e_j^{k+1}| &\le |1+\lambda||e_j^k| + |\lambda||u_{j+1}^k|+ O(\Delta t^2, \Delta t \Delta u)
+	\end{align*}if  $-1 \le \lambda = a\frac{\Delta t}{\Delta x} < 02$
+	
+\end{description}
+\HLINE
+
+\textbf{From MathGPT: } What constitutes 'appropriate stability analysis' in numerical methods of PDE.\\
+
+
+In numerical methods for partial differential equations (PDEs), 'appropriate stability analysis' is a critical component to ensure that the numerical solution behaves in a manner consistent with the true solution of the PDE over time. Here are the key elements that constitute appropriate stability analysis:
+
+\begin{enumerate}
+\item \textbf{**Definition of Stability**:} Stability in the context of numerical methods for PDEs generally refers to the property that errors, whether from initial conditions or round-off, do not grow uncontrollably as the computation progresses. A stable numerical method ensures that the solution remains bounded over time.
+
+\item \textbf{**Von Neumann Stability Analysis**:} This is a common technique used to analyze the stability of linear PDEs. It involves decomposing the numerical solution into Fourier modes and examining how these modes evolve over time. The method is particularly useful for linear PDEs with constant coefficients and provides a criterion (often called the Courant-Friedrichs-Lewy (CFL) condition) that relates the time step size to the spatial grid size to ensure stability.
+
+\item \textbf{**Energy Methods**:} For nonlinear or more complex PDEs, energy methods can be used to assess stability. These methods involve deriving an energy-like quantity from the PDE that should remain constant or decrease over time. By ensuring that the numerical method respects this energy principle, stability can be inferred.
+
+\item \textbf{**Matrix Stability Analysis**:} For systems of PDEs or when using implicit methods, stability can be analyzed by examining the eigenvalues of the amplification matrix. The method is stable if all eigenvalues lie within or on the unit circle in the complex plane.
+
+\item \textbf{**Consistency and Convergence**:} Stability is closely related to the concepts of consistency and convergence. According to the Lax Equivalence Theorem, for a consistent finite difference scheme, stability is a necessary and sufficient condition for convergence. Therefore, appropriate stability analysis also involves ensuring that the method is consistent with the PDE.
+
+\item \textbf{**Practical Considerations**:} In practice, stability analysis might also involve numerical experiments to verify theoretical predictions. This can include testing the method on known solutions or using benchmark problems to observe the behavior of the numerical solution over time.
+
+\item \textbf{Example}
+For example, consider the heat equation, a common PDE. Using an explicit finite difference method, the stability condition derived from Von Neumann analysis might require that the time step size \(\Delta t\) is proportional to the square of the spatial step size \(\Delta x\) (i.e., \(\Delta t \leq C \Delta x^2\) for some constant \(C\)). This ensures that the numerical solution does not exhibit unphysical oscillations or blow up as the simulation progresses.
+
+In summary, appropriate stability analysis in numerical methods for PDEs involves a combination of theoretical techniques and practical considerations to ensure that the numerical solution remains bounded and behaves consistently with the true solution over time.
+
+\end{enumerate}
+
+\newpage
+\textbf{\Large{From MathGPT: Describe how to use the Van Neumann Stability analysis in PDE}}\\
+
+\begin{description}
+
+\item \textbf{Step 1: Discretize the PDE}
+
+First, convert the continuous partial differential equation (PDE) into a finite difference equation by replacing the continuous derivatives with finite difference approximations. This results in a discrete recurrence relation that describes the evolution of the solution in space and time.
+
+\item \textbf{Step 2: Assume a Fourier Mode Solution}
+
+Assume a solution of the form of a Fourier mode: \( u_j^n = \xi^n e^{i k j \Delta x} \). This assumption is valid for linear PDEs because any general solution can be expressed as a superposition of Fourier modes.
+
+\item \textbf{Step 3: Substitute the Fourier Mode into the Discretized Equation}
+
+Substitute the assumed Fourier mode solution into the discretized PDE to express the equation in terms of the amplification factor \( \xi \).
+
+\item \textbf{Step 4: Solve for the Amplification Factor \( \xi \)}
+
+Simplify the equation obtained in the previous step to find an expression for the amplification factor \( \xi \).
+
+\item \textbf{Step 5: Apply the Stability Criterion}
+
+For the numerical scheme to be stable, the magnitude of the amplification factor \( \xi \) must be less than or equal to 1 for all possible wave numbers \( k \). This condition often leads to a constraint on the time step \( \Delta t \) in relation to the spatial step \( \Delta x \) and other parameters, such as the Courant-Friedrichs-Lewy (CFL) condition.
+
+\item \textbf{Final Answer}
+The von Neumann Stability Analysis is a method used to assess the stability of numerical schemes for solving linear PDEs with constant coefficients. It involves discretizing the PDE, assuming a Fourier mode solution, substituting this solution into the discretized equation, solving for the amplification factor, and applying the stability criterion to ensure the scheme is stable. This analysis provides a necessary condition for stability, particularly useful for linear problems with constant coefficients.
+\end{description}
+\end{document}

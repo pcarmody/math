@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5230 -- Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#3 }
+\newcommand{\DUEDATE}{October 15, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{MW 2:00 -- 3:15}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Snelson}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Please show your work and justify all answers.
+
+\begin{enumerate}
+\item Show by direct calcuation that the fundamental solution 
+\begin{align*}
+	\Phi(x,t) = \frac{1}{(4\pi t)^{n/2}}e^{-|x|^2/4t}
+\end{align*}solves the heat equation $\Phi_t-=\Delta \Phi = 0$ for any $ x \in \R^n$ and $t>0$.
+
+\item Assume $u$ is a solution fo the heat equation on a bounded domain:
+\begin{align*}
+	u_t-\Delta u=0,\, t>0, x\in U.
+\end{align*}Show that if $u$ satisfies the Dirichlet boundary condiotn $u=0$ on $\partial U$ OR the Neumann boundary condition $\PART{u}{\nu}=0$ on $\partial U$, then the quantity $\int_U u^2(x,t)\,dx$ is decreasing s a function of time.
+
+\item Consider the heat equation on a bounded domain with Newmann boundary conditions on $\partial U$:
+\begin{align*}
+	\BINDEF{u_t-\Delta u=0, & x \in U, t>0}{\PART{u}{\nu}=0,& x \in \partial U}
+\end{align*}Show that the quantity $\in_U\BARS{u(x,t)}^2\,dx$ is decreasing as  afunction of time.
+
+\item Show that solutions to the Neumann problem for th einhomogeneous heat equation
+\begin{align*}
+	\BINDEF{u_t - \Delta u=f, & x\in U, t>0}{\PART{u}{\nu} = h & x\in \partial U,\\u(x,0)=g(x)}
+\end{align*}are unique.  (Hint: sue teh result fo the previous exercise.)
+
+Recall that solutions to Neumann problem for Laplace's equations were not unique.  Why doesn't eh same problem occur here?
+
+\item \begin{enumerate}[label=(\alph*)]
+
+	\item Consider the initial value problem 
+	\begin{align*}
+		\BINDEF{u_t-\Delta u+b\cdot Du=0, & x\in \R^n, t>0}{u(x,0)=g(x) }
+	\end{align*}where $b \in \R^n$ is a fixed vector. (Physically, the $b-Du$ term represents advection.)
+	
+	Find an explicit soluton to this probem suint eh chang eof variables $z=x+bt$ adn the solution formula for the heat equation (equation (9) in Section 2.3 of Evans).
+	
+	\item Now consieer a simliar equaiton with asource term:
+	\begin{align*}
+		xx%BINDEF{u_t-\Delta u+b\cdot Du=f(x,t), & x\in \R^n, t>0}{u(x,0)=g(x)}
+	\end{align*}Find an explitic solution to this problem using the same chang eof variables from (a) and formula (17) in Section 2.3 of Evans.
+	
+\end{enumerate}
+
+\item Consdier the PDE
+\begin{align*}
+	u_t-\Delta u-cs\cdot Du=0,\, x\in U, t\in (0,T),
+\end{align*}where $c>0$ is a positive constant.  Prove that this PDE satisfies a maximum principle, i.e., the maximum of $u$ on $\hat{U}_T$ occurs on the parabolic boundary. (Hint: imitate the proof given in class for th ehet equation on a bounded domain.)
+
+\item the PDE $u_t-xU_{xx}=0$ is a variable-coefficient parabolic equation in one space dimension.  Show that this PDE doe snot satisfy a maximum principle. (Hint:  consider $(u(x,t)=-2xt-x^2$.  Where does the maximum of this function on the closed rectangle $-x\le x\le 2,0\le t\le 1$ occur?)
+\end{enumerate}
+
+\end{document}

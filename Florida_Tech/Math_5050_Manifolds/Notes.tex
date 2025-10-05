@@ -38,6 +38,9 @@
 
 \newcommand{\MMN}{M_{m\times n}}
 \newcommand{\FF}{\mathcal{F}}
+\newcommand{\AMB}[2]{
+			\overset{#2}{\underset{#1}{\mbox{\Large{\&}}}}\sum
+}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -244,9 +247,9 @@
 		\BLUE{I believe that the above notation obfuscates the actual expression. The following is true when you think of $dx^I= dx^{I_1}\wedge dx^{I_2}\wedge\cdots\wedge dx^{I_k} = \bigwedge_{i \in I} dx^i$ for each $I \in S_k$. Also, $a_I:\R^n \to \R$ is a single coefficient function associated with each $I$. So for clarity
 		\begin{align*}
 			\omega(u) &= \sum_{I\in S_k} a_I(u) \bigwedge_{i\in I} dx^i & \text{where each } \bigwedge_{i\in I} dx^i \text{ is  basis vector for } \Omega^k\\
-			\tau(v) &= \sum_{J\in S_l} b_I(v) \bigwedge_{j\in J} dx^j & \text{where each } \bigwedge_{j\in J} dx^j \text{ is  basis vector for } \Omega^l \\
-			(\omega \wedge \tau)(u,v) &= \PAREN{\sum_{I\in S_k} a_I(u) \bigwedge_{i\in I} dx^i}\wedge\PAREN{\sum_{J\in S_l} b_I(v) \bigwedge_{j\in J} dx^j} \\
-			&= \sum_{I\in S_k,\,J\in S_l} a_I(u)b_I(v)\underbrace{\PAREN{ \bigwedge_{i\in I} dx^i \, \wedge \, \bigwedge_{j\in J} dx^j }}_{\text{basis vector of $(k+l)$-form}}
+			\tau(v) &= \sum_{J\in S_l} b_J(v) \bigwedge_{j\in J} dx^j & \text{where each } \bigwedge_{j\in J} dx^j \text{ is  basis vector for } \Omega^l \\
+			(\omega \wedge \tau)(u,v) &= \PAREN{\sum_{I\in S_k} a_I(u) \bigwedge_{i\in I} dx^i}\wedge\PAREN{\sum_{J\in S_l} b_J(v) \bigwedge_{j\in J} dx^j} \\
+			&= \sum_{I\in S_k,\,J\in S_l} a_I(u)b_J(v)\underbrace{\PAREN{ \bigwedge_{i\in I} dx^i \, \wedge \, \bigwedge_{j\in J} dx^j }}_{\text{basis vector of $(k+l)$-form}}
 		\end{align*}
 		}
 	\item \textbf{the Exterior Derivative}.  If $k\ge 1$ and if $\omega=\sum_Ia_idx^I\,\in \Omega^k(U)$, then $d\omega \; \in \Omega^{k+1}(U)$ and 
@@ -596,7 +599,7 @@ H^k_{\text{dR}}(T^2) =
  \end{tabular}\\
  
  \newpage
- \Large{\S 8 Tangent Space.}
+ \textbf{\Large{\S 8 Tangent Space.}}
  
  \setcounter{chapter}{8}
  \setcounter{section}{1}
@@ -609,7 +612,7 @@ H^k_{\text{dR}}(T^2) =
  In general, $x^i, y^j$ are coordinates for manifolds $N,M$ and $r^i$ are coordinates associated with charts.  Thus $p=(x^1, \dots, x^n)$ and $\phi(p)=(r^1, \dots, r^k)$ where $k \le n$.
  \end{remark}
  
- \begin{definition}[Push-back and Push-forward].
+ \begin{definition}[Pull-back and Push-forward].
  
  Given the mapping between manifolds $N,M$ as $\varphi: N \to M$ with charts $\phi: N \to \R$ and $f': M \to \R$.  We define the \DEFINE{push-back} $\varphi^*f'(p)$ as \footnote{beware the f-prime, f', is NOT the derivative}
  \begin{align*}

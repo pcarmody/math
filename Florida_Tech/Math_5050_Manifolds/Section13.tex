@@ -64,38 +64,124 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 
+\textbf{\Large{Notes:}}
+\begin{description}
+	\item \textbf{General form of bump function}
+	
+	\begin{align*}
+		B(x) &= \frac{h}{1+\BARS{\frac{x-c}{r}}^n}
+	\end{align*}Where:\\
+	\begin{tabular}{l l}
+		$h \in (0,1)$ & height \\
+		$c \in [a.b]$ & center of bump in $[a,b]$ \\
+		$r$ & widens or spreads the curve out \\
+		$n \in \N$ & sharpens the corners
+	\end{tabular}
+	
+	\item \textbf{Manifolds use charts as view ports.}  Always keep in mind that much/most of the work must be done on $\R^n$ through a chart $(U, \phi)$.  That is, translate to $\R^n$ via $\phi$, do the necessary analysis (open, compact, etc.) then translate back through $\phi^{-1}$.
+	
+	\item \textbf{Exercises}
+	
+	\textbf{Exercise 13.1 (Bump function supported in an open set).}  Let $q$ be a point and $U$ any neighborhood on $q$ in a manifold. Construct a $C^\infty$ bump function at $q$ supported in $U$.
+	
+	\RED{\textbf{1st attempt: }Starting with equation 13.2 for $\R^n$ on a open ball
+	\begin{align*}
+		\sigma(x) &= 1-g\PAREN{\frac{\DBARS{x}r^2-a^2}{b^2-a^2}}
+	\end{align*}a bump function on the closed ball $\CONJ{B(0,a)}$ with support on $\CONJ{B(0,b)}$ where $a < b$.  Let 
+	\begin{align*}
+		b &= \max_{x\in \CONJ{U}} \BARS{q-x} \\
+		a &= \max_{x\in U} \BARS{q-x} \\
+		\sigma(x) &= 1-g\PAREN{\frac{\DBARS{x-q}r^2-a^2}{b^2-a^2}}
+	\end{align*}
+	}
+	\BLUE{\textbf{What I learned from MathGPT:}
+	\begin{enumerate}
+		\item \textbf{We must `translate' our exercise into $\R^n$ from $M$.} \\ That is, select a chart $(V, \phi)$ such that $q\in V \subset M$ and $\phi: V \to \phi(V) \in \R^n$ is a diffeomorphism.  Also, $V\subset U$ and $\phi(q) = 0$.\footnote{we have to establish a workspace in $\R^n$ not in $M$.  The diffeomorphism allows us to back and forth between $V$ and $\phi(V)$.}
+		\item \textbf{Establish the open set within $V$ using a ball.} \\ $B(0,\epsilon) = B(\phi(q), \epsilon)$ establishes such a ball.
+		\item \textbf{Using a standard function for bump construction}.\\  Let 
+		\begin{align*}
+			g(x) &= \BINDEF{e^{-\frac{1}{x}} & t>0}{0 & t \le 0}
+		\end{align*}	Define $\rho(x) = g(\epsilon^2-\DBARS{x})/g(\epsilon^2)$.  This function is smooth equals 1 at the origin and is supported over $B(0,\epsilon)$.
+		\item \textbf{Define the Bump Function.}\\
+		Let $f: M \to \R$ as
+		\begin{align*}
+			f(p) &= \BINDEF{\rho(\phi(p)) & p \in V}{0 & p \not \in V}
+		\end{align*}This function is smooth, equals 1 at $q$, and its support is in $U$.
+	\end{enumerate}	}
+	
+\end{description}
 
+\HLINE
 \begin{enumerate}[label=13.\arabic*]
 
 \item \textbf{Support of a finite sum}
 
 	Prove Lemma 13.5
 	
-	\textbf{Lemma 13.5} Let $M$ be a compact manifold and $\{U_\alpha\}_{\alpha\in A}$ an open cover of $M$.  There exists a $C^\infty$ partition of unity $\{\rho_\alpha\}_{\alpha \in A}$ subordinate to $\{U_\alpha\}_{\alpha\in A}$.
+	\textbf{Lemma 13.5} If $\rho_1,\dots,\rho_m$ are real-valued functions on a manifold $M$.  Then,
+	\begin{align*}
+		\SUPP\PAREN{\sum_{i=1}^m \rho_i} = \bigcup_{i=1}^m \SUPP \rho_i.
+	\end{align*}
+	
+	\BLUE{Let's start with just two, $\rho_1$ and $\rho_2$.  Let $\Phi = \rho_1+\rho_2$.  Let $x \in \SUPP \Phi$ then $x \in \SUPP\{\rho_1 + \rho_2\}$.  Thus $\Phi(x) = \rho_1(x)+\rho_2(x)$.  We have three cases, 
+	\begin{description}
+		\item Case 1: $x \in \SUPP \rho_1$ which implies $x \in \SUPP \rho_1\cup\SUPP \rho_2$.
+		\item Case 2: $x \in \SUPP \rho_2$ which implies $x \in \SUPP \rho_1\cup\SUPP \rho_2$.
+		\item Case 3: $x \in \SUPP \rho_1\cap\SUPP \rho_2$ which implies $x \in \SUPP \rho_1\cup\SUPP \rho_2$.
+	\end{description}	
+	This extends naturally to finite sums of $\rho_i$.
+	}
 	
 \item \textbf{Locally finite family and compact set}
 
-Let $\{A_\alpha\}$ be a locally finite family of subsets of a toplogical space $S$.  Show that every compact set $K$ is $S$ has a neighborhood $W$ that intersects only finitely many of the $A_\alpha$
+Let $\{A_\alpha\}$ be a locally finite family of subsets of a toplogical space $S$.  Show that every compact set $K$ in $S$ has a neighborhood $W$ that intersects only finitely many of the $A_\alpha$.
+
+\BLUE{Let $K$ be a compact subset contained in $S$.  Therefore, for every open cover of $K$ there exists a finite subcover.  That is, for every $x \in K$ such that $x \in \cup A_\alpha$ there exists a finite number $m_x$ and an index list $I_x$, $|I_x|=m_x$ such that $x \cup_{\alpha\in I} A_{\alpha}$ and a function associated with $x, f_x$, such that $\SUPP f_x \subset \subset \cup_{\alpha\in I} A_{\alpha}$. Therefore, there exists $U_x$ such that $\SUPP f_x \subset U_x$.  Let $W \cup U_x$.  Let 
+\begin{align*}
+	m_W &= \max_{x\in W} m_x.
+\end{align*}This number is finite.
+}
 
 \item \textbf{Smooth Urysohn Lemma}
 
 \begin{enumerate}[label=(\alph*)]
 
-	\item Let $A$ and $B$ be two disjoint closed sets in a manifold $M$.  Find a $C^\infty$ function $f$ on $M$ such that $r$ is identically 1 on $A$ and identically 0 on $B$.  (\textit{Hint:} Consider $C^\infty$ partition of unity $\{\rho_{M-A}, \rho_{M-B}\}$ subordinate to the open cover $\{M-A, M-b\}$.  This lemma is needed  in Subsection 29.3.)
+	\item Let $A$ and $B$ be two disjoint closed sets in a manifold $M$.  Find a $C^\infty$ function $f$ on $M$ such that $r$ is identically 1 on $A$ and identically 0 on $B$.  (\textit{Hint:} Consider $C^\infty$ partition of unity $\{\rho_{M_A}, \rho_{M_B}\}$ subordinate to the open cover $\{M_A, M_B\}$.  This lemma is needed  in Subsection 29.3.)
 	
 	\item Let $A$ be a closed subset and $U$ an open subset of a manifold $M$.  Show that there is a $C^\infty$ function $F$ on $M$ such that $f$ is identically 1 on $A$ and $\SUPP f \subset U$.
-	\end{enumerate}
+\end{enumerate}
 	
-	\item \textbf{Support of the pullback of a function}
+\item \textbf{Support of the pullback of a function}
 	
-	Let $F: N \to M$ be a $C^\infty$ map of manifolds and $h: M \to \R$ a $C^\infty$ real-valued function.  Prove that $\SUPP F^*h \subset F^{-1}(\SUPP h)$. (\textit{Hint:} First show that $(F*h)^{-1}(\R^\times)\subset F^{-1}(\SUPP h)$.)
+	Let $F: N \to M$ be a $C^\infty$ map of manifolds and $h: M \to \R$ a $C^\infty$ real-valued function.  Prove that $\SUPP F^*h \subset F^{-1}(\SUPP h)$. (\textit{Hint:} First show that $(F^*h)^{-1}(\R^\times)\subset F^{-1}(\SUPP h)$.)
 	
-	\item \textbf{Support of the pullback by projection}
+	\BLUE{Remember that for all $p\in N$,
+	\begin{align*}
+		F^*h(p) &= (h\circ F)(p) = h(F(p)) \\
+		(F^*h)^{-1} &= (h\circ F)^{-1} = F^{-1}\circ h^{-1}
+	\end{align*}Restricting $h^{-1}: \R^\times \to M$ gives us $h^{-1}(\R^\times) = \SUPP h$.  Thus, for any $p \in \R^\times$
+	\begin{align*}
+		(F^*h)^{-1}(p) &\in F^{-1}(\SUPP h) \\
+		(F^*h)^{-1}(\R^\times) &\subset F^{-1}(\SUPP h) 
+	\end{align*}Clearly, $\SUPP F^*h = (F^*h)^{-1}(\R^\times)$.
+	}
+	
+\item \textbf{Support of the pullback by projection}
 	
 	Let $f: M \to \R$ be a $C^\infty$ function on a manifold $M$.  If $N$ is another manifold and $\pi: M \times N \to M$ is the projection onto the first factor, prove that 
 	\begin{align*}
 		\SUPP(\pi^*f)=(\SUPP f)\times N
 	\end{align*}
+	
+	\BLUE{In this case, for every $p \in M\times N$
+		\begin{align*}
+			\pi^*f(p) &= (f \circ \pi)(p) = f(\pi(p)) \\
+			(f \circ \pi)^{-1} &= \pi^{-1}\circ f^{-1} \\
+			\text{since } f^{-1}(\R^\times) &= \SUPP f \\
+			\pi^{-1}(\SUPP f) &=(f \circ \pi)^{-1}(\R^\times) \times N\\
+			&= \SUPP(f\circ \pi) \times N
+		\end{align*}
+	}
 	
 	\item \textbf{Pullback of a partition of unity}
 	

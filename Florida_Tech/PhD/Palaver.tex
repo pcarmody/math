@@ -1,0 +1,85 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Florida Insitute of Technolgy -- Math Phd Program}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{\textit{Notes and Ideas}}
+\newcommand{\DUEDATE}{August, 2025}
+\newcommand{\PROFESSOR}{Dr. Carmody (wip)}
+\newcommand{\SEMESTER}{Summer 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GL}{\operatorname{gl}}
+\newcommand{\SL}{\operatorname{sl}}
+%\newcommand{\TR}{\operatorname{tr}}
+\newcommand{\AD}{\operatorname{ad}}
+\newcommand{\LB}[2]{\left [ #1,#2 \right ]}
+\newcommand{\IMG}{\operatorname{im}}
+\newcommand{\IDER}{\operatorname{IDer}}
+%\newcommand{\SPAN}{\operatorname{span}}
+\newcommand{\RANK}{\operatorname{rank}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Translating the wedge product and its uses through Differential Geometry into the graded algebra.  
+
+\begin{tabular}{ccc}
+	form & $\wedge$ notation for basis & algebraic notation\\
+	$\Omega^2(\R^n)$ 2-form & $\{ dx^i \wedge dx^j \}_{i\ne j}$ & $x^ix^j$\\
+	$\Omega^3(\R^n)$ 3-form & $\{ dx^i \wedge dx^j \wedge dx^l\}_{i\ne j \ne l}$ & $\sum_{i \ne j} x^ix^jx^l$\\
+	$\Omega^k(\R^n)$ k-form & $\{\bigwedge_{i\in I} dx^i\}_{I \in P_{n,k}}$ & $\prod_I x^i$ \\
+	$\Omega^*(\R^n)$ & $\bigcup_{i=1}^n \mathcal{B}(\Omega^i)$ &
+\end{tabular}
+
+I guess I'm trying to find a better way of explaining this notation.  I guess I'm seeing that the terms of $\Omega^*$ are elements of $\Omega^1, \Omega^2, \dots, \Omega^n$ each of which are expressions of their own vector space.  We have a finite union of vector spaces where all basis vectors are linearly independent of each other.
+
+\end{document}

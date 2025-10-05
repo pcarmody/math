@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.15)  29 SEP 2025 08:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.15)  3 OCT 2025 15:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Section13.tex
-(./Section13.tex
+**Homework_03.tex
+(./Homework_03.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2023/05/17 v1.4n Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count187
 \c@chapter=\count188
@@ -690,10 +690,6 @@ File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 s.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibrarypositioning.code.tex
-File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
-)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -713,40 +709,45 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen283
 \Gm@dimlist=\toks44
 )
+(/usr/share/texlive/texmf-dist/tex/latex/esint/esint.sty
+Package: esint 
+\symlargesymbolsA=\mathgroup6
+)
 Package hyperref Info: Option `colorlinks' set `true' on input line 27.
  (../MyMacros.tex
 \c@theorem=\count322
 \c@corollary=\count323
-) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count324
 \l__pdf_internal_box=\box111
 )
-(./Section13.aux)
-\openout1 = `Section13.aux'.
+(./Homework_03.aux)
+\openout1 = `Homework_03.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-Package hyperref Info: Link coloring ON on input line 56.
- (./Section13.out) (./Section13.out)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+Package hyperref Info: Link coloring ON on input line 52.
+ (./Homework_03.out) (./Homework_03.out)
 \@outlinefile=\write4
-\openout4 = `Section13.out'.
+\openout4 = `Homework_03.out'.
 
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -790,12 +791,12 @@ e
 * \topmargin=-73.135pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=35.0pt
-* \marginparsep=10.0pt
+* \marginparwidth=57.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -805,99 +806,55 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 71.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 71.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 67.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+LaTeX Font Info:    Trying to load font information for U+esint on input line 6
+7.
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
+(/usr/share/texlive/texmf-dist/tex/latex/esint/uesint.fd
+File: uesint.fd 
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
-
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[2]
-
-LaTeX Warning: Command \textbullet invalid in math mode on input line 214.
-
-
-LaTeX Warning: Command \textbullet invalid in math mode on input line 214.
-
-Missing character: There is no ˆ in font cmr12!
-
-LaTeX Warning: Command \textbullet invalid in math mode on input line 214.
-
-
-LaTeX Warning: Command \textbullet invalid in math mode on input line 214.
-
-Missing character: There is no ˆ in font cmr12!
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[3] (./Section13.aux)
+] (./Homework_03.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `Section13.out' has not changed.
+Package rerunfilecheck Info: File `Homework_03.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22929 strings out of 476139
- 433129 string characters out of 5794453
+ 22923 strings out of 476139
+ 432839 string characters out of 5794453
  1947975 words of memory out of 5000000
- 44542 multiletter control sequences out of 15000+600000
- 566308 words of font info for 68 fonts, out of 8000000 for 9000
+ 44552 multiletter control sequences out of 15000+600000
+ 560565 words of font info for 49 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 102i,15n,107p,546b,711s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Section13.pdf (3 pages, 197187 bytes).
+ 102i,14n,107p,548b,448s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/esint-type
+1/esint10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb>
+Output written on Homework_03.pdf (1 page, 115143 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
+ 82 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

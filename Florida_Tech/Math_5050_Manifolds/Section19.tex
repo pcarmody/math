@@ -1,0 +1,188 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 19: The Exterior Derivative }
+\newcommand{\DUEDATE}{October 8, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\begin{enumerate}[label=19.\arabic*]
+
+\item \textbf{Pullback of a differential form}
+
+Let $U$ be the open set $(0,\infty)\times(0,\pi)\times(0,2\pi)$ in the $(\rho,\theta,\theta)$-space $\R^3$.  Define $F: U \to \R^3$ by
+\begin{align*}
+	F(\rho, \phi, \theta) =(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi).
+\end{align*}If $x,y,z$ are the standard coordinates on the target $\R^3$, show that 
+\begin{align*}
+	F^*(dx\wedge dy\wedge dz) = \rho^2\sin\phi\, d\rho\wedge d\phi\wedge d\theta.
+\end{align*}
+
+\item \textbf{Pullback of a differential form}
+
+Let $F: \R^2 \to \R^2$ be given by 
+\begin{align*}
+	F(x,y) = (x^2+y^2,xy).
+\end{align*}If $u,v$ are the standard coordinates on the traget $\R^2$, compute $F^*(udu+vdv)$.
+
+\item \textbf{Pullback of a differential form by a curve}
+
+Let $\tau$ be the 1-form $\tau = (-ydx+xdy/(x^2+y^2)$ on $\R^2-\{\textbf{0}\}$.  Define $\gamma: \R \to \R^2 - \{\textbf{0}\}$ by $\gamma(t)=(\cos t,\sin t)$.  Compute $\gamma^*\tau$.  (this problem is related to Example 17.16 in that if $i: S^1\hookrightarrow \R^2-\{\textbf{0}\}$ is the inclusion, then $\gamma= i \circ c$ and $\omega=i^*\tau$).
+
+\item \textbf{Pullback of a restriction}
+
+Let $F: N\to M$ be a $C^\infty$ map of manifolds, $U$ an open subset of $M$, and $\RBAR{F}_{F^{-1}(U)} :F^{-1}(U) \to U$ the restriction of $F$ to $F^{-1}(U)$.  Prove that if $\omega\in\Omega^k(M)$, then
+\begin{align*}
+	\PAREN{\RBAR{F}_{F^{-1}(U)}}^*(\omega|_U) = (F^*\omega)|_{F^{-1}(U)}.
+\end{align*}
+
+\item \textbf{Coordinate functions are differential forms}
+
+Let $f^1,\dots,f^n$ be $C^\infty$ functions on a neighborhood $U$ of a point $p$ in a manifold of dimension $n$.  Show that there is a neighborhood $W$ of $p$ on which $f^1,\dots,f^n$ form a coordinate system if and only if $(df^1\wedge\dots\wedge df^n)_p \ne 0$.
+
+\item \textbf{Local operators}
+
+An opeerator $L:\Omega^*(M) \to \Omega^*(M)$ is \textit{support-decreasing} if $\SUPP L(\omega) \subset \SUPP\omega$ for every $k$-form $\omega \in \Omega^*(M)$ for all $k \ge 0$.  Show that an operator on $\Omega^*(M)$ is local if and only if it is support-decreasing.
+
+\item \textbf{Derivations on $C^\infty$ functions are local operators}
+
+Let $M$ be a smooth manifold.  The definition of a \textit{local operator}  $D$ on $C^\infty(M)$ is similar to that of a local operator on $\Omega^*(M): D$ is \textit{local} if whenever a function $f \in C^\infty(M)$ vanishes identically on an open subset $U$, then $Df \equiv 0$ on $U$.  Prove that a derivation of $C^\infty(M)$ is a local operator $C^\infty(M)$.
+
+\item \textbf{Nondegenerate 2-forms}
+
+Let 2-covector $\alpha$ on a 2n-dimensional vector space $V$ is said to be \textit{nondegenerate} if $\alpha^n:= \alpha\wedge\cdots\alpha$ ($n$ times) is not the zero 2n-covector.  A 2-form $\omega$ on a 2n-dimensional manifold $M$ is said to be \textit{nondegenerate} if at every point $p\in  M$, the 2-covector $\omega_p$ is nondegenerate on the tangent space $T_pM$.
+\begin{enumerate}[label=(\alph*)]
+
+	\item Prove that on $\C^n$ with real coordinates $x^1,y^1,\dots,x^n,y^n$, the 2-form 
+	\begin{align*}
+		\omega = \sum_{j=1}^n dx^j\wedge dy^j
+	\end{align*}is degenerate.
+	\item Prove that if $\lambda$ is the Liouville form on the total space $T^*M$ of the cotangent bundle of an $n$-dimensional manifold $M$, then $d\lambda$ is a nondegenerate 2-form on $T^*M$.
+
+\end{enumerate}
+
+\item \textbf{Vertical planes}
+
+Let $x,y,z$ be the standard coordiantes on $\R^3$.  A plane in $\R^3$ is 	\textit{vertical} if it is defined by $ax+by=0$ for some $(a,b) \ne (0,0) \in \R^2$.  Prove that restricted to a vertical plane, $dx \wedge dy =0$.
+
+\item \textbf{Nowhere-vanishing form on $S^1$}
+
+Prove that the nowhere-vanishing form $\omega$ on $S^1$ constructed in Example 19.8 is the form $-ydx+xdy$ of Example 17.15.  (\textit{Hint:} Consier $U_x$ and $U_y$ separeately.  On $U_x$, substitute $dx=-(y/x)dy$ into $-ydx+xdy$.)
+
+\item \textbf{A $C^\infty$ nowhere-vanishing form on a smooth hypersurface}
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Let $f(x,y)$ be a $C^\infty$ function on $\R^2$ and assume that 0 is a regular value of $f$.  Bey the regular level set theorem, the zero set $M$ of $f(x,y)$ is a one-dimensional submanifold of $\R^2$. Construct a $C^\infty$ nowhere-vanishing 1-form on $M$.
+	
+	\item Let $f(x,y,z)$ be a $C^\infty$ function on $\R^3$ and assume that 0 is a regular value $f$.  By the regular level set theorem, the zero set $M$ of $f(x,y,z)$ is a two-dimensional submanifold of $\R^3$.  Let $f_x, f_y, f_z$ be the partial derivatives of $f$ with respect to $x,y,z$ respectively.  Show that the equalities
+	\begin{align*}
+		\frac{dx\wedge dy}{f_z}=\frac{dy\wedge dz}{f_x}=\frac{dz\wedge dx}{f_y}
+	\end{align*}hold on $M$ whenever they make sense, nad therfore the three 2-forms piece together to give $C^\infty$ nowhere-vanishing 2-form on $M$.
+	
+	\item Generalize this problem to the regular level set of $f(x^1,\dots,x^{n+1})$ in $\R^{n+1}$.
+
+\end{enumerate}
+
+\item \textbf{Vector fields as derivations of $C^\infty$ fucntions}
+
+In Subsection 14.1 we showed that $C^\infty$ vector field $X$ on a manifold $M$ gives rise to a derivation of $C^\infty(M)$. We will now show that every derivation of $C^\infty(M)$ arise from one and only one vector field, as promised earlier. To distingisg the vector field from the derivation, we will temporarily denote the derivation arising from $X$ by $\varphi(X)$.  Thus, for any $f\in C^\infty(M)$,
+\begin{align*}
+	(\varphi(X)f)(p)=x_pf,\, \text{for all }p \in M.
+\end{align*}\begin{enumerate}[label=(\alph*)]
+	\item Let $\mathcal{F}= C^\infty(M)$.  Prove that $\varphi: \XXX(M) \to \DER(C^\infty(M))$ is an $\mathcal{F}$-linear map.
+	
+	\item Show that $\varphi$ is injective.
+	\item If $D$ is a derivation of $C^\infty(M)$ and $p\in M$, defined $D_p:C_p^\infty(M) \to C_p^\infty(M)$ by
+	\begin{align*}
+		D_p[f] = [D\hat{f}] \in C_p^\infty(M),
+	\end{align*}where $[f]$ is the germ of $f$ at $p$ and $\hat{f}$ is a global extension of $f$, such as those given by Proposition 18.8.  Show that $D_p[f]$ is well defined. (\textit{Hint:} Apply probloem 19.7.)
+	
+	\item Show that $D_p$ is a derivation of $C_p^\infty(M)$.
+	\item Prove that $\varphi:\XXX(M)\to \DER(C^\infty(M))$ is an isomorphism of $\mathcal{F}$-modules.
+
+\end{enumerate}
+
+\item \textbf{Twentieth-century formulation of Maxwell's equations}
+
+In Maxwell's theory of electricity and magnetism, developed in the late nineteenth century,  the electric field $\textbf{E}=\ABRACKET{E_1,E_2,E_3}$ and the magentic field $\textbf{B}=\ABRACKET{B_1,B_2,B_3}$ in a vacuum $\R^3$ with no charge or current satisfy the following equations.
+\begin{alignat*}{2}
+	\nabla\times\textbf{E}&= -\frac{\partial B}{\partial t}, & \quad \nabla\times B&=\frac{\partial E}{\partial t},\\
+	\operatorname{div} E&=0, &\quad \operatorname{div}v B&=0
+\end{alignat*}By the correspondence in Subsection 4.6, the 1-form $E$ on $\R^3$ corresponding to the vector field $E$ is 
+\begin{align*}
+	E=E_1dx+E_2dy+E_3dz
+\end{align*}and the 2-form $B$ on $\R^3$ corresponding ot eh vector field $B$ is
+\begin{align*}
+	B=B_1 dy\wedge dz + B_2 dz\wedge dx + B_3 dx \wedge dy.
+\end{align*}
+
+Let $\R^4$ be space-time with coordinates $(x,y,z,t)$.  Then both $E$ and $B$ can be viewed as differential forms on $\R^4$. Define $F$ to be the 2-form
+\begin{align*}
+	F=E \wedge dt +B
+\end{align*}on space-time.  Decide which two Maxwell's equations are equivalent to the equation
+\begin{align*}
+	dF=0.
+\end{align*}Prove your answer. (The other tow are equivalent to $D*F=0$ for a star-operator $*$ defined in differential geometry.  See [2,Section 19.1, p. 689].)
+\end{enumerate}
+
+\end{document}
