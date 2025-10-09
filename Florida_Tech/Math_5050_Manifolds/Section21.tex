@@ -1,0 +1,111 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 21: Orientations }
+\newcommand{\DUEDATE}{October 15, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+\begin{enumerate}[label=21.\arabic*]
+
+\item \textbf{Locally constant map on a connected space}
+
+A map $f: S \to Y$ between two topological spaces is \textit{locally constant} if for every $p\in S$ there is a neighborhood $U$ of $p$  such that $f$ is constan on $U$.  Show that a locally constant map $f:S\to Y$ on a nonempty connected space $S$ is constant.  (\textit{Hint: }Show that every $y \in Y$, the inverse image $f^{-1}(y)$ is open.  Then $S =\cup_{y\in Y}f^{-1}(y)$ exhibits $S$ as a disjoint union of open subsets.)
+
+\item \textbf{Continuity of pointwise orientations}
+
+Prove that a pointwise orientatin $[(X_1,\dots, X_n)]$ on a manifold $M$ is continuous if and only if every point $p \in M$  has a coordinate neighborhood $(U,\phi)=(U, x^1,\dots, x^n)$ such that for all $q \in U$, the differential $\phi_{*,q}:T_qM\to T_{f(q)}\R^n\ISO\R^n$ carries the orientation of $T_qM$ to the standard orientation of $\R^n$ in the following sense: $(\phi_*X_{1,q},\dots,X_{n,q})\sim(\PART{}{r^1},\dots,\PART{}{r^n})$.
+
+\item \textbf{Equivalence of oriented atleses}
+
+Show that the relation in Definition 2.11 is an equivalence relation.
+
+\item \textbf{Orientaion-preserving diffeomorphisms}
+
+Let $F: (N,[\omega_N])\to (M,[\omega_M])$ be an orientation-preserving diffeomorphism.  If $\{(V_\alpha, \psi_\alpha)\} = \{(V_\alpha, y_\alpha^1,\dots, y_\alpha^n)\}$ is an oriented atlas on $M$ that specifies the orientation of $M$, show that $\{(F^{-1}V_\alpha, F^*\psi_\alpha)\}=\{(f^{-1}V_\alpha,F_\alpha^1,\dots,F_\alpha^n)\}$ is an oriented atlas on $N$ that specifies the orientaion of $N$, where $F_\alpha^i=y_\alpha\circ F$.
+
+\item \textbf{Orientation-preserving or orientation-reversing diffeomorphisms}
+
+Let $U$ be an open set $(0,\infty)\times (0,2\pi)$ in the $(r,\theta)$-plaen $\R^2$.  We define $F:U\subset \R^2 \to \R^2$ by $F(r,\theta)=-(r\cos\theta,r\sin\theta)$.  Decide whether $F$ is orientation-preserving or orientation-reversing as a diffeomorphism onto its image.
+
+\item \textbf{Orientability of a regular level set in $\R^{n+1}$}
+
+Suppoe $f(x^1,\dots,x^{n+1})$ is a $C^\infty$ function on $\R^{n+1}$ with 0 as a regular value.  Show that the zero set of $f$ is an orientable submanifold of $R^{n+1}$.  In particular, the unit $n$-sphere $S^n$ in $\R^{n+1}$ is orientable.
+
+\item \textbf{Orientablity of a Lie group}
+
+Show that every Lie group $G$ is orientable by constructing a nowhere-vanishing top form on $G$.
+
+\item \textbf{Orientabiliyt of a parallaelizable manifold.}
+
+Show that the parallelizable manifold is orientable.  (In particular, this shows again that every Lie group is orientable.)
+
+\item \textbf{Orientability of the total space of the tangent bundle}
+
+Let $M$ be a smooth manifold and $\pi:TM\to M$ its tangent bundle.  Shwo that if $\{(U,\phi)\}$ is any atlas on $M$, then the atlas $\{(TU,\hat{\phi})\}$ on $TM$, with $\hat{\phi}$ defined in equation (12.1), is oriented.  This proves that the total space $TM$ of the tangent bundle is always orientable, regardless of whether $M$ is orientable.
+
+\item \textbf{Oriented atlas on a circle}
+
+In Exampel 5.16 we found an atlasn $\mathfrak{U}=\{(U_i,\phi_i)\}_{i=1}^4$ on the unit circle $S^1$.  Is $\mathcal{U}$ an oriented atlas?  If not, alter the coordinate function $\phi_i$ to make $\mathfrak{U}$ into an oriented atlas.
+
+\end{enumerate}
+\end{document}

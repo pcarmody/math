@@ -77,16 +77,71 @@ Let $U$ be the open set $(0,\infty)\times(0,\pi)\times(0,2\pi)$ in the $(\rho,\t
 	F^*(dx\wedge dy\wedge dz) = \rho^2\sin\phi\, d\rho\wedge d\phi\wedge d\theta.
 \end{align*}
 
+\BLUE{Start by recognizing that the $n$-form in an $n$-dimensional vector space operating on a function, $F: N \to M$ is the determinant of the Jacobian, $J_F$.
+\begin{align*}
+%	J_F &= \THREEXTHREE{\PART{F_x}{\rho}}{ \PART{F_x}{\phi}}{\PART{F_x}{\theta}}
+%		{\PART{F_y}{\rho}}{ \PART{F_y}{\phi}}{\PART{F_y}{\theta}}
+%		{\PART{F_z}{\rho}}{ \PART{F_z}{\phi}}{\PART{F_z}{\theta}}
+	J_F &= \COLVECTOR{ dx \\ dy \\ dz } \\
+	dx &= \CYCLE{\PART{F_x}{\rho} &  \PART{F_x}{\phi} & \PART{F_x}{\theta}} \\
+		&= \CYCLE{\sin\phi\cos\theta & \rho\cos\phi\sin\theta & -\rho\sin\phi\sin\theta} \\
+	dy &= \CYCLE{\PART{F_y}{\rho} &  \PART{F_y}{\phi} & \PART{F_y}{\theta}} \\
+	&= \CYCLE{\sin\phi\cos\theta & \rho\cos\phi\sin\theta & -\rho\sin \phi\cos\theta }\\
+	dz &= \CYCLE{\PART{F_z}{\rho} &  \PART{F_z}{\phi} & \PART{F_z}{\theta}} \\
+	&= \CYCLE{\cos \phi & -\rho\sin\phi & 0} \\
+	\BARS{J_F} &= \cos\phi\DTWOXTWO{\rho\cos\phi\sin\theta}{ -\rho\sin\phi\sin\theta}{ \rho\cos\phi\sin\theta}{ -\rho\sin \phi\cos\theta }+\rho\sin\theta\DTWOXTWO{\sin\phi\cos\theta }{ -\rho\sin\phi\sin\theta}{\sin\phi\cos\theta }{ -\rho\sin \phi\cos\theta}\\
+	&= \rho^2\PAREN{ \cos\phi\DTWOXTWO{\cos\phi\sin\theta}{ -\sin\phi\sin\theta}{ \cos\phi\sin\theta}{ -\sin \phi\cos\theta }+\sin\phi\DTWOXTWO{\sin\phi\cos\theta }{ -\sin\phi\sin\theta}{\sin\phi\cos\theta }{ -\sin \phi\cos\theta}}\\
+	&= \rho^2\PAREN{ \cos^2\phi\sin\phi \DTWOXTWO{\sin\theta}{ -\sin\theta}{ \sin\theta}{ -\cos\theta }+\sin^3\phi\DTWOXTWO{\cos\theta }{ -\sin\theta}{\cos\theta }{ -\cos\theta}}\\
+	&= \rho^2\PAREN{ \cos^2\phi\sin\phi \sin\theta\DTWOXTWO{1}{ -\sin\theta}{ 1}{ -\cos\theta }+\sin^3\phi\cos\theta \DTWOXTWO{1 }{ -\sin\theta}{1 }{ -\cos\theta}}\\
+	&= \rho^2\sin\phi\PAREN{ \cos^2\phi \sin\theta\DTWOXTWO{1}{ -\sin\theta}{ 1}{ -\cos\theta }+\sin^2\phi\cos\theta \DTWOXTWO{1 }{ -\sin\theta}{1 }{ -\cos\theta}}
+\end{align*}The bracketed term simplies
+\begin{align*}
+	\cos^2\phi \sin\theta\DTWOXTWO{1}{ -\sin\theta}{ 1}{ -\cos\theta }+\sin^2\phi\cos\theta \DTWOXTWO{1 }{ -\sin\theta}{1 }{ -\cos\theta} &= (\cos^2\phi \sin\theta+\sin^2\phi\cos\theta )( -\cos\theta  +\sin\theta) \\
+	&=\cos^2\phi \sin^2\theta +\sin^2\phi\cos^\theta \\
+	&= 1
+\end{align*}Hence, $|J_F| = \rho^2\sin\phi$ .
+}
+
 \item \textbf{Pullback of a differential form}
 
 Let $F: \R^2 \to \R^2$ be given by 
 \begin{align*}
 	F(x,y) = (x^2+y^2,xy).
-\end{align*}If $u,v$ are the standard coordinates on the traget $\R^2$, compute $F^*(udu+vdv)$.
+\end{align*}If $u,v$ are the standard coordinates on the target $\R^2$, compute $F^*(udu+vdv)$.
+
+\BLUE{For clarity, 
+\begin{align*}
+	F(x,y) = (x^2+y^2)dx + (xy)dy.
+\end{align*}Therefore, we can derive $du$ and $dv$ as
+\begin{alignat*}{2}
+	du &= \PART{F_x}{x}dx + \PART{F_x}{y}dy, & \quad 
+	dv &= \PART{F_y}{x}dx + \PART{F_y}{y}dy\\
+	&= \PART{x^2+y^2}{x}dx + \PART{x^2+y^2}{y}dy, & \quad
+	&= \PART{xy}{x}dx + \PART{xy}{y}dy \\
+	&= 2xdx+2ydy, & \quad
+	&= ydx+xdy
+\end{alignat*}Let $\omega(u,v) = udu+vdv$ then
+\begin{align*}
+	F^*\omega(x,y) &= \omega(F(x,y)) \\
+	&= (x^2+y^2)(2xdx+2ydy)+(xy)(ydx+xdy) \\
+	&= 2x^3dx+2x^2ydy+2xy^2dx+2y^3dy+xy^2dx+x^2ydy \\
+	&= (2x^3+2xy^2+xy^2)dx+(2x^2y+2y^3+x^2y)dy \\
+	&= (2x^3+3xy^2)dx+(3x^2y+2y^3)dy
+\end{align*}
+}
 
 \item \textbf{Pullback of a differential form by a curve}
 
-Let $\tau$ be the 1-form $\tau = (-ydx+xdy/(x^2+y^2)$ on $\R^2-\{\textbf{0}\}$.  Define $\gamma: \R \to \R^2 - \{\textbf{0}\}$ by $\gamma(t)=(\cos t,\sin t)$.  Compute $\gamma^*\tau$.  (this problem is related to Example 17.16 in that if $i: S^1\hookrightarrow \R^2-\{\textbf{0}\}$ is the inclusion, then $\gamma= i \circ c$ and $\omega=i^*\tau$).
+Let $\tau$ be the 1-form $\tau = (-ydx+xdy)/(x^2+y^2)$ on $\R^2-\{\textbf{0}\}$.  Define $\gamma: \R \to \R^2 - \{\textbf{0}\}$ by $\gamma(t)=(\cos t,\sin t)$.  Compute $\gamma^*\tau$.  (this problem is related to Example 17.16 in that if $i: S^1\hookrightarrow \R^2-\{\textbf{0}\}$ is the inclusion, then $\gamma= i \circ c$ and $\omega=i^*\tau$).
+
+\BLUE{\begin{align*}
+	\tau &= \frac{-y}{x^2+y^2}dx+\frac{x}{x^2+y^2} dy \\
+		&= \frac{1}{x^2+y^2}\PAREN{-ydx+xdy} \\
+	\gamma^*\tau(t) &=\gamma^*\PAREN{\frac{1}{x^2+y^2}}\PAREN{-\gamma^*(y)d(\gamma^*x)+\gamma^*(x)d(\gamma^*y)} \\
+	&= \PAREN{\frac{1}{\cos^2t+\sin^2 t}}\PAREN{-\sin t(-\sin t)dt+\cos t(\cos t)dt} \\
+	 &= 1
+\end{align*}
+}
 
 \item \textbf{Pullback of a restriction}
 
@@ -171,7 +226,7 @@ In Maxwell's theory of electricity and magnetism, developed in the late nineteen
 \end{alignat*}By the correspondence in Subsection 4.6, the 1-form $E$ on $\R^3$ corresponding to the vector field $E$ is 
 \begin{align*}
 	E=E_1dx+E_2dy+E_3dz
-\end{align*}and the 2-form $B$ on $\R^3$ corresponding ot eh vector field $B$ is
+\end{align*}and the 2-form $B$ on $\R^3$ corresponding to the vector field $B$ is
 \begin{align*}
 	B=B_1 dy\wedge dz + B_2 dz\wedge dx + B_3 dx \wedge dy.
 \end{align*}
