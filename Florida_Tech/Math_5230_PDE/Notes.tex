@@ -61,6 +61,14 @@
 \end{center} 
 
 \begin{description}
+	\item \textbf{Observations}
+	
+	We have the various equations: Transport, Laplace/Poisson (basic), Heat and Wave equations.  These each have general solutions, usually depicted by $\Phi$ with specific solutions based on additional information.  The PDE is the entire equation and surrounding information: initial conditions, inhomogenous results, boundary conditions.  Further, some solutions are dependent on the 'architecture/structure' of the space which they are defined (e.g., Green's Functions).  Some special cases happen requiring the isolation of "spiked points" (points that go to infinity making the PDE non-harmonic).  These include surrounding these points with a boundary exclusion zone and integrating over the smooth subspace.
+	
+	There are additional clever tricks that must be considered.  Integration by parts using The Divergence Theorem (building a vector space where the dot product would be useful in this).  Dirac Functions.  Green's Functions and Green's Identities.
+	
+	Each equation has a Maximum Value Theorem, a Mean Value Theorem, Uniqueness Theorem.
+
 	\item \textbf{Transportation Problem and Method Characteristics}
 	
 	Because the Transportation Equation is
@@ -108,7 +116,7 @@
 	A Green's Function must satisfy the following:
 	\begin{align*}
 		G(x,y) &= \BINDEF{ \Delta G(x) = 0, & x \in U}{G(x,y) = \Phi(x-y) + \phi^x(x), & x,y \in \partial U}
-	\end{align*}where $\phi^x$ is a Dirichlet Delta function determined by the geometry of $U$.  Then,
+	\end{align*}where $\phi^x$ is a Dirac Delta function determined by the geometry of $U$.  Then,
 	\begin{align*}
 		u(x) &= \int_U f(x)G(x,y)\, dy +\int_{\partial U} g(x)\PART{G}{\nu}(x,y) dS
 	\end{align*}
@@ -161,5 +169,102 @@
 	\int_{\partial U} wDw\cdot \nu\;  dx &= \int_U |Dw|^2\;  dx + \int_U w\Delta w\;  \not dx
 \end{align*}
 \end{remark}
+
+\newpage
+\textbf{ChatGPT: Homework 3, question 5a: }
+
+\begin{enumerate}[label=5(a)]
+	\item Consider the initial value problem 
+	\begin{align*}
+		\BINDEF{u_t-\Delta u+b\cdot Du=0, & x\in \R^n, t>0}{u(x,0)=g(x) }
+	\end{align*}where $b \in \R^n$ is a fixed vector. (Physically, the $b\cdot  Du$ term represents advection.)
+	
+	Find an explicit soluton to this probem using the  change of variables $z=x+bt$ and the solution formula for the heat equat1ion (equation (9) in Section 2.3 of Evans).
+	
+\end{enumerate}
+
+\HLINE \\
+Nice — this is the standard trick. The convenient choice is
+$$
+z := x - bt \qquad\bigl(\text{so }x=z+bt\bigr),
+$$
+and define
+$$
+v(z,t):=u(z+bt,t).
+$$
+Compute derivatives (keeping $z$ fixed when differentiating in $t$):
+$$
+v_t = u_t + b\cdot\nabla_x u,\qquad \nabla_z v=\nabla_x u,\qquad \Delta_z v=\Delta_x u.
+$$
+Substituting into the PDE $u_t-\Delta_x u+b\cdot\nabla_x u=0$ gives
+$$
+(v_t - b\cdot\nabla_x u) - \Delta_x u + b\cdot\nabla_x u = v_t-\Delta_z v =0.
+$$
+So $v$ satisfies the heat equation $v_t-\Delta_z v=0$ with initial data $v(z,0)=u(z,0)=g(z)$. Hence by the heat-kernel formula
+$$
+v(z,t)=\int_{\mathbb{R}^n}\Phi(z-y,t),g(y),dy,\qquad
+\Phi(w,t)=\frac{1}{(4\pi t)^{n/2}}e^{-|w|^2/(4t)}.
+$$
+Returning to $u$ (recall $u(x,t)=v(x-bt,t)$) gives the explicit solution
+$$
+\boxed{u(x,t)=\int_{\mathbb{R}^n}\Phi(x-bt-y,t )g(y)\,dy
+= \frac{1}{(4\pi t)^{n/2}} \int_{\mathbb{R}^n}
+e^{-\frac{|x-y-bt|^2}{4t}}g(y)\,dy. }
+$$
+
+One can easily check this satisfies the PDE and $u(\cdot,t)\to g$ as $t\downarrow 0$. (If you prefer the change of variables $z=x+bt$ from your prompt, it is equivalent up to the sign of (b) — the above is the usual sign that removes the advection term.)
+
+\newpage
+In PDE terminology those two phrases refer to very different concepts:
+
+---
+\begin{description}
+
+\item \textbf{ 1. **Bounded Domain**}
+
+A *domain* is just the region in which the PDE is being considered.
+
+* A **bounded domain** means this region is *finite in extent*.
+* Example: The unit disk $ {x^2 + y^2 < 1} \subset \mathbb{R}^2 $ or the interval $ (0,1) \subset \mathbb{R} $.
+
+This term is purely **geometric** — it says nothing about time or the type of PDE.
+
+---
+
+\item  \textbf{2. **Parabolic Boundary**}
+
+This term is specific to **evolution PDEs**, especially **parabolic equations** like the heat equation.
+
+Suppose you solve a PDE on a space-time cylinder:
+
+$$
+\Omega \times (0,T),\quad \text{where }\Omega\subset\mathbb{R}^n\text{ is the spatial domain}.
+$$
+
+The **parabolic boundary** $ \partial_p(\Omega \times (0,T)) $ consists of:
+
+* The **initial time boundary**: $ \Omega \times {0} $
+* The **lateral spatial boundary over time**: $ \partial\Omega \times (0,T) $
+
+So for the heat equation, you don’t impose boundary conditions on the *final time* $t=T$, because information flows *forward* in time.
+
+---
+
+\item  \textbf{Summary Table}
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+Term  & Applies To  & Meaning  & Example \\
+\hline
+**Bounded domain**  & Any PDE  & Spatial region is finite & $ \Omega = (0,1) \subset \mathbb{R} $ \\
+**Parabolic boundary** & Parabolic PDEs (e.g. heat equation) & Where boundary/initial data & $ \Omega\times{0} \cup \partial\Omega \times (0,T) $ \\
+& &must be given in space-time & \\
+\hline
+\end{tabular}
+
+\end{description}
+
+Let me know if you'd like a sketch or diagram — this is much easier to see visually!
+
 
 \end{document}

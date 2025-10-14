@@ -63,50 +63,159 @@
 Please show your work and justify all answers.
 
 \begin{enumerate}
-\item Show by direct calcuation that the fundamental solution 
+\item Show by direct calculation that the fundamental solution 
 \begin{align*}
 	\Phi(x,t) = \frac{1}{(4\pi t)^{n/2}}e^{-|x|^2/4t}
-\end{align*}solves the heat equation $\Phi_t-=\Delta \Phi = 0$ for any $ x \in \R^n$ and $t>0$.
+\end{align*}solves the heat equation $\Phi_t-\Delta \Phi = 0$ for any $ x \in \R^n$ and $t>0$.
 
-\item Assume $u$ is a solution fo the heat equation on a bounded domain:
+\BLUE{First consider $\Phi_t$\begin{alignat*}{3}
+	A(t) &= \frac{1}{(4\pi t)^{n/2}} & \quad \AND & \quad B(t) &= -|x|^2/4t \\
+	A'(t) &= -n/2t\PAREN{\frac{1}{(4\pi t)^{n/2}}} & \quad \AND & \quad 	B'(t) &= |x|^2/4t^2 \\
+	&= -n/2t A(t)
+\end{alignat*}
+\begin{align*}
+	\Phi(x,t) &= A(t)e^{B(t)} \\
+	\Phi_t(x,t) &= A'(t)e^{B(t)} + A(t)e^{B(t)}B'(t) \\
+	&= -n/2 A(t)e^{B(t)}+ A(t)e^{B(t)}B'(t) \\
+	&= \PAREN{\frac{-n}{2 t} + \frac{|x|^2}{t^2}}\Phi(x,t)
+\end{align*}Now consider $\Phi_x$
+\begin{align*}
+	\Phi_{x_i}(x,t) &= \Phi(x,t)(-2|x_i|/t) \\
+	\frac{\partial^2 \Phi_{x_i}(x,t)}{\partial^2 x_i} &= \Phi_{x_i}(x,t)(-2|x_i|/t) + \Phi(x,t)(-2/t) \\
+	&= \Phi(x,t)(-2|x_i|/t)^2+ \Phi(x,t)(-2/t) \\
+	\Delta \Phi(x,y) &= \sum_{i=1}^n \Phi(x,y)\PAREN{(4|x_i|^2/t^2) + (-2/t)} \\
+	&= \Phi(x,y)\PAREN{\frac{4|x|^2}{t^2} + \frac{-2n}{t}}
+\end{align*}thus
+\begin{align*}
+	\Phi_t - \Delta \Phi &= 
+\end{align*}
+}
+
+\item Assume $u$ is a solution for the heat equation on a bounded domain:
 \begin{align*}
 	u_t-\Delta u=0,\, t>0, x\in U.
-\end{align*}Show that if $u$ satisfies the Dirichlet boundary condiotn $u=0$ on $\partial U$ OR the Neumann boundary condition $\PART{u}{\nu}=0$ on $\partial U$, then the quantity $\int_U u^2(x,t)\,dx$ is decreasing s a function of time.
+\end{align*}Show that if $u$ satisfies the Dirichlet boundary condition $u=0$ on $\partial U$ OR the Neumann boundary condition $\PART{u}{\nu}=0$ on $\partial U$, then the quantity $\int_U u^2(x,t)\,dx$ is a decreasing function of time.
+
+\BLUE{Let $v=\int_U u^2(x,t)\,dx$.  Then $S$ is decreasing if $S_t<0$ for all $t>0$.
+	\begin{align*}
+		v_t &= \int_U 2uu_t \,dx \\
+		&= \int_U 2u\Delta u\, dx
+	\end{align*}Using Integration by Parts
+	\begin{align*}
+		\int_U 2u\Delta u\, dx &= -2\int_U |Du|^2\,dx +2 \int_{\partial U} u\frac{du}{d\nu}\, dS
+	\end{align*}Thus, the second term is zero when $u=0$ on $\partial U$ or when $\PART{u}{\nu}=0$ on $\partial U$.  The integral of the first time is positive as $|Du|^2$ is positive and the minus sign makes the expression negative.  Hence, $v_t< 0$ for all $t>0$.
+}
 
 \item Consider the heat equation on a bounded domain with Newmann boundary conditions on $\partial U$:
 \begin{align*}
 	\BINDEF{u_t-\Delta u=0, & x \in U, t>0}{\PART{u}{\nu}=0,& x \in \partial U}
-\end{align*}Show that the quantity $\in_U\BARS{u(x,t)}^2\,dx$ is decreasing as  afunction of time.
+\end{align*}Show that the quantity $\int_U\BARS{u(x,t)}^2\,dx$ is decreasing as a function of time.
 
-\item Show that solutions to the Neumann problem for th einhomogeneous heat equation
+\BLUE{Keeping in mind that the value of $u(x,t)$ could be complex, then $|u(x,t)|^2 = u\CONJ{u}$.  Then,
+\begin{align*}
+	\LET v = \int_U|u(x,t)|^2\,dx &= \int_U u(x,t)\CONJ{u(x,t)}\, dx \\
+	\frac{dv}{dt} &= \int_U \PAREN{u_t\CONJ{u} + u\CONJ{u}_t}\, dx \\
+	\frac{dv}{dt} &= \int_U \PAREN{\Delta u\CONJ{u} + u\Delta \CONJ{u}}\, dx 
+\end{align*}Applying Integration by Parts as in 2.  We have
+\begin{align*}
+	v_t &= \int_U \Delta u\CONJ{u}\,dx + \int_U u\Delta \CONJ{u}\, dx \\
+	&= -\int_U Du\cdot D\CONJ{u} \,dx + \int_{\partial U} u\CONJ{u}_t\, dx - \int_U D\CONJ{u}\cdot Du \,dx + \int_{\partial U} \CONJ{u}u_t\, dx
+\end{align*}The two boundary integrals are zero because of the Newman Boundary condition.  Since the dot product is commutative, we have
+\begin{align*}
+	v_t &= -2\int_U Du\cdot D\CONJ{u} \,dx = -2\int_U |Du|^2 \, dx 
+\end{align*}Thus, $v_t < 0$ for all $t>0$ therefore decreasing.
+}
+
+\item Show that solutions to the Neumann problem for the inhomogeneous heat equation
 \begin{align*}
 	\BINDEF{u_t - \Delta u=f, & x\in U, t>0}{\PART{u}{\nu} = h & x\in \partial U,\\u(x,0)=g(x)}
-\end{align*}are unique.  (Hint: sue teh result fo the previous exercise.)
+\end{align*}are unique.  (Hint: Use the result from the previous exercise.)
 
-Recall that solutions to Neumann problem for Laplace's equations were not unique.  Why doesn't eh same problem occur here?
+Recall that solutions to Neumann problem for Laplace's equations were not unique.  Why doesn't the same problem occur here?
+
+\BLUE{Let $u,v$ be solutions to the Neumann problem for the inhomogeneous heat equation.  Let $w = u-v$. Then,
+\begin{align*}
+	w &= u - v \AND \PART{w}{\nu} = \PART{u}{\nu}-\PART{v}{\nu} = h - h = 0\\
+	\int_U w^2 dx &= \int_U w\Delta w\, dx \\
+	&= -\int_U |Dw|^2\, du + \int_{\partial U} w \PART{w}{\nu}, Ds\\
+	&= -\int_U |Du-Dv|^2\, dx \\
+	&= -\int_U (|Du|^2 + |D^v|^2-2Du\cdot Dv)\, dx & (*)\\
+\end{align*}Notice that at $t=0$ we have
+\begin{align*}
+	g'(x,0)-\Delta u &= g'(x,0)-\Delta v) \\
+	\Delta u &= \Delta v 
+\end{align*}Integrate both sides and we have $Du = Dv$ then from (*)
+\begin{align*}
+	-\int_U (|Du|^2 + |D^v|^2-2Du\cdot Dv)\, dx &= -\int_U (|Du|^2 + |D^v|^2-2|Du|^2)\, dx \\
+	&= 0 
+\end{align*}Therefore $w^2 = 0$ or $u-v=0$ and hence unique solutions to Neuman problem for inhomogenous heat equation.
+}
 
 \item \begin{enumerate}[label=(\alph*)]
 
 	\item Consider the initial value problem 
 	\begin{align*}
 		\BINDEF{u_t-\Delta u+b\cdot Du=0, & x\in \R^n, t>0}{u(x,0)=g(x) }
-	\end{align*}where $b \in \R^n$ is a fixed vector. (Physically, the $b-Du$ term represents advection.)
+	\end{align*}where $b \in \R^n$ is a fixed vector. (Physically, the $b\cdot  Du$ term represents advection.)
 	
-	Find an explicit soluton to this probem suint eh chang eof variables $z=x+bt$ adn the solution formula for the heat equation (equation (9) in Section 2.3 of Evans).
-	
-	\item Now consieer a simliar equaiton with asource term:
+	Find an explicit soluton to this probem using the  change of variables $z=x+bt$ and the solution formula for the heat equat1ion (equation (9) in Section 2.3 of Evans).
+
+\BLUE{
+	\textbf{Step 1: }Solve $z$ in terms of $x$ and define the substitution 
 	\begin{align*}
-		xx%BINDEF{u_t-\Delta u+b\cdot Du=f(x,t), & x\in \R^n, t>0}{u(x,0)=g(x)}
-	\end{align*}Find an explitic solution to this problem using the same chang eof variables from (a) and formula (17) in Section 2.3 of Evans.
+		x &= z-bt \\
+		v(z,t) &= u(z+bt,t) \\
+		v_t &= u_t+ b\cdot \Delta_x u, \quad \nabla_z v = \nabla_x u, \quad \Delta_z v = \Delta_x u
+	\end{align*}\textbf{Step 2: }Substituting into the oribinal equation
+	\begin{align*}
+		u_t - \Delta_x u + b\cdot Du &= (v_t-b\cdot D_xu)-\Delta_x + b \cdot D_xu = v_t - \Delta_z v = 0
+	\end{align*}Thus $v$ is a solution to the original Heat Equation with initial state $v(z,0) = u(x,0) = g(0)$.  \\
+	\textbf{Step 3: }Now applying this to the Heat Kernel.
+	\begin{align*}
+		v(z,t)&=\int_{\mathbb{R}^n}\Phi(z-y,t),g(y)\,dy\\
+		&=\frac{1}{(4\pi t)^{n/2}}\int_{\mathbb{R}^n}e^{-|z-y|^2/(4t)} g(y)\, dy
+	\end{align*}Recall that 
+	\begin{align*}
+		u(x,t) &= v(x+bt, t) \\
+			&= \frac{1}{(4\pi t)^{n/2}}\int_{\mathbb{R}^n}e^{-|x-bt-y|^2/(4t)} g(y)\, dy
+	\end{align*}
+}
+
+	\item Now consider a similiar equation with a source term:
+	\begin{align*}
+		\BINDEF{u_t-\Delta u+b\cdot Du=f(x,t), & x\in \R^n, t>0}{u(x,0)=g(x)}
+	\end{align*}Find an explicit solution to this problem using the same change of variables from (a) and formula (17) in Section 2.3 of Evans.
+	
+	\BLUE{From (a) we can repeat Step 1: and Step 2: except that we conclude with
+	\begin{align*}
+		v_t-\Delta_zv = f(z+bt,t).
+	\end{align*}\textbf{Step 3: }We must use the kernel (17) of Evans,  
+	\begin{align*}
+		v(z,t) &= \frac{1}{(4\pi t)^{n/2}}\int_{\mathbb{R}^n}e^{-|z-y|^2/(4t)} g(y)\, dy + \int_0^t \frac{1}{(4\pi(t-s))^{n/2}} \int_{\R^n} e^{-\frac{|z-y|^2}{4(t-s)}} f(y,s)\, dyds
+	\end{align*}and repeat the last part of (a) Step 3:
+	\begin{align*}
+		u(x,t) &= v(x+bt,t)\\
+			&= \frac{1}{(4\pi t)^{n/2}}\int_{\mathbb{R}^n}e^{-|x-bt-y|^2/(4t)} g(y)\, dy + \int_0^t \frac{1}{(4\pi(t-s))^{n/2}} \int_{\R^n} e^{-\frac{|x+bt-y|^2}{4(t-s)}} f(y,s)\, dyds
+	\end{align*}
+	}
 	
 \end{enumerate}
 
-\item Consdier the PDE
+\item Consider the PDE
 \begin{align*}
-	u_t-\Delta u-cs\cdot Du=0,\, x\in U, t\in (0,T),
-\end{align*}where $c>0$ is a positive constant.  Prove that this PDE satisfies a maximum principle, i.e., the maximum of $u$ on $\hat{U}_T$ occurs on the parabolic boundary. (Hint: imitate the proof given in class for th ehet equation on a bounded domain.)
+	u_t-\Delta u-c\cdot Du=0,\, x\in U, t\in (0,T),
+\end{align*}where $c>0$ is a positive constant.  Prove that this PDE satisfies a maximum principle, i.e., the maximum of $u$ on $\hat{U}_T$ occurs on the parabolic boundary. (Hint: imitate the proof given in class for the equation on a bounded domain.)
 
-\item the PDE $u_t-xU_{xx}=0$ is a variable-coefficient parabolic equation in one space dimension.  Show that this PDE doe snot satisfy a maximum principle. (Hint:  consider $(u(x,t)=-2xt-x^2$.  Where does the maximum of this function on the closed rectangle $-x\le x\le 2,0\le t\le 1$ occur?)
+\item the PDE $u_t-xu_{xx}=0$ is a variable-coefficient parabolic equation in one space dimension.  Show that this PDE does not satisfy a maximum principle. (Hint:  consider $(u(x,t)=-2xt-x^2$.  Where does the maximum of this function on the closed rectangle $-2\le x\le 2,0\le t\le 1$ occur?)
+
+\BLUE{
+\begin{align*}
+	u(x,t) &= -2xt-x^2 \\
+	u_x &= -2t-2x \\
+	&= -2 (t+x) \\
+	u_t &= -2x
+\end{align*}A critical point exists on the line at $x=0$ and $t=-x$ or $t=0$ which is NOT on the boundary.
+}
 \end{enumerate}
 
 \end{document}

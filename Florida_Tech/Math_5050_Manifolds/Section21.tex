@@ -69,15 +69,26 @@
 
 \item \textbf{Locally constant map on a connected space}
 
-A map $f: S \to Y$ between two topological spaces is \textit{locally constant} if for every $p\in S$ there is a neighborhood $U$ of $p$  such that $f$ is constan on $U$.  Show that a locally constant map $f:S\to Y$ on a nonempty connected space $S$ is constant.  (\textit{Hint: }Show that every $y \in Y$, the inverse image $f^{-1}(y)$ is open.  Then $S =\cup_{y\in Y}f^{-1}(y)$ exhibits $S$ as a disjoint union of open subsets.)
+A map $f: S \to Y$ between two topological spaces is \textit{locally constant} if for every $p\in S$ there is a neighborhood $U$ of $p$  such that $f$ is constant on $U$.  Show that a locally constant map $f:S\to Y$ on a nonempty connected space $S$ is constant.  (\textit{Hint: }Show that every $y \in Y$, the inverse image $f^{-1}(y)$ is open.  Then $S =\cup_{y\in Y}f^{-1}(y)$ exhibits $S$ as a disjoint union of open subsets.)
 
 \item \textbf{Continuity of pointwise orientations}
 
-Prove that a pointwise orientatin $[(X_1,\dots, X_n)]$ on a manifold $M$ is continuous if and only if every point $p \in M$  has a coordinate neighborhood $(U,\phi)=(U, x^1,\dots, x^n)$ such that for all $q \in U$, the differential $\phi_{*,q}:T_qM\to T_{f(q)}\R^n\ISO\R^n$ carries the orientation of $T_qM$ to the standard orientation of $\R^n$ in the following sense: $(\phi_*X_{1,q},\dots,X_{n,q})\sim(\PART{}{r^1},\dots,\PART{}{r^n})$.
+Prove that a pointwise orientation $[(X_1,\dots, X_n)]$ on a manifold $M$ is continuous if and only if every point $p \in M$  has a coordinate neighborhood $(U,\phi)=(U, x^1,\dots, x^n)$ such that for all $q \in U$, the differential $\phi_{*,q}:T_qM\to T_{f(q)}\R^n\cong\R^n$ carries the orientation of $T_qM$ to the standard orientation of $\R^n$ in the following sense: $(\phi_*X_{1,q},\dots,X_{n,q})\sim(\PART{}{r^1},\dots,\PART{}{r^n})$.
 
 \item \textbf{Equivalence of oriented atleses}
 
 Show that the relation in Definition 2.11 is an equivalence relation.
+
+\BLUE{An Equivalance Relation is symmetric, Reflexive and Transitive
+\begin{itemize}
+	\item \textbf{Symmetric: $a\sim b \implies b \sim a$}\\
+	Let $J_\leftarrow$ be the Jacobian for $\phi_\alpha \circ \psi^{-1}_\beta$ and $J_\rightarrow$ be the Jacobian for $\psi_\beta \circ \phi_\alpha^{-1}$.  Clearly, $J_\leftarrow J_\rightarrow = \mathbb{I}$.  Thus both $J_\leftarrow$ and $J_\rightarrow$ must have the same sign.
+	\item \textbf{Reflexive: $a\sim a$}
+	$\phi_\alpha \circ \phi_\alpha = \mathbb{I}$ whose Jacobian is positive.		
+	\item \textbf{Transitive $a \sim b, b\sim c \implies a \sim c$}.\\
+	Let $J_a$ be the Jacobian for $\phi_\alpha \circ \psi^{-1}_\beta$ and $J_b$ be the Jabobian for $\psi_\beta \circ \tau^{-1}_\gamma$ for some chart $(W, \tau_\gamma)$.  Then, $J_c$ the Jacobian from $(U, \phi_\alpha)$ to $(W, \tau_\gamma)$ would be $J_c = J_a J_b$.  Thus, $J_c$ will be the same sign as $J_a$ and $J_b$ if they also have the same sign.
+\end{itemize}
+}
 
 \item \textbf{Orientaion-preserving diffeomorphisms}
 
@@ -85,7 +96,7 @@ Let $F: (N,[\omega_N])\to (M,[\omega_M])$ be an orientation-preserving diffeomor
 
 \item \textbf{Orientation-preserving or orientation-reversing diffeomorphisms}
 
-Let $U$ be an open set $(0,\infty)\times (0,2\pi)$ in the $(r,\theta)$-plaen $\R^2$.  We define $F:U\subset \R^2 \to \R^2$ by $F(r,\theta)=-(r\cos\theta,r\sin\theta)$.  Decide whether $F$ is orientation-preserving or orientation-reversing as a diffeomorphism onto its image.
+Let $U$ be an open set $(0,\infty)\times (0,2\pi)$ in the $(r,\theta)$-plane $\R^2$.  We define $F:U\subset \R^2 \to \R^2$ by $F(r,\theta)=-(r\cos\theta,r\sin\theta)$.  Decide whether $F$ is orientation-preserving or orientation-reversing as a diffeomorphism onto its image.
 
 \item \textbf{Orientability of a regular level set in $\R^{n+1}$}
 
@@ -95,17 +106,17 @@ Suppoe $f(x^1,\dots,x^{n+1})$ is a $C^\infty$ function on $\R^{n+1}$ with 0 as a
 
 Show that every Lie group $G$ is orientable by constructing a nowhere-vanishing top form on $G$.
 
-\item \textbf{Orientabiliyt of a parallaelizable manifold.}
+\item \textbf{Orientability of a parallelizable manifold.}
 
 Show that the parallelizable manifold is orientable.  (In particular, this shows again that every Lie group is orientable.)
 
 \item \textbf{Orientability of the total space of the tangent bundle}
 
-Let $M$ be a smooth manifold and $\pi:TM\to M$ its tangent bundle.  Shwo that if $\{(U,\phi)\}$ is any atlas on $M$, then the atlas $\{(TU,\hat{\phi})\}$ on $TM$, with $\hat{\phi}$ defined in equation (12.1), is oriented.  This proves that the total space $TM$ of the tangent bundle is always orientable, regardless of whether $M$ is orientable.
+Let $M$ be a smooth manifold and $\pi:TM\to M$ its tangent bundle.  Show that if $\{(U,\phi)\}$ is any atlas on $M$, then the atlas $\{(TU,\hat{\phi})\}$ on $TM$, with $\hat{\phi}$ defined in equation (12.1), is oriented.  This proves that the total space $TM$ of the tangent bundle is always orientable, regardless of whether $M$ is orientable.
 
 \item \textbf{Oriented atlas on a circle}
 
-In Exampel 5.16 we found an atlasn $\mathfrak{U}=\{(U_i,\phi_i)\}_{i=1}^4$ on the unit circle $S^1$.  Is $\mathcal{U}$ an oriented atlas?  If not, alter the coordinate function $\phi_i$ to make $\mathfrak{U}$ into an oriented atlas.
+In Example 5.16 we found an atlas $\mathfrak{U}=\{(U_i,\phi_i)\}_{i=1}^4$ on the unit circle $S^1$.  Is $\mathcal{U}$ an oriented atlas?  If not, alter the coordinate function $\phi_i$ to make $\mathfrak{U}$ into an oriented atlas.
 
 \end{enumerate}
 \end{document}
