@@ -176,4 +176,54 @@ For the numerical scheme to be stable, the magnitude of the amplification factor
 \item \textbf{Final Answer}
 The von Neumann Stability Analysis is a method used to assess the stability of numerical schemes for solving linear PDEs with constant coefficients. It involves discretizing the PDE, assuming a Fourier mode solution, substituting this solution into the discretized equation, solving for the amplification factor, and applying the stability criterion to ensure the scheme is stable. This analysis provides a necessary condition for stability, particularly useful for linear problems with constant coefficients.
 \end{description}
+\newpage 
+\textbf{\Large{Lecture 7 - Dispersion and Dissipation}}
+
+\begin{description}
+	\item FTFS/FTBS are Dissipative (amplitude matching) and 2nd order schemes as Lax-Wendroff (LW) are Dispersiive (phase shifted error).  The amount of dissipation/dispersion is related to the solution profile.
+	\begin{align*}
+		u(x,t) &= \hat{u}e^{i\omega t}e^{i\beta x}
+	\end{align*}$\omega$ is the frequency, $\beta$ is the wave number, $\lambda = 2\pi/\beta, T = 2\pi/\omega$ and speed $c=-$Re$(\omega)/\beta$.\\
+	
+	\textbf{Definition: }If for the solution of a PDE none of the Fourier Mode 'grow' with time and d at least one mode decays then the solution is dissipative.  If the speeds of the propagaion of teh different Fourier Modes are dependent on their wave number then the solution is dispersive.
+	
+	In general, PDE wth odd spatial derivatives exhibit propagating solutions.  PDE with even spatial derivatives generate non-progpagtin solutions.
+	
+	\item \textbf{Power Spectral Density Analysis}
+\end{description}
+
+\newpage
+\textbf{\Large{Lecture 13}}
+
+\begin{itemize}
+	\item High Resolution Schemes (volume schemes).
+	
+	Schems that are at least 2$\SND$-order over smooth sections of the scheme (piecewise), non-oscillatory and capable of being discontinuous transitions in the solution.
+	
+	\item \DEFINE{TVD: Total Variation Decreasing}: A difference scheme is called TVD if
+	\begin{align*}
+		TV(U^{k+1}) \le TV(U^k)
+	\end{align*}where
+	\begin{align*}
+		TV(U^k) &= \sum_{j=-\infty}^{\infty} |U^k_{j+1}-U^k_j|.
+	\end{align*}
+	\begin{itemize}
+		\item TVD is monotinicity preserving.
+		\item BTSB is TVD and LW is not.
+	\end{itemize}
+	
+	\item Flux Limiter.  A mechanism designed to resolve high resolution (potential errors) with low resolution (fewer potential errors) and to improve smooth versus oscillatory solutions.
+	
+	I-form and smoothness indicator for a Flux Limiter.
+\end{itemize}
+
+\HLINE
+\textbf{\LARGE{Lecture 14}}
+
+\begin{itemize}
+	\item \textbf{The Thomas Algorithm}
+	
+	Given a vector equation $xA=-b$ remove the n$\ITH$-column and row.
+	
+\end{itemize}
 \end{document}

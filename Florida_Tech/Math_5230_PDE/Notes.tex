@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{report}
+\documentclass[12pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -44,10 +44,12 @@
 \chead{ \fancyplain{}{\CLASSNAME} }
 %\chead{ \fancyplain{}{\STUDENTNAME} }
 \rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
 \input{../MyMacros}
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
 
 \begin{document}
 
@@ -60,6 +62,20 @@
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
 
+\textbf{\Large{Basic PDEs}}
+\begin{align*}
+	u_x  &= 0 & \quad &\implies u(x,y) = f(y) \\
+	u_{xx} &= 0 & \quad &\implies u(x,y) = f(y)x+g(y) \\
+	u_{xx}-u &=0 & \quad &\implies u(x,y) = f(y)\cos x + g(y)\sin x \\
+	u_{xy} &= 0 & \quad &\implies u(x,y) = F(y) + G(x)
+\end{align*}for some functions $f(y)$ and $g(y)$.  Note: it is interesting that $u_{xy}$ appears as it does because the wave equation comes out to exactly that.\\
+
+Also
+\begin{align*}
+	xu_x+yu_y=0 \implies u(x,y) = C
+\end{align*}
+
+\HLINE
 \begin{description}
 	\item \textbf{Observations}
 	
@@ -86,14 +102,14 @@
 		&= \int_0^t f(x+(s-tb,s)\,ds
 	\end{align*}thus
 	\begin{align*}
-		u(x,t) &= g(x-bt) +\int_0^t f(x+(s-tb,s)\,ds
+		u(x,t) &= g(x-bt) +\int_0^t f(x+(s-tb),s)\,ds
 	\end{align*}
 	
 	\item \textbf{General Laplace solution.}
 \begin{remark}[\textbf{Properties of $\Phi$}].
 
 \begin{align*}
-	\Phi(x) &= \BINDEF{-\frac{1}{2\pi}\log |x| & (n=2)}{\frac{1}{n(n-2)\alpha(n)}\frac{1}{|x|^{n-2}} & (n\ge 3)} 
+	\Phi(x) &= \Large\BINDEF{-\frac{1}{2\pi}\log |x| & (n=2)}{\frac{1}{n(n-2)\alpha(n)}\frac{1}{|x|^{n-2}} & (n\ge 3)} 
 \end{align*}
 \begin{align}
 	D\Phi(y) &= \frac{-1}{n\alpha(n)}\frac{y}{|y|^n},\, (y\ne 0)\\
@@ -264,7 +280,823 @@ Term  & Applies To  & Meaning  & Example \\
 
 \end{description}
 
-Let me know if you'd like a sketch or diagram — this is much easier to see visually!
+Let me know if you'd like a sketch or diagram — this is much easier to see visually!\footnote{stuff and nonsense}{
 
+\newpage
+\textbf{\Large {October 29, 2025}}
+
+\begin{description}
+	\item Midterm \#2 Wednesday 11/5
+	
+	Heat Equation, Wave Equations, Fourier Transform.
+	
+	Practice test solutions and Homework \#4 solutions will be posted soon.
+	
+	\item More on Method of Characteristics (converting to a single variable ODE).
+	
+	\item \textbf{Conservation laws}. One dimension $ u_t + F(u)_x = 0 $, $u(x,t), x \in \R$.
+	
+	Higher Dimension: $u_t + \operatorname{div} [F(u)] = 0$ where $F$ is a flux and $u$ is a density.
+	\begin{align*}
+		\frac{d}{dt}\int_V u\, dx = \int_{\partial V} F(u)\cdot \nu\, dS
+	\end{align*}The change is dependent on the flow over the boundary.
+	
+	Burger's Equation: $u_t + uu_x=0$ a non-linear PDE.
+	
+	Using Method of Characteristics
+	\begin{align*}
+		z(s) &= u(x(s), t(s)) \\
+		\frac{dt}{ds} &= 1, \, \frac{dx}{ds} = u
+	\end{align*}
+	
+	Rarefaction Wave.
+	
+	\item \textbf{Weak Formulation}
+	
+	Multiply PDE by a 'test function' $\phi$ that is smooth and compactly supported.
+	\begin{align*}
+		\int_0^\infty\int_{-\infty}^\infty \phi (u_t+uu_x)\, dx \, dt=0
+	\end{align*}boundary terms aren't necessary because of compact support (closed and bounded domain).
+	
+	One benefit, the weak solution makes sense even when $u$ is not differenitable.
+	
+	This weak formulation helps us choose where find the interace curve.
+\end{description}
+
+\newpage
+\textbf{\Large{November 3, 2025}}
+
+\begin{description}
+	\item \textbf{Test on Wednesday 11/5:} Review for today.
+	
+	\item 5 or 6 questions with formulas,   Not unlike the practice test and the homework assignments.
+	
+	\item \textbf{Heat Equation: }
+	\begin{align*}
+		u_t - u_{xx} &=0, \, x \in \R^n, t>0 \\
+		\text{ or }	u_t - u_{xx} &=f, \, x \in \R^n, t>0 \\
+		u(x,0) &= g(x), \text{ initial conditions} \\
+		\text{Heat Kernel } \Phi(x,t) &= \frac{1}{(4\pi t)^{n/2}} e^{-|x|^2/4t} \\
+		\int_{\R^n} \Phi(x,t) dx &= 1\end{align*}Derivation; use the scaling law ($\Phi(rx, r^2t)$ solves the same PDE), radial symmetry assumption, to get an ODE.  We solve this by taking the convolution (in $x$ only) 
+		\begin{align*}
+			u(x,t) = \Phi *_x g = \int_{\R^n} \Phi(x-y,t)g(y) dy
+		\end{align*}We get a couple of things
+		\begin{itemize}
+			\item Instantaneous propogation $x$ is independent of $t$.
+			\item Strict positive: $g \ge 0$ and $g \not \equiv 0$.
+			\item Regularity: smoothness of solutions.
+			\begin{align*}
+				u(x,t) &= \int_{\R^n} \Phi(t, x-y) g(y)dy & (*)
+			\end{align*}$\Phi(t, x-y)$ is smooth except at (0,0) (i.e., $t=0, x=y$).  Notice that 
+		\begin{align*}
+			\lim_{t\to 0} \frac{1}{(4\pi t)^{n/2}} e^{-|x|^2/4t} &= 0
+		\end{align*}Hence the only problem that we have with (*) is when $x=y$ which can be resolved through the convolution.
+		\end{itemize}
+		
+	\item \textbf{Non-homogeneous Heat Equation}
+	
+	\begin{itemize}
+		\item Duhamel: 
+		\begin{align*}
+			u(x,t) &= \Phi *_{t,x} f = \int_0^t\int_{\R^n} \Phi(x-y, t-s) f(y,s)\, dy \, ds
+		\end{align*} check text on adding a parameter $s$.
+		
+		\item Parabolic Maximum Principle 
+		\begin{align*}
+			\partial U \times [0, T) \cup ( U\times \{t=0\} )
+		\end{align*}  doesn't include $t=T$ boundary!  Unique maximum should not occur at the end of time.
+		
+		\textbf{Theorem: } \begin{align*}
+			\max_{\CONJ{U}_T} \le \max_{\Gamma U_t}
+		\end{align*}
+		\item Uniqueness derived from the Maximum Principle.  Therefore (*) is THE solution.
+		
+		\item Regularity on $\R^n$ for $u_t - \Delta_{xx}=0$: 
+		\begin{itemize}
+			\item On $\R^n$, use the solution formula.
+			\item On a bounded domain: use a localizing cutoff.  Cylinder proof
+		\end{itemize}
+		
+		\item \textbf{Energy Methods} (too much done that it seems to be the entire course).  Two ways in: 
+		\begin{itemize}
+		\item given some functional, $\int u(s)\,dx$ differentiate, use PDE, integrate by parts (almost always used), then try to show $t$-derivative of the functional has a sign.
+		
+		\item or mulitply PDE by something, integrate by parts, find the t-derivative of some functional that is constant or decreasing.
+		
+		\end{itemize}
+	\end{itemize}
+	
+	\item \textbf{the Wave Equation:} the preponderance of questions will be in one-dimension.  Just to make it worthy of a decent test question.  Starting d'Alembert formula.
+	\begin{align*}
+		(\partial_t+\partial_x)(\partial_t-\partial_x)u = 0
+	\end{align*}a transport equation. 
+	
+	\begin{itemize}
+		\item Finite speed of propagation.  See second term in d'Alembert
+		\item Use the method of spherical means
+		\item 2D method of descent (go to 3 and ignore one coordinate).
+		\begin{align*}
+			u_{tt}-u_{xx}- u_{yy} = 0
+         \end{align*}	Huygens Principle.
+         
+         \item non-homogenous: use Duhamel
+         
+		
+		\BLUE{\item \textbf{Energy methods} are good for an integral estimate.  Maximum methods are good for point-wise.\\
+		First attempt\begin{align*}
+			\int_0^l u_{tt}\,u_t \,dx &= \int_0^l c^2u_{xx}\,u_t \,dx \\
+			\frac{1}{2} \frac{d}{dt}\int_0^l (u_t)^2\, dx &= c^2\PAREN{u_x(l,t)u_t(l,t)-u_x(0,t)u_t(0,t)-\int_0^l u_x u_{tx} \,dx} \\
+			&= -c^2 \frac{1}{2}\frac{d}{dx} \int_0^l (u_x)^2 dx
+		\end{align*}where $u(0,t) = 0 \implies u_t(0,t)=u_t(l,t) = 0$.  Therefore, define your energy function $E$
+		\begin{align*}
+			E(t) &= \frac{1}{2}\PAREN{\int_0^l (u_t)^2 + c^2 (u_x)^2\, dx} \\
+			\text{notice } E'(t) &= 0 \implies E(t) \equiv c
+		\end{align*}Hence a conservation of energy.  Further $(u_t)^2$ is the kinectic energy and $c(u_x)^2$ is the potential energy and the wave passes this energy back and forth smoothly.  This leads to uniqueness of the wave equation.
+		}
+		\item \textbf{No maximum principle}
+	\end{itemize}
+	
+	\item \textbf{Fourier Transform:}  Take a function 
+	\begin{align*}
+	\mathcal{F}[f] &= \hat{f}(w) = \int_\R e^{-i\omega x}f(x) dx \AND \mathcal{F}^{-1}[f] = \hat{f}(\omega ) = \int_\R e^{-i\omega x}\hat{f}(x) dx \\
+		\mathcal{F}['f(x)] &=  \int_\R e^{-i\omega x}f'(x) dx = i\omega  \hat{f}(\omega )
+	\end{align*}
+
+	\textbf{General Idea: Heat Equation}
+	\begin{enumerate}
+		\item \textbf{Step One: }Because integration is from $-\infty$ to $\infty$.  We begin by converting to Fourier Transform
+		\begin{align*}
+			u_t &= \alpha u_{xx} \\
+			\FFF(\hat{u}_t) &= \FFF(\alpha u_{xx})= -\alpha^2 \omega \hat{u} \\
+		\end{align*}
+		\item Solve this ODE with respect to $\omega$
+		\begin{align*}
+			\int \frac{\partial \hat{u}}{\hat{u}} &= \int -\alpha^2 \omega^2\, \partial t \\
+			\hat{u}(\omega, t) &= \varphi(\omega)e^{-\alpha^2\omega^2 t}
+		\end{align*}for some initial condition $\varphi(\omega)$
+		\item \textbf{Inverse the Fourier Transform} and take use the convolution identity $\FFF^{-1}(f * g) = \FFF^{-1}(f)\FFF(g)$
+		\begin{align*}
+			u(x,t) &= \FFF^{-1}(\varphi(\omega)e^{-\alpha^2\omega^2 t}) \\
+			&= \FFF^{-1}(\FFF(\varphi(\omega))\FFF(e^{-\alpha^2\omega^2 t})) \\
+			&= \FFF^{-1}\PAREN{(\varphi(\omega))*(e^{-\alpha^2\omega^2 t})} \\
+			&= \varphi(\omega)*(e^{-\alpha^2\omega^2 t})
+		\end{align*}
+		
+		\item \textbf{In summary: }  These identities make the use of Fourier Transforms possible
+		\begin{align*}
+			\frac{d^n u}{dx^n} &= ( i\omega)^n u \\
+			\FFF(f * g) &= \FFF(f)\FFF(g) \\
+			\FFF(\FFF^{-1}(u)) &= u
+		\end{align*}
+	\end{enumerate}
+	
+	\BLUE{\item \textbf{Strategies:}
+	\begin{itemize}
+		\item \textbf{Solutions based on Integration by Parts for integrals}
+		\item \textbf{Solutions based on Maximum Principle for point-wise.}
+	\end{itemize}
+	}
+\end{description}
+
+\newpage
+\textbf{\Large{November 12, 2025}}
+
+\textbf{Test returned:} Average was on the "low side".  Curve to date of cumumlative grade (unofficial):\\
+\begin{tabular}{ll}
+	 A & 65\% and up,\\
+	 B & 50\% - 64\%,\\
+	 C & 49\% or less.
+\end{tabular}
+\\
+
+According Canvas I'm at 49.81\%!  Sacka fracka gall durn it!  I've got to study to get a B!  Final exam is 30\% of grade $50\% * 70\% = 35\%.$  if I get 50\% on the final I might squeak by with a B-.  I could get an A by getting a perfect score, which I sincerely doubt.  But, that being the case, there is a chance.  Use the Dr. Peyham videos on YouTube to study.  (28 lessons and 28 days!)\\
+
+\textbf{Questions from the test.}
+\begin{enumerate}
+	\item Show solutions to $u_{tt}-u_{xx}=0$ do NOT necessarily satisfy the max condition.  Real number line only.  Proof by counter example.  Let $g \equiv 0$ and $h \equiv 1$.
+	
+	\item Differentiate in time and see what happens then plug and play, follow by Integrate by Parts (which no one seemed to get right).
+	
+	\item (skipped)
+	
+	\item PDE like the wave equation but not.  Imitating the derivation of d'Alembert's Formula.
+	
+	\item (skipped)
+\end{enumerate}
+
+My observation:  Today he went over the test and, frankly, it looks very familiar.  He gave me 30\%, though, so I have to wonder what I actually did wrong.  There was one problem that made no sense to me because it required some knowledge about Statistics.  I forgot how to solve the Transport Equation which probably accounted for a lot of lost points.  \textbf{\textit{Still dozing off.}}
+
+\HLINE
+\textbf{\Large{Weakly harmonic solutions are harmonic to PDE}}
+
+\newpage
+\textbf{\Large{November 17, 2025}}\\
+
+Wednesday's class will be ``asynchronous" that can be found on Panopto in Canvas.  Homework \#5 will be posted today and due on December 1, 2025.\\
+
+Continuing on Weakly Harmonic Functions and their connection to Calculus of Variations.\\
+
+$u \in C(U)$ is \textit{weakly harmonic} if $\forall$ smooth test functions $\phi$ with compact support in $U$ 
+\begin{align*}
+	\int_U u\Delta \phi\,dx = 0
+\end{align*}If $\Delta u=0 \implies u$ is weakly harmonic $0=\int_u\phi\Delta u \, du = \cdots \int u\delta\phi\, dx$\\
+
+Convergence of Dirac Energy Expression: does it converge? We need Functional Analysis, using compactness theorems in function space.
+
+\HLINE
+Special sort of PDE using a matrix  div$ (A(u)Du) = 0$.  Which becomes the Laplacian when $A = I$.  The PDE is \textit{elliptic} if $A(x)$ is positive definite.  If $A$ is symetric and positive definite then its eigenvalues, all its eigenvalues are positive.  ``Elliptic" means like the Laplace Equation (how most people think of it).  And \textit{uniformaly elliptic} when all eigenvalues are contained in an interval $[\lambda, \Lambda]$.\\
+
+Anisotropic difusion.\\
+
+\HLINE
+Classification of 2$\SND$-order linear PDEs.  The general form in 2 variables.
+\begin{align*}
+	Au_{xx}+Bu_{xy}+Cu_{yx}+Du_{x}+Eu_y+Fu=0
+\end{align*}where not all $A,B,C,D$ are zero.  Hence we have
+\begin{align*}
+	B^2-4AC &<0 & \text{ellpitical, Laplace} \\
+	B^2-4AC &>0 & \text{hyperbolic, Heat} \\
+	B^2-4AC &=0 & \text{parabolic, Wave} 
+\end{align*}which are named through analogy.  Hence Laplace is elliptic, the Heat Equation is parabolic, the Wave Eqation is hyperbolic.  In practice, $A,B,C$ do NOT take the form of functions.\\
+
+Classifications of higher dimensional 2\SND order PDEs.
+
+\newpage
+\noindent\textbf{\Large{New Classifications for solving PDEs}}\\
+
+Given the following classificatin of 2$\SND$-order Partial Differential Equations
+\begin{align*}
+	Au_{xx}+Bu_{xy}+Cu_{yx}+Du_{x}+Eu_y+Fu=0
+	\end{align*}If $A=B=C=0$ and $F=0$ we have the \textbf{transport equation}.  Then, where not all $A,B,C,D$ are zero.  Hence we have
+\begin{align*}
+	B^2-4AC &<0 & \text{ellpitical, Laplace} \\
+	B^2-4AC &>0 & \text{hyperbolic, Heat} \\
+	B^2-4AC &=0 & \text{parabolic, Wave} 
+\end{align*}
+
+\begin{itemize}
+
+\item Classifications
+\begin{itemize}
+	\item Transport Equation
+	\item Elliptical
+	\item Hyperbolic
+	\item Parabolic
+	\item Burgers' Equation (Misc?)
+\end{itemize}
+
+\item Then we define sub-classifications/features of PDE as
+\begin{itemize}
+	\item Homogenous vs inhomogenous.
+	\item Boundary conditions.
+	\item Initial conditions.
+\end{itemize}
+
+\item And Strategies for solving PDEs
+\begin{itemize}
+	\item Method of Characteristics
+	
+	By finding a contour upon which all values of $u(x,t)$ are the same, we can then use the slope of that contour (by definition a constant) as part of the PDE, reducing it to an ODE.
+	
+	\item Integration by parts (in order to use the Divergence Theorem).
+	
+	\begin{align*}
+		\int_U w\Delta w\; dx &= -\int_U |Dw|^2\;  dx+\int_{\partial U}wDw\cdot \nu\;  dx = 0 \\
+	\int_U Dv\cdot Du\;  dx &= -\int_U u\Delta v \; dx + \int_{\partial U} \PART{v}{\nu}u\;  dS
+	\end{align*}
+	\item Energy methods.
+\end{itemize}
+
+\end{itemize}
+
+\noindent\textbf{Theoretical Constructs}
+\begin{itemize}
+	\item Max/Min Principle
+	\item Divergence Theorem
+	\item Average integral usage.
+\end{itemize}
+
+\noindent\textbf{Solutions via Classification: }We find solutions to PDEs via their classifications, all of which have are meant to reduce a PDE to an ODE.
+
+\begin{description}
+	\item \textbf{Advection/Transport Equation: $u_t+au_x=0$}
+	\begin{enumerate}
+		\item Method of Chacteristics
+		
+		\BOXIT{$u(s)$ must be constant satisfying
+		\begin{align*}
+			\frac{dx}{dt} &= a \\
+			x(t) &= x_0+at\\
+			u(x,t) &= u_0(x-at)
+		\end{align*}}
+		
+		\item Fouirer Transform
+		
+		\begin{align*}
+			\hat{u}_t + ia\xi\hat{u}=0
+		\end{align*}solves the ODE to
+		\begin{align*}
+			\hat{u}(\xi,t)&= u_0(\xi)e^{ia\xi t}
+		\end{align*}then using the inverse Fourier Transform
+		\begin{align*}
+			u(x,t) &= u_0(x-at)
+		\end{align*}
+	\end{enumerate}
+	\item \textbf{Elliptical: Laplace/Poison, $u_t-\Delta u=0$}
+	\item \textbf{Hyperbolic: The Heat Equation}
+	\item \textbf{Parabolic: The Wave Equation, $u_{tt}-c^2u_{xx}=0$}
+	\begin{itemize}
+		\item With Initial Conditions'
+		\begin{align*}
+			\BINDEF{u_{tt}-c^2u_{xx}=0, & t>0, x\in \R^n}{u(x,0) = f(x), \\ u_t(x,0) = g(x)}
+		\end{align*}use d'Alembert
+		\begin{align*}
+			u(x,t) &= \frac{1}{2}\PAREN{f(x+ct)+f(x-ct)}+\frac{1}{2}\int_{x-ct}^{x+ct} g(s)ds
+		\end{align*}
+	\end{itemize}
+\end{description}
+\newpage
+\textbf{\Large{Greens's Function}}
+
+The request asks for a valid Green's function used in Partial Differential Equations (PDEs). A Green's function is a fundamental solution or impulse response for a linear, non-homogeneous differential operator defined on a domain, subject to specified boundary conditions.\\
+
+\textbf{ Reasoning \& Explanation}
+
+\begin{description}
+
+\item \textbf{1. Definition of a Green's Function}
+
+A Green's function, $G(\mathbf{x}, \mathbf{x}')$, for a linear differential operator $L$ acting on a function $u(\mathbf{x})$ in a domain $\Omega$, is defined as the solution to the equation:
+$$L G(\mathbf{x}, \mathbf{x}') = \delta(\mathbf{x} - \mathbf{x}')$$
+where $\delta(\mathbf{x} - \mathbf{x}')$ is the Dirac delta function, representing a point source located at $\mathbf{x}'$.
+
+If the Green's function is known, the solution $u(\mathbf{x})$ to the non-homogeneous equation $L u(\mathbf{x}) = f(\mathbf{x})$ (with appropriate boundary conditions) can be found by integrating the source function $f(\mathbf{x})$ against the Green's function:
+$$u(\mathbf{x}) = \int_{\Omega} G(\mathbf{x}, \mathbf{x}') f(\mathbf{x}') d\mathbf{x}'$$
+
+\item \textbf{2. Example: Green's Function for the Laplacian Operator (Poisson Equation)}
+
+The most common and fundamental example of a Green's function in PDEs is associated with the Laplacian operator, $\nabla^2$. This operator appears in the Poisson equation ($\nabla^2 u = f$) and Laplace's equation ($\nabla^2 u = 0$).
+
+The defining equation for the Green's function $G(\mathbf{x}, \mathbf{x}')$ in this context is:
+$$\nabla^2 G(\mathbf{x}, \mathbf{x}') = \delta(\mathbf{x} - \mathbf{x}')$$
+
+We consider the Green's function in different dimensions:
+
+\begin{description}
+
+\item  \textbf{A. 3-Dimensional Space ($\mathbb{R}^3$)}
+
+In three dimensions, $\mathbf{x} = (x_1, x_2, x_3)$, and the distance $r = |\mathbf{x} - \mathbf{x}'|$. The fundamental solution (Green's function for the unbounded domain) is:
+$$G_3(\mathbf{x}, \mathbf{x}') = -\frac{1}{4\pi r} = -\frac{1}{4\pi |\mathbf{x} - \mathbf{x}'|}$$
+
+**Verification (Conceptual):** The Laplacian of $1/r$ is proportional to the Dirac delta function. Specifically, $\nabla^2 \left(\frac{1}{r}\right) = -4\pi \delta(\mathbf{x} - \mathbf{x}')$. Therefore, multiplying by $-1/(4\pi)$ yields the required Green's function.
+
+\item \textbf{B. 2-Dimensional Space ($\mathbb{R}^2$)}
+
+In two dimensions, $\mathbf{x} = (x_1, x_2)$, and $r = |\mathbf{x} - \mathbf{x}'|$. The fundamental solution is:
+$$G_2(\mathbf{x}, \mathbf{x}') = \frac{1}{2\pi} \ln(r) = \frac{1}{2\pi} \ln(|\mathbf{x} - \mathbf{x}'|)$$
+
+**Verification (Conceptual):** The Laplacian of $\ln(r)$ is proportional to the Dirac delta function. Specifically, $\nabla^2 (\ln r) = 2\pi \delta(\mathbf{x} - \mathbf{x}')$. Therefore, multiplying by $1/(2\pi)$ yields the required Green's function.
+
+\end{description}
+
+\item \textbf{3. Conclusion}
+
+A valid Green's function used in PDEs is the fundamental solution for the Laplacian operator in 3D space.
+
+$$G(\mathbf{x}, \mathbf{x}') = -\frac{1}{4\pi |\mathbf{x} - \mathbf{x}'|}$$
+
+This function is crucial in solving the Poisson equation in electrostatics (potential due to a charge distribution) and gravitation (potential due to a mass distribution).
+
+\item \textbf{Final Answer Summary}
+
+A valid Green's function used in Partial Differential Equations (PDEs) is the fundamental solution for the **Laplacian operator ($\nabla^2$)** in three-dimensional Euclidean space ($\mathbb{R}^3$).
+
+%| Operator | Defining Equation | Domain | Valid Green's Function $G(\mathbf{x}, \mathbf{x}')$ |
+%|---|---|---|---|
+%| Laplacian ($\nabla^2$) | $\nabla^2 G = \delta(\mathbf{x} - \mathbf{x}')$ | $\mathbb{R}^3$ (Unbounded) | $G(\mathbf{x}, \mathbf{x}') = -\frac{1}{4\pi |\mathbf{x} - \mathbf{x}'|}$ |
+%| Laplacian ($\nabla^2$) | $\nabla^2 G = \delta(\mathbf{x} - \mathbf{x}')$ | $\mathbb{R}^2$ (Unbounded) | $G(\mathbf{x}, \mathbf{x}') = \frac{1}{2\pi} \ln(|\mathbf{x} - \mathbf{x}'|)$ |
+
+Final Answer:
+\begin{enumerate}
+\item \textbf{A valid Green's function used in PDEs is the fundamental solution for the Laplacian operator in three-dimensional space: \(G(\mathbf{x}, \mathbf{x}') = -\frac{1}{4\pi |\mathbf{x} - \mathbf{x}'|}\)}
+
+\item Identifying a valid Green's function used in PDEs
+Definition of a Green's function
+\item A Green's function \(G(\mathbf{x}, \mathbf{x}')\) for a linear differential operator \(L\) satisfies \(L G(\mathbf{x}, \mathbf{x}') = \delta(\mathbf{x} - \mathbf{x}')\), where \(\delta\) is the Dirac delta function.
+Fundamental solution for the Laplacian in 3D
+\item The Green's function for the Laplacian \(\nabla^2\) in unbounded three-dimensional space is \(G(\mathbf{x}, \mathbf{x}') = -\frac{1}{4\pi |\mathbf{x} - \mathbf{x}'|}\). This satisfies \(\nabla^2 G(\mathbf{x}, \mathbf{x}') = \delta(\mathbf{x} - \mathbf{x}')\) and is widely used in solving Poisson's equation.
+
+\end{enumerate}
+\textbf{Answer:} \textbf{A valid Green's function used in PDEs is the fundamental solution for the Laplacian operator in three-dimensional space: \(G(\mathbf{x}, \mathbf{x}') = -\frac{1}{4\pi |\mathbf{x} - \mathbf{x}'|}\)}
+
+\end{description}
+
+\newpage
+\textbf{\Large{Mollifiers and Mollification}}
+
+Mollifiers and the process of mollification are indeed related to the concepts discussed earlier, specifically concerning the Dirac delta function, which is central to the definition of a Green's function. While a Green's function is a solution to an equation with a delta function source, mollifiers are used to approximate functions, including distributions like the delta function, with smooth functions.
+
+\begin{description}
+\item \textbf{Mollifiers}
+
+A mollifier is a special type of smooth function used to create smooth approximations of other functions, particularly those that are not smooth or are generalized functions (distributions). A standard mollifier, often denoted as \(\eta(x)\), has the following properties:
+
+\begin{enumerate}
+
+\item  **Smoothness:** 
+
+\(\eta(x)\) is infinitely differentiable (i.e., \(\eta \in C^\infty\)).
+\item **Compact Support:** 
+
+\(\eta(x) = 0\) for \(|x| \ge 1\). This means it is non-zero only within a bounded region (the unit ball in \(\mathbb{R}^n\)).
+\item **Normalization:** 
+
+The integral of the function over its entire domain is 1: \(\int_{\mathbb{R}^n} \eta(x) dx = 1\).
+
+\end{enumerate}
+A common example of a mollifier in \(\mathbb{R}^n\) is:
+
+\[ \eta(x) = \begin{cases} C \exp\left(\frac{1}{|x|^2 - 1}\right) & \text{if } |x| < 1 \\ 0 & \text{if } |x| \ge 1 \end{cases} \]
+
+where the constant \(C\) is chosen to ensure the integral is 1.
+
+\item \textbf{Mollification}
+
+Mollification is the process of using a mollifier to smooth out a function. This is done via convolution. For a function \(f\), its mollified version \(f_\epsilon\) is defined as:
+
+\[ f_\epsilon(x) = (f * \eta_\epsilon)(x) = \int_{\mathbb{R}^n} f(y) \eta_\epsilon(x-y) dy \]
+
+Here, \(\eta_\epsilon(x) = \frac{1}{\epsilon^n} \eta\left(\frac{x}{\epsilon}\right)\) is a scaled version of the standard mollifier \(\eta(x)\). As the parameter \(\epsilon \to 0\), the support of \(\eta_\epsilon\) shrinks, and it becomes more concentrated around the origin, behaving like an approximation of the Dirac delta function. Consequently, the mollified function \(f_\epsilon\) converges to the original function \(f\) in an appropriate sense.
+
+\item \textbf{ Application in Solving PDEs}
+
+Mollification is a powerful theoretical tool in the study of PDEs, particularly for proving the existence and regularity of solutions:
+
+\begin{enumerate}
+
+\item **Approximation:** 
+
+It allows us to approximate a non-smooth (weak) solution of a PDE with a sequence of smooth functions. We can then apply classical calculus and analysis techniques to these smooth approximations.
+\item  **Existence Proofs:** 
+
+In proving the existence of weak solutions, one might first solve a regularized or mollified version of the PDE. Then, by taking the limit as \(\epsilon \to 0\), one can show that the sequence of smooth solutions converges to a weak solution of the original PDE.
+\item  **Regularity Theory:** 
+
+Mollification is used to prove that weak solutions are actually smoother than initially assumed (regularity). For instance, one can show that if a function is a weak solution to an elliptic PDE, its mollified version also satisfies a related equation, which can then be used to derive estimates on the derivatives of the solution.
+
+\end{enumerate}
+
+\item \textbf{In summary,} just as the Dirac delta function is a key concept for defining Green's functions, mollifiers serve as smooth approximations to the delta function. This connection makes mollification a fundamental technique for rigorously establishing the properties of solutions to PDEs, bridging the gap between generalized functions and classical, smooth functions.
+\end{description}
+
+
+\newpage
+\textbf{\Large{December 1, 2025} \\Final exam 12/8 1:00 - 3:00 in Crawford 332}
+
+\begin{description}
+	\item \textbf{Final:} \DEFINE{Cumulative.}
+	
+	Practice Final has been published.	
+	
+	Eigenvalue problems
+	
+	conservation laws
+	
+	shocks
+	
+	classification
+	
+	\item From the begining of the course
+
+	Important tactics.
+	\begin{itemize}
+		\item Method of Characteristics (contours).
+		
+		Its really much simpler than they say.  
+		\begin{align*}
+			au_t+bu_x=c \implies \frac{dt}{ds}=a, \, \frac{dx}{ds}=b, \, \frac{du}{ds}=c
+		\end{align*}Where $a,b,c$ can be constants or functions.  Then, anti-differentiate based on $s$ and solve removing $s$ to find a solution.
+		
+		\item Understanding and using the Kernel. Represented by $\Phi$ and depends on the classification.
+		\item Energy methods.
+		\item Convolution.
+		\item Mollification.
+		\item Green's Function.
+		
+		See previous section.
+		
+		\item Dirac Delta functions.
+		\item \textbf{Fourier Transform Methods}  One dimensional case.  The analog for a Fouier Series.  Basically, transform the equation, solve the ODE and transform back.  Identities
+	
+	\begin{align*}
+		\mathcal{F}\PAREN{\frac{du}{dx_j}} &= i\xi_j\hat{u}(\xi)
+	\end{align*}where $\xi_j$ is the frequency component corresponding to the coordinate $x_j$.  Thus, the Fourier transform of a derivative is reduced to a multiplication.  Then
+	\begin{align*}
+		\mathcal{F}(\Delta u) &= -|\xi|^2\hat{u}(\xi)  =  \hat{f}(\xi)\\
+		&\AND \\
+		\hat{u}(\xi) &= -\frac{1}{|\xi|^2}\hat{f}(\xi)
+	\end{align*} then transforming back (using $\mathcal{F}^{-1}(ab)=\mathcal{F}^{-1}(a)*\mathcal{F}^{-1}(b)$
+	\begin{align*}
+		u(x) &= \mathcal{F}^{-1}\PAREN{-\frac{1}{|\xi|^2}}* f(x)
+	\end{align*}where the term $\mathcal{F}^{-1}\PAREN{-\frac{1}{|\xi|^2}}$ is the Green's Function from above.  Thus,  $$\mathcal{F}^{-1}\PAREN{-\frac{1}{|\xi|^2}}=\frac{1}{4\pi},\, n=3$$
+	
+	Identity of derivative.
+	
+	Convolution Rule. $\widehat{f*g} = \hat{f}\hat{g}$
+	
+	Don't expect much of this but check out the type of question on test 2.
+
+		\item construct a space where the PDE makes sense with a dot-product.
+	\end{itemize}		
+	
+	Ingteresting additional topics
+	\begin{itemize}
+		\item Mean Value Principles.
+		\item Maximum value principles.
+		\item Regularity
+	\end{itemize}
+	
+	\textbf{Classifying the space of PDEs}:
+
+Given the following classificatin of 2$\SND$-order Partial Differential Equations
+\begin{align*}
+	Au_{xx}+Bu_{xy}+Cu_{yx}+Du_{x}+Eu_y+Fu=0
+	\end{align*}If $A=B=C=0$ and $F=0$ we have the \textbf{transport equation}.  Then, where not all $A,B,C,D$ are zero.  Hence we have
+\begin{align*}
+	B^2-4AC &<0 & \text{ellpitical, Laplace} \\
+	B^2-4AC &>0 & \text{hyperbolic, Heat} \\
+	B^2-4AC &=0 & \text{parabolic, Wave} 
+\end{align*}
+
+\begin{itemize}
+
+\item Classifications
+\begin{itemize}
+	\item Transport Equation
+	\item Elliptical
+	\item Hyperbolic
+	\item Parabolic
+	\item Burgers' Equation (Misc?)
+\end{itemize}
+
+\item Then we define sub-classifications/features of PDE as
+\begin{itemize}
+	\item Homogenous vs inhomogenous.
+	\item bounded and unbounded.
+	\item Boundary conditions.
+	\item Initial conditions.
+\end{itemize}
+
+\end{itemize}
+	\textbf{Strategies for each classification}
+	\begin{itemize}
+		\item \textbf{Generic Transport $au_t+bu_x+ cu=f(x,t)$}
+		
+		Use Method of Characteristics (beware the bounded domain, would need boundary/initial condition.  Which do you hit first the $t=0$ of $x=0$?).
+		
+		\textit{Must know this in order to be able to do the more complex solutions below.}
+		
+		\textbf{Non-Homogenous case}: We find that $z'(s) \ne 0$ and actually is equal to $z'(s) = f(x+sb, t+s)$
+	\begin{align*}
+		u(x,t)-g(x-bt) &= z(0)-z(-t)\\
+		&= \int_{-t}^1 z'(s)\, ds \\
+		&= \int_0^t f(x+(s-tb,s)\,ds
+	\end{align*}thus
+	\begin{align*}
+		u(x,t) &= g(x-bt) +\int_0^t f(x+(s-tb),s)\,ds
+	\end{align*}
+		
+		\item \textbf{Elliptical: Laplace's/Poisson's Equation $\Delta u=0$, $-\Delta u=f$.}
+		
+		Beware the domain, bounded domain vs whole space.
+		
+		Fundamental solution in $\R^n$, $\Phi(x)$
+		
+\begin{remark}[\textbf{Properties of $\Phi$}].
+
+\begin{align*}
+	\Phi(x) &= \Large\BINDEF{-\frac{1}{2\pi}\log |x| & (n=2)}{\frac{1}{n(n-2)\alpha(n)}\frac{1}{|x|^{n-2}} & (n\ge 3)} 
+\end{align*}
+\begin{align}
+	D\Phi(y) &= \frac{-1}{n\alpha(n)}\frac{y}{|y|^n},\, (y\ne 0)\\
+	\PART{\Phi}{\nu} &= \nu\cdot D\Phi(y)= \frac{-1}{n\alpha(n)\varepsilon^{n-1}},\, y \in \partial B(0,\varepsilon)  \\
+	-\Delta\Phi &= \delta_0 \implies \Delta\Phi(x-y)=0,\, y \in U \AND y \ne x
+\end{align}implying that there is a point source at 0 or $x$. In (2) $n\alpha(n)\varepsilon^{n-1}$ is the area of the surface of $\partial B(0,\epsilon)$
+
+\end{remark}
+		Convolusion $\Phi * f$ solves Poisson's Equation.  Works if $f$ decays, helps make it well-defined, i.e., $f$ is bounded and compactly supported.  Doesn't work at the singularity. Use a Dirac Delta function (not likely to be on the final).
+		\begin{itemize}
+			\item \textbf{Mean Value Property}, i.e., harmonic implies mean on a ball is value of center.
+			
+			able to prove nice things about harmonic functions, i.e., $\Delta u=0$
+			
+			Can prove maximum principle
+			
+			\textbf{Regularity}: if $u \in C(U)$ satisfies MVP implies $u \in C^\infty(U)$.  Prove using standard mollificontion.  i.e., convolve $u$ then show that $u$ equals the standard mollification. 
+			
+			\begin{description}
+				\item Outline of proof: MVP proves that the integral of a harmonic function over a ball is the value at its center.   Differentiate this, proving that the derivative is also harmonic, i.e., a member of $C^1$. ``Bootstrap" this process by differentiating again (rinse and repeat) proving that it is actually $C^\infty$.
+			\end{description}
+			
+			\textbf{Quantitative Regularity}: estimate on the derivatives. Liouville's Theorem for Harmonic Functions ($u$ harmonic and bounded implies $u$ is a constant).
+			
+			\textbf{Harnack Inequality}: a quantitative approach to the ``topology" of the set $U$ overwhich $u$ is defined.  Put simply:
+			\begin{align*}
+				\exists C \to 0<u(x_1) \le Cu(x_2), \,\forall x_1, x_2 \in V \subseteq U
+			\end{align*}
+			
+			\textbf{Greens Functions:} solving the problem on a bounded domain (as opposed to the whole space). Connect to $\Phi$ and some $\phi^x$ ``can get a Green's Formula somewhat reliably!" Don't have this Newton potential.  Generally, helps to have symmetry.
+			
+			Leads to Integral formulas for ball, half space.
+			
+			\textbf{Energy Methods:} multiply the PDE which allows for integration by parts.
+			\begin{itemize}
+				\item Proves Uniqueness can be proved.
+				\item Proves linearity of PDE (subtract two solutions get another solution)
+				
+				\item Converse of MVP: that is, MVP implies harmonic.
+
+			\end{itemize}
+						
+			\item \textbf{Dirichlet's Principle.}
+			
+			The solution for 
+			\begin{align*}
+				\BINDEF{\Delta u, & x \in U}{u(x)=g(x), & x \in \partial U}
+			\end{align*}is the function that minimizes \textit{Dirichlet Energy}
+			\begin{align*}
+				E[v] = \int_U |\Delta u|^2\,dx
+			\end{align*}over the set of admissable functtions on the boundary.
+			
+			\item \textbf{On the test} use some of these details.  stuff where you'd have to just ``know" to use MVP versus something else.
+			
+		\end{itemize}
+		
+		\item \textbf{Hyperbolic: Heat Equation $u_t-\Delta u=0$}
+		
+		\textbf{Scaling Symmetry: }If $u$ solves the Hyperbolic PDE so does $u_\lambda(x,t) = u(\lambda x, \lambda^2 t)$, because of the chain rule. Use convolution and \textbf{The Heat Kernel, $\Phi$} (not the same as above)
+		
+		Nicer regularity properties than the Newton Potential.
+		
+		Infinite speed of propagation (not true in other PDEs).
+		
+		\textbf{Non-homogenous} once again exclude a singularity and find a Dirac Delta function.
+		
+		\textbf{Maximum Principle of Parabolic boundary $\Gamma$}
+		
+		\textbf{Maximum Principle on an unbounded domain} More complex.  Must occur during initial conditions.  Proof is more complicated (probably not on test).
+		
+		\textbf{Maximum implies Uniqueness}
+		
+		\textbf{Regularity estimates:}
+		
+		Homogenous: have a solution for unbounded case, not bounded case.
+		
+		Unbounded: Didn't do Green's Function for Hyperbolic Equation (Heat) but you can.  Use cut off function and a double convolustion.
+		
+		Regularity for $u$ is defined $\dots$.
+		
+		\textbf{Energy Methods on bounded domain}  
+		\begin{itemize}
+			\item multiply by something and integrate by parts.  The most popular is $u$ itself.  This gives you a boundary term which typically goes to zero from boundary conditions.  Expected to stay the same or disipate over time.
+		\end{itemize}
+	
+	\item \textbf{Parabolic PDE: Wave Equation $u_{tt}-\Delta_u=0$}
+	
+	various solution formulas: $(u_t-u_x)(u_t+u_x)=0$ and notice that this is true with the left most term $u_t-u_x=0$.  Speed limit is $c=1$.
+	
+	Finite speed of propogation (from the solution formula).
+	
+	d'Alembert's Formula.
+	
+	\textbf{Regularity Issues} One dimensional case, the three dimensional case is easier that two dimensions.
+
+	\begin{itemize}
+	\item	Three dimensions: method of spherical means (two dimensions sets $z\equiv 0$.  Translates to a one-dimensional wave equation on the radius ($r>0$, gotten by using odd reflection on the entire real line).
+	
+	\item Three dimensional wave propagation continues past the point.
+	
+	\item Two dimensional case use method of descent.  End up with a cumbersom formula.
+	
+\end{itemize}		
+	
+	\textbf{Huygen's Principle} is the difference between 2-dimensional and 3-dimensional wave propogation.
+	
+	\textbf{Energy Methods} Prove:
+	\begin{itemize}
+		\item unique
+		\item no maximum principle
+		\item alternate proof of finite speed of popagation (doesn't use Kirchoff's formula).
+	\end{itemize}
+		
+	\item \textbf{General transport equation}
+	\begin{itemize}
+		\item Variable-coefficient linear transport
+		
+		still use method of characteristics \textbf{\textit{•Know this for this test: various things that could happen with method of characteristics.}} $Z(s)=u(x(s), t(s))$ then take the derivative and choose how $\frac{dx}{ds}$ and $\frac{dt}{ds}$ make sense for a solution.
+		
+		\item non-linear transport, i.e., $u_t-u_x=u^2$
+		
+		could be a question understanding definition between linear and non-linear PDE.  Beware linear 'operator' (like the Laplacian).
+		
+
+\textbf{Strategy: Method of Characteristics}
+
+The method of characteristics transforms the PDE into a system of ordinary differential equations (ODEs) along specific curves in the \((x,t)\) plane, called characteristic curves. Along these curves, the solution's behavior simplifies dramatically.
+\begin{enumerate}
+
+\item  Set up the Characteristic Equations
+
+For a general first-order PDE of the form \(a(x,t,u)u_x + b(x,t,u)u_t = c(x,t,u)\), the characteristic equations are:
+
+\[ \frac{dx}{ds} = a, \quad \frac{dt}{ds} = b, \quad \frac{du}{ds} = c \]
+
+For your equation, \(u_t - u_x = u^2\), we can write it as \((-1)u_x + (1)u_t = u^2\). So, \(a=-1\), \(b=1\), and \(c=u^2\). The characteristic equations are:
+
+\begin{enumerate}
+\item  \(\frac{dt}{ds} = 1\)
+\item  \(\frac{dx}{ds} = -1\)
+\item \(\frac{du}{ds} = u^2\)
+
+\end{enumerate}
+
+\item  Solve the ODEs
+
+We solve this system of ODEs, typically with initial conditions given along a curve, for instance, \(u(x,0) = g(x)\) at \(t=0\).
+
+*   **Solve for t:** From \(\frac{dt}{ds} = 1\), we get \(t(s) = s + C\). If we start the characteristics at \(t=0\), we can set \(t=s\).
+
+*   **Solve for x:** From \(\frac{dx}{ds} = -1\), we get \(x(s) = -s + x_0\), where \(x_0\) is the initial x-position at \(s=0\) (i.e., \(t=0\)). Substituting \(s=t\), we find the equation for the characteristic curves:
+    \[ x = -t + x_0 \implies x_0 = x+t \]
+    This tells us that the characteristic curves are straight lines along which the quantity \(x+t\) is constant.
+
+*   **Solve for u:** Now we solve the crucial ODE for \(u\):
+    \[ \frac{du}{ds} = u^2 \]
+    This is a separable ODE: \(\frac{du}{u^2} = ds\). Integrating gives:
+    \[ -\frac{1}{u} = s + K \implies u(s) = -\frac{1}{s+K} \]
+    The constant of integration \(K\) depends on the specific characteristic curve, which is identified by its starting point \(x_0\). At \(s=0\) (which corresponds to \(t=0\)), the initial value of \(u\) is \(u(0) = g(x_0)\). So:
+    \[ u(0) = g(x_0) = -\frac{1}{K} \implies K = -\frac{1}{g(x_0)} \]
+
+\item Assemble the Final Solution
+
+Now, substitute everything back to express the solution \(u\) in terms of \(x\) and \(t\).
+
+\[ u(x,t) = u(s) = -\frac{1}{s - \frac{1}{g(x_0)}} \]
+
+Replace \(s\) with \(t\) and \(x_0\) with \(x+t\):
+
+\[ u(x,t) = -\frac{1}{t - \frac{1}{g(x+t)}} = \frac{g(x+t)}{1 - t \cdot g(x+t)} \]
+
+This is the general solution for the initial value problem. A key feature of this non-linear equation is the possibility of the solution blowing up in finite time when the denominator becomes zero, i.e., when \(t \cdot g(x+t) = 1\). This is a stark contrast to the linear PDEs we discussed earlier, whose solutions typically exist for all time (given smooth data).
+\end{enumerate}	
+		
+	\end{itemize}
+	
+	\item \textbf{Burger's Equation, Conservation laws.}  $u_t+(F(u))_x=u_t-F'(u)u_x=0$.  \textbf{Likely to be on the final}
+		
+		Start the same way with $z(s)$ and method of characteristics.
+		
+		could have rarefaction wave and a shock (probably only one at a time).  jump conditions.  Non-uniqueness issue because the characteristics cross.  Return to the weak formulation of the PDE.  \textbf{probably not on the final.}  
+		
+		\begin{description}
+			\item \textbf{Entropy condition.} violating is a non-physical shock.  Since the Method of Characteristics can generate a family of solutions and that these can travel at different speeds (some catching up and overpowering others) they can form a shock.    In this case, many solutions aren't practical or cannot represent a physical solution without the entropy condition.  If $F$ is the characteristic speed of a weak-solution then
+		\begin{align*}
+			F'(u_L)> s > F'(u_R)
+		\end{align*}
+		\end{description}
+	
+	\item \textbf{The solution space, eigenvalues and eigen-functions}
+	
+	Fundamentally, think of the PDE as $\Delta u = \lambda u$ and to think of the solution space as an inner product space over continuous functions and the inner product is 
+	\begin{align*}
+		f \cdot g = \int_{\R^n} fg\, dx
+	\end{align*}thus we can approach the solution as a linear algebra problem where $\lambda$ is an eigenvalue for a transformation equivalent to the PDE.
+	
+	\begin{enumerate}
+		\item Assume that it is separable $u(x,t) = T(t)\phi(x)$.  Then, in hyperbolic PDEs we have 
+		\begin{align*}
+			u(x,t) &= T(t)\phi(x) \\
+			T'(t)\phi(x) &= T(t)\Delta \phi \\
+			\frac{T'(t)}{T(t)} &= \frac{\Delta \phi(x)}{\phi (x)}
+		\end{align*}This must be a constant which we assign to $\lambda$.  Generating two equations
+		\begin{align*}
+			\Delta \phi &= -\lambda \phi & \text{spatial part}\\
+			&\text{generates } \{\lambda_n\} \\
+			T'(t) &= -\lambda T(t) & \text{time part} \\
+			&= C_ne^{\lambda_nt}
+		\end{align*}Thus, applying $t=0$ we get
+		\begin{align*}
+			f(x) &= u(x,0) = \sum_{n=1}^\infty C_n\phi_n(x) \\
+			C_n &= \frac{f\cdot\phi}{\phi\cdot\phi}= \frac{\int_U f(x)\phi(x)\,dx}{\int_U \phi_n(x)^2\, dx}
+		\end{align*}generating a Green's Function
+		\begin{align*}
+			G(x,t) &= \sum_{n=1}^\infty \frac{\phi_n(x)\phi_n(t)}{\lambda_n}
+		\end{align*}
+	\end{enumerate}
+	
+	\end{itemize}
+
+\end{description}
 
 \end{document}

@@ -18,7 +18,7 @@ Fall 2025
 ===========
 
 Math 5315 (86475) Numerical Methods for Partial Differential Equations
-Math 6230 (89220) Partial Differential Equations I
+Math 5230 (89220) Partial Differential Equations I
 Math 5050 (89223) Self-study in Differential Geometry (Berchenko-Kogan)
 Math 6099 (88197) Colloquium W 4-5
 
@@ -26,9 +26,9 @@ Math 6099 (88197) Colloquium W 4-5
 
 Spring 2026
 
-6240 Partial Differential Equations II
+Math 6230 (31222) Partial Differential Equations II: MW 11-12 332 Perrera
 XXXX Special Topics: Tensor Calculus (Berchenoko-Kogan)
-XXXX Special Topics: Algebraic Topology (Shibo Liu)
+Math 5050 (31226) Special Topics: Algebraic Topology (Shibo Liu)
 6899 Dissertation???
 
 ==========

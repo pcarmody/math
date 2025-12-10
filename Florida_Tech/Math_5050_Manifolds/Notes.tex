@@ -688,5 +688,273 @@ The gradient is a vector field derived from a scalar function using a Riemannian
 	 	
  	 \end{enumerate}
  \end{remark}
+ 
+ \newpage
+ \textbf{Explain this statement: Note that the topological interior and the topological boundary of a set depend on an ambient space, while the manifold interior and the manifold boundary are intrinsic.}\\
+ 
+ Excellent question — this is one of the most conceptually important distinctions in topology and differential geometry. Let’s unpack it carefully.
+
+---
+\begin{enumerate}
+\item \textbf{ **Topological interior and boundary depend on the *ambient space***}
+
+The **topological interior** $\operatorname{int}(A)$ and **topological boundary** $\operatorname{Bd}(A)$ of a subset $A\subset X$ are defined **relative to the topology of the ambient space $X$**:
+
+$$
+\operatorname{int}_X(A) = \text{largest open subset of } X \text{ contained in } A,
+$$
+$$
+\operatorname{Bd}_X(A) = \overline{A}^X \setminus \operatorname{int}_X(A),
+$$
+where the closure and openness are taken in (X).
+
+So if you **change the ambient space**, the notions of "open" and "closed" change — and so does the boundary.
+
+---
+
+Example:
+
+Let $A = [0,1)\subset\mathbb{R}$.
+
+* In the **ambient space** $\mathbb{R}$:
+  $$
+  \operatorname{int}*{\mathbb{R}}(A) = (0,1),\quad \operatorname{Bd}*{\mathbb{R}}(A) = {0,1}.
+  $$
+
+* In the **ambient space** $[0,1)$ (viewing $A$ as the *whole* space):
+  $$
+  \operatorname{int}*{[0,1)}(A) = A, \quad \operatorname{Bd}*{[0,1)}(A) = \varnothing.
+  $$
+
+See the difference? The same set has a boundary ${0,1}$ in $\mathbb{R}$, but no boundary at all in ([0,1)) when that’s the entire ambient space.
+
+---
+
+\item \textbf{ **Manifold interior and boundary are *intrinsic***}
+
+A **manifold** (with boundary) is a space that *locally looks like* an open subset of $\mathbb{R}^n$ or the half-space $\mathbb{H}^n = {x_n\ge 0}$.
+
+Then we define:
+
+* A point $p$ in the manifold $M$ is a **manifold interior point** if there is a chart mapping a neighborhood of $p$ homeomorphically to an open subset of $\mathbb{R}^n$.
+* A point $p$ is a **manifold boundary point** if, in some chart, it corresponds to a point in the boundary plane ${x_n=0}\subset\mathbb{H}^n$.
+
+These definitions depend **only on the local structure of $M$ itself**, not on how $M$ sits in some larger ambient space.
+
+---
+\begin{itemize}
+
+\item  Example (again, $M = [0,1)\subset\mathbb{R})$:
+
+\item  As a manifold with boundary, $M$ is locally modeled on:
+
+\begin{itemize}
+
+  \item $(0,1) \equiv$ open subset of $\mathbb{R}$,
+  \item $\{0\} \equiv$ boundary point (looks like $x_n=0$ in $\mathbb{H}^1 = [0,\infty))$.
+
+\end{itemize}
+So:
+$$
+\operatorname{Int}*{\text{manifold}}(M) = (0,1), \quad
+\partial*{\text{manifold}}(M) = {0}.
+$$
+
+This conclusion doesn’t depend on whether $M$ sits inside $\mathbb{R}$, inside a circle, or even inside some abstract topological space.
+
+\end{itemize}
+---
+
+\item  3. \textbf{**Summary of the idea**}
+
+\begin{tabular}{|lclc|}
+\hline
+Concept  & Ambient space? & Defined by & Example for $M=[0,1)\subset\mathbb{R}$ \\
+\hline **Topological interior** &  Yes & Open sets in the surrounding space & $(0,1)$ \\
+\hline **Topological boundary** & Yes & Closure/interior in ambient space  & $\{0,1\}$                           \\
+\hline **Manifold interior** &  No & Local charts (intrinsic to $M$)    & $(0,1)$   \\
+\hline**Manifold boundary** &  No   & Local half-space structure & $\{0\}$                   \\
+\hline
+\end{tabular}
+---
+
+\item  \textbf{**Intuitive takeaway**}
+
+\begin{itemize}
+
+\item The **topological boundary** answers:
+  “If I look from the outside (in the surrounding space), where does the set stop being inside?”
+
+\item The **manifold boundary** answers:
+  “If I live *on the manifold itself*, where does it locally look like a half-space instead of full space?”
+\end{itemize}
+
+That’s what the statement means:
+
+$\rightarrow$ “The topological interior and topological boundary of a set depend on an ambient space, while the manifold interior and manifold boundary are intrinsic.”
+
+---
+
+Would you like me to include a geometric picture (e.g., of $[0,1)$ sitting in $\mathbb{R}$ with its manifold and topological boundaries labeled)?
+
+\end{enumerate}
+
+\newpage
+\textbf{\Large{Partition of Unity}}
+
+A **partition of unity** is one of the most powerful tools in differential geometry because it lets you glue *local* constructions into *global* ones on a manifold. Here is a clear, intuitive explanation.
+
+---
+\begin{enumerate}
+
+
+\item \textbf{Why do we need partitions of unity?**}
+
+Manifolds are built from coordinate charts. Many constructions—vector fields, differential forms, Riemannian metrics—are natural only **locally** in a chart.
+
+To define a global object, we need to combine these local pieces together smoothly.
+A partition of unity is the technical device that lets us do exactly that.
+
+---
+
+\item  \textbf{Basic idea**}
+
+\textbf{Definition:} A \DEFINE{partition of unity} is a collection of smooth functions
+$$
+{\varphi_i : M \to [0,1]}_{i\in I}
+$$
+that satisfies:
+\begin{enumerate}
+
+\item \textbf{**Local finiteness:**}
+   At each point $p\in M$, only finitely many $\varphi_i(p)$ are nonzero.
+
+\item \textbf{**Subordinate to an open cover $\{U_i\}$:**}
+   Each function is supported in one set of the cover:
+   $$
+   \operatorname{supp}(\varphi_i) \subset U_i.
+   $$
+
+\item  \textbf{**Partition property:**}
+   $$
+   \sum_{i\in I} \varphi_i(p) = 1 \qquad \text{for all } p\in M.
+   $$
+
+\item \textbf{**Smoothness:**}
+   Each $\varphi_i$ is $C^\infty$.
+
+\end{enumerate}
+Think of the $\varphi_i$ as **smooth weights** that “blend” local data together.
+
+---
+
+\item \textbf{Intuition (“smooth blending”)**}
+
+Suppose on each $U_i$ you have some local data—say, a vector field $X_i$.
+You want a global smooth vector field $X$ on all of $M$.
+
+Define:
+$$
+X = \sum_{i\in I} \varphi_i X_i.
+$$
+
+This makes sense because:
+\begin{itemize}
+
+\item  Each $\varphi_i$ is smooth.
+\item Only finitely many terms are non-zero at each point (local finiteness).
+\item  The weights sum to 1.
+\item  Outside $U_i, \varphi_i = 0$, so nothing “leaks out”.
+
+\end{itemize}
+This is the manifold version of using bump functions to smoothly interpolate between definitions.
+
+---
+
+\item \textbf{Where do partitions of unity come from?**
+}
+Key fact:
+
+**Every smooth manifold admits a partition of unity subordinate to any open cover.**
+
+This relies on:
+
+\begin{itemize}
+
+\item  existence of smooth bump functions on $\mathbb R^n$,
+\item  use of charts to transfer these to the manifold,
+\item  paracompactness of smooth manifolds (ensures locally finite refinements).
+
+\end{itemize}
+This is *not* generally true for arbitrary topological spaces—smooth manifolds are special.
+
+---
+
+\item \textbf{Example (very simplified)**}
+
+Let $M = S^1$ and cover it with two open sets:
+
+* $U_1 = S^1 \setminus {\text{south pole}}$
+* $U_2 = S^1 \setminus {\text{north pole}}$
+
+We can build smooth bump functions $\varphi_1,\varphi_2$ such that:
+
+\begin{itemize}
+
+\item  $\varphi_1$ is supported inside $U_1$,
+\item  $\varphi_2$ is supported inside $U_2$,
+\item  both are nonnegative,
+\item  $\varphi_1 + \varphi_2 = 1$ everywhere on the circle.
+
+\end{itemize}
+Any two local constructions on $U_1,U_2$ can be glued together via these weights.
+
+---
+
+\item \textbf{What partitions of unity are used for**}
+
+They are essential in differential geometry:
+
+\begin{enumerate}
+
+\item  Defining Riemannian metrics globally**
+
+Given local metrics $g_i$, let
+$$
+g = \sum_i \varphi_i g_i.
+$$
+
+\item  Integrating differential forms**
+
+Used to reduce problems to computations in coordinate charts.
+
+\item  Proving de Rham cohomology = Čech cohomology**
+
+\item  Constructing global vector fields, tensor fields**
+
+\item Embedding manifolds in Euclidean space**
+
+(Used in the Whitney embedding theorem.)
+
+\end{enumerate}
+---
+
+\item \textbf{Summary**}
+
+A partition of unity on a smooth manifold is:
+\begin{itemize}
+
+\item a collection of smooth nonnegative functions
+\item each supported in one open set of a chosen cover
+\item only finitely many nonzero at any point
+\item summing to 1 everywhere.
+
+\end{itemize}
+It lets you combine local, chart-level objects into global smooth objects.
+It is thus a cornerstone of modern differential geometry.
+
+\end{enumerate}
+---
+
 
 \end{document}

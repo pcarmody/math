@@ -161,12 +161,12 @@ Recall that solutions to Neumann problem for Laplace's equations were not unique
 	Find an explicit soluton to this probem using the  change of variables $z=x+bt$ and the solution formula for the heat equat1ion (equation (9) in Section 2.3 of Evans).
 
 \BLUE{
-	\textbf{Step 1: }Solve $z$ in terms of $x$ and define the substitution 
+	\textbf{Step 1: }Solve $x$ in terms of $z$ and define the substitution 
 	\begin{align*}
 		x &= z-bt \\
 		v(z,t) &= u(z+bt,t) \\
 		v_t &= u_t+ b\cdot \Delta_x u, \quad \nabla_z v = \nabla_x u, \quad \Delta_z v = \Delta_x u
-	\end{align*}\textbf{Step 2: }Substituting into the oribinal equation
+	\end{align*}\textbf{Step 2: }Substituting into the original equation
 	\begin{align*}
 		u_t - \Delta_x u + b\cdot Du &= (v_t-b\cdot D_xu)-\Delta_x + b \cdot D_xu = v_t - \Delta_z v = 0
 	\end{align*}Thus $v$ is a solution to the original Heat Equation with initial state $v(z,0) = u(x,0) = g(0)$.  \\
@@ -205,6 +205,14 @@ Recall that solutions to Neumann problem for Laplace's equations were not unique
 \begin{align*}
 	u_t-\Delta u-c\cdot Du=0,\, x\in U, t\in (0,T),
 \end{align*}where $c>0$ is a positive constant.  Prove that this PDE satisfies a maximum principle, i.e., the maximum of $u$ on $\hat{U}_T$ occurs on the parabolic boundary. (Hint: imitate the proof given in class for the equation on a bounded domain.)
+
+\BLUE{As from the proof in class, assume $(x_0,y_0) \in U$ is a maximum point.  Following the proof from the lecture 
+\begin{align*}
+	D^2_x(x_0,t_0) &\le 0 ?\\
+	\Delta u &= \TR (D^2_x(x_0,y_0)) \le 0
+\end{align*}No, that can't happen.  We have $u_t(x_0,y_0) \le D_x(x_0,y_0)$.  However, $D_x(x_0,y_0)$ must be zero if it is interior to $U$ as it is a critical point.  The proof follows in the same manner that is $\dots$ \\
+Let $u_\epsilon = u + \epsilon |x|^2$. Then $(u_\epsilon)_t=\Delta u_\epsilon - c\cdot D_xu(x_0,y_0)- 2n\epsilon = -2n\epsilon$.  This implies that $u_\epsilon -2n\epsilon = (u_\epsilon)_t-\Delta u_\epsilon \ge 0$, which is a contradiction.  Therefore, $(x_0, y_0) \not \in U$ and must be on $\Gamma U$.
+}
 
 \item the PDE $u_t-xu_{xx}=0$ is a variable-coefficient parabolic equation in one space dimension.  Show that this PDE does not satisfy a maximum principle. (Hint:  consider $(u(x,t)=-2xt-x^2$.  Where does the maximum of this function on the closed rectangle $-2\le x\le 2,0\le t\le 1$ occur?)
 

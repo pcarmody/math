@@ -90,13 +90,25 @@ Show that the relation in Definition 2.11 is an equivalence relation.
 \end{itemize}
 }
 
-\item \textbf{Orientaion-preserving diffeomorphisms}
+\item \textbf{Orientation-preserving diffeomorphisms}
 
-Let $F: (N,[\omega_N])\to (M,[\omega_M])$ be an orientation-preserving diffeomorphism.  If $\{(V_\alpha, \psi_\alpha)\} = \{(V_\alpha, y_\alpha^1,\dots, y_\alpha^n)\}$ is an oriented atlas on $M$ that specifies the orientation of $M$, show that $\{(F^{-1}V_\alpha, F^*\psi_\alpha)\}=\{(f^{-1}V_\alpha,F_\alpha^1,\dots,F_\alpha^n)\}$ is an oriented atlas on $N$ that specifies the orientaion of $N$, where $F_\alpha^i=y_\alpha\circ F$.
+Let $F: (N,[\omega_N])\to (M,[\omega_M])$ be an orientation-preserving diffeomorphism.  If $\{(V_\alpha, \psi_\alpha)\} = \{(V_\alpha, y_\alpha^1,\dots, y_\alpha^n)\}$ is an oriented atlas on $M$ that specifies the orientation of $M$, show that $\{(F^{-1}V_\alpha, FV^*\psi_\alpha)\}=\{(F^{-1}V_\alpha,F_\alpha^1,\dots,F_\alpha^n)\}$ is an oriented atlas on $N$ that specifies the orientation of $N$, where $F_\alpha^i=y_\alpha\circ F$.
 
 \item \textbf{Orientation-preserving or orientation-reversing diffeomorphisms}
 
 Let $U$ be an open set $(0,\infty)\times (0,2\pi)$ in the $(r,\theta)$-plane $\R^2$.  We define $F:U\subset \R^2 \to \R^2$ by $F(r,\theta)=-(r\cos\theta,r\sin\theta)$.  Decide whether $F$ is orientation-preserving or orientation-reversing as a diffeomorphism onto its image.
+
+\BLUE{
+\begin{align*}
+	x(r,\theta) &= -r\cos\theta \\
+	y(r,\theta) &= -r\sin\theta \\
+	\PART{x}{r} &= -\cos\theta  &\quad \PART{x}{\theta} &= r\cos\theta \\
+	\PART{y}{r} &= -\sin\theta & \quad \PART{y}{\theta} &= -r\sin\theta \\
+	J &= \TWOXTWO{-\cos\theta}{r\sin\theta}{-\sin\theta}{-r\cos\theta} \\
+	\det J &= (-\cos\theta)(-r\cos\theta)-(r\sin\theta)(-\sin\theta) \\ 
+	&= r^2
+\end{align*}Clearly, $\det J >0$ therefore orientation-preserving.
+}
 
 \item \textbf{Orientability of a regular level set in $\R^{n+1}$}
 
@@ -116,7 +128,45 @@ Let $M$ be a smooth manifold and $\pi:TM\to M$ its tangent bundle.  Show that if
 
 \item \textbf{Oriented atlas on a circle}
 
-In Example 5.16 we found an atlas $\mathfrak{U}=\{(U_i,\phi_i)\}_{i=1}^4$ on the unit circle $S^1$.  Is $\mathcal{U}$ an oriented atlas?  If not, alter the coordinate function $\phi_i$ to make $\mathfrak{U}$ into an oriented atlas.
+In Example 5.16 we found an atlas $\mathfrak{U}=\{(U_i,\phi_i)\}_{i=1}^4$ on the unit circle $S^1$.  Is ${U}$ an oriented atlas?  If not, alter the coordinate function $\phi_i$ to make $\mathfrak{U}$ into an oriented atlas.
+
+\BLUE{
+Recall that 
+	\begin{align*}
+		\mathfrak{U} = \BRACKET{\begin{array}{l}
+		(U_1 = \{ (x,y) \in S^1: y > 0\},\, \phi_1(x,y)=x), \\
+		(U_2 = \{ (x,y) \in S^1: y < 0\},\, \phi_2(x,y)=x), \\
+		(U_3 = \{ (x,y) \in S^1: x > 0\},\, \phi_3(x,y)=y), \\
+		(U_4 = \{ (x,y) \in S^1: x < 0\},\, \phi_4(x,y)=y)
+		\end{array}
+	}
+	\end{align*}
+Need to show that the determinant of the transformation matrices (Jacobian) between each of the charts is positive.  Keeping in mind that the transformation only occurs on the intersection of the charts.  Taking $\phi_\alpha\circ\phi_\beta^{-1}$ for $\alpha, \beta \in \{1,2,3,4\}$ and its inverse we see 
+\begin{enumerate}
+	\item $(U_1, \phi_1) \cap (U_2,\phi_2)$ is empty.
+	\item $(U_1, \phi_1) \cap (U_3,\phi_3)$ is the first quadrant.
+	\begin{align*}
+		\phi_1 \circ \phi_3^{-1}(y) &= \phi_1(\phi_3^{-1}(y)) = \phi(\sqrt{1-y^2},1) = \sqrt{1-y^2}\\
+		\phi_3\circ\phi_1^{-1}(x) &= \phi_3(\phi_1^{-1}(x)) = \phi(1,\sqrt{1-x^2},1) = \sqrt{1-x^2}
+	\end{align*}
+	\item $(U_1, \phi_1) \cap (U_4,\phi_4)$ is the second quadrant.
+	\begin{align*}
+		\phi_1\circ\phi_4^{-1}(y) &= \phi_1(\phi_4^{-1}(y)) = \phi_1(-\sqrt{1-y^2}, y) = -\sqrt{1-y^2} \\
+		\phi_4\circ\phi_1^{-1}(x) &= \phi_4(\phi_1^{-1}(x)) = \phi_4(x,\sqrt{1-x^2}) = \sqrt{1-x^2}
+	\end{align*}
+	\item $(U_2, \phi_2) \cap (U_3,\phi_3)$ is the fourth quadrant
+	\begin{align*}
+		\phi_2\circ\phi_3^{-1}(y) &= \phi_2(\phi_3^{-1}(y)) = \phi_2(\sqrt{1-y^2}, y) = \sqrt{1-y^2} \\
+		\phi_3\circ\phi_2^{-1}(x) &= \phi_3(\phi_2^{-1}(x)) = \phi_3(x, -\sqrt{1-x^2}) = -\sqrt{1-x^2}
+	\end{align*}
+	\item $(U_2, \phi_2) \to (U_4,\phi_4)$ is the third quadrant.
+	\begin{align*}
+		\phi_2\circ\phi_4^{-1}(y) &= \phi_2(\phi_4^{-1}(y)) = \phi_2(-\sqrt{1-y^2}, y) = -\sqrt{1-y^2} \\
+		\phi_4\circ\phi_2^{-1}(x) &= \phi_4(\phi_2^{-1}(x)) = \phi_4(x, -\sqrt{1-x^2}) = -\sqrt{1-x^2}
+	\end{align*}
+	\item $(U_3, \phi_3) \to (U_4,\phi_4)$ is empty
+\end{enumerate}We can see that in (c) and (d) the signs are different for the inverse of each composition.  Therefore, it is NOT orientation preserving.  However, if we change $\phi_2(x,y)=-x$ and $\phi_4(x,y) = -y$ this makes ALL of the transformations across all charts to have the same sign.  Hence, orientation preserving.
+}
 
 \end{enumerate}
 \end{document}

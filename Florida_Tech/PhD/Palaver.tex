@@ -82,4 +82,38 @@ Translating the wedge product and its uses through Differential Geometry into th
 
 I guess I'm trying to find a better way of explaining this notation.  I guess I'm seeing that the terms of $\Omega^*$ are elements of $\Omega^1, \Omega^2, \dots, \Omega^n$ each of which are expressions of their own vector space.  We have a finite union of vector spaces where all basis vectors are linearly independent of each other.
 
+\HLINE
+\begin{align*}
+	\TWOXTWO{1}{1}{1}{0}^n &= \TWOXTWO{F_{n+1}}{F_n}{F_n}{F_{n-1}}
+\end{align*}Where $F_n$ is the $n\ITH$ Fibinocci Number.
+
+\HLINE
+\textbf{Exponentiating Matrices}
+
+I woke to thinking about this.  Expressing $e^A$ using Taylor's Expansion is one thing.  Then, realizing that a rotational matrix will have a cyclic nature as we iterate through the exponent.  In this way, we change an infinite series of seemingly disparate terms into several infinite series of terms led by a matrix coefficient.
+\begin{align*}
+	f(x) &= \sum_{n=1}^\infty \frac{f^{(n)}(a)}{n!} f(x-a) \\
+	f(x) &= \sum_{n=1}^\infty \frac{f^{(n)}(0)}{n!} f(x) \\
+	e^x &= \sum_{n=0}^\infty \frac{x^n}{n!}
+\end{align*}substituting a matrix $A$ for $x$ intuitively should work but the complexity seems daunting.  However, if $A$ is a rotational matrix where the angle of rotation is $\theta=2\pi/k$ then $A^k = I$.  Thus we can factor out $k$ terms of the form
+\begin{align*}
+	e^A &= I\PAREN{\frac{1}{0!} + \frac{1}{k!}+\frac{1}{{2k}!}+\cdots)} + A\PAREN{\frac{1}{1!} + \frac{1}{(k+1)!}+\frac{1}{(2k+1)!}+\cdots)} + \\
+	&\cdots + A^i\PAREN{\frac{1}{i!} + \frac{1}{(k+i)!}+\frac{1}{2(k+i)!}+\cdots)} & i=k-1 \\
+	&= \sum_{i=0}^{k-1}A^i\PAREN{\frac{1}{i!}+{•}\sum_{j=1}^\infty\frac{1}{(jk+i)!} }
+\end{align*}this is clearly convergent.\\
+
+Now, remembering that the mapping from a Lie Algebra to a Lie Group has the form $e^{iA}$ suddenly puts Lie Theory into interesting context.  Note that $\dim A$ is the same as the dimension of the manifold.\\
+\HLINE
+\textbf{Understanding functionals, covariant tensors}
+
+For every $f \in V^*$ where $\phi_i$ are the basis functionals on $V^*$.  Further, $\phi_i(b_j) = \delta_{ij}$ where $b_i$ are the basis of $V$. Then 
+\begin{align*}
+	f(v) &= \sum_{i=1}^n \alpha_i\phi_i(v)\\
+	&= \sum_{i=1}^n \alpha_i \phi_i\PAREN{\sum_{j=1}^n v_jb_j} \\
+	&= \sum_{i=1}^n \alpha_i  \sum_{j=1}^n v_j \phi_i(b_j)\\
+	&= \sum_{i=1}^n \alpha_iv_i
+\end{align*}Essentially, if we consider $\hat{f}=(\alpha_1,\dots,\alpha_n)$ as the components of a vector of $V^*$ we can see that $f(v) = \ABRACKET{(\alpha_1,\dots,\alpha_n),\, v}$, i.e., the inner product $f(v) = \ABRACKET{\hat{f}, v}$.  It should be noted that the Inner Product must be done between vectors of the same vector space.  This is a glaring exception.  It is perhaps \textit{essential} that we don't identify this as an inner product but a finite sum since the inner product might be defined differently in an Inner Product Space.  Besides, which 'space' would you use?\\
+
+What is the best way to think of functionals?  Ultimately, they look like vectors (i.e., they have scalar components) and generate scalars.  Extrapolating to covariant tensors, they look like tensors (i.e., they have scalar components) and generate scalars.  So, adding covariant vectors/tensors is like adding vectors/tensors and still adding their resultant scalars.
+
 \end{document}

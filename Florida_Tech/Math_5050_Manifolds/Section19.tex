@@ -69,9 +69,9 @@
 
 \item \textbf{Pullback of a differential form}
 
-Let $U$ be the open set $(0,\infty)\times(0,\pi)\times(0,2\pi)$ in the $(\rho,\theta,\theta)$-space $\R^3$.  Define $F: U \to \R^3$ by
+Let $U$ be the open set $(0,\infty)\times(0,\pi)\times(0,2\pi)$ in the $(\rho,\theta,\phi)$-space $\R^3$.  Define $F: U \to \R^3$ by
 \begin{align*}
-	F(\rho, \phi, \theta) =(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi).
+	F(\rho, \theta, \phi) =(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi).
 \end{align*}If $x,y,z$ are the standard coordinates on the target $\R^3$, show that 
 \begin{align*}
 	F^*(dx\wedge dy\wedge dz) = \rho^2\sin\phi\, d\rho\wedge d\phi\wedge d\theta.
@@ -94,7 +94,7 @@ Let $U$ be the open set $(0,\infty)\times(0,\pi)\times(0,2\pi)$ in the $(\rho,\t
 	&= \rho^2\PAREN{ \cos^2\phi\sin\phi \DTWOXTWO{\sin\theta}{ -\sin\theta}{ \sin\theta}{ -\cos\theta }+\sin^3\phi\DTWOXTWO{\cos\theta }{ -\sin\theta}{\cos\theta }{ -\cos\theta}}\\
 	&= \rho^2\PAREN{ \cos^2\phi\sin\phi \sin\theta\DTWOXTWO{1}{ -\sin\theta}{ 1}{ -\cos\theta }+\sin^3\phi\cos\theta \DTWOXTWO{1 }{ -\sin\theta}{1 }{ -\cos\theta}}\\
 	&= \rho^2\sin\phi\PAREN{ \cos^2\phi \sin\theta\DTWOXTWO{1}{ -\sin\theta}{ 1}{ -\cos\theta }+\sin^2\phi\cos\theta \DTWOXTWO{1 }{ -\sin\theta}{1 }{ -\cos\theta}}
-\end{align*}The bracketed term simplies
+\end{align*}The bracketed term simplifies
 \begin{align*}
 	\cos^2\phi \sin\theta\DTWOXTWO{1}{ -\sin\theta}{ 1}{ -\cos\theta }+\sin^2\phi\cos\theta \DTWOXTWO{1 }{ -\sin\theta}{1 }{ -\cos\theta} &= (\cos^2\phi \sin\theta+\sin^2\phi\cos\theta )( -\cos\theta  +\sin\theta) \\
 	&=\cos^2\phi \sin^2\theta +\sin^2\phi\cos^\theta \\

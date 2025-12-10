@@ -29,9 +29,9 @@
 
 %\urlstyle{same}
 
-\newcommand{\CLASSNAME}{Math XXXX -- Independent Study: Differential Geometry, Lie Groups}
+\newcommand{\CLASSNAME}{Math 5050 -- Independent Study: Differential Geometry, Lie Groups}
 \newcommand{\STUDENTNAME}{Paul Carmody}
-\newcommand{\ASSIGNMENT}{\textit{Basic Category Theory -- Tom Leinster}}
+\newcommand{\ASSIGNMENT}{???}
 \newcommand{\DUEDATE}{August, 2025}
 \newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
 \newcommand{\SEMESTER}{Summer 2025}
@@ -182,5 +182,34 @@ These vector fields form a Lie algebra under the Lie bracket operation. If \(X_A
 The left-invariant vector fields of GL(n,R) are of the form \(X_A\), where \(A\) is an n x n real matrix, and \(X_A(g) = gA\) for any \(g \in GL(n,R)\). These vector fields span the Lie algebra of GL(n,R), which is the space of all n x n real matrices.
 \end{itemize}
 \end{remark}
+
+\newpage
+\textbf{\Large{Interesting tidbits}}
+
+\begin{itemize}
+	\item Interesting determinant identity.
+	\begin{align*}
+		\det e^M &= e^{\operatorname{tr}(M)}
+	\end{align*}
+	
+	\item Complex numbers as two-by-two matrix
+	\begin{align*}
+		a + bi &\to \TWOXTWO{a}{-b}{b}{a}\\
+		i &= \TWOXTWO{0}{-1}{1}{0} & \quad i^2 &= \TWOXTWO{-1}{0}{0}{-1} = -1\mathbb{I}_2
+	\end{align*}
+	\item Exponential Differential Operator is a translation.
+	\begin{align*}
+		e^{a\frac{d}{dx}}f(x) &= f(x+a)
+	\end{align*}
+	
+	\item Local mapping from a tangent line to $S_1$ in contrast to a tangent space to $S_n$.
+	\begin{align*}
+		T_0(S_1) &\mapsto S_1 \\
+			y &= e^{i\tan^{-1} y} \\
+			\\
+			T_0(S_n) &\mapsto S_n \\
+				y &= e^{iM}
+	\end{align*}where $M$ is an $n\times n$ matrix projecting onto $S_n$.
+\end{itemize}
 
 \end{document}
