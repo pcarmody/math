@@ -1,0 +1,93 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+
+\begin{center}
+\textbf{\Large{Notes and Observations}}
+\end{center}
+
+\HLINE
+
+\begin{description}
+	\item \textbf{Indices:}
+	
+	The upper index is for covariant tensors and the lower index is for contravariant tensors.  Notice that 
+	\begin{align*}
+		\PART{f^i}{x^j}
+	\end{align*}that $f$ is a function and $x$ is a vector.  This is in keeping with the definition from \textit{Manifolds} where a covariant tensor is a functional and a contravariant tensor is vector.  In the special case of the dual space then we know that a basis vector is of the form $f^i(x_j)=\delta^i_j$ which derives like a constant.  In less precise terms, a functional is made up of terms based on the coordinates.  Extending that notion, a tensor is rearrangement of coordinates (and applied in an expression) that responds to a change of coordinates in a specific way.
+	
+	\item \textbf{Christofel Symbols}
+	
+	By definitions:
+	\begin{align*}
+		\COFF{k}{i}{j} &= \VK{Z}^k\cdot \PART{\VK{Z}_i}{Z_j} & (5.60)
+	\end{align*}Note: this is NOT a contraction.  Picture three $3\times 3$ matrices with these scalars.  Each element is the projection of a partial derivative  of a basis vector ($i$ with respect to $j$) onto another basis vector, $k$.  The collection of the elements of $k$ make up the coordinates of the partial $i$ with respect to $j$.
+\end{description}
+\end{document}

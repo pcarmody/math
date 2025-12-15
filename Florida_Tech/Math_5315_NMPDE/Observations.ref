@@ -1,0 +1,7 @@
+@book{texbook,
+  author = {Pavel Grinfeld},
+  year = {2010},
+  title = {An introduction to Tensor Analysis adn the Calculus of Moving Surfaces},
+  publisher = {Addison-Wesley Professional},
+  edition = {1}
+}

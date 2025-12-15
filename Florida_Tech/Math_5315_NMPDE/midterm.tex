@@ -1,0 +1,112 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5315 -- Numerical Methods for PDE}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Midterm Project }
+\newcommand{\DUEDATE}{November 12, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TTh 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 111}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+ 	\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+\HLINE
+
+\textbf{Question1.} (40 points)
+
+Apply the FTFS scheme to the wave equation $u_t-u_x=0$, with periodic boundary condition over domain $[0,1]$.  Choose $\Delta t = 0.008$ and $\Delta x=0.01$.
+\begin{enumerate}[label=(\alph*)]
+
+	\item Clearly plot the dissipation and dispersion curves of the scheme and list the Matlab code.
+	
+	\item For the initial condition $u(x,0) = \sin^{40}(\pi x)$, plot the analytical and numerical solution at time $t=1$, quantify the amount of dissipation.
+	
+	\item Change the initial condition to $u(x,0)=1$ for $0.4\le x \le 0.6$ and $u(x,0)=0$ otherwise.  Plot the analytical and numerical solution at time $t=1$, quantify the amount of dissipation.
+	
+	\item Compare the results in (b) and (c) and explain the difference based on the Power Spectrum Density Analysis of the initial conditions.
+
+\end{enumerate}
+
+\textbf{Question2.} (40 points)
+
+Apply the LeapFrog scheme ot the wave equation $u_t+u_x=0$, with periodic boundary condition over domain $[0,1]$.  The initial condition is given by $u(x,0)=\sin^{80}(\pi x)$.  Choose $\Delta t = 0.008$ and $\Delta x=0.01$.
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item Analyze the dissipation and dispersion properties for the scheme.
+	
+	\item Plot the analytical and numerical solution at $t=0.8, t=10,$ and $t=20$.
+	
+	\item Explain the numerical solution base on the analysis in (a).
+	
+	\item Can you find a way to reduce the error in the numerical solution?  Confirm your idea with numerical experiments.
+
+\end{enumerate}
+\end{document}

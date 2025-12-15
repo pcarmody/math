@@ -1,0 +1,253 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5315 -- Numerical Methods: Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{December 17, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TTh 2:00 -- 3:15}
+\newcommand{\ROOM}{Crawford 110}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+\begin{center}
+	\textbf{\Large{High Order Weighted
+Essentially Nonoscillatory
+Schemes for \\Convection
+Dominated Problems}}
+\end{center}
+\begin{center}
+	A review by Paul Carmody\\Math 5315 Numerical Methods for PDE: Fall 2025
+\end{center}
+
+\HLINE
+\begin{abstract}
+	Provide a synapses and understanding of the article ``High Order Weighted
+Essentially Nonoscillatory
+Schemes for Convection
+Dominated Problems" by Chi-Wang Shu.  The background and motivation for the WENO process is described along with its foundation in ENO (and its limitations).  The WENO methodology is then described in a step by step manner.  We measure than the behavior of the non-linear weights (decribed below).  This article ends with a discussion measuring the merits, advantages and disadvantages of this approach.
+\end{abstract}
+
+\HLINE
+The Weighted Essentially Non-Oscillatory (WENO) scheme is a high-resolution numerical method widely used for solving hyperbolic partial differential equations (PDEs), particularly those involving discontinuities, shocks, or sharp gradients.\cite{weno} It is designed to achieve high-order accuracy in smooth regions while simultaneously suppressing spurious oscillations near discontinuities, a common problem with standard high-order schemes (like central difference schemes).
+
+Here is a detailed explanation of the WENO scheme, focusing on its application in numerical methods for solving PDEs.
+
+\begin{description}
+
+\item Reasoning \& Explanation
+
+\begin{description}
+
+\item  \textbf{Background and Motivation}
+
+Hyperbolic conservation laws often take the form:
+$$\frac{\partial u}{\partial t} + \frac{\partial f(u)}{\partial x} = 0$$
+where $u$ is the conserved quantity and $f(u)$ is the flux function.
+
+When solving these equations numerically, especially using finite difference or finite volume methods, achieving high accuracy (order $p \ge 3$) is desirable. However, Godunov's theorem (or the TVD theorem) states that linear schemes that are Total Variation Diminishing (TVD) must be at most first-order accurate near extrema. High-order linear schemes (like central differences) introduce oscillations (Gibbs phenomena) near discontinuities.
+
+Non-linear schemes, such as TVD schemes (e.g., MUSCL), overcome this limitation but often cap the accuracy at second order. The WENO scheme is a non-linear approach that achieves high-order accuracy (typically fifth order) in smooth regions while maintaining non-oscillatory properties near shocks.
+
+\item \textbf{The ENO Foundation}
+
+WENO is an improvement upon the Essentially Non-Oscillatory (ENO) scheme, developed by Harten, Engquist, Osher, and Chakravarthy.
+
+ENO Principle: The ENO scheme achieves non-oscillatory behavior by adaptively choosing the smoothest stencil (a set of neighboring grid points) from a collection of candidate stencils to construct the numerical flux or interpolation polynomial. If a stencil spans a discontinuity, it is discarded in favor of a smoother one.\cite{}
+
+Limitation of ENO: ENO is only "essentially" non-oscillatory, meaning the error is $O(\Delta x^p)$ in smooth regions, but the scheme is not optimally accurate. The selection process is discrete (either choose stencil A or stencil B), which leads to a non-smooth flux function and a slight reduction in convergence rate compared to its potential order.
+
+\item \textbf{The WENO Methodology}
+
+The WENO scheme, introduced by Liu, Osher, and Chan (WENO-L), and later refined by Jiang and Shu (WENO-JS), overcomes the limitations of ENO by using a \textit{convex combination} of all candidate stencils, weighted by non-linear weights.\cite{eno}
+
+\begin{enumerate}
+
+\item \textbf{Flux Splitting (Required for Hyperbolic Systems)}
+
+To ensure stability and handle the direction of information propagation, the flux function $f(u)$ is typically split into positive and negative parts based on the sign of the eigenvalues of the Jacobian $\partial f / \partial u$. This is often done using the Lax-Friedrichs splitting or characteristic decomposition:
+$$f(u) = f^+(u) + f^-(u)$$
+The numerical flux $\hat{f}_{i+1/2}$ is then calculated as the sum of the fluxes derived from $f^+$ and $f^-$. We focus on calculating the numerical flux for $f^+$ (the procedure is symmetric for $f^-$).
+
+\item \textbf{Candidate Stencils and Interpolation}
+
+For a $p$-th order WENO scheme (e.g., $p=5$), we define $r$ small stencils, $S_k$, each containing $r$ points, such that their union forms a large stencil $S$ of size $2r-1$. For 5th-order WENO ($r=3$), we use three 3-point stencils:
+
+| Stencil Index ($k$) | Stencil Points |
+|---|---|
+| 0 | $u_{i-2}, u_{i-1}, u_i$ |
+| 1 | $u_{i-1}, u_i, u_{i+1}$ |
+| 2 | $u_i, u_{i+1}, u_{i+2}$ |
+
+For each small stencil $S_k$, a high-order polynomial interpolation $P_k(x)$ is constructed to approximate the flux function $f(u)$ at the interface $x_{i+1/2}$. This yields a candidate numerical flux $\hat{f}_{i+1/2}^{(k)}$.
+
+\item  \textbf{Linear Weights (Ideal Weights)}
+
+If the solution $u$ were perfectly smooth, we could combine these candidate fluxes using fixed, pre-determined linear weights, $d_k$, to achieve the desired high order (e.g., 5th order). These weights satisfy $\sum_{k} d_k = 1$.
+
+For 5th-order WENO-JS, the linear weights are:
+$$d_0 = 0.1, \quad d_1 = 0.6, \quad d_2 = 0.3$$
+
+The high-order flux approximation $\hat{f}_{i+1/2}^{HO}$ would be:
+$$\hat{f}_{i+1/2}^{HO} = \sum_{k=0}^{r-1} d_k \hat{f}_{i+1/2}^{(k)}$$
+
+\item \textbf{ Smoothness Indicators ($\beta_k$)}\cite{beta}
+
+The core of the WENO scheme is the determination of how smooth the solution is within each candidate stencil $S_k$. This is quantified by a smoothness indicator, $\beta_k$. $\beta_k$ is typically a measure of the $L_2$ norm of the derivatives of the interpolation polynomial $P_k(x)$ over the stencil.
+
+A common definition for $\beta_k$ (for 5th-order WENO-JS) involves quadratic forms of the cell averages:
+$$\beta_k = \sum_{l=1}^{r-1} \Delta x^{2l-1} \int_{x_{i-1/2}}^{x_{i+1/2}} \left(\frac{d^l P_k(x)}{dx^l}\right)^2 dx$$
+In practice, $\beta_k$ is calculated using discrete differences of the cell values $u_i$. A smaller $\beta_k$ indicates a smoother solution within stencil $S_k$. If a discontinuity lies within $S_k$, $\beta_k$ will be large.
+
+\item \textbf{Non-linear Weights ($\omega_k$)}
+
+The non-linear weights $\omega_k$ are calculated based on the linear weights $d_k$ and the smoothness indicators $\beta_k$. The goal is to assign a weight close to $d_k$ if the stencil is smooth, and a weight close to zero if the stencil contains a discontinuity.
+
+The standard WENO-JS formulation uses:
+$$\alpha_k = \frac{d_k}{(\epsilon + \beta_k)^2}$$
+$$\omega_k = \frac{\alpha_k}{\sum_{j=0}^{r-1} \alpha_j}$$
+where $\epsilon$ is a small positive number (e.g., $10^{-6}$) introduced to prevent division by zero when $\beta_k$ is zero and to stabilize the scheme.
+
+Behavior of Non-linear Weights:
+1.  Smooth Region: If all stencils are smooth, $\beta_k \approx O(\Delta x^2)$. The weights $\omega_k$ approach the linear weights $d_k$, and the scheme achieves the full high order (e.g., 5th order).
+2.  Discontinuity Present: If stencil $S_j$ contains a discontinuity, $\beta_j$ will be large, causing $\alpha_j$ and consequently $\omega_j$ to approach zero. The scheme effectively switches to a lower-order, non-oscillatory interpolation based on the remaining smooth stencils.
+
+\item  \textbf{Final Numerical Flux}
+
+The final numerical flux $\hat{f}_{i+1/2}$ is the weighted average of the candidate fluxes:
+$$\hat{f}_{i+1/2} = \sum_{k=0}^{r-1} \omega_k \hat{f}_{i+1/2}^{(k)}$$
+
+This flux is then used in the semi-discrete finite volume formulation:
+$$\frac{d u_i}{d t} = -\frac{1}{\Delta x} (\hat{f}_{i+1/2} - \hat{f}_{i-1/2})$$
+
+\end{enumerate}
+\item \textbf{ Advantages and Disadvantages}
+
+\begin{description}
+
+\item \textbf{High Accuracy:} Achieves high order (typically 5th or 7th) in smooth regions.
+
+\item \textbf{Non-Oscillatory} Effectively suppresses spurious oscillations near shocks and discontinuities. 
+
+\item \textbf{Robustness} Highly robust for complex flow problems, including turbulence and compressible flows. 
+
+\item \textbf{Complexity} Significantly more complex to implement than linear schemes due to flux splitting, multiple stencil calculations, and non-linear weighting. |
+
+\item \textbf{Computational Cost} Higher computational cost per time step compared to lower-order schemes (e.g., 2nd order TVD) due to the multiple flux evaluations and weight calculations. 
+
+\item \textbf{Accuracy Near Extrema} While high-order in smooth regions, the scheme typically drops to 3rd order accuracy near critical points (smooth extrema) due to the non-linear weighting function. (This led to the development of improved schemes like WENO-M and WENO-Z). 
+
+\item \textbf{Summary} 
+
+WENO achieves high order in smooth regions, suppresses oscillations near shocks, and remains robust for complex flows, while being more computationally demanding. Improvements such as WENO-M and WENO-Z enhance accuracy near extrema.
+
+\end{description}
+
+\item \textbf{Variants of WENO}\cite{current}
+
+\begin{enumerate}
+\item \textbf{WENO-JS (Jiang and Shu):} 
+
+The standard, widely used formulation described above.
+\item \textbf{WENO-M (Modified):} 
+
+A modification that aims to restore the optimal order of accuracy (5th order) even at smooth extrema by modifying the non-linear weights.
+\item \textbf{WENO-Z (Zhong):} 
+
+Uses a different definition for the non-linear weights that incorporates a global smoothness indicator, often leading to better performance and higher accuracy near critical points than WENO-JS.
+
+\end{enumerate}
+
+\end{description}
+---
+
+\item Final Answer Summary
+
+The Weighted Essentially Non-Oscillatory (WENO) scheme is a high-resolution numerical method for solving hyperbolic PDEs. It achieves high-order accuracy (e.g., 5th order) in smooth regions while maintaining non-oscillatory behavior near discontinuities (shocks).
+
+The core mechanism involves:
+\begin{enumerate}
+
+\item  \textbf{Flux Splitting: }
+
+Decomposing the flux into positive and negative components.
+\item \textbf{Multiple Stencils: }
+
+Constructing candidate numerical fluxes from several small, overlapping stencils.
+\item  \textbf{Smoothness Indicators ($\beta_k$): }
+
+Quantifying the smoothness of the solution within each stencil.
+\item \textbf{Non-linear Weights ($\omega_k$): }
+
+Combining the candidate fluxes using weights that adaptively favor the smoothest stencils. If a stencil contains a discontinuity (high $\beta_k$), its weight $\omega_k$ approaches zero.
+
+\end{enumerate}
+The final numerical flux is a convex combination of the candidate fluxes:
+$$\hat{f}_{i+1/2} = \sum_{k} \omega_k \hat{f}_{i+1/2}^{(k)}$$
+
+\end{description}
+\textbf{Conclusion:}
+
+The Weighted Essentially Non-Oscillatory (WENO) scheme is a high-resolution numerical method for solving hyperbolic PDEs that uses adaptive, non-linear weights with multiple stencils to achieve high-order accuracy in smooth regions and suppress oscillations near discontinuities. Its core process involves flux splitting, candidate stencil selection, smoothness indicators, and convex combination of candidate fluxes using non-linear weights, resulting in a final numerical flux of \(\hat{f}_{i+1/2} = \sum_{k} \omega_k \hat{f}_{i+1/2}^{(k)}\).
+
+
+Answer: The Weighted Essentially Non-Oscillatory (WENO) scheme is a high-resolution numerical method for solving hyperbolic PDEs that uses adaptive, non-linear weights with multiple stencils to achieve high-order accuracy in smooth regions and suppress oscillations near discontinuities. Its core process involves flux splitting, candidate stencil selection, smoothness indicators, and convex combination of candidate fluxes using non-linear weights, resulting in a final numerical flux of \(\hat{f}_{i+1/2} = \sum_{k} \omega_k \hat{f}_{i+1/2}^{(k)}\).
+
+\begin{thebibliography}{4}
+\bibitem{weno}
+Liu, X.-D., Osher, S., and Chan, T. (1994). "Weighted Essentially Non-Oscillatory Schemes." *Journal of Computational Physics*, 115(1), 200-212.
+
+\bibitem{impl}
+Jiang, G.-S., and Shu, C.-W. (1996). "Efficient Implementation of Weighted ENO Schemes." *Journal of Computational Physics*, 126(1), 202-228.
+
+\bibitem{beta}
+ 
+ Shu, C.-W. (1998). "Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws." In *Advanced Numerical Approximation of Nonlinear Hyperbolic Equations* (pp. 325-432). Springer, Berlin, Heidelberg.
+
+\bibitem{current} 
+
+Shu, C.-W. (2009). "High Order Weighted Essentially Non-Oscillatory Schemes for Convection Dominated Problems." *SIAM Review*, 51(1), 82-126.
+
+\end{thebibliography}
+
+\end{document}

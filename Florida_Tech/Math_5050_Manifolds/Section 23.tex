@@ -1,0 +1,121 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 23: Integration Manifolds }
+\newcommand{\DUEDATE}{November 19, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{Key Points}
+
+\HLINE
+\begin{enumerate}[label=23.\arabic*]
+
+\item \textbf{Area of an ellipse}
+
+Use the change-of-variables formula to compute the area enclosed by the ellipse
+\begin{align*}
+	x^2/a^2+y^2/b^2=1
+\end{align*}in $\R^2$.
+
+\BLUE{Let $G(r,\theta) = (ar\cos\theta, br\sin\theta)$ be the transformation.  Then  the Jacobian of $G$
+\begin{align*}
+	dG &= \TWOXTWO{a\cos\theta}{-ar\cos\theta}{b\sin\theta}{br\sin\theta}.\\
+	\det dG &= ab(r\cos^2\theta+r\sin^2\theta) = abr.
+\end{align*}The change of variable formula states that
+\begin{align*}
+	A &= \int_0^{2\pi}\int_0^1 abr\,dr\, d\theta = ab(2\pi)\frac{1}{2} = \pi ab
+\end{align*}
+}
+
+\item \textbf{Characterization of boundedness in $\R^n$}
+
+Prove that a subset $A \subset \R^n$ is bounded if and only if its closure $\CONJ{A}$ in $\R^n$ is compact.
+
+\BLUE{Since $A$ is bounded. Let $M$ be the maximum distance between any two points in $A$
+\begin{align*}
+	M &= \max_{x,y} \{x,y \in A\}
+\end{align*}by defintiion, $\CONJ{A}$ is closed.  Hence, $\CONJ{A}$ is closed and bounded, which is compact.
+}
+
+\item \textbf{Integral under a diffeomorphism}
+
+Suppose $N$ and $M$ are connected, oriented, $n$-manifolds and $F: N \to M$ is a diffeomorphism.  Prove that for any $\omega \in \Omega_c^k(M)$,
+\begin{align*}
+	\int_NF^*\omega = \pm \int_M \omega
+\end{align*} where the sign depends on whether $F$ is orientation-preserving or orientation-reversing.
+
+\item \textbf{Stoke's theorem}
+
+Prove Stokes's theorem $\R^n$ and for $\mathcal{H}^n$.
+
+\item \textbf{Area form on the sphere $S^2$}
+
+Prove that the area form $\omega$ on $S^2$ in Example 23.11 is equal to the orientation form
+\begin{align*}
+	x\,dy\wedge dz-y \,dx\wedge dz+z\,dx\wedge dy
+\end{align*}of $S^2$ in Problem 22.9.
+
+
+\end{enumerate}
+\end{document}

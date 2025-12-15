@@ -1,0 +1,44 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath}
+
+\begin{document}
+% Set the viewing angle (optional, defaults to tdplotsetmaincoords{70}{110})
+\tdplotsetmaincoords{70}{110} 
+
+\begin{tikzpicture}[tdplot_main_coords, scale=1.5]
+
+    % Define cube parameters
+    \def\N{3} % Size of the tensor along each dimension
+    \def\CubeSize{1} % Size of each small cube
+
+    % Draw the grid of small cubes
+    \foreach \i in {1,...,\N} {
+        \foreach \j in {1,...,\N} {
+            \foreach \k in {1,...,\N} {
+                \begin{scope}[shift={(\i*\CubeSize, \j*\CubeSize, \k*\CubeSize)}]
+                    % Draw the edges of the small cube
+                    \draw[red, thin] (0,0,0) -- (\CubeSize,0,0) -- (\CubeSize,\CubeSize,0) -- (0,\CubeSize,0) -- cycle;
+                    \draw[blue, thin] (0,0,0) -- (0,0,\CubeSize) -- (\CubeSize,0,\CubeSize) -- (\CubeSize,0,0) -- cycle;
+                    \draw[green, thin] (0,0,0) -- (0,\CubeSize,0) -- (0,\CubeSize,\CubeSize) -- (0,0,\CubeSize) -- cycle;
+                    \draw[gray, thin] (\CubeSize,\CubeSize,\CubeSize) -- (\CubeSize,\CubeSize,0);
+                    \draw[gray, thin] (\CubeSize,\CubeSize,\CubeSize) -- (\CubeSize,0,\CubeSize);
+                    \draw[gray, thin] (\CubeSize,\CubeSize,\CubeSize) -- (0,\CubeSize,\CubeSize);
+
+                    % Optionally, label a specific element (e.g., T_{111})
+                    % \ifnum\i=1\ifnum\j=1\ifnum\k=1
+                    %     \node[black, font=\scriptsize] at (\CubeSize/2, \CubeSize/2, \CubeSize/2) {$T_{111}$};
+                    % \fi\fi\fi
+                \end{scope}
+            }
+        }
+    }
+
+    % Draw axes and labels
+    \coordinate (O) at (0,0,0);
+    \draw[->, thick] (O) -- (\N*\CubeSize+0.5,0,0) node[right] {$i$};
+    \draw[->, thick] (O) -- (0,\N*\CubeSize+0.5,0) node[above] {$j$};
+    \draw[->, thick] (O) -- (0,0,\N*\CubeSize+0.5) node[left] {$k$};
+
+\end{tikzpicture}
+\end{document}

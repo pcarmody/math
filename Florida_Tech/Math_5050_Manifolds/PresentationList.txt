@@ -1,0 +1,76 @@
+========
+Section07.tex  
+
+Pg. 77: Exercise 7.11
+Problems 7.1 - 7.7
+
+========
+Section08.tex  
+
+Pg 88: Exercise 8.3
+Problems 1,2,3,4,6
+
+========
+Section09.tex  
+
+Problems 1-4
+
+========
+Section10.tex  
+
+Problems 1,2,3,5'
+
+========
+Section11.tex  
+
+Problems 1,2
+
+========
+Section12.tex
+
+Problems 1,2
+
+========
+Section13.tex  
+
+Problems 1,2,3,4
+
+========
+Section14.tex  
+
+Problems 1,2,10,11
+
+========
+Section15.tex  
+
+Problems 1-5
+
+========
+Section16.tex  
+
+Problems 1,2,5,10
+
+========
+Section17.tex  
+
+Problems 1,2,3
+
+========
+Section18.tex  
+
+Problems 2,3,5
+
+========
+Section19.tex  
+
+Problems 1,2,3
+
+========
+Section21.tex
+
+Problems 3,5,10
+
+========
+Section22.tex
+
+Problems ?????

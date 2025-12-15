@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Differential Geometry}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Section 24: de Rhan Cohomology }
+\newcommand{\DUEDATE}{November 26, 2025}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{Key Points}
+
+\HLINE
+\begin{enumerate}[label=24.\arabic*]
+
+\item \textbf{Nowhere vanishing $1$-forms}
+
+Prove that a nowhere vanishing $1$-form on a compact manifold cannot exist.
+
+\BLUE{Not True: On the circle $S^1$ the form $d\theta$ (in the angular coordinate $\theta$) is smooth 1-form that never vanishes.  $S^1$ is compact so compactness alone does not forbid nowhere-vanishing 1-forms.
+}
+
+\item \textbf{Cohomology in degree zero}
+
+Suppose a manifold $M$ has infinitely many connected components.  Compute its de Rham Cohomology vector space $H^0(M)$ in degree 0. (\textit{Hint:}  by second countability,  the number of connect components of a manifold is countable.)
+
+\BLUE{Let $\dim M = n$ with $n$ connected components.  If $\omega = (\omega_1,\dots,\omega_n)$ is closed but not exact, then, $d\omega = 0$.  Since, 
+\begin{align*}
+	\omega &= \sum_{i=1}^n \omega_i x^i\\
+	d\omega &= \sum_{i=1}^n d\omega_i \,dx^i \\
+	\therefore d\omega_i &= 0, \, \forall i=1,\dots,n
+\end{align*}and $\omega_i$ are constants for all $i=1,\dots,n$.  Now if $\dim M = \infty$, we recall that $M$ must be second countable.  Therefore, we can have $\omega = (\omega_1, \dots, )$ which allows a sum to infinity.
+}
+
+\end{enumerate}
+\end{document}

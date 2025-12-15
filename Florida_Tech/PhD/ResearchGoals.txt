@@ -1,0 +1,11 @@
+Winter 2025
+
+SpectrumOperator.pdf: Spectrum of Bounded Operator.
+Look into Fourier Transforms: it is interesting that maps from the Lie Algebra to the Lie Group have similar structure to a Fourier Transform (its probably nothing).
+Look into Reimmann Geometry (chapters 1 thru 4 recommended by Liu)
+Geometric Algebra, Clifford Algebras, Associative Algebras, Universal enveloping algebras.
+Topology without Tears (must prepare for Algebraic Topology)
+Introduction to Tensors.
+Consider finishing Manifolds through Section 29.
+What is Critical Point Theory and how does it relate to Manifolds/Differential Geometry.
+Consider browsing through the Relativity book.

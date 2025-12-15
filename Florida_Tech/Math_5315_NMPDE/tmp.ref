@@ -1,0 +1,15 @@
+Certainly. The explanation of the Weighted Essentially Non-Oscillatory (WENO) scheme is based on foundational and subsequent research in the field of high-order numerical methods for hyperbolic partial differential equations. Here are some key references that establish and detail the concepts discussed:
+
+1.  **Liu, X.-D., Osher, S., and Chan, T. (1994). "Weighted Essentially Non-Oscillatory Schemes." *Journal of Computational Physics*, 115(1), 200-212.**
+    *   This is one of the pioneering papers that introduced the WENO scheme. It lays out the fundamental idea of using a convex combination of lower-order fluxes to construct a higher-order, non-oscillatory approximation.
+
+2.  **Jiang, G.-S., and Shu, C.-W. (1996). "Efficient Implementation of Weighted ENO Schemes." *Journal of Computational Physics*, 126(1), 202-228.**
+    *   This is a seminal paper that is widely cited for developing the modern formulation of WENO schemes, particularly for third and fifth-order accuracy. It introduced the specific formulas for the smoothness indicators (\(\beta_k\)) and the non-linear weights (\(\omega_k\)) that are now standard in the field. The method described in this paper significantly improved the efficiency and accuracy of the original WENO schemes.
+
+3.  **Shu, C.-W. (1998). "Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws." In *Advanced Numerical Approximation of Nonlinear Hyperbolic Equations* (pp. 325-432). Springer, Berlin, Heidelberg.**
+    *   This is a comprehensive review article by one of the leading figures in the development of WENO. It provides a detailed overview of both ENO and WENO schemes, their theoretical background, implementation details, and applications. It's an excellent resource for a deeper understanding of the topic.
+
+4.  **Shu, C.-W. (2009). "High Order Weighted Essentially Non-Oscillatory Schemes for Convection Dominated Problems." *SIAM Review*, 51(1), 82-126.**
+    *   This review paper provides a more recent overview of the developments in WENO schemes, including improvements and extensions of the original methods. It discusses the performance of WENO in various contexts and is a valuable reference for understanding the state-of-the-art.
+
+These sources provide the theoretical and practical foundations for the core mechanism, smoothness indicators, non-linear weights, and applications of the WENO scheme as described in the previous answer.

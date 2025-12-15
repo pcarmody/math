@@ -1,0 +1,174 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5230 -- Partial Differential Equations}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Homework \#4 }
+\newcommand{\DUEDATE}{October 29, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{MW 2:00 -- 3:15}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\CURL}{\operatorname{curl}}
+\newcommand{\DIV}{\operatorname{div}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Snelson}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent Please show your work and justify all answers.
+
+\begin{enumerate}
+
+\item If $F$ and $G$ are any twice-differentiable functions, show that 
+\begin{align*}
+	u(x,t) = F(x+t)+G(x-t),
+\end{align*}solves the one-dimensional wave equation $u_{tt}-u_{xx}=0$.
+
+\BLUE{\begin{align*}
+	u_t &= F'(x+t) -G'(x-t) & \quad u_{tt} &= F''(x+t) + G''(x-t)\\
+	u_x &= F'(x+t) + G'(x-t) & \quad u_{xx} &= F''(x+t) + G''(x-t)
+\end{align*}\begin{align*}
+	u_{tt}-u_{xx} &= F''(x+t) + G''(x-t) - (F''(x+t) + G''(x-t)) \\
+	&=0
+\end{align*}
+}
+
+\item Let $P$ be a parallelogram in $(x,t)$ space whose sides have slope -1 and 1.  Let $p_1,p_2,p_3,p_4$ be the four vertices of $P$, listed in counterclockwise order (Note that each $p_i$ is a point in $(x,t)$ space.)  Show that, if $u$ is a solution of the wave equation and $P$ lies within the domain of $u$, then 
+\begin{align*}
+	u(p_1)+u(p_3)=u(p_2)+u(p_4)
+\end{align*}(Hint: you are allowed to use the converse to problem 1: any solution to $u_{tt}-u_{xx}=0$ can be written as $F(x+t)+G(x-t)$ for some twice-differentiable functions $F$ and $G$.)
+
+\BLUE{
+\begin{align*}
+	u(x,t) &= F(x+t) + G(x-t)
+\end{align*}Let $\alpha = x+t$ and $\beta = x-t$. Then,
+\begin{align*}
+	u(\alpha, \beta) &= F(\alpha)+G(\beta)
+\end{align*}Notice that for sides with slope equal to 1 we have 
+\begin{align*}
+	m &= 1  & \quad x_1+t_1 & =x_2+t_2 & \quad \alpha_1 &= \alpha_2\\
+	 & \quad  & x_3+t_3 &= x_4+t_4 & \quad  \alpha_3&=\alpha_4 \\
+	m &= -1  & \quad x_1-t_1 & =x_4-t_4 & \quad \beta_1 &= \beta_4\\
+	 & \quad  & x_2-t_2 &= x_3-t_3 & \quad  \beta_2&=\beta_3 
+\end{align*}Thus,
+\begin{align*}
+	u(p_1) &= F(\alpha_1)+G(\beta_1), & \quad u(p_2) &= F(\alpha_1)+G(\beta_2) \\
+	u(p_3) &= F(\alpha_3)+G(\beta_2), & \quad u(p_2) &= F(\alpha_3)+G(\beta_1) \\
+\end{align*}Then we can see that
+\begin{align*}
+	u(p_1)+u(p_3) &= F(\alpha_1)+G(\beta_1) + F(\alpha_3)+G(\beta_2) \\
+	u(p_2)+ u(p_4) &= F(\alpha_1)+G(\beta_2) + F(\alpha_3)+G(\beta_1)
+\end{align*}which are equal.
+}
+
+\item Consider the wave equation on a  half-infinite string:
+\begin{align*}
+	\BINDEF{u_{tt}-u_{xx}=0, & t>0,x>0, \\u(x,0)=0}{u_t(x,0)=0\\u(0,t)=h(t).}
+\end{align*}(In class, we looked at the case where the boundary condition at $x=0$ was zero, and the initial conditions were nonzero.  This is the opposite case.  Odd reflection will not work here because the boundary condition isn't zero.)
+
+Derive a solution formula for this problem.  (Hint: consider the cases $x>t$ and $x\le t$ separately.  In the case $x\le t$, use the result of problem 2.)
+
+\BLUE{
+Applying the initial conditions and recall that $	u(x,t) = F(x+t) + G(x-t) = 0$
+\begin{align*}
+	F(x+t) &= -G(x-t) \\ 
+	u(x,0) &= F(x)+G(x) = 0 \implies F(x) = - G(x) & (*)\\
+	u(0,t) &= F(t)+G(-t) = h(t) \\
+	u(0,t) &= F(-t)+G(t) = h(t) \text{  for } x< t
+\end{align*}Taking the first partial with respect to $t$
+\begin{align*}
+	u_t(x,t) &= F'(x+t)-G'(x-t)\\
+	u_t(x,0) &= F'(x)-G(x)=0 \implies F'(x) = G'(x)
+\end{align*}but from $(*)$ above we have $F'(x) = -G'(x) = -F'(x)$.  Therefore $F'(x)=0$ and $F(x)$ is a constant.  That leaves $G(x-t)$ which only makes sense when $x\ge t$.  Hence,
+\begin{align*}
+	u(x,t) &= \BINDEF{h(x,t) & x \ge t}{0 & x <0}
+\end{align*}
+}
+
+\item Recall d'Alembert's formula for the one-dimensional wave equation:
+\begin{align*}
+	u(x,t) = \frac{1}{2}[g(x+t)+g(x-t)] + \frac{1}{2}\int_{x-t}^{x+t} h(y)\, dy.
+\end{align*}Find ``fundamental solutions $G_0(x,t)$ and $G_1(x,t)$ so that this formal can be written convolution form:
+\begin{align*}
+	u(x,t) = \int_\R G_0(x-y,t)g(y)\,dy+\int_\R G_1(x-y,t)h(y)\,dy
+\end{align*}(Hint:  one of these will involve delta functions Recall the definition property of the delta function: $\int_\R\delta(y-c)f(y)\,dy=f(c)$ for any function $f$.)
+
+\BLUE{
+We start by finding convolving for the first term.
+\begin{align*}
+	\frac{1}{2}[g(x+t)+g(x-t)] &= \int_\R [\delta(y-(x+t))+\delta(y+(x-t))]g(y)\,dy \\
+	&= \int_\R \frac{1}{2}[\delta(x-y+t)+\delta(x-y-t)]g(y)\,dy \\
+	G_0 (x,t) &= \frac{1}{2}[\delta(x+t)+\delta(x-t)]
+\end{align*}
+}
+
+\newcommand{\EE}{\textbf{E}}
+\newcommand{\BB}{\textbf{B}}
+\item Evans Chapter 2, Problem 21(a).  Assume $\EE=(E^1,E^2,E^3)$ and $\BB= (B^1, B^2, B^3)$ solve Maxwell's equations
+\begin{align*}
+	\BINDEF{\EE_t = \CURL\BB, & \BB_t = -\CURL \EE}{\DIV \BB = \DIV \EE = 0.}
+\end{align*}Show \begin{align*}
+	\EE_{tt}-\Delta \EE = 0 & \quad \BB_{tt} - \Delta \BB = 0.
+\end{align*}
+
+\BLUE{
+Let us first take the derivative with respect to time of the first two identities.
+\begin{align*}
+	\EE_{tt} &=	 \CURL \BB_t &\quad \BB_{tt} &= - \CURL \EE_t \\
+	&= \nabla \times (-\nabla \times \EE) &\quad &= - \nabla \times (\nabla \times \BB) \\
+	&= -\nabla(\DIV \EE)+\Delta \EE &\quad &= -\nabla(\DIV \BB) + \Delta \EE \\
+	&= \Delta \EE &\quad &= \Delta \BB
+\end{align*}
+}
+
+\end{enumerate}
+
+\end{document}

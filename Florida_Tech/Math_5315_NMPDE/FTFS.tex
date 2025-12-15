@@ -1,0 +1,283 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5315 -- Numerical Methods for PDE}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Midterm Project }
+\newcommand{\DUEDATE}{November 12, 2025}
+\newcommand{\SEMESTER}{Fall 2025}
+\newcommand{\SCHEDULE}{TTh 2:00 to 3:15}
+\newcommand{\ROOM}{Crawford 111}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+ 	\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{\#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{\#1}}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Professor Du}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+\HLINE
+
+The FTFS (Forward-Time, Forward-Space) scheme is a finite difference method used for numerically solving partial differential equations (PDEs), particularly first-order hyperbolic equations like the advection equation.
+
+Here is a detailed explanation of the FTFS scheme, its application, and its limitations.
+
+\begin{itemize}
+
+\item  Step-by-Step Explanation of the FTFS Scheme
+
+\item \# 1. Introduction to the Advection Equation
+
+The FTFS scheme is typically introduced in the context of the one-dimensional linear advection equation (or wave equation):
+
+$$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$$
+
+Where:
+*   $u(x, t)$ is the quantity being transported (e.g., concentration, velocity).
+*   $t$ is time.
+*   $x$ is the spatial coordinate.
+*   $c$ is the constant advection speed (velocity).
+
+The goal of a numerical scheme is to approximate the continuous derivatives using discrete differences on a grid.
+
+\item \# 2. Discretization of the Domain
+
+We define a computational grid with discrete points in space and time:
+*   **Spatial Grid:** $x_j = j \Delta x$, where $j$ is the spatial index ($j = 0, 1, 2, \dots, J$) and $\Delta x$ is the spatial step size.
+*   **Temporal Grid:** $t_n = n \Delta t$, where $n$ is the temporal index ($n = 0, 1, 2, \dots$) and $\Delta t$ is the time step size.
+
+The numerical approximation of $u(x, t)$ at a grid point $(x_j, t_n)$ is denoted as $u_j^n$.
+
+\item \# 3. Applying the Forward-Time Difference (FT)
+
+The time derivative, $\frac{\partial u}{\partial t}$, is approximated using a **forward difference** in time (hence "Forward-Time"):
+
+$$\frac{\partial u}{\partial t} \approx \frac{u_j^{n+1} - u_j^n}{\Delta t} + O(\Delta t)$$
+
+This approximation is first-order accurate in time.
+
+\item \# 4. Applying the Forward-Space Difference (FS)
+
+The spatial derivative, $\frac{\partial u}{\partial x}$, is approximated using a **forward difference** in space (hence "Forward-Space"):
+
+$$\frac{\partial u}{\partial x} \approx \frac{u_{j+1}^n - u_j^n}{\Delta x} + O(\Delta x)$$
+
+This approximation is first-order accurate in space.
+
+\item \# 5. Formulation of the FTFS Scheme
+
+Substituting these finite difference approximations into the advection equation ($\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$):
+
+$$\frac{u_j^{n+1} - u_j^n}{\Delta t} + c \frac{u_{j+1}^n - u_j^n}{\Delta x} = 0$$
+
+Rearranging the equation to solve for the unknown value at the next time step, $u_j^{n+1}$:
+
+$$u_j^{n+1} = u_j^n - c \frac{\Delta t}{\Delta x} (u_{j+1}^n - u_j^n)$$
+
+This is the explicit FTFS scheme.
+
+\item \# 6. Introducing the Courant Number
+
+It is conventional to define the Courant-Friedrichs-Lewy (CFL) number, $\lambda$:
+
+$$\lambda = c \frac{\Delta t}{\Delta x}$$
+
+Substituting $\lambda$ into the scheme:
+
+$$u_j^{n+1} = u_j^n - \lambda (u_{j+1}^n - u_j^n)$$
+
+$$u_j^{n+1} = (1 + \lambda) u_j^n - \lambda u_{j+1}^n$$
+
+This equation allows us to calculate the value of $u$ at any spatial point $j$ at the new time level $n+1$, based only on values known at the current time level $n$.
+
+\item \# 7. Analysis of Stability and Accuracy
+
+The critical aspect of the FTFS scheme is its stability and accuracy properties, which are typically analyzed using von Neumann stability analysis.
+
+\item \item  A. Accuracy
+
+The FTFS scheme is **first-order accurate** in both time ($O(\Delta t)$) and space ($O(\Delta x)$).
+
+\item \item  B. Stability (The Fatal Flaw)
+
+The von Neumann stability analysis determines the conditions under which errors (numerical perturbations) do not grow unboundedly.
+
+For the FTFS scheme applied to the advection equation $\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$:
+
+*   If the velocity $c$ is **positive** ($c > 0$, flow is from left to right), the scheme is **unconditionally unstable** for all values of $\lambda > 0$.
+*   If the velocity $c$ is **negative** ($c < 0$, flow is from right to left), the scheme is stable only if $0 \le -\lambda \le 1$, or $0 \le c \frac{\Delta t}{\Delta x} \le 1$.
+
+**Conclusion:** Because the FTFS scheme is unconditionally unstable for the physically relevant case of positive advection ($c>0$), it is **rarely, if ever, used** in practical computational fluid dynamics (CFD) or numerical PDE solving.
+
+\item \# 8. Physical Interpretation of Instability
+
+The instability arises because the scheme uses a forward difference in space ($u_{j+1}^n - u_j^n$).
+
+1.  **If $c > 0$ (flow moves right):** Information at point $j$ should depend on information coming from the left ($j-1$). The FTFS scheme, however, uses information from the right ($j+1$) to calculate the change at $j$. This is physically incorrect for positive advection and leads to numerical instability (exponential growth of errors).
+2.  **If $c < 0$ (flow moves left):** Information at point $j$ should depend on information coming from the right ($j+1$). In this specific case, the FTFS scheme correctly uses the upstream information ($u_{j+1}^n$) and can be stable under the CFL condition.
+
+\item \# 9. Comparison with Stable Schemes
+
+The FTFS scheme is often contrasted with stable alternatives:
+
+| Scheme | Time Difference | Space Difference | Stability for $c>0$ |
+|---|---|---|---|
+| **FTFS** | Forward | Forward | Unconditionally Unstable |
+| **FTBS** (Upwind) | Forward | Backward | Conditionally Stable ($0 \le \lambda \le 1$) |
+| **Lax-Friedrichs** | Forward | Centered (with dissipation) | Conditionally Stable ($0 \le \lambda \le 1$) |
+
+The FTBS (Forward-Time, Backward-Space) scheme is the stable, first-order upwind scheme for $c>0$, as it correctly uses the backward difference ($\frac{u_j^n - u_{j-1}^n}{\Delta x}$) to capture information flowing from the upstream direction.
+
+***
+
+\item  Final Answer Summary
+
+The FTFS (Forward-Time, Forward-Space) scheme is an explicit finite difference method for solving hyperbolic PDEs, such as the advection equation ($\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$).
+
+| Feature | Description |
+|---|---|
+| **Time Discretization** | Forward difference: $O(\Delta t)$ accuracy. |
+| **Space Discretization** | Forward difference: $O(\Delta x)$ accuracy. |
+| **Governing Equation** | $u_j^{n+1} = (1 + \lambda) u_j^n - \lambda u_{j+1}^n$, where $\lambda = c \frac{\Delta t}{\Delta x}$. |
+| **Accuracy** | First-order accurate in both time and space. |
+| **Stability** | **Unconditionally unstable** when the advection velocity $c$ is positive ($c>0$). It is stable only if $c<0$ and the CFL condition ($|\lambda| \le 1$) is met. |
+| **Practical Use** | Due to its instability for positive advection, the FTFS scheme is generally **not used** in practical numerical simulations. |
+
+Final Answer:
+1. <strong>The FTFS (Forward-Time, Forward-Space) scheme is an explicit finite difference method for numerically solving hyperbolic PDEs, such as the advection equation \(\left( \frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0 \right)\), using forward differences in both time and space. The update formula is \(u_j^{n+1} = (1 + \lambda) u_j^n - \lambda u_{j+1}^n\), where \(\lambda = c \frac{\Delta t}{\Delta x}\). The scheme is first-order accurate in both time and space, but is unconditionally unstable for positive advection velocity (\(c > 0\)), and therefore is rarely used in practice.</strong>
+Explanation of the FTFS scheme in numerical methods of PDEs
+Introduction and context of the FTFS scheme
+The FTFS (Forward-Time, Forward-Space) scheme applies to PDEs like the linear advection equation \(\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0\), where \(u(x, t)\) describes a transported quantity, \(c\) is the advection speed, and the goal is to find a stable and accurate finite difference approximation.
+Discretization of time and space using forward differences
+In the FTFS method, the time derivative at grid point \((x_j, t_n)\) is approximated by \(\frac{u_j^{n+1} - u_j^n}{\Delta t}\), and the space derivative by \(\frac{u_{j+1}^n - u_j^n}{\Delta x}\). Both differences are first-order accurate.
+Formulation of the FTFS update equation
+Substituting the forward differences into the advection equation gives \(\frac{u_j^{n+1} - u_j^n}{\Delta t} + c \frac{u_{j+1}^n - u_j^n}{\Delta x} = 0\). Solving for \(u_j^{n+1}\) yields \(u_j^{n+1} = u_j^n - c \frac{\Delta t}{\Delta x} (u_{j+1}^n - u_j^n)\). Defining \(\lambda = c \frac{\Delta t}{\Delta x}\), the scheme becomes \(u_j^{n+1} = (1 + \lambda) u_j^n - \lambda u_{j+1}^n\).
+Analysis of accuracy and stability
+The FTFS scheme is first-order accurate in both time and space, meaning it introduces errors proportional to \(\Delta t\) and \(\Delta x\). However, von Neumann stability analysis reveals that the FTFS scheme is unconditionally unstable for positive advection speed (\(c > 0\)). For negative \(c\), stability is possible under the CFL condition (\(|\lambda| \leq 1\)).
+Physical interpretation and practical implications
+Instability for \(c > 0\) arises because the FTFS scheme uses information from the downstream (right) rather than the upstream direction, violating the directionality of information propagation in advection problems. As a result, FTFS is rarely used in practice; instead, stable schemes like FTBS (Forward-Time, Backward-Space) are preferred for positive advection.
+Answer: <strong>The FTFS (Forward-Time, Forward-Space) scheme is an explicit finite difference method for numerically solving hyperbolic PDEs, such as the advection equation \(\left( \frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0 \right)\), using forward differences in both time and space. The update formula is \(u_j^{n+1} = (1 + \lambda) u_j^n - \lambda u_{j+1}^n\), where \(\lambda = c \frac{\Delta t}{\Delta x}\). The scheme is first-order accurate in both time and space, but is unconditionally unstable for positive advection velocity (\(c > 0\)), and therefore is rarely used in practice.</strong>
+
+\end{itemize}
+
+\newpage
+\begin{center}
+	\textbf{\LARGE{Dispersion}}
+\end{center}
+
+In the context of numerical methods for Partial Differential Equations (PDEs), **dispersion** refers to the phenomenon where different wave components of the numerical solution travel at different speeds, even if the original PDE dictates that they should all travel at the same speed. This causes an initially sharp wave profile to spread out or distort as it propagates.
+
+\begin{itemize}
+
+\item  How Dispersion Arises
+
+When we discretize a PDE like the advection equation (\(\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0\)), we are approximating the continuous derivatives. This approximation introduces errors. To analyze these errors, we can consider a single Fourier mode of the solution, \(u(x,t) = e^{i(kx - \omega t)}\), where \(k\) is the wavenumber and \(\omega\) is the angular frequency.
+
+1.  **Exact Solution:** For the advection equation, substituting this mode gives the exact **dispersion relation**: \(\omega = ck\). The phase speed, \(c_p = \frac{\omega}{k}\), is exactly \(c\) for all wavenumbers \(k\). This means all waves, regardless of their wavelength, travel at the same speed \(c\), and the wave shape is preserved. This is a non-dispersive system.
+
+2.  **Numerical Solution:** When we apply a numerical scheme, like the FTFS scheme you asked about previously, we get a numerical dispersion relation. For a given scheme, the numerical phase speed, \(c_p^*(k)\), often depends on the wavenumber \(k\). This means different Fourier components (i.e., waves of different wavelengths) in the numerical solution travel at different speeds.
+
+\item  Effects of Numerical Dispersion
+
+*   **Distortion:** Since different frequency components travel at different speeds, a composite wave (like a square wave or a Gaussian pulse) will change its shape. Typically, high-frequency (short wavelength) components travel slower than low-frequency (long wavelength) components, leading to a train of oscillations trailing the main wave.
+*   **Phase Error:** Dispersion is a type of phase error. After a certain time, the peaks and troughs of the numerical wave will not align with those of the exact solution.
+
+\item  Example with a Related Scheme (FTBS)
+
+While the FTFS scheme is unconditionally unstable for \(c>0\), its stable counterpart, the FTBS (Forward-Time, Backward-Space) scheme, is a good example to illustrate dispersion. The FTBS scheme is also first-order accurate. Its numerical phase speed is generally less than the true speed \(c\), and it depends on the wavenumber. This causes sharp features in the solution to spread out and develop trailing oscillations as they propagate.
+
+In summary, numerical dispersion is an artifact of the discretization process where the numerical wave speed becomes dependent on the wavelength, causing the solution profile to distort over time. It is distinct from numerical diffusion (or dissipation), which damps the amplitude of the wave components.
+\end{itemize}
+
+\newpage
+\begin{center}
+	\textbf{\LARGE{Dissipation}}
+\end{center}
+
+In the context of numerical methods for Partial Differential Equations (PDEs), **dissipation**, also known as **numerical diffusion**, is an effect where the amplitude of the wave components in the numerical solution decreases over time, even if the original PDE is non-dissipative. This causes sharp features in the solution to become smeared or smoothed out as they propagate.
+\begin{itemize}
+
+\item  How Dissipation Arises
+
+When we discretize a PDE, the numerical scheme introduces errors that can mimic physical diffusion. To analyze this, we again consider a single Fourier mode, \(u_j^n = G^n e^{ikx_j}\), where \(G\) is the amplification factor of the scheme. The magnitude of this factor, \(|G|\), determines how the amplitude of a wave with wavenumber \(k\) changes over one time step.
+
+1.  **Ideal Non-Dissipative Scheme:** For a purely advective problem like the one we discussed with the FTFS scheme (\(\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0\)), the exact solution perfectly preserves the amplitude of any wave. An ideal numerical scheme would therefore have an amplification factor with a magnitude of exactly 1 (\(|G| = 1\)) for all wavenumbers. This means no energy is lost or gained.
+
+2.  **Dissipative Scheme:** In practice, many numerical schemes have an amplification factor where \(|G| \leq 1\). If \(|G| < 1\) for some or all wavenumbers, the scheme is dissipative. The amplitude of the corresponding wave components will decay exponentially as the simulation progresses.
+
+\item  Effects of Numerical Dissipation
+
+*   **Amplitude Damping:** The primary effect is a reduction in the amplitude of the solution. This effect is often more pronounced for high-frequency (short wavelength) components, which correspond to sharp gradients or discontinuities in the solution.
+*   **Smoothing:** Because sharp features are composed of high-frequency modes, their rapid damping leads to a smoothing or smearing of the overall solution profile. For example, a square wave will become rounded at the corners.
+
+\item  Dissipation vs. Dispersion
+
+It's important to distinguish dissipation from the concept of **dispersion** we discussed previously:
+
+*   **Dissipation (Amplitude Error):** Affects the *amplitude* of the waves. It causes the solution to smooth out and decay. It is related to the magnitude of the amplification factor, \(|G|\).
+*   **Dispersion (Phase Error):** Affects the *speed* of the waves. It causes the solution to distort and develop oscillations because different frequency components travel at different speeds. It is related to the phase of the amplification factor, \(\arg(G)\).
+
+Most numerical schemes, especially lower-order ones like the FTBS scheme (the stable counterpart to FTFS), exhibit both numerical dissipation and dispersion. While dissipation can be undesirable as it leads to a loss of detail, a small amount is sometimes intentionally introduced in schemes to damp out non-physical oscillations that can arise from numerical dispersion or instabilities.
+\end{itemize}
+\end{document}
