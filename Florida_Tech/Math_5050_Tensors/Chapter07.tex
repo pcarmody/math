@@ -1,0 +1,168 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 7: Elements of Linear Algebra in Tensor Notation }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{Notes  --  Linear Algebra vs Tensors}
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	& Linear Algebra & Tensors \\
+	\hline
+	Vectors & $\VK{v} = v^i\VK{e}_i$ & $\VK{V} = V^iZ_i$ \\
+	\hline
+	Matrix & $A=[ A_{ij} ]$ & $A_{ij}, A^i_j, A^{ij}$ \\
+	\hline
+	Basis & $\VK{E}=\COLVECTOR{\VK{e}_1\\\dots\\\VK{e}_n}$ : $\VK{E}'=\COLVECTOR{\VK{e}_{1'}\\\dots\\\VK{e}_{n'}}$ & $\VK{Z}_i = \PART{\VK{R}}{Z^i}$ : $\VK{Z}i' = \PART{\VK{R}}{Z^{i'}}$\\
+	\hline
+	& $\VK{v} = v^T\VK{E}$ & $\VK{V} = V^i\VK{Z}_i$ \\
+	\hline
+	Jacobian & $X$ & $J^i_j$ \\
+	\hline
+	Transformation & $ v' = X^{-1}v$ : $v=Xv'$ & $v^{i'} = J^{i'}_iv^i$ : $v^{i'} = J^{i}_{i'}v^{i'}$ \\
+	\hline
+	Inner Product & $(\VK{u},\VK{v}) = (\VK{e}_i,\VK{e}_j)u^iv^j$ & $\VK{V}\cdot\VK{U} = V^iU^i$ \\
+	\hline
+	Gram Matrix/Metric Tensor & $M = [ \VK{e}_i\cdot \VK{e}_j ]$ & $Z_{ij} = Z^iZ^j$ \\
+	\hline
+	& $(\VK{u},\VK{v}) = M_{ij}u^iv^j$ & $\VK{Z}_i\cdot\VK{Z}_j = Z_{ij}Z^iZ^j$\\
+	\hline 
+	& $(\VK{u},\VK{v}) = u^TMv$ & \\
+	\hline
+	& $M' = X^TMX$ & $Z_{i'j'} = J^i_{i'}Z_{ij}J^j_{j'}$\\
+	\hline
+	& $A' = X^{-1}AX$ & $A^{i'}_{j'} = A^{i}_{j} J^{i'}_iJ^j_{j'}$\\
+	\hline
+\end{tabular}\\
+
+
+\HLINE
+\textbf{Exercises}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\setcounter{enumi}{106}
+\item Express the symmetric property
+\begin{align*}
+	A^T = A
+\end{align*} in the tensor notation.
+
+\item Express the product $C=A^TB$ in the tensor notation.
+
+\item Express the product $C^T=A^TB$ in the tensor notation.
+
+\item Express the product $C^T=A^TB^T$ in the tensor notation and explain why it follows that $(AB)^T = B^TA^T$.  This is an example of a theorem in matrix algebra that is best proved in the tensor notation.
+
+\item Use the matrix notation to prove that, for inveritble matrices $A, B,$ and $C$,
+\begin{align*}
+	(ABC)^{_1}=C^{-1}B^{-1}A^{-1}
+\end{align*}
+
+\BLUE{\begin{align*}
+`	\LET D &= BC \\
+	(ABC)^{_1} &= (AD)^{-1} = D^{-1}A = (BC)^{-1}A^{-1} = C^{-1}B^{-1}A^{-1}
+\end{align*}
+}
+
+\item Linear algebra offers a derivation that does not require claculus.  Introduce a new vector $r = A^{-1}x-b$ and express $f(x)$ in terms of $r$.  Show that the minimum of the new quadratic form occurs at $r=0$.
+
+\item Without the tensor calculus, the calculus approach proves surprisingly cumbersome.  Derive the partial derivatives of 
+\begin{align*}
+	f(x,y) &= \frac{1}{2}A_{11}x^2+!_{12}xy+\frac{1}{2}A_{22}y^2 -b_1x-b_2y
+\end{align*}
+
+\item Perform the same task in three dimensions for $f(x,y,z)$.
+
+\item Show that the Hessian $\partial^2 f/\partial x^i\partial x^j$ equals 
+\begin{align*}
+	\frac{\partial^2 f}{\partial x^i\partial x^j} = A_{ij}
+\end{align*}
+
+\item Show that equation (7.71) can be written as 
+\begin{align*}
+	A_{ij}x^j=\lambda x_i
+\end{align*}and as
+\begin{align*}
+	A^i_j x^j = \lambda x^j
+\end{align*}
+
+\item Show that the eigenvalues of the generalized equation (7.71) are invariant with respect to change of basis.
+
+\item Show that the eigenvalues of the generalized equation (7.71) are given by the Rayliegh quotient
+\begin{align*}
+	\lambda = A_{ij}x^ix^j
+\end{align*}
+
+\end{enumerate}
+
+\end{document}

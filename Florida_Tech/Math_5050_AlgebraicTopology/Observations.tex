@@ -1,0 +1,280 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Algebraic Topology}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Shibo Liu}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+
+\section{Notes and Observations}
+\begin{center}
+\textbf{\Large{Notes and Observations}}
+\end{center}
+
+\HLINE
+
+\begin{description}
+	\item \textbf{Topological Objects}
+	\begin{itemize}
+		\item $n$-Ball: unit ball in $\R^n$.
+		
+		Line (1-ball): $D^1 = \{x\,:\, x^2 \le 1\}$
+		
+		Disk (2-ball): $D^2 = \{(x,y)\,:\, x^2+y^2 \le 1\}$
+		
+		$n$-ball: $D^n= \{(x_1,\dots,x_n)\,:\, \sum x_i^2 \le 1\}$
+		
+		'$e$-cell': interior of $n$-ball, $e^n = \{(x_1,\dots,x_n)\,:\, \sum x_i^2 < 1\}$
+		
+		\item $n=1$-surface: $S^{n-1} = \partial D^n =\{(x_1,\dots,x_n)\,:\, \sum x_i^2 = 1\}$
+
+		Two-point: $S^0 = \partial D^1 = \{0,1\}$.
+				
+		Cirlce: $S^1 = \partial D^2=\{(x,y)\,:\, x^2+y^2 = 1\}$.
+		
+		Sphere: $S^2 = \partial D^3=\{(x,y,z)\,:\, x^2+y^2+z^2 = 1\}$.
+		
+		\item A \DEFINE{cone} on $X$ is the quotient space $cX = (X \times I)/(X\times \{1\})$.
+		
+		Every element in $cX$ is $(X, t)$ where $0\le t \le 1$ and $(X, 1)$ is the identity element.
+		
+	\end{itemize}
+	
+	\item \textbf{Invariant Topological Properties}
+	\begin{itemize}
+		\item Connectedness.
+		\item Contractibility.
+		\item Compactness.
+		\item Completeness.
+	\end{itemize}
+	\item \textbf{Operators on topological objects}
+	\begin{enumerate}
+		\item \textbf{Product} $X \times Y$.  For every point in $X$ we 'attach' a copy of $Y$.
+		
+		Boundary of Product: $\partial (X \times Y) = (\partial X \times Y) \cup  (X\times\partial Y)$
+		
+		Beware $S^1 \times S^1$ can describe  sphere as well as a torus but they aren't isomorphic.
+		
+		\item \textbf{Quotient} $Y/X$
+		
+		Take $X$ to be a point and map all of $Y$ to it.
+
+		\item \textbf{Suspensions}
+		\item \textbf{Join}
+		\item \textbf{Wedge Sum}
+		\item \textbf{Smash Product}
+	\end{enumerate}
+	
+	\item \textbf{Vocabulary from Topology}
+	\begin{itemize}
+		\item \textbf{Properly Discontinuous}
+		
+		A properly discontinuous action of a group \(G\) on a topological space \(X\) is a group action where for every point \(x\in X\), there exists a neighborhood \(U\) such that the set of group elements \(g\in G\) moving \(U\) to intersect itself is limited to the identity, i.e., \(gU\cap U\ne \emptyset \) only for \(g=e\). This ensures the quotient map \(X\rightarrow X/G\) is a covering map.
+		
+		\item \textbf{Connected}
+				
+		A topological space $X$ is said to be \textit{disconnected} if it is the union of two disjoint non-empty open sets. Otherwise, $X$ is said to be \DEFINE{connected.}
+		
+		\item \textbf{Simply Connected}
+
+		A topological space is simply connected if it is path-connected and every continuous loop within it can be continuously shrunk to a point (i.e., trivial group).
+		
+		\item \textbf{Path Connected}
+		
+		 A path from a point $x$ to a point $y$ in a topological space 
+$X$ is a continuous function 
+$f$ from the unit interval $[0,1]$ to $X$ with $f(0)=$ and $f(1)=y$. A path-component of $X$ is an equivalence class of $X$ under the equivalence relation which makes $x$ equivalent to $y$ if and only if there is a path from $x$ to $y$. The space $X$ is said to be path-connected (or pathwise connected or \textbf{0}-connected) if there is exactly one path-component.
+
+		\item \textbf{Locally Path Connected}
+		
+		A space $X$ is called locally connected at $x$ if every neighborhood of $x$ contains a connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of connected open sets.
+		
+		\item \textbf{Semi-locally Path Connected}
+		
+		A space $X$ is called semi-locally simply connected if every point $x$ in $X$ and every neighborhood V of x has an open neighborhood $U$ of x such that $x\in U\subset V$ with the property that every loop in $U$ can be contracted to a single point within $X$ (i.e. every loop in $U$ is nullhomotopic in $X$).
+		
+		\item \textbf{Homeomorphic}
+		
+		Give two topological spaces $X$ and $Y$.  They are said to be \DEFINE{homeomorphic} if there exists a continuous function $f: X \to Y$ and its inverse. (think ``isomorphsim" but in topological terms).
+		
+		\item \textbf{Locally Homeomorphic}
+		
+		\item \textbf{Quotient Topology}
+	\end{itemize}
+
+	\item \textbf{Deformation Retract}
+	
+	\begin{definition}[Deformation Retract]
+	A subspace $A$ of $X$ is \DEFINE{deformation retract} of $X$ if there is a retraction $g:X \to A$ (i.e., a map $g: X\to A$ with $g(a)=a$ for every $a\in A$)  such that $g$ is homotopic to the identiy map $id: X \to X$.  A subspace $A$ of $X$ is a \DEFINE{strong deformation retract} if there is a aretraction $g: X \to A$ such that $g$ is homotopic rel $A$ to the identity map $id: X \to X$.
+	
+	\end{definition}
+		
+	\item \textbf{Homotopy Equivalence and Deformation Retract}
+	
+	\DEFINE{Homotopy}: Two maps $f_0:(X,A) \to (Y,B)$ and $f_1:(X,A) \to (Y,B)$ are \DEFINE{homotopic}, i.e., $f_0 \sim f_1$, if there is a map 
+	\begin{align*}
+		F: (X,A)\times I \to (Y,B)
+	\end{align*}where $F(x,0) = f_0$ and $F(x,1) = f_1$ for every $x\in X$.  \textit{Homotopy} is an equivalence relation.
+
+	\DEFINE{Homotopy Equivalence} is an equivalence relation (identity, symmetric, 	and transitive) which partitions (see quotient map, below).
+	
+	\begin{theorem}
+		 Put simply two spaces are homotopy equivalent if there is a third space that deformation retracts (shrinks/expands) to both.
+\end{theorem}
+	
+	\begin{lemma} A cell complex, $X$ and a subcomplex $A$, then the quotient map $X \to X/A$ is a homotopy equivalence.
+	\end{lemma}
+	
+	\begin{theorem}[Homeomorphism implies Isomorphism (not visa versa)] If $X$ is homeomorphic to $Y$ then $\pi_1(X) \cong \pi_1(Y)$.
+	\end{theorem}
+	
+	\begin{theorem}[Homotopy Equivalence implies Isomorphism]
+	
+	\end{theorem}
+	
+	\begin{remark} Understand a progression of relationships between two topological spaces $X,Y$ from``isomorphic/homeomorphic" $\to$ ``deformation retract between $X$ and $Y$" $\to$ ``homotopy equivalent".
+	\end{remark}
+	
+	\textbf{Further: } $X$ and $Y$ need only be a deformation retract between them.
+	
+	\item \textbf{The Fundamental Group}
+	
+	\begin{theorem}[The Fundamental Group is a group].
+	
+	The Fundamental Group $\pi_1(X, x_0)$ is a group
+	
+	\end{theorem}
+	
+	\begin{theorem}.
+	
+	$\pi_1(S^1) \cong \Z$\footnote{Note that this is independent of base-point $x_0$.}
+	
+	Proof (outline):  Show that there exists a homomorphism $\varphi: \Z \to \pi_1(S^1)$ then show that 
+	\begin{itemize}
+		\item $\varphi$ is surjective, i.e., $\varphi(m) = \varphi(n) \implies m=n$.
+		\item $\varphi$ is injective, $\forall [f] \in S^1\, \exists n\in \Z \to \varphi(n) = f$
+	\end{itemize}
+	
+	\begin{remark}In the video \textit{Algebraic Topolgy 3: The Fundamental Group is a Group}, the instructor uses a helix to describe multiple but separate paths around $S^1$ indicating that a full loop in $S^1$ can be a path on the helix from a point to the same point on the next (or successive) level.  The helix is eventually mapped to $\R$ where the closed loops are then mapped to $\Z$.
+	\end{remark}
+	
+	\end{theorem}
+	
+	\item \textbf{Covering Space}
+	
+	If $\tilde{X}$ is a covering space for $X$ then $\pi_1(\tilde{X})$ is a subgroup of $\pi_1(X)$.  And there is a bijection of the set/space of maps $\tilde{X} \to X$ and subgroups of $\pi_1(X)$.
+	
+	A symmetric foundamental group is normal
+	
+	\begin{definition}[Covering Space]
+	\begin{align*}
+		p: \tilde{X} &\to x\\
+		\tilde{x_0} & \mapsto x_0 \text{  basepoint } (X, x_0)
+	\end{align*}open covers $\{u_\alpha\}$ of $X$ such that $p^{-1}(\alpha)$ is homeomorphic to $u_\alpha$.\\
+	
+	There is an induced mapping $p_*: \pi_1(\tilde{X},\tilde{X}_0) \to \pi_1(X, x_0)$ where $p_*$ is a subgroup of $\pi_1(X, x_0)$.
+	\end{definition}
+\end{description}
+
+\begin{remark}It is the projection, $p$, along with the preimage homeomorphism that forms this connection between Covering Spaces and Fundamental Groups.
+\end{remark}
+
+\section{AI Questions:}
+
+\begin{description}
+	\item \textbf{What are the properties of Covering Spaces?}
+	
+	A covering space is a concept deeply connected to the fundamental group. Let's explore its properties.\\
+
+Let \(p: E \to B\) be a continuous surjective map between topological spaces. We call \(p\) a \DEFINE{covering map}, and \(E\) a \DEFINE{covering space} of \(B\), if it satisfies the following property:\\
+
+For every point \(b \in B\), there exists an open neighborhood \(U\) of \(b\) in \(B\) such that its preimage \(p^{-1}(U)\) is a disjoint union of open sets \(V_i\) in \(E\), and for each \(i\), the restriction of \(p\) to \(V_i\), denoted \(p|_{V_i}: V_i \to U\), is a homeomorphism. The neighborhood \(U\) is called an \DEFINE{evenly covered} neighborhood.
+
+\textbf{Key Properties of Covering Spaces:}
+
+\begin{enumerate}
+
+\item \textbf{**Local Homeomorphism:**} A covering map \(p: E \to B\) is a local homeomorphism. This means that for every point \(e \in E\), there is a neighborhood of \(e\) that is mapped homeomorphically onto its image in \(B\). This follows directly from the definition of an evenly covered neighborhood.
+
+\item \textbf{**Lifting Properties:**} Covering spaces have unique lifting properties for paths and homotopies. This is where the connection to the fundamental group becomes crucial.
+\begin{itemize}
+    \item \textbf{**Path Lifting Property:**} Given a path \(\gamma: [0, 1] \to B\) in the base space and a starting point \(e_0 \in E\) such that \(p(e_0) = \gamma(0)\), there exists a unique path \(\tilde{\gamma}: [0, 1] \to E\) in the covering space that starts at \(e_0\) (i.e., \(\tilde{\gamma}(0) = e_0\)) and covers \(\gamma\) (i.e., \(p \circ \tilde{\gamma} = \gamma\)). This lifted path \(\tilde{\gamma}\) is called a \DEFINE{lift} of \(\gamma\).
+    \item \textbf{**Homotopy Lifting Property:**} If two paths in \(B\) are homotopic, their lifts in \(E\) starting at the same point will also be homotopic (specifically, they will end at the same point).
+\end{itemize}
+
+\item \textbf{**Relationship with the Fundamental Group:**} The connection between covering spaces and the fundamental group is one of the most important results in algebraic topology.
+\begin{itemize}
+
+    \item Let \(p: (E, e_0) \to (B, b_0)\) be a covering map. The induced homomorphism \(p_*: \pi_1(E, e_0) \to \pi_1(B, b_0)\) is injective. This means the fundamental group of the covering space is isomorphic to a subgroup of the fundamental group of the base space.
+    \item The set of lifts of a loop in \(B\) based at \(b_0\) corresponds to the elements of the subgroup \(p_*(\pi_1(E, e_0))\). Specifically, a loop \(\gamma\) in \(B\) lifts to a loop in \(E\) if and only if its homotopy class \([\gamma]\) is in the subgroup \(p_*(\pi_1(E, e_0))\).
+\end{itemize}
+
+\item \textbf{**Classification of Covering Spaces:**} For a 'nice' space \(B\) (path-connected, locally path-connected, and semilocally simply-connected), there is a one-to-one correspondence between the subgroups of its fundamental group \(\pi_1(B, b_0)\) and the isomorphism classes of based covering spaces of \(B\). The trivial subgroup \(\{e\}\) corresponds to a special covering space called the **universal covering space**, which is simply connected (i.e., its fundamental group is trivial).
+\end{enumerate}
+\end{description}
+
+
+\end{document}

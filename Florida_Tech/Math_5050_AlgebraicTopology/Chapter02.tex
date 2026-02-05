@@ -1,0 +1,147 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Algebraic Topology}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Shibo Liu}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\OPEN}[1]{\overset{\circ}{#1}}
+
+\newtheorem{innercustomthm}{Lemma}
+\newenvironment{mylemma}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+
+\begin{center}
+\textbf{\Large{Chapter 2: The Fundamental Group}}
+\end{center}
+
+\HLINE
+
+\noindent\textbf{Exercises}
+\begin{enumerate}[label=2.7.\arabic*]
+
+\item  Prove Lemma 2.1.2
+
+\begin{mylemma}{2.1.2}The Fundamental Group $\pi_1(X,x_0)$ forms a group.
+\end{mylemma}
+
+\BLUE{A group is closure, associative, has an identity, and every element has an inverse (commutativity is optional).
+\begin{itemize}
+	\item Closure: WTS $ab \in \pi_1(X, x_0),\,\forall a,b$.\\
+	Let $h=ab$ then $h(t) \in X, \, \forall t$.  Further, $h(0) = f(0) = g(1) = x_0$, therefore, $h \in \pi_1(X,x_0)$.
+	\item Associativity: WTS $f(gk)\simeq(fg)k, \forall a,b,c$.\\	
+	\begin{align*}
+		fg &= \BINDEF{f(2t), & 0\le t \le \frac{1}{2}}{g(2t-1), & \frac{1}{2}\le t \le 1} \\
+		(fg)k &= \BINDEF{fg(2t), & 0\le t \le \frac{1}{2}}{k(2t-1), & \frac{1}{2}\le t \le 1} \\
+		&= \BINDEF{f(4t), & 0\le t \le \frac{1}{4}}{g(4t-1), & \frac{1}{4}\le t \le \frac{1}{2} \\ k(2t-1), & \frac{1}{2}\le t \le 1} \\
+		f(gk) &= \BINDEF{f(2t), & 0\le t \le \frac{1}{2}}{gk(2t-1), & \frac{1}{2}\le t \le 1} \\
+		&= \BINDEF{f(2t), & 0\le t \le \frac{1}{2}}{g(4t-3), & \frac{1}{2}\le t \le \frac{3}{4} \\ k(1-4t), & \frac{3}{4}\le t \le 1} 
+	\end{align*}Clearly, both $(fg)k$ and $f(gk)$ map completely and smoothly on to $(X, x_0)$.  Therefore, $(fg)k,f(gk) \in\pi_1(X,x_0)$ and $(fg)k\simeq f(gk)$
+	\item Inversion: WTS $\forall a,\, \exists b \to ab\simeq e$.\\
+	Let $f : (S^1,1) \to (X, x_0)$ and then $g: (X, x_0)$ such that $g(t) \simeq f(1-t)$ for $t\in [0,1]$.  The $h=fg$ is 
+	\begin{align*}
+		h(t) &= \BINDEF{f(2t), & 0\le t \le \frac{1}{2}}{g(2t-1), & \frac{1}{2}\le t \le 1} \\
+		g(2t-1) &= f(1-(2t-1)) = f(2t) \\
+		\therefore h &= fg \implies h \simeq f
+	\end{align*}
+	\item Identity: WTS $\exists e \to ae=a, \, \forall a$. \\
+	Let $\iota: (S_1, 1) \to (X, x_0)$ be $\iota(t) = x_0$ for all $t \in [0,1]$.  That is, $i$ collapses to the trival Fundamental Group.  Then 
+	\begin{align*}
+		\iota f &= \BINDEF{f(2t), & 0\le t \le \frac{1}{2}}{x_0, & \frac{1}{2}\le t \le 1} 
+	\end{align*}$\iota f \simeq f$ as $\iota f$ maps entirely to $f$ just twice as ``fast".
+	\item Commutativity: WTS $ab \simeq ba\, \forall a,b$
+\end{itemize}\textbf{Note: its a group based on $\simeq$ not on $=$.}
+}
+
+\item Prove Lemma 2.1.3
+
+\item Prove Theorem 2.1.5
+
+\item Give an example of a map $p:Y \to X$ satisfying the condition in lemma 2.2.2 which is \textit{not} a covering projection.
+
+\item Verify that the map in Example 2.2.3 are indeed covering projections.
+
+\item Let $X$ be a simply connected space.  Fix $x_0, x_1$, two arbitrary points at $X$.  Let $f:I\to X$ with $f(0)=g(0)=x_0$ and $f(1)=g(1)=x_1$.  Show that $f$ and $g$ are homotopic rel $\{0,1\}$.
+
+\item Prove directly the following special case of van Kampen's theorem:  Let $X$ be the union $X = X_1\cup X_2$ of two open sets $X_1$ and $X_2$.  Suppose that $X_1, X_2$ and $A=X_1\cap X_2$ are all path-connected.  Suppose that each of $X_1$ and $X_2$ is simply connected.  Then $X$ is simply connected.
+
+\item Prove parts (ii) and (iii) of Theorem 2.2.19.
+
+\item \begin{enumerate}
+	\item Let $C$ be a connected finite 1-complex.  Show that the number of edges $n$ of $C$ not in a maximal tree $T$ is well-defined, i.e., independent of choice of $T$.
+	\item Show that $C$ is homotopy equivalent to the $n$-leafed rose $R_n$ for some $n$.
+	
+	\item Let $p$ be prime.  Show that the free group $\ABRACKET{a,b}$ has exactly $p+1$ normal subgroups of index $p$.
+	
+	\item Find all 4-fold covers of the two-leafed rose, up to equivalence.
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+\end{document}

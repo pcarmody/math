@@ -220,7 +220,7 @@
 % Linear Algebra
 %%%%%%
 
-\newcommand{\COLVECTOR}[1]{\PAREN{\begin{array}{c}
+\newcommand{\COLVECTOR}[1]{\SQBRACKET{\begin{array}{c}
 #1
 \end{array} }}
 \newcommand{\SQCOLVECTOR}[1]{\SQBRACKET{\begin{array}{c}
@@ -231,6 +231,7 @@
 \newcommand{\SQTWOXTWO}[4]{\SQBRACKET{ \begin{array}{c c} #1&#2 \\ #3 & #4 \end{array} }}
 \newcommand{\THREEXTHREE}[9]{\PAREN{ \begin{array}{c c c} #1&#2&#3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array} }}
 \newcommand{\DTHREEXTHREE}[9]{\BARS{ \begin{array}{c c c} #1&#2&#3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array} }}
+\newcommand{\SQTHREEXTHREE}[9]{\SQBRACKET{ \begin{array}{c c c} #1&#2&#3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array} }}
 \newcommand{\NXN}{\PAREN{ \begin{array}{c c c c} 
 			a_{11} & a_{12} & \cdots & a_{1n} \\
 			a_{21} & a_{22} & \cdots & a_{2n} \\

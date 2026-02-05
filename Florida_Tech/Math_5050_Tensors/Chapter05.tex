@@ -1,0 +1,290 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 5: The Tensor Description of Euclidean Space }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent\textbf{Exercises:}
+\begin{description}
+
+\item \textbf{Exercise 60.}  Consider a curve parameterized by its arc length $s$, and consider the function $\VK{R}(s)$.  Explain, on the basis of your geometric intuition, why $\VK{T}=\VK{R}'(s)$ is the unit tangent vector.  Note that the condition $|\VK{R}'(s)| = 1$ may be taken as the definition of the arc length $s$.
+
+\BLUE{Given $\VKR(s)$ and $\VKR(s+h)$ then 
+\begin{align*}
+	\Delta \VKR &= \VKR(s)-\VKR(s+h) \\
+	&= \VKR(Z_i(s)) - \VKR(Z_i(s+h))\\
+	&= \VKR(Z_i(s) - Z_i(s+h))\\
+	&= \VKR(Z_i(h)) \\
+	|\Delta \VKR| &= \sqrt{\sum Z_i(h)^2} \\
+	\lim_{h\to 0} &= \frac{|\Delta\VKR|}{h}
+\end{align*}Notice that if $Z_2(h)=Z_3(h) = 0$ then $Z_1(h) = h$ and the limit goes to 1.  Further, $\sum Z_i(h)^2 = h^2$ via Pythagorous thus the limit goes to 1 even in the general sense.
+}
+
+\item \textbf{Exercise 61.}  What are the components of the vector $\VK{Z}_i$ with respect to the covariant basis $\VK{Z}_j$?  The answer can be captured with a single symbol introduced in Chapter 4.
+
+\BLUE{\begin{align*}
+	\VK(Z)_i &= Z_j \delta^i_j 
+\end{align*}
+}
+
+\item \textbf{Exercise 62.}  Explain why the covariant basis, interpreted as a matrix, is positive definite.
+
+\BLUE{Let $A$ be the matrix of covariant basis vectors and $u, v$ be vectors with positive entries.  then
+\begin{align*}
+	u &= u^iA_i  \\
+	u \cdot v &= u^iA_i \cdot v^jA_j = u^iv_j(A^i\cdot A_j) > 0
+\end{align*}Therefore $A^i\cdot A_j >0$ for all $i,j$, hence, positive definite.
+}
+
+\item \textbf{Exercsie 63.}  Show that the length $|\VK{V}|$ of a vector $\VK{V}$ is given by \begin{align*}
+	|\VK{V}| &= \sqrt{Z_{ij}V^iV^j}.
+\end{align*}
+
+\BLUE{\begin{align*}
+	\VK(V) &= (V^i) \\
+	|\VK{V}| &= \sqrt{\VK{V}\cdot\VK{V}} \\
+	&= \sqrt{V^i\VK{Z}_i\cdot V^j\VK{Z}_j}\\
+	&= \sqrt{V^iV^j(\VK{Z}_i\cdot \VK{Z}_j)}\\
+	&= \sqrt{V^iV^j Z_{ij}}
+\end{align*}
+}
+
+\item \textbf{Exercise 64.}  Prove that $Z^{ij}$ is positive definite.
+
+\BLUE{$Z_{ij}$ is positive definite and
+\begin{align*}
+	Z_{ij}Z^{ij} &= \mathbb{I}
+\end{align*}therefore $Z^{ij}$ is positive definite.
+}
+
+\item \textbf{Exercise 65.}  Demonstrate (5.16).  Hint: $\VK{Z}^i\cdot \VK{Z}_j = Z^{ik}\VK{Z}_k\cdot\VK{Z}^j$.
+\begin{align*}
+	\VK{Z}^i\cdot \VK{Z}_j &= \delta^i_j & (5.16)
+\end{align*}
+
+\item \textbf{Exercise 66.}  Show that the angle between $\VK{Z}^1$ and $\VK{Z}_1$ is less than $\pi/2$.
+
+\RED{\begin{align*}
+	\VK{Z}^1\cdot\VK{Z}_1 &= \delta^1_1 = \sin \theta \implies \theta = \pi/2
+\end{align*}This is based on my instinct that the covariant basis is \textit{orthonormal}.  However, let's think instead of affine and curvilinear, i.e., more general covariant bases.  The key point is 'not equal' but 'less than'.
+}
+
+\item \textbf{Exercise 67.}  Show that the product of the lengths $|\VK{Z}^1||\VK{Z}_1| \ge 1$.
+
+\BLUE{\begin{align*}
+	\BARS{\VK{Z}^1\cdot\VK{Z}_1}^2 &\le (\VK{Z}^1\cdot\VK{Z}^1)(\VK{Z}_1\cdot\VK{Z}_1)\\
+	\BARS{\delta^1_1}&\le \BARS{\VK{Z}^1}\BARS{\VK{Z}_1}
+\end{align*}
+}
+
+\item \textbf{Exercise 68.}  Show that the covariant basis $\VK{Z}_i$ can be obtained by the contravariant basis $\VK{Z}^j$ by 
+\begin{align*}
+	\VK{Z}_i &= Z_{ij}\VK{Z}^j.
+\end{align*}Hint: Multiply both sides of equation (5.14) by $Z_{ik}$, i.e., $\VK{Z}^i = Z^{ij}\VK{Z}_j$.
+
+\BLUE{First notice that
+\begin{align*}
+	\VK{Z}^i &= Z^{ij}\VK{Z}_j \\
+	\VK{Z}^i\cdot\VK{Z}_k &= Z^{ij}\VK{Z}_j\cdot\VK{Z}_k \\
+	\delta^i_k &= Z^{ij}Z_{jk}
+\end{align*}\textbf{This is a useful result}.  Now applying that to
+\begin{align*}
+	\VK{Z}^i &= Z^{ij}\VK{Z}_j \\
+	Z_{ik}\VK{Z}^i &= Z_{ik}Z^{ij}\VK{Z}_j \\
+	Z_{ik}\VK{Z}^i &= \delta^j_k\VK{Z}_j \\
+	Z_{ik}\VK{Z}^i &= \VK{Z}_k
+\end{align*}
+}
+
+\item \textbf{Exercise 69.} Show that the pairwise dot products of the contravariant basis elements yields the contravariant metric tensor.
+\begin{align*}
+	\VK{Z}^i\cdot \VK{Z}^j = Z^{ij}.
+\end{align*}
+
+\BLUE{Remember that $\VK{Z}_i\cdot\VK{Z}_j = Z_{ij}$ and $\VK{Z}^i\cdot\VK{Z}_j = \delta^i_j$.
+\begin{align*}
+	\VK{Z}^j &= Z^{ij}\VK{Z}_i \\
+	\VK{Z}^j\cdot \VK{Z}^k &= Z^{ij}\VK{Z}_i \cdot \VK{Z}^k \\
+	&= Z^{ij}\delta^k_i \\
+	&= Z^{kj}
+\end{align*}
+}
+
+\item \textbf{Exercise 70.}  Argue from the linear algebra point of view that equation (5.16) uniquely determines the vector $\VK{Z}^i$.
+
+\BLUE{(5.16) is $\VK{Z}^i\cdot\VK{Z}_j=\delta^i_j$.
+\begin{align*}
+	\VK{Z}^i\cdot\VK{Z}_j &= Z^{ij}\VK{Z}_i\cdot\VK{Z}_j \\
+	&\begin{array}{lcl}
+		i=j & Z^{ii}|\VK{V}_i|=1 & \VK{Z}_i\,||\,\VK{Z}_j \\
+		i\ne j & Z^{ij}\VK{Z}_i\cdot\VK{Z}_j=0 & \VK{Z}_i\perp\VK{Z}_j
+	\end{array}
+\end{align*}}
+\RED{Describe the space of vectors $i\ne j$ and emphasize that the vectors defined by $i=j$ are then unique.  Remember to establish the magnitude equal to 1 (not -1).  This seemed intuitively straightforwad to me, except by limiting the description to Linear Alegrbra terms like "span" and "space".}
+
+\item \textbf{Exercise 71.}  Therefore (5.16) can be taken as the definition of the contravariant basis $\VK{Z}^i$ and equation (5.18) can be taken as the contravariant basis $Z^{ij}$.  Show that property (5.11), $Z^{ij}Z_{jk}=\delta^j_k$, follows from these definitions.  
+
+\item \textbf{Exercise 72.}  Confirm that $\VK{Z}^1$ in equation (5.42) is orthogonal to $\VK{Z}_2$ and that $\VK{Z}^2$ in equation (5.43) is orthogonal to $\VK{Z}_1$
+\begin{align*}
+	\VK{Z}^1 &= \frac{1}{3}\textbf{i}-\frac{1}{3}\textbf{j} & (5.42) \\
+	\VK{Z}^2 &= -\frac{1}{3}\textbf{i}+\frac{4}{3}\textbf{j} & (5.42)
+\end{align*}
+
+\BLUE{\begin{align*}
+	Z^{ij} &= \SQTWOXTWO{\VK{Z}^1\cdot\VK{Z}^1}{\VK{Z}^1\cdot\VK{Z}^2}{\VK{Z}^2\cdot\VK{Z}^1}{\VK{Z}^2\cdot\VK{Z}^2} \\
+	&= \SQTWOXTWO{\frac{2}{9}}{-\frac{5}{9}}{-\frac{5}{9}}{\frac{17}{9}} \\
+	Z_{ij} = (Z^{ij})^{-1} &= \SQBRACKET{\begin{array}{cc|cc}
+		\frac{2}{9} & -\frac{5}{9} & 1 & 0 \\
+		-\frac{5}{9} & -\frac{17}{9} & 0 & 1 
+	\end{array} } \\
+	&= \SQTWOXTWO{17}{5}{5}{2}
+\end{align*}
+}
+
+\item \textbf{Exercise 73.} Confirm that $\VK{Z}^1\cdot\VK{Z}_1=\VK{Z}^2\cdot\VK{Z}_2=1$.
+
+\BLUE{\begin{align*}
+	\VK{Z}^1 \cdot \VK{Z}_1 &= Z^{1j}\VK{Z}_j \cdot \VK{Z}_1 \\
+	&= 17\PAREN{\frac{2}{9}}+5\PAREN{\frac{-5}{9}} = -1 \\
+	\VK{Z}^2 \cdot \VK{Z}_2 &= Z^{2j}\VK{Z}_j \cdot \VK{Z}_2 \\
+	&= 5\PAREN{\frac{-5}{9}}+2\PAREN{\frac{17}{9}} = -1
+\end{align*}
+}
+
+\item \textbf{Exercise 74.} Confirm that $\VK{Z}^1\cdot\VK{Z}^2 = Z^{12}=-1/3$.
+
+\item \textbf{Exercise 75.} Show that $\VK{Z}_3$ in cylindrical coordinates in a unit vector that points in the direction of the \textit{z}-axis.
+
+\BLUE{The position vector $\VK{R}=(r, \theta, z)$.  Thus, $\VK{Z}_3=\PART{\VK{R}}{Z^3} = \PART{\VK{R}}{z} = 1$
+}
+
+\item \textbf{Exercise 76.}  Show that metric tensors in polar coordinates are give by 
+\begin{align*}
+	Z_{ij} &= \SQTHREEXTHREE{1}{0}{0}{0}{r^2}{0}{0}{0}{1}:\; Z^{ij} = \SQTHREEXTHREE{1}{0}{0}{0}{r^{-2}}{0}{0}{0}{1}: & (5.47)
+\end{align*}
+
+\item \textbf{Exercise 77.}  Show that $\VK{Z}^3=\VK{Z}_3$.
+
+\item \textbf{Exercise 78.}  Show that 
+\begin{align*}
+	\PART{Z_{ij}}{Z^k} &= Z_{ij}\COFF{l}{j}{k}+Z_{lj}\COFF{l}{i}{k}. & (5.67)
+\end{align*}
+	
+	\BLUE{	By definitions:
+	\begin{align*}
+		\COFF{k}{i}{j} &= \VK{Z}^k\cdot \PART{\VK{Z}_i}{Z^j} & (5.60)\\
+		&= -\PART{\VK{Z}^k}{Z^j}\cdot\VK{Z}_i & (5.64)
+	\end{align*}
+	\begin{align*}
+		\PART{Z_{ij}}{Z^k} &= \PART{(\VK{Z}_i\cdot\VK{Z}_j)}{Z^k} \\
+		&= \PART{\VK{Z}_i}{Z^k}\cdot \VK{Z}_j + \VK{Z}_i\cdot \PART{\VK{Z}_j}{Z^k} \\
+		&= \PART{\VK{Z}_i}{Z^k}\cdot (Z_{jl}\VK{Z}^l) + (Z_{il}\VK{Z}^l)\cdot \PART{\VK{Z}_j}{Z^k} \\
+		&= Z_{jl}\PART{\VK{Z}_i}{Z^k}\cdot \VK{Z}^l + Z_{il}\VK{Z}^l\cdot \PART{\VK{Z}_j}{Z^k} \\
+		&= Z_{jl}\COFF{l}{i}{k}+Z_{il}\COFF{l}{j}{k}
+\end{align*}	
+	}
+
+\item \textbf{Exercise 79.}  By renaming indicies, obtain an expression for each of the terms in paranetheses of equation (5.66).
+
+\item \textbf{Exercise 80.} combine all expressions in the preceding exercise to dericve equations (5.66).
+
+\item \textbf{Exercise 81.} Consider a material particle moving along a curve with parameterization with respedct to time given by 
+\begin{align*}
+	Z^i &\equiv Z^i(t).& (5.69)
+\end{align*}Suppose that the velocity of the material particle is given by $\VK{V}(t)$.  Show that the component $V^i(t)$ of $\VK{V}(t)$ is given by 
+\begin{align*}
+	V^i(T) &= \frac{dZ^i(t)}{dt}. & (5.70)
+\end{align*}Hint: $\VK{V}(t) =  \VK{R}'(t)$.
+
+\item \textbf{Exercise 82.}  Shwo that the compoenent $A^i(t)$ of acceleration $\VK{A}(t)$ of the particl from teh preceding exercise is given by 
+\begin{align*}
+	A^i &= \frac{dV^i}{dt} + \COFF{i}{j}{k}V^jV^k. & (5.71)
+\end{align*}
+
+\item \textbf{Exercise 83.}  Let $\VK{B}(t) = \VK{A}'(t)$ by the rate of change in acceleration $\VK{A}(t)$.  Show that $B^i(t)$ is given by 
+\begin{align*}
+	B^i &= \frac{dA^i}{dt} + \COFF{i}{j}{k}A^jV^k.  & (5.72)
+\end{align*}
+
+\item \textbf{Exercise 84.}  For a general vector field $\VK{U}(t)$ defined along the curve $Z^i\equiv Z^i(t)$, show that 
+\begin{align*}
+	\VK{U}'(t) &= \PAREN{\frac{dU^i}{dt}+V^j\COFF{i}{j}{k}U^k}\VK{Z}_i. & (5.73)
+\end{align*}
+
+\item \textbf{Exercise 85.} Derive the Christoffel symbols in cylindrical and spherical coordinates by equation (5.60).
+
+\item \textbf{Exercise 86.} Derive the Christoffel symbols in cylindrical and sperical coordinates by equation (5.66).
+
+\end{description}
+\end{document}

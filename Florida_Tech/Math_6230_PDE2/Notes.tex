@@ -1,0 +1,535 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 6230 -- Partial Differential Equations II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Perrera}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{teal}{#1}}
+\newcommand{\VIOLET}[1]{\textcolor{violet}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\CSPACE}{{C(\CONJ{U})}}
+\newcommand{\CNORM}[1]{|| #1 ||_\CSPACE}
+\newcommand{\CSEMINORM}[1]{[ #1 ]_\CSPACE}
+\newcommand{\CSUBSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HOLDERNORM}[4]{|| #4 ||_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\HSEMINORM}[4]{[ #4 ]_{\HSPACE{#1}{#2}{#3}}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+
+\HLINE
+\section{January 12, 2026: H\"older semi-norm}
+
+\begin{description}
+	\item H\"older Spaces
+	
+	let $U \subset \R^n$ be an open se.t
+	
+	Definition: let $\CSPACE$ denote the linear space of all continuous and bounded functions $u:U\to \R$.  For $u \in \CSPACE$, define 
+	\begin{align*}
+		\CNORM{u} &= \sup_{x\in U} |u(x)|
+	\end{align*}
+	
+	\item Theorem: $||\bullet ||$ is a norm on $\CSPACE$.
+	
+	Proof: \begin{enumerate}
+		\item Clearly, $\CNORM{u} \ge 0$ and equaltiy holds iff $u(x) = 0$ for all $x \in U$, i.e., u=0.
+		\item For $u\in \CSPACE$ and $\lambda \in \R$
+		\begin{align*}
+			\CNORM{\lambda u} = |\lambda| ||u(x)|| = |\lambda| \PAREN{\sup_{x\in U} |u(x)|} |\lambda|\CNORM{u}
+		\end{align*}
+		\item For $u,v \in \CSPACE$ and $x \in U$ \begin{align*}
+			|u(x)+v(x)| &\le |u(x)|+|v(x)|\\
+			&\le \sup_{y\in u}|u(y)|+\sup_{y\in u}|v(y)| \\
+			&= \underbrace{\CNORM{u}+\CNORM{v}}_{\text{constant}}
+		\end{align*}
+		
+	\end{enumerate}
+	
+	Taking the $\sup$ over all $x \in U$ gives 
+	\begin{align*}
+		\sup_{x\in U} |u(x)+v(x)| &\le \CNORM{u}+\CNORM{u} \\
+		\therefore \CNORM{u+v} &\le  \CNORM{u}+\CNORM{u} 
+	\end{align*}
+	
+	\item Theorem: $\CSPACE$ is complete, i.e., every Cauchy seq $(u_j) \in \CSPACE$ convergea to some $u \in \CSPACE$.
+	
+	Recall: $u:U \to \R$ is Lipschitz continuous if $|u(x)-u(y)| \le C|x-y|, \forall x,y \in U$ for some constant $C > 0$.
+	
+	\item Definition: We say that $u:U\to \R$ is H\"older continuous, with H\"older exponent $\gamma \in (0,1]$ if
+	\begin{align*}
+		|u(x)-u(y)| &\le C|x-y|^\gamma, \, \forall x,y \in U
+	\end{align*}for some constant $C>0$ ($\gamma=1$ corresponds to Lipschitz continuity).  Then
+	\begin{align*}
+		\HSEMINORM{0}{\gamma}{\CONJ{U}}{u} = \sup_{x,y \in U,x\ne y}\frac{|u(x)-u(y)|}{|x-y|^\gamma}
+	\end{align*}as the H\"older seminorm of $u$.
+	
+	\item Theorem \begin{enumerate}
+		\item $\HSEMINORM{0}{\gamma}{\CONJ{U}}{\lambda u} = |\lambda|\,\HSEMINORM{0}{\gamma}{\CONJ{U}}{u}$,
+		\item $\HSEMINORM{0}{\gamma}{\CONJ{U}}{u+v} \le\HSEMINORM{0}{\gamma}{\CONJ{U}}{u} + \HSEMINORM{0}{\gamma}{\CONJ{U}}{v}$
+	\end{enumerate}
+	
+	Proof is mostly plug and play.
+	
+	\item Definition: Let $\CSUBSPACE{0}{\gamma}{\CONJ{U}}$ denote the subspace of $\CSPACE$ consisting of functions $u$ for which $\HSEMINORM{0}{\gamma}{\CONJ{u}}{u}<\infty$.  For $u \in \CSUBSPACE{0}{\gamma}{\CONJ{U}}$ define the \DEFINE{H\"older Norm} of $u$ by 
+	\begin{align*}
+		\HOLDERNORM{0}{\gamma}{\CONJ{U}}{u} = \CNORM{u}+\HSEMINORM{0}{\gamma}{\CONJ{U}}{u}
+	\end{align*}
+	
+	\item Theorem: $\HOLDERNORM{0}{\gamma}{\CONJ{U}}{\bullet}$ is a norm on $\CSUBSPACE{0}{\gamma}{\CONJ{U}}$.
+	
+	\item Theorem: $\CSUBSPACE{0}{\gamma}{\CONJ{U}}$ is complete, i.e., it is a Banach space.
+\end{description}
+
+\HLINE
+\textbf{\large{Janary 14, 2026: Proof of H\"older Space $\in$ Banach Space}}
+
+\newcommand{\CCC}[2]{C^{#1}(#2)}
+\newcommand{\CCCNORM}[3]{|| #3 ||_{\CCC{#1}{#2}}}
+\begin{description}
+	\item The proof goes from norms on $C(\CONJ{U})$ to $C^1(\CONJ{U})$ and upward.  Transcribe from online notes.
+	\begin{enumerate}
+		\item $\HOLDERNORM{0}{\gamma}{\CONJ{U}}{\bullet}$
+		
+		\begin{align*}
+			\HOLDERNORM{0}{\gamma}{\CONJ{U}}{u}&= \CNORM{u} + \HSEMINORM{0}{\gamma}{\CONJ{U}}{u}
+		\end{align*}
+		
+		\item $\CCCNORM{1}{\CONJ{U}}{\bullet}$
+		
+		\begin{description}
+			\item Definition: Let $\CCC{1}{\CONJ{U}}$ denote the linear space of continuously differential functions $u: U\to \R$ such that 
+		\begin{align*}
+			\CCCNORM{1}{\CONJ{U}}{u} := \CNORM{u} + \sum_{i=1}^n \CNORM{u_{x_i}} < \infty
+		\end{align*}where $u_{x_i} = \PART{u}{x_i}$.
+	
+			\item Theorem: $\CCCNORM{1}{\CONJ{U}}{\bullet}$ is a norm on $\CCC{1}{\CONJ{U}}$.
+			
+			\item Theorem: $\CCC{1}{\CONJ{U}}$ is a Banach space.\\
+			
+		\end{description}
+			
+		\item $\HOLDERNORM{1}{\gamma}{U}{\bullet}$
+		
+		\begin{description}
+	
+			\item Definition: Let $\CSUBSPACE{1}{\gamma}{\CONJ{U}}$ denote the space of continuously differentialbe functions $u: U \to \R$ such that
+			\begin{align*}
+				\HOLDERNORM{1}{\gamma}{U}{u} &= \CCCNORM{1}{\CONJ{U}}{u} + \sum_{i=1}^n + \HSEMINORM{0}{\gamma}{\CONJ{U}}{u_{x_i}} < \infty
+			\end{align*}
+			
+			\item Theorem: $\HOLDERNORM{1}{\gamma}{U}{\bullet}$ is a norm on $\CSUBSPACE{1}{\gamma}{\CONJ{U}}$.
+			
+			\item Thoerem: $\CSUBSPACE{1}{\gamma}{\CONJ{U}}$ is a Banach space.
+		\end{description}
+		
+		\item $\CCCNORM{2}{\CONJ{U}}{\bullet}$
+		\begin{align*}
+			\CCCNORM{2}{\CONJ{U}}{u} &= \CNORM{u} + \sum_{i=1}^n \CNORM{u_{x_i}}+ \sum_{i,j=1}^n  \CNORM{u_{x_ix_j}} < \infty \\
+			&\overset{?}{=} \CCCNORM{1}{\CONJ{U}}{u} + \sum_{i,j=1}^n  \CNORM{u_{x_ix_j}}
+		\end{align*}
+		
+		\item $\HOLDERNORM{2}{\gamma}{U}{\bullet}$
+		\begin{align*}
+			\HOLDERNORM{2}{\gamma}{\CONJ{U}}{u} &= \CNORM{u} + \sum_{i=1}^n \CNORM{u_{x_i}}+ \sum_{i,j=1}^n  \CNORM{u_{x_ix_j}}+ \sum_{i,j=1}^n  \HSEMINORM{0}{\gamma}{\CONJ{U}}{u_{x_ix_j}} < \infty \\
+			&\overset{?}{=} \CCCNORM{2}{\CONJ{U}}{u} + + \sum_{i,j=1}^n  \HSEMINORM{0}{\gamma}{\CONJ{U}}{u_{x_ix_j}}
+		\end{align*}
+		
+		\item Note: the general case is a list of sums over the permuations of the partials of $x_i$
+		
+		\begin{align*}
+			\HOLDERNORM{k}{\gamma}{\CONJ{U}}{u} &:= \sum_{|\alpha|\le k} \CNORM{D^\alpha u}+\sum_{|\alpha|=k} \HSEMINORM{0}{\gamma}{\CONJ{U}}{D^\alpha u} \\
+			&\overset{?}{=} \CCCNORM{k}{\CONJ{U}}{u} + \sum_{|\alpha|=k} \HSEMINORM{0}{\gamma}{\CONJ{U}}{D^\alpha u} \\
+		\end{align*}
+	\end{enumerate}
+	
+	\item keep in mind \textit{uniform convergence}.
+\end{description}
+
+\HLINE
+\textbf{\large{Homework \#1}}
+
+Assume $0 < \beta < \gamma < 1$.  Prove the interpolation inequality 
+\begin{align*}
+	\HOLDERNORM{0}{\gamma}{U}{u} \le \HOLDERNORM{0}{\beta}{U}{u}^{\frac{1-\gamma}{1-\beta}}\;\HOLDERNORM{0}{1}{U}{u}^{\frac{\gamma-\beta}{1-\beta}}
+\end{align*}
+
+\BLUE{Q: Do the exponents make up H\"older Conjugate terms?
+\begin{align*}
+	\frac{1-\gamma}{1-\beta} + \frac{\gamma-\beta}{1-\beta} &= \frac{1-\gamma+\gamma-\beta}{1-\beta} = 1 
+\end{align*}Yes, so let's find 
+\begin{align*}
+	\theta &= \frac{1-\gamma}{1-\beta} \AND 1-\theta = \frac{\gamma-\beta}{1-\beta} 	
+\end{align*}to find H\"older conjugate values for $\gamma$ and $\beta$ and we find that
+\begin{align*}
+	\gamma &= \theta\beta +(1-\theta)
+\end{align*}Then, substituting into the original equation we get
+\begin{align*}
+	\HOLDERNORM{0}{\gamma}{U}{u} \le \HOLDERNORM{0}{\beta}{U}{u}^{\theta}\;\HOLDERNORM{0}{1}{U}{u}^{1-\theta}
+\end{align*}
+}
+
+\VIOLET{Thoughts: Let's put this in context with Lebesque spaces $L^p(U)$ and $L^q(U)$. Lebesque are described as functions that are finite with integration of the function to the $1/p\ITH$ power.  Further, if $p<q$ then $L^p(U) \subseteq L^q(U)$. H\"older's Inequality deals with the relationship between H\"older conjugate Lebesque spaces.\\
+\\The H\"older Space  is defined as $k$-differentiable and with finite semi-norms on the $k\ITH$ partial derivatives.\\
+\\Spoiler: Appendex D (or was it Wikipaedia?) indicates that $L^p(U)$ and $L^q(U)$ are dual spaces of each other.  Considering these spaces in terms of functions-as-vectors may be the important distinction.\\
+\\See ``AI Questions below: how are H\"older spaces related to Lebesque Spaces?"
+}
+
+\HLINE
+\section{January 21, 2026}
+
+Multi-index notation:
+
+$\alpha = (\alpha_1,\dots, \alpha_n)$ a vector of integers $\alpha_i \in \N$.  Then given $u=u(x_1,\dots, x_n)$.  Then we define
+\begin{align*}
+	D^\alpha u = \frac{d^{|\alpha|}u}{\partial x_1^{\alpha_1}\cdots\partial x_n^{\alpha_n}}
+\end{align*}
+Define the general H\"older Space $\HSPACE{k}{\gamma}{\CONJ{U}}$ as the space of $u:U \to \R$ that are $k$-times continuously differentialbe with all $k$-th order partial derivatives H\"older continuous of expornent $\gamma$ with the norm 
+\begin{align*}
+	\HOLDERNORM{k}{\gamma}{\CONJ{U}}{u} = \sum_{|\alpha| \le k} D^\alpha
+\end{align*}
+
+Theorem: $\HSPACE{k}{\gamma}{\CONJ{U}}$ is a Banach space.
+
+\begin{align*}
+	\HSPACE{2}{\gamma}{\CONJ{U}} = \CNORM{u} + \sum \CNORM{u_x} + \sum \CNORM{u_{xx}} + \sum [ u_{xx} ]_{\HSPACE{2}{\gamma}{\CONJ{U}}}
+\end{align*}
+
+\textit{Note:}  the seminorms are not included (see $\HSPACE{2}{\gamma}{\CONJ{U}}$ expansion) in the list of terms (all of them sums over norms).  The seminorms are already included between through the process of intermediate partial derivatives.\\
+
+\textbf{Sobolev Spaces}
+
+\textit{Recall} $L^p(\R^n) = $ set of measurable functions $u: \R^n \to \R$ such that $\int_{\R^n} |u|^p\,dx < \infty$.  And $L^p_{\text{loc}}(\R^n)$ is the set of measurable functions $u: \R^n \to \R$ such that $\int_{V} |u|^p\,dx < \infty$ for every open set $V \subset \R^n$.
+
+AND, $L^p_{\text{loc}}(\R^n) = $ set of measurable functions $u: \R^n \to \R$ such that $\int_V |u|^p\,dx < \infty$ for every open set $V \subset \R^n$.
+
+\HLINE
+\begin{theorem}
+$\HSPACE{k}{\gamma}{\CONJ{U}}$ is a Banach space.\\
+\end{theorem}
+
+\begin{definition}Denote by $C_c^\infty(\R^n)$ the space of smooth functions with acompact supports in $\R^n$.  Functions in $C_c^\infty(\R^n)$ are called \DEFINE{test functions}.  (Note: infinitely smooth with a very well defined domain).\\
+\end{definition}
+
+Useful identity:  Let $u \in \CSPACE{\R^n}$ and  let $\varphi \in C_c^\infty(\R^n)$ (a test function).  Then 
+\begin{align*}
+	\int_{\R^n} u_{x_i} \varphi\, dx = - \int_{\R^n} u\varphi_{x_i} dx.
+\end{align*}It is easy to see that the usual integral over the boundary will be zero, leaving this result.  Iterating this we get
+\begin{align*}
+	\int_{\R^n} \varphi D^\alpha u\, dx = (-1)^{|\alpha|} \int_{\R^n} u D^\alpha \varphi \,dx.
+\end{align*}
+
+\begin{definition} Let $u = L^1_{\text{loc}}(\R^n)$.  We say that a function $v \in L^1_{\text{loc}}(\R^n)$ is the \DEFINE{$\alpha\ITH$ weak partial derivative} of $u$ if 
+\begin{align*}
+	 \int_{\R^n} u D^\alpha \varphi \,dx = (-1)^{|\alpha|} \int_{\R^n} v\varphi \, dx,\, \forall \varphi\in C^\infty_0(\R^n).
+\end{align*}
+\end{definition}
+
+\begin{definition}We say that \DEFINE{$v = D^\alpha u$ weakly} if
+\begin{align*}
+	\int_{U} u D^\alpha \varphi \,dx = (-1)^{|\alpha|} \int_{U} v\varphi \, dx,\, \forall \varphi\in C^\infty_0(U).
+\end{align*}
+\end{definition}
+
+\newcommand{\SSPACE}[3]{{W^{#1,#2}(#3)}}
+\begin{definition}
+let $k \ge 0$ be an integer and let $1\le p \le \infty$.  The \DEFINE{Sobolev space $\SSPACE{k}{p}{U}$} consists of all $u \in L^1_{\text{loc}}(U)$ such that for each $\alpha$ with $|\alpha|\le k$, $D^\alpha u$ exists in the weak sense and belongs to $L^p(U)$, with norm
+\begin{align*}
+	&= \BINDEF{\PAREN{\SUM{|\alpha|\le k} {}\int_U |D^\alpha u|\, dx }^{1/p} & \text{if } 1\le p\le \infty \\ }{\SUM{|\alpha|\le k}{} \operatorname{ess}\sup|D^\alpha u| & \text{if }p = \infty}
+\end{align*}
+\end{definition}
+
+Example: \begin{enumerate}
+	\item $k=0$
+	\begin{align*}
+		\SSPACE{0}{p}{U} = L^p(U)
+	\end{align*}
+	\item $k=1$
+	
+	$\SSPACE{1}{p}{U} =$ space of functions $u\in L^p(U)$ such that $Du$ exists in the weak sense adn belongs to $L^p(U)$ (i.e., $Du \in L^p(U)$ and
+	\begin{align*}
+		||u||_{\SSPACE{1}{p}{U}} = \BINDEF{||u||^p_{L^p(U)} + \PAREN{\SUM{i=1}{n} ||u_{x_i}||^p_{L^p(U)}}^{1/p} & \text{if } 1\le p\le \infty \\}{||u||_{L^\infty(U)} + \SUM{i=1}{k} ||u_{x_i}||_{L^\infty(U)} & \text{if }p = \infty}
+	\end{align*}
+	
+	\item $U=(1,-1),\, u \AND u' \in U, u(x) = x$ and
+	\begin{align*}
+		u'(x) &= \BINDEF{1 & 0\le x < 1}{-1 & -1<x<0}\text{  weakly}
+	\end{align*}$u \in \SSPACE{1}{p}{U}$ for all $p \in [1,\infty]$.
+\end{enumerate}
+
+\HLINE
+\section{January 26, 2026}
+
+\newcommand{\SSPACEX}{\SSPACE{k}{p}{u}}
+\begin{theorem}
+
+If $u,v \in \SSPACEX$ and $\int_U(au+bv)D^\alpha\varphi = (-10^{|\alpha|}\int(aD^\alpha u+bD^\alpha v)\varphi$ then for any $\alpha$ with $|\alpha|\le k$
+\begin{align*}
+	D^\alpha(au+bv)=aD^\alpha u+ b D^\alpha v, \, \forall a,b \in \R.
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+
+$||\bullet||_\SSPACEX$ is a norm on $\SSPACEX$. 
+\begin{align*}
+		||u||_{\SSPACE{1}{p}{U}} = \BINDEF{\PAREN{||u||^p_{L^p(U)} + \SUM{i=1}{n} ||u_{x_i}||^p_{L^p(U)}}^{1/p} & \text{if } 1\le p\le \infty \\}{||u||_{L^\infty(U)} + \SUM{i=1}{k} ||u_{x_i}||_{L^\infty(U)} & \text{if }p = \infty}
+\end{align*}
+
+Proof: \begin{enumerate}
+\item Cleary, $||u||_\SSPACEX \ge 0$ for all $u \in \SSPACEX$ and $||0||_\SSPACEX = 0$.  Suppose $||u||_\SSPACEX = 0$.  Then $||u||_{L^p(U)} = 0$ and hence $h=o$ a.e.,  So $u=0$ in $\SSPACEX$.
+
+\item $||au||_\SSPACEX = |a|\,||u||_\SSPACEX$ for all $a \in \R$ since $D^\alpha(au)=a D^\alpha u$ and the $L^p(U)$ norm has this property.
+
+\item Let $u,v \in \SSPACEX$.  If $1<p<\infty$, 
+\begin{align*}
+	||u+v||_\SSPACEX &= \PAREN{\sum_{|\alpha| \le k} ||D^\alpha(u+v)||^p_{L^p(U)||}}^{1/p} \\
+	&\le \PAREN{\sum_{|\alpha| \le k} ||D^\alpha u||^p_{L^p(U)}+||D^\alpha v||^p_{L^p(U)||}}^{1/p} \\
+	&\le \PAREN{\sum_{|\alpha| \le k} ||D^\alpha u||^p_{L^p(U)}}^{1/p}+\PAREN{\sum_{|\alpha| \le k}||D^\alpha v||^p_{L^p(U)||}}^{1/p} \\
+	&\le ||u||_\SSPACEX + ||v||_\SSPACEX
+\end{align*}\RED{Homework: Give the proof of (3) for $p=\infty$.}
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+	$\SSPACEX$ is a Banach Space.
+\end{theorem}
+
+\begin{theorem}
+	If $u \in \SSPACEX$ and $|\alpha|+|\beta| \le k$, then 
+	\begin{align*}
+		D^\alpha(D^\beta) = D^{\alpha+\beta} u = D^\beta(D^\alpha u).
+	\end{align*}
+\end{theorem}
+
+\HLINE
+\section{January 28, 2026: Sections 5.2 and 5.3} 
+
+For $u \in \SSPACE{k}{p}{U}$ then order of differentiation doesn't matter when $|\alpha| \le k$.\\
+
+See sections 5.2 and 5.3:``Approximation of $\dots$" Evans.  See Appendix \S C.5:Convolutions and Smoothing.\\
+
+\HLINE
+\section{February 2, 2026: 5.4 Extensions}
+
+\textbf{FYI: } Midterm is next week!  Consider doing more of the problems that are in the book to study.  Problems 1 thru 6 on page 306.\\
+
+Proof of the \DEFINE{Extension Theorem}  See pages 268 thru 271.
+
+\HLINE
+\section{February 4, 2026: Extensions continued}
+
+\textbf{Keyword:}  Partition of Unity.  Given an interval, $I$, and a number of functions $\rho_i$ defined on this interval.  Every $x\in I$ has the quality that $\sum_i \rho_i(x) = 1$.\\
+
+\textit{Consider: }looking into Real Analysis 2 and finding a theorem where we 'extend' (although I don't think that it is called that) a support of a function beyond a superset and find its closure.\\
+
+\textbf{Note: }We need extensions, see AI questions below.  the proof uses "approximation" which takes a $C^1(U)$ function and $\dots$, see above.d
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\HLINE
+\section{AI Questions and Responses}
+
+\begin{description}
+
+\item \textbf{How are H\"older Spaces and Lebesque Spaces related to each other?}
+
+To understand the relationship between Hölder spaces and Lebesgue spaces, it is necessary to examine their definitions, the domains on which they are defined, and the embedding theorems that connect them.
+
+\textbf{Step-by-Step Explanation}
+
+\begin{enumerate}
+
+\item \textbf{Definitions of the Spaces}
+\begin{itemize}
+
+	\item \textbf{Lebesgue Spaces ($L^p$):} These spaces measure the integrability of a function. For a measurable set $\Omega \subset \mathbb{R}^n$, a function $f$ belongs to $L^p(\Omega)$ if the integral of its absolute value raised to the power $p$ is finite: $\|f\|_{L^p} = (\int_{\Omega} |f|^p dx)^{1/p} < \infty$. These spaces focus on ``size" and ``averaging" behavior.
+
+	\item \textbf{Hölder Spaces ($C^{k, \alpha}$):} These spaces measure the regularity or smoothness of a function. A function $f$ is in the Hölder space $C^{0, \alpha}(\Omega)$ (often denoted $C^\alpha$) if it is continuous and satisfies a specific growth condition: $|f(x) - f(y)| \leq C|x - y|^\alpha$ for all $x, y \in \Omega$, where $0 < \alpha \leq 1$. These spaces focus on``pointwise" behavior and continuity.
+
+\end{itemize}
+
+\item  \textbf{Inclusion on Bounded Domains}
+
+On a bounded domain $\Omega$ with a sufficiently smooth boundary, there is a hierarchical relationship based on the ``strength" of the norm:
+
+\begin{itemize}
+
+	\item \textbf{Hölder implies Lebesgue:} Any function that is Hölder continuous on a bounded domain is also bounded (since $\Omega$ is compact). Because bounded functions on bounded domains are integrable to any power $p$, we have the embedding $C^{0, \alpha}(\Omega) \subset L^p(\Omega)$ for all $1 \leq p \leq \infty$.
+	
+\item \textbf{Lebesgue does not imply Hölder:} A function in $L^p$ can be discontinuous or even unbounded at certain points (e.g., $f(x) = x^{-1/4}$ is in $L^2(0,1)$ but is not continuous, let alone Hölder continuous).
+
+\end{itemize}
+
+\item  \textbf{Sobolev Embedding Theorems (The Bridge)}
+The primary mathematical link between these two spaces is provided by \DEFINE{Sobolev Spaces} ($W^{k,p}$). Sobolev spaces act as an intermediary by requiring a function and its derivatives to be in $L^p$.
+
+\begin{itemize}
+
+	\item \textbf{Morrey's Inequality:} If a function $f$ is in the Sobolev space $W^{1,p}(\Omega)$ and $p > n$ (where $n$ is the dimension of the space), then $f$ is actually Hölder continuous. Specifically, $W^{1,p}(\Omega) \hookrightarrow C^{0, \gamma}(\Omega)$ where $\gamma = 1 - n/p$.
+	\item This means that if a function has ``enough" integrability of its derivatives (Lebesgue property), it gains a certain level of smoothness (Hölder property).
+\end{itemize}
+
+\item  \textbf{Comparison of Properties}
+
+\begin{tabular}{|l|l|l|}
+	\hline
+	Feature & Lebesgue Spaces ($L^p$) & Hölder Spaces ($C^\alpha$) \\
+	\hline
+	**Focus** & Global integrability / ``Size" & Local smoothness / Regularity \\
+	\hline
+	**Elements** & Equivalence classes of functions & Actual continuous functions \\
+	\hline
+	**Sensitivity** & Insensitive to values at single points & Highly sensitive to pwise variations \\
+	\hline
+	**Relationship** & $L^p$ is a ``larger" space & $C^\alpha$ is a more restrictive space \\
+	\hline
+\end{tabular}
+
+\end{enumerate} 
+
+\textbf{Final Answer Summary}
+
+The relationship between Hölder spaces ($C^\alpha$) and Lebesgue spaces ($L^p$) is characterized by the following:
+
+\begin{enumerate}
+
+	\item \textbf{**Inclusion:**} On bounded domains, Hölder spaces are subsets of Lebesgue spaces ($C^\alpha \subset L^p$). A function with Hölder regularity is necessarily integrable, but an integrable function is not necessarily Hölder continuous.
+	
+	\item \textbf{**Regularity vs. Integrability:**} Lebesgue spaces categorize functions by their ``bulk" size and integrability, while Hölder spaces categorize them by their ``smoothness" and pointwise behavior.
+	
+	\item  \textbf{**Sobolev Connection:**} They are linked via Sobolev Embedding Theorems. If a function's derivatives are in a Lebesgue space $L^p$ with $p$ sufficiently large ($p > n$), the function is guaranteed to be in a Hölder space.
+	
+	\item \textbf{**The $L^\infty$ Limit:**} As $p \to \infty$, the Lebesgue space $L^\infty$ consists of essentially bounded functions. While $C^\alpha$ functions are in $L^\infty$, $L^\infty$ functions are not necessarily in $C^\alpha$ unless they possess specific continuity properties.
+\end{enumerate}
+
+Final Answer:
+
+1. Hölder spaces \(C^{\alpha}(\Omega)\) are subsets of Lebesgue spaces \(L^p(\Omega)\) on bounded domains: every Hölder continuous function is also Lebesgue integrable, but not every Lebesgue integrable function is Hölder continuous; they are connected via Sobolev embedding theorems, which state that sufficient integrability of derivatives (in \(L^p\)) can imply Hölder continuity.</strong>
+Relationship between Hölder and Lebesgue spaces
+Defining Lebesgue and Hölder spaces
+Lebesgue spaces \(L^p(\Omega)\) consist of functions whose absolute value raised to the \(p\)-th power is integrable over \(\Omega\). Hölder spaces \(C^{\alpha}(\Omega)\) contain functions that satisfy a specific continuity condition: for all \(x, y\), \(|f(x) - f(y)| \leq C|x-y|^{\alpha}\) with \(0 < \alpha \leq 1\). Thus, Hölder spaces focus on regularity, while Lebesgue spaces focus on integrability.
+Inclusion and hierarchy on bounded domains
+Every Hölder continuous function on a bounded domain is bounded, and therefore integrable for any \(p\). This gives the inclusion \(C^{\alpha}(\Omega) \subset L^p(\Omega)\) for all \(1 \leq p \leq \infty\). However, not every function in \(L^p(\Omega)\) is Hölder continuous—integrability does not imply smoothness.
+Connecting spaces via Sobolev embeddings
+Sobolev spaces \(W^{k,p}(\Omega)\) require derivatives of a function to be in \(L^p\). When \(p > n\) (dimension), Sobolev embedding theorems (e.g., Morrey's inequality) guarantee that these functions are Hölder continuous: \(W^{1,p}(\Omega) \hookrightarrow C^{0, \gamma}(\Omega)\), where \(\gamma = 1 - n/p\). Thus, sufficient integrability of derivatives yields Hölder regularity.
+Distinguishing properties of the spaces
+Lebesgue spaces classify functions based on their global size, while Hölder spaces classify based on local continuity. Lebesgue functions can be highly irregular, but Hölder functions are smooth. Hölder spaces are more restrictive subsets within Lebesgue spaces.
+Answer: <strong>Hölder spaces \(C^{\alpha}(\Omega)\) are subsets of Lebesgue spaces \(L^p(\Omega)\) on bounded domains: every Hölder continuous function is also Lebesgue integrable, but not every Lebesgue integrable function is Hölder continuous; they are connected via Sobolev embedding theorems, which state that sufficient integrability of derivatives (in \(L^p\)) can imply Hölder continuity.
+
+\HLINE
+\item How helpful is the Extension Theorem to PDF?\\
+
+The Extension Theorem is a fundamental tool in the theory of Partial Differential Equations (PDEs), particularly when dealing with Sobolev spaces and boundary value problems. Its primary utility lies in allowing mathematicians to treat functions defined on a restricted domain as if they were defined on the entire Euclidean space.
+
+\textbf{**Step-by-Step Explanation of Utility**}
+\begin{enumerate}
+
+\item \textbf{ Overcoming Domain Restrictions}
+In PDE theory, many powerful analytical tools—such as the Fourier Transform, convolution, and certain fundamental solutions—are naturally defined on the entire space $\mathbb{R}^n$. However, physical problems are usually confined to a bounded domain $\Omega$. The Extension Theorem allows a function $u \in W^{k,p}(\Omega)$ to be extended to a function $\bar{u} \in W^{k,p}(\mathbb{R}^n)$ such that $\bar{u} = u$ within $\Omega$. This enables the application of global analytical techniques to local problems.
+
+\item  \textbf{Establishing Sobolev Embedding Theorems}
+One of the most critical uses of the extension theorem is in proving embedding theorems (like the Sobolev Inequality or Rellich-Kondrachov Compactness Theorem) for bounded domains.
+\begin{itemize}
+
+\item **The Logic:** It is often easier to prove that $W^{k,p}(\mathbb{R}^n) \hookrightarrow L^q(\mathbb{R}^n)$ using global estimates.
+\item **The Application:** By extending a function from $\Omega$ to $\mathbb{R}^n$, applying the global embedding, and then restricting the result back to $\Omega$, we prove that the same embedding holds for the bounded domain, provided the boundary $\partial\Omega$ is sufficiently smooth (usually Lipschitz or $C^k$).
+\end{itemize}
+
+\item \textbf{ Handling Boundary Regularity}
+The theorem is essential for defining and understanding "traces" (the values of a function on the boundary). To analyze how a solution behaves near the boundary, one often extends the function across the boundary into a larger neighborhood. This simplifies the process of performing integration by parts and establishing energy estimates near $\partial\Omega$.
+
+\item \textbf{Numerical Analysis and Approximation}
+In the context of Finite Element Methods (FEM) and other numerical schemes, extension theorems justify the approximation of functions. They ensure that functions in Sobolev spaces can be approximated by smooth functions ($C^\infty$) up to the boundary, which is a prerequisite for many convergence proofs.
+
+\item \textbf{**Summary of Importance**}
+
+| Feature | Benefit in PDE Analysis |
+|---|---|
+| **Global Tools** | Permits the use of Fourier Transforms and convolutions on bounded domains. |
+| **Embeddings** | Essential for proving $W^{k,p}(\Omega) \subset L^q(\Omega)$ and Hölder continuity. |
+| **Trace Theory** | Provides the mathematical framework for non-homogeneous boundary conditions. |
+| **Regularity** | Allows for the "straightening of the boundary" to study local solution behavior. |
+\end{enumerate}
+
+\textbf{**Final Answer Summary**}
+The Extension Theorem is **highly helpful and indispensable** in PDE theory. It bridges the gap between functions defined on specific geometries and the powerful analytical machinery available for $\mathbb{R}^n$. Without it, proving the existence, uniqueness, and regularity of solutions in Sobolev spaces for bounded domains would be significantly more difficult, if not impossible, for many classes of equations.
+
+Final Answer:
+1. The extension theorem is highly helpful and indispensable in PDEs, as it enables the application of global analytical techniques (like Sobolev embeddings, Fourier analysis, and trace theory) to functions defined on bounded domains, thereby greatly simplifying the proofs of existence, regularity, and boundary behavior of solutions.</strong>
+Role and utility of the Extension Theorem in PDE theory
+Enables global analytical techniques on local domains
+The extension theorem allows a function in a Sobolev space on a bounded domain \(\Omega\) to be extended to the whole space \(\mathbb{R}^n\) while preserving its Sobolev regularity, thus making global tools like Fourier transforms and convolutions available for local PDE problems.
+Facilitates Sobolev embedding and compactness results
+By extending a function from \(\Omega\) to \(\mathbb{R}^n\), global Sobolev embedding and compactness theorems can be applied and then restricted back to \(\Omega\), allowing key regularity and continuity results to hold for domains with sufficient boundary regularity.
+Aids in boundary regularity and trace theorems
+The theorem permits extension of functions across the boundary, simplifying the study of traces (boundary values) and making integration by parts and energy estimates tractable near \(\partial\Omega\).
+Supports numerical approximation and smooth approximations
+The ability to extend Sobolev functions ensures they can be approximated by smooth functions in numerical schemes, such as finite element methods, which is essential for convergence and error analysis.
+Answer: <strong>The extension theorem is highly helpful and indispensable in PDEs, as it enables the application of global analytical techniques (like Sobolev embeddings, Fourier analysis, and trace theory) to functions defined on bounded domains, thereby greatly simplifying the proofs of existence, regularity, and boundary behavior of solutions.
+
+\end{description} %%%% AI questions and responses
+
+\end{document}

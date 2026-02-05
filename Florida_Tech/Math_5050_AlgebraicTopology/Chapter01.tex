@@ -1,0 +1,124 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Algebraic Topology}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Shibo Liu}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\OPEN}[1]{\overset{\circ}{#1}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+
+\begin{center}
+\textbf{\Large{Chapter 1: Homotopy}}
+\end{center}
+
+\HLINE
+
+\noindent\textbf{Exercises}
+\begin{enumerate}[label=1.3.\arabic*]
+	\item \begin{enumerate}
+		\item Construct a homeomorphism $h: \OPEN{D^n}\to \R^n$.
+		
+		\BLUE{Let $f: \OPEN{D^n}\to \R^n$ as $f(x_1, \dots, x_n) = (1/x_1, \dots, 1/x_n)-\mathbb{I}$.
+		}
+		\item Construct a homeomorphism $h: D^n/S^{n-1}\to S^n$.
+		
+		\BLUE{For clarity, the elements of $D^n/S^{n-1}$ are shells within $D^n$.  $h$ will be the projection of these shells on $S^n$.\begin{align*}
+			h(x_1,\dots, x_n) &= (x_1,\dots, x_n, \pm\sqrt{1-|x|})
+		\end{align*}As an example, use $n=2$.  Let $x \in D^2/S^1$ which is a ring around the origin whose diameter is between 0 and 1.  Project this ring up to and down to a surround sphere $S^2$ of radius 1.
+		}
+	\end{enumerate}
+	
+	\item Let $H$ be the "Southern Hemisphere`` in $S^n, H=\{x_1,\dots,x_{n+1}\} \in S^n \,|\, x_{n+1} 0\}$.  Let $p$ be the "South Pole`` $p=(0,\dots,0,-1)\in S^n$.  Show that the inclusion $(S^n, p)\to (S^n,H)$ is a homotopy equivalence of pairs.
+	
+	\item Carefully prove that homotopy is and equivalence relation.
+	
+	\BLUE{Show that homotopy, $\sim$, is reflexive, symmetric and transitive.
+	\begin{itemize}
+		\item \textbf{Reflexive}  Given $f: X \to Y$.  Let $h: X \times [0,1] \to Y$ such that $h(x,0) = f(x)$ and $h(x,1) = f(x)$ and, just to be clear, $h(x,t) = f(x)$ for all $t \in [0,1]$.  $h$ is a homotopy therefore $f \sim f$.
+		\item \textbf{Symmetric}  Let $f : X \to X$ and $g: X \to X$.  If $f \sim g$ then $\exists h(x,t): X \times [0,1] \to Y \implies h(x,0) = f(x) \AND h(x,1) = g(x)$  that is smooth with $t$.  So, let $k(x,t) = h(x,1-t)$.  It is clear that $k$ is smooth and that $k(x,0) = h(x,1) = g(x) \AND k(x,1) = h(x,0) = f(x)$.  Therefore, $k$ is a homotopy and $g \sim f$.
+		\item \textbf{Transitive} Let $f : X \to X, g: X \to X$ and $h: X \to X$. Also $f \sim g$ and $g \sim h$.  Therefore, $\exists h:X\times[0,1] \to X \AND k:X\times[0,1]\to X$ such that 
+		\begin{align*}
+			\exists h:X&\times[0,1] \to X \AND k:X\times[0,1]\to X \\
+		\implies l(x,0) &= f(x) \AND l(x,0) = f(x) \AND l(x,1)=g(x) \\ 
+			k(x,1) &= h(x) \AND k(x,0) = g(x), \, k(x,1) = h(x) \\
+			\text{construct } H(x, t): X &\times [0,1] \to X, \, h(x,t) = \BINDEF{l(x, 2t), & t \in [0,1/2]}{k(x, 2(t-1/2) ), & t \in (1/2, 1]}
+		\end{align*}
+	\end{itemize}
+	}
+	
+	\item Prove lemma 1.2.6.
+	
+	\item \begin{enumerate}
+		\item Prove $cS^{n-1}$ is homeomorphic to $D^n$ (Example 1.2.11)
+		\item The \textit{suspension} $\sum X$ of a space $X$ is the quotient space $X\times [-1,1]/\sim$, where the relation $\sim$ identifies $X\times\{1\}$ to a point and $X\times\{1\}$ to a point.
+		
+		Prove that $\sum S^{n-1}$ is homeomorphic to $S^n$.		
+\end{enumerate}		
+\end{enumerate}
+
+
+
+\end{document}

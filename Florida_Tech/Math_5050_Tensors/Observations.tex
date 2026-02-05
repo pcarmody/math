@@ -76,6 +76,20 @@
 \HLINE
 
 \begin{description}
+
+	\item \textbf{Semester Plan}
+
+		One chapter per week with the hopes of all 17 chapters by the end of April.	
+	
+	\item \textbf{Status:}
+	\begin{description}
+		\item \textbf{January 20, 2026}  Reading Chapter 8 and Chapter 7 exercises.
+	\end{description}
+
+	\item \textbf{Important Quotes}
+	
+	``A tensor is not meaningful by itself $\dots$ tensors lead to invariants." -- Page 86
+	
 	\item \textbf{Indices:}
 	
 	The upper index is for covariant tensors and the lower index is for contravariant tensors.  Notice that 
@@ -83,11 +97,113 @@
 		\PART{f^i}{x^j}
 	\end{align*}that $f$ is a function and $x$ is a vector.  This is in keeping with the definition from \textit{Manifolds} where a covariant tensor is a functional and a contravariant tensor is vector.  In the special case of the dual space then we know that a basis vector is of the form $f^i(x_j)=\delta^i_j$ which derives like a constant.  In less precise terms, a functional is made up of terms based on the coordinates.  Extending that notion, a tensor is rearrangement of coordinates (and applied in an expression) that responds to a change of coordinates in a specific way.
 	
-	\item \textbf{Christofel Symbols}
+	\item \textbf{Progression of Intrinsic Objects}
+	\begin{itemize}
+		\item Start with scalar field.
+		\item Given a Position Vector $\VK{R}(Z^1, Z^2, Z^3$) (no coordinates).
+		\item Default tangent space $\VK{Z}_i = \PART{\VK{R}}{Z^i}$ also called  covariant tensors.
+		\begin{enumerate}
+			\item \textbf{Vector notation}
+			
+			\begin{align*}
+				\VK{V} &= \sum_{i=1}^n V^i\VK{Z}_i = V^i\VK{Z}_i
+			\end{align*}It seems a little silly but this $V^i\VK{Z}_i$ is a new intuitive form of a vector (the index is arbitrary and unique).
+			
+		\end{enumerate}
+		
+		\item Covariant metric tensor $Z_{ij} = \VK{Z}_i\cdot\VK{Z}_j$.  The foundational object of Reimannian Geometry.
+		\item Contravariant metric tensor $Z^{ij}Z_{ij} = \mathbb{I}$ (inverse of the covariant metric tensor).
+		\item Contravariant tensor derived from contravariant metric tensor, $\VK{Z}^j = Z^{ij}\VK{Z}_i$
+	\end{itemize}
+	
+	\item Useful identitites
+	\begin{align*}
+		Z_{ij}Z^{ij} &= \mathbb{I} \\
+		Z_{ij}Z^{ik} &= \delta^k_j
+	\end{align*}
+	
+	\item a little dissection
+	\begin{align*}
+		L &= \int^b_a \sqrt{Z_{ij}\frac{dZ^i}{dt}\frac{dZ^j}{dt}}\, dt \\
+		&= \int^b_a \sqrt{\sum_{i=1}^n\sum_{j=1}^nZ_{ij}\frac{dZ^i}{dt}\frac{dZ^j}{dt}}\, dt \\
+		&= \int^b_a \sqrt{\sum_{i=1}^n\sum_{j=1}^n\PAREN{\VK{Z}_i\cdot\VK{Z}_j}\frac{dZ^i}{dt}\frac{dZ^j}{dt}}\, dt & \VK{Z}_i\perp\VK{Z}_j, i \ne j\\
+		&= \int^b_a \sqrt{\sum_{i=1}^n\PAREN{\frac{dZ^i}{dt}}^2}\, dt
+	\end{align*}
+	\item \textbf{Christoffel Symbols}
 	
 	By definitions:
 	\begin{align*}
-		\COFF{k}{i}{j} &= \VK{Z}^k\cdot \PART{\VK{Z}_i}{Z_j} & (5.60)
-	\end{align*}Note: this is NOT a contraction.  Picture three $3\times 3$ matrices with these scalars.  Each element is the projection of a partial derivative  of a basis vector ($i$ with respect to $j$) onto another basis vector, $k$.  The collection of the elements of $k$ make up the coordinates of the partial $i$ with respect to $j$.
+		\COFF{k}{i}{j} &= \VK{Z}^k\cdot \PART{\VK{Z}_i}{Z^j} & (5.60)\\
+		&= -\PART{\VK{Z}^k}{Z^j}\cdot\VK{Z}_i & (5.64)
+	\end{align*}Note: this is NOT a contraction.  Picture three $3\times 3$ matrices with these scalars.  Each element is the projection of a partial derivative  of a basis vector ($i$ with respect to $j$) onto another basis vector, $k$.  The collection of the elements of $k$ make up the coordinates of the partial $i$ with respect to $j$.\\
+	
+	The contravariant version is 
+	\begin{align*}
+		\PART{\VK{Z}^k}{Z^j} &= -\COFF{k}{i}{j}\VK{Z}^i & (5.65)
+	\end{align*}note the contraction on $i$.\\
+	
+	And based on the metric tensors
+	\begin{align*}
+		\COFF{k}{i}{j} &= \frac{1}{2}Z^{km}\PAREN{\PART{Z_{mi}}{Z_j}+\PART{Z_{mj}}{Z_i}-\PART{Z_{ij}}{Z_m}} & (5.67)
+	\end{align*}
+	
+	\item \textbf{Multiple change of coordinates}
+	
+	I find the notation for the Jacobian misleading at times.  We must understand that $J^i_j$ does not mean indices of $i$ and $j$ but different change of coordinate systems.  Further the over use of $Z^j$ when we might be meaning an entirely different basis vector gets confusing as well.  Suppose $a$ represents Cartesian Coordinates $(x,y)$ and $b$ represents polar coordinates $(r, \theta)$ then
+	\begin{align*}
+		J^a_b &= \TWOXTWO{x_r}{x_\theta}{y_r}{y_\theta}
+	\end{align*}using the susbscript partial derivative notation.  Now, let $c$ represent an affine coordinate system $p,q$  then 
+	\begin{align*}
+		J^b_c &= \TWOXTWO{r_p}{r_q}{\theta_p}{\theta_q} 
+	\end{align*}Notice that combining these two we get
+	\begin{align*}
+		J^a_bJ^b_c &= \TWOXTWO{x_r}{x_\theta}{y_r}{y_\theta}\TWOXTWO{r_p}{r_q}{\theta_p}{\theta_q} \\
+		&= \TWOXTWO{x_rr_p+x_\theta\theta_p}{x_rr_q+x_r\theta_q}{y_rr_p+y_\theta\theta_p}{y_rr_q+y_r\theta_q}
+	\end{align*}Notice that $x_rr_p = \PART{x}{r}\PART{x}{p}= \PART{x}{p}$.  Thus,
+	\begin{align*}
+	J^a_bJ^b_c &= \TWOXTWO{x_p+x_p}{x_q+x_q}{y_p+y+p}{y_q+y_q} = 2J^a_c
+	\end{align*}the $b$ in the superscript followed by the subscript of $J$ effectively cancel out, but $b$ is not an index.  Remember that it represents a change of coordinates that has become superfluous.
+	
+	\item \textbf{On Page 76} We have the identities (4.74) and (4.76)
+	\begin{align*}
+		J^i_{i'}J^{i'}_j &= \delta^i_j & (4.74)\\
+		J^{i'}_iJ^i_{j'} &= \delta^{i'}_{j'} & (4.76)
+	\end{align*}\BLUE{Abuse of notation.}  From above we have $J^a_bJ^b_c = J^a_c$ where each $J$ is a distinct coordinate transformation between three different systems.  Here, though, we are actually saying that $i,j$ and $i',j'$ are the same coordinate system but with different indices.  We can see the contradiction in $J^a_c$.  This implies $\delta^a_c = 1$ if $x=p$ (which might be true in the affine case).  Consider in stead
+	\begin{align*}
+		J^b_a &= \TWOXTWO{r_x}{r_y}{\theta_x}{\theta_y} \\
+		J^b_a J^a_c &= \TWOXTWO{r_xx_p+r_yy_p}{r_xx_q+r_yy_q}{\theta_xx_p+\theta_yy_p}{\theta_xx_q+\theta_yy_q} \\
+		&= 2\TWOXTWO{r_p}{r_q}{\theta_p}{\theta_q}
+	\end{align*}which is distinctly NOT $\delta^b_c$.
+	
+	\item \textbf{On page 80} we see this abuse again where $i,j$ and $i',j'$ are considered different indices of the same coordinate transformation.
+	
+	\item \textbf{Beware the metric tensors.}  Notice that the covariant metric tensor is defined as
+	\begin{align*}
+		Z_{ij} &= \VK{Z}_i\cdot\VK{Z}_j.
+	\end{align*}This only makes sense when $i,j$ are indices of the same coordinate system.  The notation, though, suggests that they could be from different coordinate systems.  Which might look something like
+	\begin{align*}
+		Z_{y\theta} &= y\cdot \theta &(?)
+	\end{align*}Indeed, later expressions treat them that way as in 
+	\begin{align*}
+		Z_{ij}J^i_{i'}J^j_{j'} &= Z_{i'j'}
+	\end{align*}In this case, $J^i_{i'}$ and $J^j_{j'}$ are the same matrix (and must be the same) with different indices.
+	
+	\item \textbf{Page 85} we say "$S^i_j$ is a tensor then $S^i_i$ is an invariant."  In this case, can be different coordinate systems.  Let $i$ be Cartesian and $j$ be polar coordinates.  $J^j_i$ would be a change of coordinates from polar to Cartesian which makes $\bar{S}^i_i=S^i_jJ^j_i$ which would make sense but $\bar{S}$ is not made up of the same coordinate systems as $S$.  Be wary of $S^i_i$ when the subscript is originally from a different coordinate system.  The $S$ refers to the tensor object $S$ but $S^i_i$ and $S^i_j$ are very different flavors of it.  This can be deceptive.
+	
+	\item \textbf{Covariant Derivative $\nabla_j$}
+	\begin{itemize}
+		\item Contravariant Tensor
+		
+		\begin{align*}
+			\nabla_j V^i = \PART{V^i}{Z^j}+\COFF{i}{j}{m}V^m
+		\end{align*}
+		
+		\item Covariant Tensor
+		
+		\begin{align*}
+			\nabla_j V_i = \PART{V_i}{Z^j}-\COFF{m}{i}{j}V_m
+		\end{align*}
+
+	\end{itemize}
 \end{description}
 \end{document}

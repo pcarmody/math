@@ -1,0 +1,261 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 6: The Tensor Property }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{Exercises}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\setcounter{enumi}{86}
+\item Prove the tensor property of $Z^{ij}$ from the identity $\Z^{ij}Z_{ik}=\delta^i_k$.
+
+\BLUE{WTS: $Z^{ij}J^{i'}_iJ^{j'}_j=Z^{i'j'}$
+\begin{align*}
+	Z^{ij}Z_{ik}&=\delta^i_k\\
+	Z^{ij}Z_{ik}J^i_{i'}J^k_{k'} &= \delta^i_kJ^i_{i'}J^k_{k'}\\
+	Z^{ij}Z_{i'k'} &= \delta^i_kJ^i_{i'}J^k_{k'}\\
+	Z^{ij}Z_{i'k'}Z^{i'k'} &= \delta^i_kJ^i_{i'}J^k_{k'}Z^{i'k'} \\
+	Z^{ij}\delta^{i'}_{k'} &= \delta^i_kJ^i_{i'}J^k_{k'}Z^{i'k'} \\
+	Z^{ij}\delta^{i'}_{k'} \delta^{k'}_{j'}&= \delta^i_kJ^i_{i'}J^k_{k'}Z^{i'k'}\delta^{k'}_{j'}  \\
+	Z^{ij}&= J^i_{i'}J^j_{j'}Z^{i'j'}
+\end{align*}
+}
+
+\item Show that, for a scalar field $F$, the collection of partial derivatives $\partial F/\partial Z^i$ is a covariant tensor.
+
+\BLUE{WTS: $\partial F/\partial Z^i J_i^{i'} = \partial F/\partial Z^{i'}$.  Realizing that $Z^i = \alpha_{i'}Z^{i'}$  we can say that
+\begin{align*}
+	\nabla F &= \PART{F_i}{ Z^i} \PART{Z^i}{Z^{i'}} \\
+	&= \PART{F_i}{ Z^i} J^i_{i'} \\
+	&= \nabla' F J^i_{i'}
+\end{align*}
+}
+
+\item Given a scalar field $F$, show that the collection of second-order partial derivatives $\partial^2 F/\partial Z^i\partial Z^j$ is not a tensor.  More generally, show that for a covariant tensor field $T_i$, the variant $\partial T_i/\partial Z^j$ is not a tensor.
+
+\BLUE{From 88 we have 
+\begin{align*}
+	\nabla' F &= \PART{F_i}{ Z^i} J^i_{i'}
+\end{align*}differentiating this with respect to $Z^j$ gives us
+\begin{align*}
+	\PART{}{Z^j}\PAREN{\PART{F_i}{ Z^i} J^i_{i'}} &= \frac{\partial^2 F_i}{\partial Z^j\partial Z^i}J^i_{i'}+\PART{F_i}{ Z^i}\PAREN{\PART{}{Z^j} J^i_{i'} } \\
+	&= \frac{\partial^2 F_i}{\partial Z^j\partial Z^i}J^i_{i'}+\PART{F_i}{ Z^i} J^i_{i'j}
+\end{align*}Need to show that the second term is non-zero and therefore does not transform under a change of coordinates as a tensor.
+}\RED{A more interesting question is: under what conditions is $J^i_{i'j}=0$?}
+
+\newpage
+\item Show that the skew-symmetric part $S_{ij}$
+\begin{align*}
+	S_{ij} = \PART{T_i}{Z^j}-\PART{T_j}{Z^i}
+\end{align*}of the variant $\partial T_i/\partial Z^j$ is a tensor.
+
+\BLUE{Start with the first partial of $T_i$ with respect to $Z^b$
+\begin{align*}
+	\PART{T_i}{Z^j}J^j_b &= \PART{T_i}{Z^j}\PART{Z^j}{Z^b}\\
+	\PART{T_i}{Z^b} &= \nabla_j T_i\cdot \nabla_b\ABRACKET{Z^j} &\text{chain rule}\\
+	&= \PART{T_i}{Z^j}\PART{Z^j}{Z^b} \\
+	&= \PART{T_i}{Z^j}J^j_b
+\end{align*}Then when we transform via a change in coordinates $\bar{T_a} = T_iJ^i_a$ and
+\begin{align*}
+	\PART{\bar{T_a}}{Z^b} &= \PART{\PAREN{T_iJ^i_a}}{Z^b} \\
+	&= \PART{T_i}{Z^b}J^i_a+T_i\PART{J^i_a}{Z^b} \\
+	&= \PART{T_i}{Z^j}J^j_bJ^i_a+T_i\PART{J^i_a}{Z^b} \\
+	&=\PART{T_i}{Z^j}J^j_bJ^i_a+T_iJ^i_{ab} \\
+	\PART{T_i}{Z^j}J^j_bJ^i_a &= \PART{\bar{T_a}}{Z^b} - T_iJ^i_{ab}
+\end{align*}The transformation of $S_{ij}$ is
+\begin{align*}
+	\bar{S_{ab}} &= \PART{\bar{T_a}}{Z^b}-\PART{\bar{T_b}}{Z^a} \\
+	\bar{S_{ab}} = S_{ij}J^i_aJ^j_b &=  \PAREN{\PART{T_i}{Z^j}-\PART{T_j}{Z^i}}J^i_aJ^j_b \\
+	&= \PART{T_i}{Z^j}J^i_aJ^j_b-\PART{T_j}{Z^i}J^i_aJ^j_b \\
+	&= \PART{T_i}{Z^b}J^i_a-\PART{T_j}{Z^a}J^j_b \\
+	&=  \PART{\bar{T_a}}{Z^b}J^i_a - T_iJ^i_{ab} - \PAREN{ \PART{\bar{T_a}}J^j_b{J^j_b} - T_jJ^j_{ab}} \\
+	&=  \PART{\bar{T_a}}{Z^b}J^i_a - \PART{\bar{T_a}}{Z^b}J^j_b + T_jJ^j_{ab} -  T_iJ^i_{ab} \\
+	&= \PART{\bar{T_a}}{Z^b}-\PART{\bar{T_b}}{Z^a}
+\end{align*}
+}
+
+\item Similarly, for a contravariant tensor $T^i$, derived the transformation rule for $\partial T^i/\partial Z^j$, and show that it is not a tensor.
+
+\BLUE{Recall that $T^j = Z^{ij}T_i$ then
+\begin{align*}
+	T^jJ^i_j &= Z^{ij}T_iJ^i_j \\
+	\PART{T^jJ^i_j}{Z^j} &= \PART{}{Z^j}\PAREN{Z^{ij}T_iJ^i_j} \\
+	&= \PART{Z^{ij}}{Z^j}(T_j)+Z^{ij}\PART{T_j}{Z^j}
+\end{align*}which doesn't transform like a tensor.
+}
+
+\item Derive the transformation rule for the Christoffel symbol $\COFF{k}{i}{j}$ on the basis of equation $(5.60)$ and show that is not a tensor.
+
+\RED{Recall that $\COFF{k}{i}{j} = \VK{Z}^k\cdot\PART{\VK{Z}_i}{Z^j}$.  We can distribute the Jacobian to either the left or right term of the dot product.  The left term doesn't transform under a change in coordinates so is not a tensor.
+\begin{align*}
+	\bar{\Gamma}^k_{ij} &= \COFF{k}{i}{j}J^i_aJ^j_bJ^k_b \\
+	&= \PAREN{\VK{Z}^k\cdot\PART{\VK{Z}_i}{Z^j}}J^i_aJ^j_bJ^b _k \\
+	&= \VK{Z}^kJ^b_k\cdot \PART{\VK{Z}_i}{Z^j}J^i_aJ^j_b
+\end{align*}Focusing on the right side of the dot product
+\begin{align*}
+	\PART{\VK{Z}_i}{Z^j}J^j_bJ^i_a &= \PART{\VK{Z}_i}{Z^j}\PART{Z^j}{\xi^b}\PART{Z^i}{\Xi^a} \\
+	&= \PART{\VK{Z}_i}{\xi^b}\PART{Z^i}{\Xi^a}
+\end{align*}
+}
+
+\item For a tensor $T_{ij}$, derive the transformation rule for $\partial T_{ij}/\partial Z^k$ and show that it is not a tensor.  Apply the obtained relationship to the metric tensor $Z_{ij}$ and use the result to obtain the transformation rule for the Christoffel symbol $\COFF{k}{i}{j}$ on the basis of equation (5.66).
+
+\BLUE{Since $T_{ij}$ is an ordert two tensor it transforms as 
+\begin{align*}
+	\bar{T}_{ab} &= T_{ij}J^i_aJ^j_b \\
+	\therefore \PART{}{Z^k}\bar{T}_{ab} &= \PART{}{Z^k}\PAREN{T_{ij}J^i_aJ^j_b}
+\end{align*}this is clearly not a tensor transformation as the chain rule will generate two terms around $\PART{J^i_a}{Z^k}$ and $\PART{J^j_b}{Z^k}$ which will generate second partial derivatives.
+}
+
+\item Show that if a tensor vanishes in one coordinate system, then it vanishes in all coordinate systems.
+
+\BLUE{Let's start with a rank-1 tensor, $T_i$.  Assuming that it is non-zero but transforms via $J^i_a$ into another coordinate system and is zero.  Then,
+\begin{align*}
+	\bar{T}_a &= T_iJ^i_a = 0
+\end{align*}We can say that $T_i$ must be zero because $J^i_a \ne 0$.  We can also point out 
+\begin{align*}
+	\bar{T}_aJ^a_i &= T_iJ^i_aJ^a_i = T_i \ne 0
+\end{align*} Except that $\bar{T}_a = 0$ which is a contradiction.
+}
+
+\item Which of the objects considered in the preceding exercises are tensors with respect to linear transformations
+\begin{align*}
+	Z^{i'}=A^{i'}_iZ^i+b^{i'}
+\end{align*}without being tensors in the general sense?
+
+\item Show that a linear combination of tensors is a tensor.
+
+\newcommand{\BOTH}[1]{J^{#1}_{#1'}}
+\BLUE{Let $S^{ij}_{ab}$ and $T^{ij}_{ab}$ be tensors.  Then
+\begin{align*}
+	\PAREN{\alpha S^{ij}_{ab}+ \beta T^{ij}_{ab}}\BOTH{i}\BOTH{j}\BOTH{a}\BOTH{b} &= \alpha S^{ij}_{ab}\BOTH{i}\BOTH{j}\BOTH{a}\BOTH{b}+\beta T^{ij}_{ab}\BOTH{i}\BOTH{j}\BOTH{a}\BOTH{b} \\
+	&= \alpha\CONJ{S^{i'j'}_{a'b'}}+\beta\CONJ{T^{i'j'}_{a'b'}}
+\end{align*}Note: There may be some confusion over the summations between these two terms.  In order to sum $S$ and $T$ we must use the same indices: $i,j,a,b$.  
+}
+
+\item Suppose that $S_i$ and $T^{jk}$ are tensors.  Prove that $S_iT^{ij}$ is a tensor.
+
+\BLUE{Since $S_iT^{ij}$ has only two indices we need only show that it transforms over two coordinate systems.  However, since $i$ is both the covariant and the contravariant index, the corresponding change in coordinate matrices would be represented by $J^i_k$ and $J^k_i$ which are inverses of each other.  So, for a transformation of $J^l_j$ we have
+\begin{align*}
+	S_iT^{ij}J^i_kJ^k_iJ^l_j &= S_iT^{ij}J^l_j = S_i\bar{T}^{il}
+\end{align*}
+}
+
+\item Since $\delta^i_j$ is a tensor, $\delta^i_i$ must be an invariant.  What is the value of $\delta^i_i$ and what is the geometric meaning?
+
+\BLUE{Since $\delta^i_j$ is a tensor of rank 2, we can see it as an $n\times n$ matrix representing the identity.  $\delta^i_i$ is a tensor of rank one and, in this context, can be see as a degenerate $1 \times 1$ matrix containing one.  Geometrically this is the identity, that is, an operation that yields whatever you put into it.
+}
+
+\item Suppose that $\VK{V}_{ij}$ is a tensor with vector elements.  Show that $V^k_{ij}$, the components of $\VK{V}_{ij}$ with respect to the covariant basis $\VK{Z}_i$ is a tensor.
+
+\item Give a variation arbitrary values in some coordinate system and let it transform by the proper tensor rules.  Show that this construction produces a tensor.  More specifically, single out a particular coordinate system $Z^{\hat{i}}$ and choose an arbitrary collection of values for $T^{{\hat{i}}{\hat{j}}}_{\hat{k}}$.  Then, in coordinates $Z^i$, define $T^{ij}_k$ by 
+\begin{align*}
+	T^{ij}_k&=T^{{\hat{i}}{\hat{j}}}_{\hat{k}} J^i_{\hat{i}}J^j_{\hat{j}}J^{\hat{k}}_{\hat{k}}. & (6.47)
+\end{align*}Show that $T^{ij}_k$ is a tensor.
+
+\item Explain why the Laplacian $\Delta F$ of a scalar $F$ cannot be defined as 
+\begin{align*}
+	\Delta F = Z^{ij} \frac{\partial^2 F}{\partial Z^i\partial Z^j}?
+\end{align*}Hint: Is $\partial^2 F/\partial Z^i\partial Z^j$ tensor?
+
+\item Consider a coordinate system with the metric tensor at point $A$ is 
+\begin{align*}
+	Z_{ij} &= \SQTWOXTWO{2}{-1}{-1}{2}
+\end{align*}Suppose that $T^{i}{.jkl}$ is an object whose only nonzero value is 
+\begin{align*}
+	T^1_{.212}= \pi.
+\end{align*}Determine $T_{1212}$ and $T_{2212}$
+
+\item Show that the operations of raising and lowering indices are the inverses of each other.  That is, if 
+\begin{align*}
+	S_i = S^i Z_{jk}.
+\end{align*}then
+\begin{align*}
+	S^i = S_jZ^{jk}.
+\end{align*}
+
+\item Show that in a tensor identity, a live covariant (contravariant) index can be raised (lowered) on both sides.  That is, if, for instance
+\begin{align*}
+	S^i=T^{jkl}U_{jk},
+\end{align*}then
+\begin{align*}
+	S_i = T^{jk}_{..i}U_{jk}.
+\end{align*}Therefore 
+\begin{align*}
+	\delta^i_{.j}= \delta^{.i}_j
+\end{align*}as we are about to show.
+
+\end{enumerate}
+
+\end{document}
