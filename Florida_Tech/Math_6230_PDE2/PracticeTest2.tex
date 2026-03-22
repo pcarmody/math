@@ -1,0 +1,464 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 6230 -- Partial Differential Equations II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Practice Test 2 }
+\newcommand{\DUEDATE}{March 18, 2026}
+\newcommand{\PROFESSOR}{Professor Perrera}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+\newcommand{\CSPACE}{{C(\CONJ{U})}}
+\newcommand{\CNORM}[1]{|| #1 ||_\CSPACE}
+\newcommand{\CSEMINORM}[1]{[ #1 ]_\CSPACE}
+\newcommand{\CSUBSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HOLDERNORM}[4]{|| #4 ||_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\HSEMINORM}[4]{[ #4 ]_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\SSPACE}[3]{{W^{#1,#2}(#3)}}
+\newcommand{\TRR}{\operatorname{Tr}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\section*{Practice Test}
+\begin{enumerate}
+	\item Let $n\ge 3$.  Show that there exists a constant $C > 0$ such that
+	\begin{align*}
+		\int_{\R^n} \frac{u^2}{|x|^2}\,dx \le C\int_{\R^n} |Du|^2\,dx
+	\end{align*}for all $u \in C_c^\infty(\R^n)$.  (Hint:  $|Du-\lambda(x/|x|^2)u|^2 \ge 0$ for all $\lambda \in \R$).\\
+	
+	This problem is an excellent continuation of our conversation, as it introduces another fundamental inequality in the study of Sobolev spaces, known as \textbf{Hardy's inequality}. It fits perfectly with our previous discussions:
+
+\begin{description}
+\item \textbf{Inequalities}: It adds a new, powerful inequality to our collection (Cauchy-Schwarz, Hölder, Sobolev, Morrey, Interpolation). Like the others, it provides a way to control one aspect of a function (its size, weighted by $1/|x|^2$) by another (the size of its derivative).
+\item \textbf{Sobolev Spaces}: The inequality relates the $L^2$ norm of the gradient, which is central to the definition of Sobolev spaces like $H^1 = W^{1,2}$, to a weighted $L^2$ norm of the function itself. This type of weighted inequality is crucial for analyzing PDEs on unbounded domains or with singular potentials.
+\item \textbf{Regularity}: It demonstrates another subtle aspect of regularity. While a function in $H^1(\mathbb{R}^n)$ doesn't have to decay at a specific rate, this inequality shows that the integrability of its derivative imposes a strict limit on how slowly it can decay near the origin.
+\end{description}
+
+Let's prove the inequality using the provided hint.\\
+
+\textbf{Proof of Hardy's Inequality}
+
+We are asked to prove that for $n \ge 3$ and any function $u \in C_c^\infty(\mathbb{R}^n)$, there exists a constant $C$ such that:
+
+$$ \int_{\mathbb{R}^n} \frac{u^2}{|x|^2}\,dx \le C\int_{\mathbb{R}^n} |Du|^2\,dx $$
+
+The hint suggests starting from the fact that the square of any real number is non-negative. Let's define a vector field $v(x) = \frac{x}{|x|^2}$. For any constant $\lambda \in \mathbb{R}$, we have:
+
+$$ \int_{\mathbb{R}^n} |Du - \lambda v u|^2 \,dx \ge 0 $$
+
+Let's expand the integrand:
+
+$$ |Du - \lambda v u|^2 = (Du - \lambda v u) \cdot (Du - \lambda v u) = |Du|^2 - 2\lambda (Du \cdot v) u + \lambda^2 |v|^2 u^2 $$
+
+Integrating over $\mathbb{R}^n$ gives:
+
+$$ \int_{\mathbb{R}^n} |Du|^2 \,dx - 2\lambda \int_{\mathbb{R}^n} (Du \cdot v) u \,dx + \lambda^2 \int_{\mathbb{R}^n} |v|^2 u^2 \,dx \ge 0 $$
+
+Now, let's analyze the terms involving $v(x) = \frac{x}{|x|^2}$:
+
+\begin{enumerate}
+\item  \textbf{The $\lambda^2$ term}: $|v|^2 = |\frac{x}{|x|^2}|^2 = \frac{|x|^2}{(|x|^2)^2} = \frac{1}{|x|^2}$. So the integral is $\int_{\mathbb{R}^n} \frac{u^2}{|x|^2} \,dx$.
+
+\item \textbf{The $\lambda$ term}: We need to evaluate $\int_{\mathbb{R}^n} (Du \cdot v) u \,dx$. Notice that $Du \cdot u = \frac{1}{2} D(u^2)$. So the integrand is $\frac{1}{2} (D(u^2) \cdot v)$. We can use integration by parts (or the divergence theorem). Since $u \in C_c^\infty(\mathbb{R}^n)$, the boundary terms at infinity are zero.
+
+    $$ \int_{\mathbb{R}^n} (Du \cdot v) u \,dx = \frac{1}{2} \int_{\mathbb{R}^n} D(u^2) \cdot v \,dx = -\frac{1}{2} \int_{\mathbb{R}^n} u^2 (\operatorname{div} v) \,dx $$
+
+    We need to compute the divergence of $v(x) = \frac{x}{|x|^2}$.
+
+    $$ \operatorname{div} v = \sum_{i=1}^n \frac{\partial}{\partial x_i} \left( \frac{x_i}{|x|^2} \right) = \sum_{i=1}^n \left( \frac{1}{|x|^2} - \frac{x_i (2x_i)}{|x|^4} \right) = \frac{n}{|x|^2} - \frac{2|x|^2}{|x|^4} = \frac{n-2}{|x|^2} $$
+
+    Substituting this back, the integral becomes:
+
+    $$ \int_{\mathbb{R}^n} (Du \cdot v) u \,dx = -\frac{1}{2} \int_{\mathbb{R}^n} u^2 \left( \frac{n-2}{|x|^2} \right) \,dx = -\frac{n-2}{2} \int_{\mathbb{R}^n} \frac{u^2}{|x|^2} \,dx $$
+\end{enumerate}
+
+Now, substitute these results back into the main inequality:
+
+$$ \int |Du|^2 \,dx - 2\lambda \left( -\frac{n-2}{2} \int \frac{u^2}{|x|^2} \,dx \right) + \lambda^2 \int \frac{u^2}{|x|^2} \,dx \ge 0 $$
+
+$$ \int |Du|^2 \,dx + \lambda(n-2) \int \frac{u^2}{|x|^2} \,dx + \lambda^2 \int \frac{u^2}{|x|^2} \,dx \ge 0 $$
+
+This is a quadratic polynomial in $\lambda$ of the form $A\lambda^2 + B\lambda + D \ge 0$, where:
+
+\begin{enumerate}
+\item  $A = \int \frac{u^2}{|x|^2} \,dx$
+\item  $B = (n-2) \int \frac{u^2}{|x|^2} \,dx$
+\item  $D = \int |Du|^2 \,dx$
+\end{enumerate}
+
+For a quadratic to always be non-negative, its discriminant must be less than or equal to zero: $B^2 - 4AD \le 0$.
+
+$$ (n-2)^2 \left( \int \frac{u^2}{|x|^2} \,dx \right)^2 - 4 \left( \int \frac{u^2}{|x|^2} \,dx \right) \left( \int |Du|^2 \,dx \right) \le 0 $$
+
+Assuming $\int \frac{u^2}{|x|^2} \,dx > 0$ (otherwise the inequality is trivial), we can divide by it:
+
+$$ (n-2)^2 \int \frac{u^2}{|x|^2} \,dx \le 4 \int |Du|^2 \,dx $$
+
+Finally, rearranging gives the desired result:
+
+$$ \int_{\mathbb{R}^n} \frac{u^2}{|x|^2}\,dx \le \frac{4}{(n-2)^2} \int_{\mathbb{R}^n} |Du|^2\,dx $$
+
+This holds with the constant $C = \frac{4}{(n-2)^2}$. Since we assumed $n \ge 3$, the constant is well-defined and positive.
+	
+	\newpage
+	\item Give an example of a sequence that is bounded in $W^{1,p}(\R^n)$ but has no convergent subsequence in $L^p(\R^n)$.\\
+	
+	This question is an excellent follow-up that probes the limitations of the Sobolev embedding theorems we've been discussing. Our conversation began with inequalities like Sobolev and Morrey, which guarantee that for bounded domains, a bounded sequence in $W^{1,p}$ has a convergent subsequence in $L^q$ for some $q > p$ (if $p < n$) or even in a space of continuous functions (if $p > n$). This is known as the Rellich-Kondrachov theorem. Your question asks what happens on an unbounded domain like $\mathbb{R}^n$. The answer is that this compactness is lost, and a bounded sequence in $W^{1,p}(\mathbb{R}^n)$ is not guaranteed to have a convergent subsequence even in $L^p(\mathbb{R}^n)$. This demonstrates a crucial difference between analysis on bounded versus unbounded domains.
+
+Let's construct an example to illustrate this phenomenon.
+
+\textbf{Example: A `Bump' Function Sliding to Infinity}
+
+\begin{enumerate}
+\item \textbf{Construct a Base Function}: 
+
+Let $\eta(x)$ be a non-zero smooth `bump' function with compact support. For instance, let $\eta \in C_c^\infty(B(0,1))$, where $B(0,1)$ is the unit ball centered at the origin. This means $\eta$ is smooth, non-zero inside the ball, and zero everywhere outside of it.
+
+\item \textbf{Construct the Sequence}: 
+
+We can create a sequence of functions, $u_k(x)$, by translating this bump function to different locations in $\mathbb{R}^n$. Let $e_1$ be the unit vector in the first coordinate direction. Define the sequence as:
+
+    $$ u_k(x) = \eta(x - k e_1) $$
+
+    For each $k$, $u_k$ is just the function $\eta$ shifted so that it is centered at the point $(k, 0, \dots, 0)$. The support of $u_k$ is the ball $B(k e_1, 1)$. As $k \to \infty$, the bump function `slides off to infinity'.
+
+\item \textbf{Show the Sequence is Bounded in $W^{1,p}(\mathbb{R}^n)$}:
+
+    The $W^{1,p}$ norm is defined as $||u||_{W^{1,p}}^p = ||u||_{L^p}^p + ||Du||_{L^p}^p$. Let's compute this for our sequence $u_k$.
+
+\begin{itemize}
+    \item \textbf{$L^p$ norm of $u_k$}: 
+    
+    By a simple change of variables $y = x - k e_1$, we see that the norm is independent of the shift:
+        $$ ||u_k||_{L^p}^p = \int_{\mathbb{R}^n} |\eta(x - k e_1)|^p dx = \int_{\mathbb{R}^n} |\eta(y)|^p dy = ||\eta||_{L^p}^p $$
+        This is a finite constant, let's call it $C_1$.
+
+    \item \textbf{$L^p$ norm of $Du_k$}: 
+    
+    The derivative is $Du_k(x) = D\eta(x - k e_1)$. Again, by the same change of variables:
+        $$ ||Du_k||_{L^p}^p = \int_{\mathbb{R}^n} |D\eta(x - k e_1)|^p dx = \int_{\mathbb{R}^n} |D\eta(y)|^p dy = ||D\eta||_{L^p}^p $$
+        This is also a finite constant, let's call it $C_2$.
+\end{itemize}
+
+    Therefore, the $W^{1,p}$ norm for any function in the sequence is:
+    $$ ||u_k||_{W^{1,p}}^p = C_1 + C_2 $$
+    The sequence is not just bounded; every function has the exact same norm. It is clearly a bounded sequence in $W^{1,p}(\mathbb{R}^n)$.
+
+\item \textbf{Show it has no Convergent Subsequence in $L^p(\mathbb{R}^n)$}:
+
+    Let's assume for contradiction that there exists a subsequence, which we can relabel as $u_k$, that converges to some function $u$ in $L^p(\mathbb{R}^n)$. This means $||u_k - u||_{L^p} \to 0$ as $k \to \infty$.
+
+    A convergent sequence in a normed space must be a Cauchy sequence. Let's check if our sequence is Cauchy. Consider the distance between two distinct terms, $u_k$ and $u_m$, for $k \neq m$:
+
+    $$ ||u_k - u_m||_{L^p}^p = \int_{\mathbb{R}^n} |\eta(x - k e_1) - \eta(x - m e_1)|^p dx $$
+
+    For $k$ and $m$ large enough (specifically, $|k-m| > 2$), the supports of $u_k$ and $u_m$ are disjoint. The support of $u_k$ is $B(k e_1, 1)$ and the support of $u_m$ is $B(m e_1, 1)$. When the supports are disjoint, the integrand $|\eta(x - k e_1) - \eta(x - m e_1)|^p$ simplifies to $|\eta(x - k e_1)|^p$ on one ball and $|\eta(x - m e_1)|^p$ on the other.
+
+    $$ ||u_k - u_m||_{L^p}^p = \int_{B(k e_1, 1)} |\eta(x - k e_1)|^p dx + \int_{B(m e_1, 1)} |\eta(x - m e_1)|^p dx = ||u_k||_{L^p}^p + ||u_m||_{L^p}^p = 2 C_1 $$
+
+    So, for any $k \neq m$ (with $|k-m|>2$), the distance between $u_k$ and $u_m$ is constant:
+    $$ ||u_k - u_m||_{L^p} = (2C_1)^{1/p} > 0 $$
+
+    This distance does not go to zero as $k, m \to \infty$. Therefore, the sequence is not a Cauchy sequence in $L^p(\mathbb{R}^n)$. Since every convergent sequence must be Cauchy, our sequence (and any of its subsequences) cannot converge in $L^p(\mathbb{R}^n)$.
+\end{enumerate}
+
+This example perfectly illustrates the `loss of compactness' due to the unboundedness of the domain $\mathbb{R}^n$.
+	
+	\newpage
+	\item For $u,v \in H^1(U)$, prove the integration by parts formula
+	\begin{align*}
+		\int_U uv_{x_i}\,dx &= \int_{\partial U} (\TRR u)(\TRR v) \nu_i\, dS- \int_U vu_{x_i}\, dx
+	\end{align*}where $\TRR$ is the trace operator and $\nu_i$ is the $i\ITH$ component of the outward unit normal to $\partial U$. \\
+	
+	This question is a direct and natural continuation of our entire conversation. We started by discussing inequalities (Sobolev, Morrey) that define the properties of Sobolev spaces like $H^1(U) = W^{1,2}(U)$. We then discussed the concept of a \DEFINE{trace operator}, $\text{Tr}$, which gives meaning to the value of a Sobolev function on the boundary $\partial U$. We even proved that such an operator `doesn't exist' for the larger space $L^p(U)$, highlighting the importance of the derivative control provided by Sobolev spaces. This question asks us to prove the fundamental \DEFINE{integration by parts formula} for Sobolev functions, which is the primary tool that makes the trace operator so useful and is the foundation for proving many of the inequalities and PDE results we've discussed.
+
+\textbf{Proof of Integration by Parts for $H^1(U)$ Functions}
+
+The formula to prove is:
+\[
+\int_U u v_{x_i}\,dx = \int_{\partial U} (\text{Tr } u)(\text{Tr } v) \nu_i\, dS - \int_U v u_{x_i}\, dx
+\]
+where $u, v \in H^1(U)$ and $\nu_i$ is the $i\ITH$ component of the outward unit normal vector.
+
+This can be rewritten by moving the second term on the right to the left side:
+\[
+\int_U (u v_{x_i} + v u_{x_i})\,dx = \int_{\partial U} (\text{Tr } u)(\text{Tr } v) \nu_i\, dS
+\]
+The integrand on the left is simply the derivative of the product, $(uv)_{x_i}$. So we need to prove:
+\[
+\int_U (uv)_{x_i}\,dx = \int_{\partial U} (\text{Tr } u)(\text{Tr } v) \nu_i\, dS
+\]
+This is the generalized version of the Divergence Theorem for Sobolev functions.
+
+\begin{description}
+\item \textbf{Step 1: The Formula for Smooth Functions}
+
+First, recall the classical Divergence Theorem for a smooth vector field $F$ on a domain $U$ with a sufficiently regular boundary:
+\[
+\int_U \text{div}(F) \,dx = \int_{\partial U} F \cdot \nu \,dS
+\]
+If we let $F$ be the vector field that is zero in all components except for the $i$-th component, where $F_i = w$ for some smooth function $w$, then $\text{div}(F) = w_{x_i}$. The formula becomes:
+\[
+\int_U w_{x_i}\,dx = \int_{\partial U} w \nu_i\, dS
+\]
+This holds if $w$ is a smooth function, for instance, if $w \in C^1(\bar{U})$.
+
+\item \textbf{Step 2: Density Argument}
+
+We cannot directly apply this formula to $uv$ because if $u, v \in H^1(U)$, their product $uv$ is not necessarily in $H^1(U)$ (it is, but this requires proof). A more direct approach is to use the density of smooth functions within Sobolev spaces.
+
+A fundamental property of Sobolev spaces is that for a domain $U$ with a reasonably nice (e.g., Lipschitz) boundary, the space of smooth functions $C^\infty(\bar{U})$ is dense in $H^1(U)$. This means that for our given $u, v \in H^1(U)$, we can find sequences of smooth functions, $\{u_k\}$ and $\{v_k\}$ in $C^\infty(\bar{U})$, such that:
+
+\begin{itemize}
+\item   $u_k \to u$ in $H^1(U)$ as $k \to \infty$
+\item   $v_k \to v$ in $H^1(U)$ as $k \to \infty$
+\end{itemize}
+
+Since $u_k$ and $v_k$ are smooth, their product $u_k v_k$ is also smooth, and we can apply the classical formula from Step 1 to the function $w = u_k v_k$:
+\[
+\int_U (u_k v_k)_{x_i}\,dx = \int_{\partial U} (u_k v_k) \nu_i\, dS \quad (*)
+\]
+Our goal is to take the limit of this equation as $k \to \infty$.
+
+\item \textbf{Step 3: Taking the Limit}
+
+Let's analyze the limit of each side of equation $(*)$.
+
+\begin{description}
+\item \textbf{Left-Hand Side (LHS):}
+    We need to show that $\int_U (u_k v_k)_{x_i}\,dx \to \int_U (uv)_{x_i}\,dx$. This is equivalent to showing $(u_k v_k)_{x_i} \to (uv)_{x_i}$ in $L^1(U)$.
+    $(u_k v_k)_{x_i} = (u_k)_{x_i} v_k + u_k (v_k)_{x_i}$.
+    Since $u_k \to u$ in $H^1$, we know $(u_k)_{x_i} \to u_{x_i}$ in $L^2$ and $u_k \to u$ in $L^2$. The same holds for $v_k$. Using the properties of $L^p$ spaces (specifically that convergence in $L^2$ implies convergence of products in $L^1$, a result proven with the Hölder/Cauchy-Schwarz inequality), we get:
+\begin{itemize}
+\item   $(u_k)_{x_i} v_k \to u_{x_i} v$ in $L^1(U)$
+\item   $u_k (v_k)_{x_i} \to u v_{x_i}$ in $L^1(U)$
+\end{itemize}
+    Therefore, the sum converges: $(u_k v_k)_{x_i} \to (uv)_{x_i}$ in $L^1(U)$, and the integral converges.
+
+\item \textbf{Right-Hand Side (RHS):}
+    The trace operator $\text{Tr}: H^1(U) \to L^2(\partial U)$ is a bounded (and thus continuous) linear operator. This is the key property we discussed previously. Continuity means that if $u_k \to u$ in $H^1(U)$, then $\text{Tr}(u_k) \to \text{Tr}(u)$ in $L^2(\partial U)$.
+    For smooth functions, $\text{Tr}(u_k) = u_k|_{\partial U}$. So we have:
+\begin{itemize}
+\item   $u_k|_{\partial U} \to \text{Tr}(u)$ in $L^2(\partial U)$
+\item   $v_k|_{\partial U} \to \text{Tr}(v)$ in $L^2(\partial U)$
+    Again, using the Hölder/Cauchy-Schwarz inequality on the boundary space $L^2(\partial U)$, the product converges in $L^1(\partial U)$:
+\item   $u_k v_k|_{\partial U} \to (\text{Tr } u)(\text{Tr } v)$ in $L^1(\partial U)$
+    This implies the convergence of the boundary integral:
+    \[
+    \int_{\partial U} u_k v_k \nu_i\, dS \to \int_{\partial U} (\text{Tr } u)(\text{Tr } v) \nu_i\, dS
+    \]
+\end{itemize}
+\end{description}
+
+\item \textbf{Step 4: Conclusion}
+
+By taking the limit as $k \to \infty$ on both sides of equation $(*)$, we have shown that the LHS converges to $\int_U (uv)_{x_i}\,dx$ and the RHS converges to $\int_{\partial U} (\text{Tr } u)(\text{Tr } v) \nu_i\, dS$. Therefore, the equality must hold for the limit functions $u$ and $v$:
+\[
+\int_U (uv)_{x_i}\,dx = \int_{\partial U} (\text{Tr } u)(\text{Tr } v) \nu_i\, dS
+\]
+Expanding the left side gives the desired integration by parts formula.
+\end{description}
+	
+	\newpage
+	\item Integrate by parts to prove the interpolation inequality
+	\begin{align*}
+		\|Du\|_{L^2(U)}^2 \le C\|u\|_{L^2(U)}\|D^2u\|_{L^2(U)}
+	\end{align*}for all $u \in H^2(U)\cap H_0^1(U)$.  (Hint: Take sequences $(v_j) \in C_c^\infty(U)$ converging to $u$ in $H_0^1(U)$ and $(w_j) \subset C^\infty(\CONJ{U})$ convergint to $u$ in $H^2(U)$.)\\
+	
+	This question is an excellent synthesis of our entire conversation. It asks to prove an \DEFINE{interpolation inequality}, a concept we've already explored, which falls under the broad category of inequalities like \DEFINE{Cauchy-Schwarz}, \DEFINE{Sobolev}, and \DEFINE{Morrey} that define the structure of function spaces. The proof requires using \DEFINE{integration by parts for Sobolev functions}, a formula we just derived. Furthermore, the function space in question, $H^2(U) \cap H_0^1(U)$, combines the concepts of higher-order \DEFINE{regularity} ($H^2$) and zero boundary conditions ($H_0^1$), both of which are central themes we have discussed, particularly in relation to the \DEFINE{trace theorem}.
+
+Let's prove the inequality for $u \in H^2(U) \cap H_0^1(U)$.
+
+\textbf{Proof}`
+
+Our goal is to prove that there exists a constant $C$ such that:
+\[
+\|Du\|_{L^2(U)}^2 \le C \|u\|_{L^2(U)}\|D^2u\|_{L^2(U)}
+\]
+
+\begin{description}
+\item \textbf{Step 1: Start with the integral form}
+
+The left-hand side is the integral of $|Du|^2$. We can write this using summation notation as:
+\[
+\|Du\|_{L^2}^2 = \int_U |Du|^2 \,dx = \int_U \sum_{i=1}^n u_{x_i} u_{x_i} \,dx
+\]
+where $u_{x_i} = \frac{\partial u}{\partial x_i}$.
+
+\item \textbf{Step 2: Apply Integration by Parts}
+
+As we proved in our previous discussion, the integration by parts formula holds for functions in $H^1(U)$. Since $u \in H^2(U)$, both $u$ and its derivatives $u_{x_i}$ are in $H^1(U)$. We can apply the formula to the product of $u$ and $u_{x_i}$:
+\[
+\int_U u_{x_i} u_{x_i} \,dx = \int_U (u_{x_i}) u_{x_i} \,dx = \int_{\partial U} (\text{Tr } u_{x_i})(\text{Tr } u) \nu_i \,dS - \int_U u \, u_{x_i x_i} \,dx
+\]
+Here, $\text{Tr}$ is the trace operator and $\nu_i$ is the $i$-th component of the outward normal vector.
+
+\item \textbf{Step 3: Use the Boundary Condition}
+
+The condition $u \in H_0^1(U)$ is crucial. By definition, this means that the trace of $u$ on the boundary is zero, i.e., $\text{Tr } u = 0$. Therefore, the boundary integral vanishes:
+\[
+\int_{\partial U} (\text{Tr } u_{x_i})(\text{Tr } u) \nu_i \,dS = 0
+\]
+This simplifies our equation significantly:
+\[
+\int_U u_{x_i} u_{x_i} \,dx = - \int_U u \, u_{x_i x_i} \,dx
+\]
+
+\item \textbf{Step 4: Sum over all derivatives and apply Cauchy-Schwarz}
+
+Now, we sum this result over all $i = 1, \dots, n$:
+\[
+\|Du\|_{L^2}^2 = \sum_{i=1}^n \int_U u_{x_i}^2 \,dx = -\sum_{i=1}^n \int_U u \, u_{x_i x_i} \,dx = -\int_U u \left( \sum_{i=1}^n u_{x_i x_i} \right) \,dx = -\int_U u (\Delta u) \,dx
+\]
+where $\Delta u$ is the Laplacian of $u$. Now, we take the absolute value and apply the \DEFINE{Cauchy-Schwarz inequality}, which we identified at the beginning of our conversation as the fundamental tool for $L^2$ spaces:
+\[
+\|Du\|_{L^2}^2 = \left| -\int_U u (\Delta u) \,dx \right| \le \int_U |u| |\Delta u| \,dx \le \|u\|_{L^2} \|\Delta u\|_{L^2}
+\]
+
+\item \textbf{Step 5: Relate the Laplacian to the full second derivative}
+
+The norm of the Laplacian, $\|\Delta u\|_{L^2}$, can be bounded by the norm of the full Hessian matrix of second derivatives, $\|D^2u\|_{L^2}$. The norm $\|D^2u\|_{L^2}$ is defined as $\left( \sum_{i,j=1}^n \|u_{x_i x_j}\|_{L^2}^2 \right)^{1/2}$. By the triangle inequality:
+\[
+\|\Delta u\|_{L^2} = \left\| \sum_{i=1}^n u_{x_i x_i} \right\|_{L^2} \le \sum_{i=1}^n \|u_{x_i x_i}\|_{L^2} \le \sqrt{n} \left( \sum_{i=1}^n \|u_{x_i x_i}\|_{L^2}^2 \right)^{1/2} \le \sqrt{n} \|D^2u\|_{L^2}
+\]
+Substituting this into our inequality, we get:
+\[
+\|Du\|_{L^2}^2 \le \|u\|_{L^2} (\sqrt{n} \|D^2u\|_{L^2})
+\]
+Setting $C = \sqrt{n}$ (a constant that depends only on the dimension), we arrive at the final result:
+\[
+\|Du\|_{L^2(U)}^2 \le C \|u\|_{L^2(U)} \|D^2u\|_{L^2(U)}
+\]
+\end{description}
+\end{enumerate}
+
+\section{Inequalities}
+\begin{description}
+	\item \textbf{Gagliardo-Nirenberg-Sobolev}
+	
+	Assume $1\le p < n$.  Ther exists a constant $C$, depending onlyon $p$n and $n$ , such that 
+	\begin{align*}
+		\|u\|_{L^{p^*}(\R^n)} \le C\|Du\|_{L^p(\R^n)}
+	\end{align*} for all $u \in C_c^1(\R^n)$.
+	
+	\item \textbf{Theorem 2 (EStimates for $W^{1,p}, 1 \le p < n)$}
+	
+	Let $U$ b3 bounded, open subset of $\R^n$, and suppose $\partial U$ is $C^1$.  Assume $1 \le p < n$, and $u\in W^{1,p}(U)$.  Then $u \in L^{p^*}(U)$, whtih the estimate 
+	\begin{align*}
+		\|u\|_{L^{p^*}(U)},
+	\end{align*}the constant $C$ depending only $p,n$, and $U$.
+	
+	\item \textbf{Morrey's Inequality}
+	
+	Assume $n < p \le \infty$.  Then ther exists a constant $C$, depending only on $p$ and $n$, such that 
+	\begin{align*}
+		\|u\|_{C^{0,\gamma}(\R^n)} \le C\|u\|_{W^{1,p}(\R^n)}
+	\end{align*}for all $u \in C^1(\R^n)$, where
+	\begin{align*}
+		\gamma := 1-n/p.
+	\end{align*}
+	
+	\item \textbf{Theorem 5: Estimates for $W^{1,p}, n < p \le \infty$.}
+	
+	Let $U$ be a bounded, open subset of $\R^n$, and suppose $\partial U$ is $C^1$.'  Assume $n < p \le \infty$ and $u \in W^{1,p}(U)$.  Then $u$ has a version $u^*\in C^{0,\gamma}(\CONJ{U})$, for $\gamma = 1-\frac{n}{p}$, with the estimate 
+	\begin{align*}
+		\|u^*\|_{C^{0,\gamma}(\CONJ{U})} \le C\|u\|_{W^{1,p}(U)}.
+	\end{align*}The constant $C$ depends only on $p,n$, and $U$.
+	
+	\item \textbf{Theorem 6: General Sobolev Inequalities).}
+	
+	Let $U$ be a bounded open subset on $\R^n$, with a $C^1$ boundary.  Assume $u \in W^{k,p}(U)$.
+	\begin{enumerate}[label=(\roman*)]
+		\item If 
+		\begin{align*}
+			k < \frac{n}{p}
+\end{align*}	 then $u \in L^q(U)$, where
+\begin{align*}
+	\frac{1}{q}= \frac{1}{p}-\frac{k}{n}
+\end{align*}We have addition the estimate
+\begin{align*}
+	\|u\|_{L^q(U)} \le C \|u\|_{W^{k,p}(U)},
+\end{align*}the constant $C$ depending only on $k,p,n$ and $U$.
+		\item If
+		\begin{align*}
+			k > \frac{n}{p}
+		\end{align*}then $u \in C^{k-\frac{n}{p}-1,\gamma}(\CONJ{U})$, where
+		\begin{align*}
+			\gamma &= \BINDEF{\frac{n}{p}+1-\frac{n}{p}, & \text{if $\frac{n}{p}$ is not an integer}}{\text{any positive number } < 1, &\text{if $\frac{n}{p}$ is an integer}}
+		\end{align*}We have an addition the estimate
+depending only on $k,p,n,\gamma$ and $U$.
+		\begin{align*}
+			\gamma &= \BINDEF{\frac{n}{p}+1-\frac{n}{p}, & \text{if $\frac{n}{p}$ is not an integer}}{\text{any positive number } < 1, &\text{if $\frac{n}{p}$ is an integer}}
+		\end{align*}We have an addition the estimate
+		\begin{align*}
+			\|u\|_{C^{k-\frac{n}{p}-1,\gamma}(\CONJ{U})} \le C\|u\|_{W^{k,p}(U)},
+		\end{align*}the constant $C$ depending only on $k,p,n,\gamma$ and $U$.
+	\end{enumerate}
+	
+\end{description}
+\end{document}

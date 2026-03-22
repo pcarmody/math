@@ -117,11 +117,37 @@
 	A^T = A
 \end{align*} in the tensor notation.
 
+\BLUE{$$ A_{ij} = A_{ji}$$}
+
 \item Express the product $C=A^TB$ in the tensor notation.
+
+\BLUE{\begin{align*}
+	C_{ij} &= A_{ki}B_{kj}
+\end{align*}
+}
 
 \item Express the product $C^T=A^TB$ in the tensor notation.
 
+\BLUE{\begin{align*}
+	\LET D &= A^TB\\
+	D_{ij} &= A_{ki}B_{kj} \\
+	C &= D^T = B_{ki}A_{kj} \\ \\
+	\text{ or } C^T &= A^TB\\
+	C &= B^TA = B_{ki}A_{kj}
+\end{align*}
+}
+
 \item Express the product $C^T=A^TB^T$ in the tensor notation and explain why it follows that $(AB)^T = B^TA^T$.  This is an example of a theorem in matrix algebra that is best proved in the tensor notation.
+
+\BLUE{\begin{align*}
+	C^T &= A^TB^T \\
+	C_{ji} &= A_{ki}B_{jk} 
+\end{align*}Let $D = AB$ then 
+\begin{align*}
+	D_{ij} &= A_{ik}B_{kj} \\
+	D^T \to D_{ji} &= A_{ki}B_{jk} = B_{jk}A_{ki} \to B^TA^T
+\end{align*}
+}
 
 \item Use the matrix notation to prove that, for inveritble matrices $A, B,$ and $C$,
 \begin{align*}
@@ -136,6 +162,7 @@
 
 \item Linear algebra offers a derivation that does not require claculus.  Introduce a new vector $r = A^{-1}x-b$ and express $f(x)$ in terms of $r$.  Show that the minimum of the new quadratic form occurs at $r=0$.
 
+\textbf{Section 7.5}
 \item Without the tensor calculus, the calculus approach proves surprisingly cumbersome.  Derive the partial derivatives of 
 \begin{align*}
 	f(x,y) &= \frac{1}{2}A_{11}x^2+!_{12}xy+\frac{1}{2}A_{22}y^2 -b_1x-b_2y
@@ -156,6 +183,7 @@
 	A^i_j x^j = \lambda x^j
 \end{align*}
 
+\textbf{Section 7.6}
 \item Show that the eigenvalues of the generalized equation (7.71) are invariant with respect to change of basis.
 
 \item Show that the eigenvalues of the generalized equation (7.71) are given by the Rayliegh quotient

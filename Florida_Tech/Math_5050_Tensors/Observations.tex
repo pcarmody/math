@@ -122,7 +122,7 @@
 		Z_{ij}Z^{ik} &= \delta^k_j
 	\end{align*}
 	
-	\item a little dissection
+	\item a little dissection*
 	\begin{align*}
 		L &= \int^b_a \sqrt{Z_{ij}\frac{dZ^i}{dt}\frac{dZ^j}{dt}}\, dt \\
 		&= \int^b_a \sqrt{\sum_{i=1}^n\sum_{j=1}^nZ_{ij}\frac{dZ^i}{dt}\frac{dZ^j}{dt}}\, dt \\
@@ -145,6 +145,11 @@
 	And based on the metric tensors
 	\begin{align*}
 		\COFF{k}{i}{j} &= \frac{1}{2}Z^{km}\PAREN{\PART{Z_{mi}}{Z_j}+\PART{Z_{mj}}{Z_i}-\PART{Z_{ij}}{Z_m}} & (5.67)
+	\end{align*}
+	
+	\textbf{Transformation of Coordinates}
+	\begin{align*}
+		\COFF{i}{j}{k} &= \CONJ{\Gamma}^u_{rs} \PART{x^i}{\CONJ{x}^u}\PART{\CONJ{x}^r}{x^j}\PART{\CONJ{x}^s}{x^k}+\frac{\partial^2\CONJ{x}^r}{\partial x^j\partial x^k}\PART{x^i}{\CONJ{x}^r}
 	\end{align*}
 	
 	\item \textbf{Multiple change of coordinates}
@@ -188,7 +193,7 @@
 		Z_{ij}J^i_{i'}J^j_{j'} &= Z_{i'j'}
 	\end{align*}In this case, $J^i_{i'}$ and $J^j_{j'}$ are the same matrix (and must be the same) with different indices.
 	
-	\item \textbf{Page 85} we say "$S^i_j$ is a tensor then $S^i_i$ is an invariant."  In this case, can be different coordinate systems.  Let $i$ be Cartesian and $j$ be polar coordinates.  $J^j_i$ would be a change of coordinates from polar to Cartesian which makes $\bar{S}^i_i=S^i_jJ^j_i$ which would make sense but $\bar{S}$ is not made up of the same coordinate systems as $S$.  Be wary of $S^i_i$ when the subscript is originally from a different coordinate system.  The $S$ refers to the tensor object $S$ but $S^i_i$ and $S^i_j$ are very different flavors of it.  This can be deceptive.
+	\item \textbf{Page 85} we say ``$S^i_j$ is a tensor then $S^i_i$ is an invariant."  In this case, can be different coordinate systems.  Let $i$ be Cartesian and $j$ be polar coordinates.  $J^j_i$ would be a change of coordinates from polar to Cartesian which makes $\bar{S}^i_i=S^i_jJ^j_i$ which would make sense but $\bar{S}$ is not made up of the same coordinate systems as $S$.  Be wary of $S^i_i$ when the subscript is originally from a different coordinate system.  The $S$ refers to the tensor object $S$ but $S^i_i$ and $S^i_j$ are very different flavors of it.  This can be deceptive.
 	
 	\item \textbf{Covariant Derivative $\nabla_j$}
 	\begin{itemize}
@@ -205,5 +210,445 @@
 		\end{align*}
 
 	\end{itemize}
+	
+	\item \textbf{Index Algebra}
+	\begin{enumerate}
+		\item The Free Index.  Indices appearing once on one side must appear once on ther other side.
+		\item Indices appearing twice on one side must appear in both upper and lower positions.  Appearing on both sides actually means that the index on the left and the index on the right are independent of each other (this should be avoided).
+		\item \textbf{Moving from left to right: }An element/tensor (i.e., a factor in multiplication) transfers from one side to the other (i.e., analogous to multiplying by its inverse) by introducing a free index and switching positions yielding (that is, $J_b^k \to J^b_m$ or $Z_{im} \to Z^{mj}$ because $J_b^kJ^b_m = \delta^k_m$ and $Z_{im}Z^{mj} = \delta_i^j$)\footnote{An expression that results in a Kronecker Delta is being considered a quotient expression}. For example,
+		\begin{align*}
+			J_b^k = \delta_b^c &\implies J_b^k J^b_m = \delta_b^c J^b_m \implies \delta_m^k= \delta_b^c J^b_m \implies \delta_m^k = J_m^c & (1)\\
+			Z_{im} = J^c_m &\implies Z_{im}Z^{mj} = J^c_mZ^{mj} \implies \delta_i^j = J^c_mZ^{mj} & (2)
+		\end{align*}(1) moves the $\delta$ from one side to the other side by removing $b$ and introducing $m$ (both free indices).  (2) moves $Z$ to the right (leaving the $\delta$ behind) by removing $i$ and introduction $j$ both of which are free indices.
+	\end{enumerate}
+	
+	\item \textbf{Delta symbols}
+	
+	This symbol determines/filters two permuations that are in sync, out of sync, or neither.
+	\begin{align*}
+		e^{ijk} &= e_{ijk} = \BINDEF{1 & ijk \text{ positive permutation}}{-1 & ijk \text{ negative permuation} \\ 0 & \text{otherwise}} \\
+		\delta_{rst}^{ijk} &= e_{rst}e^{ijk}
+	\end{align*}Thus, $\delta_{rst}^{ijk}$ is positive when $ijk$ and $rst$ have the same permutation sign, negative when they have different permutation signs and zero otherwise.  Also, the numbers $ijk$ and $rst$ must come from the same set albeit not the same order (e.g., $\exists i \in rst$ as well as $j$ and $k$)
+	
+	Interesting identities
+	\begin{align*}
+		\delta_{rs}^{ij} &= \delta_r^i\delta_s^j - \delta_r^j\delta_s^i \\
+		&= \left | \begin{array}{cc}
+			\delta_r^i & \delta_s^i \\
+			\delta_r^j & \delta_s^j
+		\end{array} \right |
+	\end{align*}
+	
+	\HLINE
+	\section*{Chapter 10 -- Surface Tensors}
+	\item \textbf{Shift Tensor}
+	
+	The matrix which converts from the ambient basis, $\textbf{Z}_i$, and the surface basis, $S_\alpha$.
+	\begin{align*}
+		Z_\alpha^i &= \textbf{S}_\alpha \cdot \textbf{Z}^i
+	\end{align*}for example. 
+	\begin{align*}
+		\LET \textbf{T} &= T^i\textbf{Z}_i \\
+			&= T^\alpha\textbf{S}_\alpha = T^\alpha Z_\alpha^i\textbf{Z}_i \\
+			\therefore T^i &= T^\alpha Z_\alpha^i
+	\end{align*}
+	
+	\item \textbf{Surface covariant metric tensor}
+	
+	Analogous to the covariant metric tensor $Z_{ij}$.
+	\begin{align*}
+		S_{\alpha\beta} &= \textbf{S}_\alpha \cdot \textbf{S}_\beta
+	\end{align*}Consequently, the covariant metric tensor and the surface covariant metric tensor are related by 
+	\begin{align*}
+		S_{\alpha\beta} = \textbf{S}_\alpha\cdot\textbf{S}_\beta = \textbf{Z}_i Z_\alpha^i\,\cdot\,\textbf{Z}_j Z_\beta^i = Z_{ij}Z_\alpha^i Z_\beta^j
+	\end{align*}The last term is all matrix multiplication starting with the metric tensor that twice the surface metric tensor.
+	
+	\item \textbf{Surface Contravariant Metric Tensor}.
+	
+	This is defined as the matrix inverse that provides
+	\begin{align*}
+		S^{\alpha\beta}S_{\beta\gamma} &= \delta_\gamma^\beta
+	\end{align*}\textbf{Note:} $Z_{ij}, Z^{ij}$ would be a 3 dimensional square matrix, $S_{\alpha\beta}, S^{\alpha\beta}$ is a two dimensional matrix, $Z_\alpha^i$ is $2 \times 3$ matrix and $Z_i^\alpha$ is a $3 \times 2$ matrix.
+	
+	\item \textbf{Surface versions of Levi-Civita symbols}
+	
+	Define $S$ (not a vector and no subscripts) as anlogous ot $Z$ (not a vector and no subscripts) as
+	\begin{align*}
+		S = |S_{..}|
+	\end{align*}We define the \textbf{area element} as $\sqrt{S}$.
+	
+	Define the permutation operator as 
+	\begin{align*}
+		e_{12} = -e_{21} = 1 \text{ zero otherwise}
+	\end{align*}then
+	\begin{align*}
+		\varepsilon_{\alpha\beta} &= \sqrt{S}\,e_{\alpha\beta} \\
+		\varepsilon^{\alpha\beta} &= \frac{e^{\alpha\beta}}{\sqrt{S}} 
+	\end{align*}
 \end{description}
+
+\section*{AI Questions}
+
+\begin{description}
+
+\subsection*{Help me understand more about Christoffel Symbols.}
+\item \textbf{Help me understand more about Christoffel Symbols.}
+
+The \DEFINE{Christoffel symbols} look mysterious at first, but they’re really just bookkeeping for how your coordinate system bends and twists.
+
+Let’s build intuition step by step.
+
+---
+
+\item \textbf{ 1. What problem are they solving?}
+
+In flat $\mathbb{R}^n$, derivatives are easy:
+\begin{align*}
+\partial_i V^j
+\end{align*}
+works fine because the coordinate axes don’t change.
+
+But on a \DEFINE{curved manifold} (or even curvilinear coordinates like polar coordinates), the \DEFINE{basis vectors themselves vary with position}.
+
+So when you differentiate a vector field, two things change:
+
+\begin{enumerate}
+\item the components $V^j$
+\item the basis vectors $e_j$
+\end{enumerate}
+
+Christoffel symbols correct for (2).
+
+---
+
+\item \textbf{ 2. Definition}
+
+The Christoffel symbols $\Gamma^k_{ij}$ are defined by:
+\begin{align*}
+\nabla_i e_j = \Gamma^k_{ij} e_k.
+\end{align*}
+
+Interpretation:
+
+\begin{itemize}
+\item  Take the basis vector $e_j$
+\item  Differentiate it in direction $x^i$
+\item  The result is another vector, expressed as a linear combination of the basis
+\end{itemize}
+
+So $\Gamma^k_{ij}$ tells you:
+
+\DEFINE{how the $j\ITH$ basis vector rotates toward the $k\ITH$ direction when moving in the $i\ITH$ direction.}
+
+---
+
+\item \textbf{ 3. Covariant derivative of a vector}
+
+Using this, the correct derivative of a vector field is:
+\begin{align*}
+\nabla_i V^k = \partial_i V^k + \Gamma^k_{ij} V^j.
+\end{align*}
+
+Two parts:
+
+\begin{itemize}
+\item $\partial_i V^k$: change in components
+\item  $\Gamma^k_{ij} V^j$: correction for moving basis
+\end{itemize}
+
+---
+
+\item \textbf{ 4. Why they are NOT tensors}
+
+Christoffel symbols are \DEFINE{not tensors} because:
+
+\begin{itemize}
+\item they depend on the coordinate system
+\item you can make them vanish at a point by choosing normal coordinates
+\end{itemize}
+
+Intuition:
+They describe the coordinate system as much as the geometry.
+
+---
+
+\item \textbf{ 5. Formula in terms of the metric}
+
+If you have a Riemannian metric $g_{ij}$, then:
+\begin{align*}
+\Gamma^k_{ij} = \frac{1}{2} g^{k\ell} \left( \partial_i g_{j\ell} + \partial_j g_{i\ell} - \partial_\ell g_{ij} \right).
+\end{align*}
+
+ This shows:
+
+\begin{itemize}
+\item Christoffel symbols come entirely from how the \DEFINE{metric changes}
+\item No curvature yet — just first derivatives of the metric
+\end{itemize}
+
+---
+
+\item \textbf{ 6. Geometric intuition}
+
+Think of walking on Earth:
+
+\begin{itemize}
+\item Moving north changes what you mean by “east”
+\item So even if a vector “looks constant,” it actually rotates
+\end{itemize}
+
+Christoffel symbols measure that rotation.
+
+---
+
+\item \textbf{ 7. Simple example: polar coordinates}
+
+In $(r,\theta)$, the metric is:
+\begin{align*}
+ds^2 = dr^2 + r^2 d\theta^2.
+\end{align*}
+
+Some Christoffel symbols are:
+\begin{align*}
+\Gamma^r_{\theta\theta} = -r, \quad \Gamma^\theta_{r\theta} = \frac{1}{r}.
+\end{align*}
+
+Meaning:
+
+\begin{itemize}
+\item moving in $\theta$ changes the radial direction
+\item the angular basis vector shrinks/expands with $r$
+\end{itemize}
+
+---
+
+\item \textbf{ 8. Connection to curvature}
+
+Christoffel symbols themselves are not curvature, but:
+
+\DEFINE{curvature = derivatives of Christoffel symbols + quadratic terms}
+
+So they are like the “first layer” of geometry.
+
+---
+
+\item \textbf{ 9. Connection to your earlier question (normal derivatives)}
+
+When you computed:
+\begin{align*}
+\nabla_i \nabla_j u
+\end{align*}
+
+you were using Christoffel symbols implicitly:
+\begin{align*}
+\nabla_i \nabla_j u = \partial_i \partial_j u - \Gamma^k_{ij} \partial_k u.
+\end{align*}
+
+ That extra term is exactly the same phenomenon:
+
+\DEFINE{derivatives must account for changing geometry.}
+
+---
+
+\item \textbf{ 10. Mental model (most important)}
+
+A very useful way to think of Christoffel symbols:
+
+\DEFINE{They measure how much your coordinate grid is ``curving” or ``tilting” as you move.}
+
+\begin{itemize}
+\item If coordinates are straight (Cartesian): $\Gamma = 0$
+\item If coordinates bend (polar, sphere, manifold): $\Gamma \neq 0$
+
+---
+\end{itemize}
+
+\HLINE
+\newpage
+\subsection*{Help me understand the Reimann-Christoffel tensor.}
+\item \textbf{Help me understand the Reimann-Christoffel tensor.}
+
+The \DEFINE{Riemann–Christoffel tensor} (usually just called the \DEFINE{Riemann curvature tensor}) is what finally measures \textbf{true curvature}, not just coordinate effects. Let’s build it from the ground up in the clearest way possible.
+
+---
+
+\begin{description}
+
+\item \textbf{1. What is it trying to measure?}
+
+Christoffel symbols tell you how basis vectors change:
+\begin{align*}
+\nabla_i e_j = \Gamma^k_{ij} e_k.
+\end{align*}
+
+But Christoffel symbols can vanish at a point just by changing coordinates — so they \DEFINE{don’t measure real curvature}.
+
+The Riemann tensor answers a deeper question:
+
+\textbf{ If you move a vector around a tiny loop, does it come back unchanged?}
+
+\begin{itemize}
+\item Flat space → it comes back the same
+\item Curved space → it comes back rotated
+\end{itemize}
+
+That rotation is exactly what the Riemann tensor measures.
+
+---
+
+\item \textbf{2. Definition using covariant derivatives}
+
+The Riemann tensor is defined by
+\begin{align*}
+(\nabla_i \nabla_j - \nabla_j \nabla_i)V^k = R^k_{\ \ell ij} V^\ell.
+\end{align*}
+
+So it measures the \DEFINE{failure of second covariant derivatives to commute}.
+
+---
+
+\item \textbf{3. Concrete formula}
+
+In coordinates, the Riemann–Christoffel tensor is
+
+\begin{align*}
+R^k_{\ \ell ij} = \partial_i \Gamma^k_{j\ell} - \partial_j \Gamma^k_{i\ell} + \Gamma^k_{im}\Gamma^m_{j\ell} - \Gamma^k_{jm}\Gamma^m_{i\ell}.
+\end{align*}
+
+---
+
+\item \textbf{4. What each term means}
+
+Think of the formula in two parts:
+
+\begin{itemize}
+\item (A) Derivatives of Christoffel symbols
+
+\begin{align*}
+\partial_i \Gamma^k_{j\ell} - \partial_j \Gamma^k_{i\ell}
+\end{align*}
+
+This measures whether the “rotation of the basis” changes from point to point.
+
+\item (B) Quadratic correction terms
+
+\begin{align*}
+\Gamma^k_{im}\Gamma^m_{j\ell} - \Gamma^k_{jm}\Gamma^m_{i\ell}
+\end{align*}
+
+These appear because the basis is already rotating while you move.
+\end{itemize}
+
+---
+
+\item \textbf{5. Why this measures curvature}
+
+Imagine moving a vector in two steps:
+
+\begin{enumerate}
+\item Move in direction $x^i$, then in direction $x^j$
+\item Move in direction $x^j$, then in direction $x^i$
+\end{enumerate}
+
+In flat space → same result
+In curved space → not the same
+
+The difference equals
+\begin{align*}
+R^k_{\ \ell ij}V^\ell.
+\end{align*}
+
+So the Riemann tensor measures how much the vector \DEFINE{twists due to curvature}.
+
+---
+
+\item \textbf{6. Geometric intuition}
+
+A very concrete picture:
+
+\textbf{Walk on a sphere}
+
+Start at the equator:
+
+\begin{itemize}
+\item Walk north
+\item Walk east
+\item Walk south
+\end{itemize}
+
+Your direction changes even though you never turned.
+
+That change in direction = curvature = Riemann tensor.
+
+---
+
+\item \textbf{7. What the indices mean}
+
+\begin{align*}
+R^k_{\ \ell ij}
+\end{align*}
+
+Each index has a meaning:
+
+\begin{itemize}
+\item $i, j$: directions you move in
+\item $\ell$: direction of the vector you are transporting
+\item $k$: direction it ends up pointing
+\end{itemize}
+
+So the tensor answers:
+
+\DEFINE{ If I transport a vector in direction $\ell$ around the $i$-$j$ plane, how much does it rotate toward direction $k$?}
+
+---
+
+\item \textbf{8. Why it’s a true tensor}
+
+Unlike Christoffel symbols:
+
+\begin{itemize}
+\item You cannot make the Riemann tensor vanish by changing coordinates (unless the space is actually flat).
+\item If $R^k_{\ \ell ij} = 0$ everywhere → the space is flat.
+\end{itemize}
+
+---
+
+\item \textbf{9. Important special cases}
+
+In 2D surfaces
+
+The Riemann tensor contains only \DEFINE{one independent number}:
+\begin{align*}
+K = \text{Gaussian curvature}.
+\end{align*}
+
+So for surfaces:
+
+\begin{itemize}
+\item sphere → $K>0$
+\item plane → $K=0$
+\item saddle → $K<0$
+\end{itemize}
+
+---
+
+\item \textbf{10. Most useful mental picture}
+
+Think of the hierarchy:
+
+\begin{tabular}{|l|l|}
+\hline
+ Object                              & What it measures     \\
+\hline
+ Metric $g_{ij}$                     & distances            \\
+ Christoffel symbols $\Gamma^k_{ij}$ & how coordinates bend \\
+ Riemann tensor $R^k_{\ \ell ij}$    & real curvature       \\
+\hline
+\end{tabular}
+---
+
+
+\end{description}
+\end{description}
+
 \end{document}

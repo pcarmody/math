@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.14)  1 JAN 2026 17:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.29)  16 FEB 2026 03:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -885,12 +885,12 @@ Package rerunfilecheck Info: File `Chapter05.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22905 strings out of 476139
- 432748 string characters out of 5794453
+ 22905 strings out of 476064
+ 432748 string characters out of 5792853
  1948975 words of memory out of 5000000
- 44533 multiletter control sequences out of 15000+600000
+ 44542 multiletter control sequences out of 15000+600000
  564586 words of font info for 60 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
+ 81 hyphenation exceptions out of 8191
  102i,16n,107p,546b,568s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
@@ -904,7 +904,7 @@ sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Chapter05.pdf (5 pages, 150148 bytes).
+Output written on Chapter05.pdf (5 pages, 150728 bytes).
 PDF statistics:
  97 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream

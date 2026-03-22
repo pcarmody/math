@@ -1,0 +1,270 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Presentation \#2 }
+\newcommand{\DUEDATE}{February 18, 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\TEAL}[1]{\textcolor{teal}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{\large{Exercises}}
+Chapter 5: 64, 68
+Chapter 6: 87, 90, 94
+Chapter 7: 110, 115, 117
+Chapter 8: 119, 130
+
+\HLINE
+\textbf{Chapter 5}
+
+\textbf{64: }\textbf{Exercise 64.}  Prove that $Z^{ij}$ is positive definite.
+
+\BLUE{$Z_{ij}$ is positive definite (it is defined by the inner product which is positive definite by definition) and
+\begin{align*}
+	Z_{ij}Z^{ij} &= \mathbb{I}
+\end{align*}therefore $Z^{ij}$ is positive definite.
+}\\
+
+\textbf{Exercise 68.}  Show that the covariant basis $\VK{Z}_i$ can be obtained by the contravariant basis $\VK{Z}^j$ by 
+\begin{align*}
+	\VK{Z}_i &= Z_{ij}\VK{Z}^j.
+\end{align*}Hint: Multiply both sides of equation (5.14) by $Z_{ik}$, i.e., $\VK{Z}^i = Z^{ij}\VK{Z}_j$.
+
+\BLUE{First notice that
+\begin{align*}
+	\VK{Z}^i &= Z^{ij}\VK{Z}_j \\
+	\VK{Z}^i\cdot\VK{Z}_k &= Z^{ij}\VK{Z}_j\cdot\VK{Z}_k \\
+	\delta^i_k &= Z^{ij}Z_{jk}
+\end{align*}\textbf{This is a useful result}.  Now applying that to
+\begin{align*}
+	\VK{Z}^i &= Z^{ij}\VK{Z}_j \\
+	Z_{ik}\VK{Z}^i &= Z_{ik}Z^{ij}\VK{Z}_j \\
+	Z_{ik}\VK{Z}^i &= \delta^j_k\VK{Z}_j \\
+	Z_{ik}\VK{Z}^i &= \VK{Z}_k
+\end{align*}
+}
+
+\HLINE
+\textbf{Chapter 6}
+
+\textbf{87: }Prove the tensor property of $Z^{ij}$ from the identity $\Z^{ij}Z_{jk}=\delta^i_k$.
+
+\RED{WTS: $Z^{ij}J^{i'}_iJ^{j'}_j=Z^{i'j'}$
+\begin{align*}
+	Z^{ij}Z_{ik}&=\delta^i_k\\
+	Z^{ij}Z_{ik}J^i_{i'}J^k_{k'} &= \delta^i_kJ^i_{i'}J^k_{k'}\\
+	Z^{ij}Z_{i'k'} &= \delta^i_kJ^i_{i'}J^k_{k'}\\
+	Z^{ij}Z_{i'k'}Z^{i'k'} &= \delta^i_kJ^i_{i'}J^k_{k'}Z^{i'k'} \\
+	Z^{ij}\delta^{i'}_{k'} &!= \delta^i_kJ^i_{i'}J^k_{k'}Z^{i'k'} \\
+	Z^{ij}\delta^{i'}_{k'} \delta^{k'}_{j'}&= \delta^i_kJ^i_{i'}J^k_{k'}Z^{i'k'}\delta^{k'}_{j'}  \\
+	Z^{ij}&= J^i_{i'}J^j_{j'}Z^{i'j'}
+\end{align*}
+}\\
+
+\BLUE{\begin{enumerate}
+	\item Necessary expressions\\
+	(1) $\CONJ{Z}^{ac}\CONJ{Z}_{ab} = \delta_b^c$ \\
+	(2) $\CONJ{Z}_{ab}= J_a^iJ_b^kZ_{ik}$
+	\item Starting from (1), substitute (2) in for (1) and move $J_b^k$ to the right.  This can only be done by using a free index, $m$, and simplify.
+	\begin{align*}
+		\CONJ{Z}^{ac}J_a^iJ_b^kZ_{ik} &= \delta_b^c \\
+		\CONJ{Z}^{ac}J_a^iZ_{ik}(J_b^kJ_m^b) &= \delta_b^cJ_m^b \\
+		\CONJ{Z}^{ac}J_a^iZ_{ik}\delta_m^k &= J_m^c\\
+		\CONJ{Z}^{ac}J_a^iZ_{im} &= J_m^c
+	\end{align*}
+	\item Move $Z_{im}$ to the right by multiplying by $Z^{jm}$.  Once again, we need to introduce a free index, $j$ to move it over.  Then simplify.
+	\begin{align*}
+		\CONJ{Z}^{ac}J_a^iZ_{im}Z^{jm} &= J_m^cZ^{jm} \\
+		\CONJ{Z}^{ac}J_a^i\delta_i^j &= J_m^cZ^{jm} \\
+		\CONJ{Z}^{ac}J_a^j &= J_m^cZ^{jm}
+	\end{align*}
+	\item Now move $J_a^j$ over by introducing another free index, $n$, and multiplying by $J_j^n$ on both sides.
+	\begin{align*}
+		\CONJ{Z}^{ac}J_a^jJ_j^n &= J_m^cZ^{jm}J_j^n \\
+		\CONJ{Z}^{ac}\delta_a^n &= J_j^nJ_m^cZ^{jm} \\
+		\CONJ{Z}^{nc} &= J_j^nJ_m^cZ^{jm} 
+	\end{align*}Thus, $\CONJ{Z}^{nc}$ exhibits the tensor property.
+\end{enumerate}
+}
+
+\TEAL{\textbf{Note: }we need to move three factors from the left side to the right.  By analogy, we'd do this by multiplying both sides by their inverse.  This is precisely the same process but we must build/eliminate free indices as we go.\\
+}
+
+\textbf{90: }Show that the skew-symmetric part $S_{ij}$
+\begin{align*}
+	S_{ij} = \PART{T_i}{Z^j}-\PART{T_j}{Z^i}
+\end{align*}of the variant $\partial T_i/\partial Z^j$ is a tensor.
+
+\BLUE{Start with the first partial of $T_i$ with respect to $Z^b$
+\begin{align*}
+	\PART{T_i}{Z^j}J^j_b &= \PART{T_i}{Z^j}\PART{Z^j}{Z^b}\\
+	\PART{T_i}{Z^b} &= \nabla_j T_i\cdot \nabla_b\ABRACKET{Z^j} &\text{chain rule}\\
+	&= \PART{T_i}{Z^j}\PART{Z^j}{Z^b} \\
+	&= \PART{T_i}{Z^j}J^j_b
+\end{align*}Then when we transform via a change in coordinates $\bar{T_a} = T_iJ^i_a$ and
+\begin{align*}
+	\PART{\bar{T_a}}{Z^b} &= \PART{\PAREN{T_iJ^i_a}}{Z^b} \\
+	&= \PART{T_i}{Z^b}J^i_a+T_i\PART{J^i_a}{Z^b} \\
+	&= \PART{T_i}{Z^j}J^j_bJ^i_a+T_i\PART{J^i_a}{Z^b} \\
+	&=\PART{T_i}{Z^j}J^j_bJ^i_a+T_iJ^i_{ab} \\
+	\PART{T_i}{Z^j}J^j_bJ^i_a &= \PART{\bar{T_a}}{Z^b} - T_iJ^i_{ab}
+\end{align*}The transformation of $S_{ij}$ is
+\begin{align*}
+	\bar{S_{ab}} &= \PART{\bar{T_a}}{Z^b}-\PART{\bar{T_b}}{Z^a} \\
+	\bar{S_{ab}} = S_{ij}J^i_aJ^j_b &=  \PAREN{\PART{T_i}{Z^j}-\PART{T_j}{Z^i}}J^i_aJ^j_b \\
+	&= \PART{T_i}{Z^j}J^i_aJ^j_b-\PART{T_j}{Z^i}J^i_aJ^j_b \\
+	&= \PART{T_i}{Z^b}J^i_a-\PART{T_j}{Z^a}J^j_b \\
+	&=  \PART{\bar{T_a}}{Z^b}J^i_a - T_iJ^i_{ab} - \PAREN{ \PART{\bar{T_a}}J^j_b{J^j_b} - T_jJ^j_{ab}} \\
+	&=  \PART{\bar{T_a}}{Z^b}J^i_a - \PART{\bar{T_a}}{Z^b}J^j_b + T_jJ^j_{ab} -  T_iJ^i_{ab} \\
+	&= \PART{\bar{T_a}}{Z^b}-\PART{\bar{T_b}}{Z^a}
+\end{align*}
+}
+
+\textbf{94: }Show that if a tensor vanishes in one coordinate system, then it vanishes in all coordinate systems.
+
+\BLUE{Let's start with a rank-1 tensor, $T_i$.  Assuming that it is non-zero but transforms via $J^i_a$ into another coordinate system and is zero.  Then,
+\begin{align*}
+	\bar{T}_a &= T_iJ^i_a = 0
+\end{align*}We can say that $T_i$ must be zero because $J^i_a \ne 0$.  We can also point out 
+\begin{align*}
+	\bar{T}_aJ^a_i &= T_iJ^i_aJ^a_i = T_i \ne 0
+\end{align*} Except that $\bar{T}_a = 0$ which is a contradiction.
+}
+
+\HLINE
+\textbf{Chapter 7}
+
+\textbf{110: }Express the product $C^T=A^TB^T$ in the tensor notation and explain why it follows that $(AB)^T = B^TA^T$.  This is an example of a theorem in matrix algebra that is best proved in the tensor notation.
+
+\BLUE{\begin{align*}
+	C^T &= A^TB^T \\
+	C_{ji} &= A_{ki}B_{jk} 
+\end{align*}Let $D = AB$ then 
+\begin{align*}
+	D_{ij} &= A_{ik}B_{kj} \\
+	D^T \to D_{ji} &= A_{ki}B_{jk} = B_{jk}A_{ki} \to B^TA^T
+\end{align*}
+}\\
+
+\textbf{115: }Show that the Hessian $\partial^2 f/\partial x^i\partial x^j$ equals 
+\begin{align*}
+	\frac{\partial^2 f}{\partial x^i\partial x^j} = A_{ij}
+\end{align*}
+
+\BLUE{From the text
+\begin{align*}
+	\PART{f}{x^k} &= A_{ki}x^i - b_k & (7.63)
+\end{align*}Thus,
+\begin{align*}
+	\frac{\partial^2 f}{\partial x^l\partial x^k} &= \PART{}{x^l} \PART{f}{x^k} \\
+	&= \PART{}{x^l}\PAREN{A_{ki}x^i - b_k} \\
+	&= \PART{A_{ki}x^i}{x^l} \\
+	&= A_{ki} \PART{x^i}{x^l} \\
+	&= A_{ki} \delta^i_l \\
+	&= A_{kl}
+\end{align*}
+}
+
+\textbf{117: }Show that the eigenvalues of the generalized equation (7.71) are invariant with respect to change of basis.
+
+\HLINE
+\textbf{Chapter  8}
+
+\textbf{119: }Derive equation (8.13).
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \PAREN{\PART{V^i}{Z^j}+\COFF{i}{j}{m}V^m}\VK{Z}_i.
+\end{align*}
+
+\BLUE{\begin{align*}
+	\VK{V} &= (V^1(\VK{Z}), V^2(\VK{Z}), \dots, V^n(\VK{Z})) = V^i\VK{Z}_i  \\
+	\PART{\VK{V}}{Z^j} &= \sum_i \PART{V^i}{Z^j}\VK{Z}_i + V^i \PART{\VK{Z}_i}{Z^j} 
+\end{align*}Remember that 
+\begin{align*}
+	\PART{\VK{Z}_i}{Z^j} &= \COFF{k}{i}{j}\VK{Z}_k
+\end{align*}then
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \sum_i \PAREN{ \PART{V^i}{Z^j}\VK{Z}_i + \sum_k V^i \COFF{k}{i}{j}\VK{Z}_k } \\
+	&= \sum_i\PART{V^i}{Z^j}\VK{Z}_i + \sum_m V^m \COFF{i}{m}{j}\VK{Z}_i 
+\end{align*}since the second term sums over all $\VK{k}$ we can rearrange these to sum over $\VK{Z}_i$.  That is, change the indices $i\to m$ and $k \to i$ as in 
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \sum_i\PART{V^i}{Z^j}\VK{Z}_i + \sum_m V^m \COFF{i}{m}{j}\VK{Z}_i \\
+	&= \PAREN{\PART{V^i}{Z^j} + V^m \COFF{i}{m}{j}}\VK{Z}_i 
+\end{align*}The last expression translated to Einstein Contraction in both $i$ and $m$.
+}\\
+
+\textbf{130: }Determine the expression for the covariant derivative $\nabla_lT^{ij}_k$.
+
+\BLUE{\begin{align*}
+	\nabla_l T^{ij}_k &= \PART{T^{ij}_k}{Z^l}+ \COFF{i}{l}{m}T^{mj}_k + \COFF{j}{l}{m}T^{im}_k - \COFF{m}{k}{l}T^{ij}_m
+\end{align*}
+}
+
+\end{document}

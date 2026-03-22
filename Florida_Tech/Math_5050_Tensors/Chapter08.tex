@@ -1,0 +1,259 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 8: Covariant Derivative }
+\newcommand{\DUEDATE}{February 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{Exercises}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\setcounter{enumi}{118}
+\item Derive equation (8.13).
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \PAREN{\PART{V^i}{Z^j}+\COFF{i}{j}{m}V^m}\VK{Z}_i.
+\end{align*}
+
+\BLUE{\begin{align*}
+	\VK{V} &= (V^1(\VK{Z}), V^2(\VK{Z}), \dots, V^n(\VK{Z})) = V^i\VK{Z}_i  \\
+	\PART{\VK{V}}{Z^j} &= \sum_i \PART{V^i}{Z^j}\VK{Z}_i + V^i \PART{\VK{Z}_i}{Z^j} 
+\end{align*}Remember that 
+\begin{align*}
+	\PART{\VK{Z}_i}{Z^j} &= \COFF{k}{i}{j}\VK{Z}_k
+\end{align*}then
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \sum_i \PAREN{ \PART{V^i}{Z^j}\VK{Z}_i + \sum_k V^i \COFF{k}{i}{j}\VK{Z}_k } \\
+	&= \sum_i\PART{V^i}{Z^j}\VK{Z}_i + \sum_m V^m \COFF{i}{m}{j}\VK{Z}_i 
+\end{align*}since the second term sums over all $\VK{k}$ we can rearrange these to sum over $\VK{Z}_i$.  That is, change the indices $i\to m$ and $k \to i$ as in 
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \sum_i\PART{V^i}{Z^j}\VK{Z}_i + \sum_m V^m \COFF{i}{m}{j}\VK{Z}_i \\
+	&= \PAREN{\PART{V^i}{Z^j} + V^m \COFF{i}{m}{j}}\VK{Z}_i 
+\end{align*}The last expression translated to Einstein Contraction in both $i$ and $m$.
+}
+
+\item Explain why $\nabla_jV_i$ is a tensor.
+
+\BLUE{\begin{align*}
+	\nabla_jV_i &= \nabla_j(Z^{ij}V^i) \\
+		&= \PAREN{\nabla_jZ^{ij}}+Z^{ij}\nabla_jV^i
+\end{align*}Recall that
+		\begin{align*}
+			\nabla_j V^i = \PART{V^i}{Z^j}+\COFF{i}{j}{m}V^m
+		\end{align*}Then
+		\begin{align*}
+			\nabla_jZ^{il} &= \PART{Z^{il}}{Z^j}+\COFF{i}{j}{m}Z^{ml} \\
+			&= \PART{(Z^i\cdot Z^l)}{Z^j}+\COFF{i}{j}{m}Z^{ml} \\
+		\end{align*}		
+}
+
+\textbf{Section 8.3}
+\item In Exercise 82, you awere asked to show that the acceleration of a particle moving along the curve $Z^i\equiv Z^i(t)$ is given by 
+\begin{align*}
+	A^i&=\frac{dV^i}{dt}+\COFF{i}{J}{k}V^jV^k.
+\end{align*}
+
+\item Show that in cylindrical coordinates in three dimensions, the Laplacian is give by 
+\begin{align*}
+	Z^{ij}\nabla_i\nabla_j F &= \frac{\partial^2 F}{\partial r^2} + \frac{1}{r}\PART{F}{r} + \frac{1}{r^2}\frac{\partial^2 F}{\partial \theta^2} + \frac{\partial^2 F}{\partial z^2}.
+\end{align*}Show that this expression is equivalent to 
+\begin{align*}
+	Z^{ij}\nabla_i\nabla_j F &= \frac{1}{r}\PART{}{r}\PAREN{r\PART{F}{r}}+\frac{1}{r^2}\frac{\partial^2 F}{\partial\theta^2}+\frac{\partial^2 F}{\partial z^2}
+\end{align*}
+
+\item Show that the spherical coordinates in three dimensions, the Laplacian is given by
+\begin{align*}
+	Z^{ij}\nabla_i\nabla_j F &= \SPART{F}{r} + \frac{2}{r}\PART{F}{r}+\frac{1}{r^2}\SPART{F}{\theta}+\frac{\cot \theta}{r^2}\PART{F}{\theta}+\frac{1}{r^2\sin\theta}\SPART{F}{\phi}
+\end{align*}Show that this expression is equivalent to 
+\begin{align*}
+	Z^{ij}\nabla_i\nabla_j F &= \frac{1}{r^2}\PART{}{r}\PAREN{r^2\PART{F}{r}}+\frac{1}{r^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{r^2\sin^2\theta}\SPART{F}{\phi}
+\end{align*}
+
+\item Derive the expression for the Laplacian in two dimensions in affine coordinates $X$ and $Y$ related to the Cartesian coordinates $x$ and $y$ by stretching:
+\begin{align*}
+	X &= Ax\\
+	Y &= By
+\end{align*}
+\textbf{Section 8.4}
+\item Using geometric arguments, explain why $\PART{\VK{Z}_i}{\theta}$ is the unit vector that is orthogonal to $\VK{Z}_i$.
+
+\item Conclude that 
+\begin{align*}
+	\nabla_2\VK{Z}_1=0.
+\end{align*}
+
+\item Given an alternative derivation of this identity by showing the general property that $\nabla_i \VK{Z}_j$ is a symmetric object
+\begin{align*}
+	\nabla_i\VK{Z}_j &= \nabla_J\VK{Z}_i.
+\end{align*}Hint: $\PART{\VK{Z}_j}{Z^i} = \frac{\partial^2 \VK{R}}{\partial Z^i\partial Z^j}$ and $\COFF{k}{i}{j}=\COFF{k}{j}{i}$.
+
+\item Show that 
+\begin{align*}
+	\nabla_2\VK{Z}_2 = \VK{0}.
+\end{align*}
+
+\item Show similarly that 
+\begin{align*}
+	\nabla_i\VK{Z}_j = \VK{0}.
+\end{align*}
+
+\textbf{Section 8.5}
+\item Determine the expression for the covariant derivative $\nabla_lT^{ij}_k$.
+
+\BLUE{\begin{align*}
+	\nabla_l T^{ij}_k &= \PART{T^{ij}_k}{Z^l}+ \COFF{i}{l}{m}T^{mj}_k + \COFF{j}{l}{m}T^{im}_k - \COFF{m}{k}{l}T^{ij}_m
+\end{align*}
+}
+
+\item Show that 
+\begin{align*}
+	\nabla_k\delta^i_j = 0
+\end{align*}
+
+\textbf{Section 8.6}
+\item Prove that $\nabla _jV_i$ is a tensor by forming the invariant $V_i\VK{Z}^i$ and analyzing its partial derivative with respect to $Z^j$.
+
+\item For a contravariant vector $\VK{T}^i$, prove that $\nabla_j\VK{T}^i$ is a tensor by forming the invariant $T = \VK{T}^i\cdot\VK{Z}_i$.
+
+\item For a covariant vector $\VK{T}_i$, prove that $\nabla_j\VK{T}_i$ is a tenstor by forming the invariant $T = \VK{T}_i\cdot \VK{Z}^i$.
+
+\item Show similarly that $\nabla_kT^k_j$ and $\nabla_kT^{ij}$ are tensors.
+
+\item Show, by forming dot products with the covariant and contravariant bases, that $\nabla_k\VK{T}_{jj}, \nabla_k\VK{T}^i_j$, and $\nabla_k\VK{T}^{ij}$ are tensors.
+
+\item Argue the general tensor property by induction.  That is, if $T^{ijk\cdots}_{rst\dots}$ is a tensor, then $\nabla_pT^{ijk\cdots}_{rst\dots}$ is also a tensor.
+
+\item Show the metrinilic property for the contravariant metric tensor $Z^{ij}$ by the product rule.
+
+\item Show that the metrinilic property for the Kronecker symbol $\delta^i_j$.
+
+\item Show the metrinilic property for the delta symbols $\delta^{ij}_{rs}$ and $\delta^{ijk}_{rst}$ by expressin them in terms of the kronecker delta symbol $\delta^i_j$.
+
+\item Show the metrinilic property for the delta symbol $\delta^{ij}_{rs}$ by a direct application of the definition.
+
+\item Use the property that $\nabla_kZ_{ij}=0$ to show that
+\begin{align*}
+	\PART{Z_{ij}}{Z^k} &= \Gamma_{j,ik} + \Gamma_{j,ik}.
+\end{align*}
+
+\item Use the property that $\nabla_kZ^{ij} = 0$ to derive the expression of $
+\PART{Z^{ij}}{Z^k}.$
+
+\textbf{Section 8.7}
+\item Show that contracted indices can exchange flavors across the covariant derivative.
+
+\item Derive equation (8.129)
+
+\item Show that the Riemann-Christoffel tensor vanishes in a Euclidean space by substituting equation (5.60) into equation (8.130).  After an initial application of the product rule, you will need equation (5.65) to re-express the derivative of the contravariant basis.
+
+\item Argue, on the basis of $\VK{V}$ being a tensor, that $V^i$ is tensor with respeoct to the chang eof coordinates $Z^i$.
+
+\item Show, by relating $V^{i'}$ to $V^i$, that $V^i$ is a tensor with respect to the change of coordintes $Z^i$.
+
+\item Show that $dV^i/dt$ is not a tensor with repsect to the change of coordinates $Z^i$.
+
+\item Show that 
+\begin{align*}
+	A(t) &= \PAREN{\frac{d V^i}{dt} + \COFF{i}{j}{k}V^iV^k}\VK{Z}_i
+\end{align*}thus
+\begin{align*}
+	A^i(t) &= \frac{dV^i}{dt} + \COFF{i}{j}{k} V^jV^k
+\end{align*}
+
+\item Argue that the combination of the right hand side of this equation is. (Hint, $\VK{A}|$ is an invariant).
+
+\item Suppose that $T^i$ is the contravariant component of a vector field $\VK{T}$ that is constant along the trajectory $\gamma$.  Show taht $\delta T^i/\delta t = 0$.
+
+\item Use the techniques developed in this chapter to show that the $\delta/\delta t$-derivative satisfies the tensor property: that is, the $\delta/\delta t$-derivative produces tensors out of tensors.
+
+\item Show that the $\delta/\delta t$-derivative coincides with the ordinary derivative $d/dt$ when applied to variants of order zero.
+
+\item Show that the $\delta/\delta t$-derivative coincides with the ordinarey derivative $d/dt$ in affine coordinates
+
+\item Show that the $\delta/\delta t$-derivative satisfies the sum and product rules.
+
+\item Show that the $\delta/\delta t$-derivative commutes with Contraction.
+
+\item Suppose that $T^i_j$ is defined in the entire Euclidean space.  Show that the trajectory restriction of $T^i_j$ satisfies the chain rule
+\begin{align*}
+	\frac{\delta T^i_j}{\delta t} &= \PART{T^i_j(t,Z)}{t}+V^k\nabla_k T^i_j
+\end{align*}
+
+\item Show that the $\delta/\delta t$-derivative is metrinilic with respect to all metrics associated with the coordinate sysemt $A^i$.
+
+\item Rewrite equation (8.138) in the form 
+\begin{align*}
+	\VK{A}(T) &= \frac{\delta V^i}{\delta t} \VK{Z}_i.
+\end{align*}
+
+\end{enumerate}
+
+\end{document}

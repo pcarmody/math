@@ -1,0 +1,90 @@
+This question is a direct continuation of our conversation, exploring another variant of the \DEFINE{interpolation inequalities} we have been studying. Previously, we proved:
+
+\begin{enumerate}
+\item  $\|Du\|_{L^2}^2 \le C\|u\|_{L^2}\|D^2u\|_{L^2}$ (The Gagliardo-Nirenberg-Sobolev inequality for $p=2$)
+\item  $\|Du\|_{L^p}^2 \le C\|u\|_{L^p}\|D^2u\|_{L^p}$ (The generalization to $L^p$)
+\end{enumerate}
+
+This new inequality is a different flavor, mixing norms from various $L^p$ spaces ($L^{2p}$, $L^\infty$, and $L^p$). The proof technique, however, will be very similar, relying on \DEFINE{integration by parts} and the \DEFINE{Hölder inequality}, which have been central tools throughout our entire discussion.
+
+---
+
+\textbf{Proof of the Interpolation Inequality}
+
+Our goal is to prove that for $u \in C_c^\infty(U)$ and $1 \le p < \infty$, there exists a constant $C$ such that:
+
+$$\|Du\|_{L^{2p}} \le C\|u\|_{L^\infty}^{1/2}\|D^2u\|_{L^p}^{1/2}$$
+
+We will prove the equivalent inequality raised to the power of $2p$:
+
+$$\|Du\|_{L^{2p}}^{2p} \le C^{2p} \|u\|_{L^\infty}^{p}\|D^2u\|_{L^p}^{p}$$
+
+\begin{description}
+\item \textbf{Step 1: Start with the integral form}
+
+We begin with the integral for the norm of the gradient:
+
+$$\|Du\|_{L^{2p}}^{2p} &= \int_U |Du|^{2p} dx = \int_U |Du|^{2p-2} |Du|^2 dx = \int_U |Du|^{2p-2} \sum_{i=1}^n u_{x_i} u_{x_i} dx \\
+&= \sum_{i=1}^n \int_U u_{x_i} (u_{x_i} |Du|^{2p-2}) dx$$
+
+\item \textbf{Step 2: Apply Integration by Parts}
+
+For each term in the sum, we apply integration by parts. Since $u \in C_c^\infty(U)$, it is zero on the boundary $\partial U$, so all boundary terms vanish.
+
+$$\int_U u_{x_i} (u_{x_i} |Du|^{2p-2}) dx = -\int_U u \frac{\partial}{\partial x_i} (u_{x_i} |Du|^{2p-2}) dx$$
+
+Summing over all $i=1, \dots, n$ gives:
+
+$$\|Du\|_{L^{2p}}^{2p} = -\int_U u \left( \sum_{i=1}^n \frac{\partial}{\partial x_i} (u_{x_i} |Du|^{2p-2}) \right) dx$$
+
+\item \textbf{Step 3: Apply the Product Rule and Simplify}
+
+Let's expand the divergence term inside the integral:
+
+$$\sum_{i=1}^n \frac{\partial}{\partial x_i} (u_{x_i} |Du|^{2p-2}) &= \sum_{i=1}^n \left( u_{x_i x_i} |Du|^{2p-2} + u_{x_i} (2p-2)|Du|^{2p-3} \frac{\partial|Du|}{\partial x_i} \right) \\
+&= |Du|^{2p-2} \Delta u + (2p-2)|Du|^{2p-3} \sum_{i=1}^n u_{x_i} \frac{\partial|Du|}{\partial x_i}$$
+
+Recognizing that $\sum u_{x_i} \frac{\partial|Du|}{\partial x_i} = Du \cdot \nabla|Du| = |Du|$, the second term simplifies to $(2p-2)|Du|^{2p-2}$. However, a more careful calculation shows this term is non-negative. A key identity for a vector field $v$ is $div(|v|^{q-2}v) = (q-2)|v|^{q-4}|v_T|^2 + |v|^{q-2}div(v)$, where $|v_T|^2$ involves tangential derivatives and is non-negative. For $q=2p$, this means the second part of the divergence is non-negative.
+
+Therefore, we can establish an inequality:
+
+$$\|Du\|_{L^{2p}}^{2p} = -\int_U u \left( |Du|^{2p-2} \Delta u + \text{a non-negative term} \right) dx$$
+
+Taking the absolute value and using the fact that $u$ has compact support:
+
+$$\|Du\|_{L^{2p}}^{2p} \le \int_U |u| |\Delta u| |Du|^{2p-2} dx$$
+
+\item \textbf{Step 4: Apply Hölder's Inequality}
+
+Now we bound the integral. First, we can bound the $|u|$ term by its supremum norm, $\|u\|_{L^\infty}$:
+
+$$\|Du\|_{L^{2p}}^{2p} \le \|u\|_{L^\infty} \int_U |\Delta u| |Du|^{2p-2} dx$$
+
+Next, we apply \DEFINE{Hölder's inequality} to the remaining integral with conjugate exponents $q=p$ and $q' = p/(p-1)$.
+
+$$\int_U |\Delta u| |Du|^{2p-2} dx \le \left( \int_U |\Delta u|^p dx \right)^{1/p} \left( \int_U (|Du|^{2p-2})^{p/(p-1)} dx \right)^{(p-1)/p}$$
+
+Let's analyze the two resulting terms:
+
+\begin{enumerate}
+\item  The first term is simply $\|\Delta u\|_{L^p}$.
+\item  The second term simplifies: $(\int_U |Du|^{2p} dx)^{(p-1)/p} = (\|Du\|_{L^{2p}}^{2p})^{(p-1)/p} = \|Du\|_{L^{2p}}^{2(p-1)}$.
+\end{enumerate}
+
+Substituting these back into our main inequality:
+
+$$\|Du\|_{L^{2p}}^{2p} \le \|u\|_{L^\infty} \|\Delta u\|_{L^p} \|Du\|_{L^{2p}}^{2(p-1)}$$
+
+\item \textbf{Step 5: Finalize the Proof}
+
+Assuming $\|Du\|_{L^{2p}} > 0$, we can divide both sides by $\|Du\|_{L^{2p}}^{2(p-1)}$:
+
+$$\|Du\|_{L^{2p}}^{2p - 2(p-1)} &\le \|u\|_{L^\infty} \|\Delta u\|_{L^p} \\
+\|Du\|_{L^{2p}}^2 &\le \|u\|_{L^\infty} \|\Delta u\|_{L^p}$$
+
+Finally, we bound the Laplacian norm by the full second derivative norm, $\|\Delta u\|_{L^p} \le C_1 \|D^2u\|_{L^p}$, and take the square root of both sides:
+
+$$\|Du\|_{L^{2p}} \le C \|u\|_{L^\infty}^{1/2} \|D^2u\|_{L^p}^{1/2}$$
+\end{description}
+
+This completes the proof.

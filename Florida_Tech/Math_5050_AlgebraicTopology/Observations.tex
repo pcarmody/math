@@ -30,7 +30,7 @@
 
 \newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Algebraic Topology}
 \newcommand{\STUDENTNAME}{Paul Carmody}
-\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\ASSIGNMENT}{Topological Notes and Observations }
 \newcommand{\DUEDATE}{January 2026}
 \newcommand{\PROFESSOR}{Professor Shibo Liu}
 \newcommand{\SEMESTER}{Spring 2026}
@@ -55,12 +55,8 @@
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
 
-\newcommand{\SUPP}{\operatorname{supp}}
-\newcommand{\CLOSURE}{\operatorname{closure of}}
-\newcommand{\BD}{\operatorname{bd}}
-\newcommand{\HHN}{\mathcal{H}^n}
-\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
-\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\FUNDG}[1]{\pi_1(#1)}
+\newcommand{\IMG}{\operatorname{img}}
 
 \begin{document}
 
@@ -69,14 +65,27 @@
 	\large{ w/\PROFESSOR}
 \end{center}
 
-\section{Notes and Observations}
+\section*{Notes and Observations}
 \begin{center}
-\textbf{\Large{Notes and Observations}}
+ \textbf{\Large{Notes and Observations}}
 \end{center}
 
 \HLINE
 
+\DEFINE{LOOK UP ROBERT GHRIST PAPERS, EULER CHARACTERISTIC BETTI NUMBER HOW THESE CONTRIBUTE TO HOMOLOGY}
+
 \begin{description}
+	\item \textbf{Helpful Diagrams}
+	
+	\begin{tikzpicture}
+    % Basepoint
+    \node (O) at (0,0) [circle, fill, inner sep=1.5pt, label=below:{$x_0$}] {};
+    % Petal 1
+    \draw (O) to [out=135, in=45, loop, distance=1.5cm] node[above] {$a$} (O);
+    % Petal 2
+    \draw (O) to [out=225, in=315, loop, distance=1.5cm] node[below] {$b$} (O);
+\end{tikzpicture}
+
 	\item \textbf{Topological Objects}
 	\begin{itemize}
 		\item $n$-Ball: unit ball in $\R^n$.
@@ -87,9 +96,9 @@
 		
 		$n$-ball: $D^n= \{(x_1,\dots,x_n)\,:\, \sum x_i^2 \le 1\}$
 		
-		'$e$-cell': interior of $n$-ball, $e^n = \{(x_1,\dots,x_n)\,:\, \sum x_i^2 < 1\}$
+		`$e$-cell': interior of $n$-ball, $e^n = \{(x_1,\dots,x_n)\,:\, \sum x_i^2 < 1\}$
 		
-		\item $n=1$-surface: $S^{n-1} = \partial D^n =\{(x_1,\dots,x_n)\,:\, \sum x_i^2 = 1\}$
+		\item $n-1$-surface: $S^{n-1} = \partial D^n =\{(x_1,\dots,x_n)\,:\, \sum x_i^2 = 1\}$
 
 		Two-point: $S^0 = \partial D^1 = \{0,1\}$.
 				
@@ -168,7 +177,7 @@ $f$ from the unit interval $[0,1]$ to $X$ with $f(0)=$ and $f(1)=y$. A path-comp
 	\item \textbf{Deformation Retract}
 	
 	\begin{definition}[Deformation Retract]
-	A subspace $A$ of $X$ is \DEFINE{deformation retract} of $X$ if there is a retraction $g:X \to A$ (i.e., a map $g: X\to A$ with $g(a)=a$ for every $a\in A$)  such that $g$ is homotopic to the identiy map $id: X \to X$.  A subspace $A$ of $X$ is a \DEFINE{strong deformation retract} if there is a aretraction $g: X \to A$ such that $g$ is homotopic rel $A$ to the identity map $id: X \to X$.
+	A subspace $A$ of $X$ is \DEFINE{deformation retract} of $X$ if there is a retraction $g:X \to A$ (i.e., a map $g: X\to A$ with $g(a)=a$ for every $a\in A$)  such that $g$ is homotopic to the identiy map $id: X \to X$.  A subspace $A$ of $X$ is a \DEFINE{strong deformation retract} if there is a retraction $g: X \to A$ such that $g$ is homotopic rel $A$ to the identity map $id: X \to X$.
 	
 	\end{definition}
 		
@@ -179,7 +188,8 @@ $f$ from the unit interval $[0,1]$ to $X$ with $f(0)=$ and $f(1)=y$. A path-comp
 		F: (X,A)\times I \to (Y,B)
 	\end{align*}where $F(x,0) = f_0$ and $F(x,1) = f_1$ for every $x\in X$.  \textit{Homotopy} is an equivalence relation.
 
-	\DEFINE{Homotopy Equivalence} is an equivalence relation (identity, symmetric, 	and transitive) which partitions (see quotient map, below).
+	\begin{definition}[Homotopy Equivalence] A continuous map $f: X \to Y$ is a \DEFINE{homotopy equivalence} if there exists a continuous map $g:Y \to X$ such that $f \circ g = \mathbb{I}_Y$  and $g \circ f = \mathbb{I}_X$. This means the maps are inverses of each other up to homotopy, implying that the spaces $X$ and $Y$ share the same homotopy type.
+	\end{definition}
 	
 	\begin{theorem}
 		 Put simply two spaces are homotopy equivalent if there is a third space that deformation retracts (shrinks/expands) to both.
@@ -198,10 +208,12 @@ $f$ from the unit interval $[0,1]$ to $X$ with $f(0)=$ and $f(1)=y$. A path-comp
 	\begin{remark} Understand a progression of relationships between two topological spaces $X,Y$ from``isomorphic/homeomorphic" $\to$ ``deformation retract between $X$ and $Y$" $\to$ ``homotopy equivalent".
 	\end{remark}
 	
-	\textbf{Further: } $X$ and $Y$ need only be a deformation retract between them.
+	 \textbf{Further: } $X$ and $Y$ need only be a deformation retract between them.
 	
 	\item \textbf{The Fundamental Group}
-	
+
+	The \DEFINE{Fundamental Group} is the set of homotopy classes of loops.
+		
 	\begin{theorem}[The Fundamental Group is a group].
 	
 	The Fundamental Group $\pi_1(X, x_0)$ is a group
@@ -212,6 +224,15 @@ $f$ from the unit interval $[0,1]$ to $X$ with $f(0)=$ and $f(1)=y$. A path-comp
 	
 	$\pi_1(S^1) \cong \Z$\footnote{Note that this is independent of base-point $x_0$.}
 	
+	Proof: Let $a$ be the generator of $\FUNDG{S^1}$, i.e., $\FUNDG{S^1}= \ABRACKET{a}$.  Define $\varphi:\Z \to \FUNDG{S^1}$ as 
+	\begin{align*}
+		\varphi(n) &= a^n
+	\end{align*}Then
+	\begin{itemize}
+		\item $\varphi$ is surjective, i.e., $\varphi(m) = \varphi(n) \implies m=n$.
+		\item $\varphi$ is injective, $\forall [f] \in S^1\, \exists n\in \Z \to \varphi(n) = a^n = f$
+	\end{itemize}Thus, an isomorphism exists between $\Z$ and $\FUNDG{S^1}$
+
 	Proof (outline):  Show that there exists a homomorphism $\varphi: \Z \to \pi_1(S^1)$ then show that 
 	\begin{itemize}
 		\item $\varphi$ is surjective, i.e., $\varphi(m) = \varphi(n) \implies m=n$.
@@ -242,7 +263,55 @@ $f$ from the unit interval $[0,1]$ to $X$ with $f(0)=$ and $f(1)=y$. A path-comp
 \begin{remark}It is the projection, $p$, along with the preimage homeomorphism that forms this connection between Covering Spaces and Fundamental Groups.
 \end{remark}
 
-\section{AI Questions:}
+\section*{Simplicial Diagrams}
+
+\begin{description}
+	\item \textbf{Torus}
+\[\begin{tikzcd}[row sep=huge]
+		v \arrow[r, "b"] & v \\
+		v \arrow[u, "a" ] \arrow[r, swap, "b"]  \arrow[ru, "c"] & 
+		v \arrow[u, swap, "a"]
+	\end{tikzcd}\]
+\end{description}
+
+\section*{Homology}
+
+\begin{description}
+\item \textbf{Simplicial Mapping, $\Delta^n$}
+
+The \DEFINE{simplicial mapping}, $\Delta_n(X)$, is the set of all mappings of n-simplexes onto the topological space $X$.  These mappings form a group.
+
+\item \textbf{Chain Complex}
+
+Given a set of nested groups $C_n$ such that 
+\begin{align*}
+\dots \to C_{n+1} \overset{\partial_{n+1}}\longrightarrow C_{n} \overset{\partial_{n}}\longrightarrow C_{n-1} \overset{\partial_{n-1}}\longrightarrow \dots \longrightarrow C_{1} \overset{\partial_{1}}\longrightarrow C_{0} \overset{\partial_{0}}\longrightarrow \to 0
+\end{align*}Where the image of $\IMG\partial_{n+1} \subset \ker \partial_n$ for all $n$.  We define the \DEFINE{exact chain} if $\IMG\partial_{n+1} = \ker \partial_n$ for all $n$.
+
+\item \textbf{The $n\ITH$ simplicial homology group, $H_n^\Delta(X)$}
+
+The chain complex where $C_n = \Delta_n$ of simplicial elements.  Where each element is defined as $H_n(X) = \ker\partial_n/\IMG\partial_{n+1}$.
+
+\item \textbf{The $n\ITH$ singular homology group, $H_n(X)$}
+
+The chain complex where $C_n$ is the set of continuous functions on $X$ in $n$ variables.  Where each element is defined as $H_n(X) = \ker\partial_n/\IMG\partial_{n+1}$.
+\end{description}
+
+\section*{Exact Chain Complexes}
+
+\begin{description}
+\item \textbf{Small Exact Chains}
+
+Define $i: A \to B$ and $j: B \to C$ and 
+\[\begin{tikzcd}
+	0 \arrow[r] & A \arrow[r,"i"] & B \arrow[r, "j"] & C \arrow[r] & 0 \\
+	 & \ker(i)=0 \arrow[r] & \IMG(i)=\ker(j) \arrow[r] & \IMG(j)=C
+\end{tikzcd}\]Question: $i\circ j: A \to C$ is injective and $(j\circ i)^{-1}: C \to A$ is surjective?
+
+\item \textbf{Applied to Chain Complexes}
+\end{description}
+
+\section*{AI Questions:}
 
 \begin{description}
 	\item \textbf{What are the properties of Covering Spaces?}
@@ -253,27 +322,490 @@ Let \(p: E \to B\) be a continuous surjective map between topological spaces. We
 
 For every point \(b \in B\), there exists an open neighborhood \(U\) of \(b\) in \(B\) such that its preimage \(p^{-1}(U)\) is a disjoint union of open sets \(V_i\) in \(E\), and for each \(i\), the restriction of \(p\) to \(V_i\), denoted \(p|_{V_i}: V_i \to U\), is a homeomorphism. The neighborhood \(U\) is called an \DEFINE{evenly covered} neighborhood.
 
-\textbf{Key Properties of Covering Spaces:}
+ \textbf{Key Properties of Covering Spaces:}
 
 \begin{enumerate}
 
-\item \textbf{**Local Homeomorphism:**} A covering map \(p: E \to B\) is a local homeomorphism. This means that for every point \(e \in E\), there is a neighborhood of \(e\) that is mapped homeomorphically onto its image in \(B\). This follows directly from the definition of an evenly covered neighborhood.
+\item \textbf{\textbf{Local Homeomorphism:}} A covering map \(p: E \to B\) is a local homeomorphism. This means that for every point \(e \in E\), there is a neighborhood of \(e\) that is mapped homeomorphically onto its image in \(B\). This follows directly from the definition of an evenly covered neighborhood.
 
-\item \textbf{**Lifting Properties:**} Covering spaces have unique lifting properties for paths and homotopies. This is where the connection to the fundamental group becomes crucial.
+\item \textbf{\textbf{Lifting Properties:}} Covering spaces have unique lifting properties for paths and homotopies. This is where the connection to the fundamental group becomes crucial.
 \begin{itemize}
-    \item \textbf{**Path Lifting Property:**} Given a path \(\gamma: [0, 1] \to B\) in the base space and a starting point \(e_0 \in E\) such that \(p(e_0) = \gamma(0)\), there exists a unique path \(\tilde{\gamma}: [0, 1] \to E\) in the covering space that starts at \(e_0\) (i.e., \(\tilde{\gamma}(0) = e_0\)) and covers \(\gamma\) (i.e., \(p \circ \tilde{\gamma} = \gamma\)). This lifted path \(\tilde{\gamma}\) is called a \DEFINE{lift} of \(\gamma\).
-    \item \textbf{**Homotopy Lifting Property:**} If two paths in \(B\) are homotopic, their lifts in \(E\) starting at the same point will also be homotopic (specifically, they will end at the same point).
+    \item \textbf{\textbf{Path Lifting Property:}} Given a path \(\gamma: [0, 1] \to B\) in the base space and a starting point \(e_0 \in E\) such that \(p(e_0) = \gamma(0)\), there exists a unique path \(\tilde{\gamma}: [0, 1] \to E\) in the covering space that starts at \(e_0\) (i.e., \(\tilde{\gamma}(0) = e_0\)) and covers \(\gamma\) (i.e., \(p \circ \tilde{\gamma} = \gamma\)). This lifted path \(\tilde{\gamma}\) is called a \DEFINE{lift} of \(\gamma\).
+    \item \textbf{\textbf{Homotopy Lifting Property:}} If two paths in \(B\) are homotopic, their lifts in \(E\) starting at the same point will also be homotopic (specifically, they will end at the same point).
 \end{itemize}
 
-\item \textbf{**Relationship with the Fundamental Group:**} The connection between covering spaces and the fundamental group is one of the most important results in algebraic topology.
+\item \textbf{\textbf{Relationship with the Fundamental Group:}} The connection between covering spaces and the fundamental group is one of the most important results in algebraic topology.
 \begin{itemize}
 
     \item Let \(p: (E, e_0) \to (B, b_0)\) be a covering map. The induced homomorphism \(p_*: \pi_1(E, e_0) \to \pi_1(B, b_0)\) is injective. This means the fundamental group of the covering space is isomorphic to a subgroup of the fundamental group of the base space.
     \item The set of lifts of a loop in \(B\) based at \(b_0\) corresponds to the elements of the subgroup \(p_*(\pi_1(E, e_0))\). Specifically, a loop \(\gamma\) in \(B\) lifts to a loop in \(E\) if and only if its homotopy class \([\gamma]\) is in the subgroup \(p_*(\pi_1(E, e_0))\).
 \end{itemize}
 
-\item \textbf{**Classification of Covering Spaces:**} For a 'nice' space \(B\) (path-connected, locally path-connected, and semilocally simply-connected), there is a one-to-one correspondence between the subgroups of its fundamental group \(\pi_1(B, b_0)\) and the isomorphism classes of based covering spaces of \(B\). The trivial subgroup \(\{e\}\) corresponds to a special covering space called the **universal covering space**, which is simply connected (i.e., its fundamental group is trivial).
+\item \textbf{\textbf{Classification of Covering Spaces:}} For a 'nice' space \(B\) (path-connected, locally path-connected, and semilocally simply-connected), there is a one-to-one correspondence between the subgroups of its fundamental group \(\pi_1(B, b_0)\) and the isomorphism classes of based covering spaces of \(B\). The trivial subgroup \(\{e\}\) corresponds to a special covering space called the \textbf{universal covering space}, which is simply connected (i.e., its fundamental group is trivial).
+
+\item \textbf{From another query: How is a Covering Space Related to a subgroup of a Fundamental Group?}.  The terminology is a misnomer.  The word 'covering' implies 'larger than' as in the definition of 'compact' has 'finite subcover' and whose union is larger.  A covering space is much more related to a subgroup which IS NOT be as large as the original group.
 \end{enumerate}
+
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+\newpage
+\item \textbf{Describe the homology of a torus.}
+
+To describe the homology of a torus, we consider the standard 2-torus, denoted as $T^2$ or $S^1 \times S^1$. The homology groups $H_n(T^2; \mathbb{Z})$ provide information about the ``holes" of various dimensions within the shape.
+
+\[\begin{tikzcd}[row sep=huge]
+		v \arrow[r, "b"] & v \\
+		v \arrow[u, "a" ] \arrow[r, swap, "b"] & 
+		v \arrow[u, swap, "a"]
+	\end{tikzcd}\]
+
+\begin{description}
+
+\item \textbf{Step-by-Step Explanation}
+
+\begin{description}
+
+\item 1. \textbf{Definition and CW Structure}
+
+A torus can be constructed by taking a square and identifying opposite edges. This gives it a CW complex structure consisting of:
+\begin{itemize}
+
+\item  \textbf{One 0-cell (vertex):} Let's call it $v$.
+\item  \textbf{Two 1-cells (edges):} Let's call them $a$ and $b$. Both start and end at $v$.
+\item  \textbf{One 2-cell (face):} Let's call it $f$. The boundary of this face is attached along the path $aba^{-1}b^{-1}$ (the commutator of the two edges).
+
+\end{itemize}
+\item 2. \textbf{Calculating $H_0(T^2)$ (Connectedness)}
+
+The 0\ITH homology group represents the number of path-connected components. Since the torus is a single connected piece, the 0\ITH  homology group is the free abelian group of rank 1.
+
+\textbf{Result:} $H_0(T^2) \cong \mathbb{Z}$.
+
+\item 3. \textbf{Calculating $H_1(T^2)$ (1-Dimensional Holes)}
+
+The 1st homology group represents the ``loops" that cannot be shrunk to a point or expressed as boundaries of a surface. 
+
+\begin{itemize}
+\item  From the CW structure, the boundary of the 2-cell $f$ is $\partial f = a + b - a - b = 0$ in the abelian chain group.
+
+\item  Since the boundary is zero, the two 1-cells $a$ and $b$ are cycles and are not boundaries of any 2-cell.
+
+\item  These two cycles correspond to the ``meridional" and ``longitudinal" circles of the torus.
+
+\item  \textbf{Result:} $H_1(T^2) \cong \mathbb{Z} \oplus \mathbb{Z}$ (or $\mathbb{Z}^2$).
+\end{itemize}
+
+\item 4. \textbf{Calculating $H_2(T^2)$ (2-Dimensional Voids)}
+
+The 2nd homology group represents enclosed volumes or ``cavities." 
+
+\begin{itemize}
+\item   The torus is a compact, connected, oriented 2-manifold without boundary.
+\item   For any such manifold of dimension $n$, the top homology group $H_n$ is isomorphic to $\mathbb{Z}$.
+\item   In our CW complex, the single 2-cell $f$ has a boundary of 0, making it a cycle. There are no 3-cells to serve as boundaries for it.
+\end{itemize}
+*   \textbf{Result:} $H_2(T^2) \cong \mathbb{Z}$.
+
+\item 5. \textbf{Higher Homology Groups}
+
+Since the torus is a 2-dimensional manifold, there are no cells of dimension 3 or higher.
+
+*   \textbf{Result:} $H_n(T^2) = 0$ for all $n \ge 3$.
+
+\end{description}
+\item \textbf{Final Answer Summary}
+
+The homology groups of the torus $T^2$ with integer coefficients are summarized in the table below:
+
+| Dimension ($n$) | Homology Group $H_n(T^2; \mathbb{Z})$ | Description |
+|---|---|---|
+| 0 | $\mathbb{Z}$ | The torus is path-connected. |
+| 1 | $\mathbb{Z} \oplus \mathbb{Z}$ | Two independent non-contractible loops (meridian and longitude). |
+| 2 | $\mathbb{Z}$ | The torus encloses a single 2-dimensional ``void" (it is an oriented surface). |
+| $\ge 3$ | $0$ | No higher-dimensional features exist. |
+
+\end{description}
+Final Answer:
+Describing the homology of a torus
+Defining the CW complex structure
+To analyze the torus $T^2$, we can view it as a square with opposite sides identified. This construction allows us to define a CW complex structure, which simplifies the calculation of homology groups. The structure consists of:
+
+\begin{itemize}
+\item - \textbf{One 0-cell (vertex):} A single point $v$ where all corners of the square meet.
+\item - \textbf{Two 1-cells (edges):} Two loops, $a$ and $b$, that start and end at $v$.
+\item - \textbf{One 2-cell (face):} The interior of the square, $f$, attached to the edges along the boundary path $aba^{-1}b^{-1}$.
+\end{itemize}
+
+Calculating the 0\ITH homology group $H_0$
+The 0\ITH homology group $H_0(T^2; \mathbb{Z})$ measures the path-connectedness of the space. Because the torus is a single, continuous piece, it has only one connected component. In algebraic terms, this corresponds to a free abelian group of rank 1.
+
+$$H_0(T^2) \cong \mathbb{Z}$$
+
+Calculating the 1st homology group $H_1$
+The 1st homology group $H_1(T^2; \mathbb{Z})$ identifies 1-dimensional ``holes" or loops that cannot be contracted to a point. In our CW structure, the boundary of the 2-cell $f$ is calculated as:
+
+\begin{align*}
+\partial f & = a + b - a - b \\
+& = 0
+\end{align*}
+
+Since the boundary is zero, the loops $a$ (the meridian) and $b$ (the longitude) are cycles that do not bound any surface. They are independent, leading to a rank-2 free abelian group:
+\begin{align*}
+H_1(T^2) & \cong \mathbb{Z} \oplus \mathbb{Z}
+\end{align*}
+Calculating the 2nd homology group $H_2$
+The 2nd homology group $H_2(T^2; \mathbb{Z})$ represents the 2-dimensional ``void" enclosed by the surface. Since the torus is a compact, oriented 2-manifold without a boundary, its top-dimensional homology group is isomorphic to $\mathbb{Z}$. In our model, the single 2-cell $f$ acts as a cycle because its boundary is zero, and there are no 3-cells to ``fill" it.
+\begin{align*}
+H_2(T^2) & \cong \mathbb{Z}
+\end{align*}
+Higher-dimensional homology groups
+Because the torus is a 2-dimensional manifold, it contains no cells or structures of dimension 3 or higher. Consequently, all homology groups for $n \geq 3$ are trivial.
+\begin{align*}
+H_n(T^2) & = 0 \text{ for } n \geq 3
+\end{align*}
+Answer: <strong>The homology groups of the torus $T^2$ are $H_0(T^2) \cong \mathbb{Z}$, $H_1(T^2) \cong \mathbb{Z}^2$, $H_2(T^2) \cong \mathbb{Z}$, and $H_n(T^2) = 0$ for $n \geq 3$.
+
+\newpage
+\item \textbf{Describe relative homology.}
+
+\DEFINE{Relative homology} measures the homology of a space \DEFINE{relative to a subspace}—intuitively, it captures the holes of $X$ that are ``not already present in $A$".
+
+Let’s go step by step.
+
+---
+
+\begin{description}
+
+\item 1. \textbf{Setup}
+
+Let $A \subset X$ be a subspace of a topological space $X$.
+
+Relative homology assigns groups
+
+$$ H_n(X,A) $$
+
+called the \textbf{relative homology groups} of the pair $(X,A)$.
+
+They measure how $X$ differs from $A$ topologically.
+
+---
+
+\item 2. \textbf{Definition using chains}
+
+In singular homology, we start with the chain groups:
+
+$$ C_n(X) $$
+
+generated by singular (n)-simplices in (X).
+
+Similarly we have
+
+$$ C_n(A) $$
+
+generated by simplices lying in $A$.
+
+Since $A \subset X$, we have
+
+$$ C_n(A) \subset C_n(X).  $$
+
+The \textbf{relative chain group} is the quotient
+
+$$ C_n(X,A) = C_n(X) / C_n(A).  $$
+
+So chains in $A$ are treated as \textbf{zero}.
+
+The boundary operator descends to this quotient, giving a chain complex
+
+$$ \dots \to C_{n+1}(X,A) \to C_n(X,A) \to C_{n-1}(X,A) \to \dots $$
+
+Then
+
+$$ H_n(X,A) = \frac{\ker(\partial_n : C_n(X,A)\to C_{n-1}(X,A))} {\operatorname{im}(\partial_{n+1})}.  $$
+
+---
+
+\item 3. \textbf{Geometric interpretation}
+
+Relative cycles are chains in $X$ whose boundary lies in $A$.
+
+So:
+
+* cycles may \textbf{end on $A$}
+* boundaries are those filled inside $A$
+
+Thus relative homology detects features of $A$ that \textbf{become trivial once $A$ is allowed as a boundary}.
+
+---
+
+\item 4. \textbf{Example}
+
+Consider the disk and its boundary:
+
+$$ X = D^2, \qquad A = S^1.  $$
+
+Here $S^1$ is the boundary of the disk.
+
+Key result:
+
+$$ H_2(D^2,S^1) \cong \mathbb{Z}.  $$
+
+Interpretation:
+
+* The disk itself represents a \textbf{relative 2-cycle}
+* Its boundary lies in $S^1$
+
+So it is allowed in relative homology.
+
+Note that:
+
+$$ H_2(D^2)=0 $$
+
+but relative homology detects the 2-dimensional region.
+
+The boundary circle is the familiar space Circle.
+
+---
+
+\item 5. \textbf{Long exact sequence of a pair}
+
+Relative homology fits into a fundamental structure:
+
+*** Long exact sequence
+
+$$ \cdots \to H_n(A) \to H_n(X) \to H_n(X,A) \to H_{n-1}(A) \to H_{n-1}(X) \to \cdots $$
+
+This sequence shows how the topology of $A$, $X$, and the pair $(X,A)$ interact.
+
+It is one of the most important tools in algebraic topology.
+
+---
+
+\item 6. \textbf{Intuition}
+
+Relative homology answers the question:
+
+ \textbf{What new holes appear when we enlarge $A$ to $X$?}
+
+or equivalently
+
+ \textbf{Which cycles in $X$ become trivial once $A$ is allowed as a boundary?}
+
+---
+
+\item 7. \textbf{Special cases}
+
+\begin{description}
+
+\item If $A = \emptyset$
+
+$$ H_n(X,\emptyset) = H_n(X).  $$
+
+So ordinary homology is a special case.
+
+---
+
+\item If $A = X$
+
+$$ H_n(X,X) = 0.  $$
+
+Because everything becomes trivial.
+
+---
+
+\end{description}
+
+\item 8. \textbf{Important applications}
+
+Relative homology is used in:
+
+\begin{description}
+
+\item \textbf{excision theorem}
+\item \textbf{Mayer–Vietoris sequence}
+\item \textbf{Poincaré–Lefschetz duality}
+\item manifolds with boundary
+\item CW complex computations
+
+\end{description}
+
+For example, manifolds with boundary use
+
+$$ H_n(M,\partial M).  $$
+
+\end{description}
+---
+
+\item Key intuition
+
+Relative homology studies \textbf{chains in $X$ whose boundaries lie in $A$}.
+
+So it measures the topology of $X$ \textbf{relative to the part $A$ that we treat as negligible}.
+
+---
+
+If you'd like, I can also explain:
+
+• the \textbf{disk/sphere example in detail}
+• the \textbf{exact meaning of relative cycles}
+• the \textbf{excision theorem (which makes relative homology powerful)}
+• how relative homology appears in \textbf{degree theory and manifolds}.
+
+\newpage
+\item \textbf{Describe the Excision Theorem}
+
+The \textbf{excision theorem} is one of the central results in relative homology. It tells us that \DEFINE{removing a suitable subset from both $X$ and $A$ does not change the relative homology}. This makes relative homology extremely powerful because it lets us simplify spaces without affecting the answer.
+
+---
+
+\begin{description}
+\item 1. \textbf{Statement of the excision theorem}
+
+Let $A \subset X$, and suppose $U \subset A$ is a subset whose closure lies in the interior of $A$:
+
+$$ \overline{U} \subset \operatorname{int}(A).  $$ Then the inclusion
+
+$$ (X-U, A-U) \hookrightarrow (X,A) $$
+
+induces isomorphisms
+
+$$ H_n(X-U, A-U) \cong H_n(X,A) $$
+
+for all $n$.
+
+---
+
+\item 2. \textbf{Meaning of the theorem}
+
+We can \textbf{cut out} a region $U$ that lies completely inside $A$ without affecting the relative homology.
+
+So relative homology depends only on the portion of $X$ \textbf{near the boundary between $X$ and $A$}.
+
+Everything deep inside $A$ can be removed.
+
+---
+
+\item 3. \textbf{Intuition}
+
+Relative homology measures chains in $X$ whose boundaries lie in $A$.
+
+If a region $U$ sits entirely inside $A$:
+
+\begin{itemize}
+
+\item  any chains inside $U$ are already considered trivial
+\item  removing them does not affect the homology
+
+Thus the topology inside $A$ is irrelevant.
+
+Only the \textbf{interaction between $X$ and $A$} matters.
+
+\end{itemize}
+---
+
+\item 4. \textbf{Why this theorem is useful}
+
+Excision allows us to \textbf{shrink complicated regions} to simpler ones.
+
+Many important computations in algebraic topology depend on it, including:
+
+\begin{itemize}
+
+\item homology of spheres
+\item CW complex homology
+\item Mayer–Vietoris sequence
+\item manifolds with boundary
+\end{itemize}
+
+---
+
+\item 5. \textbf{Classic example: computing sphere homology}
+
+Consider the pair $(D^n, S^{n-1}) $ where $D^n$ is a disk and $S^{n-1}$ its boundary.
+
+Using excision, one shows
+
+$$ H_k(D^n,S^{n-1}) = \BINDEF{\mathbb{Z} & k=n }{ 0 & k\neq n } $$
+
+This calculation helps prove the homology of spheres like the familiar boundary of a disk, the Circle.
+
+---
+
+\item 6. \textbf{Geometric picture}
+
+Imagine:
+
+\begin{itemize}
+
+\item $A$ is a thick region inside $X$
+\item $U$ is a smaller piece deep inside $A$
+\end{itemize}
+
+Excision says:
+
+\> we can carve out $U$ completely, and the relative homology stays the same.
+
+So the interior of $A$ becomes irrelevant.
+
+Only the \textbf{interface between $X$ and $A$} carries homological information.
+
+---
+
+\item 7. \textbf{Why excision is surprising}
+
+Ordinary homology \textbf{does not allow this}.
+
+If you remove a subset from a space, its homology usually changes.
+
+But relative homology is built so that:
+
+\begin{enumerate}
+
+\item chains in $A$ are ignored
+\item therefore parts deep inside $A$ do not matter
+\end{enumerate}
+
+This special feature is exactly what excision formalizes.
+
+---
+
+\item 8. \textbf{Key idea behind the proof $intuition$}
+
+The proof relies on \textbf{subdividing singular simplices}.
+
+After enough subdivision:
+
+* every simplex lies either inside $X-U$ or inside $A$
+
+So chains can be replaced by equivalent chains that avoid $U$.
+
+Thus removing $U$ does not change the homology.
+
+---
+
+\item 9. \textbf{Key takeaway}
+
+The excision theorem says:
+
+\> If a subset lies entirely inside $A$, we can remove it from both $X$ and $A$ without changing the relative homology.
+
+This allows complicated spaces to be \textbf{simplified locally}, which is why excision is one of the most powerful tools in algebraic topology.
+
+\end{description}
+
+---
+
+If you'd like, I can also show:
+
+\begin{itemize}
+\item \textbf{How excision leads to the computation of sphere homology}
+\item \textbf{Why $H_n(D^n,S^{n-1})=\mathbb{Z}$}
+\item \textbf{How excision works inside the proof of Mayer–Vietoris}
+\item \textbf{A geometric picture of excision using chains and simplices}
+\end{itemize}
+
+These are usually the next big steps in mastering relative homology.
+
 \end{description}
 
 

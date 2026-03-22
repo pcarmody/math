@@ -1,0 +1,184 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 11: The Covariant surface Derivative }
+\newcommand{\DUEDATE}{March 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{description}
+
+\section*{Section 11.3}
+\item \textbf{Exercise 229} Show the tensor property of the surface covariant derivative.
+\item \textbf{Exercise 230} Show the sum and product rules of the surface covariant derivative.
+\item \textbf{Exercise 231} Show the metrinilic property of the surface covariant derivative.
+\item \textbf{Exercise 232} Show commutativity with contracton of the surface covariant derivative.
+\section*{Section 11.4}
+\item \textbf{Exercise 233} Show that surface Laplacian on the surface of a sphere (10.92)-(10.94) is give by 
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F = \frac{1}{R^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{R^2\sin^2\theta}\SPART{F}{\phi}
+\end{align*}
+
+The Surface Laplacian of an invarient tensor F is:
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F &= \frac{1}{\sqrt{S}}\PART{}{S^\alpha}\PAREN{\sqrt{S}\,S^{\alpha\beta}\PART{F}{S^\beta}}.
+\end{align*}The covariant surface metric tensor and $S$ are defined as 
+\begin{align*}
+	S^{\alpha\beta} &= \SQTWOXTWO{R^{-2}}{0}{0}{R^{-2}\sin^{-2}\theta} & (10.97) \\
+	\sqrt{S} &= R^2\sin\theta & (10.98)
+\end{align*}
+
+\BLUE{\begin{align*}
+	\nabla_\alpha\nabla^\alpha F &= \frac{1}{\sqrt{S}}\PART{}{S^\alpha}\PAREN{\sqrt{S}\,S^{\alpha\beta}\PART{F}{S^\beta}}\\
+	&= \sum_\alpha \frac{1}{R^2\sin\theta}\PART{}{S^\alpha}\PAREN{R^2\sin\theta\,\sum_\beta S^{\alpha\beta}\PART{F}{S^\beta}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{R^2\sin\theta\,S^{11}\PART{F}{S^1}}+\PART{}{S^2}\PAREN{R^2\sin\theta\, S^{22}\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{R^2\sin\theta\,R^{-2}\PART{F}{S^1}}+\PART{}{S^2}\PAREN{R^2\sin\theta\, R^{-2}\sin^{-2}\theta\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{\sin\theta\PART{F}{S^1}}+\PART{}{S^2}\PAREN{(\sin\theta)^{-1}\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\PART{}{\phi}\PAREN{(\sin\theta)^{-1}\PART{F}{\phi}}} \\
+	&= \frac{1}{R^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{R^2\sin^2\theta}\SPART{F}{\phi} \\
+\end{align*}
+}
+
+\item \textbf{Exercise 234} Show that surface Laplacian on the surface of a cyliner (10-101)-(10.103) is given by
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F = \frac{1}{R^2}\SPART{F}{\theta}+\SPART{F}{z}
+\end{align*}
+\item \textbf{Exercise 235} Show that surface Laplacian on the surface of a torus (10.107)-(10.109) is given by
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F = \frac{1}{(R^2+r\cos\theta)^2}\PART{}{z}\PAREN{\frac{r(z)}{\sqrt{1+r'(z)^2}}\PART{F}{z}}+\frac{1}{r(z)^2}\SPART{F}{\theta}
+\end{align*}
+\item \textbf{Exercise 236}  Show that surface Laplacia on the surface of revolution (10.115)-(10-117) is give by 
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F = \frac{1}{r(z)\sqrt{1+r'(z)^2}}\PART{}{z}\PAREN{\frac{r(z)}{\sqrt{1+r'(z)^2}}+\frac{1}{r(z)^2}\SPART{F}{\theta}}
+\end{align*}
+\section*{Section 11.8}
+\item \textbf{Exercise 238} Justify equations (11.36)-(11.39).\begin{align*}
+	\nabla_\gamma\textbf{Z}_i, \nabla_\gamma\textbf{Z}^i &= 0 &  (11.36)\\
+	\nabla_\gamma Z_{ij}, \nabla_\gamma Z^{ij} &=0 & (11.37) \\
+	\nabla_\gamma\varepsilon_{ijk}, \nabla_\gamma\varepsilon^{ijk} &= 0 & (11.38)\\
+	\nabla_\gamma\delta_j^i, \nabla_\gamma\delta_{rs}^{ij}, \nabla_\gamma\delta_{rst}^{ijk} &= 0 & (11.39) 
+\end{align*}
+\BLUE{Recall that \begin{align*}
+	\nabla_\gamma T_j^i &= Z_\gamma^k\nabla_kT_j^i & (11.35)
+\end{align*}
+\begin{description}
+	\item (11.36)
+	\begin{align*}
+	\nabla_\gamma\textbf{Z}_i &= Z_\gamma^k \nabla_k \textbf{Z}_i & 
+		&& \nabla_\gamma\textbf{Z}^i &= Z_\gamma^k \nabla_k  \textbf{Z}^i \\
+	&= \PART{Z^i}{S^\gamma} \PAREN{\PART{\textbf{Z}_i}{Z^k} - \Gamma^m_{ik}\textbf{Z}_m} &
+		&&  &= \PART{Z^k}{S^\gamma} \PAREN{\PART{\textbf{Z}^i}{Z^k} + \Gamma^i_{km}\textbf{Z}^m}\\
+	&= \PART{Z^i}{S^\gamma} \PAREN{\PART{\textbf{Z}_i}{Z^k} - \textbf{Z}^m\cdot\PART{\textbf{Z}_i}{Z^k}\textbf{Z}_m} &
+		&&  &= \PART{Z^k}{S^\gamma} \PAREN{\PART{\textbf{Z}^i}{Z^k} + \textbf{Z}^i\cdot\PART{\textbf{Z}_k}{Z^m}\textbf{Z}^m}\\ 
+	&=  \PART{\textbf{Z}_i}{S^\gamma} - \PART{Z^i}{S^\gamma} \textbf{Z}^m\cdot\PART{\textbf{Z}_i}{Z^k}\textbf{Z}_m &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\textbf{Z}^i\cdot\PART{\textbf{Z}_m}{Z^k}\textbf{Z}^m\\ 
+	&=  \PART{\textbf{Z}_i}{S^\gamma} - \PART{Z^i}{S^\gamma} \PART{\textbf{Z}_i}{Z^k}\textbf{Z}^m\cdot\textbf{Z}_m &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\PART{\textbf{Z}_m}{Z^k}\textbf{Z}^i\cdot\textbf{Z}^m\\
+	&=  \PART{\textbf{Z}_i}{S^\gamma} -  \PART{\textbf{Z}_i}{S^\gamma} &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\PART{\textbf{Z}_i}{Z^k}\\
+	&=0 &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{\textbf{Z}_i}{S^\gamma} \\ & & && &= 0
+	\end{align*}
+	\item (11.37)
+	\begin{align*}
+		\nabla_\gamma Z_{ij} &= \nabla_\gamma \PAREN{\textbf{Z}_i \cdot \textbf{Z}_j} & && \nabla_\gamma Z^{ij} &= \nabla_\gamma \PAREN{\textbf{Z}^i \cdot \textbf{Z}^j} \\
+		&= \nabla_\gamma \textbf{Z}_i \cdot \textbf{Z}_j + \textbf{Z}_i \cdot \nabla_\gamma \textbf{Z}_j & && &= \nabla_\gamma \textbf{Z}^i \cdot \textbf{Z}^j + \textbf{Z}^i \cdot \nabla_\gamma \textbf{Z}^j \\
+		&= 0 & && &= 0
+	\end{align*}
+	\item (11.38)
+	\begin{align*}
+		\nabla_\gamma\varepsilon_{ijk} &= Z_\gamma^l \nabla_l \varepsilon_{ijk} &
+		&& \nabla_\gamma\varepsilon^{ijk} &= Z_\gamma^l \nabla_l \varepsilon^{ijk} & && \\
+		&= 0 & && &= 0
+	\end{align*}
+\end{description}
+}
+
+\section*{Section 11.9}
+\item \textbf{Exercise 239} Derive (11.44) from (10.41)
+\item \textbf{Exercise 240} Confirm equation (11.51) by substituting an explicit expression for $N_k$.
+\section*{Section 11.10} 
+\item \textbf{Exercise 241} Derive equation (11.61). Hint: Transofrm the surface Laplacian $\nabla_\alpha^\alpha u$ by the chain rule (11.35) starting with the innermost covariant derivative $\nabla^\alpha$.
+\item \textbf{Exercise 242} Show that 
+\begin{align*}
+	\SPART{}{n} &= N^iN^j\nabla_i\nabla_j
+\end{align*}
+	
+	\BLUE{\begin{align*}
+			\PART{u}{n} &= N^i\nabla_i u \\
+			\LET v &= \PART{u}{n}\\
+			\PART{v}{n} &= N^j\nabla_j v \\
+				&= N^j \nabla_j (N^i\nabla_i u) \\
+				&= N^jN^i \nabla_j\nabla_i u
+		\end{align*}	
+	}\end{description}
+\end{document}

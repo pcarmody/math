@@ -1,0 +1,399 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Presentation \#3 }
+\newcommand{\DUEDATE}{March 18, 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\TEAL}[1]{\textcolor{teal}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{\large{Exercises}}
+Chapter 8: 119
+Chapter 9: 162, 168, 191
+Chapter 10: 213, 215, 218
+Chapter 11: 233, 238, 242
+
+\HLINE
+\textbf{Chapter 8}
+
+\textbf{119} Derive equation (8.13).
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \PAREN{\PART{V^i}{Z^j}+\COFF{i}{j}{m}V^m}\VK{Z}_i.
+\end{align*}
+
+\BLUE{\begin{align*}
+	\VK{V} &= (V^1(\VK{Z}), V^2(\VK{Z}), \dots, V^n(\VK{Z})) = V^i\VK{Z}_i  \\
+	\PART{\VK{V}}{Z^j} &= \sum_i \PART{V^i}{Z^j}\VK{Z}_i + V^i \PART{\VK{Z}_i}{Z^j} 
+\end{align*}Remember that 
+\begin{align*}
+	\PART{\VK{Z}_i}{Z^j} &= \COFF{k}{i}{j}\VK{Z}_k
+\end{align*}then
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \sum_i \PAREN{ \PART{V^i}{Z^j}\VK{Z}_i + \sum_k V^i \COFF{k}{i}{j}\VK{Z}_k } \\
+	&= \sum_i\PART{V^i}{Z^j}\VK{Z}_i + \sum_m V^m \COFF{i}{m}{j}\VK{Z}_i 
+\end{align*}since the second term sums over all $\VK{k}$ we can rearrange these to sum over $\VK{Z}_i$.  That is, change the indices $i\to m$ and $k \to i$ as in 
+\begin{align*}
+	\PART{\VK{V}}{Z^j} &= \sum_i\PART{V^i}{Z^j}\VK{Z}_i + \sum_m V^m \COFF{i}{m}{j}\VK{Z}_i \\
+	&= \PAREN{\PART{V^i}{Z^j} + V^m \COFF{i}{m}{j}}\VK{Z}_i 
+\end{align*}The last expression translated to Einstein Contraction in both $i$ and $m$.
+}
+
+\HLINE
+\textbf{Chapter 9}
+
+ \textbf{Exercise 162} Evaluate the contraction $e^{ijk}e_{ijk}$.
+
+\BLUE{\begin{align*}
+	e^{ijk}e_{ijk} &= \sum_i\sum_j\sum_k e^{ijk}e_{ijk} 
+\end{align*}Observe when $i=1$ we have 
+\begin{align*}
+	e^{1jk}e_{1jk} =& e^{111}e_{111}+e^{112}e_{112} + e^{113}e_{113} + \\
+	&\text{ }e^{121}e_{121}+e^{122}e_{122} + e^{i23}e_{123} +\\
+	& e^{131}e_{131}+e^{132}e_{132} + e^{i33}e_{133} \\
+	=& 0+0 + 0 + \\
+	& 0+0 + e^{123}e_{123} +\\
+	& 0+e^{132}e_{132} + 0
+\end{align*}The zeros occur whenever indices appear twice.  Then,
+\begin{align*}
+	e^{ijk}e_{ijk} = e^{123}e_{123} + e^{132}e_{132} &= 1 + (-1)(-1) = 2\end{align*}This is true for $i=2$ and $i=3$.  Thus, $e^{ijk}e_{ijk} = 6$
+}
+
+\textbf{Exercise 168} Justify equation (9.20)
+
+\begin{align*}
+	\delta_{rst}^{ijk} &= \left |\begin{array}{ccc}
+		\delta_r^i & \delta_r^j & \delta_r^k \\
+		\delta_s^i & \delta_s^j & \delta_s^k \\
+		\delta_t^i & \delta_t^j & \delta_t^k \\
+	\end{array} \right | & (9.20)
+\end{align*}
+
+
+\BLUE{This is only non-zero when $ijk$ and $rst$ are each permutations of $1, 2,3$.  Which gives us $2 * 3!$ possible combinations.  Half of these will have the same sign or permutation and the other will have opposite sign.\\
+Construct the $3 \time 3$ matrix and it will become clear that there can only be one entry in each row and column.  Thus, when $a_{11}=1$ then there are two options: 1) is that $a_{22}=1$ which implies that both permutations are the same and the detrminant is 1  or 2) is that $a_{23}=1$ which indicates that the permuatations are not the same and the determinant is -1.\\
+Thus, when $a_{12}=1$ we start by multiplying by -1 and, once again we have two choices that put the permutations together or opposite.\\
+Similarly, when $a_{13}=1$.
+}
+
+\textbf{Exercise 191} Show that the result of contraction for a relative tensor of weight $M$ is also a relative tensor of weight $M$.
+
+\BLUE{\begin{align*}
+	\CONJ{T}	_a^n &= J^MT_m^bJ_b^aJ_n^m
+\end{align*}A contraction would be $a=n$ or
+\begin{align*}
+	\CONJ{T}	_a^a &= J^MT_m^bJ_b^aJ_a^m = J^MT_m^bJ_b^m
+\end{align*}
+}
+
+\HLINE
+
+\textbf{Chapter 10}
+
+\textbf{Exercise 213} Explain why it is not possible that $Z_\alpha^i Z_j^\alpha = \delta_j^i$.
+
+\BLUE{First of all $Z_\alpha^i$ is a $3\times 2$ matrix and $Z_j^\alpha$ is a $2\times 3$ matrix, thus $Z_\alpha^i Z_j^\alpha$ is a $2 \times 2$ matrix when $\delta_j^i$ must be a $3 \times 3$ matrix.
+}
+
+\textbf{Exercise 215} Show that $(\textbf{V}-\textbf{P})\cdot\textbf{N}$, where $\textbf{P}$ is defined by equation (10.42), is zero.
+\begin{align*}
+	\textbf{P} &= \PAREN{\textbf{V}\cdot\textbf{N}}\textbf{N} & (10.42)
+\end{align*}
+
+\textbf{Exercise 218} Denote the tensor $N^iN_j$ by $T_j^i$. Show that 
+\begin{align*}
+	T_j^iT_k^j=T_k^i,
+\end{align*}
+
+\BLUE{
+\begin{align*}
+		T_j^iT_k^j &= N^i(N_jN^j)N_k \\
+		&= N^i\|N\|N_k \\
+		&= N^iN_k
+\end{align*}
+}
+
+\HLINE
+
+\textbf{Chapter 11}
+
+\textbf{Exercise 233} Show that surface Laplacian on the surface of a sphere (10.92)-(10.94) is give by 
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F = \frac{1}{R^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{R^2\sin^2\theta}\SPART{F}{\phi}
+\end{align*}
+
+The Surface Laplacian of an invarient tensor F is:
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F &= \frac{1}{\sqrt{S}}\PART{}{S^\alpha}\PAREN{\sqrt{S}\,S^{\alpha\beta}\PART{F}{S^\beta}}.
+\end{align*}The covariant surface metric tensor and $S$ are defined as 
+\begin{align*}
+	S^{\alpha\beta} &= \SQTWOXTWO{R^{-2}}{0}{0}{R^{-2}\sin^{-2}\theta} & (10.97) \\
+	\sqrt{S} &= R^2\sin\theta & (10.98)
+\end{align*}
+
+\BLUE{\begin{align*}
+	\nabla_\alpha\nabla^\alpha F &= \frac{1}{\sqrt{S}}\PART{}{S^\alpha}\PAREN{\sqrt{S}\,S^{\alpha\beta}\PART{F}{S^\beta}}\\
+	&= \sum_\alpha \frac{1}{R^2\sin\theta}\PART{}{S^\alpha}\PAREN{R^2\sin\theta\,\sum_\beta S^{\alpha\beta}\PART{F}{S^\beta}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{R^2\sin\theta\,S^{11}\PART{F}{S^1}}+\PART{}{S^2}\PAREN{R^2\sin\theta\, S^{22}\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{R^2\sin\theta\,R^{-2}\PART{F}{S^1}}+\PART{}{S^2}\PAREN{R^2\sin\theta\, R^{-2}\sin^{-2}\theta\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{\sin\theta\PART{F}{S^1}}+\PART{}{S^2}\PAREN{(\sin\theta)^{-1}\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\PART{}{\phi}\PAREN{(\sin\theta)^{-1}\PART{F}{\phi}}} \\
+	&= \frac{1}{R^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{R^2\sin^2\theta}\SPART{F}{\phi} \\
+\end{align*}
+}
+
+\textbf{Exercise 238} Justify equations (11.36)-(11.39).\begin{align*}
+	\nabla_\gamma\textbf{Z}_i, \nabla_\gamma\textbf{Z}^i &= 0 &  (11.36)\\
+	\nabla_\gamma Z_{ij}, \nabla_\gamma Z^{ij} &=0 & (11.37) \\
+	\nabla_\gamma\varepsilon_{ijk}, \nabla_\gamma\varepsilon^{ijk} &= 0 & (11.38)\\
+	\nabla_\gamma\delta_j^i, \nabla_\gamma\delta_{rs}^{ij}, \nabla_\gamma\delta_{rst}^{ijk} &= 0 & (11.39) 
+\end{align*}
+\BLUE{Recall that \begin{align*}
+	\nabla_\gamma T_j^i &= Z_\gamma^k\nabla_kT_j^i & (11.35)
+\end{align*}
+\begin{description}
+	\item (11.36)
+	\begin{align*}
+	\nabla_\gamma\textbf{Z}_i &= Z_\gamma^k \nabla_k \textbf{Z}_i & 
+		&& \nabla_\gamma\textbf{Z}^i &= Z_\gamma^k \nabla_k  \textbf{Z}^i \\
+	&= \PART{Z^i}{S^\gamma} \PAREN{\PART{\textbf{Z}_i}{Z^k} - \Gamma^m_{ik}\textbf{Z}_m} &
+		&&  &= \PART{Z^k}{S^\gamma} \PAREN{\PART{\textbf{Z}^i}{Z^k} + \Gamma^i_{km}\textbf{Z}^m}\\
+	&= \PART{Z^i}{S^\gamma} \PAREN{\PART{\textbf{Z}_i}{Z^k} - \textbf{Z}^m\cdot\PART{\textbf{Z}_i}{Z^k}\textbf{Z}_m} &
+		&&  &= \PART{Z^k}{S^\gamma} \PAREN{\PART{\textbf{Z}^i}{Z^k} + \textbf{Z}^i\cdot\PART{\textbf{Z}_k}{Z^m}\textbf{Z}^m}\\ 
+	&=  \PART{\textbf{Z}_i}{S^\gamma} - \PART{Z^i}{S^\gamma} \textbf{Z}^m\cdot\PART{\textbf{Z}_i}{Z^k}\textbf{Z}_m &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\textbf{Z}^i\cdot\PART{\textbf{Z}_m}{Z^k}\textbf{Z}^m\\ 
+	&=  \PART{\textbf{Z}_i}{S^\gamma} - \PART{Z^i}{S^\gamma} \PART{\textbf{Z}_i}{Z^k}\textbf{Z}^m\cdot\textbf{Z}_m &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\PART{\textbf{Z}_m}{Z^k}\textbf{Z}^i\cdot\textbf{Z}^m\\
+	&=  \PART{\textbf{Z}_i}{S^\gamma} -  \PART{\textbf{Z}_i}{S^\gamma} &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\PART{\textbf{Z}_i}{Z^k}\\
+	&=0 &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{\textbf{Z}_i}{S^\gamma} \\ & & && &= 0
+	\end{align*}
+	\item (11.37)
+	\begin{align*}
+		\nabla_\gamma Z_{ij} &= \nabla_\gamma \PAREN{\textbf{Z}_i \cdot \textbf{Z}_j} & && \nabla_\gamma Z^{ij} &= \nabla_\gamma \PAREN{\textbf{Z}^i \cdot \textbf{Z}^j} \\
+		&= \nabla_\gamma \textbf{Z}_i \cdot \textbf{Z}_j + \textbf{Z}_i \cdot \nabla_\gamma \textbf{Z}_j & && &= \nabla_\gamma \textbf{Z}^i \cdot \textbf{Z}^j + \textbf{Z}^i \cdot \nabla_\gamma \textbf{Z}^j \\
+		&= 0 & && &= 0
+	\end{align*}
+	\item (11.38)
+	\begin{align*}
+		\nabla_\gamma\varepsilon_{ijk} &= Z_\gamma^l \nabla_l \varepsilon_{ijk} &
+		&& \nabla_\gamma\varepsilon^{ijk} &= Z_\gamma^l \nabla_l \varepsilon^{ijk} & && \\
+		&= 0 & && &= 0
+	\end{align*}
+\end{description}
+}
+
+\textbf{Exercise 242} Show that 
+\begin{align*}
+	\SPART{}{n} &= N^iN^j\nabla_i\nabla_j
+\end{align*}
+	
+	\BLUE{\begin{align*}
+			\PART{u}{n} &= N^i\nabla_i u \\
+			\LET v &= \PART{u}{n}\\
+			\PART{v}{n} &= N^j\nabla_j v \\
+				&= N^j \nabla_j (N^i\nabla_i u) \\
+				&= N^jN^i \nabla_j\nabla_i u
+		\end{align*}	
+	}
+
+\HLINE
+\textbf{ChatGPT's response to this question using a varying $n$}
+
+Now let (n) be the \DEFINE{unit normal field} to a smooth surface $\Sigma$, and let (u) be a smooth scalar function defined in a neighborhood of $\Sigma$.
+
+We again start from
+\begin{align*}
+\frac{\partial^2 u}{\partial n^2} = N^j \nabla_j (N^i \nabla_i u) = N^j (\nabla_j N^i)\nabla_i u + N^i N^j \nabla_i \nabla_j u.
+\end{align*}
+
+The key point is: \DEFINE{for a unit normal field, $\nabla_j N^i \neq 0$} in general, and this is exactly where curvature enters.
+
+---
+\begin{description}
+\item \textbf{ 1. Geometry of $\nabla N$}
+
+Since $n$ is a \DEFINE{unit vector field}, we have
+\begin{align*}
+N^i N_i = 1.
+\end{align*}
+Differentiating,
+\begin{align*}
+\nabla_j (N^i N_i) = 2 N_i \nabla_j N^i = 0,
+\end{align*}
+so
+\begin{align*}
+N_i \nabla_j N^i = 0.
+\end{align*}
+
+This shows:
+\begin{align*}
+\nabla_j N^i \ \text{is tangent to the surface.}
+\end{align*}
+
+Thus $\nabla_j N^i$ encodes how the normal rotates \DEFINE{within the tangent bundle}—this is exactly the \DEFINE{second fundamental form / shape operator}.
+
+---
+
+\item \textbf{ 2. Decomposition using the shape operator}
+
+Define the \DEFINE{shape operator} (Weingarten map):
+\begin{align*}
+S(X)^i = -(\nabla_X N)^i.
+\end{align*}
+
+In coordinates:
+\begin{align*}
+\nabla_j N^i = - S_j^{\ i},
+\end{align*}
+where $S_j^{\ i}$ acts tangentially.
+
+Thus the first term becomes:
+\begin{align*}
+N^j (\nabla_j N^i)\nabla_i u
+= - N^j S_j^{\ i} \nabla_i u.
+\end{align*}
+
+---
+
+\item \textbf{ 3. Final formula}
+
+So the second normal derivative becomes:
+\begin{align*}
+\boxed{
+\frac{\partial^2 u}{\partial n^2}
+= N^i N^j \nabla_i \nabla_j u - N^j S_j^{\ i} \nabla_i u
+}
+\end{align*}
+
+---
+
+\item \textbf{ 4. Interpretation of the curvature term}
+
+\begin{itemize}
+\item $N^i N^j \nabla_i \nabla_j u$: “pure” second derivative in the normal direction
+\item $- N^j S_j^{\ i} \nabla_i u$: \DEFINE{curvature correction}
+\end{itemize}
+
+This extra term appears because:
+
+\begin{itemize}
+\item  the normal direction \DEFINE{changes as you move}, and
+\item  the second derivative picks up that variation.
+\end{itemize}
+
+---
+
+\item \textbf{ 5. Important special case (geometric insight)}
+
+If you extend $n$ \DEFINE{along normal geodesics} (i.e., choose coordinates so that)
+\begin{align*}
+\nabla_n n = 0,
+\end{align*}
+then
+\begin{align*}
+N^j \nabla_j N^i = 0,
+\end{align*}
+and the curvature term vanishes \DEFINE{at the surface}.
+
+This is why in many PDE/geometry arguments one can locally write:
+\begin{align*}
+\frac{\partial^2 u}{\partial n^2}
+= N^i N^j \nabla_i \nabla_j u
+\quad \text{(at the surface, in normal coordinates)}.
+\end{align*}
+
+---
+
+\item \textbf{ 6. Connection to classical differential geometry}
+
+The tensor
+\begin{align*}
+h_{ij} = \langle \nabla_i N, e_j \rangle
+\end{align*}
+is the \DEFINE{second fundamental form}, and its trace gives \DEFINE{mean curvature}.
+
+So the correction term is literally:
+
+\DEFINE{ “how the bending of the surface interacts with the gradient of $u$.”}
+
+---
+\end{description}
+
+If you want, I can push this further and derive the decomposition of the Laplacian
+\begin{align*}
+\Delta u = \frac{\partial^2 u}{\partial n^2} + H \frac{\partial u}{\partial n} + \Delta_\Sigma u,
+\end{align*}
+where the mean curvature $H$ shows up explicitly.
+
+
+\end{document}

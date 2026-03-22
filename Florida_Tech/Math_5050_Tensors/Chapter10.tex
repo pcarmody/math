@@ -1,0 +1,154 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 10: Tensors on Surfaces }
+\newcommand{\DUEDATE}{March 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\noindent\textbf{Exercises: 10.1}
+\begin{description}
+
+\item \textbf{Exercise 213} Explain why it is not possible that $Z_\alpha^i Z_j^\alpha = \delta_j^i$.
+
+\BLUE{First of all $Z_\alpha^i$ is a $3\times 2$ matrix and $Z_j^\alpha$ is a $2\times 3$ matrix, thus $Z_\alpha^i Z_j^\alpha$ is a $2 \times 2$ matrix when $\delta_j^i$ must be a $3 \times 3$ matrix.
+}
+
+\item \textbf{Exercise 214} Derive equation (10.15) from equation (10.14).
+
+\section*{Section 10.6}
+\item \textbf{Exercise 215} Show that $(\textbf{V}-\textbf{P})\cdot\textbf{N}$, where $\textbf{P}$ is defined by equation (10.42), is zero.
+\begin{align*}
+	\textbf{P} &= \PAREN{\textbf{V}\cdot\textbf{N}}\textbf{N} & (10.42)
+\end{align*}
+
+\BLUE{\begin{align*}
+	(\textbf{V}-\textbf{P})\cdot\textbf{N} &= \PAREN{\textbf{V}-\PAREN{\textbf{V}\cdot\textbf{N}}\textbf{N}}\cdot\textbf{N} \\
+	&= \textbf{V}\cdot\textbf{N} - (\textbf{V}\cdot\textbf{N})\textbf{N}\cdot\textbf{N} \\
+	&= \textbf{V}\cdot\textbf{N}(1-\|N\|) \\
+	&= 0
+\end{align*}
+}
+
+\item \textbf{Exercise 216} Denote the tensor $N^iN_j$ by $P_j^i$.  Show that 
+\begin{align*}
+	P_j^i P_k^j &= P_k^i.
+\end{align*}
+\item \textbf{Exercise 217} To show $\textbf{V}-\textbf{T}$ that is orthogonal to the tangent plane, show that $(\textbf{V}-\textbf{T})\cdot \textbf{S}^\beta = 0$.
+\item \textbf{Exercise 218} Denote the tensor $N^iN_j$ by $T_j^i$. Show that 
+\begin{align*}
+	T_j^iT_k^j=T_k^i,
+\end{align*}
+
+\BLUE{
+\begin{align*}
+		T_j^iT_k^j &= N^i(N_jN^j)N_k \\
+		&= N^i\|N\|N_k \\
+		&= N^iN_k
+\end{align*}
+}
+
+\item\textbf{Exercise 219} Derive equation (10.41) from equation (10.55)
+\item \textbf{Exercise 220} Show that the two terms in equation (10.74) are equal, thus
+\begin{align*}
+	N^iN_r &= \frac{1}{2}\delta_{rst}^{ijk}T_j^sT_k^i
+\end{align*}According to equation (9.20), we find 
+\begin{align*}
+N^iN_r = \frac{1}{2}\PAREN{\delta_r^iT_j^jT_k^k-\delta_r^jT_j^iT_k^k+\delta_r^jT_j^kT_k^i-\delta_r^kT_j^jT_k^i+\delta_r^kT_j^iT_k^j-\delta_r^iT_j^kT_k^j}
+\end{align*}which yields the following $\dots$.
+\item \textbf{Exercise 221} Derive Equation (10.81) from the definition (10.80).
+\item \textbf{Exercise 222} Derive Equaion (10.82).
+\item \textbf{Exercise 223} Show that when the ambient space is referred to affine coordinates, the relationship between the surface and the ambient Christoffel symbols simplies to 
+\begin{align*}
+	\Gamma_{\beta\gamma}^\alpha = Z_i^\alpha\frac{\partial Z_\beta^i}{\partial S^\gamma}.
+\end{align*}
+\section*{Section 10.11}
+\item \textbf{Exercise 224} Derive the objects given in this section.
+\item \textbf{Exercise 225} Rederive the objects on the sphere by referring the ambient space to sperical coordinates $r_1, \theta_1, \phi_1$ in which the sphere is give by 
+\begin{align*}
+	r_1(\theta,\phi) &= R\\
+	\theta_1(\theta, \phi) &= \theta \\
+	\phi_1(\theta,\phi_) &= \phi
+\end{align*}
+\item \textbf{Exercise 226} Show that when the curve is referred to the arc length $s$, the above expression simplifies to the following
+\begin{align*}
+	N^i_, = \COLVECTOR{y'(x)\\x'(s)}; S_{\alpha\beta} =1 ; S^{\alpha\beta}=1; \sqrt{S}=1; \tilde{\Gamma} = 0
+\end{align*}
+\section*{Section 10.12}
+\item \textbf{Exercise 228} Show that the when the curve is referred to the arc length $s$, the above expression simplify to the following
+\begin{align*}
+	Z_\alpha^i &= \COLVECTOR{r'(s)\\\theta'(s)}; N^i = \COLVECTOR{r(s)\theta'(s)\\-r(s)^{-1}r'(s)};\\
+	S_{\alpha\beta}&=1; S^{\alpha\beta}=1\\
+	\sqrt{S} &= 1; \tilde{\Gamma} = 0
+\end{align*}
+\end{description}
+\end{document}

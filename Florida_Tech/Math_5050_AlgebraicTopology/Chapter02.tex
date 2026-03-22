@@ -30,7 +30,7 @@
 
 \newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Algebraic Topology}
 \newcommand{\STUDENTNAME}{Paul Carmody}
-\newcommand{\ASSIGNMENT}{Notes and Observations }
+\newcommand{\ASSIGNMENT}{Topological Notes and Observations }
 \newcommand{\DUEDATE}{January 2026}
 \newcommand{\PROFESSOR}{Professor Shibo Liu}
 \newcommand{\SEMESTER}{Spring 2026}
@@ -54,13 +54,8 @@
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
-
-\newcommand{\SUPP}{\operatorname{supp}}
-\newcommand{\CLOSURE}{\operatorname{closure of}}
-\newcommand{\BD}{\operatorname{bd}}
-\newcommand{\HHN}{\mathcal{H}^n}
-\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
-\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\TEAL}[1]{\textcolor{teal}{#1}}
+\newcommand{\FUNDG}[1]{\pi_1(#1)}
 \newcommand{\OPEN}[1]{\overset{\circ}{#1}}
 
 \newtheorem{innercustomthm}{Lemma}
@@ -78,6 +73,24 @@
 \begin{center}
 \textbf{\Large{Chapter 2: The Fundamental Group}}
 \end{center}
+
+\HLINE 
+\noindent\textbf{Notes:}
+
+\begin{description}
+	\item \textbf{Homotopy Lifting Principle}
+	
+	Let $p(y_0) = x_0$ and $H:X \subset B \times [0,1] \to B$ be a homotopy in $B$.  Then there exists $\tilde{H}: X \times [0,1] \to E$ a homotopy in the covering space $E$ such that if $p\circ \tilde{H}(x,0) = p(y_0)=x_0$ then $p\circ \tilde{H} = H$.
+	
+\[\begin{tikzcd}
+	& p \circ \tilde{H} 
+		\arrow[dd, bend left=65] \\
+	& E \arrow[d, "p",]\\
+	X 	\arrow[uur, bend left=65, {name=compose}] 
+		\arrow[ru] {} {\tilde{H}(x,t)} \arrow[r] {} {H(x,t)} & 
+	B
+\end{tikzcd}\]
+\end{description}
 
 \HLINE
 
@@ -119,15 +132,83 @@
 
 \item Prove Lemma 2.1.3
 
+\textbf{Notes:}  This lemma describes a mapping and its negative $\varphi, \tilde{\varphi}$ out and back between $x_0, x_1$.  Then $f$ is a loop anchored at $x_1$ and we define $g$ as a loop $\varphi \to f \to \tilde{\varphi}$.  Also, that $g$ is the composition of the loop $f$ with an isomorphism $\Phi$ between $\pi_1(X, x_0)$ and $\pi_1(X, x_1)$.  In the end, $g$ is a loop that can be anchored at either $x_0$ or $x_1$.  \textbf{WTS} that $\Phi(f_1f_2)=\Phi(f_1)\Phi(f_2)$.
+
+\BLUE{Given $f \in \pi_1(X, x_1)$ then 
+\begin{align*}
+	\Phi(f) = g(x) &= \left \{ \begin{array}{ll}
+		\varphi(3t) & 0\le t \le \frac{1}{3} \\
+		f(3t-1) & \frac{1}{3} \le t \le \frac{2}{3}  \\
+	\tilde{\varphi}(3t-2) & \frac{2}{3} \le t \le 1		
+	\end{array}\right .
+\end{align*}Let $f_1,f_2 \in \FUNDG{X,x_1}$ and $g_1 = \Phi(f_1)$ and $g_2 = \Phi(f_2)$.  Then,
+\begin{align*}
+	f_1f_2 &= \BINDEF{f_1(2s) & 0\le s \le \frac{1}{2}}{
+	f_2(2s-1) & \frac{1}{2} \le s \le 1} \\
+	\Phi(f_1f_2) &= \left \{ \begin{array}{ll}
+		\varphi(3t) & 0\le t \le \frac{1}{3} \\ 
+		f1f2(3t-1) & \frac{1}{3} \le t \le \frac{2}{3} \\
+	\tilde{\varphi}(3t-2) & \frac{2}{3} \le t \le 1	\end{array}
+	\right . \\
+	&= \left \{ \begin{array}{ll}
+		\varphi(3t) & 0\le t \le \frac{1}{3} \\ 
+		\BINDEF{f_1(2s) & 0\le s \le \frac{1}{2}}{
+	f_2(2s-1) & \frac{1}{2} \le s \le 1} \\
+	\tilde{\varphi}(3t-2) & \frac{2}{3} \le t \le 1	\end{array}
+	\right . \\
+	g_1g_2 &= \BINDEF{g_1(2s) & 0\le s \le \frac{1}{2}}{
+	g_2(2s-1) & \frac{1}{2} \le s \le 1}
+\end{align*}
+}
+
+\RED{The real issue was finding a mapping $H: (X, x_0)\times I \to (X, X_0)$ which is the deformation retract that maps $\varphi \to \tilde{\varphi}$ and is, hence, a constant mapping.  Where $H(t, 0) = \varphi(t)$ and $H(t, 1) = \tilde{\varphi}(t)$
+\begin{align*}
+	H(t,s) &= \BINDEF{\varphi(2t(1-s)) & 0 \le t \le \frac{1}{2}}{\varphi((2-2t)(1-s)) & \frac{1}{2}\le t \le 1}
+\end{align*}With each value of $s$ is a loop from $x_0$ back to itself getting progressively smaller until $s=1$ then there is no loop.  This is called the \DEFINE{constant loop} or trivial mapping.\\
+For example, when $s=1/4$ we have 
+	\begin{align*}
+			H(t,1/4) &= \BINDEF{\varphi(\frac{6t}{4}) & 0 \le t \le \frac{1}{2}}{\varphi(\frac{6}{4}-\frac{6t}{4}) & \frac{1}{2}\le t \le 1}
+	\end{align*}We can see that the maximum value of $\frac{6t}{4}$ is $\frac{3}{4}$ for all of $t\in [0,1]$.  That is, as $t\to \frac{1}{2}$ the parameters for $\varphi$ reaches its maximum (regardless of the value of $s$) and returns back to $0$ as $t \to 1$.  And, when $s=1$ we get $H(t, 1) \equiv \varphi(0)$.
+}
+
 \item Prove Theorem 2.1.5
+
+\textbf{Theorem 2.1.5}.  Let $f: X \to Y$ with $f(x_0)=y_0$.  If $f$ is a \textit{homotopy equivalence}, then $f_*:\pi_1(X,x_0)\to \pi_1(Y, y_0)$ is an \textit{isomorphism}.
+
+\BLUE{$f$ is a homotopy equivalence means that there exists a $g:Y \to X$ where $g(y_0) = x_0$ such that $f\circ g = \mathbb{I}_Y$.  Recall that if $h \in \pi_1(X, x_0)$ then $f_*(h) = f\circ h$.  Need to show that $f_*$ is injective and surjective.\\
+\\
+$(g \circ f)_* = (\mathbb{I}_X)_*$ that is $\mathbb{I}_X \circ h = g\circ f\circ h = g\circ f_*(h) = g_*(f_*(h)) = (g_*\circ f_*)(h)$.  That is $(g \circ f)_* = g_*\circ f_*$ or the induced maps are inverses of each other.  
+}
 
 \item Give an example of a map $p:Y \to X$ satisfying the condition in lemma 2.2.2 which is \textit{not} a covering projection.
 
 \item Verify that the map in Example 2.2.3 are indeed covering projections.
 
+\BLUE{\begin{enumerate}[label=(\roman*)]
+	\item $X \times D$ is a covering space of $X$.\\
+	$p: X\times D \to X$ that is $p(x,d)=x$ where every open set $U \subset X$ is mapped to an open set, i.e., discrete point, $d \in D$.
+	\item $p:\R \to S^1 \equiv e^{2\pi it}$ \\ That is for $t \in \R$, $p(t)$ is a point on a circle.  However, $p{-1}(U)$ for an open set $U \in S^1$ (i.e., a portion of the circle) maps to a many open sets (infinitely many open sets) all surrounding the same fraction.  That is, $t = 4\frac{1}{3}$ then $p^{-1}(e^{2\pi i 4\frac{1}{3}}) = \{ \dots, \frac{1}{3}, 2\frac{1}{3}, 3\frac{1}{3}, \dots\}$ and the open sets $V_i$ surrounding each of these points.  Each $V_i$ is homeomorphic to ther others.
+	\item $p: S^1 \to S^1$, $p(z)=z^n$.\\
+		That is given a point $z$ on the circle $S^1$	, then $p(z) = z^n$ and any open set $U\subset S^1$ (a segment) around $z^n$ then $p^{-1}(U)$ will be open set in $S^1$ surrounding $z$.
+	\item $p:G \to H/G$
+	\item Hausdorff space.
+\end{enumerate}
+}
+
 \item Let $X$ be a simply connected space.  Fix $x_0, x_1$, two arbitrary points at $X$.  Let $f:I\to X$ with $f(0)=g(0)=x_0$ and $f(1)=g(1)=x_1$.  Show that $f$ and $g$ are homotopic rel $\{0,1\}$.
 
+\TEAL{This is one of those ``state the obvious to show that you know the rigor" kind of questions.  I've always found these annoying but, lately, I've learned the utility of such fundamental questions.  There really is a lesson to be learned in ``proving the obvious".  We learn to rely on the rigor more thoroughly.
+}
+
+\BLUE{WTS that there exists $F: X \times I \to Y$ such that $F(x, 0) = f$ and $F(x,1) = g$.  Define $F(x, t)$ is a smooth function on $x$ and $t$ such that $F(x,0)=x_0$ and $F(x,1) = x_1$.
+}
+
 \item Prove directly the following special case of van Kampen's theorem:  Let $X$ be the union $X = X_1\cup X_2$ of two open sets $X_1$ and $X_2$.  Suppose that $X_1, X_2$ and $A=X_1\cap X_2$ are all path-connected.  Suppose that each of $X_1$ and $X_2$ is simply connected.  Then $X$ is simply connected.
+
+\textbf{Notes:} Doesn't $X_1$ path-connected and $X_2$ path-connected implie $X_1 \cap X_2$ path-connected?  Perhaps that is just redundancy or clarity.  Given this info, show that if $X_1$ and $X_2$ are also simply connected, then $X = X_1\cup X_2$ must also be simply connected.  We need to find a single point where the Fundamental Group $(X, x_0)$ is trivial.
+
+\BLUE{Let $x_0 \in A$.  $A$ is path-connected means $A \ne \emptyset$ and that for any point $x_1$ there exists a continuous function $\varphi: I \to A$ such that $\varphi(0) = x_0$ and $\varphi(1) = x_1$.  Let $\phi: I \to A$ such that $\phi(0) = x_1$ and $\phi(1)=x_0$ and $\phi \ne \varphi^{-1}$.  Then $h=\varphi\phi \in S^1$.  As $x_1 \to x_0$ we can see that $h \to x_0$ for all possible $\varphi$ and $\phi$.  \textit{Note: perhaps a proof by contradiction might be in order.}
+}
 
 \item Prove parts (ii) and (iii) of Theorem 2.2.19.
 
@@ -140,6 +221,21 @@
 	\item Find all 4-fold covers of the two-leafed rose, up to equivalence.
 \end{enumerate}
 
+	\item Let $p$ be a prime.  Show that the free group $\ABRACKET{a,b}$ has exactly $p+1$ normal subgroups of index $p$.
+	
+	\item Find all 4-fold covers of the two-leafed rose, up to equivalence.
+	
+	\item Let $X$ be a path-connected space and let $f:(X,x_0)\to(X, x_0)$ be a map the mapping to $M_f$ is the identification space $X \times I/\sim$ where $(x,0)$ is identified to $(f(x),1)$.  Let $m_0$ be the image of the point$(x_0,0)$ in $M_f$.  Show that $\pi_1(M_f,m_0)=\pi_1(X,x_0) * \FUNDG{X^1}/tgt^{-1}=f_*(g)$, where $t$ is the generator $\pi_1(S^1)$.
+	
+	\item Let $G$ be a topological group (\textit{not} necessarily abelian) with identity element $e$.  Let $\alpha\in \pi_1(G, e)$ be represented by $f:(I,\{0,1\})\to (G,e)$ and let $\beta \in \pi_1(G,e)$ be represented by $g:(I,\{0,1\})\to(G,e)$.  Show that both $\alpha\beta$ and $\beta\alpha$ are represented by $h:(I,\{0,1\})\to (G,e)$ given by $h(t)f(t)g(t)$.  Note this implies that $\pi_1(G,e)$ is abelian, and also that $\alpha^{-1}$ is represented by $k:(I,\{0,1\})\to (G,e)$ given by $k(t0=(f(t))^{-1}$.
+	
+	\item Let $p(z)=a_nz^n+\cdots+a_0$ be a polynomial of degree $n>0$ with complex coefficients.  Let $q(z)$ be the polynomial $q(z)=z^n$.  For a positive real number $r$, let $p_r(z)=p(rz)/\|p(rz)\|$ and similarly for $q_r(z)$.  Show that, for $r$ sufficiently large, $p_r:S^1\to S^1$ and $q_r: S^1\to S^1$ are homotopic.
+	
+	\item Prove the Fundamental Theorem of Algebra: Every nonconstant complex polynomial has a complex root.
+	
+	\item Prove the claims in Example 2.6.1
+	
+	\item Prove the claims in Example 2.6.2.
 \end{enumerate}
 
 

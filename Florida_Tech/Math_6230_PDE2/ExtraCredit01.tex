@@ -1,0 +1,112 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 6230 -- Partial Differential Equations II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Extra Credit Assignment }
+\newcommand{\DUEDATE}{February 26, 2026}
+\newcommand{\PROFESSOR}{Professor Perrera}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+\newcommand{\CSPACE}{{C(\CONJ{U})}}
+\newcommand{\CNORM}[1]{|| #1 ||_\CSPACE}
+\newcommand{\CSEMINORM}[1]{[ #1 ]_\CSPACE}
+\newcommand{\CSUBSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HOLDERNORM}[4]{|| #4 ||_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\HSEMINORM}[4]{[ #4 ]_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\SSPACE}[3]{{W^{#1,#2}(#3)}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Show that if $u \in W^{1,1}(0,1)$, then $[u]_{C^{0,1}([0,1])} \le \| u \|_{W^{1,1}(0,1)}$.\\
+
+\noindent Remember that the H\"older Seminorm is
+	\begin{align*}
+		\HSEMINORM{0}{\gamma}{\CONJ{U}}{u} &= \sup_{x,y \in U,x\ne y}\frac{|u(x)-u(y)|}{|x-y|^\gamma} \\
+		&\text{or in our case}\\
+		\HSEMINORM{0}{1}{[0,1]}{u} &= \sup_{x,y \in [0,1],x\ne y}\frac{|u(x)-u(y)|}{|x-y|}
+	\end{align*}which is the supremum of the Lipschitz Constant.  Then we have that the Soboleve Norm is 	\begin{align*}
+		||u||_{\SSPACE{1}{p}{U}} &= \BINDEF{||u||^p_{L^p(U)} + \PAREN{\SUM{i=1}{n} ||u_{x_i}||^p_{L^p(U)}}^{1/p} & \text{if } 1\le p\le \infty \\}{||u||_{L^\infty(U)} + \SUM{i=1}{k} ||u_{x_i}||_{L^\infty(U)} & \text{if }p = \infty} \\
+		&\text{and in our case} \\
+		||u||_{\SSPACE{1}{1}{0,1}} &=||u||_{L(0,1)} + ||u_{x_i}||_{L(0,1)} \\
+		&= \int_0^1 |u| dx + \int_0^1 |u'| dx 
+	\end{align*}So, the question becomes
+	\begin{align*}
+		\frac{|u(x)-u(y)|}{|x-y|} &\overset{?}\le \int_0^1 |u| dx + \int_0^1 |u'| dx, \, \forall x,y \in [0,1], x \ne y \\
+		&\le u(c)(1-0) + u(1)-u(0)
+	\end{align*}for some $c \in [0,1]$ such that $u(x) \le u(c)$ for all $x \in [0,1]$.\\
+	
+	\textbf{I have a problem with this: } What if $u(x) = \sqrt{x}$?  Then
+	\begin{align*}
+		\frac{|u(x)-u(y)|}{|x-y|} &= \frac{|\sqrt{x}-\sqrt{y}|}{|x-y|} 
+	\end{align*}Without loss of generality, we can assume that $x > y$ and 
+	\begin{align*}
+		\frac{|\sqrt{x}-\sqrt{y}|}{|x-y|}  &= \frac{\sqrt{x}-\sqrt{y}}{(\sqrt{x}-\sqrt{y})(\sqrt{x}+\sqrt{y})} = \frac{1}{\sqrt{x}+\sqrt{y}} 
+	\end{align*}The supremum occurs as $x,y \to 0$ and goes to $\infty$ and since $u \in W^{1,1}(0,1)$ then $\|u\|_{W^{1,1}}(0,1) < \infty$. A counter example.
+
+\end{document}

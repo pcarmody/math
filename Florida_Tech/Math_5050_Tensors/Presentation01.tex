@@ -179,15 +179,49 @@ Now consider another simple expression $(\vec{A} +\vec{B})\cdot\vec{j}$\\
 \end{center}
 we can clearly see that $\vec{B}\cdot\vec{j} = 4$ and $\vec{A}\cdot\vec{j} = 2$ and $(\vec{A}+\vec{B})\cdot\vec{j} = 6$.\\
 
-This allows for any inner product of the form $(\vec{a}+\vec{B})\cdot(\vec{i}+\vec{j})$.  For the general case of $\alpha \vec{i}+\beta\vec{j}$ it is easy to see that $\alpha$ and $\beta$ also distribute due to the Distribution Law of Algebra.
+This allows for any inner product of the form $(\vec{A}+\vec{B})\cdot(\vec{i}+\vec{j})$.  For the general case of $\alpha \vec{i}+\beta\vec{j}$ it is easy to see that $\alpha$ and $\beta$ also distribute due to the Distribution Law of Algebra.
+
+\RED{Notes from Dr. B's feedback during presentation.  This is a more coordinate independent approach.}
+\begin{center}
+
+\begin{tikzpicture}
+
+	% Drase a vector horizontally for ease of presentation (it needn't be horizontal).
+    \draw[->, very thick, black] (0,0) -- (5,0) node[above right] {$\vec{C}$};
+
+    % 4. Draw a vector from the origin (0,0) to the point (3, 2)
+    % The "->" option creates an arrow head
+    \draw[->, very thick, blue] (0,0) -- (3,2) node[above right] {$\vec{A}$};
+
+    % 4a. Draw a vector from the origin (0,0) to the point (3, 2)
+    % The "->" option creates an arrow head
+    \draw[dashed, very thick, blue] (3,2) -- (3,0) node[above right] {$\vec{A}\cdot\vec{C}$};
+    
+    % 5. Draw a vector from the origin (0,0) to the point (3, 2)
+    % The "->" option creates an arrow head
+    \draw[->, very thick, red] (0,0) -- (1,4) node[above right] {$\vec{B}$};
+    
+    % 5a. Draw a vector from the origin (0,0) to the point (3, 2)
+    % The "->" option creates an arrow head
+    \draw[dashed, very thick, red] (1,4) -- (1,0) node[above right] {$\vec{B}\cdot \vec{C}$};
+    
+    % 6. Draw a vector from the origin (0,0) to the point (3, 2)
+    % The "->" option creates an arrow head
+    \draw[->, very thick, violet] (0,0) -- (4,6) node[above right] {$\vec{A}+\vec{B}$};
+    
+    % 6. Draw a vector from the origin (0,0) to the point (3, 2)
+    % The "->" option creates an arrow head
+    \draw[dashed, very thick, violet] (4,6) -- (4,0) node[right] {($\vec{A}+\vec{B})\cdot\vec{C}$};
+
+\end{tikzpicture}
+\end{center}
+  
 
 %section 2.6
 \item Evalute $d F/dl$ for $F(P) = $ ``Distance from $P$ to point $A$" in a direction perpendicular to $AP$.
 
 \BLUE{$F(P) = d(P, A)$.  Let $l$ be perpendicular to $AP$ at $P$.  For any $p \in l,\, F(P+p) \to F(P)$ as $p \to P$.  That is, $\partial F/\partial l = F(P)$.  Geometrically, consider a circle centered at $A$ and going through $P$.  The line $l \perp AP$ is a tangent line, thus $\partial F/\partial l$ is simply following along a circle of the same radius as $d(A,P)$.
 }
-
-
 \setcounter{enumi}{13}
 \item Give the geometric intuition behind equation (2.11). In other words, explain geometrically, why knowing the gradient is sufficient to determine the directional derivatives in all possible directions.
 

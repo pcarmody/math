@@ -1,0 +1,201 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 6230 -- Partial Differential Equations II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Notes for Exame \#1 }
+\newcommand{\DUEDATE}{January 2026}
+\newcommand{\PROFESSOR}{Professor Perrera}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{teal}{#1}}
+\newcommand{\VIOLET}[1]{\textcolor{violet}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\CSPACE}{{C(\CONJ{U})}}
+\newcommand{\CNORM}[1]{|| #1 ||_\CSPACE}
+\newcommand{\CSEMINORM}[1]{[ #1 ]_\CSPACE}
+\newcommand{\CSUBSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HOLDERNORM}[4]{|| #4 ||_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\HSEMINORM}[4]{[ #4 ]_{\HSPACE{#1}{#2}{#3}}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+
+\textbf{From Feynmann:} try to explain it to a twelve year old.
+\begin{definition}[Holder Space].
+	
+	Let $U \subset \R^n$ be an open set.  
+	
+	\begin{description}
+		\item \textbf{Space of Continuous Functions:} Let $\CSPACE$ denote the linear space of all continuous and bounded functions $u:U\to \R$.  For $u \in \CSPACE$, define 
+	\begin{align*}
+		\CNORM{u} &= \sup_{x\in U} |u(x)|
+	\end{align*}
+	
+	\item \textbf{H\"older Semi-Norm:} We say that $u:U\to \R$ is \DEFINE{H\"older continuous}, with \DEFINE{H\"older exponent $\gamma \in (0,1]$} if
+	\begin{align*}
+		|u(x)-u(y)| &\le C|x-y|^\gamma, \, \forall x,y \in U
+	\end{align*}for some constant $C>0$ ($\gamma=1$ corresponds to Lipschitz continuity).  Then
+	\begin{align*}
+		\HSEMINORM{0}{\gamma}{\CONJ{U}}{u} = \sup_{x,y \in U,x\ne y}\frac{|u(x)-u(y)|}{|x-y|^\gamma}
+	\end{align*}as the \DEFINE{H\"older seminorm} of $u$.\\
+	
+	\BLUE{In short, it describes a set of functions that have a ``finer smoothness or closeness" between Cauchy differences.}
+	
+	\item \textbf{Continous $k$-Spaces} Define them interatively:
+	\begin{description}
+		\item Let $\C^1(\CONJ{U})$ denote the linear space of all 1\FST differentiable continuous and bounded functions $u:U\to \R$.  For $u \in \CSPACE$, define 
+	\begin{align*}
+		||u||_{C^1(\CONJ{U})} &= \CNORM{u} + \sum_{i=1}^n \CNORM{u_{x_i}} 
+	\end{align*}
+	\item Let $\C^2(\CONJ{U})$ denote the linear space of all 2\SND differentiable continuous and bounded functions $u:U\to \R$.  For $u \in \CSPACE$, define 
+	\begin{align*}
+		||u||_{C^2(\CONJ{U})} &= ||u||_{C^1(\CONJ{U})} + \sum_{i,j=1}^n \CNORM{u_{x_ix_j}} 
+	\end{align*}
+	\item And continue with $C^k(\CONJ{U})$ denoting the $k\ITH$ differentiable continuous boundaed functions and  summing the previous norms with $\SUM{|\alpha|\le k}{}\CNORM{D^\alpha u}$.
+	
+	\item \BLUE{$C^k(\CONJ{U})$ is a vector space of functions that make sense and are integrable up to the $k\ITH$ derivative.  We aren't concerned with anything more than that.
+	}
+	
+\end{description}	 
+	
+	\item \textbf{H\"older Space:} Define a \DEFINE{H\"older 0-Space as} as $\CSUBSPACE{0}{\gamma}{\CONJ{U}}$ denoting the subspace of $\CSPACE$ consisting of functions $u$ for which $\HSEMINORM{0}{\gamma}{\CONJ{u}}{u}<\infty$.  For $u \in \CSUBSPACE{0}{\gamma}{\CONJ{U}}$ define the \DEFINE{H\"older Norm} of $u$ by 
+	\begin{align*}
+		\HOLDERNORM{0}{\gamma}{\CONJ{U}}{u} = \CNORM{u}+\HSEMINORM{0}{\gamma}{\CONJ{U}}{u}
+	\end{align*}
+	
+	Define the \DEFINE{H\"older 1-Space} as $\CSUBSPACE{1}{\gamma}{\CONJ{U}}$ denoting the subspace of $\CSPACE$ consisting of functions $u$ for which $\HSEMINORM{1}{\gamma}{\CONJ{u}}{u}<\infty$.  For $u \in \CSUBSPACE{1}{\gamma}{\CONJ{U}}$ define the \DEFINE{H\"older Norm} of $u$ by 
+	\begin{align*}
+		\HOLDERNORM{1}{\gamma}{\CONJ{U}}{u} = ||u||_{C^1(\CONJ{U})}+\HSEMINORM{1}{\gamma}{\CONJ{U}}{u}
+	\end{align*}
+	
+	\item \textbf{H\"older $k$-space} is denoted by $\HSPACE{k}{\gamma}{\CONJ{U}}$ and is the space of $k\ITH$ differentiable functions on the closure of $U$ who's $k\ITH$ derivative is both $\gamma$-smooth and has a bounded H\"older Norm.
+	
+
+	\end{description}
+	
+\end{definition}
+
+\HLINE
+
+\newcommand{\SSPACE}[3]{{W^{#1,#2}(#3)}}
+\begin{definition}[Sobolev Space].
+
+Let $k \ge 0$ be an integer and let $1\le p \le \infty$.  The \DEFINE{Sobolev space $\SSPACE{k}{p}{U}$} consists of all $u \in L^1_{\text{loc}}(U)$ (defined on $V \subset\subset U$) such that for each $\alpha$ with $|\alpha|\le k$, $D^\alpha u$ exists in the weak sense and belongs to $L^p(U)$, with norm
+\begin{align*}
+	||u||_{\SSPACE{k}{p}{U}} &= \BINDEF{\PAREN{\SUM{|\alpha|\le k} {}\int_U |D^\alpha u|\, dx }^{1/p} & \text{if } 1\le p\le \infty \\ }{\SUM{|\alpha|\le k}{} \operatorname{ess}\sup|D^\alpha u| & \text{if }p = \infty}
+\end{align*}
+
+\BLUE{The space of functions which has $k$-wise weak derivatives on $U$ (they integrate to non-continous functions) and whose$k\ITH$ derivatives are $p$-wise  smooth and bounded.  Except when $p=\infty$.
+}
+\end{definition}
+
+\newpage
+\textbf{Practice Test}
+
+\BLUE{Consider taking each of these questions and see how AI answers them}
+
+\begin{enumerate}
+	\item Show that $C^1[0,1]\subset \HSPACE{0}{\gamma}{[0,1]}$ for all $\gamma \in [0,1)$.  (Hint: Use the Mean Value Theorem).
+
+	Using the Mean Value Theorem was straight forward.  However, you must pick a $\gamma$ and $1-\gamma$.  That is
+	\begin{align*}
+		|f(b) - f(a)| &= f'(c)|b-a| = f'(c)|b-a|^\gamma|b-a|^{1-\gamma}\\
+		\frac{|f(b) - f(a)|}{|b-a|^\gamma} &= f'(c)|b-a|^{1-\gamma}\\
+		&\le ||u||_{C^1{[0,1])}} \\
+		\therefore \HOLDERNORM{0}{\gamma}{[0,1]}{u} &\le ||u||_{C^1{[0,1])}} 
+\end{align*}		
+	\newpage
+	\item Let $U \subset \R^n$ be open and let $\beta, \gamma \in (0,1]$.  Show that if $u \in \HSPACE{0}{\gamma}{\CONJ{U}}$ and $v \in \HSPACE{0}{\beta}{\R}$ then $v\circ u \in \HSPACE{0}{\beta\gamma}{\CONJ{U}}$.
+	
+	\begin{align*}
+		\sup_{x\in U} |v(u(x))| + \sup_{x,y \in U} \frac{v(u(x))-v(u(y))}{|x-y|^{\beta\gamma}}
+	\end{align*}The first term is finite because $v$ is bounded.  The second term, however, ``needs to prove the Chain Rule".
+	\begin{align*}
+		u \in \HSPACE{0}{\gamma}{\CONJ{U}} \to \sup_{x,y\in U} \frac{|u(x)-u(y)|}{|x-y|} \\
+		v \in \HSPACE{0}{\beta}{\R} \to \sup_{w,z\in U} \frac{|v(w)-u(z)|}{|w-z|}
+	\end{align*}set $z=u(x)$ and $w=u(y)$ and plug into the bottom.
+	
+	\newpage
+	\item Show that the function $u(x) = |\sin x|$ is weakly differentiable on $(0,2\pi)$ and find its weak derivative.
+	
+	Go through the process of finding a $v$ and a test function that fits into the integration of $u\phi$ and $v\phi$.  $|u(x)|\le 1 \implies u\in L'(0,2\pi)$ then $\phi \in C_c^\infty(0,2\pi)$ then
+	\begin{align*}
+		\int_0^{2\pi} |\sin x|\phi' dx &= \int_0^{\pi} |\sin x|\phi' dx + \int_\pi^{2\pi} u\phi' dx \\
+		&= \int_0^{\pi} \phi(\sin x)' dx - \int_\pi^{2\pi} \phi(\sin x)' dx \\  
+		v &= \BINDEF{\cos x & 0< x< \pi}{-\cos x & \pi < x < 2\pi}
+	\end{align*}there fore $v=u'$ in the weak sense.
+	
+	\newpage
+	\item Let $U = \{x \in \R^n\,|\, |x|>1\}$ and let $u(x) = 1/x^\alpha$ where $\alpha > 0$.  For which values of $p$ is $u \in \SSPACE{1}{p}{U}$
+	
+	\begin{enumerate}
+		\item For which $p\ge 1$ is $u \in L^p(U)$?
+		
+		\begin{align*}
+			\int_U |u|^p dx &= \int_{\{|x|>1\}} \frac{dx}{|x|^{p\alpha}}
+		\end{align*}use polar coordinates.  See classroom notes.  I'm pretty sure that I wouldn't have thought of this solution had I dared to spend time on it.  Expectation: poor grade on the test.  However, \textbf{know the norms of all of the spaces.}
+	\end{enumerate}
+	
+	\newpage
+	\item Let $1 < p < \infty$. For $u \in W^{1,p}(\R^n){\R^n}$, set $v(x)=u(2x)$.  Show that the linear mapping $T: W^{1,p}(\R^n) \to W^{1,p}(\R^n) $ defined by $Tu=v$ is bounded.
+\end{enumerate}
+
+\end{document}
