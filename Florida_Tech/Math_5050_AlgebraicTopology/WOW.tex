@@ -1,0 +1,45 @@
+Final Answer
+
+The group \( \boldsymbol{H^n(X)} \) is the **\( \boldsymbol{n^{\text{th}}} \) singular cohomology group** of the topological space \( \boldsymbol{X} \). It is the dual counterpart to the singular homology group \( \boldsymbol{H_n(X)} \). While homology is constructed from a chain complex that maps "downward" in dimension, cohomology is constructed from a cochain complex that maps "upward."
+
+### 1. Definitions
+
+| Term | Symbol | Definition |
+|---|---|---|
+| Singular \( n \)-cochains | \( \boldsymbol{C^n(X; G)} \) | <strong>The group of homomorphisms \( \boldsymbol{\text{Hom}(C_n(X), G)} \), where \( \boldsymbol{G} \) is an abelian group of coefficients.</strong> |
+| Coboundary Operator | \( \boldsymbol{\delta^n} \) | <strong>The map \( \boldsymbol{\delta^n: C^n(X) \to C^{n+1}(X)} \) defined by \( \boldsymbol{\delta^n(\varphi)(\sigma) = \varphi(\partial_{n+1}\sigma)} \).</strong> |
+| Singular \( n \)-cocycles | \( \boldsymbol{Z^n(X)} \) | \( \boldsymbol{\ker(\delta^n: C^n(X) \to C^{n+1}(X))} \) |
+| Singular \( n \)-coboundaries | \( \boldsymbol{B^n(X)} \) | \( \boldsymbol{\text{Im}(\delta^{n-1}: C^{n-1}(X) \to C^n(X))} \) |
+| **Singular \( \boldsymbol{n^{\text{th}}} \) cohomology** | \( \boldsymbol{H^n(X)} \) | \( \boldsymbol{Z^n(X) / B^n(X)} \) |
+
+---
+
+### 2. Key Characteristics
+
+*   **Contravariance**: Unlike homology, cohomology is a contravariant functor. A continuous map \( f: X \to Y \) induces a homomorphism \( f^*: H^n(Y) \to H^n(X) \), reversing the direction of the map.
+*   **Ring Structure**: The direct sum \( H^*(X) = \bigoplus_n H^n(X) \) can be equipped with the **cup product**, which gives cohomology the structure of a graded-commutative ring. This provides more refined topological information than homology groups alone.
+*   **Universal Coefficient Theorem**: The cohomology group \( H^n(X; G) \) is related to the homology group \( H_n(X) \) via the formula:
+    \( \boldsymbol{H^n(X; G) \cong \text{Hom}(H_n(X), G) \oplus \text{Ext}(H_{n-1}(X), G)} \).
+
+Explanation
+
+Question 1.: Defining the Singular Cohomology Group $H^n(X)$
+Step 1: Transitioning to the Dual Space
+To understand H^n(X), we first move from the concept of chains to **cochains**. While a chain is a formal sum of simplices, a cochain is a function that evaluates those simplices. We define the group of singular n-cochains with coefficients in an abelian group G (usually \mathbb{Z}) as the algebraic dual of the chain group C_n(X):
+$C^n(X; G) = \text{Hom}(C_n(X), G)
+An element \varphi \in C^n(X; G) is a linear map that assigns an element of G to every n-simplex in the space X$.
+Step 2: The Coboundary Operator
+In homology, the boundary operator \partial_n decreases the dimension. In cohomology, we use a **coboundary operator** \delta^n that increases the dimension. It is defined by the relation:
+$\delta^n: C^n(X; G) \to C^{n+1}(X; G)
+For a cochain \varphi and an (n+1)-simplex \sigma, the operator acts as:
+\delta^n(\varphi)(\sigma) = \varphi(\partial_{n+1}\sigma)
+Because \partial_n \circ \partial_{n+1} = 0 in the chain complex, it follows that \delta^{n+1} \circ \delta^n = 0$, forming a cochain complex.
+Step 3: Defining Cocycles and Coboundaries
+Just as we did with homology, we identify the kernel and image of these maps to find the "holes" in the cochain complex:
+- **Singular n-cocycles**: Z^n(X; G) = \ker(\delta^n). These are cochains whose coboundary is zero.
+- **Singular n-coboundaries**: B^n(X; G) = \text{Im}(\delta^{n-1}). These are cochains that are themselves the coboundary of an (n-1)-cochain.
+Step 4: Constructing the Cohomology Group
+The n-th singular cohomology group H^n(X; G) is the quotient group of the n-cocycles modulo the n-coboundaries:
+$H^n(X; G) = Z^n(X; G) / B^n(X; G)
+While H_n(X) and H^n(X) often contain similar information, cohomology is particularly powerful because the direct sum \bigoplus_n H^n(X)$ can be equipped with a **cup product**, giving it the structure of a graded-commutative ring.
+Answer: <strong>The group $H^n(X)$ is the $n$-th singular cohomology group, defined as the quotient $Z^n(X)/B^n(X)$ of singular $n$-cocycles by singular $n$-coboundaries. It is the dual theory to singular homology, constructed from the cochain complex $C^n(X) = \text{Hom}(C_n(X), G)$ and the dimension-raising coboundary map $\delta^n$.</strong>

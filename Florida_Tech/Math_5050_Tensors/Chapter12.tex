@@ -1,0 +1,326 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Chapter 11: Riemann-Christoffel Tensor}
+\newcommand{\DUEDATE}{March 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+%\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\COFF}[3]{\PART{\textbf{Z}_{#2}}{Z^{#3}}\cdot\textbf{Z}^{#1}}
+\newcommand{\COFFF}[3]{\frac{1}{2}Z^{{#1}m}\PAREN{\PART{Z_{m{#2}}}{Z^{#3}} + \PART{Z_{m{#3}}}{Z^{#2}} - \PART{Z_{{#2}{#3}}}{Z^m}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\newcommand{\RIEMANN}[4]{ \PART{\Gamma^#1_{#4#2}}{S^#3} - \PART{\Gamma^#1_{#3#2}}{S^#4} + \Gamma^#1_{#3\omega}\Gamma^\omega_{#4#2} - \Gamma^#1_{#4\omega}\Gamma^{\omega}_{#3#2}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{description}
+
+\section*{Section 12.2}
+\item \textbf{Exercise 243} Define the covariant Riemann Tensor from the curvature metric $S_{\gamma\omega}$ as 
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} = S_{\gamma\omega}R^\omega_{.\delta\alpha\beta}
+\end{align*}Show that
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} = \PART{\Gamma_{\gamma.\beta\delta}}{S^\alpha} - \PART{\Gamma_{\gamma.\alpha\beta}}{S^\beta} + \Gamma_{\omega.\gamma\beta}\Gamma^\omega_{\alpha\beta} -\Gamma_{\omega.\gamma\alpha}\Gamma^{\omega}_{\beta\delta}.
+\end{align*}
+
+\BLUE{Starting with the definition of the Riemann-Christoffel tensor and labeling each term as
+\begin{align*}
+	\RIEMANN{1}{2}{3}{4}\\
+	R_{\gamma\delta\alpha\beta} = \underbrace{\PART{\Gamma^\gamma_{\beta\delta}}{S^\alpha}}_{D_1} - \underbrace{\PART{\Gamma^\gamma{\alpha\beta}}{S^\beta}}_{D_2} + \underbrace{\Gamma^\gamma_{\alpha\omega}\Gamma^\omega_{\beta\delta}}_{C_1} - \underbrace{\Gamma^\gamma_{\beta\omega}\Gamma^{\omega}_{\alpha\delta}}_{C_2}.
+\end{align*}distribute $S_{\gamma\rho}$ to each term then $D_1$ and $D_2$ become
+\begin{align*}
+	S_{\gamma\rho}{\PART{\Gamma^\rho{\beta\delta}}{S^\alpha}} &= \PART{}{S^\alpha}\PAREN{S_{\gamma\rho}\Gamma^\rho{\beta\delta}} \\
+&= \PART{\Gamma_{\gamma.\beta\delta}}{S^\alpha} \\
+	S_{\gamma\rho}{\PART{\Gamma^\rho{\alpha\beta}}{S^\beta}} &= \PART{}{S^\alpha}\PAREN{S_{\gamma\rho}\Gamma^\rho{\alpha\delta}} \\
+&= \PART{\Gamma_{\gamma.\alpha\delta}}{S^\alpha}
+\end{align*}Now, examine $C_1$ and $C_2$
+\begin{align*}
+	S_{\gamma\rho}\PAREN{\Gamma^\rho_{\alpha\omega}\Gamma^\omega_{\beta\delta}} &= \PAREN{S_{\gamma\rho}\Gamma^\rho_{\alpha\omega}}\Gamma^\omega_{\beta\delta} \\
+	&= \Gamma_{\gamma.\alpha\omega}\Gamma^\omega_{\beta\delta} \\
+	S_{\gamma\rho}\PAREN{\Gamma^\rho_{\beta\omega}\Gamma^{\omega}_{\alpha\delta}} &= \PAREN{S_{\gamma\rho}\Gamma^\rho{\beta\omega}}\Gamma^{\omega}_{\alpha\delta} \\
+	&= \Gamma_{\gamma.\beta\omega}\Gamma^\omega_{\alpha\delta}
+\end{align*}
+}
+
+\item \textbf{Exercise 244} Show that
+\begin{align*}
+	R^\alpha_{.\alpha\gamma\delta} = 0
+\end{align*}
+\BLUE{Recall that 
+\begin{align*}
+	\Gamma^\alpha_{\delta\alpha} &= \COFFF{\alpha}{\delta}{\alpha} \\
+		&= \frac{1}{2}Z^{\alpha m}\PART{Z_{m\alpha}}{Z^\delta} \\
+		&= \partial_\delta (\ln \sqrt{|Z|}) \\
+		&= \frac{1}{\sqrt{|Z|}} \partial_\delta \sqrt{|Z|}
+\end{align*}then we have
+\begin{align*}
+	R^\alpha_{.\alpha\gamma\delta} &= \RIEMANN{\alpha}{\alpha}{\gamma}{\delta}
+\end{align*}the first two terms are the same and cancel each other out.  As are the last two terms.
+}
+
+\item \textbf{Exercise 245} Show relationships(12.3)-(12.5).
+
+\item \textbf{Exercise 246} Show that equation (12.4) follows from equation (12.3) and (12.5)
+
+\item \textbf{Exercise 247} The Ricci tensor $R_{\alpha\beta}$ is defined as
+\begin{align*}
+	R_{\alpha\beta} = R^\gamma_{.\alpha\gamma\beta}.
+\end{align*}Its trace
+\begin{align*}
+	R = R^\alpha_\alpha
+\end{align*}is called \DEFINE{the scalar curvature}.  Show that the Ricci tensor is symmetric.
+
+\BLUE{\begin{align*}
+	R_{\alpha\beta} &= \RIEMANN{\gamma}{\alpha}{\gamma}{\beta}\\
+	R_{\beta\alpha} &= \RIEMANN{\gamma}{\beta}{\gamma}{\alpha}
+\end{align*}subtract one from the other and we get 
+\begin{align*}
+	R_{\alpha\beta} - R_{\beta\alpha} &= \RIEMANN{\gamma}{\alpha}{\gamma}{\beta} - \PAREN{\RIEMANN{\gamma}{\beta}{\gamma}{\alpha}} \\
+	&= \PART{\Gamma^\gamma_{\beta\alpha}}{S^\gamma} - \PART{\Gamma^\gamma_{\beta\alpha}}{S^\gamma} - \PART{\Gamma^\gamma_{\gamma\alpha}}{S^\beta} + \PART{\Gamma^\gamma_{\gamma\beta}}{S^\alpha}
+\end{align*}
+}
+
+\item \textbf{Exercise 248} The Einstein tensor $G_{\alpha\beta}$ is defined by 
+\begin{align*}
+	G_{\alpha\beta} = R_{\alpha\beta} - \frac{1}{2}RS_{\alpha\beta}.
+\end{align*} Show that the Einstein tensor is symmetric.
+
+\item \textbf{Exercise 249} Show that, for two-dimensional manifolds, the trace $G^\alpha_\alpha$ of the Einstein tensor $G_{\alpha\beta}$ vanishes.
+
+\item \textbf{Exercise 250} Show that for covariant tensor $T_\gamma$, the commutator relationship reads
+\begin{align*}
+	(\nabla_\alpha\nabla_\beta-\nabla_\beta\nabla_\alpha) T_\gamma = -R^\delta_{.\gamma\alpha\beta}T_\delta.
+\end{align*}
+
+\item \textbf{Exercise 251} Show that convariant derivatives commute when applied to invariants and variants with ambient indices
+\begin{align*}
+	(\nabla_\alpha\nabla_\beta-\nabla_\beta\nabla_\alpha) T &=0\\
+	(\nabla_\alpha\nabla_\beta-\nabla_\beta\nabla_\alpha) T^i &= 0\\
+	(\nabla_\alpha\nabla_\beta-\nabla_\beta\nabla_\alpha) t_i &= 0
+\end{align*}
+
+\item \textbf{Exercise 252} Show the first Biachi identity
+\begin{align*}
+	\R_{\alpha\beta\gamma\delta} + R_{\alpha\gamma\delta\beta} + R_{\alpha\delta\beta\gamma} = 0
+\end{align*}
+
+\item \textbf{Exercise 253} Show the second Bianchi identity
+\begin{align*}
+	\nabla_\varepsilon R_{\alpha\beta\gamma\delta} + \delta_\gamma R_{\alpha\beta\delta\varepsilon} + \nabla_\delta R_{\alpha\beta\varepsilon\gamma} = 0
+\end{align*}
+
+\section*{Section 12.3}
+\item \textbf{Exercise 254} Derive the following explicit expression for $K$:
+\begin{align*}
+	K = \frac{1}{4}\varepsilon^{\gamma\delta}\varepsilon^{\alpha\beta} R_{\gamma\delta\alpha\beta}.
+\end{align*}In particular, equation (12.28) shows that $K$ is a tensor.
+
+\BLUE{
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} &= K(g_{\delta\alpha}g_{\delta\beta}-g_{\gamma\beta}g_{\delta\alpha} \\
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}R_{\gamma\delta\alpha\beta} &= K	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}(g_{\delta\alpha}g_{\delta\beta}-g_{\gamma\beta}g_{\delta\alpha}) 
+\end{align*}Recall that $g^{\delta\alpha}g_{\delta\alpha}=2$ and 
+\begin{align*}
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta} &= 	g^{\delta\alpha}g^{\delta\beta}-g^{\gamma\beta}g^{\delta\alpha} \\
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}g_{\gamma\beta} &= 	(g^{\delta\alpha}g^{\delta\beta}-g^{\gamma\beta}g^{\delta\alpha}) g_{\gamma\alpha}g_{\delta\beta} \\
+	&= 4
+\end{align*}then
+\begin{align*}
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}R_{\gamma\delta\alpha\beta} &= 4K	
+\end{align*}
+}
+
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} &= K \varepsilon_{\gamma\delta\alpha\beta}
+\end{align*}
+
+\item \textbf{Exercise 255} Show that 
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} = K(S_{\alpha\gamma}S_{\beta\delta}- S_{\alpha\delta}S_{\beta\gamma}.
+\end{align*}
+
+\item \textbf{Exercise 256} Show that the Gaussian curvature $K$ is also given by 
+\begin{align*}
+	K = \frac{1}{2}R^{\alpha\beta}_{..\alpha\beta}.
+\end{align*}Equivalently,
+\begin{align*}
+	K = \frac{1}{2} R^\alpha_\alpha,
+\end{align*}where $R_{\alpha\beta}$ is the Ricci tensor. In other words, for a two-dimensional surface, the Gaussian Curvature is half of the scalar curvature.
+
+\section*{Section 12.4}
+\item \textbf{Exercise 257} Show that $B_{\alpha\beta}$ is symmetric
+\begin{align*}
+	B_{\alpha\beta} = B_{\beta\alpha}
+\end{align*}
+
+Define the shift tensor, $Z^i_\beta = \textbf{Z}^i\cdot \textbf{S}_\beta$.  Evaluate the curvature tensor, $B_{\alpha\beta}$ defined by
+\begin{align*}
+	B_{\alpha\beta} &= N_i\nabla_\alpha Z^i_\beta. \\
+		&= N_i\nabla_\alpha \textbf{Z}^i\cdot \textbf{S}_\beta \\
+\end{align*}Recall that 
+\begin{align*}
+	\textbf{S}_\beta &= Z^i_\beta \textbf{Z}_i \\
+	\nabla_\alpha \textbf{S}_\beta &= \nabla_\alpha Z^i_\beta
+\end{align*}Therefore
+\begin{align*}
+	B_{\alpha\beta} &= N_i\nabla_\alpha \textbf{Z}^i\cdot \textbf{S}_\beta \\
+		&= N_i \PAREN{ (\nabla_\alpha \textbf{Z}^i)\cdot \textbf{S}_\beta + \textbf{Z}^i\cdot\nabla_\alpha \textbf{S}_\beta } \\
+		&= N_i  + \textbf{Z}^i\cdot\nabla_\alpha \textbf{S}_\beta  \\
+		&= \textbf{N}\cdot\nabla_\alpha \textbf{S}_\beta  \\
+		&= \textbf{N}\cdot\frac{\partial^2 x}{\partial\alpha\partial\beta} \\
+		&= \textbf{N}\cdot\nabla_\beta  \textbf{S}_\alpha \\
+\end{align*}
+	
+\item \textbf{Exercise 258} Show that  the following relationship holds at points of zero mean curvature:
+\begin{align*}
+	B^\alpha_\beta B^\beta_\alpha = -2 |B^._.|.
+\end{align*}
+
+\section*{Section 12.6}
+\item \textbf{Exercise 259} Show that the catenoid given by $r(z) = a \cosh(z-b)/a$ has zero mean curvature.
+
+\section*{Section 12.7}
+\item \textbf{Exercise 260} Suppose that a partical confined to the surface moves along the trajectory $\gamma(t)$ given by 
+\begin{align*}
+	S^\alpha = S^\alpha(t).
+\end{align*}Show that its velocity $\textbf{V}$ is given by 
+\begin{align*}
+	\textbf{V} &= V^\alpha \textbf{S}_\alpha
+\end{align*}where
+\begin{align*}
+	V^\alpha &= \frac{dS^\alpha(t)}{dt}.
+\end{align*}Hint: $\textbf{R}(t) = \textbf{R}(S(t))$.
+
+\newcommand{\NPART}[2]{\frac{\delta #1}{\delta #2}}
+\item \textbf{Exercise 261} Show that the acceleration $\textbf{A}$ of the particle is given by 
+\begin{align*}
+	\textbf{A} = \NPART{V^\alpha}{t} \textbf{S}_\alpha + \textbf{N} B_{\alpha\beta}V^\alpha V^\beta.
+\end{align*}where
+\begin{align*}
+	\NPART{V^\alpha}{t} = \frac{d V^\alpha}{dt} + \Gamma^\alpha_{\beta\gamma} V^\beta V^\gamma.
+\end{align*}Conclude that $\NPART{V^\alpha}{t}$ is a tensor with respect to coordinate transformations on the surface.  Also note the term $\textbf{N} B_{\alpha\beta}V^\alpha V^\beta$ known as the \DEFINE{centripetal acceleration}.
+
+\item \textbf{Exercise 262} Use this problem as an opportunity to develop a new $\NPART{}{t}$-calculus motivated by the definition (12.64).  For a general tensor $T^\alpha_\beta$, define the $\NPART{}{t}$-derivative along the trajectory as follows
+\begin{align*}
+	\NPART{T^\alpha_\beta}{t} = \frac{d T^\alpha_beta}{dt} + V^\gamma\Gamma^\alpha_{\gamma\omega}T^\omega_\beta - V^\gamma\Gamma^\omega_{\gamma\beta}T^\alpha\omega.
+\end{align*}This derivative is also know as the \textit{intrinsic derivative}.
+\item \textbf{Exercise 263} Show that the $\NPART{}{t}$-derivative satisfies the tensor property.
+
+\item \textbf{Exercise 264} Show that the $\NPART{}{t}$-derivative satisfies the sum and product rules.
+
+\item \textbf{Exercise 265} Show that the $\NPART{}{t}$-derivative stisfies the chain rule
+\begin{align*}
+	\NPART{T^\alpha_\beta}{t} = \PART{T^\alpha_\beta(t,X)}{t} + V^\gamma\nabla_\gamma T^\alpha_\beta
+\end{align*}for trajectory restriions of time-dependent surface tensors $T^\alpha\beta$.
+
+\item \textbf{Exercise 266} Conclude thate the $\NPART{}{t}$-derivative is metrinilic with respect to all the surface metrics, except $\textbf{S}_\alpha$ and $\textbf{A}^\alpha$.
+
+\item \textbf{Exercise 267} Show that 
+\begin{align*}
+	\NPART{\textbf{S}_\alpha}{t} = \textbf{N} V^\gamma B_{\gamma\alpha}.
+\end{align*}
+
+\item \textbf{Exercise 268} Show that $\NPART{}{t}$ commutes with contraction.
+
+\item \textbf{Exercise 269} Show that 
+\begin{align*}
+	\textbf{J} &= \PAREN{\frac{\delta^2 V^\alpha}{\delta t^2}- B^\alpha_\beta B_{\gamma\delta}V^\beta V^\gamma V^\delta}\textbf{S}_\alpha + \PAREN{3 B_{\alpha\beta}\NPART{V^\alpha}{t} V^\beta  \nabla_\alpha B_{\beta\gamma} V^\alpha V^\beta V^\gamma}\textbf{N}.
+\end{align*}
+
+\section*{Section 12.9}
+\item \textbf{Exercise 270} Show that the Gaussian curvture of the cyinder (10.101)-(10.103) is zero: $$K=0$$.
+
+\item \textbf{Exercise 271} Show that the Gaussian curvature of a cone is zero: $$K=0$$.
+
+\item \textbf{Exercise 272} Show that Show that the Gaussian curvature of the sphere (10.92)-(10.94) is $$K = \frac{1}{R^2}$$.
+
+\item \textbf{Exercise 273} Show that the Gaussian curvature of the torus (10.17)-(10.109) is 
+\begin{align*}
+	K = \frac{\cos \phi}{r(R+r\cos\phi}.
+\end{align*}
+
+\item \textbf{Exercise 274} Show that the Gaussian curvature of the surface of revolution (10.115)-(10.117) is
+\begin{align*}
+	K = -\frac{r''(z)}{r(z)\PAREN{1+r'(z)^2}^2}.
+\end{align*}
+
+\section*{Section 12.10}
+\item \textbf{Exercise 275} Verify the Gauss-Bonnet theorem for a sphere.  This is
+\begin{align*}
+	\int_S K\,dS = 4\pi.
+\end{align*}
+
+\item \textbf{Exercise 276} Verify the Gauss-Bonnet theorem for a torus.  This is
+\begin{align*}
+	\int_S K\,dS = 4\pi.
+\end{align*}
+
+\end{description}
+\end{document}

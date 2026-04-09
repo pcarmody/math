@@ -1,0 +1,7 @@
+\textbf{Exercise 243} Define the covariant Riemann Tensor from the curvature metric $S_{\gamma\omega}$ as 
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} = S_{\gamma\omega}R^\omega_{.\delta\alpha\beta}
+\end{align*}Show that
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} = \PART{\Gamma_{\gamma.\beta\delta}}{S^\alpha} - \PART{\Gamma_{\gamma.\alpha\beta}}{S^\beta} + \Gamma_{\omega.\gamma\beta}\Gamma^\omega_{\alpha\beta} -\Gamma_{\omega.\gamma\alpha}\Gamma^{\omega}_{\beta\delta}.
+\end{align*}

@@ -1,0 +1,1073 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Real Analysis},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Comprehensive Exams -- Real Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{April 2026}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} 
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\section*{Real Analysis -- Overview}
+
+Here’s a structured overview of \DEFINE{Real Analysis}, organized the way it’s typically developed mathematically. I’ll emphasize the core ideas, key definitions, and fundamental theorems rather than just listing topics.
+
+---
+
+\begin{description}
+\item \DEFINE{I. Foundations: The Real Number System}
+
+	\begin{description}
+    \item \textbf{1. Construction and Properties of $\R$}
+
+		\begin{itemize}
+        \item Ordered field axioms
+        \item Completeness axiom (crucial!):
+		\end{itemize}
+
+  * Every nonempty set bounded above has a least upper bound (supremum)
+
+    \item \textbf{2. Consequences of Completeness}
+
+		\begin{itemize}
+        \item Archimedean property
+        \item Density of $\Q$ in $\R$
+        \item Existence of limits
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{II. Sequences and Limits}
+
+	\begin{description}
+    \item \textbf{1. Convergence of Sequences}
+
+		\begin{itemize}
+        \item Definition:
+  \begin{align*}
+  x_n \to x \iff \forall \varepsilon > 0, \exists N \text{ such that } n \ge N \Rightarrow |x_n - x| < \varepsilon
+  \end{align*}
+		\end{itemize}
+
+    \item \textbf{2. Key Theorems}
+
+		\begin{itemize}
+        \item Uniqueness of limits
+        \item Algebra of limits
+        \item Squeeze Theorem
+        \item Monotone Convergence Theorem
+        \item Bolzano–Weierstrass Theorem (subsequence convergence)
+        \item Cauchy criterion:
+		\end{itemize}
+
+  * Sequence converges $\iff$ it is Cauchy (uses completeness)
+
+	\end{description}
+---
+
+\item \DEFINE{III. Series}
+
+	\begin{description}
+    \item \textbf{1. Infinite Series}
+
+		\begin{itemize}
+        \item Definition of convergence via partial sums
+		\end{itemize}
+
+    \item \textbf{2. Tests for Convergence}
+
+		\begin{itemize}
+        \item Comparison test
+        \item Ratio test
+        \item Root test
+        \item Integral test
+        \item Alternating series test
+		\end{itemize}
+
+    \item \textbf{3. Absolute vs Conditional Convergence}
+
+		\begin{itemize}
+        \item Absolute convergence $\to$ convergence
+        \item Rearrangement theorem (Riemann)
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{IV. Topology of $\R^n$}
+
+	\begin{description}
+    \item \textbf{1. Open and Closed Sets}
+
+		\begin{itemize}
+        \item Open sets ($\varepsilon$-balls)
+        \item Closed sets (contain limit points)
+		\end{itemize}
+
+    \item \textbf{2. Compactness}
+
+		\begin{itemize}
+        \item Definition: every open cover has a finite subcover
+        \item In $\R^n$:
+		\end{itemize}
+
+  * Heine–Borel Theorem: compact $\iff$ closed and bounded
+
+    \item \textbf{3. Connectedness}
+
+		\begin{itemize}
+        \item Intervals as connected sets
+        \item Intermediate Value property
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{V. Limits and Continuity of Functions}
+
+	\begin{description}
+    \item \textbf{1. Limits of Functions}
+
+		\begin{itemize}
+        \item $\varepsilon-\delta$ definition
+		\end{itemize}
+
+    \item \textbf{2. Continuity}
+
+		\begin{itemize}
+        \item Equivalent formulations:
+		\end{itemize}
+
+  * Sequential continuity
+  * $\varepsilon-\delta$ definition
+
+    \item \textbf{3. Key Theorems}
+
+		\begin{itemize}
+        \item Intermediate Value Theorem (IVT)
+        \item Extreme Value Theorem (EVT)
+        \item Uniform continuity (vs pointwise continuity)
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{VI. Differentiation}
+
+	\begin{description}
+    \item \textbf{1. Derivative}
+
+		\begin{itemize}
+        \item Definition:
+  \begin{align*}
+  f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+  \end{align*}
+		\end{itemize}
+
+    \item \textbf{2. Main Results}
+
+		\begin{itemize}
+        \item Mean Value Theorem (MVT)
+        \item Rolle’s Theorem
+        \item Taylor’s Theorem
+		\end{itemize}
+
+    \item \textbf{3. Consequences}
+
+		\begin{itemize}
+        \item Monotonicity criteria
+        \item Convexity
+        \item L’Hôpital’s Rule
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{VII. Riemann Integration}
+
+	\begin{description}
+    \item \textbf{1. Definition}
+
+		\begin{itemize}
+        \item Upper and lower sums
+        \item Integrability $\iff$ upper = lower integral
+		\end{itemize}
+
+    \item \textbf{2. Key Results}
+
+		\begin{itemize}
+        \item Continuous $\to$ integrable
+        \item Monotone $\to$ integrable
+        \item Fundamental Theorem of Calculus:
+		\end{itemize}
+
+  * Part I: differentiation of integrals
+  * Part II: evaluation via antiderivatives
+
+	\end{description}
+---
+
+\item \DEFINE{VIII. Sequences and Series of Functions}
+
+	\begin{description}
+    \item \textbf{1. Types of Convergence}
+
+		\begin{itemize}
+        \item Pointwise convergence
+        \item Uniform convergence
+		\end{itemize}
+
+    \item \textbf{2. Key Theorems}
+
+		\begin{itemize}
+        \item Uniform convergence preserves:
+
+  * Continuity
+  * Integrability
+  * Differentiability (with conditions)
+		\end{itemize}
+
+    \item \textbf{3. Important Tests}
+
+		\begin{itemize}
+        \item Weierstrass M-test
+        \item Arzelà–Ascoli Theorem
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{IX. Metric Spaces (Generalization)}
+
+	\begin{description}
+    \item \textbf{1. Metric Spaces}
+
+		\begin{itemize}
+        \item Distance function $d(x,y)$
+		\end{itemize}
+
+    \item \textbf{2. General Concepts}
+
+		\begin{itemize}
+        \item Convergence
+        \item Continuity
+        \item Compactness
+        \item Completeness
+		\end{itemize}
+
+    \item \textbf{3. Important Results}
+
+		\begin{itemize}
+        \item Contraction Mapping Theorem (Banach Fixed Point)
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{X. Measure Theory and Lebesgue Integration (Advanced Real Analysis)}
+
+	\begin{description}
+    \item \textbf{1. Motivation}
+
+		\begin{itemize}
+        \item Riemann integral limitations
+		\end{itemize}
+
+    \item \textbf{2. Measure}
+
+		\begin{itemize}
+        \item $\sigma$-algebras
+        \item Lebesgue measure
+		\end{itemize}
+
+    \item \textbf{3. Lebesgue Integral}
+
+		\begin{itemize}
+        \item Integrate more general functions
+		\end{itemize}
+
+    \item \textbf{4. Convergence Theorems}
+
+		\begin{itemize}
+        \item Monotone Convergence Theorem (MCT)
+        \item Dominated Convergence Theorem (DCT)
+        \item Fatou’s Lemma
+		\end{itemize}
+
+	\end{description}
+---
+
+\item \DEFINE{XI. Functional Analysis Connections}
+
+		\begin{itemize}
+        \item Normed spaces, Banach spaces
+        \item $L^p$ spaces
+        \item Weak convergence
+		\end{itemize}
+
+---
+
+\item \DEFINE{Core Themes to Keep in Mind}
+
+Real Analysis revolves around a few deep ideas:
+
+		\begin{itemize}
+        \item \DEFINE{Completeness} → guarantees limits exist
+        \item \DEFINE{Approximation} → sequences, series, integrals
+        \item \DEFINE{Structure of sets} → topology
+        \item \DEFINE{Limiting processes} → continuity, differentiation, integration
+        \item \DEFINE{Control of convergence} → uniform vs pointwise
+		\end{itemize}
+
+---
+\end{description}
+
+If you want, I can tailor this into:
+
+		\begin{itemize}
+        \item a \DEFINE{course roadmap} (week-by-week),
+        \item a \DEFINE{theorem checklist for exams}, or
+        \item a \DEFINE{dependency map} showing which results rely on which foundations.
+		\end{itemize}
+
+\newpage
+\section*{Dependency Map}
+
+Here’s a \DEFINE{dependency map of Real Analysis}, showing how the major concepts and theorems build on one another. Think of it as a layered structure: each level relies on the ones below it.
+
+---
+
+\begin{description}
+\item \DEFINE{0. Logical Foundations}
+
+		\begin{itemize}
+        \item Set theory (sets, functions, relations)
+        \item Logic (quantifiers, implications, proof techniques)
+		\end{itemize}
+
+$\downarrow$ everything depends on this
+
+---
+
+\item \DEFINE{1. Real Numbers ($\R$) — The Core Foundation}
+
+		\begin{itemize}
+        \item Ordered field structure
+        \item \DEFINE{Completeness axiom (supremum property)}
+		\end{itemize}
+
+This is the *most important root node*.
+
+$\downarrow$ gives rise to:
+
+		\begin{itemize}
+        \item Archimedean property
+        \item Density of rationals
+        \item Nested interval property
+		\end{itemize}
+
+---
+
+\item \DEFINE{2. Sequences}
+
+Built directly from completeness.
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item $\R$ (especially completeness)
+		\end{itemize}
+
+    \item Leads to:
+
+		\begin{itemize}
+        \item Definition of limits
+        \item Cauchy sequences
+        \item Subsequence arguments
+		\end{itemize}
+
+    \item Key results:
+
+		\begin{itemize}
+        \item Cauchy $\iff$ convergent (\DEFINE{uses completeness})
+        \item Bolzano–Weierstrass Theorem
+        \item Monotone Convergence Theorem
+		\end{itemize}
+	\end{itemize}
+
+$\downarrow$ feeds into:
+
+---
+
+\item \DEFINE{3. Series}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Sequences (via partial sums)
+		\end{itemize}
+
+    \item Leads to:
+
+		\begin{itemize}
+        \item Convergence tests
+        \item Absolute vs conditional convergence
+		\end{itemize}
+	\end{itemize}
+
+$\downarrow$ parallel development with:
+
+---
+
+\item \DEFINE{4. Topology of $\R^n$}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Distance (metric from $\R$)
+		\end{itemize}
+
+    \item Core concepts:
+
+		\begin{itemize}
+        \item Open/closed sets
+        \item Limit points
+        \item Compactness
+        \item Connectedness
+		\end{itemize}
+
+    \item Key theorem:
+
+		\begin{itemize}
+        \item \DEFINE{Heine–Borel} (uses completeness indirectly)
+		\end{itemize}
+
+	\end{itemize}
+$\downarrow$ feeds into:
+
+---
+
+\item \DEFINE{5. Limits of Functions}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Sequences OR topology
+
+Two equivalent frameworks:
+
+        \item $\varepsilon-\delta$ definition
+        \item Sequential definition
+		\end{itemize}
+
+	\end{itemize}
+$\downarrow$ leads to:
+
+---
+
+\item \DEFINE{6. Continuity}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Limits of functions
+        \item Topology
+		\end{itemize}
+
+    \item Key results:
+
+		\begin{itemize}
+        \item Intermediate Value Theorem (uses connectedness)
+        \item Extreme Value Theorem (uses compactness)
+		\end{itemize}
+
+	\end{itemize}
+$\downarrow$ feeds into:
+
+---
+
+\item \DEFINE{7. Differentiation}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Limits
+		\end{itemize}
+
+    \item Core results:
+
+		\begin{itemize}
+        \item Mean Value Theorem (\DEFINE{depends on EVT + IVT $\to$ topology!})
+        \item Taylor’s Theorem
+		\end{itemize}
+
+	\end{itemize}
+$\downarrow$ feeds into:
+
+---
+
+\item \DEFINE{8. Riemann Integration}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Limits
+        \item Supremum/infimum ($\to$ completeness)
+		\end{itemize}
+
+    \item Key results:
+
+		\begin{itemize}
+        \item Integrability criteria
+        \item Fundamental Theorem of Calculus
+		\end{itemize}
+
+\DEFINE{ Important dependency:}
+
+		\begin{itemize}
+        \item FTC uses differentiation results (MVT structure)
+		\end{itemize}
+
+	\end{itemize}
+$\downarrow$ feeds into:
+
+---
+
+\item \DEFINE{9. Sequences of Functions}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Sequences
+        \item Functions
+        \item Continuity/integration
+		\end{itemize}
+
+    \item Key ideas:
+
+		\begin{itemize}
+        \item Pointwise vs uniform convergence
+		\end{itemize}
+
+    \item Key results:
+
+		\begin{itemize}
+        \item Uniform convergence preserves continuity/integration
+		\end{itemize}
+
+	\end{itemize}
+$\downarrow$ leads to:
+
+---
+
+\item \DEFINE{10. Metric Spaces (Generalization Layer)}
+
+Abstracts everything above.
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Understanding of $\R$ structure
+		\end{itemize}
+
+    \item Generalizes:
+
+		\begin{itemize}
+        \item Sequences $\to$ convergence
+        \item Open/closed sets $\to$ topology
+        \item Continuity
+		\end{itemize}
+
+    \item Key theorem:
+
+		\begin{itemize}
+        \item Contraction Mapping Theorem (uses completeness)
+		\end{itemize}
+	\end{itemize}
+
+$\downarrow$ feeds into:
+
+---
+
+\item \DEFINE{11. Measure Theory \& Lebesgue Integration}
+
+	\begin{itemize}
+    \item Depends on:
+
+		\begin{itemize}
+        \item Set theory
+        \item Limits
+        \item Sequences of functions
+		\end{itemize}
+
+    \item Key shift:
+
+		\begin{itemize}
+        \item Replace “interval-based” integration with “measure-based”
+		\end{itemize}
+
+    \item Core theorems:
+
+		\begin{itemize}
+        \item Dominated Convergence Theorem
+        \item Monotone Convergence Theorem
+		\end{itemize}
+	\end{itemize}
+
+---
+
+\item \DEFINE{Big Picture Dependency Flow}
+
+Here’s the structure in compact form:
+
+```
+%Set Theory / Logic
+%        ↓
+%   Real Numbers (Completeness)
+%        ↓
+%     Sequences
+%        ↓
+%   ┌───────────────┐
+%   ↓               ↓
+% Series        Topology ($\R$ⁿ)
+%                    ↓
+%              Function Limits
+%                    ↓
+%                Continuity
+%                    ↓
+%              Differentiation
+%                    ↓
+%             Riemann Integration
+%                    ↓
+%        Sequences of Functions
+%                    ↓
+%        Metric Spaces (Abstract)
+%                    ↓
+%     Measure Theory (Lebesgue)
+%```
+
+---
+
+\item \DEFINE{Key Insight (What Really Drives Everything)}
+
+If you compress the whole map to its essence:
+
+		\begin{itemize}
+        \item \DEFINE{Completeness of $\R$} $\to$ makes limits work
+        \item \DEFINE{Limits} $\to$ define continuity, derivatives, integrals
+        \item \DEFINE{Topology} $\to$ explains *why* key theorems (IVT, EVT) hold
+        \item \DEFINE{Uniform control} $\to$ determines when limits behave nicely
+		\end{itemize}
+
+---
+\end{description}
+
+If you want, I can turn this into a \DEFINE{visual diagram (graph-style)} or give you a \DEFINE{minimal set of “core theorems”} that generate almost everything else.
+
+\newpage
+\section*{11. Measure Theory -- Overview}
+
+
+Here’s a structured overview of \DEFINE{Measure Theory}, focusing on the key ideas, objects, and theorems that make the subject work.
+
+---
+\begin{description}
+
+\item \DEFINE{1. Motivation}
+
+Measure theory generalizes the idea of:
+		\begin{itemize}
+        \item \DEFINE{length} (intervals),
+        \item \DEFINE{area} (regions),
+        \item \DEFINE{volume} (higher dimensions),
+		\end{itemize}
+so that we can:
+		\begin{itemize}
+        \item integrate more functions than Riemann allows,
+        \item handle limits of functions cleanly,
+        \item work rigorously with probability.
+		\end{itemize}
+
+---
+
+\item \DEFINE{2. $\sigma$-Algebras (Measurable Structure)}
+
+	\begin{description}
+    \item \textbf{Definition}
+
+A \DEFINE{$\sigma$-algebra} $\mathcal{F} \subseteq \mathcal{P}(X)$ is a collection of subsets such that:
+
+		\begin{description}
+        \item 1. $X \in \mathcal{F}$
+        \item 2. Closed under complements: $A \in \mathcal{F} \Rightarrow A^c \in \mathcal{F}$
+        \item 3. Closed under countable unions:
+   \begin{align*} 
+       A_1, A_2, \dots \in \mathcal{F} \Rightarrow \bigcup_{n=1}^\infty A_n \in \mathcal{F}
+   \end{align*} 
+   
+		\end{description}
+
+    \item \textbf{Interpretation}
+
+		\begin{description}
+        \item These are the sets to which we are allowed to assign “size.”
+        \item Prevents pathological constructions.
+		\end{description}
+
+    \item \textbf{Key Example}
+
+* \DEFINE{Borel $\sigma$-algebra} on $\R$: generated by open sets
+	\end{description}
+
+---
+
+\item \DEFINE{3. Measures}
+
+	\begin{description}
+    \item \textbf{Definition}
+
+A \DEFINE{measure} is a function:
+\begin{align*}
+\mu: \mathcal{F} \to [0,\infty]
+\end{align*}
+such that:
+		\begin{description}
+        \item 1. $\mu(\emptyset) = 0$
+        \item 2. \DEFINE{Countable additivity}:
+     \begin{align*}
+         \mu\left(\bigcup_{n=1}^\infty A_n\right) = \sum_{n=1}^\infty \mu(A_n) \quad \text{(disjoint sets)}
+     \end{align*}
+		\end{description}
+
+    \item \textbf{Examples}
+
+		\begin{itemize}
+        \item Length on $\R$ $\to$ \DEFINE{Lebesgue measure}
+        \item Counting measure
+        \item Probability measures $(\mu(X)=1)$
+		\end{itemize}
+	\end{description}
+
+---
+
+\item \DEFINE{4. Measurable Functions}
+
+	\begin{description}
+    \item \textbf{Definition}
+
+A function $f: X \to \mathbb{R}$ is \DEFINE{measurable} if:
+\begin{align*}
+\{x : f(x) > a\} \in \mathcal{F} \quad \forall a \in \mathbb{R}
+\end{align*}
+
+    \item \textbf{Intuition}
+
+		\begin{itemize}
+        \item Measurable functions are those compatible with the measure structure.
+        \item Continuous functions are measurable, but measurable functions are much more general.
+\BLUE{
+		\item The range of $f$ is measurable, (i.e., a member of a $\sigma$-algebra).
+}
+		\end{itemize}
+	\end{description}
+
+---
+
+\item \DEFINE{5. Lebesgue Integration}
+
+	\begin{description}
+    \item \textbf{Step 1: Simple Functions}
+
+* Finite linear combinations of indicator functions:
+    \begin{align*}
+        s(x) = \sum a_i \chi_{A_i}(x)
+    \end{align*}
+
+    \item \textbf{Step 2: Nonnegative Functions}
+
+* Approximate from below by simple functions:
+    \begin{align*}
+        \int f\, d\mu = \sup \left\{ \int s\, d\mu : s \le f \right\}
+    \end{align*}\BLUE{Decompose $f$ via its domain into a sequence of simple functions $s_i$ then integrate over the domain of each.  Keep in mind that this could easily be an infinite sum.  In Riemann we summed over the range using $\Delta x_i f(x_i)$ here we are using almost the same thing but $s_i(x)$ over each domain. Even more important is $X$ can be any multi-dimensional space whereas $\Delta x_i$ becomes limited.}
+
+    \item \textbf{Step 3: General Functions}
+
+* Decompose:
+    \begin{align*}
+        f = f^+ - f^-
+    \end{align*}\BLUE{This process only really works if $f>0$, thus, for those functions that don't fit into this set, we must use $f^-$.}
+
+---
+
+    \item \textbf{Key Idea}
+
+		\begin{itemize}
+        \item \DEFINE{Riemann}: slice the domain
+        \item \DEFINE{Lebesgue}: slice the range
+		\end{itemize}
+
+\BLUE{
+		\item \textbf{Observations: } Up until this level, functions are largely regarded as an object that accepts a parameter and returns another object.  This emphasizes the idea that one input generates one output.  However, at this point, we focus on the domain as an intricate part of what a function is.  Thus, a simple function really IS about as simple a definition as we can from this perspective.  A simple function is a defined domain, $X$, and the function, $s: X \to \R$, is some constant.  That is $s(x)=c$ whenever $x \in X$ and zero otherwise.  The question now arises, what are the properties of $X$ (continuous, measurable, connected, complete, dense, $\dots$)?  These then determine the behavior of $s$.
+}
+
+	\end{description}
+
+This makes Lebesgue integration much more flexible.
+
+---
+
+\item \DEFINE{6. Convergence Theorems (Core Power)}
+
+These are the heart of measure theory.
+
+	\begin{description}
+    \item \textbf{1. Monotone Convergence Theorem (MCT)}
+
+If $f_n \uparrow f$, then:
+\begin{align*}
+\int f_n \to \int f
+\end{align*}
+
+---
+
+    \item \textbf{2. Fatou’s Lemma}
+
+\begin{align*}
+\int \liminf f_n \le \liminf \int f_n
+\end{align*}\BLUE{The integral of the limit of the infimum is the `floor' of the sequence of functions.  Whereas the limit of the infimum of integrals will always be higher.}
+
+---
+
+    \item \textbf{3. Dominated Convergence Theorem (DCT)}
+
+If:
+		\begin{itemize}
+        \item $f_n \to f$ pointwise
+        \item $|f_n| \le g$, with $g \in L^1$
+		\end{itemize}
+
+Then:
+\begin{align*}
+\int f_n \to \int f
+\end{align*}\BLUE{If $g$ exists it must be finite.  This is essentially an upper bound for $f_n$ and since $f_n \to f$ then $f$ must also be finite and hence $f\in L^1$ (set of integrable functions).}
+
+---
+
+\item Why these matter
+
+They allow you to:
+		\begin{itemize}
+        \item interchange limits and integrals,
+        \item control sequences of functions,
+        \item justify calculations rigorously.
+		\end{itemize}
+	\end{description}
+
+---
+
+\item \DEFINE{7. $L^p$ Spaces}
+
+	\begin{description}
+    \item \textbf{Definition}
+
+\begin{align*}
+L^p(X) = \left\{ f : \int |f|^p < \infty \right\}
+\end{align*}
+
+    \item \textbf{Special cases}
+
+		\begin{itemize}
+        \item $L^1$: integrable functions
+        \item $L^2$: Hilbert space (inner product structure)
+		\end{itemize}
+
+    \item \textbf{Key inequalities}
+
+		\begin{itemize}
+        \item Hölder’s inequality \BLUE{Think Cauchy-Schwartz
+		\begin{align*}
+			\sum |a_ib_i|  &\le \|a\|_{L^p} \|b\|_{L^q}
+		\end{align*}
+		}
+        \item Minkowski inequality \BLUE{Think Triangular Inequality
+		\begin{align*}
+			\PAREN{\sum_n |a_i-b_i|^p}^{1/p} &\le \PAREN{\sum_n |a_i|^p}^{1/p} + 			\PAREN{\sum_n |b_i|^p}^{1/p} \\
+			\PAREN{\int_n |a_i-b_i|^p}^{1/p} &\le \PAREN{\int_n |a_i|^p}^{1/p} + 			\PAREN{\int_n |b_i|^p}^{1/p}
+		\end{align*}
+        }
+
+		\end{itemize}
+	\end{description}
+
+---
+
+\item \DEFINE{8. Null Sets and “Almost Everywhere”}
+
+	\begin{description}
+    \item \textbf{Null sets}
+
+* Sets of measure zero
+
+    \item \textbf{Almost everywhere (a.e.)}
+
+* Property holds except on a null set
+
+    \item \textbf{Importance}
+
+* Functions that differ only on null sets are considered the same in $L^p$
+	\end{description}
+
+---
+
+\item \DEFINE{9. Product Measures and Fubini’s Theorem}
+
+	\begin{description}
+    \item \textbf{Product measure}
+
+* Measure on $X \times Y$
+
+    \item \textbf{Fubini’s Theorem}
+
+\begin{align*}
+    \int f(x,y)\,d(x,y) = \int \left(\int f(x,y)\,dx\right) dy
+\end{align*}
+
+    \item \textbf{Importance}
+
+* Justifies iterated integrals
+	\end{description}
+
+---
+
+\item \DEFINE{10. Radon–Nikodym Theorem}
+
+If $\nu \ll \mu$, then:
+\begin{align*}
+    \nu(A) = \int_A f \, d\mu
+\end{align*}
+
+* $f = \frac{d\nu}{d\mu}$ is the \DEFINE{Radon–Nikodym derivative}
+
+\textbf{Interpretation}
+
+* Generalized ``density"
+
+---
+
+\item \DEFINE{11. Big Conceptual Themes}
+
+	\begin{description}
+    \item \textbf{1. Generalization of size}
+
+* From intervals $\to$ arbitrary sets
+
+    \item \textbf{2. Limit control}
+
+* Convergence theorems dominate the subject
+
+    \item \textbf{3. Flexibility}
+
+* Handles discontinuous, highly irregular functions
+
+    \item \textbf{4. Equivalence up to null sets}
+
+* Exact equality replaced by “almost everywhere”
+	\end{description}
+
+---
+
+\item \DEFINE{12. Dependency Flow (Compressed)}
+
+%```id="7k2mql"
+%$\sigma$-algebras
+%     ↓
+%Measures
+%     ↓
+%Measurable functions
+%     ↓
+%Lebesgue integral
+%     ↓
+%Convergence theorems
+%     ↓
+%Lp spaces / Functional analysis
+%```
+
+---
+\end{description}
+
+\DEFINE{If you want to go deeper}
+
+I can walk you through:
+
+		\begin{itemize}
+        \item a \DEFINE{full construction of Lebesgue measure} (Carathéodory approach),
+        \item \DEFINE{proofs of MCT/DCT} (these are central),
+        \item or how measure theory connects directly to \DEFINE{probability theory} and \DEFINE{PDEs}.
+		\end{itemize}
+
+Just tell me where you want to zoom in.
+
+\end{document}

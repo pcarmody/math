@@ -22,7 +22,7 @@
     linkcolor=blue,
     filecolor=magenta,      
     urlcolor=cyan,
-    pdftitle={Tensors},
+    pdftitle={PDE2},
     pdfpagemode=FullScreen,
     }
 
@@ -79,7 +79,7 @@
 \end{center}
 
 \HLINE
-\section{January 12, 2026: H\"older semi-norm}
+\section*{January 12, 2026: H\"older semi-norm}
 
 \begin{description}
 	\item H\"older Spaces
@@ -237,7 +237,7 @@ Assume $0 < \beta < \gamma < 1$.  Prove the interpolation inequality
 }
 
 \HLINE
-\section{January 21, 2026}
+\section*{January 21, 2026}
 
 Multi-index notation:
 
@@ -319,7 +319,7 @@ Example: \begin{enumerate}
 \end{enumerate}
 
 \HLINE
-\section{January 26, 2026}
+\section*{January 26, 2026}
 
 \newcommand{\SSPACEX}{\SSPACE{k}{p}{u}}
 \begin{theorem}
@@ -364,21 +364,21 @@ Proof: \begin{enumerate}
 \end{theorem}
 
 \HLINE
-\section{January 28, 2026: Sections 5.2 and 5.3} 
+\section*{January 28, 2026: Sections 5.2 and 5.3} 
 
 For $u \in \SSPACE{k}{p}{U}$ then order of differentiation doesn't matter when $|\alpha| \le k$.\\
 
 See sections 5.2 and 5.3:``Approximation of $\dots$" Evans.  See Appendix \S C.5:Convolutions and Smoothing.\\
 
 \HLINE
-\section{February 2, 2026: 5.4 Extensions}
+\section*{February 2, 2026: 5.4 Extensions}
 
 \textbf{FYI: } Midterm is next week!  Consider doing more of the problems that are in the book to study.  Problems 1 thru 6 on page 306.\\
 
 Proof of the \DEFINE{Extension Theorem}  See pages 268 thru 271.
 
 \HLINE
-\section{February 4, 2026: Extensions continued}
+\section*{February 4, 2026: Extensions continued}
 
 \textbf{Keyword:}  Partition of Unity.  Given an interval, $I$, and a number of functions $\rho_i$ defined on this interval.  Every $x\in I$ has the quality that $\sum_i \rho_i(x) = 1$.\\
 
@@ -388,7 +388,7 @@ Proof of the \DEFINE{Extension Theorem}  See pages 268 thru 271.
 
 
 \HLINE
-\section{February 18, 2026}
+\section*{February 18, 2026}
 
 25 out of 100 on the test.  The frustrating part isn't how bad I scored it is how much I have to live with failure.  The average score was 45, so we all have the same feeling, which is not at all uncommon from other classes.  I don't quite understand a curriculum designed around abtuseness, non-communication and, ultimately, failure.  Yet, I suspect that I'll still pass the course.  Indeed, the worst part of all is how much it makes me want to say ``I don't care".  Seriously, if there is no way to find success then fail me or don't bother to put on the facade that is called ``education".\\
 
@@ -398,7 +398,7 @@ Proof of the \DEFINE{Extension Theorem}  See pages 268 thru 271.
 
 \GREEN{It would be a good idea to go over the solutions to the midterm and see if there actually is some kind of lesson from the teacher.}
 
-\section{Homework before First Midterm}
+\section*{Homework before First Midterm}
 
 \begin{enumerate}
 	\item Suppose $k \in \{0,1,\dots\}, 0 < \gamma \le 1$.  Prove $\HSPACE{k}{\gamma}{\CONJ{U}}$ is a Banach Sapce.
@@ -630,7 +630,7 @@ On $U$, we have:
 \end{enumerate}
 
 \HLINE
-\section{Homework before 2\SND Midterm}
+\section*{Homework before 2\SND Midterm}
 
 \begin{enumerate}
 	\setcounter{enumi}{7}
@@ -1157,7 +1157,7 @@ Since both $\int_U |u|^n dx$ and $\int_U |Du|^n dx$ are finite, we have successf
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \HLINE
-\section{AI Questions and Responses}
+\section*{AI Questions and Responses}
 
 \begin{description}
 
@@ -1247,6 +1247,7 @@ Lebesgue spaces classify functions based on their global size, while Hölder spa
 Answer: <strong>Hölder spaces \(C^{\alpha}(\Omega)\) are subsets of Lebesgue spaces \(L^p(\Omega)\) on bounded domains: every Hölder continuous function is also Lebesgue integrable, but not every Lebesgue integrable function is Hölder continuous; they are connected via Sobolev embedding theorems, which state that sufficient integrability of derivatives (in \(L^p\)) can imply Hölder continuity.
 
 \HLINE
+\subsection*{Extension Theorem}
 \item \textbf{How helpful is the Extension Theorem to PDE?}\\
 
 The Extension Theorem is a fundamental tool in the theory of Partial Differential Equations (PDEs), particularly when dealing with Sobolev spaces and boundary value problems. Its primary utility lies in allowing mathematicians to treat functions defined on a restricted domain as if they were defined on the entire Euclidean space.
@@ -1302,6 +1303,7 @@ The ability to extend Sobolev functions ensures they can be approximated by smoo
 Answer: <strong>The extension theorem is highly helpful and indispensable in PDEs, as it enables the application of global analytical techniques (like Sobolev embeddings, Fourier analysis, and trace theory) to functions defined on bounded domains, thereby greatly simplifying the proofs of existence, regularity, and boundary behavior of solutions.
 
 \newpage
+\subsection*{Motivation for H\"older Norm?}
 \item \textbf{What is the motivation for H\"older Norm?}
 
 Great question — the Hölder norm isn’t just a technical definition; it’s designed to \DEFINE{**quantify how smooth a function is**}, in a way that sits naturally \textbf{between mere continuity and differentiability}.
@@ -1455,6 +1457,7 @@ If you want, I can next explain:
 Just say what direction you want.
 
 \newpage
+\subsection*{Exercises for mollification}
 \item \textbf{Provide 5 exercises to understand mollification}
 
 The request for exercises on mollification is directly related to our previous discussion. In the last step, we constructed a smooth cutoff function using a technique called mollification. This technique is fundamental in the theory of Sobolev spaces, which is the natural setting for the Sobolev and Morrey inequalities we discussed initially. Understanding mollification is key to proving many results in this area, such as the density of smooth functions in Sobolev spaces and the properties of weak solutions to PDEs.
@@ -1463,7 +1466,8 @@ Here are 5 exercises to help you better understand how to use mollification:
 
 \begin{description}
 
-\item Exercise 1: Approximation of Identity
+\item \textbf{Exercise 1: Approximation of Identity}
+
 Let \( \eta \) be a standard mollifier and define \( \eta_\epsilon(x) = \frac{1}{\epsilon^n} \eta(\frac{x}{\epsilon}) \) for \( \epsilon > 0 \). Let \( f \in L^p(\R^n) \) for \( 1 \leq p < \infty \). Show that the convolution \( f_\epsilon = f * \eta_\epsilon \) converges to \( f \) in the \( L^p \) norm as \( \epsilon \to 0 \). That is, prove:
 
 \[ \lim_{\epsilon \to 0} \|f * \eta_\epsilon - f\|_{L^p} = 0 \]
@@ -1483,14 +1487,16 @@ Let \( \eta \) be a standard mollifier and define \( \eta_\epsilon(x) = \frac{1}
 \end{align*}The norm must be positive therefore the limit is zero.
 }
 
-\item  Exercise 2: Density of Smooth Functions in \( L^p \)
+\item  \textbf{Exercise 2: Density of Smooth Functions in \( L^p \)}
+
 Prove that the space of compactly supported smooth functions, \( C_c^\infty(\R^n) \), is dense in \( L^p(\R^n) \) for \( 1 \leq p < \infty \).
 
 **Hint:** Use the result from Exercise 1. First, show that for any \( f \in L^p \), its mollification \( f_\epsilon = f * \eta_\epsilon \) is a smooth function. Then, consider approximating \( f \) by functions with compact support, for example \( f_k = f \cdot \chi_{B(0,k)} \), where \( \chi \) is the characteristic function for the ball of radius \( k \). Combine these two approximation steps.
 
 ---
 
-\item  Exercise 3: Mollification and Derivatives
+\item  \textbf{Exercise 3: Mollification and Derivatives}
+
 Let \( u \in W^{1,p}(U) \), where \( U \) is an open set in \( \R^n \). Let \( u_\epsilon = u * \eta_\epsilon \) be the mollification of \( u \) (assuming \( u \) is extended by zero outside \( U \)). Show that the derivative of the mollified function is the mollification of the weak derivative. Specifically, for any multi-index \( \alpha \) with \( |\alpha| = 1 \), prove that:
 
 \[ D^\alpha (u * \eta_\epsilon) = (D^\alpha u) * \eta_\epsilon \]
@@ -1499,7 +1505,8 @@ Let \( u \in W^{1,p}(U) \), where \( U \) is an open set in \( \R^n \). Let \( u
 
 ---
 
-\item  Exercise 4: A Product Rule for Sobolev Functions
+\item  \textbf{Exercise 4: A Product Rule for Sobolev Functions}
+
 Let \( u, v \in W^{1,p}(\R^n) \cap L^\infty(\R^n) \) for \( 1 \leq p < \infty \). Prove that their product \( uv \) is in \( W^{1,p}(\R^n) \) and that the Leibniz rule (product rule) holds for their weak derivatives:
 
 \[ D(uv) = (Du)v + u(Dv) \]
@@ -1508,7 +1515,8 @@ Let \( u, v \in W^{1,p}(\R^n) \cap L^\infty(\R^n) \) for \( 1 \leq p < \infty \)
 
 ---
 
-\item Exercise 5: Friedrichs' Inequality
+\item \textbf{Exercise 5: Friedrichs' Inequality}
+
 Let \( U \) be a bounded open set in \( \R^n \). Prove that there exists a constant \( C > 0 \) such that for any function \( u \in C_c^1(U) \) (smooth functions with compact support in \( U \)), the following inequality holds:
 
 \[ \|u\|_{L^2(U)} \leq C \|\nabla u\|_{L^2(U)} \]
@@ -1520,6 +1528,8 @@ This shows that for functions that are zero on the boundary, the \( L^2 \) norm 
 \end{description}
 
 \HLINE
+\newpage
+\subsection*{Exercises for Convolusions.}
 \item \textbf{Provide 5 exercises that help to understand Convolusions.}
 
 This request for exercises on convolutions is directly related to our previous discussions. We used convolution with a mollifier to construct a smooth cutoff function, and the exercises on mollification heavily relied on the properties of convolution. Convolutions are a fundamental tool in the analysis of Sobolev spaces and PDEs, which is the context for the Hölder, Sobolev, and Morrey inequalities we started with.
@@ -1527,7 +1537,8 @@ This request for exercises on convolutions is directly related to our previous d
 Here are 5 exercises to help you better understand how to use convolutions:
 
 \begin{description}
-\item Exercise 1: Basic Properties of Convolution
+\item \textbf{Exercise 1: Basic Properties of Convolution}
+
 Let \( f, g, h \) be functions in \( L^1(\R^n) \). Prove the following properties of the convolution operation \( * \):
 \begin{description}
 
@@ -1560,7 +1571,8 @@ Let \( f, g, h \) be functions in \( L^1(\R^n) \). Prove the following propertie
 
 ---
 
-\item Exercise 2: Young's Inequality for Convolutions
+\item \textbf{Exercise 2: Young's Inequality for Convolutions}
+
 Let \( 1 \leq p, q, r \leq \infty \) be such that \( \frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r} \). If \( f \in L^p(\R^n) \) and \( g \in L^q(\R^n) \), prove that their convolution \( f * g \) is in \( L^r(\R^n) \) and satisfies the inequality:
 
 \[ \|f * g\|_{L^r} \leq \|f\|_{L^p} \|g\|_{L^q} \]
@@ -1585,7 +1597,8 @@ Let \( 1 \leq p, q, r \leq \infty \) be such that \( \frac{1}{p} + \frac{1}{q} =
 
 ---
 
-\item Exercise 3: Convolution and the Fourier Transform
+\item \textbf{Exercise 3: Convolution and the Fourier Transform}
+
 Let \( f, g \in L^1(\R^n) \). The Fourier transform of a function \( h \) is defined as \( \hat{h}(\xi) = \int_{\R^n} h(x) e^{-2\pi i x \cdot \xi} dx \). Prove that the Fourier transform of a convolution is the pointwise product of the Fourier transforms:
 
 \[ \widehat{f * g}(\xi) = \hat{f}(\xi) \hat{g}(\xi) \]
@@ -1594,14 +1607,16 @@ Let \( f, g \in L^1(\R^n) \). The Fourier transform of a function \( h \) is def
 
 ---
 
-\item  Exercise 4: Solving a Differential Equation with Convolution
+\item  \textbf{Exercise 4: Solving a Differential Equation with Convolution}
+
 Consider the ordinary differential equation (ODE) \( u'' - u = f \) on \( \R \), where \( f \) is a continuous function with compact support. A solution can be found using the Green's function (or fundamental solution) \( G(x) = -\frac{1}{2}e^{-|x|} \). Show that the function \( u(x) = (G * f)(x) \) is a solution to the ODE.
 
 **Hint:** You need to compute the first and second derivatives of the convolution \( u(x) = -\frac{1}{2} \int_{-\infty}^{\infty} e^{-|x-y|} f(y) dy \). Be careful when differentiating the absolute value function. This exercise demonstrates how convolution provides a general method for solving linear, constant-coefficient differential equations.
 
 ---
 
-\item  Exercise 5: Support of a Convolution
+\item  \textbf{Exercise 5: Support of a Convolution}
+
 Let \( f \) and \( g \) be functions on \( \R^n \) with compact support. The support of a function \( h \), denoted \( \text{supp}(h) \), is the closure of the set where \( h(x) \neq 0 \). Prove that the support of the convolution \( f * g \) is contained in the vector sum of their individual supports:
 
 \[ \text{supp}(f * g) \subseteq \text{supp}(f) + \text{supp}(g) \]
@@ -1613,6 +1628,9 @@ where \( A+B = \{a+b \mid a \in A, b \in B\} \). This property is essential for 
 \end{description}
 
 \HLINE
+
+\newpage
+\subsection*{Describe the $H^n(H)$ Space.}
 \textbf{Describe the $H^n(U)$  Space.}
 
 The notation \(H^k(U)\) is central to our entire conversation. It represents a specific type of \DEFINE{Sobolev space}, which is a fundamental concept in the study of partial differential equations and the inequalities we've been discussing.
@@ -1664,6 +1682,510 @@ The space \(H^k(U)\) is a Hilbert space equipped with an inner product, for exam
 
 \end{itemize}
 \end{itemize}
+
+\HLINE
+\newpage
+\subsection*{Define elliptical, hyperbolic and parabolic PDE}.
+\item \textbf{Explain the terms elliptical, hyperbolic and parabolic in the context of PDE}
+
+The classification into \DEFINE{elliptic, parabolic, and hyperbolic PDEs} is really about the \textit{geometry and behavior of solutions}, not just algebra. The cleanest way to see it is through the \DEFINE{second-order linear PDE}.
+
+---
+\begin{description}
+
+\item \textbf{1. The general second-order PDE}
+
+In two variables, consider:
+\begin{align*}
+A(x,y),u_{xx} + 2B(x,y),u_{xy} + C(x,y),u_{yy} + \text{lower-order terms} = 0
+\end{align*}
+
+The classification depends on the discriminant:
+\begin{align*}
+\boxed{B^2 - AC}
+\end{align*}
+
+---
+
+\item \textbf{2. The three types}
+
+\begin{description}
+\item \textbf{(a) Elliptic: $B^2 - AC < 0$}
+\begin{description}
+\item \textit{Example:}
+
+\begin{align*}
+u_{xx} + u_{yy} = 0 \quad \text{(Laplace equation)}
+\end{align*}
+
+\item \textit{Meaning:}
+
+\begin{itemize}
+\item No real characteristic directions
+\item Behavior is \DEFINE{spatially smooth and global}
+\item Disturbances spread instantly everywhere
+\end{itemize}
+
+\item \textit{Key properties:}
+
+\begin{itemize}
+\item Solutions are very smooth (analytic if coefficients are nice)
+\item No propagation of waves
+\item Boundary conditions determine everything
+\end{itemize}
+
+\item \textit{Physical intuition:}
+
+\begin{itemize}
+\item Steady-state equilibrium
+\item Example: temperature in a solid at equilibrium
+\end{itemize}
+
+---
+\end{description}
+
+\item \textbf{(b) Hyperbolic: $B^2 - AC > 0$}
+\begin{description}
+\item \textit{Example:}
+
+\begin{align*}
+u_{tt} - c^2 u_{xx} = 0 \quad \text{(wave equation)}
+\end{align*}
+
+\item \textit{Meaning:}
+
+\begin{itemize}
+\item Two real characteristic directions
+\item Information propagates along \DEFINE{characteristic curves}
+\end{itemize}
+
+\item \textit{Key properties:}
+
+\begin{itemize}
+\item Finite speed of propagation
+\item Signals travel like waves
+\item Sharp fronts and discontinuities can occur
+\end{itemize}
+
+\item \textit{Physical intuition:}
+
+\begin{itemize}
+\item Vibrations, waves, signals
+\item Example: string vibration, sound waves
+\end{itemize}
+\end{description}
+
+---
+
+\item \textbf{(c) Parabolic: $B^2 - AC = 0$}
+
+\begin{description}
+\item \textit{Example:}
+\begin{align*}
+u_t - k u_{xx} = 0 \quad \text{(heat equation)}
+\end{align*}
+
+\item \textit{Meaning:}
+
+\begin{itemize}
+\item One repeated characteristic direction
+\item Intermediate between elliptic and hyperbolic
+\end{itemize}
+
+\item \textit{Key properties:}
+
+\begin{itemize}
+\item Diffusion/smoothing over time
+\item Infinite propagation speed (but decays rapidly)
+\item Irreversible behavior (time direction matters)
+\end{itemize}
+
+\item \textit{Physical intuition:}
+
+\begin{itemize}
+\item Heat flow, diffusion
+\item Information spreads but *dissipates*
+\end{itemize}
+\end{description}
+
+---
+\end{description}
+
+\item \textbf{3. Geometric interpretation (very important)}
+
+The classification comes from the quadratic form:
+\begin{align*}
+A,dx^2 + 2B,dx,dy + C,dy^2
+\end{align*}
+
+This behaves like conic sections:
+
+\begin{tabular}{|l|l|l|}
+\hline
+   Type       & Geometry  & Analogy            \\   
+\hline
+   Elliptic   & Ellipse   & No real directions \\   
+   Hyperbolic & Hyperbola & Two directions     \\   
+   Parabolic  & Parabola  & One direction      \\   
+\hline
+\end{tabular}
+
+So:
+
+\begin{itemize}
+\item \DEFINE{Hyperbolic} → real characteristic curves (wave propagation)
+\item \DEFINE{Elliptic} → no real characteristics (global coupling)
+\item \DEFINE{Parabolic} → degenerate case
+\end{itemize}
+
+---
+
+\item \textbf{4. Characteristics (the real heart of it)}
+
+Characteristic curves satisfy:
+\begin{align*}
+A(dy)^2 - 2B\,dx\,dy + C(dx)^2 = 0
+\end{align*}
+
+\begin{itemize}
+\item Hyperbolic → two real solutions → two families of curves
+\item Parabolic → one repeated solution
+\item Elliptic → no real solutions
+\end{itemize}
+
+These curves are where:
+
+\begin{itemize}
+\item information travels (hyperbolic)
+\item PDE reduces to ODEs
+\end{itemize}
+
+---
+
+\item \textbf{5. Big-picture intuition}
+
+\begin{description}
+\item \DEFINE{Elliptic:}
+
+\item \textit{“Everything depends on everything else at once.”}
+
+\begin{itemize}
+\item Global constraint
+\item No notion of time evolution
+\end{itemize}
+
+---
+
+\item \DEFINE{Hyperbolic:}
+
+\item \textit{“Information travels along paths.”}
+
+\begin{itemize}
+\item Signals move with finite speed
+\item Domain of dependence is finite
+\end{itemize}
+
+---
+
+\item \DEFINE{Parabolic:}
+
+\item \textit{“Information diffuses and forgets its past.”}
+
+\begin{itemize}
+\item Smooths out irregularities
+\item Has a preferred time direction
+\end{itemize}
+
+\end{description}
+---
+
+\item \textbf{6. In higher dimensions}
+
+For:
+\begin{align*}
+\sum_{i,j} a_{ij} u_{x_i x_j}
+\end{align*}
+
+Look at eigenvalues of matrix $A = (a_{ij})$:
+
+\begin{itemize}
+\item \DEFINE{Elliptic}: all eigenvalues same sign
+\item \DEFINE{Hyperbolic}: mixed signs
+\item \DEFINE{Parabolic}: at least one zero eigenvalue
+\end{itemize}
+
+---
+
+\item \textbf{7. Why this matters}
+
+This classification determines:
+
+\begin{itemize}
+\item What kind of boundary/initial conditions are appropriate
+\item Whether solutions are smooth
+\item How information propagates
+\item Which methods work (Fourier, energy, maximum principle, etc.)
+\end{itemize}
+
+---
+\end{description}
+
+If you want, I can connect this directly to:
+
+\begin{itemize}
+\item characteristics and change of variables,
+\item energy estimates,
+\item or how this classification appears on manifolds (since you’ve been working in that direction).
+\end{itemize}
+
+\HLINE
+\newpage
+\subsection*{How do you derive a Green's Function?}
+
+\item \textbf{How do you derive a Green's Function?}
+
+Deriving a Green’s function is less about a single recipe and more about a \textit{strategy tailored to the operator and domain}. That said, there is a clear general framework you can follow.
+
+---
+
+\begin{description}
+\item \textbf{1. What a Green’s function is}
+
+Suppose you have a linear PDE operator $L$ and want to solve
+\begin{align*}
+L u(x) = f(x), \quad x \in \Omega
+\end{align*}
+with some boundary conditions.
+
+The Green’s function $G(x,\xi$) is defined by
+\begin{align*}
+L_x G(x,\xi) = \delta(x-\xi)
+\end{align*}
+(with the same boundary conditions in $x$).
+
+Once you have $G$, the solution is
+\begin{align*}
+u(x) = \int_\Omega G(x,\xi), f(\xi), d\xi.
+\end{align*}
+
+So the whole problem reduces to:
+\DEFINE{solve the PDE with a point source}.
+
+---
+
+\item \textbf{2. General derivation strategy}
+
+\begin{description}
+\item \DEFINE{Step 1: Identify the operator and domain}
+
+\begin{itemize}
+\item Example: $L = -\Delta$, or $L = \partial_t - \Delta$
+\item Domain: $\mathbb{R}^n$, bounded domain, interval, etc.
+\item Boundary conditions matter *a lot*
+\end{itemize}
+
+---
+
+\item \DEFINE{Step 2: Solve the fundamental solution (free space)}
+
+First ignore boundaries and solve:
+\begin{align*}
+L G(x,\xi) = \delta(x-\xi), \quad x \in \mathbb{R}^n
+\end{align*}
+
+This is often done using:
+
+\begin{itemize}
+\item Fourier transform
+\item Symmetry (radial solutions)
+\item ODE reduction (in 1D)
+\end{itemize}
+
+---
+
+\item \DEFINE{Example: Laplacian in $\mathbb{R}^3$}
+
+Solve:
+\begin{align*}
+-\Delta G = \delta(x)
+\end{align*}
+
+Using symmetry, assume $G = G(r$), $r = |x|$, then:
+\begin{align*}
+\Delta G = \frac{1}{r^2}\frac{d}{dr}\left(r^2 \frac{dG}{dr}\right)
+\end{align*}
+
+Solving gives:
+\begin{align*}
+G(x) = \frac{1}{4\pi |x|}
+\end{align*}
+
+---
+
+\item \DEFINE{Step 3: Impose boundary conditions}
+
+If the domain is not all of $\mathbb{R}^n$, modify $G$ so that:
+
+\begin{itemize}
+\item $G(x,\xi$) satisfies boundary conditions in $x$
+\end{itemize}
+
+Methods:
+
+\begin{itemize}
+\item \DEFINE{Method of images}
+\item \DEFINE{Eigenfunction expansions}
+\item \DEFINE{Separation of variables}
+\end{itemize}
+
+---
+
+\item \DEFINE{Example: Interval $[0,L]$}
+
+For:
+\begin{align*}
+-u'' = f(x), \quad u(0)=u(L)=0
+\end{align*}
+
+Green’s function satisfies:
+\begin{align*}
+-G''(x,\xi) = \delta(x-\xi)
+\end{align*}
+
+Solve piecewise:
+
+\begin{itemize}
+\item For $x<\xi$: $G = A x$
+\item For $x>\xi$: $G = B (L-x)$
+\end{itemize}
+
+Apply:
+
+\begin{itemize}
+\item Continuity at $x=\xi$
+\item Jump condition:
+\begin{align*}
+  G'( \xi^+) - G'(\xi^-) = -1
+\end{align*}
+\end{itemize}
+
+Result:
+\begin{align*}
+G(x,\xi) = \BINDEF{ \frac{x(L-\xi)}{L}, & x<\xi }{ \frac{\xi(L-x)}{L}, & x>\xi s}
+\end{align*}
+
+---
+
+\item \DEFINE{Step 4: Verify the delta property}
+
+You must check:
+
+\begin{itemize}
+\item $G$ is continuous
+\item Derivative has correct jump:
+\begin{align*}
+  \text{jump in derivative} = 1
+\end{align*}
+\end{itemize}
+
+This ensures:
+\begin{align*}
+L G = \delta
+\end{align*}
+
+---
+
+\item \DEFINE{Step 5: Build the solution}
+
+Once $G$ is known:
+\begin{align*}
+u(x) = \int_\Omega G(x,\xi) f(\xi), d\xi
+\end{align*}
+
+---
+\end{description}
+
+\item \textbf{3. Key intuition}
+
+A Green’s function is:
+
+\DEFINE{The response of the system to a point source.}
+
+So you can think:
+
+\begin{itemize}
+\item General forcing = superposition of point sources
+\item Solution = sum (integral) of responses
+\end{itemize}
+
+---
+
+\item \textbf{4. Common methods summarized}
+
+\begin{description}
+\item \DEFINE{1. Fourier transform (best for $\mathbb{R}^n$)}
+
+Turn PDE into algebra:
+\begin{align*}
+\hat{G}(k) = \frac{1}{L(k)}
+\end{align*}
+
+---
+
+\item \DEFINE{2. Eigenfunction expansion}
+
+If $L\phi_n = \lambda_n \phi_n$, then:
+\begin{align*}
+G(x,\xi) = \sum_n \frac{\phi_n(x)\phi_n(\xi)}{\lambda_n}
+\end{align*}
+
+---
+
+\item \DEFINE{3. Method of images}
+
+Used for simple domains (half-space, etc.)
+
+---
+
+\item \DEFINE{4. Direct ODE approach (1D)}
+
+Solve piecewise and enforce jump conditions.
+
+---
+\end{description}
+
+\item \textbf{5. Subtle but important point}
+
+Green’s functions are:
+
+\begin{itemize}
+\item \DEFINE{not unique} unless boundary conditions are fixed
+\item depend heavily on domain geometry
+\end{itemize}
+
+---
+
+\item \textbf{6. If you want to go deeper}
+
+Given your background (you’ve been working with tensors and PDEs), the next level is:
+
+\begin{itemize}
+\item Green’s functions on manifolds
+\item Heat kernel as a Green’s function
+\item Connection with fundamental solutions and distributions
+\end{itemize}
+
+---
+\end{description}
+
+If you want, I can:
+
+\begin{itemize}
+\item Derive one fully step-by-step (Laplace, heat, wave), or
+\item Show how Green’s functions relate to weak solutions and distributions.
+\end{itemize}
+
+
 \end{description} %%%% AI questions and responses
 
 \end{document}

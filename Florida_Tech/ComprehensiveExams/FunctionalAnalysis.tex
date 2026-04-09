@@ -1,0 +1,630 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Functional Analysis},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Comprehensive Exams -- Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{April 2026}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} 
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\section*{Functional Analysis -- Overview}
+
+Functional analysis is a broad subject, but it has a very coherent “architecture.” Here’s a structured outline that shows how the pieces fit together and what each part is trying to accomplish.
+
+---
+\begin{description}
+
+\item \textbf{1. Foundations: Normed and Metric Spaces}
+
+\item \textbf{Goal:} Generalize notions of distance, convergence, and continuity.
+
+\begin{itemize}
+    \item \DEFINE{Metric spaces}
+
+	\begin{itemize}
+        \item Open/closed sets, completeness
+        \item Compactness, connectedness
+	\end{itemize}
+
+    \item \DEFINE{Normed vector spaces}
+
+	\begin{itemize}
+        \item Norms, induced metrics
+        \item Examples: $ \mathbb{R}^n $, $ C([a,b]$ ), $ L^p $
+	\end{itemize}
+
+    \item \DEFINE{Banach spaces (complete normed spaces)}
+
+	\begin{itemize}
+        \item Importance of completeness
+        \item Examples: $ L^p $, $ C([a,b]$ )
+	\end{itemize}
+
+\end{itemize}
+---
+
+\item \textbf{2. Hilbert Spaces}
+
+\item \textbf{Goal:} Introduce geometry (angles, orthogonality) into infinite dimensions.
+
+\begin{itemize}
+    \item Inner product spaces
+    \item Hilbert spaces (complete inner product spaces)
+    \item Orthogonality and projections
+    \item Orthonormal bases
+    \item Fourier series and expansions
+\end{itemize}
+
+---
+
+\item \textbf{3. Linear Operators}
+
+\item \textbf{Goal:} Study functions between infinite-dimensional spaces.
+
+\begin{itemize}
+    \item Bounded (continuous) linear operators
+
+    \item Operator norm
+
+    \item Examples:
+
+	\begin{itemize}
+        \item Integral operators
+        \item Differential operators
+	\end{itemize}
+
+    \item Finite vs infinite dimensional behavior
+\end{itemize}
+
+---
+
+\item \textbf{4. Duality and Functionals}
+
+\item \textbf{Goal:} Understand spaces via linear functionals.
+
+\begin{itemize}
+    \item Dual space $ X^* $
+    \item Hahn–Banach theorem (extension of functionals)
+    \item Weak and weak-* convergence
+\end{itemize}
+
+---
+
+\item \textbf{5. Core Theorems of Functional Analysis}
+
+These are the “big three” structural results:
+
+\begin{itemize}
+    \item \DEFINE{Hahn–Banach Theorem}
+
+	\begin{itemize}
+        \item Extension of linear functionals
+	\end{itemize}
+    \item \DEFINE{Uniform Boundedness Principle (Banach–Steinhaus)}
+
+	\begin{itemize}
+        \item Control of operator families
+	\end{itemize}
+    \item \DEFINE{Open Mapping Theorem}
+
+	\begin{itemize}
+        \item Surjective bounded operators are open
+	\end{itemize}
+    \item \DEFINE{Closed Graph Theorem}
+\end{itemize}
+
+These results rely heavily on completeness.
+
+---
+
+\item \textbf{6. Topologies in Infinite Dimensions}
+
+\item \textbf{Goal:} Introduce weaker notions of convergence.
+
+\begin{itemize}
+    \item Weak topology
+    \item Weak-* topology
+    \item Compactness (e.g., Banach–Alaoglu theorem)
+\end{itemize}
+
+---
+
+\item \textbf{7. Spectral Theory}
+
+\item \textbf{Goal:} Generalize eigenvalues and diagonalization.
+
+\begin{itemize}
+    \item Spectrum of an operator
+    \item Resolvent
+    \item Spectral radius
+    \item Compact operators
+    \item Self-adjoint operators (Hilbert spaces)
+    \item Spectral theorem
+\end{itemize}
+
+---
+
+\item \textbf{8. Operator Algebras}
+
+\item \textbf{Goal:} Study collections of operators as algebraic objects.
+
+\begin{itemize}
+    \item Banach algebras
+    \item $ C^* $-algebras
+    \item Applications to quantum mechanics
+\end{itemize}
+
+---
+
+\item \textbf{9. Distributions and Sobolev Spaces}
+
+\item \textbf{Goal:} Extend notion of functions to handle PDEs.
+
+\begin{itemize}
+    \item Test functions and distributions
+    \item Weak derivatives
+    \item Sobolev spaces $ W^{k,p} $
+    \item Embedding theorems
+
+\end{itemize}
+
+---
+
+\item \textbf{10. Applications}
+
+Functional analysis is largely motivated by applications:
+
+\begin{itemize}
+    \item \DEFINE{Partial Differential Equations}
+
+	\begin{itemize}
+        \item Weak solutions
+        \item Variational methods
+	\end{itemize}
+    \item \DEFINE{Quantum mechanics}
+
+	\begin{itemize}
+        \item Hilbert space framework
+	\end{itemize}
+    \item \DEFINE{Harmonic analysis}
+
+	\begin{itemize}
+        \item Fourier transform
+	\end{itemize}
+    \item \DEFINE{Numerical analysis}
+    \item \DEFINE{Optimization and control}
+\end{itemize}
+
+---
+
+\item \textbf{11. Advanced Topics (Optional Extensions)}
+
+\begin{itemize}
+    \item Semigroup theory (evolution equations)
+    \item Nonlinear functional analysis
+    \item Fixed point theorems (Banach, Schauder)
+    \item Fredholm theory
+    \item Measure theory connections
+\end{itemize}
+
+---
+
+\item \textbf{Big Picture}
+
+Functional analysis is essentially:
+
+\DEFINE{Linear algebra + topology + limits in infinite dimensions}
+
+It studies:
+
+\begin{itemize}
+    \item Spaces of functions
+    \item Operators acting on them
+    \item Convergence and structure
+\end{itemize}
+
+---
+\end{description}
+
+If you want, I can tailor this outline specifically toward \DEFINE{PDEs}, \DEFINE{geometry}, or a \DEFINE{first graduate course}, which each emphasize very different parts.
+
+\newpage
+
+\subsection*{1. Foundations: Normed and Metric Spaces}
+
+Here’s a focused “toolkit-style” outline of the \DEFINE{core ideas, definitions, and theorems} for each of the three layers:
+
+---
+
+\begin{description}
+\item \textbf{1. Metric Spaces}
+
+    \begin{itemize}
+    \item \textbf{Key Idea}
+
+Abstract the notion of \DEFINE{distance} to study convergence and topology without linear structure.
+
+    \item \textbf{Core Definitions}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Metric space}: $(X,d)$ with}
+\begin{align*}
+  d(x,y)\ge 0,\quad d(x,y)=0 \iff x=y,\quad d(x,y)=d(y,x),\quad d(x,z)\le d(x,y)+d(y,z)
+\end{align*}
+
+            \item \textit{\DEFINE{Open ball}: $B_r(x)={y\in X: d(x,y)<r}$}
+
+            \item \textit{\DEFINE{Open / closed sets}}
+
+            \item \textit{\DEFINE{Closure}, \DEFINE{interior}, \DEFINE{boundary}}
+
+            \item \textit{\DEFINE{Convergence}: $x_n \to x \iff d(x_n,x)\to 0$}
+
+            \item \textit{\DEFINE{Cauchy sequence}:}
+\begin{align*}
+  d(x_n,x_m)\to 0 \quad \text{as } n,m\to\infty
+\end{align*}
+
+            \item \textit{\DEFINE{Complete space}: every Cauchy sequence converges}
+            \end{itemize}
+
+---
+
+    \item \textbf{Key Concepts}
+
+            \begin{itemize}
+            \item \textit{Continuity via metric}
+            \item \textit{Sequential vs topological definitions}
+            \item \textit{Compactness vs completeness}
+            \end{itemize}
+
+---
+
+    \item \textbf{Fundamental Theorems}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Triangle inequality consequences}}
+
+  * Reverse triangle inequality:
+    \begin{align*}
+    |d(x,z)-d(y,z)| \le d(x,y)
+    \end{align*}
+
+            \item \textit{\DEFINE{Characterization of continuity}}
+
+  * Equivalent to sequential continuity
+
+            \item \textit{\DEFINE{Compactness (metric spaces)}}
+  Equivalent:
+
+  * Sequential compactness
+  * Every sequence has convergent subsequence
+  * Open cover definition
+
+            \item \textit{\DEFINE{Heine–Borel (in $\mathbb{R}^n$)}}
+
+  * Compact $\iff$ closed and bounded
+
+            \item \textit{\DEFINE{Cantor Intersection Theorem}}
+
+  * Nested closed sets with diameters $\to$ 0 have single-point intersection
+
+            \end{itemize}
+---
+
+    \item \textbf{Important Lemmas}
+
+            \begin{itemize}
+            \item \textit{Limit in metric space is unique}
+            \item \textit{Cauchy $\implies$ bounded}
+            \item \textit{Convergent $\implies$ Cauchy}
+            \end{itemize}
+    \end{itemize}
+
+---
+
+\item \textbf{2. Normed Vector Spaces}
+
+    \begin{itemize}
+    \item \textbf{Key Idea}
+
+Add \DEFINE{linear structure + size (norm)} $\to$ geometry + analysis.
+
+---
+
+    \item \textbf{Core Definitions}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Normed space} $(X,|\cdot|)$:}
+\begin{align*}
+  |x|\ge 0,\quad |x|=0 \iff x=0,\quad |\lambda x|=|\lambda||x|,\quad |x+y|\le |x|+|y|
+\end{align*}
+
+            \item \textit{Induced metric:}
+\begin{align*}
+  d(x,y)=|x-y|
+\end{align*}
+
+            \item \textit{\DEFINE{Convergence}: $|x_n-x|\to 0$}
+
+            \item \textit{\DEFINE{Linear operator} $T:X\to Y$}
+
+            \item \textit{\DEFINE{Bounded operator}:}
+\begin{align*}
+  |Tx|\le C|x|
+\end{align*}
+
+            \item \textit{\DEFINE{Operator norm}:}
+\begin{align*}
+  |T|=\sup_{|x|\le 1}|Tx|
+\end{align*}
+
+            \end{itemize}
+---
+
+    \item \textbf{Key Concepts}
+
+            \begin{itemize}
+            \item \textit{Geometry (balls, convexity)}
+            \item \textit{Linear structure + topology interaction}
+            \item \textit{Finite vs infinite dimensional differences}
+            \end{itemize}
+
+---
+
+    \item \textbf{Fundamental Theorems}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Equivalence of norms (finite dimension)}}
+
+  * All norms on finite-dimensional spaces are equivalent
+
+            \item \textit{\DEFINE{Continuity of linear maps}}
+  Equivalent:
+
+            \begin{itemize}
+                 \item   Continuous
+                 \item   Continuous at 0
+                 \item   Bounded
+            \end{itemize}
+
+            \item \textit{\DEFINE{Riesz lemma}}
+
+            \begin{itemize}
+                 \item In infinite-dimensional spaces, unit ball is “large” 
+                 \item Used to show non-compactness
+            \end{itemize}
+
+            \item \textit{\DEFINE{Hahn–Banach Theorem (normed version)}}
+
+  * Extend bounded linear functionals without increasing norm
+
+            \end{itemize}
+---
+
+    \item \textbf{Important Lemmas / Results}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Triangle inequality variants}}
+            \item \textit{\DEFINE{Convexity of norm balls}}
+            \item \textit{\DEFINE{Bounded sets vs totally bounded sets}}
+            \end{itemize}
+
+    \end{itemize}
+---
+
+\item \textbf{3. Banach Spaces}
+
+    \begin{itemize}
+    \item \textbf{Key Idea}
+
+A \DEFINE{complete normed space} $\to$ limits behave well $\to$ powerful global theorems.
+
+---
+
+    \item \textbf{Core Definition}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Banach space}: normed space where every Cauchy sequence converges}
+
+            \end{itemize}
+---
+
+    \item \textbf{Key Concepts}
+
+            \begin{itemize}
+            \item \textit{Completeness enables:}
+
+  * Existence theorems
+  * Stability of limits
+  * Functional analytic structure
+
+            \end{itemize}
+---
+
+    \item \textbf{Fundamental Theorems (the “Big Four”)}
+
+		\begin{description}
+        \item \textbf{1. Hahn–Banach Theorem}
+
+            \begin{itemize}
+            \item \textit{Extend linear functionals:}
+\begin{align*}
+  f: Y \to \mathbb{R} \quad \Rightarrow \quad \tilde f: X \to \mathbb{R}
+\end{align*}
+            \item \textit{Preserves norm}
+
+\DEFINE{Impact:}
+
+            \item \textit{Rich dual spaces}
+            \item \textit{Separation of points and sets}
+            \end{itemize}
+
+---
+
+        \item \textbf{2. Uniform Boundedness Principle (Banach–Steinhaus)}
+
+If $ {T_n} \subset \mathcal{L}(X,Y) $ and
+\begin{align*}
+\sup_n |T_n x| < \infty \quad \forall x \in X
+\end{align*}
+then
+\begin{align*}
+\sup_n |T_n| < \infty
+\end{align*}
+
+\DEFINE{Idea:} pointwise bounded $\implies$ uniformly bounded
+
+---
+
+        \item \textbf{3. Open Mapping Theorem}
+
+If $T:X\to Y$ is bounded, linear, surjective (Banach spaces), then:
+
+            \begin{itemize}
+            \item \textit{$T$ maps open sets to open sets}
+            \end{itemize}
+
+---
+
+        \item \textbf{4. Closed Graph Theorem}
+
+If $T:X\to Y$ has closed graph, then $T$ is bounded
+
+		\end{description}
+---
+
+    \item \textbf{Other Key Results}
+
+            \begin{itemize}
+            \item \textit{\DEFINE{Inverse Mapping Theorem}}
+
+  * Bijective bounded linear map $\implies$ inverse is bounded
+
+            \item \textit{\DEFINE{Banach Fixed Point Theorem (Contraction Mapping)}}
+
+  * Contractions have unique fixed points
+
+            \item \textit{\DEFINE{Baire Category Theorem}}
+
+  * Complete metric spaces are “large”
+  * Foundation of many major results
+
+            \end{itemize}
+---
+
+    \item \textbf{Important Concepts}
+
+            \begin{itemize}
+            \item \textit{Dense subsets}
+            \item \textit{Nowhere dense sets}
+            \item \textit{Category (meager vs residual)}
+            \end{itemize}
+
+    \end{itemize}
+---
+
+\item \textbf{Big Structural Picture}
+
+You can think of the progression as:
+
+        \begin{itemize}
+        \item \textbf{Metric spaces} $\to$ convergence + topology
+
+        \item \textbf{Normed spaces} $\to$ add linear structure
+
+        \item \textbf{Banach spaces} $\to$ add completeness $\to$ \DEFINE{powerful global theorems}
+
+        \end{itemize}
+---
+
+\item \textbf{What to Remember Most}
+
+If you’re prioritizing:
+
+    \begin{itemize}
+        \item \textbf{Definitions to know cold}
+
+            \begin{itemize}
+            \item \textit{Metric, norm, completeness, Cauchy}
+            \item \textit{Bounded linear operator}
+            \end{itemize}
+
+        \item \textbf{Theorems that drive everything}
+
+            \begin{itemize}
+            \item \textit{Hahn–Banach}
+            \item \textit{Uniform Boundedness}
+            \item \textit{Open Mapping}
+            \item \textit{Closed Graph}
+            \item \textit{Banach Fixed Point}
+            \item \textit{Baire Category}
+            \end{itemize}
+    \end{itemize}
+
+---
+\end{description}
+
+If you want, I can next:
+
+            \begin{itemize}
+            \item Give \DEFINE{typical exam problems} from each section, or
+            \item Show how these results are used in \DEFINE{PDEs or Sobolev spaces} (which connects to your earlier questions).
+            \end{itemize}
+
+
+\end{document}

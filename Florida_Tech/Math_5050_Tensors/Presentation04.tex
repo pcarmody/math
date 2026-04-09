@@ -1,0 +1,299 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Tensors},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 5050 -- Special Topics: Tensor Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Presentation \#4 }
+\newcommand{\DUEDATE}{April 9, 2026}
+\newcommand{\PROFESSOR}{Professor Berchenko-Kogan}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Remote}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\TEAL}[1]{\textcolor{teal}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\COFFF}[3]{\frac{1}{2}Z^{{#1}m}\PAREN{\PART{Z_{m{#2}}}{Z^{#3}} + \PART{Z_{m{#3}}}{Z^{#2}} - \PART{Z_{{#2}{#3}}}{Z^m}}}
+\newcommand{\RIEMANN}[4]{ \PART{\Gamma^#1_{#4#2}}{S^#3} - \PART{\Gamma^#1_{#3#2}}{S^#4} + \Gamma^#1_{#3\omega}\Gamma^\omega_{#4#2} - \Gamma^#1_{#4\omega}\Gamma^{\omega}_{#3#2}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\textbf{\large{Exercises}}\\
+Chapter 11 238, 233 \\
+Chapter 12 244, 254, 257 \\
+Chapter 13 280, 283, 287\\
+Chapter 14 288, 289\\
+
+\HLINE
+
+\section*{Chapter 11}
+
+\textbf{Exercise 233} Show that surface Laplacian on the surface of a sphere (10.92)-(10.94) is give by 
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F = \frac{1}{R^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{R^2\sin^2\theta}\SPART{F}{\phi}
+\end{align*}
+
+The Surface Laplacian of an invarient tensor F is:
+\begin{align*}
+	\nabla_\alpha\nabla^\alpha F &= \frac{1}{\sqrt{S}}\PART{}{S^\alpha}\PAREN{\sqrt{S}\,S^{\alpha\beta}\PART{F}{S^\beta}}.
+\end{align*}The covariant surface metric tensor and $S$ are defined as 
+\begin{align*}
+	S^{\alpha\beta} &= \SQTWOXTWO{R^{-2}}{0}{0}{R^{-2}\sin^{-2}\theta} & (10.97) \\
+	\sqrt{S} &= R^2\sin\theta & (10.98)
+\end{align*}
+
+\BLUE{\begin{align*}
+	\nabla_\alpha\nabla^\alpha F &= \frac{1}{\sqrt{S}}\PART{}{S^\alpha}\PAREN{\sqrt{S}\,S^{\alpha\beta}\PART{F}{S^\beta}}\\
+	&= \sum_\alpha \frac{1}{R^2\sin\theta}\PART{}{S^\alpha}\PAREN{R^2\sin\theta\,\sum_\beta S^{\alpha\beta}\PART{F}{S^\beta}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{R^2\sin\theta\,S^{11}\PART{F}{S^1}}+\PART{}{S^2}\PAREN{R^2\sin\theta\, S^{22}\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{R^2\sin\theta\,R^{-2}\PART{F}{S^1}}+\PART{}{S^2}\PAREN{R^2\sin\theta\, R^{-2}\sin^{-2}\theta\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{S^1}\PAREN{\sin\theta\PART{F}{S^1}}+\PART{}{S^2}\PAREN{(\sin\theta)^{-1}\PART{F}{S^2}}} \\
+	&= \frac{1}{R^2\sin\theta}\PAREN{\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\PART{}{\phi}\PAREN{(\sin\theta)^{-1}\PART{F}{\phi}}} \\
+	&= \frac{1}{R^2\sin\theta}\PART{}{\theta}\PAREN{\sin\theta\PART{F}{\theta}}+\frac{1}{R^2\sin^2\theta}\SPART{F}{\phi} \\
+\end{align*}
+}
+
+\textbf{Exercise 238} Justify equations (11.36)-(11.39).\begin{align*}
+	\nabla_\gamma\textbf{Z}_i, \nabla_\gamma\textbf{Z}^i &= 0 &  (11.36)\\
+	\nabla_\gamma Z_{ij}, \nabla_\gamma Z^{ij} &=0 & (11.37) \\
+	\nabla_\gamma\varepsilon_{ijk}, \nabla_\gamma\varepsilon^{ijk} &= 0 & (11.38)\\
+	\nabla_\gamma\delta_j^i, \nabla_\gamma\delta_{rs}^{ij}, \nabla_\gamma\delta_{rst}^{ijk} &= 0 & (11.39) 
+\end{align*}
+\BLUE{Recall that \begin{align*}
+	\nabla_\gamma T_j^i &= Z_\gamma^k\nabla_kT_j^i & (11.35)
+\end{align*}
+\begin{description}
+	\item (11.36)
+	\begin{align*}
+	\nabla_\gamma\textbf{Z}_i &= Z_\gamma^k \nabla_k \textbf{Z}_i & 
+		&& \nabla_\gamma\textbf{Z}^i &= Z_\gamma^k \nabla_k  \textbf{Z}^i \\
+	&= \PART{Z^i}{S^\gamma} \PAREN{\PART{\textbf{Z}_i}{Z^k} - \Gamma^m_{ik}\textbf{Z}_m} &
+		&&  &= \PART{Z^k}{S^\gamma} \PAREN{\PART{\textbf{Z}^i}{Z^k} + \Gamma^i_{km}\textbf{Z}^m}\\
+	&= \PART{Z^i}{S^\gamma} \PAREN{\PART{\textbf{Z}_i}{Z^k} - \textbf{Z}^m\cdot\PART{\textbf{Z}_i}{Z^k}\textbf{Z}_m} &
+		&&  &= \PART{Z^k}{S^\gamma} \PAREN{\PART{\textbf{Z}^i}{Z^k} + \textbf{Z}^i\cdot\PART{\textbf{Z}_k}{Z^m}\textbf{Z}^m}\\ 
+	&=  \PART{\textbf{Z}_i}{S^\gamma} - \PART{Z^i}{S^\gamma} \textbf{Z}^m\cdot\PART{\textbf{Z}_i}{Z^k}\textbf{Z}_m &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\textbf{Z}^i\cdot\PART{\textbf{Z}_m}{Z^k}\textbf{Z}^m\\ 
+	&=  \PART{\textbf{Z}_i}{S^\gamma} - \PART{Z^i}{S^\gamma} \PART{\textbf{Z}_i}{Z^k}\textbf{Z}^m\cdot\textbf{Z}_m &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\PART{\textbf{Z}_m}{Z^k}\textbf{Z}^i\cdot\textbf{Z}^m\\
+	&=  \PART{\textbf{Z}_i}{S^\gamma} -  \PART{\textbf{Z}_i}{S^\gamma} &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{Z^k}{S^\gamma}\PART{\textbf{Z}_i}{Z^k}\\
+	&=0 &
+		&&  &= \PART{\textbf{Z}^i}{S^\gamma}  - \PART{\textbf{Z}_i}{S^\gamma} \\ & & && &= 0
+	\end{align*}
+	\item (11.37)
+	\begin{align*}
+		\nabla_\gamma Z_{ij} &= \nabla_\gamma \PAREN{\textbf{Z}_i \cdot \textbf{Z}_j} & && \nabla_\gamma Z^{ij} &= \nabla_\gamma \PAREN{\textbf{Z}^i \cdot \textbf{Z}^j} \\
+		&= \nabla_\gamma \textbf{Z}_i \cdot \textbf{Z}_j + \textbf{Z}_i \cdot \nabla_\gamma \textbf{Z}_j & && &= \nabla_\gamma \textbf{Z}^i \cdot \textbf{Z}^j + \textbf{Z}^i \cdot \nabla_\gamma \textbf{Z}^j \\
+		&= 0 & && &= 0
+	\end{align*}
+	\item (11.38)
+	\begin{align*}
+		\nabla_\gamma\varepsilon_{ijk} &= Z_\gamma^l \nabla_l \varepsilon_{ijk} &
+		&& \nabla_\gamma\varepsilon^{ijk} &= Z_\gamma^l \nabla_l \varepsilon^{ijk} & && \\
+		&= 0 & && &= 0
+	\end{align*}
+\end{description}
+}
+
+\section*{Chapter 12}
+\textbf{Exercise 244} Show that
+\begin{align*}
+	R^\alpha_{.\alpha\gamma\delta} = 0
+\end{align*}
+\BLUE{Recall that 
+\begin{align*}
+	\Gamma^\alpha_{\delta\alpha} &= \COFFF{\alpha}{\delta}{\alpha} \\
+		&= \frac{1}{2}Z^{\alpha m}\PART{Z_{m\alpha}}{Z^\delta} \\
+		&= \partial_\delta (\ln \sqrt{|Z|}) \\
+		&= \frac{1}{\sqrt{|Z|}} \partial_\delta \sqrt{|Z|}
+\end{align*}then we have
+\begin{align*}
+	R^\alpha_{.\alpha\gamma\delta} &= \RIEMANN{\alpha}{\alpha}{\gamma}{\delta}
+\end{align*}the first two terms are the same and cancel each other out.  As are the last two terms.
+}
+
+
+\section*{Section 12.3}
+\textbf{Exercise 254} Derive the following explicit expression for $K$:
+\begin{align*}
+	K = \frac{1}{4}\varepsilon^{\gamma\delta}\varepsilon^{\alpha\beta} R_{\gamma\delta\alpha\beta}.
+\end{align*}In particular, equation (12.28) shows that $K$ is a tensor.
+
+\BLUE{
+\begin{align*}
+	R_{\gamma\delta\alpha\beta} &= K(g_{\delta\alpha}g_{\delta\beta}-g_{\gamma\beta}g_{\delta\alpha} \\
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}R_{\gamma\delta\alpha\beta} &= K	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}(g_{\delta\alpha}g_{\delta\beta}-g_{\gamma\beta}g_{\delta\alpha}) 
+\end{align*}Recall that $g^{\delta\alpha}g_{\delta\alpha}=2$ and 
+\begin{align*}
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta} &= 	g^{\delta\alpha}g^{\delta\beta}-g^{\gamma\beta}g^{\delta\alpha} \\
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}g_{\gamma\beta} &= 	(g^{\delta\alpha}g^{\delta\beta}-g^{\gamma\beta}g^{\delta\alpha}) g_{\gamma\alpha}g_{\delta\beta} \\
+	&= 4
+\end{align*}then
+\begin{align*}
+	\varepsilon^{\gamma\delta}\varepsilon_{\alpha\beta}R_{\gamma\delta\alpha\beta} &= 4K	
+\end{align*}
+}
+
+
+\section*{Section 12.4}
+\textbf{Exercise 257} Show that $B_{\alpha\beta}$ is symmetric
+\begin{align*}
+	B_{\alpha\beta} = B_{\beta\alpha}
+\end{align*}
+
+Define the shift tensor, $Z^i_\beta = \textbf{Z}^i\cdot \textbf{S}_\beta$.  Evaluate the curvature tensor, $B_{\alpha\beta}$ defined by
+\begin{align*}
+	B_{\alpha\beta} &= N_i\nabla_\alpha Z^i_\beta. \\
+		&= N_i\nabla_\alpha \textbf{Z}^i\cdot \textbf{S}_\beta \\
+\end{align*}Recall that 
+\begin{align*}
+	\textbf{S}_\beta &= Z^i_\beta \textbf{Z}_i \\
+	\nabla_\alpha \textbf{S}_\beta &= \nabla_\alpha Z^i_\beta
+\end{align*}Therefore
+\begin{align*}
+	B_{\alpha\beta} &= N_i\nabla_\alpha \textbf{Z}^i\cdot \textbf{S}_\beta \\
+		&= N_i \PAREN{ (\nabla_\alpha \textbf{Z}^i)\cdot \textbf{S}_\beta + \textbf{Z}^i\cdot\nabla_\alpha \textbf{S}_\beta } \\
+		&= N_i  + \textbf{Z}^i\cdot\nabla_\alpha \textbf{S}_\beta  \\
+		&= \textbf{N}\cdot\nabla_\alpha \textbf{S}_\beta  \\
+		&= \textbf{N}\cdot\frac{\partial^2 x}{\partial\alpha\partial\beta} \\
+		&= \textbf{N}\cdot\nabla_\beta  \textbf{S}_\alpha \\
+\end{align*}
+	
+\textbf{Exercise 258} Show that  the following relationship holds at points of zero mean curvature:
+\begin{align*}
+	B^\alpha_\beta B^\beta_\alpha = -2 |B^._.|.
+\end{align*}
+
+\section*{Chapter 13}
+\textbf{Exercise 280}  Show that $\nabla_s$ commutes with contraction.
+
+\BLUE{WTS: $\nabla_s ($contraction$)=$ contraction$(\nabla_s)$.  That is, given a tensor $T^i_j$ and $S^i_{sj} = \nabla_s T^i_j$ then $\nabla_s T^i_i = S^i_{ij}$.
+}
+
+
+\section*{Section 13.7}
+
+\textbf{Exercise 283} Differentiate the identity $\textbf{T}(s)\cdot\textbf{T}(s)=1$ to conclude that $\textbf{P}$ is orthogonal to $\textbf{T}$.
+
+\BLUE{
+\begin{align*}
+	\frac{d}{ds}(\textbf{T}(s)\cdot\textbf{T}(s)) &= \frac{d}{ds}(\textbf{T}(s))\cdot\textbf{T}(s) + \textbf{T}(s)\cdot\frac{d}{ds}(\textbf{T}(s)) \\
+		&= \kappa\textbf{P}\cdot\textbf{T} + \textbf{T}\cdot(\kappa\textbf{P}) \\
+		&= \kappa\textbf{P}\cdot\textbf{T} \\
+	\therefore \textbf{P}\cdot\textbf{T} &= 0 \implies \textbf{P} \perp \textbf{T}
+\end{align*}
+}
+
+
+\section*{Section 13.8}
+
+\textbf{Exercise 287}  Explain why the last equation in the Frenet procedure reads
+\begin{align*}
+	\frac{d\textbf{T}_{N-1}}{ds} &= \kappa_{N-1}\textbf{T}_{N-2}
+\end{align*}consistent with equation (13.57).
+
+\begin{align*}
+	\frac{d\textbf{Q}}{ds} &= -\tau\textbf{P} & (13.57)
+\end{align*}
+
+\BLUE{Let $T_0 = T$ from the \textit{Frenet Formulas} (13.55, 13.56, 13.57).  Then, $P = T_1$ and $Q = T_2$.  And, from (13.69)
+\begin{align*}
+	\frac{\textbf{T}_m}{ds}\cdot\textbf{T}_{m-1} &= -\kappa_m & (13.69)
+\end{align*}we can define $\kappa = \kappa_1$ and $\tau = \kappa_2$. Also, all $\kappa_i$ are the dot products of other unit vectors, which have all now be accounted for.  Thus, the next level or processing would make $\textbf{T}_4$ perpendicular to the three other vectors, thus $\kappa_3 = 0$.
+\begin{align*}
+	\frac{d\textbf{T}_2}{ds} &= \kappa_{1}\textbf{T}_0
+\end{align*}
+}
+
+
+\section*{Section 14.7}
+\textbf{Exercise 288}  Define the unit tangent vector $\textbf{T}$
+\begin{align*}
+	T^i = \varepsilon_{ijk}N^jn^\alpha z^k_\alpha.
+\end{align*}
+Show that the vector $\textbf{T}$ with components give by (14.43) is inded the unit tangent to the contour boundary.  That is, $\textbf{T}$ is unit length
+\begin{align*}
+	\textbf{T}\cdot\textbf{T} = 1
+\end{align*}orthogonal to the surface normal $\textbf{N}$
+\begin{align*}
+	\textbf{T}\cdot\textbf{N} = 0
+\end{align*}and the countour normal
+\begin{align*}
+	\textbf{T}\cdot\textbf{n} = 0.
+\end{align*}
+
+\BLUE{Converting to ambiant coordinates we get
+\begin{align*}
+	n^i &= n^\alpha Z^i_\alpha \\
+	T^i &= \varepsilon_{ijk}N^jn^k \\
+	\textbf{T} &= \textbf{N}\times\textbf{n}
+\end{align*}Take the inner product
+\begin{align*}
+	\textbf{T}\cdot\textbf{N} &= (\textbf{N}\times\textbf{n})\cdot\textbf{N} = 0\\
+	\textbf{T}\cdot\textbf{n} &= (\textbf{N}\times\textbf{n})\cdot\textbf{n} = 0
+\end{align*}Since $|\textbf{N}| = |\textbf{n}| = 1$ then $|\textbf{T}|=1$.
+}
+
+ \textbf{Exercise 289} Explain why the term $\varepsilon_{ijk}Z^j_\beta Z^k_\alpha B^{\alpha\beta}$.
+
+\end{document}

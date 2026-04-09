@@ -1,0 +1,79 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Functional Analysis},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Comprehensive Exam -- Real Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{April 2026}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{} \chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
+\input{../../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} 
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}
+
+\item Let $\mathcal{F}$ be a colletion of measurable functions $f: X \to [0,\infty]$,
+\begin{align*}
+	c = \inf_{f \in \mathcal{F}} \int f.
+\end{align*}Assume that every sequence $\{f_n\}\subset \mathcal{F}$ has a subsequence $f_n \to f$ for some $f \in \mathcal{F}$.  Show that there is an $f \in \mathcal{F}$ with $\int f =c$.
+
+\item Let $f \in L^1, E_1\subset E_2\subset \cdots$ be measurable with $X = \bigcup_n E^n$.  Shown that $\int_{E_n} f \to \int_X f$.
+
+\item If $p \in (r,s) \subset [1,\infty], f \in L^r\cap L^s$, then $f \in L^p$ and $|f|_p \le \max\{|f|_r, |f|_s\}$.
+
+\item If $p \in [1,\infty), f_n \to f$ in $L^p(X), g_n\to g$ a.e., on $X$ and $g_n$ is bounded in $L^\infty(X)$, then $f_ng_n \to fg$ in $L^p(X)$.
+
+\item If $p,q \in (1, \infty), f_n \to f$ in $L^p, g_n\to g$ in $L^q$ where $p^{-1}+q^{-1}=1$, then $f_n g_n \to fg $.
+\end{enumerate}
+
+\end{document}
