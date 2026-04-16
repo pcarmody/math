@@ -897,7 +897,7 @@ If $f_n \uparrow f$, then:
 
 \begin{align*}
 \int \liminf f_n \le \liminf \int f_n
-\end{align*}\BLUE{The integral of the limit of the infimum is the `floor' of the sequence of functions.  Whereas the limit of the infimum of integrals will always be higher.}
+\end{align*}\BLUE{On the left, we integrate a single value over $X$ which is, basically, $Xc$ where $c = \liminf f_n$ over $X$.  On the right, we are taking the $\liminf$ of all areas under $f_n$, which, naturally, is larger or equal to the right.}
 
 ---
 
@@ -952,12 +952,17 @@ L^p(X) = \left\{ f : \int |f|^p < \infty \right\}
 			\sum |a_ib_i|  &\le \|a\|_{L^p} \|b\|_{L^q}
 		\end{align*}
 		}
+
+		Let $(S, \Sigma, \mu)$ be a measure space and let $p,q \in [1,\infty]$ with $1/p+1/q = 1$.  Then for all measurable real or complex valued functions $f$ and $g$ on $S$.
+        \begin{align * }
+			\|fg\|_1 \le \|f\|_p\,\|g\|_q.
+        \end{align * }  In addition, $p,q \in (1,\infty)$ and $f \in L^p(\mu)$ and $g \in L^q(\mu)$, then H\"olders Inequality becomes equality if and only if $|f|^p$ and $|g}^q$ are linearly dependent in $L^1(\mu)$, meaning that there exist real numbers $\alpha, \beta \ge 0$, not both of them zero, such that $\alpha|f|^p = \beta|g|^q$ a.e..
+
         \item Minkowski inequality \BLUE{Think Triangular Inequality
 		\begin{align*}
 			\PAREN{\sum_n |a_i-b_i|^p}^{1/p} &\le \PAREN{\sum_n |a_i|^p}^{1/p} + 			\PAREN{\sum_n |b_i|^p}^{1/p} \\
 			\PAREN{\int_n |a_i-b_i|^p}^{1/p} &\le \PAREN{\int_n |a_i|^p}^{1/p} + 			\PAREN{\int_n |b_i|^p}^{1/p}
 		\end{align*}
-        }
 
 		\end{itemize}
 	\end{description}

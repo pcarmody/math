@@ -2186,6 +2186,279 @@ If you want, I can:
 \end{itemize}
 
 
+\HLINE
+\newpage
+\subsection*{Explain Sobolev Embedding}
+
+\item \textbf{Explain Sobolev Embedding}
+
+The \DEFINE{Sobolev Embedding Theorem} tells us that functions with weak derivatives in $L^p$ automatically belong to better spaces—typically some $L^q$ space, or even a Hölder continuous space.
+
+It is one of the most important tools in PDE and functional analysis because it converts \DEFINE{derivative information} into \DEFINE{regularity information}.
+
+---
+
+\begin{description}
+\item \textbf{1. The basic idea}
+
+Suppose $u\in W^{1,p}(U$).
+This means:
+
+    \begin{itemize}
+    \item $u\in L^p(U$)
+    \item its first weak derivatives are also in $L^p(U$)
+    \end{itemize}
+
+Then Sobolev embedding says that $u$ often belongs to a larger space like:
+
+    \begin{itemize}
+    \item $L^q(U$) for some $q>p$,
+    \item or $C^{0,\alpha}(U$),
+    \item or even $L^\infty(U$),
+    \end{itemize}
+
+depending on the dimension $n$ and the exponent $p$.
+
+---
+
+\item \textbf{2. The standard $W^{1,p}\to L^q$ embedding}
+
+Let $U\subset \mathbb{R}^n$ be bounded and regular enough.
+
+If $1\le p<n$, then
+\begin{align*}
+W^{1,p}(U)\hookrightarrow L^q(U)
+\end{align*}
+for all
+\begin{align*}
+1\le q\le p^*:=\frac{np}{n-p}.
+\end{align*}
+
+Here
+\begin{align*}
+p^*=\frac{np}{n-p}
+\end{align*}
+is called the \DEFINE{Sobolev conjugate exponent}.
+
+This means there exists $C>0$ such that
+\begin{align*}
+|u|_{L^q(U)}\le C|u|_{W^{1,p}(U)}.
+\end{align*}
+
+---
+
+\textbf{Example: $H^1(U)=W^{1,2}(U)$}
+
+If $n\ge 3$, then
+\begin{align*}
+H^1(U)\hookrightarrow L^{2n/(n-2)}(U).
+\end{align*}
+
+That is,
+\begin{align*}
+|u|_{L^{2n/(n-2)}}\le C|u|_{H^1}.
+\end{align*}
+
+This is exactly what was used in your PDE problem.
+
+---
+
+\item \textbf{3. Why the exponent $p^*=\frac{np}{n-p}$?}
+
+The exponent comes from balancing the integrability of $u$ and its derivative.
+
+Roughly:
+
+    \begin{itemize}
+    \item differentiating costs one power of length,
+    \item integration in dimension $n$ gives scaling by $n$,
+    \item balancing these yields
+  \begin{align*}
+  \frac{1}{p^*}=\frac{1}{p}-\frac{1}{n}.
+  \end{align*}
+    \end{itemize}
+
+Solving:
+\begin{align*}
+p^*=\frac{np}{n-p}.
+\end{align*}
+
+This is the largest $L^q$ space you can embed into in general.
+
+---
+
+\item \textbf{4. The three cases}
+
+---
+    \begin{description}
+    \item \textbf{Case 1: $p<n$}
+
+Then
+\begin{align*}
+W^{1,p}(U)\hookrightarrow L^q(U),\quad q\le p^*.
+\end{align*}
+
+This gives \DEFINE{better integrability}.
+
+Example:
+\begin{align*}
+H^1(U)\hookrightarrow L^6(U)\quad \text{if }n=3.
+\end{align*}
+
+---
+
+    \item \textbf{Case 2: $p=n$}
+
+Then
+\begin{align*}
+W^{1,n}(U)\hookrightarrow L^q(U)\quad \text{for all }q<\infty,
+\end{align*}
+but generally not into $L^\infty$.
+
+This is the borderline case.
+
+---
+
+    \item \textbf{Case 3: $p>n$}
+
+Then
+\begin{align*}
+W^{1,p}(U)\hookrightarrow C^{0,\alpha}(\overline U),
+\end{align*}
+where
+\begin{align*}
+\alpha=1-\frac np.
+\end{align*}
+
+This means functions are Hölder continuous.
+
+So if derivatives are sufficiently integrable, the function is actually continuous.
+
+---
+    \end{description}
+
+\item \textbf{5. The special case $n=2$}
+
+For $H^1(U$) in dimension 2:
+
+\begin{align*}
+H^1(U)\hookrightarrow L^q(U)\quad \forall q<\infty.
+\end{align*}
+
+This was exactly the fact used in part $i$ of your boundary value problem.
+
+Because $2$ is the critical dimension for $H^1$:
+
+\begin{align*}
+\frac{2n}{n-2}
+\end{align*}
+becomes infinite when $n=2$.
+
+So in 2D, $H^1$ embeds into every finite $L^q$.
+
+---
+
+\item \textbf{6. Why this matters in PDE}
+
+Sobolev embedding lets us estimate nonlinear terms.
+
+Example:
+\begin{align*}
+\int_U c(x)u(x)v(x),dx.
+\end{align*}
+
+To control this with Hölder, we need $u,v\in L^q$.
+
+Sobolev embedding gives:
+\begin{align*}
+u,v\in H_0^1(U)\implies u,v\in L^q(U),
+\end{align*}
+which makes the bilinear form bounded.
+
+This is why Lax–Milgram works.
+
+---
+
+\item \textbf{7. Continuous embedding notation}
+
+The notation
+\begin{align*}
+W^{1,p}(U)\hookrightarrow L^q(U)
+\end{align*}
+means:
+
+	\begin{enumerate}
+    \item Every $u\in W^{1,p}(U$) lies in $L^q(U$),
+    \item There is a constant $C$ such that
+\begin{align*}
+   |u|_{L^q}\le C|u|_{W^{1,p}}.
+\end{align*}
+	\end{enumerate}
+
+So the inclusion map is continuous.
+
+---
+
+\item \textbf{8. Compact embedding}
+
+A stronger result is the \DEFINE{Rellich–Kondrachov theorem}:
+
+If $q<p^*$, then
+\begin{align*}
+W^{1,p}(U)\hookrightarrow\hookrightarrow L^q(U),
+\end{align*}
+meaning the embedding is \DEFINE{compact}.
+
+So bounded sequences in $W^{1,p}$ have convergent subsequences in $L^q$.
+
+This is essential for nonlinear PDEs and variational methods.
+
+---
+
+\item \textbf{9. Intuition}
+
+If the derivative of $u$ is in $L^p$, then $u$ cannot oscillate too wildly.
+
+Greater derivative control gives greater regularity:
+
+    \begin{itemize}
+    \item weak derivative in $L^p$ $\Rightarrow$ better integrability,
+    \item stronger $p$ $\Rightarrow$ continuity,
+    \item even stronger $\Rightarrow$ differentiability.
+    \end{itemize}
+
+Sobolev embedding quantifies that.
+
+---
+
+\item \textbf{10. The two embeddings from your problem}
+
+\begin{itemize}
+\item For $n=2$:
+
+\begin{align*}
+H_0^1(U)\hookrightarrow L^q(U)\quad \forall q<\infty.
+\end{align*}
+
+\item For $n\ge 3$:
+
+\begin{align*}
+H_0^1(U)\hookrightarrow L^{2n/(n-2)}(U).
+\end{align*}
+
+These are the precise embeddings needed to estimate
+\begin{align*}
+\int_U c u v.
+\end{align*}
+
+\end{itemize}
+---
+\end{description}
+
+If you'd like next, I can explain \DEFINE{why $H_0^1(U)\hookrightarrow L^{2n/(n-2)}(U)$} holds by proving the Sobolev inequality in the $H^1$ case.
+
+
+
 \end{description} %%%% AI questions and responses
 
 \end{document}

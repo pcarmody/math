@@ -67,13 +67,66 @@
 	c = \inf_{f \in \mathcal{F}} \int f.
 \end{align*}Assume that every sequence $\{f_n\}\subset \mathcal{F}$ has a subsequence $f_n \to f$ for some $f \in \mathcal{F}$.  Show that there is an $f \in \mathcal{F}$ with $\int f =c$.
 
-\item Let $f \in L^1, E_1\subset E_2\subset \cdots$ be measurable with $X = \bigcup_n E^n$.  Shown that $\int_{E_n} f \to \int_X f$.
+\BLUE{Let $\{f_n\} \subset \mathcal{F}, \int f_n \to c$ and let $\alpha$ be an index list such that $\LIM{i \to \infty}{f_{\alpha_i}} = f$ for some $f \in \mathcal{F}$. 
+\begin{align*}
+	\int f \le \liminf_{k\to\infty} \int f_{\alpha_k} = c 
+\end{align*}However, 
+\begin{align*}
+	c \le \int f \le c 
+\end{align*}hence $\int f = c$.
+}
 
+\newpage
+\item Let $f \in L^1, E_1\subset E_2\subset \cdots$ be measurable with $X = \bigcup_n E_n$.  Shown that $\int_{E_n} f \to \int_X f$.
+
+\BLUE{
+\begin{align*}
+	\int_{E_2} f &= \int_{E_1} f + \int_{E_2\backslash E_1} f \\
+	\int_{E_3} f &= \int_{E_2} f + \int_{E_3\backslash E_2} f \\
+	    &= \int_{E_1} f + \int_{E_2\backslash E_1} f + \int_{E_3\backslash E_2} f \\
+	\int_{E_n} f &= \int_{E_1} f + \sum_{i=2}^n \int_{E_i\backslash E_{i-1}} f \\
+	\lim_{n\to\infty} \int_{E_n} f &= \int_{E_1} f + \lim_{n\to\infty} \sum_{i=2}^n \int_{E_i\backslash E_{i-1}} f \\
+\end{align*}Notice that $E_1 \cup (E_2\backslash E_1) \cup (E_3\backslash E_2) \cup \cdots E_n\backslash E_{n-1} = \bigcup_{N} E_n = X$.
+}
+
+\newpage
 \item If $p \in (r,s) \subset [1,\infty], f \in L^r\cap L^s$, then $f \in L^p$ and $|f|_p \le \max\{|f|_r, |f|_s\}$.
 
+Start by establishing a relation ship between $\frac{1}{p}, \frac{1}{r},$ and $ \frac{1}{s}$.  Since $p$ is between $r$ and $s$, we can establish a relative location $\theta \in (0,1)$ and solve for $ \frac{1}{p}$ to see how we can relate powers of $p$ to powers of $r$ and $s$ (i.e., H\"older's Inequality).  That is
+\[\begin{tikzcd}[row sep=small]
+	\frac{1}{s} \arrow[r,"\theta"] & \frac{1}{p} \arrow[r,"1-\theta"] &\frac{1}{r}
+\end{tikzcd}\]
+Notice that $\theta$ is a fraction and $1-\theta$ is the H\"older conjugate.  For simplicity's sake $P= \frac{1}{p}, R =  \frac{1}{r}$ and $S =  \frac{1}{s}$
+\begin{align*}
+	\theta &= \frac{P-S}{R-S} \\
+	\theta (R-S) &= P-S \\
+    \theta R + S(1-\theta) &= P \\
+	\text{or } \frac{1}{p} &= \theta \frac{1}{r} + \frac{1}{s}(1-\theta)
+\end{align*}we can use
+\begin{align*}
+	1 &= \frac{\theta p}{r} + \frac{(1-\theta)p}{s} \\
+	\therefore q &= \frac{\theta p}{r} \AND q' = \frac{(1-\theta)p}{s}
+\end{align*} which are conjugate to each other.  Consequently,
+\begin{align*}
+	\int |f|^p &= \int |f|^{\theta p}|f|^{(1-\theta)p} \le \PAREN{\int |f|^r}^{\frac{\theta p}{r}}\PAREN{\int|f|^s}^{\frac{(1-\theta)p}{s}} \\
+	\|f\|_p &\le \|f\|_r^{\theta}\|f\|_s^{(1-\theta)} \le \max\{\|f\|_r,\|f\|_s\}
+\end{align*} 
+
+\newpage
 \item If $p \in [1,\infty), f_n \to f$ in $L^p(X), g_n\to g$ a.e., on $X$ and $g_n$ is bounded in $L^\infty(X)$, then $f_ng_n \to fg$ in $L^p(X)$.
 
+\BLUE{WTS that $fg$ is bound by a function in $L^p$.  Notice that $g \in L^\infty$ implies that there exists $M$ such that $g(x) < M$ for all $x \in X$.  $f \in L^p$ means that there exists $h < \infty$ such that $f(x) < h(x)$ for all $x\in X$.  Thus, $fg \le M^ph$ thus $fg \in L^p$.
+}
+
+\newpage
 \item If $p,q \in (1, \infty), f_n \to f$ in $L^p, g_n\to g$ in $L^q$ where $p^{-1}+q^{-1}=1$, then $f_n g_n \to fg $.
+
+\BLUE{
+\begin{align*}
+	\|fg\|_1 \le \|f\|_p\,\|g\|_q, \, \forall p,q
+\end{align*}
+}
+
 \end{enumerate}
 
 \end{document}

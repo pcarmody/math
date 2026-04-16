@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sample Test 1},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Comprehensive Exams -- Functional Analysis}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{April 2026}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{TBD}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
+\input{../../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} 
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}
+
+\item Let $X$ be a normed linear space, let $Z$ be a linear subspace of $X$, let $w \in X\backslash Z$, and let 
+\begin{align*}
+	d = \inf_{z \in Z} |w-z|
+\end{align*}be the distance from $w$ to $Z$.  Show that there exists a linear functional $l : X \to \R$ such that $l(w)=d, l(z)=0$ for all $z \in Z$, and $l(x) \le |x|$ for all $x \in X$.
+
+\item Let $X$ be a Banach space and let $(x_n)$ be a sequence of points in $X$ such that the infintie series $\sum_{n=1}^\infty \|x_n\|$ converges.  Show that the series $\sum_{n=1}^\infty x_n$ converges in $X$.
+
+\item Let $X$ be auniformly convex Banach space, let $K$ be a closed convex subset of $X$, and let $C \subset X\backslash K$ be a compact set. Show that there exists points $y_0\in K$ and $z_0\in C$ such that
+\begin{align*}
+	|y_0-z_0| = \inf_{y\in K,z\in C} |y-z|
+\end{align*}
+
+\item If $\{x_i\}$ is an orthonormal base of a Hilbert space $H$, show that $l(x_j) \to 0$ for every bounded linear functional $l$ on $H$.
+
+\item Let $H$ be a Hilbert space and let $\{x_n\}$ be a sequence of points in $H$ such that for any $y \in H$, there exists a constant $m_y>0$ such that $|(x_n,y_n)|\le m_y$ for all $n$.  Show that there exists a constant $m > 0$ such that $\|x_n\|\le m$ for all $n$.
+
+\item Let $X$ be a Banach space, let $U=X'$, let $(x_n)$ be a sequence in $X$, and let $(u_n)$ be a sequence in $U$.  Show that if $x_n\to x$ in $X$ and $u_n\to u$ in $U$, then $u_n(x_n) \to u(x)$.
+
+\item Let $X$ and $U$ be Banach spaces and let $M:X \to U$ be a linear map.  Assume that whenever $x_n\to 0$ in $X, Mx_n\to 0$ in $U$.  Show that $M$ is bounded.
+
+\item Let $X$ and $U$ be Banach spaces an dlet $C: X \to U$ be a compact linear map.  Assume that the range $R_C$ of $C$ is closed.  Show that $R_C$ is finite dimensional.
+
+\item Let $X$ be a Banach space, let $C: X \to X$ be a compact linear map, and let $Y$ be a closed linear subspace of $X$ such that $C(Y) \subset Y$.  Show that the linear map $\tilde{C}:X/Y \to X/Y$ defined by $\tilde{C}[x]=[Cz], z \in [x]$ is compact.
+
+\item  Let $X$ and $U$ be Banach spaces, let $C: X \to U$ be a compact linear map, and let $x_n \to x$ in $X$.  Show that $Cx_n\to Cx$ in $U$.
+
+\end{enumerate}
+
+\end{document}

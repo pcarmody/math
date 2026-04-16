@@ -45,7 +45,7 @@
 %\chead{ \fancyplain{}{\STUDENTNAME} }
 \rhead{\thepage}
 \fancyfoot[C]{-- \thepage --}
-\input{../MyMacros}
+\input{../../MyMacros}
 
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
@@ -63,7 +63,7 @@
 
 \section*{Functional Analysis -- Overview}
 
-Functional analysis is a broad subject, but it has a very coherent “architecture.” Here’s a structured outline that shows how the pieces fit together and what each part is trying to accomplish.
+Functional analysis is a broad subject, but it has a very coherent ``architecture." Here’s a structured outline that shows how the pieces fit together and what each part is trying to accomplish.
 
 ---
 \begin{description}
@@ -146,7 +146,7 @@ Functional analysis is a broad subject, but it has a very coherent “architectu
 
 \item \textbf{5. Core Theorems of Functional Analysis}
 
-These are the “big three” structural results:
+These are the ``big three" structural results:
 
 \begin{itemize}
     \item \DEFINE{Hahn–Banach Theorem}
@@ -286,7 +286,7 @@ If you want, I can tailor this outline specifically toward \DEFINE{PDEs}, \DEFIN
 
 \subsection*{1. Foundations: Normed and Metric Spaces}
 
-Here’s a focused “toolkit-style” outline of the \DEFINE{core ideas, definitions, and theorems} for each of the three layers:
+Here’s a focused ``toolkit-style" outline of the \DEFINE{core ideas, definitions, and theorems} for each of the three layers:
 
 ---
 
@@ -445,7 +445,7 @@ Add \DEFINE{linear structure + size (norm)} $\to$ geometry + analysis.
             \item \textit{\DEFINE{Riesz lemma}}
 
             \begin{itemize}
-                 \item In infinite-dimensional spaces, unit ball is “large” 
+                 \item In infinite-dimensional spaces, unit ball is ``large" 
                  \item Used to show non-compactness
             \end{itemize}
 
@@ -496,7 +496,7 @@ A \DEFINE{complete normed space} $\to$ limits behave well $\to$ powerful global 
             \end{itemize}
 ---
 
-    \item \textbf{Fundamental Theorems (the “Big Four”)}
+    \item \textbf{Fundamental Theorems (the ``Big Four")}
 
 		\begin{description}
         \item \textbf{1. Hahn–Banach Theorem}
@@ -561,7 +561,7 @@ If $T:X\to Y$ has closed graph, then $T$ is bounded
 
             \item \textit{\DEFINE{Baire Category Theorem}}
 
-  * Complete metric spaces are “large”
+  * Complete metric spaces are ``large"
   * Foundation of many major results
 
             \end{itemize}
@@ -625,6 +625,369 @@ If you want, I can next:
             \item Give \DEFINE{typical exam problems} from each section, or
             \item Show how these results are used in \DEFINE{PDEs or Sobolev spaces} (which connects to your earlier questions).
             \end{itemize}
+
+\newpage
+\subsection*{Hilbert Spaces}
+
+Here is a \DEFINE{structured ``core toolkit" for Hilbert spaces}—focusing on the ideas, definitions, and theorems that actually drive the subject.
+
+---
+
+\begin{description}
+\item \DEFINE{1. Core Idea of Hilbert Spaces}
+
+A Hilbert space is:
+
+$\to$ A \DEFINE{complete inner product space} → combines geometry (angles, orthogonality) with analysis (limits).
+
+It is the infinite-dimensional analogue of \DEFINE{Euclidean space}.
+
+---
+
+\item \DEFINE{2. Fundamental Definitions}
+
+\begin{description}
+    \item \textbf{Inner Product}
+
+A function $ \langle \cdot,\cdot \rangle : H \times H \to \mathbb{C} $ (or $\mathbb{R}$) such that:
+
+\begin{itemize}
+\item Linearity (in first argument)
+\item Conjugate symmetry:
+  \begin{align*}
+  \langle x,y\rangle = \overline{\langle y,x\rangle}
+  \end{align*}
+\item Positive definiteness:
+  \begin{align*}
+  \langle x,x\rangle \ge 0,\quad =0 \iff x=0
+  \end{align*}
+
+---
+\end{itemize}
+
+    \item \textbf{Norm induced by inner product}
+
+\begin{align*}
+|x| = \sqrt{\langle x,x\rangle}
+\end{align*}
+
+---
+
+    \item \textbf{Hilbert Space}
+
+A space $H$ that is:
+
+\begin{itemize}
+\item Inner product space
+\item Complete with respect to $|\cdot|$
+\end{itemize}
+
+---
+
+    \item \textbf{Orthogonality}
+
+\begin{align*}
+x \perp y \iff \langle x,y\rangle = 0
+\end{align*}
+
+---
+
+    \item \textbf{Orthonormal Set}
+
+\begin{align*}
+\langle e_i, e_j\rangle = \delta_{ij}
+\end{align*}
+
+---
+\end{description}
+
+\item \DEFINE{3. Key Geometric Ideas}
+
+\begin{itemize}
+\item Angles and projections make sense
+\item Best approximation = orthogonal projection
+\item Infinite-dimensional ``Euclidean geometry"
+\end{itemize}
+
+---
+
+\item \DEFINE{4. Fundamental Inequalities}
+
+\begin{description}
+    \item \textbf{Cauchy–Schwarz Inequality}
+
+\begin{align*}
+|\langle x,y\rangle| \le |x||y|
+\end{align*}
+
+    \item \textbf{Triangle Inequality}
+
+Follows from Cauchy–Schwarz
+
+    \item \textbf{Parallelogram Law}
+
+\begin{align*}
+|x+y|^2 + |x-y|^2 = 2|x|^2 + 2|y|^2
+\end{align*}
+
+\DEFINE{Important:} Characterizes inner product norms.
+
+---
+\end{description}
+
+\item \DEFINE{5. Orthogonality and Projections}
+
+\begin{description}
+    \item \textbf{Orthogonal Complement}
+
+For $M \subset H$:
+\begin{align*}
+M^\perp = {x \in H : \langle x,m\rangle = 0 \ \forall m\in M}
+\end{align*}
+
+---
+
+    \item \textbf{Projection Theorem (CRUCIAL)}
+
+If $M$ is a \DEFINE{closed subspace} of $H$, then:
+
+For every $x\in H$, there exists a unique $y\in M$ such that
+\begin{align*}
+|x-y| = \inf_{m\in M} |x-m|
+\end{align*}
+
+And:
+\begin{align*}
+x - y \perp M
+\end{align*}
+
+---
+
+    \item \textbf{Decomposition}
+
+\begin{align*}
+H = M \oplus M^\perp
+\end{align*}
+
+---
+\end{description}
+
+\item \DEFINE{6. Orthonormal Bases and Expansions}
+
+\begin{description}
+    \item \textbf{Orthonormal Basis (ONB)}
+
+A set ${e_i}$ such that:
+
+* Orthonormal
+* Span is dense in $H$
+
+---
+
+    \item \textbf{Fourier Expansion}
+
+For ONB ${e_i}$:
+\begin{align*}
+x = \sum \langle x,e_i\rangle e_i
+\end{align*}
+
+---
+
+    \item \textbf{Parseval’s Identity}
+
+\begin{align*}
+|x|^2 = \sum |\langle x,e_i\rangle|^2
+\end{align*}
+
+---
+
+    \item \textbf{Bessel’s Inequality}
+
+\begin{align*}
+\sum |\langle x,e_i\rangle|^2 \le |x|^2
+\end{align*}
+
+---
+\end{description}
+
+\item \DEFINE{7. Key Structural Theorems}
+
+\begin{description}
+    \item \textbf{Riesz Representation Theorem (VERY IMPORTANT)}
+
+Every bounded linear functional $f \in H^*$ has the form:
+\begin{align*}
+f(x) = \langle x,y\rangle
+\quad \text{for a unique } y \in H
+\end{align*}
+
+\DEFINE{Meaning:}
+\begin{align*}
+H^* \cong H
+\end{align*}
+
+---
+
+    \item \textbf{Gram–Schmidt Process}
+
+* Converts linearly independent set → orthonormal set
+
+---
+
+    \item \textbf{Pythagorean Theorem}
+
+If $x \perp y$:
+\begin{align*}
+|x+y|^2 = |x|^2 + |y|^2
+\end{align*}
+
+---
+\end{description}
+
+\item \DEFINE{8. Operators on Hilbert Spaces}
+
+\begin{description}
+    \item \textbf{Bounded Linear Operators}
+
+Same as Banach space theory, but with extra structure.
+
+---
+
+    \item \textbf{Adjoint Operator}
+
+For $T:H\to H$, define $T^*$ by:
+\begin{align*}
+\langle Tx,y\rangle = \langle x,T^*y\rangle
+\end{align*}
+
+---
+
+    \item \textbf{Special Classes}
+
+\begin{itemize}
+\item \DEFINE{Self-adjoint}: $T = T^*$
+\item \DEFINE{Unitary}: $T^*T = I$
+\item \DEFINE{Normal}: $TT^* = T^*T$
+\end{itemize}
+
+---
+\end{description}
+
+\item \DEFINE{9. Spectral Theory (Hilbert Version)}
+
+\begin{description}
+    \item \textbf{Spectrum}
+
+Generalization of eigenvalues
+
+---
+
+    \item \textbf{Spectral Theorem (KEY RESULT)}
+
+For self-adjoint (or normal) operators:
+
+* Operator can be ``diagonalized" in an appropriate sense
+
+Finite-dimensional analogy:
+
+* Symmetric matrix → orthonormal eigenbasis
+
+Infinite-dimensional:
+
+* Integral decomposition / spectral measures
+
+---
+\end{description}
+
+\item \DEFINE{10. Weak Convergence}
+
+\begin{description}
+    \item \textbf{Weak Convergence}
+
+\begin{align*}
+x_n \rightharpoonup x \iff \langle x_n, y\rangle \to \langle x,y\rangle \ \forall y\in H
+\end{align*}
+
+---
+
+    \item \textbf{Key Facts}
+
+\begin{itemize}
+\item Weak convergence + norm convergence differ
+\item Bounded sequences have weakly convergent subsequences (in many cases)
+\end{itemize}
+
+---
+\end{description}
+
+\item \DEFINE{11. Important Lemmas and Facts}
+
+\begin{itemize}
+\item Orthonormal sets are linearly independent
+\item Closed subspaces are Hilbert spaces
+\item $ (M^\perp)^\perp = \overline{M} $
+\item Finite-dimensional subspaces are closed
+\end{itemize}
+
+---
+
+\item \DEFINE{12. Canonical Examples}
+
+\begin{itemize}
+\item $ \ell^2 $: square-summable sequences
+\item $ L^2(\Omega$ ): square-integrable functions
+\item $ \mathbb{R}^n, \mathbb{C}^n $
+\end{itemize}
+
+---
+
+\item \DEFINE{Big Picture}
+
+Hilbert spaces give you:
+
+\begin{description}
+\item \textbf{Geometry}
+
+* Angles, orthogonality, projections
+
+\item \textbf{Analysis}
+
+* Convergence, completeness
+
+\item \textbf{Algebra of operators}
+
+* Adjoint, spectral theory
+
+\end{description}
+---
+
+\item \DEFINE{What to Know Cold}
+
+If you’re prioritizing:
+
+\begin{description}
+\item \textbf{Definitions}
+
+* Inner product, orthogonality, ONB
+
+\item \textbf{Core Theorems}
+
+* Cauchy–Schwarz \\
+* Projection theorem \\
+* Riesz representation \\
+* Parseval identity \\
+* Spectral theorem (at least conceptually) \\
+
+\end{description}
+---
+
+\end{description}
+
+If you want, I can next:
+
+* Compare \DEFINE{Hilbert vs Banach spaces (what fails without inner products)}, or \\
+* Work through \DEFINE{typical proofs (e.g., Riesz, projection theorem)} step-by-step.
+
 
 
 \end{document}

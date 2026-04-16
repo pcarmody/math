@@ -1,0 +1,178 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={PDE2<F2>},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Math 6230 -- Partial Differential Equations II}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{Extra Credit Assignment \#2}
+\newcommand{\DUEDATE}{April 19, 2026}
+\newcommand{\PROFESSOR}{Professor Perrera}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{MW 11:00 -- 12:15}
+\newcommand{\ROOM}{332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{-------\\\ASSIGNMENT}
+%\fancyfoot[CO,RE]{To: Dean A. Smith}
+\input{../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\SUPP}{\operatorname{supp}}
+\newcommand{\CLOSURE}{\operatorname{closure of}}
+\newcommand{\BD}{\operatorname{bd}}
+\newcommand{\HHN}{\mathcal{H}^n}
+\newcommand{\COFF}[3]{\Gamma^{#1}_{{#2}{#3}}}
+\newcommand{\VK}[1]{\textbf{#1}}
+\newcommand{\VKR}{\VK{R}}
+\newcommand{\VKZ}{\VK{Z}}
+\newcommand{\CSPACE}{{C(\CONJ{U})}}
+\newcommand{\CNORM}[1]{|| #1 ||_\CSPACE}
+\newcommand{\CSEMINORM}[1]{[ #1 ]_\CSPACE}
+\newcommand{\CSUBSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HSPACE}[3]{C^{#1,#2}(#3)}
+\newcommand{\HOLDERNORM}[4]{|| #4 ||_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\HSEMINORM}[4]{[ #4 ]_{\HSPACE{#1}{#2}{#3}}}
+\newcommand{\SSPACE}[3]{{W^{#1,#2}(#3)}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/\PROFESSOR}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+Let $U \subset \R^n$ be a bound open set and consier the boundary value problem
+\begin{align*}
+		\BINDEF{-\Delta u + c(x)u = f(x) & \text{in } U}{
+		u=0 & \text{on } \partial U}
+\end{align*} where $c(x) \ge 0$ for a.e., $x \in U$.  Show that this problem has a unique weak solution $u\in H_0^1(U)$ in each of the following cases:
+\begin{enumerate}[label=(\roman*)]
+	\item $n=2, c \in L^p(U)$ for some $p>1$, and $f \in L^s(U)$ for some $s >1$.
+	\item $n\ge 3, c\in L^{n/2}(U)$, and $f \in L^{2n/(n+2)}(U)$.
+\end{enumerate}
+
+\HLINE
+
+\begin{description}
+
+\item Let 
+\begin{align*}
+	a(u,v) &= \int_U Du\cdot Dv\, dx + \int_U c(x)uv\, dx \AND \\
+	L(v) &= \int_U f(x)v(x)\,dx
+\end{align*}WTS that $a(u,v) = L(v),\,\forall v \in H_0^1(U)$.
+
+\item \begin{align*}
+	c(x) >0 \implies a(u,u) &= \int_U |Du|^2 + \int_U c(x)u^2 \ge \int_U |Du|^2 \\
+\end{align*}therefore 
+\begin{align*}
+	\int_U |Du|^2 \ge C\|u\|^2_{H_0^1(U)}
+\end{align*}
+
+\item WTS $a(u,v)$ is bounded in each case \begin{description}
+	\item Case \#1: $n = 2, c \in L^p(U), p >1$.
+	\begin{align*}
+		H^1_0(U) \hookrightarrow L^q(U),\, \forall q < \infty
+	\end{align*}Pick $q$ such that
+	\begin{align*}
+		p>n\implies \frac{1}{p}+\frac{2}{q}=1
+	\end{align*}then due to H\"older
+	\begin{align*}
+		\int_U cuv \le \|c\|_{L^p}\,\|u\|_{L^q}\,\|v\|_{L^q}	
+	\end{align*}Then there exists a $C$ such that
+	\begin{align*}
+		\|U\|_{L^q}\,\|v\|_{L^p} \le C\|u\|_{H_0^1}\,\|v\|_{H_0^1}.
+	\end{align*}Hence
+	\begin{align*}
+        |a(u,v)| \le C\|u\|_{H_0^1}\,\|v\|_{H_0^1}.
+	\end{align*}
+
+	\item Case \#2: $n>3,\,c\in L^{n/2}(U)$.
+	
+	Using $p*=\frac{2n}{n-2}$ and 
+	\begin{align*}
+		H_0^1(U) &\hookrightarrow L^{p*} \\
+		\text{then } \frac{1}{n/2}+\frac{2}{p*} &= \frac{2}{n}+\frac{2(n-2)}{2n} = \frac{2}{n}+\frac{n-2}{n}=1
+	\end{align*}consequently
+	\begin{align*}
+		\int_U cuv \le \|c\|_{L^{n/2}}\,\|u\|_{L^{p*}}\,\|v\|_{L^{p*}}
+	\end{align*}Therefore bounded.
+    \end{description}
+
+\item WTS that $L(v)$ is bounded in each case \begin{description}
+
+	\item Case $(i)$: $f\in L^s,\, s>1$.
+
+	Let $q$ be such that 
+	\begin{align*}
+		\frac{1}{s}+\frac{1}{q}=1.
+	\end{align*}Since $q$ is finite, it follows that (via Sobolev embedding)
+	\begin{align*}
+		|L(V)| \le \|f||_{L^s}\,\|v||_L^q \le C\|v\|_{H_0^1}.
+	\end{align*}
+
+	\item Case $(ii)$: $f \in L^{2n/n+2}$
+	
+	Let 
+	\begin{align*}
+		s = \frac{2n}{n+2}, q = \frac{2n}{n-2}
+	\end{align*}
+	Then applying H\"older's Inequality
+	\begin{align*}
+		|L(v)| &\le \|f\|_{L^s}\,\|v||_{L^q} \\
+		\AND \|v||_{L^q} &\le C\|v||_{H_o^1}
+	\end{align*}
+
+\end{description}
+
+\item Consequently, there exists a unique $u \in H_0^1(U)$ such that 
+	\begin{align*}
+		a(u,v) = L(v),\, \forall H_0^1(U).
+	\end{align*}
+
+
+\end{description}
+
+
+\end{document}
