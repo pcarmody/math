@@ -1,0 +1,1484 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={PDF2 Top 10},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Comprehensive Exam -- PDE2, Top 10}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{April 29, 2026}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{3:00 -- 5:00}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
+\input{../../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Faculty}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+
+Here is a \DEFINE{Top 10 PDE Comprehensive Exam Practice Set}, designed around the kinds of problems that repeatedly appear on graduate qualifying/comprehensive exams.
+
+These focus on the ``core moves" of graduate PDE:
+
+	\begin{itemize}
+    \item weak formulations,
+    \item energy estimates,
+    \item Sobolev embeddings,
+    \item compactness,
+    \item maximum principles,
+    \item Fourier methods,
+    \item variational methods.
+	\end{itemize}
+
+These are the backbone of graduate Partial Differential Equations.
+\begin{description}
+
+\newpage\item \textbf{1. Energy estimate for the heat equation}
+
+Let $u$ solve
+\begin{align*}
+u_t-\Delta u=0 \quad \text{in }U\times(0,T),
+\end{align*}
+with $u=0$ on $\partial U\times(0,T)$.
+
+Show that
+\begin{align*}
+\frac{d}{dt}\int_U u^2\,dx\le 0.
+\end{align*}
+Then prove uniqueness.
+
+Skills tested:
+
+	\begin{itemize}
+    \item multiply by $u$,
+    \item integration by parts,
+    \item energy decay.
+	\end{itemize}
+
+\HLINE
+
+
+We use the standard \DEFINE{energy method} for the heat equation.
+
+Let $u$ solve
+\begin{align*}
+u_t-\Delta u=0
+\qquad\text{in }U\times(0,T),
+\end{align*}
+with boundary condition
+\begin{align*}
+u=0
+\qquad\text{on }\partial U\times(0,T).
+\end{align*}
+We will show:
+
+\begin{align*}
+\frac{d}{dt}\int_U u^2\,dx\le 0,
+\end{align*}
+and then use this to prove uniqueness.
+
+This is the basic energy estimate for the heat equation in Partial Differential Equations.
+
+\begin{description}
+\item \textbf{Step 1: Multiply the PDE by $u$}
+
+Starting with
+\begin{align*}
+u_t-\Delta u=0,
+\end{align*}
+multiply by $u$:
+\begin{align*}
+uu_t-u\Delta u=0.
+\end{align*}
+Integrate over $U$:
+\begin{align*}
+\int_U uu_t\,dx-\int_U u\Delta u\,dx=0.
+\end{align*}
+
+\item \textbf{Step 2: Integrate by parts}
+
+Using integration by parts,
+\begin{align*}
+\int_U u\Delta u\,dx = -\int_U |\nabla u|^2\,dx + \int_{\partial U}u\frac{\partial u}{\partial\nu}\,dS.
+\end{align*}
+Since $u=0$ on $\partial U$, the boundary term vanishes:
+\begin{align*}
+\int_{\partial U}u\frac{\partial u}{\partial\nu}\,dS=0.
+\end{align*}
+Thus,
+\begin{align*}
+\int_U u\Delta u\,dx = -\int_U |\nabla u|^2\,dx.
+\end{align*}
+Substitute back:
+\begin{align*}
+\int_U uu_t\,dx+\int_U |\nabla u|^2\,dx=0.
+\end{align*}
+
+\item \textbf{Step 3: Recognize the energy derivative}
+
+Since
+\begin{align*}
+\frac{d}{dt}\int_U u^2\,dx = 2\int_U uu_t\,dx,
+\end{align*}
+we obtain
+\begin{align*}
+\frac12\frac{d}{dt}\int_U u^2\,dx+\int_U |\nabla u|^2\,dx=0.
+\end{align*}
+Therefore,
+\begin{align*}
+\frac{d}{dt}\int_U u^2\,dx = -2\int_U |\nabla u|^2\,dx.
+\end{align*}
+Hence,
+\begin{align*}
+\boxed{
+\frac{d}{dt}\int_U u^2\,dx\le 0.
+}
+\end{align*}
+So the $L^2$-energy is nonincreasing.
+
+\item \textbf{Step 4: Prove uniqueness}
+
+Suppose $u_1,u_2$ are two solutions with the same initial data.
+
+Define
+\begin{align*}
+w=u_1-u_2.
+\end{align*}
+Then $w$ satisfies
+\begin{align*}
+w_t-\Delta w=0
+\end{align*}
+in $U\times(0,T)$, with
+\begin{align*}
+w=0
+\end{align*}
+on $\partial U\times(0,T)$, and initial condition
+\begin{align*}
+w(x,0)=0.
+\end{align*}
+Apply the energy identity to $w$:
+\begin{align*}
+\frac{d}{dt}\int_U w^2\,dx\le 0.
+\end{align*}
+But initially,
+\begin{align*}
+\int_U w(x,0)^2\,dx=0.
+\end{align*}
+Since the energy is nonincreasing and nonnegative,
+\begin{align*}
+\int_U w(x,t)^2\,dx=0
+\qquad\forall t.
+\end{align*}
+Thus,
+\begin{align*}
+w(x,t)=0
+\qquad\forall (x,t).
+\end{align*}
+Therefore,
+\begin{align*}
+u_1=u_2.
+\end{align*}
+Hence the solution is unique.
+
+\item \textbf{Final result}
+
+We proved:
+\begin{align*}
+\boxed{
+\frac{d}{dt}\int_U u^2\,dx = -2\int_U |\nabla u|^2\,dx \le 0 }
+\end{align*}
+and this implies:
+\begin{align*}
+\boxed{\text{The solution of the heat equation is unique.}}
+\end{align*}
+
+\item \textbf{Interpretation}
+
+The quantity
+\begin{align*}
+\int_U u^2\,dx
+\end{align*}
+is the heat energy, and diffusion causes it to decrease over time.
+
+That decay prevents two different solutions from starting from the same initial data.
+
+\end{description}
+
+If you'd like, next I can show how this energy estimate yields the \DEFINE{stability estimate}
+
+\begin{align*}
+|u(\cdot,t)|*{L^2(U)}\le |g|*{L^2(U)},
+\end{align*}
+
+which is another common comprehensive exam result.
+
+
+\newpage\item \textbf{2. Energy conservation for the wave equation}
+
+Let $u$ solve
+
+\begin{align*}
+u_{tt}-\Delta u=0
+\end{align*}
+with homogeneous Dirichlet boundary data.
+
+Show that
+\begin{align*}
+E(t)=\frac12\int_U(u_t^2+|\nabla u|^2)\,dx
+\end{align*}
+is constant.
+
+Skills tested:
+
+	\begin{itemize}
+    \item multiply by $u_t$,
+    \item conserved energy,
+    \item uniqueness.
+	\end{itemize}
+
+\HLINE
+
+
+We prove that the energy
+\begin{align*}
+E(t)=\frac12\int_U\left(u_t^2+|\nabla u|^2\right)\,dx
+\end{align*}
+is constant for solutions of
+\begin{align*}
+u_{tt}-\Delta u=0
+\qquad\text{in }U\times(0,T),
+\end{align*}
+with homogeneous Dirichlet boundary condition
+\begin{align*}
+u=0 \qquad\text{on }\partial U\times(0,T).
+\end{align*}
+
+This is the standard \DEFINE{energy conservation law} for the wave equation in Partial Differential Equations.
+\begin{description}
+
+\item \textbf{Step 1: Differentiate the energy}
+
+Differentiate $E(t)$:
+\begin{align*}
+E'(t) = \frac12\frac{d}{dt}\int_U\left(u_t^2+|\nabla u|^2\right)\,dx.
+\end{align*}
+So
+\begin{align*}
+E'(t) = \int_U u_tu_{tt}\,dx + \int_U \nabla u\cdot\nabla u_t\,dx.
+\end{align*}
+
+\item \textbf{Step 2: Integrate by parts}
+
+Integrate the second term by parts:
+\begin{align*}
+\int_U \nabla u\cdot\nabla u_t\,dx = -\int_U (\Delta u)u_t\,dx + \int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS.
+\end{align*}
+Thus,
+\begin{align*}
+E'(t) =  \int_U u_tu_{tt}\,dx- \int_U (\Delta u)u_t\,dx + \int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS.
+\end{align*}
+Factor $u_t$:
+\begin{align*}
+E'(t) = \int_U u_t(u_{tt}-\Delta u)\,dx + \int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS.
+\end{align*}
+
+\item \textbf{Step 3: Use the PDE}
+
+Since
+\begin{align*}
+u_{tt}-\Delta u=0,
+\end{align*}
+the volume term vanishes:
+\begin{align*}
+\int_U u_t(u_{tt}-\Delta u)\,dx=0.
+\end{align*}
+Hence
+\begin{align*}
+E'(t) = \int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS.
+\end{align*}
+
+\item \textbf{Step 4: Use the boundary condition}
+
+Since
+\begin{align*}
+u=0 \qquad\text{on }\partial U\times(0,T),
+\end{align*}
+we have
+\begin{align*}
+u_t=0
+\qquad\text{on }\partial U\times(0,T),
+\end{align*}
+because the boundary value is identically zero in time.
+
+Thus,
+\begin{align*}
+\int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS=0.
+\end{align*}
+Therefore,
+\begin{align*}
+E'(t)=0.
+\end{align*}
+
+\item \textbf{Step 5: Conclude conservation}
+
+Since
+\begin{align*}
+E'(t)=0,
+\end{align*}
+
+the energy is constant:
+\begin{align*}
+\boxed{
+E(t)=\frac12\int_U\left(u_t^2+|\nabla u|^2\right)\,dx
+\text{ is constant in time.}
+}
+\end{align*}
+
+\item \textbf{Final conclusion}
+
+For the wave equation with homogeneous Dirichlet boundary data,
+\begin{align*}
+\boxed{
+\frac{d}{dt} \left[ \frac12\int_U (u_t^2+|\nabla u|^2)\,dx \right] =0
+}
+\end{align*}
+so the total energy is conserved.
+
+\item \textbf{Interpretation}
+
+The two terms represent:
+\begin{align*}
+\frac12\int_U u_t^2\,dx
+\quad\text{(kinetic energy)}
+\end{align*}
+and
+\begin{align*}
+\frac12\int_U |\nabla u|^2\,dx
+\quad\text{(potential energy)}.
+\end{align*}
+The wave equation transfers energy between these two forms, but the total remains constant.
+
+\end{description}
+---
+
+If you'd like, next I can show how this same computation gives \DEFINE{uniqueness of the wave equation}, exactly as the heat equation energy estimate gave uniqueness.
+
+
+\newpage\item \textbf{3. Weak formulation of Poisson’s equation}
+
+Given
+\begin{align*}
+-\Delta u=f \quad \text{in }U,\qquad u=0 \text{ on }\partial U,
+\end{align*}
+derive the weak formulation:
+\begin{align*}
+\int_U \nabla u\cdot\nabla v\,dx=\int_U fv\,dx.
+\end{align*}
+
+Skills tested:
+	\begin{itemize}
+    \item integration by parts,
+    \item Sobolev spaces,
+    \item weak derivatives.
+	\end{itemize}
+
+\HLINE
+
+
+To derive the \DEFINE{weak formulation} of
+\begin{align*}
+-\Delta u=f
+\quad\text{in }U,
+\qquad
+u=0
+\quad\text{on }\partial U,
+\end{align*}
+we convert the PDE into an integral identity using \DEFINE{test functions} and \DEFINE{integration by parts}.
+
+This is the standard weak formulation for Poisson’s equation in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{Step 1: Choose a test function}
+
+Let
+\begin{align*}
+v\in C_c^\infty(U),
+\end{align*}
+that is, $v$ is smooth and compactly supported in $U$.
+
+Multiply the PDE by $v$:
+\begin{align*}
+-\Delta u\, v=fv.
+\end{align*}
+Integrate over $U$:
+\begin{align*}
+\int_U (-\Delta u)v\,dx=\int_U fv\,dx.
+\end{align*}
+
+\item \textbf{Step 2: Integrate by parts}
+
+Use Green’s identity:
+\begin{align*}
+\int_U (-\Delta u)v\,dx =  \int_U \nabla u\cdot\nabla v\,dx - \int_{\partial U}v\frac{\partial u}{\partial\nu}\,dS.
+\end{align*}
+Since $v\in C_c^\infty(U$), we have
+\begin{align*}
+v=0 \quad\text{on }\partial U,
+\end{align*}
+so the boundary term vanishes:
+\begin{align*}
+\int_{\partial U}v\frac{\partial u}{\partial\nu}\,dS=0.
+\end{align*}
+Thus,
+\begin{align*}
+\int_U (-\Delta u)v\,dx = \int_U \nabla u\cdot\nabla v\,dx.
+\end{align*}
+Substituting into the previous equation gives:
+\begin{align*}
+\int_U \nabla u\cdot\nabla v\,dx = \int_U fv\,dx.
+\end{align*}
+
+\item \textbf{Step 3: Extend to Sobolev test functions}
+
+The above identity holds for all
+\begin{align*}
+v\in C_c^\infty(U).
+\end{align*}
+Since $C_c^\infty(U)$ is dense in $H_0^1(U)$, we extend the identity to all
+\begin{align*}
+v\in H_0^1(U).
+\end{align*}
+Thus the weak formulation is:
+\begin{align*}
+\boxed{
+\int_U \nabla u\cdot\nabla v\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U).
+}
+\end{align*}
+
+\item \textbf{Final answer}
+
+The weak formulation of
+\begin{align*}
+-\Delta u=f,\qquad u=0\text{ on }\partial U
+\end{align*}
+is:
+\begin{align*}
+\boxed{
+\int_U \nabla u\cdot\nabla v\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U).
+}
+\end{align*}
+
+\item \textbf{Why this is useful}
+
+The classical PDE requires second derivatives:
+\begin{align*}
+\Delta u.
+\end{align*}
+But the weak formulation only requires first derivatives:
+\begin{align*}
+\nabla u.
+\end{align*}
+So instead of needing $u\in C^2(U)$, we only need
+\begin{align*}
+u\in H_0^1(U),
+\end{align*}
+which makes existence theory much easier.
+
+\end{description}
+
+If you'd like, next I can show how to use this weak formulation with \DEFINE{Lax–Milgram} to prove existence and uniqueness of $u$.
+
+
+\newpage\item \textbf{4. Existence by Lax–Milgram}
+
+Show there exists a unique weak solution to
+
+\begin{align*}
+-\Delta u+u=f,\qquad u|_{\partial U}=0
+\end{align*}
+
+for $f\in L^2(U)$.
+
+Skills tested:
+
+	\begin{itemize}
+    \item bilinear form,
+    \item boundedness,
+    \item coercivity,
+    \item Lax–Milgram.
+	\end{itemize}
+
+\HLINE
+
+
+We will prove existence and uniqueness of a weak solution using the \DEFINE{Lax–Milgram theorem}, the standard method for elliptic problems in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{Step 1: Write the weak formulation}
+
+We consider
+\begin{align*}
+-\Delta u+u=f \quad\text{in }U, \qquad u=0 \quad\text{on }\partial U.
+\end{align*}
+Multiply by a test function $v\in H_0^1(U)$:
+\begin{align*}
+(-\Delta u+u)v=fv.
+\end{align*}
+Integrate over $U$:
+\begin{align*}
+\int_U(-\Delta u)v\,dx+\int_U uv\,dx=\int_U fv\,dx.
+\end{align*}
+Integrate the Laplacian term by parts:
+\begin{align*}
+\int_U(-\Delta u)v\,dx=\int_U \nabla u\cdot\nabla v\,dx,
+\end{align*}
+since $v=0$ on $\partial U$.
+
+Thus the weak formulation is:
+\begin{align*}
+\boxed{
+\int_U (\nabla u\cdot\nabla v+uv)\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U).
+}
+\end{align*}
+
+\item \textbf{Step 2: Define the bilinear form}
+
+Define
+\begin{align*}
+a(u,v)=\int_U(\nabla u\cdot\nabla v+uv)\,dx.
+\end{align*}
+Define the linear functional
+\begin{align*}
+L(v)=\int_U fv\,dx.
+\end{align*}
+Then the weak problem is:
+\begin{align*}
+a(u,v)=L(v)
+\qquad\forall v\in H_0^1(U).
+\end{align*}
+Now we verify the hypotheses of \DEFINE{Lax–Milgram}.
+
+\item \textbf{Step 3: Show $a(\cdot,\cdot)$ is bounded}
+
+We estimate:
+\begin{align*}
+|a(u,v)| \le \int_U |\nabla u||\nabla v|\,dx+\int_U |u||v|\,dx.
+\end{align*}
+Using Cauchy–Schwarz:
+\begin{align*}
+|a(u,v)| \le \|\nabla u\|_{L^2}\|\nabla v\|_{L^2} + \|u\|_{L^2}\|v\|_{L^2}.
+\end{align*}
+Hence,
+\begin{align*}
+|a(u,v)| \le \|u\|_{H_0^1(U)}\|v\|_{H_0^1(U)}.
+\end{align*}
+So $a$ is bounded.
+
+\item \textbf{Step 4: Show coercivity}
+
+Compute:
+\begin{align*}
+a(u,u)=\int_U (|\nabla u|^2+u^2)\,dx.
+\end{align*}
+Thus,
+\begin{align*}
+a(u,u)=\|u\|_{H_0^1(U)}^2.
+\end{align*}
+Hence
+\begin{align*}
+a(u,u)\ge \|u\|_{H_0^1(U)}^2.
+\end{align*}
+So $a$ is coercive.
+
+\item \textbf{Step 5: Show $L$ is bounded}
+
+We estimate:
+\begin{align*}
+|L(v)| = \left|\int_U fv\,dx\right| \le \|f\|_{L^2}\|v\|_{L^2}.
+\end{align*}
+Since
+\begin{align*}
+\|v\|_{L^2}\le \|v\|_{H_0^1(U)},
+\end{align*}
+we get
+\begin{align*}
+|L(v)| \le
+\|f\|_{L^2}\|v\|_{H_0^1(U)}.
+\end{align*}
+So $L$ is a bounded linear functional.
+
+\item \textbf{Step 6: Apply Lax–Milgram}
+
+Since:
+
+\begin{enumerate}
+\item $a(u,v$) is bounded,
+\item $a(u,u$) is coercive,
+\item $L(v$) is bounded,
+\end{enumerate}
+
+the \DEFINE{Lax–Milgram theorem} gives a unique $u\in H_0^1(U)$ such that
+\begin{align*}
+a(u,v)=L(v) \qquad\forall v\in H_0^1(U).
+\end{align*}
+That is,
+\begin{align*}
+\int_U (\nabla u\cdot\nabla v+uv)\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U).
+\end{align*}
+So there exists a unique weak solution.
+
+\item \textbf{Final conclusion}
+
+There exists a unique
+\begin{align*}
+u\in H_0^1(U)
+\end{align*}
+such that
+\begin{align*}
+\boxed{
+\int_U (\nabla u\cdot\nabla v+uv)\,dx = \int_U fv\,dx \quad\forall v\in H_0^1(U),
+}
+\end{align*}
+and this is the unique weak solution of
+\begin{align*}
+-\Delta u+u=f,\qquad u|_{\partial U}=0.
+\end{align*}
+
+\item \textbf{Key structure}
+
+The proof is always:
+
+\begin{enumerate}
+\item derive weak form,
+\item define bilinear form,
+\item prove boundedness,
+\item prove coercivity,
+\item apply Lax–Milgram.
+\end{enumerate}
+
+This is the standard existence/uniqueness framework for linear elliptic PDE.
+
+\end{description}
+
+If you'd like, next I can show how to prove the \DEFINE{a priori estimate}
+\begin{align*}
+\|u\|_{H_0^1(U)}\le C\|f\|_{L^2(U)},
+\end{align*}
+which follows immediately from the same argument and is often asked on exams.
+
+
+\newpage\item \textbf{5. Sobolev embedding estimate}
+
+Show that if $U\subset\mathbb R^n$ is bounded and $n>2$,
+
+\begin{align*}
+H_0^1(U)\hookrightarrow L^{2^*}(U),
+\qquad 2^*=\frac{2n}{n-2}.
+\end{align*}
+
+Skills tested:
+
+	\begin{itemize}
+    \item Sobolev inequality,
+    \item critical exponent.
+	\end{itemize}
+
+\HLINE
+
+
+We want to prove the \DEFINE{Sobolev embedding}
+\begin{align*}
+H_0^1(U)\hookrightarrow L^{2^*}(U),
+\qquad 2^*=\frac{2n}{n-2},
+\end{align*}
+for a bounded domain $U\subset\mathbb R^n$, $n>2$.
+
+That means there exists a constant $C>0$ such that
+\begin{align*}
+\|u\|_{L^{2^*}(U)} \le C\|u\|_{H_0^1(U)} \qquad\forall u\in H_0^1(U).
+\end{align*}
+This is the classical \DEFINE{Sobolev inequality}, one of the central results in Functional Analysis.
+
+\begin{description}
+
+\item \textbf{Step 1: Sobolev inequality on $\mathbb R^n$}
+
+The key result is:
+If $u\in C_c^\infty(\mathbb R^n$), then
+\begin{align*}
+\|u\|_{L^{2^*}(\mathbb R^n)} \le C\|\nabla u\|_{L^2(\mathbb R^n)},
+\end{align*}
+where
+\begin{align*}
+2^*=\frac{2n}{n-2}.
+\end{align*}
+This is the Sobolev inequality on $\mathbb R^n$.
+
+\item \textbf{Step 2: Extend functions by zero}
+
+Take $u\in H_0^1(U)$.
+
+Extend $u$ by zero outside $U$:
+\begin{align*}
+\tilde u(x)=
+\begin{cases}
+u(x), & x\in U,\\
+0, & x\notin U.
+\end{cases}
+\end{align*}
+Then
+\begin{align*}
+\tilde u\in H^1(\mathbb R^n),
+\end{align*}
+and
+\begin{align*}
+\|\tilde u\|_{L^{2^*}(\mathbb R^n)} = \|u\|_{L^{2^*}(U)}.
+\end{align*}
+Also,
+\begin{align*}
+\|\nabla \tilde u\|_{L^2(\mathbb R^n)} = \|\nabla u\|_{L^2(U)}.
+\end{align*}
+Applying the Sobolev inequality in $\mathbb R^n$,
+\begin{align*}
+\|u\|_{L^{2^*}(U)} \le C\|\nabla u\|_{L^2(U)}.
+\end{align*}
+
+\item \textbf{Step 3: Relate to the $H_0^1$-norm}
+
+For $H_0^1(U)$, the norm
+\begin{align*}
+\|u\|_{H_0^1(U)}
+\end{align*}
+is equivalent to
+\begin{align*}
+\|\nabla u\|_{L^2(U)}
+\end{align*}
+by the \DEFINE{Poincaré inequality}:
+\begin{align*}
+\|u\|_{L^2(U)} \le C\|\nabla u\|_{L^2(U)}.
+\end{align*}
+Thus,
+\begin{align*}
+\|u\|_{H_0^1(U)} \sim \|\nabla u\|_{L^2(U)}.
+\end{align*}
+Hence,
+\begin{align*}
+\|u\|_{L^{2^*}(U)} \le C\|u\|_{H_0^1(U)}.
+\end{align*}
+
+This proves the embedding.
+
+\item \textbf{Final result}
+
+We have shown that for all $u\in H_0^1(U)$,
+
+\begin{align*}
+\boxed{
+\|u\|_{L^{2^*}(U)} \le C\|u\|_{H_0^1(U)}, \qquad 2^*=\frac{2n}{n-2}.
+}
+\end{align*}
+Therefore,
+\begin{align*}
+\boxed{
+H_0^1(U)\hookrightarrow L^{2^*}(U).
+}
+\end{align*}
+
+\item \textbf{Why $2^*=\frac{2n}{n-2}$?}
+
+This exponent is the \DEFINE{critical Sobolev exponent}.
+It is the largest exponent for which first derivatives in $L^2$ force the function itself to lie in $L^p$.
+
+The relation comes from scaling:
+\begin{align*}
+\frac1{2^*}=\frac12-\frac1n.
+\end{align*}
+That gives
+\begin{align*}
+2^*=\frac{2n}{n-2}.
+\end{align*}
+
+\item \textbf{Key exam takeaway}
+
+To prove Sobolev embedding on a bounded domain:
+
+\begin{enumerate}
+\item extend $u$ by zero,
+\item apply Sobolev inequality on $\mathbb R^n$,
+\item use Poincaré inequality.
+\end{enumerate}
+
+This is the standard graduate PDE proof structure.
+
+\end{description}
+
+If you'd like, next I can show the \DEFINE{compact embedding}
+\begin{align*}
+H_0^1(U)\hookrightarrow\hookrightarrow L^2(U),
+\end{align*}
+which is the Rellich–Kondrachov theorem and appears constantly on qualifying exams.
+
+
+\newpage\item \textbf{6. Weak compactness + passing to the limit}
+
+Suppose $u_j$ solves
+\begin{align*}
+-\Delta u_j=f_j,\qquad u_j\in H_0^1(U),
+\end{align*}
+where $f_j\rightharpoonup f$ in $L^2(U)$, and $u_j$ is bounded in $H_0^1(U)$.
+
+Show a subsequence converges weakly to a weak solution of
+\begin{align*}
+-\Delta u=f.
+\end{align*}
+
+Skills tested:
+
+	\begin{itemize}
+    \item weak convergence,
+    \item compactness,
+    \item limit in weak formulation.
+	\end{itemize}
+
+\HLINE
+
+
+We are given:
+
+\begin{itemize}
+    \item $u_j\in H_0^1(U)$ solves
+\begin{align*}
+-\Delta u_j=f_j,
+\end{align*}
+
+    \item $f_j\rightharpoonup f$ weakly in $L^2(U)$,
+    \item $(u_j$) is bounded in $H_0^1(U)$.
+\end{itemize}
+
+We want to show that some subsequence $u_{j_k}$ converges weakly in $H_0^1(U)$ to a weak solution $u$ of
+\begin{align*}
+-\Delta u=f.
+\end{align*}
+This is a standard \DEFINE{weak compactness + passage to the limit} argument in Functional Analysis.
+
+\begin{description}
+
+\item \textbf{Step 1: Use boundedness in $H_0^1(U)$}
+
+Since $(u_j)$ is bounded in $H_0^1(U)$, and $H_0^1(U)$ is a Hilbert space, bounded sets are weakly precompact.
+
+Therefore there exists a subsequence $u_{j_k}$ and some $u\in H_0^1(U)$ such that
+\begin{align*}
+u_{j_k}\rightharpoonup u
+\qquad\text{weakly in }H_0^1(U).
+\end{align*}
+That means:
+\begin{align*}
+\int_U \nabla u_{j_k}\cdot\nabla v\,dx
+\to
+\int_U \nabla u\cdot\nabla v\,dx
+\end{align*}
+for every $v\in H_0^1(U)$.
+
+\item \textbf{Step 2: Write the weak formulation for $u_j$}
+
+Since $u_j$ solves
+\begin{align*}
+-\Delta u_j=f_j,
+\end{align*}
+its weak formulation is:
+\begin{align*}
+\int_U \nabla u_j\cdot\nabla v\,dx = \int_U f_jv\,dx \qquad\forall v\in H_0^1(U).
+\end{align*}
+For the subsequence:
+\begin{align*}
+\int_U \nabla u_{j_k}\cdot\nabla v\,dx = \int_U f_{j_k}v\,dx.
+\end{align*}
+
+\item \textbf{Step 3: Pass to the limit on the left-hand side}
+
+Since
+\begin{align*}
+u_{j_k}\rightharpoonup u
+\quad\text{in }H_0^1(U),
+\end{align*}
+we have
+\begin{align*}
+\int_U \nabla u_{j_k}\cdot\nabla v\,dx \to \int_U \nabla u\cdot\nabla v\,dx.
+\end{align*}
+
+\item \textbf{Step 4: Pass to the limit on the right-hand side}
+
+Since
+\begin{align*}
+f_{j_k}\rightharpoonup f
+\quad\text{in }L^2(U),
+\end{align*}
+we know
+\begin{align*}
+\int_U f_{j_k}\phi\,dx \to \int_U f\phi\,dx \qquad\forall \phi\in L^2(U).
+\end{align*}
+
+Because $v\in H_0^1(U)\subset L^2(U)$, we may take $\phi=v$, giving:
+
+\begin{align*}
+\int_U f_{j_k}v\,dx \to \int_U fv\,dx.
+\end{align*}
+
+\item \textbf{Step 5: Identify the limit equation}
+
+Taking limits in
+\begin{align*}
+\int_U \nabla u_{j_k}\cdot\nabla v\,dx = \int_U f_{j_k}v\,dx,
+\end{align*}
+we obtain
+\begin{align*}
+\int_U \nabla u\cdot\nabla v\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U).
+\end{align*}
+This is exactly the weak formulation of
+
+\begin{align*}
+-\Delta u=f,\qquad u\in H_0^1(U).
+\end{align*}
+Hence $u$ is a weak solution.
+
+\item \textbf{Final conclusion}
+
+There exists a subsequence $u_{j_k}$ and a function $u\in H_0^1(U)$ such that
+\begin{align*}
+u_{j_k}\rightharpoonup u
+\quad\text{weakly in }H_0^1(U),
+\end{align*}
+and $u$ satisfies
+\begin{align*}
+\boxed{
+\int_U \nabla u\cdot\nabla v\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U),
+}
+\end{align*}
+that is,
+\begin{align*}
+\boxed{-\Delta u=f}
+\end{align*}
+in the weak sense.
+
+\item \textbf{Key exam structure}
+
+This is the standard 3-step compactness argument:
+
+	\begin{description}
+        \item 1. Bounded sequence in $H_0^1$
+\begin{align*}
+u_j \text{ bounded}
+\Rightarrow
+u_{j_k}\rightharpoonup u
+\end{align*}
+
+        \item 2. Write weak formulation
+\begin{align*}
+a(u_j,v)=L_j(v)
+\end{align*}
+
+        \item 3. Pass to the limit
+Use weak convergence on both sides to get
+\begin{align*}
+a(u,v)=L(v)
+\end{align*}
+
+		\end{description}
+
+This exact structure appears constantly in graduate PDE exams.
+\end{description}
+
+If you'd like, next I can show how to strengthen this result to \DEFINE{strong convergence in $L^2(U)$} using the \DEFINE{Rellich compactness theorem}, which is often the next step on comprehensive exams.
+
+
+\newpage\item \textbf{7. Maximum principle}
+
+Let $u$ solve
+\begin{align*}
+u_t-\Delta u=0
+\end{align*}
+with $u(x,0)=g(x)$.
+
+Show:
+\begin{align*}
+\sup_{U\times[0,T]}u\le \sup_U g.
+\end{align*}
+
+Skills tested:
+	\begin{itemize}
+    \item parabolic maximum principle,
+    \item uniqueness,
+    \item $L^\infty$ bounds.
+	\end{itemize}
+
+\HLINE
+
+
+We want to prove the \DEFINE{maximum principle} for the heat equation:
+
+If $u$ solves
+
+\begin{align*}
+u_t-\Delta u=0
+\qquad\text{in }U\times(0,T),
+\end{align*}
+with initial data
+\begin{align*}
+u(x,0)=g(x),
+\end{align*}
+then
+\begin{align*}
+\sup_{U\times[0,T]}u\le \sup_U g.
+\end{align*}
+This is the standard \DEFINE{parabolic maximum principle}, one of the central tools in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{Step 1: Define the maximum level}
+
+Let
+\begin{align*}
+M=\sup_U g.
+\end{align*}
+We want to show:
+\begin{align*}
+u(x,t)\le M
+\qquad\forall (x,t)\in U\times[0,T].
+\end{align*}
+Define
+\begin{align*}
+v(x,t)=u(x,t)-M.
+\end{align*}
+Then $v$ satisfies
+\begin{align*}
+v_t-\Delta v=0,
+\end{align*}
+and
+\begin{align*}
+v(x,0)=g(x)-M\le 0.
+\end{align*}
+So initially, $v\le 0$.
+
+We must show $v\le 0$ for all time.
+
+\item \textbf{Step 2: Suppose $v$ becomes positive}
+
+Assume for contradiction that $v>0$ somewhere in $U\times(0,T]$.
+
+Then $v$ attains a positive maximum at some point
+\begin{align*}
+(x_0,t_0)\in U\times(0,T].
+\end{align*}
+At this interior maximum:
+\begin{align*}
+\nabla v(x_0,t_0)&=0\\
+\Delta v(x_0,t_0)&\le 0,
+\end{align*}
+and since $t_0$ is the first time of maximum,
+\begin{align*}
+v_t(x_0,t_0)\ge 0.
+\end{align*}
+Thus,
+\begin{align*}
+v_t-\Delta v\ge 0.
+\end{align*}
+But since $v$ satisfies the heat equation,
+\begin{align*}
+v_t-\Delta v=0.
+\end{align*}
+Hence at the maximum point,
+\begin{align*}
+0=v_t-\Delta v\ge 0.
+\end{align*}
+This forces equality:
+\begin{align*}
+v_t=0,\qquad \Delta v=0.
+\end{align*}
+By the strong maximum principle, if a positive interior maximum occurs, then $v$ must be constant.
+
+But $v(x,0)\le 0$, so $v$ cannot be a positive constant.
+
+Contradiction.
+
+Thus $v\le 0$.
+
+\item \textbf{Step 3: Conclude the estimate}
+
+Since $v=u-M\le 0$,
+\begin{align*}
+u(x,t)\le M.
+\end{align*}
+Therefore,
+\begin{align*}
+u(x,t)\le \sup_U g
+\qquad\forall (x,t)\in U\times[0,T].
+\end{align*}
+Hence
+\begin{align*}
+\boxed{
+\sup_{U\times[0,T]}u\le \sup_U g.
+}
+\end{align*}
+
+\item \textbf{Final result}
+
+We have shown the \DEFINE{maximum principle}:
+
+\begin{align*}
+\boxed{
+\sup_{U\times[0,T]}u \le \sup_U g.
+}
+\end{align*}
+
+This means the heat equation cannot create temperatures larger than the initial maximum.
+
+\item \textbf{Interpretation}
+
+For the heat equation,
+\begin{align*}
+u_t-\Delta u=0,
+\end{align*}
+heat diffuses from hot regions to cold ones.
+
+So:
+
+	\begin{itemize}
+    \item peaks flatten out,
+    \item no new maxima are created,
+    \item the maximum temperature decreases or stays constant.
+	\end{itemize}
+
+That is exactly what the maximum principle says.
+
+\item \textbf{Exam insight}
+
+For heat equation maximum principle problems, the standard strategy is:
+
+\begin{enumerate}
+\item let $M=\sup g$,
+\item define $v=u-M$,
+\item show $v\le 0$ by contradiction using an interior maximum.
+\end{enumerate}
+
+This is the standard maximum principle template for parabolic PDE.
+\end{description}
+
+If you'd like, next I can show how the same argument proves the \DEFINE{minimum principle}
+\begin{align*}
+\inf_{U\times[0,T]}u\ge \inf_U g,
+\end{align*}
+and combining them gives the useful estimate
+\begin{align*}
+\|u(\cdot,t)\|_{L^\infty(U)}\le \|g\|_{L^\infty(U)}.
+\end{align*}
+
+
+\newpage\item \textbf{8. Direct method in the calculus of variations}
+
+Show that the infimum
+\begin{align*}
+\inf_{u\in H_0^1(U)} \left( \int_U |\nabla u|^2\,dx-\int_U fu\,dx \right)
+\end{align*}
+is attained.
+
+Skills tested:
+
+	\begin{itemize}
+    \item minimizing sequence,
+    \item weak convergence,
+    \item weak lower semicontinuity.
+	\end{itemize}
+
+\HLINE
+
+
+We want to show that the functional
+
+\begin{align*}
+J(u)=\int_U |\nabla u|^2\,dx-\int_U fu\,dx
+\end{align*}
+attains its minimum on $H_0^1(U)$, i.e. that there exists $u_0\in H_0^1(U)$ such that
+\begin{align*}
+J(u_0)=\inf_{u\in H_0^1(U)}J(u).
+\end{align*}
+This is the standard \DEFINE{direct method in the calculus of variations}, one of the foundational techniques in Calculus of Variations.
+\begin{description}
+
+\item \textbf{Step 1: Define the infimum}
+
+Let
+\begin{align*}
+m=\inf_{u\in H_0^1(U)}J(u).
+\end{align*}
+Choose a minimizing sequence $(u_j)\subset H_0^1(U)$ such that
+\begin{align*}
+J(u_j)\to m.
+\end{align*}
+So
+\begin{align*}
+\int_U |\nabla u_j|^2\,dx-\int_U fu_j\,dx\to m.
+\end{align*}
+We want to show $(u_j)$ has a weakly convergent subsequence.
+
+\item \textbf{Step 2: Show the minimizing sequence is bounded}
+
+We estimate the linear term using Cauchy–Schwarz:
+\begin{align*}
+\left|\int_U fu_j\,dx\right| \le \|f\|_{L^2(U)}\|u_j\|_{L^2(U)}.
+\end{align*}
+Using Poincaré:
+\begin{align*}
+\|u_j\|_{L^2(U)} \le C\|\nabla u_j\|_{L^2(U)}.
+\end{align*}
+Hence
+\begin{align*}
+\left|\int_U fu_j\,dx\right| \le C\|f\|_{L^2(U)}\,\|\nabla u_j\|_{L^2(U)}.
+\end{align*}
+Thus
+\begin{align*}
+J(u_j) \ge
+\|\nabla u_j\|_{L^2}^2 - C\|f\|_{L^2}\,\|\nabla u_j\|_{L^2}.
+\end{align*}
+Let
+\begin{align*}
+t_j=\|\nabla u_j\|_{L^2}.
+\end{align*}
+Then
+\begin{align*}
+J(u_j)\ge t_j^2-Ct_j.
+\end{align*}
+Since $J(u_j)\to m$, the values $J(u_j)$ are bounded above, so $t_j^2-Ct_j$ is bounded above, which implies $t_j$ is bounded.
+
+Therefore,
+\begin{align*}
+(u_j)\text{ is bounded in }H_0^1(U).
+\end{align*}
+
+\item \textbf{Step 3: Extract a weakly convergent subsequence}
+
+Since $H_0^1(U)$ is reflexive, there exists a subsequence (still denoted $u_j$) and some $u_0\in H_0^1(U)$ such that
+\begin{align*}
+u_j\rightharpoonup u_0 \qquad\text{weakly in }H_0^1(U).
+\end{align*}
+
+\item \textbf{Step 4: Use weak lower semicontinuity}
+
+The map
+\begin{align*}
+u\mapsto \int_U |\nabla u|^2\,dx
+\end{align*}
+is weakly lower semicontinuous, so
+\begin{align*}
+\int_U |\nabla u_0|^2\,dx \le \liminf_{j\to\infty} \int_U |\nabla u_j|^2\,dx.
+\end{align*}
+Also, the linear functional
+\begin{align*}
+u\mapsto \int_U fu\,dx
+\end{align*}
+is weakly continuous, so
+\begin{align*}
+\int_U fu_j\,dx \to \int_U fu_0\,dx.
+\end{align*}
+Therefore,
+\begin{align*}
+J(u_0) = \int_U |\nabla u_0|^2\,dx-\int_U fu_0\,dx
+\end{align*}
+satisfies
+\begin{align*}
+J(u_0) \le \liminf_{j\to\infty} J(u_j).
+\end{align*}
+Since $J(u_j)\to m$,
+\begin{align*}
+J(u_0)\le m.
+\end{align*}
+But $m$ is the infimum, so
+\begin{align*}
+J(u_0)=m.
+\end{align*}
+Thus the infimum is attained.
+
+\item \textbf{Final conclusion}
+
+There exists $u_0\in H_0^1(U)$ such that
+\begin{align*}
+\boxed{
+J(u_0)= \inf_{u\in H_0^1(U)} \left( \int_U |\nabla u|^2\,dx-\int_U fu\,dx \right).
+}
+\end{align*}
+
+So the minimization problem has a minimizer.
+
+\item \textbf{Why this works}
+
+The direct method always uses:
+
+		\begin{itemize}
+        \item 1. Minimize:
+
+Take a minimizing sequence.
+
+        \item 2. Compactness:
+
+Show boundedness, then extract weak convergence.
+
+        \item 3. Lower semicontinuity:
+
+Pass to the limit.
+
+		\end{itemize}
+
+This gives existence of a minimizer.
+
+\item \textbf{PDE interpretation}
+
+The minimizer $u_0$ is the weak solution of
+\begin{align*}
+-\Delta u=\frac{f}{2}
+\end{align*}
+(up to constants in the functional).
+
+Thus the variational problem corresponds to an elliptic PDE.
+
+This variational viewpoint is central in Partial Differential Equations.
+
+---
+\end{description}
+
+If you'd like, next I can show how to derive the \DEFINE{Euler–Lagrange equation} of this minimization problem and recover the PDE satisfied by the minimizer.
+
+
+\newpage\item \textbf{9. Fundamental solution of the heat equation}
+
+Verify that
+\begin{align*}
+\Phi(x,t)=\frac{1}{(4\pi t)^{n/2}}e^{-|x|^2/4t}
+\end{align*}
+solves the heat equation.
+
+Skills tested:
+
+	\begin{itemize}
+    \item direct differentiation,
+    \item fundamental solutions.
+	\end{itemize}
+
+\newpage\item \textbf{10. Fourier transform solution of the heat equation}
+
+Solve
+\begin{align*}
+u_t-\Delta u=0,\qquad u(x,0)=g(x)
+\end{align*}
+on $\mathbb R^n$ using the Fourier transform.
+
+Show:
+\begin{align*}
+u(x,t)=\Phi(\cdot,t)\ast g(x).
+\end{align*}
+
+Skills tested:
+	\begin{itemize}
+    \item Fourier transform,
+    \item ODE in frequency space,
+    \item convolution.
+	\end{itemize}
+
+\newpage\item \textbf{ Why these 10 matter}
+
+These ten problems cover the most common exam strategies:
+
+	\begin{description}
+    \item \DEFINE{Energy methods}
+
+Problems 1,2,7
+
+These test uniqueness and estimates.
+
+    \item \DEFINE{Weak solutions}
+
+Problems 3,4,6
+
+These test Sobolev space fluency.
+
+    \item \DEFINE{Sobolev/compactness}
+
+Problems 5,6,8
+
+These test existence methods.
+
+    \item \DEFINE{Explicit formulas}
+
+Problems 9,10
+
+These test computational PDE techniques.
+	\end{description}
+
+\item \textbf{If I were prioritizing for exams:}
+
+Study these in order:
+\begin{enumerate}
+\item \DEFINE{Energy estimates}
+\item \DEFINE{Weak formulations}
+\item \DEFINE{Lax–Milgram}
+\item \DEFINE{Sobolev embeddings}
+\item \DEFINE{Compactness arguments}
+\item \DEFINE{Maximum principle}
+\item \DEFINE{Fourier methods}
+\end{enumerate}
+
+That sequence covers a huge percentage of PDE comprehensive exams.
+\end{description}
+
+If you'd like, next I can create a \DEFINE{mock PDE comprehensive exam (3 problems, 3 hours)} at the same level as a graduate qualifying exam.
+
+
+\end{document}

@@ -1,0 +1,3341 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{ esint }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={PDF2 Sample Test},
+    pdfpagemode=FullScreen,
+    }
+
+%\urlstyle{same}
+
+\newcommand{\CLASSNAME}{Comprehensive Exam -- PDE2}
+\newcommand{\STUDENTNAME}{Paul Carmody}
+\newcommand{\ASSIGNMENT}{NOTES }
+\newcommand{\DUEDATE}{April 29, 2026}
+\newcommand{\SEMESTER}{Spring 2026}
+\newcommand{\SCHEDULE}{3:00 -- 5:00}
+\newcommand{\ROOM}{Crawford 332}
+
+\newcommand{\MMN}{M_{m\times n}}
+\newcommand{\FF}{\mathcal{F}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\chead{ \fancyplain{}{\CLASSNAME} }
+%\chead{ \fancyplain{}{\STUDENTNAME} }
+\rhead{\thepage}
+\fancyfoot[C]{-- \thepage --}
+\input{../../MyMacros}
+
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FFF}{\mathcal{F}}
+
+\begin{document}
+
+\begin{center}
+	\Large{\CLASSNAME -- \SEMESTER} \\
+	\large{ w/Faculty}
+\end{center}
+\begin{center}
+	\STUDENTNAME \\
+	\ASSIGNMENT -- \DUEDATE\\
+\end{center} 
+
+\begin{enumerate}
+
+\item Let $U = \{x\in \R^n, |x| > 1\}$ and let $u(x) = 1/|x|^\alpha$ for $x \in U$, where $\alpha > 0$.  For which values of $p$ is $U \in W^{1,p}(U)$.?
+
+\HLINE
+\textbf{Notes}
+\begin{description}
+\item $W^{k,p}$ is a set of functions, $u\in L^p$ and $Du\in L^p$.
+\item Be conscious fo $|x|$ realizing that polar coordinates are often better.
+\item Remember convergences theorems.
+\end{description}
+
+%1%%%%%%%%%%%%%%%%%%%%
+\HLINE
+\begin{itemize}
+	\item What values of $n$ and $p$ make $u \in L^p$?
+\begin{align*}
+	\int_U |u(x)|^p\,dx &< \infty \\
+		&= \int_U|x|^{-\alpha p} \, dx\\
+		&= C \int_0^\infty r^{n-1-\alpha p}\,dr\quad\text{polar coordinates}
+\end{align*}which converges iff $n-1-\alpha p < -1$ or $\alpha p > n$.
+	\item What values of $n$ and $p$ make $Du \in L^p$?
+	\begin{align*}
+		u(x) &= |x|^{-\alpha} \\
+		Du(x) &=  -\alpha|x|^{-\alpha-2}x =  -\alpha|x|^{-\alpha-1}  \\
+		|Du(x)|^p &=  -\alpha^p|x|^{-p(\alpha+1)}  \\
+		\int_U |Du(x)|^p\,dx &= C\int_1^\infty r^{n-1-p(\alpha+1)}\,dr,\quad\text{polar coordinates}
+	\end{align*}which converges when $p(\alpha+1)>n$. Therefore, whenv $p> \frac{n}{\alpha}$.
+\end{itemize}
+
+%2%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $U$ be a bounded open subset of $\R^n$ with $\partial U \in C^1$.  Let $c \in L^\infty(U)$ and let $f \in L^2(U)$.  We say that $U\in H^1(U)$ is a weak solution of 
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 -\Delta u+c(x)=f & \text{in } U\\
+		\PART{u}{\nu} = 0 & \text{on } \partial U,
+	\end{array} \right .
+\end{align*}
+where $\nu$ is the outward unit normal to $\partial U$, if 
+\begin{align*}
+	\int_U (\nabla u\cdot\nabla u+cuv)\,dx &= \int_U fv\,dx, \quad \forall v \in H^1(U).
+\end{align*}
+Assume that 
+\begin{align*}
+	\inf_{x\in U} c(x) >0.
+\end{align*}
+Show that there exists a unique weak solution.
+
+\HLINE
+
+To show that the Neumann problem
+
+\begin{align*}
+\left\{
+\begin{aligned}
+-\Delta u + c(x)u &= f &&\text{in } U,\\
+\frac{\partial u}{\partial \nu} &=0 &&\text{on } \partial U,
+\end{aligned}
+\right.
+\end{align*}
+
+has a \DEFINE{unique weak solution} $u\in H^1(U$), the standard approach is to apply the \DEFINE{Lax–Milgram Theorem}.
+
+---
+\begin{description}
+
+\item \textbf{Step 1: Weak formulation}
+
+Define the bilinear form $B:H^1(U)\times H^1(U)\to \mathbb R$ by
+
+\begin{align*}
+B[u,v] = \int_U (\nabla u\cdot \nabla v + c uv)\,dx,
+\end{align*}
+
+and define the linear functional $F:H^1(U)\to\mathbb R$ by
+
+\begin{align*}
+F(v)=\int_U fv\,dx.
+\end{align*}
+
+Then the weak problem is:
+
+\> Find $u\in H^1(U$) such that
+\begin{align*}
+B[u,v]=F(v)\qquad \forall v\in H^1(U).
+\end{align*}
+
+By the \DEFINE{Lax–Milgram theorem}, this has a unique solution provided:
+
+\begin{enumerate}
+\item $B$ is bounded,
+\item $B$ is coercive,
+\item $F$ is bounded.
+\end{enumerate}
+
+---
+
+\item \textbf{Step 2: Boundedness of $B$}
+
+We estimate:
+
+\begin{align*}
+|B[u,v]| \le \int_U |\nabla u||\nabla v|\,dx+\int_U |cuv|\,dx.
+\end{align*}
+
+Using Cauchy–Schwarz,
+
+\begin{align*}
+\int_U |\nabla u||\nabla v| \le |\nabla u|_{L^2}|\nabla v|_{L^2}.
+\end{align*}
+
+Since $c\in L^\infty(U)$,
+
+\begin{align*}
+\int_U |cuv| \le |c|_{L^\infty}|u|_{L^2}|v|_{L^2}.
+\end{align*}
+
+Thus,
+
+\begin{align*}
+|B[u,v]| \le |\nabla u|_{L^2}|\nabla v|_{L^2} + |c|_{L^\infty}|u|_{L^2}|v|_{L^2}.
+\end{align*}
+
+Hence
+
+\begin{align*}
+|B[u,v]| \le C|u|_{H^1(U)}|v|_{H^1(U)},
+\end{align*}
+
+so $B$ is bounded.
+
+---
+
+\item \textbf{Step 3: Coercivity of $B$}
+
+We compute
+
+\begin{align*}
+B[u,u] = \int_U (|\nabla u|^2+c u^2)\,dx.
+\end{align*}
+
+Since
+
+\begin{align*}
+c(x)\ge c_0>0
+\end{align*}
+
+for some constant $c_0$, we get
+
+\begin{align*}
+B[u,u] \ge \int_U |\nabla u|^2\,dx+c_0\int_U u^2\,dx.
+\end{align*}
+
+Thus,
+
+\begin{align*}
+B[u,u] \ge \min(1,c_0)|u|_{H^1(U)}^2.
+\end{align*}
+
+Therefore $B$ is coercive.
+
+---
+
+\item \textbf{Step 4: Boundedness of $F$}
+
+We have
+
+\begin{align*}
+|F(v)| = \left|\int_U fv\,dx\right| \le |f|_{L^2}|v|_{L^2} \le |f|_{L^2}|v|_{H^1(U)}.
+\end{align*}
+
+Thus $F$ is bounded on $H^1(U)$.
+
+---
+
+\item \textbf{Step 5: Apply Lax–Milgram}
+
+Since:
+
+\begin{itemize}
+\item $B$ is bounded,
+\item $B$ is coercive,
+\item $F$ is bounded,
+\end{itemize}
+
+the \DEFINE{Lax–Milgram theorem} gives the existence of a unique $u\in H^1(U)$ such that
+
+\begin{align*}
+B[u,v]=F(v) \qquad\forall v\in H^1(U).
+\end{align*}
+
+That is,
+
+\begin{align*}
+\int_U (\nabla u\cdot \nabla v + c uv)\,dx = \int_U fv\,dx \qquad\forall v\in H^1(U).
+\end{align*}
+
+Hence there exists a \DEFINE{unique weak solution}.
+
+---
+
+\item \textbf{Final Conclusion}
+
+\begin{align*}
+\boxed{\text{There exists a unique weak solution }u\in H^1(U).}
+\end{align*}
+because the bilinear form
+\begin{align*}
+B[u,v]=\int_U (\nabla u\cdot\nabla v+cuv)\,dx
+\end{align*}
+is bounded and coercive on $H^1(U)$, and the linear functional
+\begin{align*}
+F(v)=\int_U fv\,dx
+\end{align*}
+is bounded, so the result follows from the Lax–Milgram theorem.
+
+---
+\end{description}
+
+If you'd like, I can explain \DEFINE{why the positivity assumption $c(x)\ge c_0>0$ is crucial for uniqueness in the Neumann problem}, since without it uniqueness generally fails.
+
+
+
+%3%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $U$ be a bounded open subset of $\R^n$ with $\partial U \in C^1$.  Let $(f_j) \subset L^2(U)$ converge weakly to $f$ in $L^2(U)$ and let $u_j \in  H_0^1(U)$ be a weak solution of
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 -\Delta u_j=f_j & \text{in } U\\
+		u_j = 0 & \text{on } \partial U,
+	\end{array} \right .
+\end{align*}
+Assume that $(u_j)$ is a bounded sequence in $H_0^1(U)$.  Show that a subsequence of $(u_j)$ converges weakly to a weak solution of
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 -\Delta u=f & \text{in } U\\
+		u = 0 & \text{on } \partial U,
+	\end{array} \right .
+\end{align*}
+
+\HLINE
+
+Let $u_j\in H_0^1(U)$ satisfy
+
+\begin{align*}
+\int_U \nabla u_j\cdot \nabla v\,dx=\int_U f_jv\,dx
+\qquad\forall v\in H_0^1(U),
+\end{align*}
+
+and assume:
+
+\begin{enumerate}
+\item  $f_j\rightharpoonup f$ weakly in $L^2(U)$,
+\item  $(u_j$) is bounded in $H_0^1(U)$.
+\end{enumerate}
+
+We want to show:
+
+\> There exists a subsequence $u_{j_k}$ converging weakly in $H_0^1(U)$ to some $u$, and this $u$ is a weak solution of
+\begin{align*}
+ -\Delta u=f,\qquad u=0\text{ on }\partial U.
+\end{align*}
+
+---
+\begin{description}
+
+\item \textbf{Step 1: Extract a weakly convergent subsequence}
+
+Since $(u_j)$ is bounded in $H_0^1(U)$, and $H_0^1(U)$ is a Hilbert space, bounded sets are weakly compact.
+
+Therefore, there exists a subsequence $(u_{j_k})$ and some $u\in H_0^1(U)$ such that
+\begin{align*}
+u_{j_k}\rightharpoonup u
+\quad\text{weakly in }H_0^1(U).
+\end{align*}
+
+This means in particular,
+\begin{align*}
+\nabla u_{j_k}\rightharpoonup \nabla u
+\quad\text{weakly in }L^2(U).
+\end{align*}
+
+---
+
+\item \textbf{Step 2: Pass to the limit in the weak formulation}
+
+For every $v\in H_0^1(U)$,
+\begin{align*}
+\int_U \nabla u_{j_k}\cdot \nabla v\,dx=\int_U f_{j_k}v\,dx.
+\end{align*}
+
+We pass to the limit on both sides.
+
+---
+
+\begin{description}
+\item \textbf{Left-hand side}
+
+Because
+\begin{align*}
+\nabla u_{j_k}\rightharpoonup \nabla u
+\quad\text{in }L^2(U),
+\end{align*}
+we have
+\begin{align*}
+\int_U \nabla u_{j_k}\cdot \nabla v\,dx
+\to
+\int_U \nabla u\cdot \nabla v\,dx.
+\end{align*}
+
+---
+
+\item \textbf{Right-hand side}
+
+Since $f_{j_k}\rightharpoonup f$ weakly in $L^2(U)$, and $v\in H_0^1(U)\subset L^2(U)$, we get
+\begin{align*}
+\int_U f_{j_k}v\,dx
+\to
+\int_U fv\,dx.
+\end{align*}
+
+---
+\end{description}
+
+\item \textbf{Step 3: Obtain the limiting weak formulation}
+
+Taking limits gives:
+\begin{align*}
+\int_U \nabla u\cdot \nabla v\,dx = \int_U fv\,dx \qquad\forall v\in H_0^1(U).
+\end{align*}
+
+This is exactly the weak formulation of
+\begin{align*}
+\left\{
+\begin{aligned}
+-\Delta u&=f &&\text{in }U,\\
+u&=0 &&\text{on }\partial U.
+\end{aligned}
+\right.
+\end{align*}
+
+Thus $u$ is a weak solution.
+
+---
+
+\item \textbf{Final conclusion}
+
+There exists a subsequence $u_{j_k}$ such that
+\begin{align*}
+u_{j_k}\rightharpoonup u
+\quad\text{weakly in }H_0^1(U),
+\end{align*}
+and the limit $u$ satisfies
+\begin{align*}
+\int_U \nabla u\cdot\nabla v\,dx=\int_U fv\,dx
+\qquad\forall v\in H_0^1(U),
+\end{align*}
+so $u$ is a weak solution of
+\begin{align*}
+-\Delta u=f,\qquad u=0\text{ on }\partial U.
+\end{align*}
+
+---
+\end{description}
+
+\begin{align*}
+\boxed{\text{A weakly convergent subsequence of }(u_j)\text{ converges to a weak solution }u.}
+\end{align*}
+
+This is a standard \DEFINE{weak compactness + passage to the limit} argument in Partial Differential Equations.
+
+If you'd like, I can show why the assumption that $(u_j)$ is bounded in $H_0^1(U)$ is actually automatic from the boundedness of $(f_j$) in $L^2(U)$.
+
+\HLINE
+
+\textbf{Questions}
+\begin{itemize}
+	\item \textit{Explain `weak convergence'}
+	\item \textit{Explain `weak differeentiation'}
+	\item \textit{Explain the reltionship between $H_0^1$ and $L^p$ spaces}
+\end{itemize}
+
+
+%4%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $U$ be a bounded open subset of $\R^n$, $n>3$ with $\partial U \in C^1$.  Let $f: \R\to\R$ be a continous function satisfying
+\begin{align*}
+	|f(t)| \le c|t|^{q-1}\quad\forall \in \R
+\end{align*}
+for some constants $c > 0$ and $ 1 \le q < 2$.  We say that $u \in H_o^1(U)$ is a weak solution of 
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 -\Delta u=f(u) & \text{in } U\\
+		u = 0 & \text{on } \partial U,
+	\end{array} \right .
+\end{align*}
+if
+\begin{align*}
+	\int_U \nabla u\cdot\nabla v\, dx = \int_U f(u)v\,dx\quad \forall v \in H_0^1.
+\end{align*}
+Show that there exists a constant $C >0$ such that 
+\begin{align*}
+	\|u\|_{H_0^1(U)} \le C
+\end{align*}
+for all weak solutions $u$.
+
+\HLINE
+
+We want to prove that every weak solution $u\in H_0^1(U)$ of
+\begin{align*}
+\begin{cases}
+-\Delta u=f(u) &\text{in }U,\\
+u=0 &\text{on }\partial U,
+\end{cases}
+\end{align*}
+satisfies a \DEFINE{uniform a priori bound}
+\begin{align*}
+\|u\|_{H_0^1(U)}\le C.
+\end{align*}
+
+The key ingredients are:
+\begin{enumerate}
+\item test the weak equation with $v=u$,
+\item use the growth condition on $f$,
+\item apply the Sobolev embedding,
+\item use the fact that $q<2$.
+\end{enumerate}
+
+---
+\begin{description}
+
+\item \textbf{Step 1: Use the weak formulation with $v=u$}
+
+Since $u$ is a weak solution,
+\begin{align*}
+\int_U \nabla u\cdot \nabla v\,dx = \int_U f(u)v\,dx \qquad \forall v\in H_0^1(U).
+\end{align*}
+Take (v=u). Then
+\begin{align*}
+\int_U |\nabla u|^2\,dx = \int_U f(u)u\,dx.
+\end{align*}
+So
+\begin{align*}
+\|\nabla u\|_{L^2(U)}^2 = \int_U f(u)u\,dx.
+\end{align*}
+
+---
+
+\item \textbf{Step 2: Use the growth condition on $f$}
+
+We are given
+\begin{align*}
+|f(t)|\le c|t|^{q-1}.
+\end{align*}
+Thus
+\begin{align*}
+|f(u)u| \le c|u|^q.
+\end{align*}
+Therefore,
+\begin{align*}
+\|\nabla u\|_{L^2(U)}^2 \le c\int_U |u|^q\,dx = c\|u\|_{L^q(U)}^q.
+\end{align*}
+Hence,
+\begin{align*}
+\|\nabla u\|_{L^2}^2 \le c|\|u\|_{L^q}^{q}.
+\end{align*}
+
+---
+
+\item \textbf{Step 3: Use Sobolev embedding}
+
+Since $U$ is bounded and $u\in H_0^1(U)$, the Sobolev embedding gives
+\begin{align*}
+H_0^1(U)\hookrightarrow L^q(U),
+\end{align*}
+because $q<2<\frac{2n}{n-2}$ (since $n>3$).
+
+Therefore,
+\begin{align*}
+\|u\|_{L^q(U)} \le C\|u\|_{H_0^1(U)}.
+\end{align*}
+Since on $H_0^1(U)$,
+\begin{align*}
+\|u\|_{H_0^1(U)} \sim \|\nabla u\|_{L^2(U)}
+\end{align*}
+(by Poincaré inequality), we get
+\begin{align*}
+\|u\|_{L^q(U)} \le C\|\nabla u\|_{L^2(U)}.
+\end{align*}
+Substitute into the previous inequality:
+\begin{align*}
+\|\nabla u\|_{L^2}^2 \le C\|\nabla u\|_{L^2}^q.
+\end{align*}
+
+---
+
+\item \textbf{Step 4: Use that $q<2$}
+
+Let
+\begin{align*}
+X=\|\nabla u\|_{L^2(U)}.
+\end{align*}
+Then
+\begin{align*}
+X^2\le CX^q.
+\end{align*}
+If $X>0$, divide by $X^q$:
+\begin{align*}
+X^{2-q}\le C.
+\end{align*}
+Thus,
+\begin{align*}
+X\le C^{1/(2-q)}.
+\end{align*}
+Hence,
+\begin{align*}
+\|\nabla u\|_{L^2(U)}\le C.
+\end{align*}
+By the equivalence of norms on $H_0^1(U)$,
+\begin{align*}
+\|u\|_{H_0^1(U)}\le C.
+\end{align*}
+This bound is independent of the weak solution (u).
+
+---
+
+\item \textbf{Final conclusion}
+
+There exists $C>0$ such that every weak solution satisfies
+\begin{align*}
+\boxed{\|u\|_{H_0^1(U)}\le C.}
+\end{align*}
+
+---
+
+\item \textbf{Main mechanism summarized}
+
+We proved:
+\begin{align*}
+\|u\|_{H_0^1}^2 \lesssim \|u\|_{H_0^1}^q,
+\end{align*}
+and because $q<2$, this forces boundedness.
+
+This is a standard \DEFINE{a priori estimate} argument in nonlinear Partial Differential Equations.
+
+---
+\end{description}
+
+If you'd like, I can show how this estimate is used with the \DEFINE{Schaefer fixed point theorem} to prove existence of a weak solution for this nonlinear PDE.
+
+\textbf{Questions:}
+\begin{description}
+	\item \textit{Why can we use `weak formulations`?}
+
+	\item \textit{Explain Sobolev Embedding}.
+\end{description}
+
+
+%5%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $U$ be a bounded open subset of $\R^n$, $n>3$, let $p \in (2,2^*]$, and let 
+\begin{align*}
+	M = \BRACKET{u \in H_0^1(U)\,:\,\int_U |u|^p\,dx =1 }
+\end{align*}
+Consider the minimization problem
+\begin{align*}
+	c = \inf_{u\in M} \int_U |Du|^2\,dx
+\end{align*}
+\begin{enumerate}
+	\item Show that $c > 0$.
+	\item if $p \in (2, 2^*)$, show that the infimum is attained, i.e., $\exists u_0\in M$ such that
+\begin{align*}
+	c = \int_U |Du_0|^2\,dx
+\end{align*}
+\end{enumerate}
+
+\HLINE
+
+Let
+\begin{align*}
+M=\left\{u\in H_0^1(U):\int_U |u|^p\,dx=1\right\},
+\end{align*}
+and define
+\begin{align*}
+c=\inf_{u\in M}\int_U |\nabla u|^2\,dx.
+\end{align*}
+We want to prove:
+\begin{enumerate}
+\item $c>0$,
+\item if $2<p<2^*$, then the infimum is attained.
+\end{enumerate}
+This is a standard application of the \DEFINE{Sobolev embedding theorem} and weak compactness in Calculus of Variations.
+
+---
+\begin{description}
+
+\item \textbf{Part $1$: Show that $c>0$}
+
+Take any $u\in M$. Since $u\in H_0^1(U)$, Sobolev embedding gives:
+\begin{align*}
+|u|*{L^p(U)}\le C|\nabla u|*{L^2(U)},
+\end{align*}
+because $p\le 2^*$.
+
+Since $u\in M$,
+\begin{align*}
+|u|_{L^p(U)}=1.
+\end{align*}
+Therefore,
+\begin{align*}
+1\le C|\nabla u|_{L^2(U)}.
+\end{align*}
+Hence,
+\begin{align*}
+|\nabla u|_{L^2(U)}\ge \frac1C.
+\end{align*}
+Squaring,
+\begin{align*}
+\int_U |\nabla u|^2\,dx\ge \frac1{C^2}.
+\end{align*}
+Since this is true for every $u\in M$,
+\begin{align*}
+c\ge \frac1{C^2}>0.
+\end{align*}
+Thus,
+\begin{align*}
+\boxed{c>0.}
+\end{align*}
+
+---
+
+\item \textbf{Part $2$: Show the infimum is attained for $2<p<2^*$}
+
+We use the \DEFINE{direct method}.
+
+---
+
+	\begin{description}
+    \item Step 1: Choose a minimizing sequence
+
+Let $(u_j)\subset M$ be such that
+\begin{align*}
+\int_U |\nabla u_j|^2\,dx\to c.
+\end{align*}
+Then $(u_j)$ is bounded in $H_0^1(U)$, since
+\begin{align*}
+|\nabla u_j|_{L^2}^2\to c.
+\end{align*}
+Since on $H_0^1(U)$,
+\begin{align*}
+|u_j|*{H_0^1}\sim |\nabla u_j|*{L^2},
+\end{align*}
+the sequence is bounded in $H_0^1(U)$.
+
+---
+
+    \item Step 2: Extract a weakly convergent subsequence
+
+Since $H_0^1(U)$ is reflexive, there exists a subsequence $still denoted (u_j$) and some $u_0\in H_0^1(U)$ such that
+
+\begin{align*}
+u_j\rightharpoonup u_0
+\quad\text{weakly in }H_0^1(U).
+\end{align*}
+	\end{description}
+
+---
+
+    \item Step 3: Use compact Sobolev embedding
+
+Since $2<p<2^*$, the embedding
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\end{align*}
+is \DEFINE{compact}.
+
+Therefore,
+\begin{align*}
+u_j\to u_0
+\quad\text{strongly in }L^p(U).
+\end{align*}
+Hence,
+\begin{align*}
+\int_U |u_j|^p\,dx\to \int_U |u_0|^p\,dx.
+\end{align*}
+But each $u_j\in M$, so
+\begin{align*}
+\int_U |u_j|^p\,dx=1.
+\end{align*}
+Thus,
+\begin{align*}
+\int_U |u_0|^p\,dx=1.
+\end{align*}
+So
+\begin{align*}
+u_0\in M.
+\end{align*}
+
+---
+
+    \item Step 4: Use weak lower semicontinuity
+
+The Dirichlet energy is weakly lower semicontinuous:
+\begin{align*}
+\int_U |\nabla u_0|^2\,dx \le \liminf_{j\to\infty} \int_U |\nabla u_j|^2\,dx.
+\end{align*}
+Since the right side is $c$,
+\begin{align*}
+\int_U |\nabla u_0|^2\,dx\le c.
+\end{align*}
+But $u_0\in M$, so by definition of $c$,
+\begin{align*}
+c\le \int_U |\nabla u_0|^2\,dx.
+\end{align*}
+Therefore,
+\begin{align*}
+\int_U |\nabla u_0|^2\,dx=c.
+\end{align*}
+Thus the infimum is attained.
+
+So there exists $u_0\in M$ such that
+\begin{align*}
+\boxed{c=\int_U |\nabla u_0|^2\,dx.}
+\end{align*}
+
+---
+
+\item \textbf{Final conclusion}
+
+		\begin{enumerate}
+        \item
+\begin{align*}
+\boxed{c>0}
+\end{align*}
+by Sobolev inequality.
+
+        \item For $2<p<2^*$, there exists $u_0\in M$ such that
+\begin{align*}
+\boxed{c=\int_U |\nabla u_0|^2\,dx}
+\end{align*}
+by:
+\begin{enumerate}
+\item bounded minimizing sequence,
+\item weak compactness in $H_0^1(U)$,
+\item compact embedding into $L^p(U)$,
+\item weak lower semicontinuity.
+\end{enumerate}
+		\end{enumerate}
+
+---
+\end{description}
+
+If you'd like, I can explain \DEFINE{why the argument fails at the critical exponent $p=2^*$}, which is where compactness breaks down.
+
+\textbf{Questions:}
+\begin{description}
+\item \textit{Explain Calculus of Variations}
+\item \textit{Explain semi-continuous}
+\end{description}
+
+
+%6%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $u \in C^2(\R\times(0,\infty))\cap C(\R\times[0,\infty))$ be the bouded solution of
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 u_t=u_{xx} & \text{in } \R\times(0,\infty)\\
+		u = g & \text{on } \R\times\{0\}
+	\end{array} \right .
+\end{align*}
+where $g \in C(\R)$ satisfies
+\begin{align*}
+	\lim_{x\to -\infty} g(x) = a, \quad \lim_{x\to +\infty} g(x) = b
+\end{align*}
+for some $a,b\in \R$.  Show that
+\begin{align*}
+	\lim_{x\to -\infty} u(x,t)=\frac{a+b}{2}\quad\forall x \in \R.
+\end{align*}
+
+\HLINE
+
+Let
+\begin{align*}
+u_t=u_{xx}\qquad\text{in }\mathbb R\times (0,\infty),
+\end{align*}
+with initial data $u(x,0)=g(x)$, where $g$ is bounded and
+\begin{align*}
+\lim_{x\to -\infty}g(x)=a, \qquad \lim_{x\to +\infty}g(x)=b.
+\end{align*}
+We want to prove that for every $x\in\mathbb R$,
+\begin{align*}
+\lim_{t\to\infty}u(x,t)=\frac{a+b}{2}.
+\end{align*}
+(Your statement says $\lim_{x\to-\infty}u(x,t)$, but the conclusion $(a+b)/2$ is the \DEFINE{large time limit}, so the intended statement is almost certainly)
+\begin{align*}
+\boxed{\lim_{t\to\infty}u(x,t)=\frac{a+b}{2}}.
+\end{align*}
+\begin{description}
+
+\item \textbf{Step 1: Write the solution using the heat kernel}
+
+The bounded solution of the heat equation on $\mathbb R$ is given by
+\begin{align*}
+u(x,t)=\frac1{\sqrt{4\pi t}}
+\int_{-\infty}^{\infty}
+e^{-(x-y)^2/4t}g(y)\,dy.
+\end{align*}
+Equivalently, letting
+\begin{align*}
+z=\frac{x-y}{\sqrt{4t}},
+\end{align*}
+we get
+\begin{align*}
+u(x,t)=\frac1{\sqrt{\pi}}
+\int_{-\infty}^{\infty}
+e^{-z^2}g(x-2\sqrt{t},z)\,dz.
+\end{align*}
+
+\item \textbf{Step 2: Examine the behavior as $t\to\infty$}
+
+Fix $x\in\mathbb R$.
+
+Then for each fixed $z$,
+\begin{align*}
+x-2\sqrt{t},z\to
+\begin{cases}
+-\infty,& z>0,[1mm] \\
++\infty,& z<0.
+\end{cases}
+\end{align*}
+Hence,
+\begin{align*}
+g(x-2\sqrt{t}z)\to
+\begin{cases}
+a,& z>0,[1mm] \\
+b,& z<0.
+\end{cases}
+\end{align*}
+Thus the integrand converges pointwise to
+\begin{align*}
+e^{-z^2}
+\begin{cases}
+a,& z>0,\\
+b,& z<0.
+\end{cases}
+\end{align*}
+
+\item \textbf{Step 3: Apply dominated convergence}
+
+Since $g$ is bounded, say $|g(y)|\le M$, we have
+\begin{align*}
+\left|e^{-z^2}g(x-2\sqrt{t}z)\right| \le Me^{-z^2},
+\end{align*}
+and $Me^{-z^2}\in L^1(\mathbb R)$.
+
+Therefore, by the dominated convergence theorem,
+\begin{align*}
+\lim_{t\to\infty}u(x,t) = \frac1{\sqrt{\pi}} \left( \int_0^\infty ae^{-z^2}\,dz + \int_{-\infty}^0 be^{-z^2}\,dz
+\right).
+\end{align*}
+
+Factor out constants:
+\begin{align*}
+\frac1{\sqrt{\pi}} \left( a\int_0^\infty e^{-z^2}\,dz + b\int_{-\infty}^0 e^{-z^2}\,dz \right).
+\end{align*}
+But
+\begin{align*}
+\int_0^\infty e^{-z^2}\,dz = \left[\int_{-\infty}^0 e^{-z^2}\,dz] \frac{\sqrt{\pi}}2\right]
+\end{align*}
+Thus,
+\begin{align*}
+\lim_{t\to\infty}u(x,t) = \frac1{\sqrt{\pi}} \left( a\frac{\sqrt{\pi}}2+b\frac{\sqrt{\pi}}2 \right) = \frac{a+b}{2}.
+\end{align*}
+Therefore,
+\begin{align*}
+\boxed{
+\lim_{t\to\infty}u(x,t)=\frac{a+b}{2} } \qquad\forall x\in\mathbb R.
+\end{align*}
+
+\item \textbf{Final conclusion}
+
+The heat flow averages the left and right endstates of the initial data, and the solution converges pointwise to
+\begin{align*}
+\boxed{\frac{a+b}{2}}.
+\end{align*}
+
+This happens because the Gaussian kernel spreads symmetrically to the left and right as $t\to\infty$, assigning half the mass to each side.
+
+This is a classic large-time asymptotic result for the heat equation.
+
+\end{description}
+
+If you'd like, I can explain the \DEFINE{intuition} for why the heat equation ``forgets" the shape of $g$ and only remembers the two end states $a$ and $b$.
+
+
+
+%7%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $T>0$ and let $u \in C_1^2(\R^\times(0,T])\cap C(\R^n\times[0,T])$ solve
+\begin{align*}
+%	\left \{\begin{array}{rl}
+%		 u_t-\Delta u=cu & \text{in } \R\times(0,T)\\
+%		u = g & \text{on } \R\times\{0\}
+%	\end{array} \right .
+	\begin{cases}
+		 u_t-\Delta u=cu & \text{in } \R\times(0,T)\\
+		u = g & \text{on } \R\times\{0\}
+	\end{cases}
+\end{align*}
+wher $c >0$ is a constant and $g\in C(\R^n)$ is bounded.  Assume that $u$ satisfies
+\begin{align*}
+	u(x,t) \le Ae^{a|x|^2}\quad \forall(x,t)\in\R^n\times[0,T]
+\end{align*}
+for some constants $A,a >0$.  Show that
+\begin{align*}
+	\sup_{\R^n\times[0,T]} u\le e^{cT}\sup_{\R^n} g
+\end{align*}
+
+\HLINE
+
+We want to prove the estimate
+\begin{align*}
+\sup_{\mathbb R^n\times[0,T]}u \le e^{cT}\sup_{\mathbb R^n}g
+\end{align*}
+for a solution of
+\begin{align*}
+u_t-\Delta u=cu \qquad\text{in }\mathbb R^n\times(0,T),
+\end{align*}
+with initial data
+\begin{align*}
+u(x,0)=g(x),
+\end{align*}
+assuming
+\begin{align*}
+u(x,t)\le Ae^{a|x|^2}.
+\end{align*}
+This is a \DEFINE{maximum principle with a zeroth-order term}, standard in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{Step 1: Remove the zeroth-order term}
+
+Define
+\begin{align*}
+v(x,t)=e^{-ct}u(x,t).
+\end{align*}
+Then compute:
+\begin{align*}
+v_t = [-ce^{-ct}u+e^{-ct}u_t e^{-ct}(u_t-cu) ],
+\end{align*}
+and
+\begin{align*}
+\Delta v=e^{-ct}\Delta u.
+\end{align*}
+Thus,
+\begin{align*}
+v_t-\Delta v = e^{-ct}(u_t-\Delta u-cu).
+\end{align*}
+Since
+\begin{align*}
+u_t-\Delta u=cu,
+\end{align*}
+we obtain
+\begin{align*}
+v_t-\Delta v=0.
+\end{align*}
+So $v$ satisfies the heat equation:
+\begin{align*}
+v_t-\Delta v=0.
+\end{align*}
+Its initial data is
+\begin{align*}
+v(x,0)=u(x,0)=g(x).
+\end{align*}
+
+\item \textbf{Step 2: Apply the maximum principle}
+
+We would like to conclude:
+\begin{align*}
+\sup_{\mathbb R^n\times[0,T]}v \le \sup_{\mathbb R^n}g.
+\end{align*}
+Because the domain is unbounded, we use the growth assumption
+\begin{align*}
+u(x,t)\le Ae^{a|x|^2}.
+\end{align*}
+Then
+\begin{align*}
+v(x,t)=e^{-ct}u(x,t)\le Ae^{a|x|^2},
+\end{align*}
+so $v$ has at most exponential growth.
+
+This growth condition allows the maximum principle on $\mathbb R^n\times[0,T]$: bounded-above solutions of the heat equation attain no interior maximum above the initial maximum.
+
+Hence,
+\begin{align*}
+\sup_{\mathbb R^n\times[0,T]}v \le \sup_{\mathbb R^n}g.
+\end{align*}
+
+\item \textbf{Step 3: Return to $u$}
+
+Since
+\begin{align*}
+u(x,t)=e^{ct}v(x,t),
+\end{align*}
+we get
+\begin{align*}
+u(x,t) \le e^{ct}\sup_{\mathbb R^n}g \le e^{cT}\sup_{\mathbb R^n}g.
+\end{align*}
+Therefore,
+\begin{align*}
+\sup_{\mathbb R^n\times[0,T]}u \le e^{cT}\sup_{\mathbb R^n}g.
+\end{align*}
+Thus,
+\begin{align*}
+\boxed{
+\sup_{\mathbb R^n\times[0,T]}u \le e^{cT}\sup_{\mathbb R^n}g
+}
+\end{align*}
+which is what we wanted.
+
+\item \textbf{Final idea}
+
+The transformation
+\begin{align*}
+v=e^{-ct}u
+\end{align*}
+removes the reaction term $cu$, turning the PDE into the heat equation:
+\begin{align*}
+v_t-\Delta v=0.
+\end{align*}
+Then the \DEFINE{maximum principle} gives
+\begin{align*}
+v\le \sup g,
+\end{align*}
+and multiplying back gives
+\begin{align*}
+u\le e^{ct}\sup g\le e^{cT}\sup g.
+\end{align*}
+\end{description}
+
+If you'd like, I can show how to justify the maximum principle on the \DEFINE{unbounded domain} $\mathbb R^n\times(0,T)$ using the barrier
+\begin{align*}
+v_\varepsilon(x,t)=v(x,t)-\varepsilon(|x|^2+\lambda t),
+\end{align*}
+which is the technical step behind this argument.
+
+
+
+%8%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $u\in C^2(\R^2\times[0,\infty))$ be the solution of
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 u_{tt}= \Delta u & \text{in } \R\times(0,\infty)\\
+		u = 0, u_t= h & \text{on } \R\times\{0\}
+	\end{array} \right .
+\end{align*}
+where $g$ and $h$ are smooth with compact support.  Show that for each $x \in \R^2$, where exists a constant $C=C(x)>0$ such that 
+\begin{align*}
+	|u(x,t)| \le \frac{C(x)}{t}\quad\forall t\in (0,\infty).
+\end{align*}
+
+\HLINE
+
+We are dealing with the \DEFINE{wave equation in two dimensions}
+
+\begin{align*}
+u_{tt}-\Delta u=0 \qquad\text{in }\mathbb R^2\times(0,\infty),
+\end{align*}
+with initial data
+\begin{align*}
+u(x,0)=0,\qquad u_t(x,0)=h(x),
+\end{align*}
+where $h\in C_c^\infty(\mathbb R^2)$.
+
+We want to show that for each fixed $x\in\mathbb R^2$,
+\begin{align*}
+|u(x,t)|\le \frac{C(x)}{t}.
+\end{align*}
+
+This follows from the explicit solution formula for the 2D wave equation, known as \DEFINE{Poisson's formula}, a standard result in Partial Differential Equations.
+
+\begin{description}
+\item \textbf{Step 1: Use the 2D wave formula}
+
+Since the initial displacement is zero, the solution is
+\begin{align*}
+u(x,t)=\frac1{2\pi}\int_{|x-y|<t} \frac{h(y)}{\sqrt{t^2-|x-y|^2}}\,dy.
+\end{align*}
+Because $h$ has compact support, there exists $R>0$ such that
+\begin{align*}
+\operatorname{supp}(h)\subset B_R(0).
+\end{align*}
+Thus the integral reduces to
+\begin{align*}
+u(x,t)=\frac1{2\pi} \int_{B_R(0)} \frac{h(y)}{\sqrt{t^2-|x-y|^2}}\,dy,
+\end{align*}
+whenever $t>|x-y|$ for $y\in B_R(0)$, i.e. for sufficiently large $t$.
+
+\item \textbf{Step 2: Estimate the denominator}
+
+Fix $x\in\mathbb R^2$.
+
+For $y\in B_R(0$),
+\begin{align*}
+|x-y|\le |x|+R.
+\end{align*}
+Hence if $t>|x|+R$,
+\begin{align*}
+t^2-|x-y|^2\ge t^2-(|x|+R)^2.
+\end{align*}
+Therefore,
+\begin{align*}
+\frac1{\sqrt{t^2-|x-y|^2}} \le \frac1{\sqrt{t^2-(|x|+R)^2}}.
+\end{align*}
+Thus
+\begin{align*}
+|u(x,t)| \le \frac1{2\pi} \frac1{\sqrt{t^2-(|x|+R)^2}} \int_{B_R(0)}|h(y)|\,dy.
+\end{align*}
+Let
+\begin{align*}
+C_1=\frac1{2\pi}\int_{\mathbb R^2}|h(y)|\,dy.
+\end{align*}
+Then
+\begin{align*}
+|u(x,t)| \le \frac{C_1}{\sqrt{t^2-(|x|+R)^2}}.
+\end{align*}
+
+\item \textbf{Step 3: Compare with (1/t)}
+
+For $t\ge 2(|x|+R)$,
+\begin{align*}
+t^2-(|x|+R)^2\ge \frac34 t^2.
+\end{align*}
+Hence
+\begin{align*}
+\sqrt{t^2-(|x|+R)^2}\ge \frac{\sqrt3}{2}t.
+\end{align*}
+So
+\begin{align*}
+|u(x,t)| \le \frac{2C_1}{\sqrt3}\frac1t.
+\end{align*}
+Thus for sufficiently large (t),
+\begin{align*}
+|u(x,t)|\le \frac{C}{t}.
+\end{align*}
+
+\item \textbf{Step 4: Extend to all (t>0)}
+
+Since $u(x,t)$ is continuous in $t$, the function
+\begin{align*}
+t\mapsto t|u(x,t)|
+\end{align*}
+is continuous on $(0,2(|x|+R)]$, hence bounded there.
+
+Thus there exists $C_2(x)$ such that
+\begin{align*}
+|u(x,t)|\le \frac{C_2(x)}{t}
+\quad\text{for }0<t\le 2(|x|+R).
+\end{align*}
+Combining this with the large-(t) estimate gives a constant (C(x)) such that
+\begin{align*}
+|u(x,t)|\le \frac{C(x)}{t} \qquad\forall t>0.
+\end{align*}
+Hence,
+\begin{align*}
+\boxed{|u(x,t)|\le \frac{C(x)}{t}\quad\forall t>0.}
+\end{align*}
+
+\item \textbf{Final idea}
+
+The solution is
+\begin{align*}
+u(x,t)=\frac1{2\pi}\int \frac{h(y)}{\sqrt{t^2-|x-y|^2}}\,dy,
+\end{align*}
+and because $h$ has compact support, the denominator behaves like $t$ for fixed $x$ as $t\to\infty$, giving
+\begin{align*}
+u(x,t)=O(t^{-1}).
+\end{align*}
+So the wave amplitude decays like (1/t) at each fixed point in two dimensions.
+
+\end{description}
+
+If you'd like, I can explain \DEFINE{why the decay is $1/t$ in dimension 2 but $1/t^{(n-1)/2}$ in higher dimensions}, which is the general dispersive decay law for the wave equation.
+
+
+
+%9%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Consider the problem
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 u_{u} -\Delta u -2au_t+a^2u =f(x) & \text{in } \R\times(0,\infty)\\
+		u = 0, u_t= 0 & \text{on } \R\times\{0\}
+	\end{array} \right .
+\end{align*}
+where $a > 0$ is a constant and $f$ is a continous function on $\R^n$.  By considering the energy
+\begin{align*}
+	E(t) = \frac{1}{2} \int_{\R^n} (u_t^2+|\nabla u|^2 + a^23u^2)\,dx,
+\end{align*}
+show that this problem has at most one solution in $C_c^2(\R^n\times[0,\infty))$.
+
+\HLINE
+
+
+To prove \DEFINE{uniqueness}, we show that if $u$ is a solution of the homogeneous problem
+
+\begin{align*}
+\begin{cases}
+u_{tt}-\Delta u-2au_t+a^2u=0 & \text{in }\mathbb R^n\times (0,\infty),[1mm]
+u(x,0)=0,\quad u_t(x,0)=0,
+\end{cases}
+\end{align*}
+then $u\equiv 0$.
+
+This implies the original problem has \DEFINE{at most one solution}, since the difference of two solutions satisfies this homogeneous problem.
+
+This is a standard \DEFINE{energy method} argument in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{Step 1: Define the energy}
+
+Let
+\begin{align*}
+E(t)=\frac12\int_{\mathbb R^n}\left(u_t^2+|\nabla u|^2+a^2u^2\right)\,dx.
+\end{align*}
+
+We compute $E'(t$).
+
+\item \textbf{Step 2: Differentiate the energy}
+
+Differentiate under the integral:
+
+\begin{align*}
+E'(t) = \int_{\mathbb R^n}\left(u_tu_{tt}+\nabla u\cdot\nabla u_t+a^2uu_t\right)\,dx.
+\end{align*}
+
+Integrate the middle term by parts:
+
+\begin{align*}
+\int_{\mathbb R^n}\nabla u\cdot\nabla u_t\,dx = -\int_{\mathbb R^n}(\Delta u)u_t\,dx,
+\end{align*}
+
+since $u\in C_c^2$, so there are no boundary terms.
+
+Thus,
+\begin{align*}
+E'(t) = \int_{\mathbb R^n}u_t(u_{tt}-\Delta u+a^2u)\,dx.
+\end{align*}
+
+\item \textbf{Step 3: Use the PDE}
+
+The PDE is
+\begin{align*}
+u_{tt}-\Delta u-2au_t+a^2u=0,
+\end{align*}
+so
+\begin{align*}
+u_{tt}-\Delta u+a^2u=2au_t.
+\end{align*}
+Substitute:
+\begin{align*}
+E'(t) = \int_{\mathbb R^n}u_t(2au_t)\,dx 2a\int_{\mathbb R^n}u_t^2\,dx.
+\end{align*}
+Therefore,
+\begin{align*}
+E'(t)=2a\int_{\mathbb R^n}u_t^2\,dx\ge 0.
+\end{align*}
+So the energy is nondecreasing.
+
+\item \textbf{Step 4: Use the initial conditions}
+
+Because
+\begin{align*}
+u(x,0)=0,\qquad u_t(x,0)=0,
+\end{align*}
+we have
+\begin{align*}
+E(0)=0.
+\end{align*}
+Since $E'(t)\ge 0$,
+\begin{align*}
+E(t)\ge 0.
+\end{align*}
+But this alone does not give uniqueness—we need a better quantity.
+
+\item \textbf{Step 5: Introduce the transformed variable}
+
+Define
+\begin{align*}
+v(x,t)=e^{-at}u(x,t).
+\end{align*}
+Then compute:
+\begin{align*}
+u&=e^{at}v,\\
+u_t&=e^{at}(v_t+av),\\
+u_{tt}&=e^{at}(v_{tt}+2av_t+a^2v).
+\end{align*}
+Substitute into
+\begin{align*}
+u_{tt}-\Delta u-2au_t+a^2u&=0:\\
+e^{at}(v_{tt}+2av_t+a^2v)-e^{at}\Delta v-2ae^{at}(v_t+av)+a^2e^{at}v&=0.
+\end{align*}
+Simplify:
+\begin{align*}
+e^{at}(v_{tt}-\Delta v)=0.
+\end{align*}
+Hence $v$ solves the wave equation
+\begin{align*}
+v_{tt}-\Delta v=0.
+\end{align*}
+Also,
+\begin{align*}
+v(x,0)=u(x,0)=0,
+\end{align*}
+and
+\begin{align*}
+v_t(x,0)=u_t(x,0)-au(x,0)=0.
+\end{align*}
+Thus $v$ satisfies
+\begin{align*}
+\begin{cases}
+v_{tt}-\Delta v=0,\
+v(x,0)=0,\quad v_t(x,0)=0.
+\end{cases}
+\end{align*}
+
+\item \textbf{Step 6: Apply the standard wave energy identity}
+
+Define
+\begin{align*}
+F(t)=\frac12\int_{\mathbb R^n}(v_t^2+|\nabla v|^2)\,dx.
+\end{align*}
+For the wave equation,
+\begin{align*}
+F'(t)=0.
+\end{align*}
+Since $F(0)=0$, we get
+\begin{align*}
+F(t)=0.
+\end{align*}
+Therefore,
+\begin{align*}
+v_t=0,\qquad \nabla v=0.
+\end{align*}
+So $v\equiv 0$.
+Hence
+\begin{align*}
+u=e^{at}v\equiv 0.
+\end{align*}
+Thus the homogeneous problem has only the zero solution.
+
+Therefore the original problem has at most one solution.
+
+\item \textbf{Final conclusion}
+
+The difference of any two solutions satisfies the homogeneous equation, and the transformation
+
+\begin{align*}
+v=e^{-at}u
+\end{align*}
+reduces it to the classical wave equation with zero initial data, whose energy remains zero.
+
+Hence
+\begin{align*}
+u\equiv 0.
+\end{align*}
+Therefore the original problem has at most one solution:
+\begin{align*}
+\boxed{\text{The problem has at most one solution in }C_c^2(\mathbb R^n\times[0,\infty)).}
+\end{align*}
+
+\end{description}
+
+If you'd like, I can show how to prove uniqueness \DEFINE{directly from the given energy $E(t)$} without introducing the substitution $v=e^{-at}u$, since that is probably what the exercise intends.
+
+
+
+%10%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Show that the problem
+\begin{align*}
+	\left \{\begin{array}{rl}
+		 u_{u} -\Delta u  =f(x) & \text{in } U\times(0,T)\\
+		u = g, u_t= h & \text{on } U\times\{0\} \\
+		u_t + \PART{u}{\nu} = 0 & \text{on } \partial U \times[0,T],
+	\end{array} \right .
+\end{align*}
+where $U\subset \R^n$ is open and bounded with smooth boundary $\partial U, T>0$, and $\nu$ is the outward unit normal to $\partial U$, has at most one solution $u \in C^2(\CONJ{U}\times[0,T])$.
+
+\end{enumerate}
+
+\HLINE
+
+
+To show the problem has \DEFINE{at most one solution}, we prove that if $u_1,u_2$ are two solutions, then they must be equal.
+
+The standard method is an \DEFINE{energy argument}.
+
+This is a uniqueness proof for the wave equation with \DEFINE{dissipative boundary conditions}, a standard result in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{Step 1: Take the difference of two solutions}
+
+Suppose $u_1,u_2\in C^2(\overline U\times[0,T])$ are two solutions.
+
+Let
+\begin{align*}
+w=u_1-u_2.
+\end{align*}
+Then $w$ satisfies the homogeneous problem:
+\begin{align*}
+\begin{cases}
+w_{tt}-\Delta w=0 &\text{in }U\times(0,T),\\
+w(x,0)=0,\quad w_t(x,0)=0 &\text{in }U,\\
+w_t+\dfrac{\partial w}{\partial \nu}=0 &\text{on }\partial U\times[0,T].
+\end{cases}
+\end{align*}
+We will show that $w\equiv 0$.
+
+\item \textbf{Step 2: Define the energy}
+
+Define
+\begin{align*}
+E(t)=\frac12\int_U \left(w_t^2+|\nabla w|^2\right)\,dx.
+\end{align*}
+This is the usual wave energy.
+
+\item \textbf{Step 3: Differentiate the energy}
+
+Differentiate:
+\begin{align*}
+E'(t)=\int_U w_tw_{tt}\,dx+\int_U \nabla w\cdot \nabla w_t\,dx.
+\end{align*}
+Integrate the second term by parts:
+\begin{align*}
+\int_U \nabla w\cdot\nabla w_t\,dx = -\int_U (\Delta w)w_t\,dx +\int_{\partial U}\frac{\partial w}{\partial \nu}w_t\,dS.
+\end{align*}
+Thus,
+\begin{align*}
+E'(t) = \int_U w_t(w_{tt}-\Delta w)\,dx +\int_{\partial U}\frac{\partial w}{\partial \nu}w_t\,dS.
+\end{align*}
+Since $w_{tt}-\Delta w=0$,
+\begin{align*}
+E'(t) = \int_{\partial U}\frac{\partial w}{\partial \nu}w_t\,dS.
+\end{align*}
+
+\item \textbf{Step 4: Use the boundary condition}
+
+On $\partial U$,
+\begin{align*}
+w_t+\frac{\partial w}{\partial \nu}=0,
+\end{align*}
+so
+\begin{align*}
+\frac{\partial w}{\partial \nu}=-w_t.
+\end{align*}
+Substitute:
+\begin{align*}
+E'(t) = \int_{\partial U}(-w_t)w_t\,dS = -\int_{\partial U}w_t^2\,dS.
+\end{align*}
+Hence,
+\begin{align*}
+E'(t)\le 0.
+\end{align*}
+So the energy is nonincreasing.
+
+\item \textbf{Step 5: Use the initial conditions}
+
+Because
+\begin{align*}
+w(x,0)=0,\qquad w_t(x,0)=0,
+\end{align*}
+we have
+\begin{align*}
+E(0)=0.
+\end{align*}
+Since $E(t)\ge 0$ and $E'(t)\le 0$,
+\begin{align*}
+E(t)\equiv 0.
+\end{align*}
+Thus,
+\begin{align*}
+\int_U \left(w_t^2+|\nabla w|^2\right)\,dx=0.
+\end{align*}
+Hence,
+\begin{align*}
+w_t=0,\qquad \nabla w=0
+\end{align*}
+in $U\times(0,T)$.
+So $w$ is constant in space and time.
+
+Since $w(x,0)=0$,
+\begin{align*}
+w\equiv 0.
+\end{align*}
+Thus,
+\begin{align*}
+u_1=u_2.
+\end{align*}
+
+\item \textbf{Final conclusion}
+
+The difference of two solutions has zero energy, hence is identically zero.
+
+Therefore the problem has at most one solution:
+\begin{align*}
+\boxed{\text{There is at most one }u\in C^2(\overline U\times[0,T])\text{ solving the problem.}}
+\end{align*}
+
+\item \textbf{Key idea}
+
+The dissipative boundary condition
+\begin{align*}
+u_t+\frac{\partial u}{\partial \nu}=0
+\end{align*}
+forces
+\begin{align*}
+E'(t)=-\int_{\partial U}u_t^2\,dS\le 0,
+\end{align*}
+so the energy decreases, and zero initial energy implies the solution is zero.
+
+This is the fundamental uniqueness mechanism for damped boundary wave problems.
+
+\end{description}
+
+If you'd like, I can explain \DEFINE{why the boundary condition $u_t+\partial_\nu u=0$ is called absorbing/dissipative}, which gives intuition for why the energy decreases.
+
+\textbf{Questions}
+
+\begin{description}
+	\item \textit{Explain the `energy argument'.}
+	\item \textit{What are the energy formulas for the standard PDEs}.
+\end{description}
+
+
+%%%%%%%%%%%%%%%%%%%% Notes
+\newpage
+\section*{Notes}
+
+\begin{description}
+	\item \DEFINE{Explain `weak convergence'}
+
+\DEFINE{``Weakly convergent"} means a sequence converges \DEFINE{when tested against every continuous linear functional}, even if it does \DEFINE{not} converge in norm.
+
+This is weaker than ordinary (strong) convergence.
+
+---
+\begin{description}
+
+\item \textbf{1. Definition of weak convergence}
+
+Let $X$ be a Banach space.
+
+A sequence $u_j$ \DEFINE{converges weakly} to $u$ in $X$, written
+\begin{align*}
+u_j \rightharpoonup u,
+\end{align*}
+if for every bounded linear functional $L\in X^*$,
+\begin{align*}
+L(u_j)\to L(u).
+\end{align*}
+
+---
+
+\item \textbf{2. Intuition}
+
+Instead of requiring
+\begin{align*}
+|u_j-u|_X\to 0
+\end{align*}
+(which is \DEFINE{strong convergence}), weak convergence only requires that
+\begin{align*}
+L(u_j-u)\to 0
+\end{align*}
+
+for every linear measurement $L$.
+
+So:
+\begin{itemize}
+\item \DEFINE{strong convergence:} vectors themselves get close;
+\item \DEFINE{weak convergence:} all linear “probes” of the vectors converge.
+\end{itemize}
+
+---
+
+\item \textbf{3. Example in $L^2(U)$}
+
+A sequence $f_j$ converges weakly to $f$ in $L^2(U)$ if
+\begin{align*}
+\int_U f_j g\,dx \to \int_U fg\,dx
+\qquad\forall g\in L^2(U).
+\end{align*}
+So instead of
+\begin{align*}
+|f_j-f|_{L^2}\to 0,
+\end{align*}
+
+we only require convergence of all inner products.
+
+Because $L^2(U)$ is a Hilbert space, weak convergence is:
+\begin{align*}
+f_j\rightharpoonup f \iff \langle f_j,g\rangle\to\langle f,g\rangle \quad\forall g\in L^2(U).
+\end{align*}
+
+---
+
+\item \textbf{4. Example in $H_0^1(U)$}
+
+In $H_0^1(U)$,
+\begin{align*}
+u_j\rightharpoonup u
+\end{align*}
+means:
+\begin{align*}
+\int_U \nabla u_j\cdot\nabla v\,dx \to \int_U \nabla u\cdot\nabla v\,dx \qquad \forall v\in H_0^1(U),
+\end{align*}
+and similarly for the $L^2$-part.
+
+So weak convergence in Sobolev spaces means the derivatives converge “in the averaged sense.”
+
+---
+
+\item \textbf{5. Strong convergence implies weak convergence}
+
+If
+\begin{align*}
+u_j\to u
+\quad\text{strongly in }X,
+\end{align*}
+then automatically
+\begin{align*}
+u_j\rightharpoonup u.
+\end{align*}
+Because if $L$ is continuous,
+\begin{align*}
+|L(u_j)-L(u)| \le \|L\|\,\|u_j-u\|,
+\end{align*}
+so the right-hand side goes to zero.
+
+Thus:
+\begin{align*}
+\text{strong convergence } \implies \text{ weak convergence}.
+\end{align*}
+But the converse is generally false.
+
+---
+
+\item \textbf{6. Weak but not strong convergence example}
+
+In $L^2(0,2\pi)$, define
+\begin{align*}
+f_j(x)=\sin(jx).
+\end{align*}
+Then:
+\begin{description}
+\item $f_j$ does \DEFINE{not} converge strongly to $0$, because
+\begin{align*}
+  |f_j|_{L^2}\not\to 0,
+\end{align*}
+but
+\item $f_j\rightharpoonup 0$ weakly, because
+\begin{align*}
+  \int_0^{2\pi}\sin(jx)g(x)\,dx\to 0
+\end{align*}
+for every $g\in L^2$.
+\end{description}
+
+So the oscillations average out.
+
+This is the intuition:
+
+\> weak convergence allows oscillation, as long as averages converge.
+
+---
+
+\item \textbf{7. Why weak convergence matters}
+
+Weak convergence is crucial because bounded sequences may fail to converge strongly, but often have weakly convergent subsequences.
+
+This is the idea behind:
+
+\> \DEFINE{bounded sequence + reflexive space $\to$ weakly convergent subsequence}
+
+For example:
+\begin{itemize}
+\item bounded sequences in $L^p$, $1<p<\infty$,
+\item bounded sequences in $H^1$,
+\end{itemize}
+have weakly convergent subsequences.
+
+This is one of the main compactness tools in Functional Analysis.
+
+---
+
+\item \textbf{8. In your PDE problem}
+
+You had:
+\begin{align*}
+u_j \rightharpoonup u \quad\text{in } H_0^1(U),
+\end{align*}
+which means:
+\begin{itemize}
+\item $u_j$ may not converge in norm,
+\item but for every test function $v$,
+\end{itemize}
+
+\begin{align*}
+\int_U \nabla u_j\cdot\nabla v\,dx
+\to
+\int_U \nabla u\cdot\nabla v\,dx.
+\end{align*}
+That is exactly what lets us pass to the limit in the weak formulation.
+
+---
+
+\item \textbf{Final summary}
+
+Weak convergence means:
+\begin{align*}
+u_j\rightharpoonup u
+\end{align*}
+if all linear functionals converge:
+\begin{align*}
+L(u_j)\to L(u).
+\end{align*}
+
+It is weaker than norm convergence, but bounded sequences often have weakly convergent subsequences, which makes it fundamental in PDEs and Sobolev spaces.
+
+---
+\end{description}
+
+If you'd like, I can explain \DEFINE{why bounded sequences in $H_0^1(U)$ always have weakly convergent subsequences}, which is the compactness fact used in your proof.
+
+\HLINE
+
+%%%%%%%%%%%%%%%%%%%%%%%
+	\newpage
+	\item \DEFINE{Explain `weak differentiation'}
+
+A \DEFINE{weak derivative} is a generalized notion of derivative that lets us differentiate functions that may not be classically differentiable.
+
+It is fundamental in Partial Differential Equations because weak solutions of PDEs are defined using weak derivatives.
+
+---
+\begin{description}
+
+\item \textbf{1. Motivation}
+
+In classical calculus, the derivative $u'(x)$ is defined pointwise:
+\begin{align*}
+u'(x)=\lim_{h\to 0}\frac{u(x+h)-u(x)}{h}.
+\end{align*}
+But many functions:
+\begin{itemize}
+\item are not differentiable everywhere,
+\item may have corners,
+\item may only be integrable,
+\end{itemize}
+yet we still want to talk about their derivatives.
+
+The weak derivative does this by moving the derivative onto a \DEFINE{test function} using integration by parts.
+
+---
+
+\item \textbf{2. Classical integration by parts idea}
+
+If $u,v\in C^1(a,b)$, then
+\begin{align*}
+\int_a^b u'(x)v(x)\,dx = -\int_a^b u(x)v'(x)\,dx
+\end{align*}
+assuming $v(a)=v(b)=0$.
+
+Notice:
+
+\> This identity characterizes $u'$ without using pointwise differentiation.
+
+That motivates the definition.
+
+---
+
+\item \textbf{3. Definition of weak derivative in one dimension}
+
+Let $u\in L^1_{\mathrm{loc}}(a,b)$.
+
+A function $g\in L^1_{\mathrm{loc}}(a,b)$ is the \DEFINE{weak derivative} of $u$ if
+\begin{align*}
+\int_a^b u(x)\varphi'(x)\,dx = -\int_a^b g(x)\varphi(x)\,dx 
+\end{align*}
+\begin{align*}
+\varphi\in C_c^\infty(a,b).
+\end{align*}
+Then we write
+\begin{align*}
+g=u'.
+\end{align*}
+
+---
+
+\item \textbf{4. Interpretation}
+
+Instead of requiring:
+\begin{align*}
+u'(x)=g(x)
+\end{align*}
+pointwise, we require:
+\begin{align*}
+\int u\,\varphi'=-\int g\,\varphi
+\end{align*}
+for every smooth compactly supported $\varphi$.
+
+So:
+
+\> \DEFINE{$g$ acts like the derivative of $u$ under integration.}
+
+---
+
+\item \textbf{5. Example: $u(x)=|x|$}
+
+Classically:
+\begin{align*}
+u(x)=|x|
+\end{align*}
+is not differentiable at $x=0$.
+
+But define
+\begin{align*}
+g(x)= \begin{cases}
+1,&x>0,\\
+-1,&x<0.
+\end{cases}
+\end{align*}
+Then for every $\varphi\in C_c^\infty(\mathbb R)$,
+\begin{align*}
+\int_{\mathbb R}|x|\varphi'(x),dx = -\int_{\mathbb R}g(x)\varphi(x),dx.
+\end{align*}
+So $g$ is the weak derivative of $|x|$.
+
+Thus:
+\begin{align*}
+(|x|)'=\operatorname{sgn}(x)
+\end{align*}
+
+in the weak sense.
+
+This is valid even though the classical derivative fails at $0$.
+
+---
+
+\item \textbf{6. Multivariable weak derivatives}
+
+For $u\in L^1_{\text{loc}}(U)$, the weak partial derivative $\partial u/\partial x_i$ is a function $g\in L^1_{\text{loc}}(U)$ such that
+
+\begin{align*}
+\int_U u,\frac{\partial \varphi}{\partial x_i},dx = -\int_U g,\varphi,dx
+\end{align*}
+for all $\varphi\in C_c^\infty(U)$.
+
+Then we write
+\begin{align*}
+g=\frac{\partial u}{\partial x_i}.
+\end{align*}
+
+---
+
+\item \textbf{7. Why weak derivatives matter}
+
+Many PDE solutions are not smooth enough for classical derivatives.
+
+Example:
+\begin{align*}
+-\Delta u=f
+\end{align*}
+may not have a $C^2$ solution, but may have a solution with
+\begin{align*}
+u\in H^1(U),
+\end{align*}
+meaning:
+\begin{itemize}
+\item $u\in L^2(U)$,
+\item weak first derivatives are in $L^2(U)$.
+\end{itemize}
+
+Thus weak derivatives allow us to define Sobolev spaces:
+\begin{align*}
+W^{k,p}(U) = {u\in L^p(U): D^\alpha u\in L^p(U)}.
+\end{align*}
+
+---
+
+\item \textbf{8. If classical derivative exists, weak derivative agrees}
+
+If $u\in C^1(U)$, then its weak derivative equals its classical derivative.
+
+So weak derivatives extend the classical notion—they do not replace it.
+
+---
+
+\item \textbf{9. Key intuition}
+
+A weak derivative is a derivative defined \DEFINE{through integration against test functions}, rather than pointwise limits.
+
+This lets us differentiate rough functions.
+
+---
+
+\item \textbf{Final summary}
+
+A function $g$ is the weak derivative of $u$ if
+\begin{align*}
+\int_U u,D\varphi,dx = -\int_U g,\varphi,dx
+\end{align*}
+for every smooth compactly supported test function $\varphi$.
+
+This is the generalized derivative used in Sobolev spaces and weak PDE solutions.
+
+---
+\end{description}
+
+If you'd like, I can show next \DEFINE{why the weak derivative is unique}, which is an important theorem behind the definition of Sobolev spaces.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+	\newpage
+	\item \DEFINE{Explain the relationship between $H_0^1$ and $L^p$ spaces}
+
+The relationship between $H_0^1(U)$ and $L^p(U)$ spaces comes from the fact that functions in $H_0^1(U)$ automatically belong to certain $L^p(U)$ spaces. This is given by the \DEFINE{Sobolev embedding theorem}, one of the central results in Functional Analysis.
+
+---
+\begin{description}
+
+\item \textbf{1. Recall the definitions}
+
+---
+
+\begin{itemize}
+\item \textbf{$L^p(U)$}
+
+A function $u$ is in $L^p(U)$ if
+\begin{align*}
+\int_U |u|^p,dx<\infty.
+\end{align*}
+
+This measures the \DEFINE{size of the function}.
+
+---
+
+\item \textbf{$H^1(U)$}
+
+\begin{align*}
+H^1(U)=W^{1,2}(U)
+\end{align*}
+means:
+\begin{align*}
+u\in L^2(U)
+\quad\text{and}\quad
+\nabla u\in L^2(U).
+\end{align*}
+
+So $H^1$ measures:
+
+\begin{enumerate}
+\item the size of $u$,
+\item the size of its gradient.
+\end{enumerate}
+
+---
+
+\item \textbf{$H_0^1(U)$}
+
+$H_0^1(U)$ is the closure of $C_c^\infty(U)$ in the $H^1$-norm.
+
+These are $H^1$ functions whose boundary trace is zero.
+
+---
+\end{itemize}
+
+\item \textbf{2. $H_0^1(U)\subset L^p(U)$}
+
+If $U\subset \mathbb R^n$ is bounded, then every function in $H_0^1(U)$ lies in $L^p(U)$ for a range of $p$.
+
+Specifically:
+
+---
+\begin{itemize}
+
+\item \textbf{If $n>2$,}
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\quad\text{for }1\le p\le \frac{2n}{n-2}.
+\end{align*}
+That means:
+\begin{align*}
+u\in H_0^1(U)\implies u\in L^p(U),
+\end{align*}
+and there exists $C>0$ such that
+\begin{align*}
+\|u\|_{L^p(U)} \le C\|u\|_{H_0^1(U)}.
+\end{align*}
+The exponent
+\begin{align*}
+2^*=\frac{2n}{n-2}
+\end{align*}
+is called the \DEFINE{critical Sobolev exponent}.
+
+---
+
+\item \textbf{If $n=2$,}
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\quad\forall p<\infty.
+\end{align*}
+So every $H_0^1$ function is in every finite $L^p$ space.
+
+---
+
+\item \textbf{If $n=1$,}
+\begin{align*}
+H_0^1(U)\hookrightarrow L^\infty(U).
+\end{align*}
+So one-dimensional $H_0^1$ functions are bounded.
+
+---
+\end{itemize}
+
+\item \textbf{3. Why this matters}
+
+The space $H_0^1(U)$ gives you \DEFINE{extra integrability}.
+
+Knowing only $u\in L^2$ gives:
+\begin{align*}
+u\in L^2.
+\end{align*}
+But knowing $u\in H_0^1$ gives:
+\begin{align*}
+u\in L^p
+\end{align*}
+for larger (p).
+
+So:
+
+\> the derivative information improves the integrability of the function.
+
+That is the key relationship.
+
+---
+
+\item \textbf{4. Example in dimension $3$}
+
+If $n=3$,
+\begin{align*}
+2^*=\frac{2(3)}{3-2}=6.
+\end{align*}
+So
+\begin{align*}
+H_0^1(U)\hookrightarrow L^6(U).
+\end{align*}
+Thus every $u\in H_0^1(U)$ satisfies
+\begin{align*}
+\|u\|_{L^6}\le C\|\nabla u\|_{L^2}.
+\end{align*}
+This is often written as
+\begin{align*}
+H_0^1(U)\subset L^6(U).
+\end{align*}
+This is essential in nonlinear elliptic PDEs.
+
+---
+
+\item \textbf{5. Poincaré inequality connects them}
+
+For $u\in H_0^1(U)$,
+\begin{align*}
+\|u\|_{L^2(U)} \le C\|\nabla u\|_{L^2(U)}.
+\end{align*}
+This means that in $H_0^1(U)$, the gradient controls the $L^2$-norm.
+
+Therefore,
+\begin{align*}
+\|u\|_{H_0^1(U)} \sim \|\nabla u\|_{L^2(U)}.
+\end{align*}
+Combining this with Sobolev embedding gives:
+\begin{align*}
+\|u\|_{L^p(U)} \le C\|\nabla u\|_{L^2(U)}.
+\end{align*}
+This is the fundamental bridge between $H_0^1$ and $L^p$.
+
+---
+
+\item \textbf{6. Compact embeddings}
+
+The embedding
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\end{align*}
+is not only continuous, but compact for
+\begin{align*}
+1\le p<\frac{2n}{n-2}.
+\end{align*}
+That means:
+
+If $(u_j)$ is bounded in $H_0^1(U)$, then some subsequence converges \DEFINE{strongly} in $L^p(U)$.
+
+This is the \DEFINE{Rellich–Kondrachov compactness theorem}, fundamental in Partial Differential Equations.
+
+---
+
+\item \textbf{7. Summary of the relationship}
+
+The space $H_0^1(U)$ is stronger than $L^p(U)$:
+\begin{align*}
+H_0^1(U)\subset L^p(U)
+\end{align*}
+for appropriate $p$.
+
+The inclusion is controlled by Sobolev inequalities:
+\begin{align*}
+\|u\|_{L^p}\le C\|u\|_{H_0^1}.
+\end{align*}
+So:
+
+\> $H_0^1(U$) gives both square integrability \DEFINE{and} derivative control, and that forces better $L^p$ behavior.
+
+---
+
+\item \textbf{Final summary}
+
+For bounded (U),
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\end{align*}
+with:
+\begin{align*}
+1\le p\le \frac{2n}{n-2}\quad (n>2).
+\end{align*}
+
+This means every $H_0^1$ function automatically lies in certain $L^p$ spaces, and its $L^p$-norm is controlled by its $H_0^1$-norm.
+
+That relationship is one of the core structural facts in Sobolev space theory.
+
+---
+\end{description}
+
+If you'd like, next I can explain \DEFINE{why the exponent $\frac{2n}{n-2}$ appears}, since that critical exponent is extremely important in PDE.
+
+
+\newpage
+
+	\item \DEFINE{Why can we use `weak formulations`?}
+
+We use \DEFINE{weak formulations} because many differential equations do not have sufficiently smooth \DEFINE{classical solutions}, but they often do have solutions in a weaker sense.
+
+The weak formulation allows us to:
+\begin{enumerate}
+\item \DEFINE{make sense of derivatives for rough functions},
+\item \DEFINE{prove existence of solutions},
+\item \DEFINE{work in Sobolev spaces},
+\item \DEFINE{use functional analysis tools like Lax–Milgram}.
+\end{enumerate}
+This is foundational in Partial Differential Equations.
+
+---
+\begin{description}
+
+\item \textbf{1. Classical solutions may not exist}
+
+Take the PDE
+\begin{align*}
+-\Delta u=f.
+\end{align*}
+A \DEFINE{classical solution} requires
+\begin{align*}
+u\in C^2(U),
+\end{align*}
+because $\Delta u$ involves second derivatives.
+
+But even if $f$ is nice, the solution may fail to be $C^2$.
+
+For example:
+\begin{itemize}
+\item the domain may be irregular,
+\item the coefficients may be rough,
+\item the forcing term $f$ may only be in $L^2$.
+\end{itemize}
+Then classical derivatives may not exist.
+
+---
+
+\item \textbf{2. Weak formulations lower the differentiability requirement}
+
+Suppose
+\begin{align*}
+-\Delta u=f.
+\end{align*}
+Multiply by a test function $v\in C_c^\infty(U)$:
+\begin{align*}
+\int_U (-\Delta u)v,dx=\int_U fv,dx.
+\end{align*}
+Integrate by parts:
+\begin{align*}
+\int_U \nabla u\cdot\nabla v,dx=\int_U fv,dx.
+\end{align*}
+Now only \DEFINE{first derivatives} of $u$ appear.
+
+So instead of requiring:
+\begin{align*}
+u\in C^2(U),
+\end{align*}
+we only need:
+\begin{align*}
+u\in H^1(U).
+\end{align*}
+That is a much larger space.
+
+So:
+
+\> the weak formulation reduces smoothness requirements.
+
+---
+
+\item \textbf{3. Weak derivatives let us define derivatives for rough functions}
+
+In Sobolev spaces, derivatives are interpreted weakly:
+\begin{align*}
+\int_U u,D\varphi = -\int_U (Du)\varphi.
+\end{align*}
+This means $u$ need not be classically differentiable.
+
+Example:
+\begin{align*}
+u(x)=|x|
+\end{align*}
+is not differentiable at $0$, but it has a weak derivative.
+
+Thus weak formulations let us solve PDEs with non-smooth solutions.
+
+---
+
+\item \textbf{4. Weak formulations turn PDEs into integral equations}
+
+Instead of solving
+\begin{align*}
+-\Delta u=f,
+\end{align*}
+we solve:
+\begin{align*}
+\int_U \nabla u\cdot\nabla v,dx = \int_U fv,dx \qquad \forall v.
+\end{align*}
+This is an equation in a Hilbert space.
+
+That allows the use of tools from Functional Analysis, such as:
+\begin{itemize}
+\item Lax–Milgram,
+\item weak compactness,
+\item variational methods,
+\item monotone operator methods.
+\end{itemize}
+These tools are often unavailable in the classical setting.
+
+---
+
+\item \textbf{5. Weak formulations are stable under limits}
+
+Suppose $u_j$ solves approximating equations and
+\begin{align*}
+u_j\rightharpoonup u.
+\end{align*}
+The weak formulation:
+\begin{align*}
+\int_U \nabla u_j\cdot\nabla v,dx=\int_U f_jv,dx
+\end{align*}
+passes to the limit easily.
+
+That is because integrals behave well under weak convergence.
+
+But pointwise second derivatives generally do \DEFINE{not} pass to limits.
+
+So:
+
+\> weak formulations are compatible with approximation.
+
+This is essential in existence proofs.
+
+---
+
+\item \textbf{6. Physical meaning}
+
+Weak formulations often represent the \DEFINE{integral balance law} of the PDE.
+
+For example, in elasticity or heat flow, the weak form expresses:
+\begin{itemize}
+\item conservation of energy,
+\item conservation of mass,
+\item equilibrium.
+\end{itemize}
+Thus weak solutions are often physically meaningful even when classical derivatives fail.
+
+---
+
+\item \textbf{7. Classical solutions imply weak solutions}
+If (u) is smooth, then integration by parts shows it satisfies the weak formulation.
+
+So:
+
+\> every classical solution is a weak solution.
+
+That means weak solutions generalize classical ones.
+
+Moreover, if the weak solution is smooth enough, it satisfies the PDE classically.
+
+So the weak formulation is not changing the equation—it is extending the notion of solution.
+
+---
+
+\item \textbf{Final summary}
+
+We use weak formulations because they:
+\begin{enumerate}
+\item allow less regular solutions,
+\item reduce derivative requirements,
+\item convert PDEs into integral equations,
+\item enable functional analytic methods,
+\item are stable under weak convergence.
+\end{enumerate}
+
+In short:
+
+\> \DEFINE{Weak formulations let us solve PDEs in spaces where classical derivatives may not exist.}
+
+That is why they are central in modern PDE theory.
+
+---
+\end{description}
+
+If you'd like, I can show the exact derivation of the weak formulation for
+\begin{align*}
+-\Delta u=f,\quad u=0,
+\end{align*}
+step by step using integration by parts.
+
+%%%%%%%%%%%%%%%%%%5
+\newpage
+	\item \DEFINE{Explain Sobolev Embedding}.
+
+The \DEFINE{Sobolev Embedding Theorem} tells us that if a function has enough integrable derivatives, then the function itself automatically belongs to a “better” function space—typically an $L^p$ space or even a continuous function space.
+
+It is one of the central structural theorems in Functional Analysis and underlies much of modern Partial Differential Equations.
+
+---
+\begin{description}
+
+\item \textbf{1. The basic idea}
+
+Sobolev spaces measure both:
+
+\begin{enumerate}
+\item the size of the function,
+\item the size of its derivatives.
+\end{enumerate}
+The Sobolev embedding theorem says:
+
+\> \DEFINE{Derivative control improves integrability (and sometimes continuity).}
+
+For example:
+\begin{align*}
+u\in H_0^1(U)
+\end{align*}
+implies
+\begin{align*}
+u\in L^p(U)
+\end{align*}
+for certain $p>2$.
+
+So knowing $\nabla u\in L^2$ gives stronger information about $u$.
+
+\item \textbf{2. The classical Sobolev embedding}
+
+Let $U\subset \mathbb R^n$ be bounded.
+
+If $n>2$, then
+\begin{align*}
+H_0^1(U)\hookrightarrow L^{2^*}(U),
+\end{align*}
+where
+\begin{align*}
+2^*=\frac{2n}{n-2}.
+\end{align*}
+This means:
+\begin{enumerate}
+\item every $u\in H_0^1(U)$ belongs to $L^{2^*}(U)$,
+\item there exists $C>0$ such that
+\end{enumerate}
+\begin{align*}
+\|u\|_{L^{2^*}(U)} \le C\|u\|_{H_0^1(U)}.
+\end{align*}
+Because of Poincaré inequality, this is often written as
+\begin{align*}
+\|u\|_{L^{2^*}(U)} \le C\|\nabla u\|_{L^2(U)}.
+\end{align*}
+This is the fundamental Sobolev inequality.
+
+\item \textbf{3. Meaning of the embedding notation}
+
+The notation
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\end{align*}
+means:
+\begin{itemize}
+\item every $u\in H_0^1(U)$ is in $L^p(U)$,
+\item the inclusion map is continuous.
+\end{itemize}
+That is:
+\begin{align*}
+\|u\|_{L^p(U)} \le C\|u\|_{H_0^1(U)}.
+\end{align*}
+So the Sobolev norm controls the $L^p$-norm.
+
+\item \textbf{4. The critical exponent}
+
+The number
+\begin{align*}
+2^*=\frac{2n}{n-2}
+\end{align*}
+is called the \DEFINE{critical Sobolev exponent}.
+
+The theorem says:
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U) \quad\text{for }1\le p\le 2^*.
+\end{align*}
+Thus:
+\begin{itemize}
+\item for $p\le 2^*$, the embedding holds;
+\item for $p>2^*$, generally it fails.
+\end{itemize}
+
+---
+
+\item \textbf{5. Dimension matters}
+
+---
+
+\begin{description}
+\item If $n>2$,
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\quad\text{for }1\le p\le \frac{2n}{n-2}.
+\end{align*}
+
+\item If $n=2$,
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\quad\forall p<\infty.
+\end{align*}
+No finite critical exponent exists.
+
+\item If $n=1$,
+\begin{align*}
+H_0^1(U)\hookrightarrow C^0(\overline U)
+\end{align*}
+and in particular
+\begin{align*}
+H_0^1(U)\hookrightarrow L^\infty(U).
+\end{align*}
+So in low dimensions, Sobolev functions are even continuous.
+\end{description}
+
+\item \textbf{6. Why this matters in PDE}
+
+Suppose
+\begin{align*}
+-\Delta u=f(u).
+\end{align*}
+To make sense of the weak formulation, we need $f(u)$ to be integrable.
+
+If $u\in H_0^1(U)$, Sobolev embedding gives:
+\begin{align*}
+u\in L^p(U),
+\end{align*}
+which gives integrability for nonlinear terms like:
+\begin{align*}
+u^q,\quad |u|^{q-1}u.
+\end{align*}
+This is essential in nonlinear Partial Differential Equations.
+
+\item \textbf{7. Compact Sobolev embedding}
+
+There is also the \DEFINE{Rellich–Kondrachov theorem}:
+
+If
+\begin{align*}
+1\le p<2^*,
+\end{align*}
+then
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U)
+\end{align*}
+is \DEFINE{compact}.
+
+That means:
+
+If $u_j$ is bounded in $H_0^1(U)$, then some subsequence converges strongly in $L^p(U)$.
+
+This compactness is one of the main tools for proving existence of weak solutions.
+
+\item \textbf{8. Intuition}
+
+If $\nabla u\in L^2$, then $u$ cannot oscillate too wildly.
+
+That extra regularity forces better behavior of $u$, such as:
+\begin{itemize}
+\item better integrability,
+\item continuity,
+\item compactness.
+\end{itemize}
+So:
+
+\> \DEFINE{Derivative bounds control the function itself.}
+
+That is the heart of Sobolev embedding.
+
+\item \textbf{Final summary}
+
+The Sobolev Embedding Theorem says:
+
+\> If a function has sufficiently integrable derivatives, then the function belongs to stronger spaces.
+
+For example, for $n>2$,
+\begin{align*}
+H_0^1(U)\hookrightarrow L^p(U) \quad\text{for }1\le p\le \frac{2n}{n-2}.
+\end{align*}
+This means:
+\begin{align*}
+\|u\|_{L^p(U)} \le C\|u\|_{H_0^1(U)}.
+\end{align*}
+
+This theorem is fundamental because it turns derivative estimates into function estimates, which is essential in PDE theory.
+\end{description}
+
+If you'd like, I can explain \DEFINE{where the critical exponent $\frac{2n}{n-2}$ comes from}, which is the key scaling argument behind Sobolev embedding.
+
+%%%%%%%%%%%%%%%
+\newpage
+\item \DEFINE{Explain Calculus of Variations}
+
+The \DEFINE{calculus of variations} is the branch of mathematics where we seek a \DEFINE{function} that minimizes or maximizes a quantity called a \DEFINE{functional}.
+
+Instead of minimizing numbers like
+\begin{align*}
+f(x),
+\end{align*}
+we minimize expressions like
+\begin{align*}
+J[u].
+\end{align*}
+This is fundamental in Calculus of Variations and is one of the main tools in Partial Differential Equations.
+
+\item \textbf{1. Ordinary calculus vs calculus of variations}
+
+In ordinary calculus:
+\begin{align*}
+f(x)=x^2+1
+\end{align*}
+and we look for $x$ minimizing $f(x$).
+
+In calculus of variations:
+\begin{align*}
+J[u]=\int_a^b F(x,u,u')\,dx
+\end{align*}
+and we look for a \DEFINE{function $u(x)$} minimizing $J$.
+
+So:
+	\begin{itemize}
+    \item ordinary calculus: unknown is a number,
+    \item calculus of variations: unknown is a function.
+	\end{itemize}
+
+\item \textbf{2. Example of a functional}
+
+A typical functional is:
+\begin{align*}
+J[u]=\int_a^b (u')^2\,dx.
+\end{align*}
+This measures the ``energy" of the function.
+
+We may want to find $u$ minimizing $J[u]$ among all functions with fixed endpoints:
+\begin{align*}
+u(a)=A,\qquad u(b)=B.
+\end{align*}
+The minimizer is the straight line between $A$ and $B$.
+
+\item \textbf{3. The main idea: perturb the function}
+
+Suppose $u$ is a minimizer.
+
+Take a small perturbation:
+\begin{align*}
+u+\varepsilon v,
+\end{align*}
+where $v$ is a test function.
+
+Define:
+\begin{align*}
+\phi(\varepsilon)=J[u+\varepsilon v].
+\end{align*}
+If $u$ minimizes $J$, then
+\begin{align*}
+\phi'(0)=0.
+\end{align*}
+This gives the \DEFINE{Euler–Lagrange equation}, the necessary condition for minimizers.
+
+\item \textbf{4. Euler–Lagrange equation}
+
+For
+\begin{align*}
+J[u]=\int_a^b F(x,u,u')\,dx,
+\end{align*}
+the minimizer satisfies
+\begin{align*}
+\frac{\partial F}{\partial u} - \frac{d}{dx} \left( \frac{\partial F}{\partial u'} \right) =0.
+\end{align*}
+This is the Euler–Lagrange equation.
+
+It is the analogue of
+\begin{align*}
+f'(x)=0
+\end{align*}
+from ordinary calculus.
+
+\item \textbf{5. Example}
+
+Minimize
+\begin{align*}
+J[u]=\int_a^b (u')^2\,dx.
+\end{align*}
+Then
+\begin{align*}
+F=(u')^2.
+\end{align*}
+
+So:
+\begin{align*}
+\frac{\partial F}{\partial u}=0, \qquad \frac{\partial F}{\partial u'}=2u'.
+\end{align*}
+Thus,
+\begin{align*}
+\frac{d}{dx}(2u')=0,
+\end{align*}
+which gives
+\begin{align*}
+u''=0.
+\end{align*}
+So the minimizer is linear.
+
+\item \textbf{6. Connection to PDEs}
+
+Many PDEs arise as Euler–Lagrange equations.
+
+For example, consider
+\begin{align*}
+J[u]=\int_U \frac12 |\nabla u|^2-fu\,dx.
+\end{align*}
+Its Euler–Lagrange equation is
+\begin{align*}
+-\Delta u=f.
+\end{align*}
+So solving the PDE is equivalent to minimizing the energy.
+
+This is why variational methods are so important in Partial Differential Equations.
+
+\item \textbf{7. Direct method in calculus of variations}
+
+A standard way to prove existence of minimizers:
+
+	\begin{description}
+    \item Step 1: Choose a minimizing sequence
+
+Take $u_j$ such that
+\begin{align*}
+J[u_j]\to \inf J.
+\end{align*}
+
+    \item Step 2: Show boundedness
+
+Prove $(u_j)$ is bounded in some Sobolev space.
+
+    \item Step 3: Extract a weakly convergent subsequence
+
+Use weak compactness:
+\begin{align*}
+u_j\rightharpoonup u.
+\end{align*}
+
+    \item Step 4: Use lower semicontinuity
+
+Show
+\begin{align*}
+J[u]\le \liminf J[u_j].
+\end{align*}
+Then $u$ minimizes $J$.
+	\end{description}
+
+This is the \DEFINE{direct method}, and it is exactly what you used in the Sobolev minimization problem.
+
+\item \textbf{8. Physical meaning}
+
+Many physical systems minimize an energy:
+	\begin{itemize}
+    \item elastic membranes minimize elastic energy,
+    \item geodesics minimize length,
+    \item soap films minimize area.
+	\end{itemize}
+The calculus of variations gives the equations governing these minimizers.
+
+Examples:
+	\begin{itemize}
+    \item geodesics,
+    \item minimal surfaces,
+    \item Laplace equation,
+    \item elasticity,
+    \item quantum mechanics.
+	\end{itemize}
+
+\item \textbf{9. Why it matters}
+
+The calculus of variations turns PDE problems into minimization problems.
+
+This is useful because minimization problems can often be solved using:
+	\begin{itemize}
+    \item weak compactness,
+    \item Sobolev embeddings,
+    \item lower semicontinuity.
+	\end{itemize}
+
+Thus:
+
+\> \DEFINE{Variational methods provide existence results even when explicit solutions are impossible.}
+
+\item \textbf{Final summary}
+
+The calculus of variations studies how to minimize functionals like
+\begin{align*}
+J[u]=\int F(x,u,\nabla u)\,dx.
+\end{align*}
+The minimizers satisfy Euler–Lagrange equations, often PDEs.
+
+It is a central framework for:
+\begin{enumerate}
+\item deriving PDEs,
+\item proving existence of solutions,
+\item interpreting solutions as energy minimizers.
+\end{enumerate}
+
+If you'd like, I can show how the minimization problem
+\begin{align*}
+\inf_{u\in M}\int_U |\nabla u|^2\,dx
+\end{align*}
+leads to the nonlinear PDE
+\begin{align*}
+-\Delta u=\lambda |u|^{p-2}u
+\end{align*}
+via the Euler–Lagrange equation.
+
+\newpage
+	\item \DEFINE{Explain the `energy argument'.}
+
+
+The \DEFINE{energy argument} is a method for proving properties of solutions of PDEs—especially \DEFINE{uniqueness}, \DEFINE{stability}, and \DEFINE{a priori estimates}—by introducing an ``energy" quantity and studying how it changes in time.
+
+It is one of the most important tools in Partial Differential Equations.
+
+\begin{description}
+
+\item \textbf{1. Basic idea}
+
+You define an energy functional $E(t)$ that measures the size of the solution at time $t$.
+
+Typical form:
+\begin{align*}
+E(t)=\text{kinetic energy}+\text{potential energy}.
+\end{align*}
+Then:
+\begin{enumerate}
+\item differentiate $E(t$),
+\item use the PDE to simplify $E'(t)$,
+\item show $E'(t)\le 0$, or $E'(t)=0$,
+\item conclude bounds or uniqueness.
+\end{enumerate}
+
+\item \textbf{2. Example: wave equation}
+
+Consider
+\begin{align*}
+u_{tt}-\Delta u=0.
+\end{align*}
+Define the energy:
+\begin{align*}
+E(t)=\frac12\int_U \left(u_t^2+|\nabla u|^2\right)\,dx.
+\end{align*}
+Interpretation:
+\begin{itemize}
+    \item $u_t^2$: kinetic energy,
+    \item $|\nabla u|^2$: potential energy.
+\end{itemize}
+
+\item \textbf{3. Differentiate the energy}
+
+Differentiate:
+\begin{align*}
+E'(t) = \int_U u_tu_{tt}\,dx+\int_U \nabla u\cdot\nabla u_t\,dx.
+\end{align*}
+Integrate the second term by parts:
+\begin{align*}
+\int_U \nabla u\cdot\nabla u_t = -\int_U (\Delta u)u_t +\int_{\partial U}\frac{\partial u}{\partial\nu}u_t.
+\end{align*}
+So
+\begin{align*}
+E'(t) = \int_U u_t(u_{tt}-\Delta u)\,dx +\int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS.
+\end{align*}
+Now use the PDE:
+\begin{align*}
+u_{tt}-\Delta u=0.
+\end{align*}
+Then
+\begin{align*}
+E'(t)=\int_{\partial U}\frac{\partial u}{\partial\nu}u_t\,dS.
+\end{align*}
+So the PDE tells us how energy changes.
+
+\item \textbf{4. Why this helps}
+
+Depending on the boundary condition:
+	\begin{itemize}
+    \item If $\partial_\nu u=0$,
+\begin{align*}
+E'(t)=0.
+\end{align*}
+Energy is conserved.
+
+    \item If $u_t+\partial_\nu u=0$,
+
+then
+\begin{align*}
+\partial_\nu u=-u_t,
+\end{align*}
+so
+\begin{align*}
+E'(t) = -\int_{\partial U}u_t^2\,dS\le 0.
+\end{align*}
+Energy decreases.
+
+	\end{itemize}
+Thus the PDE + boundary conditions control the energy.
+
+\item \textbf{5. Energy arguments prove uniqueness}
+
+Suppose two solutions $u_1,u_2$ exist.
+
+Set
+\begin{align*}
+w=u_1-u_2.
+\end{align*}
+Then $w$ satisfies the homogeneous PDE with zero initial data.
+
+Define energy:
+\begin{align*}
+E_w(t)=\frac12\int_U (w_t^2+|\nabla w|^2)\,dx.
+\end{align*}
+Then often:
+\begin{align*}
+E_w'(t)\le 0.
+\end{align*}
+Since initial data are zero,
+\begin{align*}
+E_w(0)=0.
+\end{align*}
+Thus,
+\begin{align*}
+E_w(t)\equiv 0.
+\end{align*}
+Hence
+\begin{align*}
+w_t=0,\quad \nabla w=0,
+\end{align*}
+so
+\begin{align*}
+w\equiv 0.
+\end{align*}
+Therefore the solution is unique.
+
+This is the core of the energy argument.
+
+\item \textbf{6. Energy arguments give bounds}
+
+Sometimes one gets:
+\begin{align*}
+E'(t)\le CE(t).
+\end{align*}
+Then Grönwall's inequality gives:
+\begin{align*}
+E(t)\le E(0)e^{Ct}.
+\end{align*}
+This yields bounds like
+\begin{align*}
+|u(t)|\le Ce^{Ct}.
+\end{align*}
+These are \DEFINE{a priori estimates}.
+
+\item \textbf{7. Why the name ``energy"?}
+
+Because in physical systems the energy often has the form:
+\begin{align*}
+\text{kinetic}+\text{potential}.
+\end{align*}
+For example:
+\begin{align*}
+E(t)=\frac12\int (u_t^2+|\nabla u|^2)\,dx
+\end{align*}
+is exactly the physical energy of a vibrating string or membrane.
+
+So the PDE describes the evolution of energy.
+
+\item \textbf{8. General structure of an energy argument}
+
+\begin{description}
+
+    \item Step 1:
+
+Define an energy $E(t)$.
+
+    \item Step 2:
+
+Differentiate:
+\begin{align*}
+E'(t).
+\end{align*}
+
+    \item Step 3:
+
+Use the PDE to rewrite $E'(t)$.
+
+    \item Step 4:
+
+Show:
+\begin{align*}
+E'(t)\le 0
+\quad\text{or}\quad
+E'(t)\le CE(t).
+\end{align*}
+
+    \item Step 5:
+
+Conclude uniqueness or bounds.
+
+\end{description}
+
+\item \textbf{Final summary}
+
+The \DEFINE{energy argument} is:
+
+\> Define an energy measuring the size of the solution, compute its time derivative using the PDE, and use the resulting inequality to prove uniqueness or estimates.
+
+For uniqueness:
+
+\begin{align*}
+E(0)=0,\quad E'(t)\le 0
+\implies E(t)=0
+\implies u=0.
+\end{align*}
+
+This is one of the most powerful methods in PDE theory.
+
+\end{description}
+
+If you'd like, I can show how the \DEFINE{energy argument changes for the heat equation}, where the energy decreases because diffusion dissipates energy.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+	\item \textit{What are the energy formulas for the standard PDEs}.
+
+
+For the ``standard" PDEs, the \DEFINE{energy formula} is the identity (or inequality) satisfied by a natural norm of the solution, usually obtained by:
+\begin{enumerate}
+\item multiplying the PDE by the solution (or $u_t)$,
+\item integrating over the domain,
+\item integrating by parts.
+\end{enumerate}
+
+These formulas measure conservation or dissipation of energy and are fundamental in Partial Differential Equations.
+
+\begin{description}
+\item \textbf{1. Heat equation}
+
+Consider
+\begin{align*}
+u_t-\Delta u=0 \quad\text{in }U.
+\end{align*}
+Multiply by $u$:
+\begin{align*}
+uu_t-u\Delta u=0.
+\end{align*}
+Integrate:
+\begin{align*}
+\int_U uu_t\,dx-\int_U u\Delta u\,dx=0.
+\end{align*}
+Using integration by parts,
+\begin{align*}
+\int_U u\Delta u\,dx=-\int_U |\nabla u|^2\,dx
+\end{align*}
+(for zero boundary data), so:
+\begin{align*}
+\int_U uu_t\,dx+\int_U |\nabla u|^2\,dx=0.
+\end{align*}
+Since
+\begin{align*}
+\frac{d}{dt}\frac12\int_U u^2\,dx = \int_U uu_t\,dx,
+\end{align*}
+we obtain
+\begin{align*}
+\boxed{
+\frac{d}{dt}\frac12\int_U u^2\,dx + \int_U |\nabla u|^2\,dx = 0.  }
+\end{align*}
+
+\textbf{Interpretation:}
+
+\begin{align*}
+E(t)=\frac12\int_U u^2\,dx
+\end{align*}
+is decreasing:
+\begin{align*}
+E'(t)=-\int_U |\nabla u|^2\,dx\le 0.
+\end{align*}
+So the heat equation \DEFINE{dissipates energy}.
+
+\item \textbf{2. Wave equation}
+
+Consider
+\begin{align*}
+u_{tt}-\Delta u=0.
+\end{align*}
+Multiply by $u_t$:
+\begin{align*}
+u_tu_{tt}-u_t\Delta u=0.
+\end{align*}
+Integrate:
+\begin{align*}
+\int_U u_tu_{tt}\,dx-\int_U u_t\Delta u\,dx=0.
+\end{align*}
+Integrate by parts:
+\begin{align*}
+-\int_U u_t\Delta u\,dx=\int_U \nabla u\cdot\nabla u_t\,dx.
+\end{align*}
+Thus,
+\begin{align*}
+\int_U u_tu_{tt}\,dx+\int_U \nabla u\cdot\nabla u_t\,dx=0.
+\end{align*}
+Recognize:
+\begin{align*}
+\frac{d}{dt}\frac12\int_U u_t^2\,dx = \int_U u_tu_{tt}\,dx,
+\end{align*}
+and
+\begin{align*}
+\frac{d}{dt}\frac12\int_U |\nabla u|^2\,dx = \int_U \nabla u\cdot\nabla u_t\,dx.
+\end{align*}
+Therefore,
+\begin{align*}
+\boxed{
+\frac{d}{dt}\frac12\int_U \left(u_t^2+|\nabla u|^2\right)\,dx=0.
+}
+\end{align*}
+
+\textbf{Interpretation:}
+
+The energy
+\begin{align*}
+E(t)=\frac12\int_U(u_t^2+|\nabla u|^2)\,dx
+\end{align*}
+is conserved.
+
+So the wave equation \DEFINE{preserves energy}.
+
+\item \textbf{3. Poisson equation}
+
+Consider
+\begin{align*}
+-\Delta u=f.
+\end{align*}
+Multiply by $u$:
+\begin{align*}
+-u\Delta u=fu.
+\end{align*}
+Integrate:
+\begin{align*}
+-\int_U u\Delta u\,dx=\int_U fu\,dx.
+\end{align*}
+Integrating by parts gives:
+\begin{align*}
+\boxed{
+\int_U |\nabla u|^2\,dx = \int_U fu\,dx.
+}
+\end{align*}
+
+This is the energy identity for elliptic equations.
+
+\textbf{Interpretation:}
+
+The Dirichlet energy
+
+\begin{align*}
+\int_U |\nabla u|^2\,dx
+\end{align*}
+is controlled by the forcing term.
+
+\item \textbf{4. Reaction-diffusion equation}
+
+Consider
+\begin{align*}
+u_t-\Delta u+cu=0.
+\end{align*}
+Multiply by $u$:
+\begin{align*}
+uu_t-u\Delta u+cu^2=0.
+\end{align*}
+Then:
+\begin{align*}
+\boxed{
+\frac{d}{dt}\frac12\int_U u^2\,dx + \int_U |\nabla u|^2\,dx + c\int_U u^2\,dx = 0.
+}
+\end{align*}
+Energy decays even faster because of the reaction term.
+
+\item \textbf{5. Damped wave equation}
+
+Consider
+\begin{align*}
+u_{tt}-\Delta u+u_t=0.
+\end{align*}
+Multiply by $u_t$:
+\begin{align*}
+u_tu_{tt}-u_t\Delta u+u_t^2=0.
+\end{align*}
+Then:
+\begin{align*}
+\boxed{
+\frac{d}{dt}\frac12\int_U (u_t^2+|\nabla u|^2)\,dx + \int_U u_t^2\,dx = 0.
+}
+\end{align*}
+The energy decreases due to damping.
+
+\item \textbf{6. Schrödinger equation}
+
+Consider
+\begin{align*}
+iu_t+\Delta u=0.
+\end{align*}
+\begin{align*}
+\boxed{
+\frac{d}{dt}\int_U |u|^2\,dx=0.
+}
+\end{align*}
+
+So the $L^2$-norm is conserved.
+
+\item \textbf{7. General pattern}
+
+For PDEs:
+
+	\begin{itemize}
+
+    \item Diffusion-type equations:
+
+Energy decreases.
+
+\begin{align*}
+E'(t)\le 0.
+\end{align*}
+
+Examples:
+
+	\begin{itemize}
+    \item heat equation,
+    \item reaction-diffusion,
+    \item damped wave.
+	\end{itemize}
+
+    \item Conservative equations:
+
+Energy is constant.
+
+\begin{align*}
+E'(t)=0.
+\end{align*}
+
+Examples:
+
+	\begin{itemize}
+    \item wave equation,
+    \item Schrödinger equation.
+	\end{itemize}
+
+    \item Elliptic equations:
+
+Energy gives static bounds.
+
+\begin{align*}
+\int |\nabla u|^2 = \int fu.
+\end{align*}
+	\end{itemize}
+
+---
+
+\item \textbf{Final summary}
+
+The standard energy formulas are:
+
+	\begin{itemize}
+    \item Heat equation:
+
+\begin{align*}
+\boxed{
+\frac{d}{dt}\frac12\int u^2 + \int |\nabla u|^2 = 0
+}
+\end{align*}
+Energy decays.
+
+    \item Wave equation:
+
+\begin{align*}
+\boxed{
+\frac{d}{dt}\frac12\int (u_t^2+|\nabla u|^2)=0
+}
+\end{align*}
+Energy conserved.
+
+    \item Poisson equation:
+
+\begin{align*}
+\boxed{
+\int |\nabla u|^2=\int fu
+}
+\end{align*}
+Static energy balance.
+
+    \item Damped wave:
+
+\begin{align*}
+\boxed{
+\frac{d}{dt}E(t)+\int u_t^2=0
+}
+\end{align*}
+Energy decays.
+
+These are the main ``energy identities" used to prove:
+\begin{enumerate}
+\item uniqueness,
+\item stability,
+\item a priori bounds,
+\item existence.
+\end{enumerate}
+	\end{itemize}
+
+\end{description}
+
+If you'd like, I can derive the \DEFINE{energy formula for the general second-order hyperbolic PDE}
+\begin{align*}
+u_{tt}-\operatorname{div}(A\nabla u)+cu=0,
+\end{align*}
+which unifies the wave and damped wave cases.
+
+
+\end{description} %%% end of Questions
+
+\end{document}

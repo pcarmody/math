@@ -1,0 +1,239 @@
+We want to show that the functional
+
+[
+J(u)=\int_U |\nabla u|^2,dx-\int_U fu,dx
+]
+
+attains its minimum on (H_0^1(U)), i.e. that there exists (u_0\in H_0^1(U)) such that
+
+[
+J(u_0)=\inf_{u\in H_0^1(U)}J(u).
+]
+
+This is the standard **direct method in the calculus of variations**, one of the foundational techniques in Calculus of Variations.
+
+---
+
+# Step 1: Define the infimum
+
+Let
+
+[
+m=\inf_{u\in H_0^1(U)}J(u).
+]
+
+Choose a minimizing sequence ((u_j)\subset H_0^1(U)) such that
+
+[
+J(u_j)\to m.
+]
+
+So
+
+[
+\int_U |\nabla u_j|^2,dx-\int_U fu_j,dx\to m.
+]
+
+We want to show ((u_j)) has a weakly convergent subsequence.
+
+---
+
+# Step 2: Show the minimizing sequence is bounded
+
+We estimate the linear term using Cauchy–Schwarz:
+
+[
+\left|\int_U fu_j,dx\right|
+\le
+|f|*{L^2(U)}|u_j|*{L^2(U)}.
+]
+
+Using Poincaré:
+
+[
+|u_j|*{L^2(U)}
+\le
+C|\nabla u_j|*{L^2(U)}.
+]
+
+Hence
+
+[
+\left|\int_U fu_j,dx\right|
+\le
+C|f|*{L^2(U)}|\nabla u_j|*{L^2(U)}.
+]
+
+Thus
+
+[
+J(u_j)
+\ge
+|\nabla u_j|_{L^2}^2
+--------------------
+
+C|f|*{L^2}|\nabla u_j|*{L^2}.
+]
+
+Let
+
+[
+t_j=|\nabla u_j|_{L^2}.
+]
+
+Then
+
+[
+J(u_j)\ge t_j^2-Ct_j.
+]
+
+Since (J(u_j)\to m), the values (J(u_j)) are bounded above, so (t_j^2-Ct_j) is bounded above, which implies (t_j) is bounded.
+
+Therefore,
+
+[
+(u_j)\text{ is bounded in }H_0^1(U).
+]
+
+---
+
+# Step 3: Extract a weakly convergent subsequence
+
+Since (H_0^1(U)) is reflexive, there exists a subsequence (still denoted (u_j)) and some (u_0\in H_0^1(U)) such that
+
+[
+u_j\rightharpoonup u_0
+\qquad\text{weakly in }H_0^1(U).
+]
+
+---
+
+# Step 4: Use weak lower semicontinuity
+
+The map
+
+[
+u\mapsto \int_U |\nabla u|^2,dx
+]
+
+is weakly lower semicontinuous, so
+
+[
+\int_U |\nabla u_0|^2,dx
+\le
+\liminf_{j\to\infty}
+\int_U |\nabla u_j|^2,dx.
+]
+
+Also, the linear functional
+
+[
+u\mapsto \int_U fu,dx
+]
+
+is weakly continuous, so
+
+[
+\int_U fu_j,dx
+\to
+\int_U fu_0,dx.
+]
+
+Therefore,
+
+[
+J(u_0)
+======
+
+\int_U |\nabla u_0|^2,dx-\int_U fu_0,dx
+]
+
+satisfies
+
+[
+J(u_0)
+\le
+\liminf_{j\to\infty}
+J(u_j).
+]
+
+Since (J(u_j)\to m),
+
+[
+J(u_0)\le m.
+]
+
+But (m) is the infimum, so
+
+[
+J(u_0)=m.
+]
+
+Thus the infimum is attained.
+
+---
+
+# Final conclusion
+
+There exists (u_0\in H_0^1(U)) such that
+
+[
+\boxed{
+J(u_0)=
+\inf_{u\in H_0^1(U)}
+\left(
+\int_U |\nabla u|^2,dx-\int_U fu,dx
+\right).
+}
+]
+
+So the minimization problem has a minimizer.
+
+---
+
+# Why this works
+
+The direct method always uses:
+
+---
+
+### 1. Minimize:
+
+Take a minimizing sequence.
+
+---
+
+### 2. Compactness:
+
+Show boundedness, then extract weak convergence.
+
+---
+
+### 3. Lower semicontinuity:
+
+Pass to the limit.
+
+---
+
+This gives existence of a minimizer.
+
+---
+
+# PDE interpretation
+
+The minimizer (u_0) is the weak solution of
+
+[
+-\Delta u=\frac{f}{2}
+]
+
+(up to constants in the functional).
+
+Thus the variational problem corresponds to an elliptic PDE.
+
+This variational viewpoint is central in Partial Differential Equations.
+
+---
+
+If you'd like, next I can show how to derive the **Euler–Lagrange equation** of this minimization problem and recover the PDE satisfied by the minimizer.
+

@@ -60,6 +60,35 @@
 	\STUDENTNAME \\
 	\ASSIGNMENT -- \DUEDATE\\
 \end{center} 
+\section*{Synopsis}
+
+\begin{description}
+
+\item \#1 Hahan-Banach Extension, Sequence of Partial Sums, distance to subspace.
+
+\item \#2 Go from $\sum \|x\|$ to $\sum x$ covergent series by using Sequence of Partial Sums then $\|sum S_N\| \to \sum \|S_N\| \le M$ which goes to zero.
+
+\item \#3 Distance, continuitty, compactness, uniform convex Banach space.
+
+\item \#4 Linear Functionals must converge over the basis vectors of an infinite dimensional vector space.  Riesz's Representation Theorem ($\exists$ inner product), Bessel's Theorem (equiv. to Cauchy-Schwartz for $D=\infty$), and Parseval's Theorem (equiv. Triangular Inequality for $D=\infty$ using projections onto basis) and inner product $\to$ norm.
+
+\item \#5 Uniform Bounded Theorem (linear operators) with Riesz Representation Theorem
+
+\item \#6 How to use sequences of vectors with sequences of functionals to prove boundedness of functionals.
+
+\item \#7 Linearity and Continuity along with Boundedness and work together to prove each other.
+
+\item \#8 A compact linear map must be \textit{finite dimensional}.  Consider that \#4 as a similar image.  A compact linear operator (thus the range is closed and bounded) implies a closed ball exists within the range.  A compact ball has finite dimension.
+
+\item \#9 A compact linear operator on a quotient set divides a closed subspace into compact subsets (essentially compact partition).
+
+\item \#10 Compact linear operators are bounded.  Boundedness and sequences on linear operatos maintain consistency. FYI: bounded does NOT imply compact.
+
+\end{description}
+
+\newpage
+
+\section*{Questions}
 
 \begin{enumerate}
 
@@ -68,26 +97,1131 @@
 	d = \inf_{z \in Z} |w-z|
 \end{align*}be the distance from $w$ to $Z$.  Show that there exists a linear functional $l : X \to \R$ such that $l(w)=d, l(z)=0$ for all $z \in Z$, and $l(x) \le |x|$ for all $x \in X$.
 
-\item Let $X$ be a Banach space and let $(x_n)$ be a sequence of points in $X$ such that the infintie series $\sum_{n=1}^\infty \|x_n\|$ converges.  Show that the series $\sum_{n=1}^\infty x_n$ converges in $X$.
+\HLINE
 
-\item Let $X$ be auniformly convex Banach space, let $K$ be a closed convex subset of $X$, and let $C \subset X\backslash K$ be a compact set. Show that there exists points $y_0\in K$ and $z_0\in C$ such that
+\begin{description}
+
+\item Let $Y = Z + \operatorname{span}\{w\} = \{z+tw: z \in Z, t\in \R\}$.  That is, every $y \in Y$ can be written as $y = z + tw$.
+
+\item Define $l_0: Y \to \R$ as our initial functional which will be extended later.  Define it as 
+\begin{align*}
+	l_0(z+tw) &= dt
+\end{align*}We can demonstrate linearity by
+\begin{align*}
+	l_0(\,(z_1+t_1w)+(z_2+t_2w)\,) = (t_1+t_2)d
+\end{align*}and $t=0\implies l_0(z) = 0$.  Further, $l_0(w) = d$.
+
+\item WTS: $|l_0(x)| \le \|x||, \, \forall x \in Y$.
+
+\begin{align*}
+	\LET x &= z+tw \AND t \ne 0 \\
+	|l_0(x)| &= |t|d \\
+	\forall z \in Z\, \|w-(-z/t)\|&\ge d \\
+	\|tw+z\| &= |t|\,\left \|w + \frac{z}{t} \right \|
+\end{align*}Let $z'=-\frac{z}{t}$ then $\|w-z'\|\ge d$ and 
+\begin{align*}
+	\left\|w+\frac{z}{t}\right\| &\ge d \\
+	\therefore \|z+tw\| &\ge |t|d \\
+	\AND |l_0(z+tw)| &= |t|d \le \|z+tw\|
+\end{align*}
+
+\item By Hahn-Banach we have
+\begin{align*}
+	\exists l : X &\to \R\\
+	l|_Y &= l_0 \\
+	|l(x)| &\le \|x\|, \, \forall x \in X \\
+	l(x) &= \BINDEF{l_0(x), & x \in Y}{0, & \text{otherwise}} & \qed
+\end{align*}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $X$ be a Banach space and let $(x_n)$ be a sequence of points in $X$ such that the infinite series $\sum_{n=1}^\infty \|x_n\|$ converges.  Show that the series $\sum_{n=1}^\infty x_n$ converges in $X$.
+
+\HLINE
+Define the sequence of partial sums as
+\begin{align*}
+	S_N = \sum_{i=1}^N x_i
+\end{align*}WTOL, let $M > N$ and notice that 
+\begin{align*}
+	S_M - S_N &= \sum_{i=1}^M x_i - \sum_{i=1}^N x_i \\
+			&= \sum_{i=N+1}^M x_i
+\end{align*} and by the Triangular Inequality
+\begin{align*}
+	\|S_M - S_N\| &= \left \|\sum_{i=N+1}^M x_i \right\| \le \sum_{i=N+1}^M \left \|x_i\right\| 
+\end{align*}since $\sum_{n=1}^\infty \|x_n\|$ converges, then for any $\epsilon > 0$ there exists an $L$ such that $M > N \ge L$ and
+\begin{align*}
+	\|S_M - S_N\| &\le \sum_{i=N+1}^M \left \|x_i\right\| < \epsilon 
+\end{align*}Since $X$ is Banach, a.k.a. complete, there exists $S \in X$ such that $S_N \to S$.  Hence, $\sum_{i=1}^\infty x_i$ converges.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $X$ be a uniformly convex Banach space, let $K$ be a closed convex subset of $X$, and let $C \subset X\backslash K$ be a compact set. Show that there exists points $y_0\in K$ and $z_0\in C$ such that
 \begin{align*}
 	|y_0-z_0| = \inf_{y\in K,z\in C} |y-z|
 \end{align*}
 
+\HLINE
+
+\begin{description}
+
+\item Let
+
+\begin{itemize}
+\item $X$ be a uniformly convex Banach space,
+\item $K\subset X$ be closed and convex,
+\item $C\subset X\setminus K$ be compact,
+
+\item and define the distance between the sets:
+\begin{align*}
+d:=\inf_{y\in K,; z\in C}|y-z|.
+\end{align*}
+
+\item We want to show there exist $y_0\in K$, $z_0\in C$ such that
+\begin{align*}
+|y_0-z_0|=d.
+\end{align*}
+\end{itemize}
+
+---
+
+\item Strategy
+
+We will:
+
+\begin{enumerate}
+\item For each $z\in C$, define the distance from $z$ to $K$,
+\item Show that this distance function is continuous,
+\item Use compactness of $C$ to get $z_0\in C$ minimizing that distance,
+\item Use the fact that in a uniformly convex Banach space, every closed convex set is \DEFINE{proximinal}, i.e. each point has a nearest point in $K$.
+\end{enumerate}
+
+---
+\end{description}
+
+\begin{description}
+
+\item \DEFINE{Step 1: Distance to (K)}
+
+For each $z\in C$, define
+\begin{align*}
+\delta(z)=\inf_{y\in K}|y-z|.
+\end{align*}
+
+Then
+\begin{align*}
+d=\inf_{z\in C}\delta(z).
+\end{align*}
+
+So if we can find $z_0\in C$ minimizing $\delta$, and then find $y_0\in K$ such that
+\begin{align*}
+|y_0-z_0|=\delta(z_0),
+\end{align*}
+we are done.
+
+---
+
+\item \DEFINE{Step 2: $\delta(z)$ is continuous}
+
+We claim:
+\begin{align*}
+|\delta(z_1)-\delta(z_2)|\le |z_1-z_2|.
+\end{align*}
+
+Indeed, for any $y\in K$,
+\begin{align*}
+|z_1-y|\le |z_1-z_2|+|z_2-y|.
+\end{align*}
+
+Taking infimum over $y\in K$,
+\begin{align*}
+\delta(z_1)\le |z_1-z_2|+\delta(z_2).
+\end{align*}
+
+Thus,
+\begin{align*}
+\delta(z_1)-\delta(z_2)\le |z_1-z_2|.
+\end{align*}
+
+Interchanging $z_1,z_2$ gives
+\begin{align*}
+|\delta(z_1)-\delta(z_2)|\le |z_1-z_2|.
+\end{align*}
+
+So $\delta$ is continuous.
+
+---
+
+\item \DEFINE{Step 3: Compactness of $C$}
+
+Since $C$ is compact and $\delta$ is continuous, there exists $z_0\in C$ such that
+\begin{align*}
+\delta(z_0)=\min_{z\in C}\delta(z)=d.
+\end{align*}
+
+Thus:
+\begin{align*}
+d=\inf_{y\in K}|y-z_0|.
+\end{align*}
+
+Now we only need to show this infimum is attained.
+
+---
+
+\item \DEFINE{Step 4: Existence of nearest point in (K)}
+
+Since $K$ is closed and convex and $X$ is uniformly convex, there exists $y_0\in K$ such that
+\begin{align*}
+|y_0-z_0|=\inf_{y\in K}|y-z_0|.
+\end{align*}
+
+This is the **nearest point theorem** for uniformly convex spaces.
+
+Hence:
+\begin{align*}
+|y_0-z_0|=\delta(z_0)=d.
+\end{align*}
+
+Therefore,
+\begin{align*}
+|y_0-z_0|=\inf_{y\in K,z\in C}|y-z|.
+\end{align*}
+
+---
+
+\item \DEFINE{Conclusion}
+
+There exist $y_0\in K$, $z_0\in C$ such that
+\begin{align*}
+|y_0-z_0|=\inf_{y\in K,z\in C}|y-z|.
+\end{align*}
+
+---
+
+\item \DEFINE{Why uniform convexity matters}
+
+The key nontrivial step is:
+
+\textit{ In a uniformly convex Banach space, every closed convex set admits nearest points.}
+
+Without uniform convexity, the distance
+\begin{align*}
+\inf_{y\in K}|z-y|
+\end{align*}
+need not be attained.
+
+Uniform convexity guarantees the minimizing sequence converges.
+
+---
+\end{description}
+
+If you'd like, I can prove the \DEFINE{nearest point theorem in uniformly convex Banach spaces}, i.e. why every closed convex subset has a unique nearest point.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \item If $\{x_i\}$ is an orthonormal base of a Hilbert space $H$, show that $l(x_j) \to 0$ for every bounded linear functional $l$ on $H$.
 
-\item Let $H$ be a Hilbert space and let $\{x_n\}$ be a sequence of points in $H$ such that for any $y \in H$, there exists a constant $m_y>0$ such that $|(x_n,y_n)|\le m_y$ for all $n$.  Show that there exists a constant $m > 0$ such that $\|x_n\|\le m$ for all $n$.
+\HLINE
 
+Basically, for an infinite dimensional vector space, any linear functional must converge over the basis vectors.\\
+
+These are based on Riesz' Representation Theorem and Parsivel/Bessel Theorem (a.k.a, Triangular Inequality for infinite dimensional vector spaces).\\
+
+\begin{description}
+
+	\item Riesz Representation Theorem tells that for every functional there exists $y \in H$ such that $l(x) = \ABRACKET{x,y}$ for all $x \in H$.
+
+	\item Then by Bessel's inequality, $\{x_i\}$ is orthonormal means that 
+	\begin{align*}
+		\sum_{j=1}^\infty |\ABRACKET{x_j,y}|^2 \le \|y\|^2
+	\end{align*}In fact, because it is an \textit{orthonormal basis}, Parseval gives
+	\begin{align*}
+		\sum_{j=1}^\infty |\ABRACKET{x_j,y}|^2 = \|y\|^2
+	\end{align*}Hence $\SUM{j=1}{\infty} |l(x_j)|^2$ and $l(x_j) \to 0$.
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $H$ be a Hilbert space and let $\{x_n\}$ be a sequence of points in $H$ such that for any $y \in H$, there exists a constant $m_y>0$ such that $|(x_n,y)|\le m_y$ for all $n$.  Show that there exists a constant $m > 0$ such that $\|x_n\|\le m$ for all $n$.
+
+\HLINE
+
+This is an application of the \DEFINE{Uniform Boundedness Principle}.
+
+The idea is:
+
+\> If the scalar functionals $y\mapsto \langle x_n,y\rangle$ are pointwise bounded, then their norms are uniformly bounded.
+
+And since the norm of the functional $y\mapsto \langle x_n,y\rangle$ is exactly $|x_n|$, the conclusion follows.
+
+---
+\begin{description}
+
+\item \DEFINE{Step 1: Define linear functionals}
+
+For each $n$, define
+\begin{align*}
+T_n:H\to \mathbb{F}
+\end{align*}
+$\mathbb{F}=\mathbb{R}$ or $\mathbb{C}$ by
+\begin{align*}
+T_n(y)=\langle x_n,y\rangle.
+\end{align*}
+
+Each $T_n$ is linear.
+
+Also,
+\begin{align*}
+|T_n(y)|=|\langle x_n,y\rangle|
+\le |x_n|\,|y|,
+\end{align*}
+so $T_n$ is bounded.
+
+---
+
+\item \DEFINE{Step 2: Use the hypothesis}
+
+The hypothesis says:
+
+For every $y\in H$, there exists $m_y>0$ such that
+\begin{align*}
+|\langle x_n,y\rangle|\le m_y
+\quad\text{for all }n.
+\end{align*}
+
+That is:
+\begin{align*}
+\sup_n |T_n(y)|<\infty
+\quad\text{for every }y\in H.
+\end{align*}
+
+So the family $\{T_n\}$ is \DEFINE{pointwise bounded}.
+
+---
+
+\item \DEFINE{Step 3: Apply Uniform Boundedness Principle}
+
+Since $H$ is a Banach space, the \DEFINE{Uniform Boundedness Principle} implies:
+\begin{align*}
+\sup_n |T_n|<\infty.
+\end{align*}
+
+So there exists $m>0$ such that
+\begin{align*}
+|T_n|\le m
+\quad\text{for all }n.
+\end{align*}
+
+---
+
+\item \DEFINE{Step 4: Compute $|T_n|$}
+
+By the Riesz representation theorem,
+\begin{align*}
+T_n(y)=\langle x_n,y\rangle
+\end{align*}
+has operator norm
+\begin{align*}
+|T_n|=|x_n|.
+\end{align*}
+
+Indeed,
+\begin{align*}
+|T_n(y)|\le |x_n|,|y|
+\end{align*}
+so $|T_n|\le |x_n|$, and taking $y=x_n/|x_n|$ gives equality.
+
+Thus:
+\begin{align*}
+|x_n|=|T_n|.
+\end{align*}
+
+Hence,
+\begin{align*}
+\sup_n |x_n|<\infty.
+\end{align*}
+
+Therefore there exists $m>0$ such that
+\begin{align*}
+|x_n|\le m
+\quad\text{for all }n.
+\end{align*}
+
+---
+
+\item \DEFINE{Conclusion}
+
+There exists a constant $m>0$ such that
+\begin{align*}
+|x_n|\le m
+\quad\text{for all }n.
+\end{align*}
+
+---
+
+\item \DEFINE{Key Insight}
+
+The assumption says:
+
+\> For every fixed $y$, the numbers $\langle x_n,y\rangle$ remain bounded.
+
+That means the family of functionals
+\begin{align*}
+T_n(y)=\langle x_n,y\rangle
+\end{align*}
+is pointwise bounded.
+
+Then:
+
+\> Uniform boundedness upgrades pointwise boundedness to bounded operator norms,
+
+and in a Hilbert space the operator norm of $T_n$ is exactly $|x_n|$.
+
+---
+
+\end{description}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \item Let $X$ be a Banach space, let $U=X'$, let $(x_n)$ be a sequence in $X$, and let $(u_n)$ be a sequence in $U$.  Show that if $x_n\to x$ in $X$ and $u_n\to u$ in $U$, then $u_n(x_n) \to u(x)$.
 
+\HLINE
+
+We are given:
+
+\begin{itemize}
+\item $X$ is a Banach space,
+\item $U=X'$ is the dual space,
+\item $x_n\to x$ in $X$,
+\item $u_n\to u$ in $X'$,
+
+\item and we want to prove:
+\begin{align*}
+u_n(x_n)\to u(x).
+\end{align*}
+\end{itemize}
+
+---
+\begin{description}
+
+\item \textbf{Step 1: Split the difference}
+
+Consider:
+\begin{align*}
+u_n(x_n)-u(x).
+\end{align*}
+
+Add and subtract $u_n(x$):
+\begin{align*}
+u_n(x_n)-u(x)=\big(u_n(x_n)-u_n(x)\big)+\big(u_n(x)-u(x)\big).
+\end{align*}
+
+Thus,
+\begin{align*}
+|u_n(x_n)-u(x)|
+\le
+|u_n(x_n-x)|+|u_n(x)-u(x)|.
+\end{align*}
+
+---
+
+\item \textbf{Step 2: Estimate the first term}
+
+Since $u_n\in X'$,
+\begin{align*}
+|u_n(x_n-x)|\le |u_n||x_n-x|.
+\end{align*}
+
+So:
+\begin{align*}
+|u_n(x_n)-u(x)|
+\le
+|u_n||x_n-x|+|u_n(x)-u(x)|.
+\end{align*}
+
+---
+
+\item \textbf{Step 3: Use convergence in (X')}
+
+Since $u_n\to u$ in $X'$,
+\begin{align*}
+|u_n-u|\to 0.
+\end{align*}
+
+Hence the sequence $(u_n)$ is bounded: there exists $M>0$ such that
+\begin{align*}
+|u_n|\le M
+\quad\text{for all }n.
+\end{align*}
+
+Therefore,
+\begin{align*}
+|u_n||x_n-x|
+\le
+M|x_n-x|\to 0
+\end{align*}
+because $x_n\to x$.
+
+---
+
+\item \textbf{Step 4: Estimate the second term}
+
+Also,
+\begin{align*}
+|u_n(x)-u(x)|=|(u_n-u)(x)|
+\le
+|u_n-u||x|\to 0.
+\end{align*}
+
+---
+
+\item \textbf{Step 5: Combine}
+
+Thus both terms go to zero:
+\begin{align*}
+|u_n||x_n-x|\to 0
+\quad\text{and}\quad
+|u_n(x)-u(x)|\to 0.
+\end{align*}
+
+Hence,
+\begin{align*}
+|u_n(x_n)-u(x)|\to 0.
+\end{align*}
+
+Therefore,
+\begin{align*}
+u_n(x_n)\to u(x).
+\end{align*}
+
+---
+
+\item \textbf{Conclusion}
+
+If
+\begin{align*}
+x_n\to x \quad\text{in }X
+\end{align*}
+and
+\begin{align*}
+u_n\to u \quad\text{in }X',
+\end{align*}
+then
+\begin{align*}
+u_n(x_n)\to u(x).
+\end{align*}
+
+---
+
+\item \textbf{Key idea}
+
+The proof is based on:
+
+\begin{align*}
+u_n(x_n)-u(x)=u_n(x_n-x)+(u_n-u)(x),
+\end{align*}
+
+and then:
+
+\begin{itemize}
+\item the first term vanishes because $x_n-x\to 0$ and $(u_n$) is bounded,
+\item the second vanishes because $u_n\to u$ in operator norm.
+\end{itemize}
+
+---
+\end{description}
+
+If you'd like, I can show the analogous statement for \DEFINE{weak convergence}, where the same conclusion generally \DEFINE{fails}, which is an important distinction in functional analysis.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \item Let $X$ and $U$ be Banach spaces and let $M:X \to U$ be a linear map.  Assume that whenever $x_n\to 0$ in $X, Mx_n\to 0$ in $U$.  Show that $M$ is bounded.
 
-\item Let $X$ and $U$ be Banach spaces an dlet $C: X \to U$ be a compact linear map.  Assume that the range $R_C$ of $C$ is closed.  Show that $R_C$ is finite dimensional.
+\HLINE
 
-\item Let $X$ be a Banach space, let $C: X \to X$ be a compact linear map, and let $Y$ be a closed linear subspace of $X$ such that $C(Y) \subset Y$.  Show that the linear map $\tilde{C}:X/Y \to X/Y$ defined by $\tilde{C}[x]=[Cz], z \in [x]$ is compact.
+We are given a linear map
+\begin{align*}
+M:X\to U
+\end{align*}
 
+between Banach spaces, with the property:
+
+\> Whenever $x_n\to 0$ in $X$, then $Mx_n\to 0$ in $U$.
+
+We want to show that $M$ is \DEFINE{bounded}, i.e. continuous.
+
+---
+\begin{description}
+
+\item \textbf{Step 1: Interpret the hypothesis}
+
+The assumption says:
+
+\> $M$ preserves limits of sequences converging to $0$.
+
+That is exactly \DEFINE{sequential continuity at $0$}.
+
+Because $M$ is linear, continuity at $0$ implies continuity everywhere, and for linear maps continuity is equivalent to boundedness.
+
+So the proof is basically:
+
+\begin{enumerate}
+\item Show $M$ is continuous at $0$,
+\item Conclude $M$ is bounded.
+\end{enumerate}
+
+Let’s write it carefully.
+
+---
+
+\item \textbf{Step 2: Suppose $M$ is not bounded}
+
+Assume for contradiction that $M$ is \DEFINE{not bounded}.
+
+Then for every $n\in\mathbb N$, there exists $x_n\in X$ such that
+\begin{align*}
+|Mx_n|>n|x_n|.
+\end{align*}
+
+Since $x_n\neq 0$, define
+\begin{align*}
+y_n=\frac{x_n}{n|x_n|}.
+\end{align*}
+
+Then
+\begin{align*}
+|y_n|=\frac1n\to 0.
+\end{align*}
+
+So by the hypothesis,
+\begin{align*}
+My_n\to 0.
+\end{align*}
+
+---
+
+\item \textbf{Step 3: Compute $My_n$}
+
+We have:
+\begin{align*}
+My_n=M\left(\frac{x_n}{n|x_n|}\right)=\frac{Mx_n}{n|x_n|}.
+\end{align*}
+
+Thus,
+\begin{align*}
+|My_n| = \frac{|Mx_n|}{n|x_n|} > 1.
+\end{align*}
+
+So for every (n),
+\begin{align*}
+|My_n|>1.
+\end{align*}
+
+This contradicts the fact that $My_n\to 0$.
+
+---
+
+\item \textbf{Step 4: Conclude boundedness}
+
+The contradiction shows that $M$ must be bounded.
+
+Hence there exists $C>0$ such that
+\begin{align*}
+|Mx|\le C|x|
+\quad\forall x\in X.
+\end{align*}
+
+So $M$ is bounded.
+
+---
+
+\item \textbf{Conclusion}
+
+If a linear map $M:X\to U$ satisfies:
+
+\begin{align*}
+x_n\to 0 \implies Mx_n\to 0,
+\end{align*}
+
+then $M$ is bounded.
+
+---
+
+\item \textbf{Key idea}
+
+If $M$ were unbounded, we could find vectors with
+\begin{align*}
+|Mx_n|\gg |x_n|,
+\end{align*}
+scale them so that $x_n\to 0$, but still have $Mx_n\not\to 0$, contradicting the hypothesis.
+
+---
+\end{description}
+
+This is the sequential version of the standard fact:
+
+\> A linear operator between normed spaces is bounded iff it is continuous at (0).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $X$ and $U$ be Banach spaces and let $C: X \to U$ be a compact linear map.  Assume that the range $R_C$ of $C$ is closed.  Show that $R_C$ is finite dimensional.
+
+\HLINE
+
+Let
+
+\begin{align*}
+C:X\to U
+\end{align*}
+
+be a \DEFINE{compact linear operator} between Banach spaces, and assume its range
+
+\begin{align*}
+R_C=C(X)
+\end{align*}
+
+is closed.
+
+We want to prove:
+
+\> $R_C$ is finite dimensional.
+
+---
+\begin{description}
+
+\item \textbf{Main idea}
+
+A compact operator sends bounded sets into \DEFINE{relatively compact} sets.
+
+If the range were infinite-dimensional, the unit ball in the range would fail to be compact.
+
+But because the range is closed, the Open Mapping Theorem allows us to pull the unit ball in the range back to a bounded set in $X$, and compactness of $C$ would force the unit ball of the range to be compact — impossible unless the range is finite-dimensional.
+
+---
+
+\item \textbf{Step 1: Regard $C$ as a surjective map onto its range}
+
+Define
+\begin{align*}
+C:X\to R_C.
+\end{align*}
+
+This map is:
+
+\begin{itemize}
+\item linear,
+\item bounded,
+\item surjective.
+\end{itemize}
+
+Since $R_C$ is closed in the Banach space $U$, it is itself a Banach space.
+
+Thus $C:X\to R_C$ is a bounded surjective operator between Banach spaces.
+
+---
+
+\item \textbf{Step 2: Apply the Open Mapping Theorem}
+
+By the \DEFINE{Open Mapping Theorem}, $C$ maps open sets in $X$ to open sets in $R_C$.
+
+In particular, if $B_X(0,1)$ is the unit ball in (X), then $C(B_X(0,1))$ contains some open ball around $0$ in $R_C$:
+
+there exists $\delta>0$ such that
+
+\begin{align*}
+B_{R_C}(0,\delta)\subset C(B_X(0,1)).
+\end{align*}
+
+Therefore, for every $y\in R_C$ with $|y|\le \delta$, there exists $x\in X$ with
+\begin{align*}
+Cx=y,\qquad |x|\le 1.
+\end{align*}
+
+Scaling gives:
+
+\> For every $y\in R_C$ with $|y|\le 1$, there exists $x\in X$ such that
+\begin{align*}
+Cx=y,\qquad |x|\le \frac1\delta.
+\end{align*}
+
+Hence,
+
+\begin{align*}
+B_{R_C}(0,1)\subset C\big(B_X(0,1/\delta)\big).
+\end{align*}
+
+---
+
+\item \textbf{Step 3: Use compactness of $C$}
+
+Since $C$ is compact, the image of the bounded set
+
+\begin{align*}
+B_X(0,1/\delta)
+\end{align*}
+
+has compact closure in (U).
+
+Therefore,
+
+\begin{align*}
+C(B_X(0,1/\delta))
+\end{align*}
+
+is relatively compact.
+
+Since the unit ball of $R_C$ is contained in that image,
+
+\begin{align*}
+B_{R_C}(0,1)
+\end{align*}
+
+is relatively compact.
+
+But $B_{R_C}(0,1)$ is also closed in $R_C$, so it is compact.
+
+Thus:
+
+\> The closed unit ball in $R_C$ is compact.
+
+---
+
+\item \textbf{Step 4: A Banach space with compact unit ball is finite-dimensional}
+
+A normed space has compact closed unit ball \DEFINE{iff} it is finite-dimensional.
+
+Hence $R_C$ must be finite-dimensional.
+
+---
+
+\item \textbf{Conclusion}
+
+The range $R_C$ is finite-dimensional.
+
+---
+
+\item \textbf{Final theorem}
+
+\> If $C:X\to U$ is compact and $R_C$ is closed, then $R_C$ is finite-dimensional.
+
+---
+
+\item \textbf{Why this matters}
+
+This result is one of the key facts about compact operators:
+
+\> A compact operator cannot have a closed infinite-dimensional range.
+
+That is why compact operators are “almost finite-dimensional.”
+
+---
+\end{description}
+
+If you'd like, I can show the related theorem:
+
+\> \DEFINE{If $I-C$ is injective for compact $C$, then $I-C$ has closed range},
+
+which leads to the **Fredholm Alternative**.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Let $X$ be a Banach space, let $C: X \to X$ be a compact linear map, and let $Y$ be a closed linear subspace of $X$ such that $C(Y) \subset Y$.  Show that the linear map $\tilde{C}:X/Y \to X/Y$ defined by $\tilde{C}[x=][Cz], z \in [x]$ is compact.
+
+\HLINE
+
+Let
+
+\begin{itemize}
+\item $X$ be a Banach space,
+\item $Y\subset X$ a closed linear subspace,
+\item $C:X\to X$ a compact linear operator,
+\item $C(Y)\subset Y$.
+\end{itemize}
+
+Because $C(Y\subset Y)$, the operator $C$ induces a map on the quotient:
+
+\begin{align*}
+\widetilde C:X/Y\to X/Y,\qquad \widetilde C([x])=[Cx].
+\end{align*}
+
+We want to prove that $\widetilde C$ is \DEFINE{compact}.
+
+---
+\begin{description}
+
+\item \textbf{Step 1: $\widetilde C$ is well-defined and bounded}
+
+If $[x]=[x']$, then $x-x'\in Y$. Since $C(Y)\subset Y$,
+
+\begin{align*}
+C(x-x')\in Y,
+\end{align*}
+
+so
+
+\begin{align*}
+Cx-Cx'\in Y,
+\end{align*}
+
+hence
+
+\begin{align*}
+	[Cx]=[Cx'].
+\end{align*}
+
+Thus $\widetilde C$ is well-defined.
+
+It is linear, and bounded because the quotient norm satisfies:
+
+\begin{align*}
+|\widetilde C[x]| = \inf_{y\in Y}|Cx+y| \le |Cx| \le |C||x|.
+\end{align*}
+
+So $\widetilde C$ is bounded.
+
+---
+
+\item \textbf{Step 2: Compactness criterion}
+
+To show $\widetilde C$ is compact, it suffices to show:
+
+\> If $([x_n])$ is bounded in $X/Y$, then $(\widetilde C[x_n])$ has a convergent subsequence.
+
+---
+
+\item \textbf{Step 3: Lift a bounded sequence in $X/Y$}
+
+Suppose $([x_n])$ is bounded in $X/Y$. Then there exists $M>0$ such that
+
+\begin{align*}
+|[x_n]|_{X/Y}\le M.
+\end{align*}
+
+By definition of the quotient norm,
+
+\begin{align*}
+|[x_n]| = \inf_{y\in Y}|x_n-y|.
+\end{align*}
+
+Thus for each $n$, we can choose $y_n\in Y$ such that
+
+\begin{align*}
+|x_n-y_n|\le M+1.
+\end{align*}
+
+Define
+\begin{align*}
+z_n=x_n-y_n.
+\end{align*}
+
+Then:
+
+\begin{itemize}
+\item $z_n\in [x_n]$,
+\item $|z_n|\le M+1$.
+\end{itemize}
+
+So $(z_n)$ is bounded in $X$.
+
+---
+
+\item \textbf{Step 4: Use compactness of $C$}
+
+Since $C$ is compact, the sequence $(Cz_n)$ has a convergent subsequence:
+
+\begin{align*}
+Cz_{n_k}\to z
+\quad\text{in }X.
+\end{align*}
+
+Then the quotient classes converge in $X/Y$:
+
+\begin{align*}
+[Cz_{n_k}] \to [z].
+\end{align*}
+
+But since $z_n\in [x_n]$, we have:
+
+\begin{align*}
+\widetilde C[x_n]=[Cx_n]=[Cz_n],
+\end{align*}
+
+because
+\begin{align*}
+x_n-z_n=y_n\in Y
+\end{align*}
+and therefore
+\begin{align*}
+C(x_n-z_n)=C(y_n)\in Y.
+\end{align*}
+
+Hence,
+
+\begin{align*}
+\widetilde C[x_{n_k}] = [Cz_{n_k}] \to [z].
+\end{align*}
+
+So $(\widetilde C[x_n])$ has a convergent subsequence.
+
+---
+
+\item \textbf{Step 5: Conclusion}
+
+Thus $\widetilde C$ maps bounded sequences in $X/Y$ to sequences with convergent subsequences, so $\widetilde C$ is compact.
+
+---
+
+\item \textbf{Final conclusion}
+
+\begin{align*}
+\widetilde C:X/Y\to X/Y
+\end{align*}
+
+is a compact linear operator.
+
+---
+
+\item \textbf{Key idea}
+
+A bounded sequence in the quotient can be represented by a bounded sequence in $X$, and compactness of $C$ passes to the quotient because $C(Y)\subset Y$.
+
+---
+\end{description}
+
+This is a standard and important fact:
+
+\> \DEFINE{Compact operators descend to compact operators on quotient spaces}, provided the subspace is invariant under the operator.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \item  Let $X$ and $U$ be Banach spaces, let $C: X \to U$ be a compact linear map, and let $x_n \to x$ in $X$.  Show that $Cx_n\to Cx$ in $U$.
+
+\HLINE
+
+\begin{description}
+\item Let
+
+\begin{align*}
+C:X\to U
+\end{align*}
+
+be a \DEFINE{compact linear operator}, and let $x_n\to x$ in $X$.
+
+We want to show:
+
+\begin{align*}
+Cx_n\to Cx \quad \text{in } U.
+\end{align*}
+
+---
+
+\item Key idea
+
+A compact linear operator is, in particular, \DEFINE{continuous} (bounded). Once we know $C$ is bounded, convergence follows immediately:
+
+\begin{align*}
+|Cx_n-Cx|=|C(x_n-x)|\le |C|,|x_n-x|\to 0.
+\end{align*}
+
+So the real point is:
+
+\item \> \DEFINE{Compact linear operators are bounded.}
+
+---
+\end{description}
+\begin{description}
+
+\item \textbf{Step 1: Show $C$ is bounded}
+
+Let $B={x\in X:|x|\le 1}$ be the unit ball in $X$.
+
+Since $C$ is compact, $C(B)$ has compact closure in $U$, hence $C(B)$ is \DEFINE{bounded}.
+
+So there exists $M>0$ such that
+
+\begin{align*}
+|Cx|\le M \quad \text{for all } |x|\le 1.
+\end{align*}
+
+Now for arbitrary $x\neq 0$, let
+
+\begin{align*}
+y=\frac{x}{|x|}.
+\end{align*}
+
+Then $|y|=1$, so
+
+\begin{align*}
+|Cy|\le M.
+\end{align*}
+
+Thus:
+
+\begin{align*}
+|Cx| = |x||Cy| \le M|x|.
+\end{align*}
+
+Hence (C) is bounded.
+
+---
+
+\item \textbf{Step 2: Use boundedness to pass to the limit}
+
+Since $x_n\to x$, we have:
+
+\begin{align*}
+x_n-x\to 0.
+\end{align*}
+
+Then:
+
+\begin{align*}
+|Cx_n-Cx| = |C(x_n-x)| \le M|x_n-x|\to 0.
+\end{align*}
+
+Therefore:
+
+\begin{align*}
+Cx_n\to Cx.
+\end{align*}
+
+---
+
+\item \textbf{Conclusion}
+
+\begin{align*}
+x_n\to x \implies Cx_n\to Cx.
+\end{align*}
+
+So every compact linear operator between Banach spaces is continuous.
+
+---
+
+\item \textbf{Important note}
+
+The result does \DEFINE{not} actually require Banach spaces; it is true for normed spaces:
+
+\> Every compact linear operator is bounded, hence continuous.
+
+The completeness assumption is unnecessary here.
+
+---
+\end{description}
+
+If you'd like, I can show the converse is false:
+
+\> \DEFINE{bounded does not imply compact},
+
+for example the identity operator on an infinite-dimensional Banach space.
+
 
 \end{enumerate}
 
